@@ -1,7 +1,6 @@
 """Tests for Phase 3 advanced TTPs: T1082, T1069.001, T1005, T1041."""
 from __future__ import annotations
 
-import platform
 from pathlib import Path
 
 import ttps  # noqa: F401

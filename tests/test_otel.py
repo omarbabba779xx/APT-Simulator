@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 
 from orchestrator.core.audit import AuditLog
 from orchestrator.telemetry.otel import OtelExporter, maybe_install

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import platform
-from pathlib import Path
 
 import ttps  # noqa: F401
 from ttps.base import registry

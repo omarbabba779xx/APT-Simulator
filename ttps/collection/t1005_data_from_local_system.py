@@ -68,7 +68,6 @@ def _walk_limited(
             if _is_excluded(entry, exclude_dir):
                 continue
             if entry.is_file() and not entry.is_symlink():
-                name = entry.name.lower()
                 for pat in patterns:
                     if entry.match(pat):
                         try:

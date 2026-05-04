@@ -1,7 +1,6 @@
 """Tests for Phase 2 TTPs: T1016, T1049, T1053.005, T1105, T1486."""
 from __future__ import annotations
 
-import os
 import platform
 from pathlib import Path
 

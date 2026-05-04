@@ -19,7 +19,7 @@ from .api import profiles as profiles_api
 from .api import scenarios as scenarios_api
 from .api import ttps as ttps_api
 from .api import ws as ws_api
-from .api.state import AppState, get_state, set_state
+from .api.state import AppState, set_state
 from .core.audit import AuditLog
 from .core.bus import EventBus
 from .core.config import load_config

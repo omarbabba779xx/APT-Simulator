@@ -15,19 +15,12 @@ Defensive value: validates that:
 from __future__ import annotations
 
 import ipaddress
-import os
 import random
 import time
 import urllib.parse
 from typing import Any
 
 from ..base import TTP, TTPResult, registry
-
-try:
-    import urllib.request as _urllib_req
-    _HAS_URLLIB = True
-except ImportError:
-    _HAS_URLLIB = False
 
 
 _EXFIL_MARKER = b"APT_SIM_EXFIL_BENIGN\x00"

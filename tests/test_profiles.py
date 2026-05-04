@@ -1,8 +1,6 @@
 """Tests for adversary profile loader and profile-driven scenario generator."""
 from __future__ import annotations
 
-import yaml
-from pathlib import Path
 from fastapi.testclient import TestClient
 
 import ttps  # noqa: F401
