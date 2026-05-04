@@ -1,0 +1,69 @@
+[project]
+name = "apt-simulator"
+version = "0.1.0"
+description = "Defensive APT emulation framework for purple team training and detection validation"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "omarb" }]
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "httpx>=0.27",
+    "cryptography>=42.0",
+    "structlog>=24.1",
+    "typer>=0.9",
+    "rich>=13.7",
+    "jsonschema>=4.21",
+    "websockets>=12.0",
+    "sqlmodel>=0.0.16",
+    "PyJWT>=2.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.3",
+    "mypy>=1.9",
+    "pyinstaller>=6.5",
+]
+aws = [
+    "boto3>=1.34",
+]
+azure = [
+    "azure-identity>=1.15",
+    "azure-mgmt-resource>=23.0",
+]
+otel = [
+    "opentelemetry-sdk>=1.24",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.24",
+]
+gcp = [
+    "google-cloud-resource-manager>=1.12",
+]
+transpile = [
+    "pysigma>=0.11",
+    "pysigma-backend-splunk>=1.1",
+    "pysigma-backend-elasticsearch>=1.1",
+]
+
+[project.scripts]
+apt-orchestrator = "orchestrator.main:cli"
+apt-agent = "agent.main:cli"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["orchestrator*", "agent*", "ttps*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

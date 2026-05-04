@@ -1,0 +1,38 @@
+name: FIN7
+aliases: [Carbanak, Navigator Group, ITG14]
+origin: Russia / Ukraine
+sponsor: financially-motivated criminal group
+motivation: financial_crime
+active_since: 2013
+description: >
+  Prolific financially-motivated threat actor targeting hospitality, retail,
+  and finance sectors. Sophisticated spear-phishing campaigns combined with
+  CARBANAK malware and a wide range of post-exploitation tools.
+
+preferred_ttps:
+  - T1033   # User Discovery
+  - T1057   # Process Discovery
+  - T1083   # File Discovery
+  - T1082   # System Info Discovery
+  - T1049   # Network Connections Discovery
+  - T1003   # Credential Access
+  - T1059   # Command Execution
+  - T1112   # Modify Registry
+  - T1027   # Obfuscation
+  - T1071.001  # HTTP C2
+  - T1105   # Tool Staging
+  - T1005   # Data from Local System
+  - T1041   # Exfiltration over C2
+
+c2_profile:
+  jitter_mode: normal
+  interval_seconds: 60
+  jitter_seconds: 30
+  profile: noisy
+  user_agent_rotation: true
+
+evasion_preference: [T1027, T1112]
+persistence_preference: [T1547.001, T1053.005]
+
+target_platforms: [windows]
+tags: [russia, ukraine, financial, carbanak, pos, hospitality]

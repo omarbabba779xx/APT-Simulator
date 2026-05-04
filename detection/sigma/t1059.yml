@@ -1,0 +1,25 @@
+title: Recon Command Execution Burst (APT Simulator T1059)
+id: a1059000-0000-0000-0000-000000001059
+status: experimental
+description: Detects sequential whoami/hostname/ipconfig/tasklist/netstat from same
+  parent process within a short window.
+references:
+- https://attack.mitre.org/techniques/T1059
+tags:
+- attack.execution
+- attack.t1059
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+    - \whoami.exe
+    - \hostname.exe
+    - \ipconfig.exe
+    - \tasklist.exe
+    - \netstat.exe
+  condition: selection
+falsepositives:
+- IT diagnostic scripts
+level: medium

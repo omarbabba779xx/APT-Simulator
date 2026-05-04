@@ -1,0 +1,98 @@
+name: lazarus_style_full_chain
+description: >
+  Lazarus Group-style intrusion emulation — recon, credential targeting,
+  simulated tool staging, obfuscated payload drop, persistence via
+  scheduled task, C2 beaconing, and ransomware-impact simulation.
+  Windows-only end-to-end chain.
+target_platforms: [windows]
+actor: Lazarus-style (emulation)
+tags: [demo, lazarus, full_chain, windows, impact]
+
+steps:
+  # --- Initial Recon ---
+  - id: user_discovery
+    ttp: T1033
+    params: {}
+
+  - id: process_recon
+    ttp: T1057
+    params: {}
+    depends_on: [user_discovery]
+
+  - id: network_config_recon
+    ttp: T1016
+    params: {}
+    depends_on: [user_discovery]
+
+  - id: network_connections_recon
+    ttp: T1049
+    params: {}
+    depends_on: [network_config_recon]
+
+  - id: file_recon
+    ttp: T1083
+    params:
+      max_depth: 2
+      max_entries: 80
+    depends_on: [user_discovery]
+
+  # --- Credential Access ---
+  - id: credential_target_enum
+    ttp: T1003
+    params: {}
+    depends_on: [process_recon]
+
+  # --- Tool Staging (Ingress Transfer sim) ---
+  - id: stage_tool
+    ttp: T1105
+    params:
+      extension: .exe
+    depends_on: [network_connections_recon]
+
+  # --- Obfuscated Payload Drop ---
+  - id: drop_obfuscated_payload
+    ttp: T1027
+    params:
+      size_bytes: 16384
+    depends_on: [file_recon]
+
+  # --- Registry Modify (config staging) ---
+  - id: modify_registry_config
+    ttp: T1112
+    params:
+      value_name: LazSimConfigFlag
+      value: 1
+    depends_on: [drop_obfuscated_payload]
+
+  # --- Persistence via Scheduled Task ---
+  - id: scheduled_task_persistence
+    ttp: T1053.005
+    params:
+      task_name: AptSimLazarusMarker
+      trigger: ONLOGON
+    depends_on: [modify_registry_config]
+    abort_on_fail: false
+
+  # --- C2 Beaconing ---
+  - id: c2_beacon
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 5
+      interval_seconds: 1
+      jitter_seconds: 0.4
+      profile: stealth
+    depends_on: [scheduled_task_persistence, credential_target_enum, stage_tool]
+
+  # --- Impact: Ransomware-style encrypted file creation (sim) ---
+  - id: encrypt_impact_sim
+    ttp: T1486
+    params:
+      file_count: 8
+    depends_on: [c2_beacon]
+
+  # --- Indicator Removal ---
+  - id: cleanup_artifacts
+    ttp: T1070.004
+    params: {}
+    depends_on: [encrypt_impact_sim]

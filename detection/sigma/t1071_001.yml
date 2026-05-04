@@ -1,0 +1,23 @@
+title: Periodic HTTP Beaconing With Rotating User-Agent (APT Simulator T1071.001)
+id: a1071001-0000-0000-0000-000000001071
+status: experimental
+description: Detects regular-interval HTTP requests from one process with varied User-Agent
+  strings.
+references:
+- https://attack.mitre.org/techniques/T1071/001
+tags:
+- attack.command_and_control
+- attack.t1071.001
+logsource:
+  category: proxy
+detection:
+  selection:
+    cs-method: GET
+    cs-user-agent|contains|all:
+    - curl/
+    - python-requests/
+  condition: selection
+falsepositives:
+- Monitoring agents
+- API polling scripts
+level: medium

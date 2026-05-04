@@ -1,0 +1,19 @@
+# Lab whitelist
+# Only hosts/IPs listed here may run the agent.
+# Hostname matching is case-insensitive substring.
+# IP matching uses CIDR.
+# Agent refuses to start if running host does not match.
+
+hostnames:
+  - lab
+  - sandbox
+  - vm-test
+
+cidrs:
+  - 127.0.0.0/8
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+
+# Set to true ONLY in true isolated lab. Disables whitelist (dangerous).
+allow_any: false

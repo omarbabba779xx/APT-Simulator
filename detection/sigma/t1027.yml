@@ -1,0 +1,22 @@
+title: High-Entropy Encoded Artifact Drop (APT Simulator T1027)
+id: a1027000-0000-0000-0000-000000001027
+status: experimental
+description: Detects creation of files with .b64 extension or high-entropy content
+  under unusual paths.
+references:
+- https://attack.mitre.org/techniques/T1027
+tags:
+- attack.defense_evasion
+- attack.t1027
+logsource:
+  category: file_event
+detection:
+  selection:
+    TargetFilename|endswith:
+    - .b64
+    - .enc
+    - .obf
+  condition: selection
+falsepositives:
+- Backup tools producing .b64 archives
+level: medium

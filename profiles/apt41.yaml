@@ -1,0 +1,45 @@
+name: APT41
+aliases: [Double Dragon, BARIUM, Winnti, Wicked Panda, Brass Typhoon]
+origin: China
+sponsor: MSS (Ministry of State Security)
+motivation: espionage, financial_crime
+active_since: 2012
+description: >
+  Unique dual-mission APT: conducts both state-sponsored espionage for the
+  Chinese MSS and independent financially-motivated attacks. Known for supply-
+  chain compromises, gaming industry fraud, and healthcare/telecom espionage.
+  Operates across all major platforms including Linux and macOS.
+
+preferred_ttps:
+  - T1033   # User Discovery
+  - T1082   # System Info Discovery
+  - T1016   # Network Config Discovery
+  - T1049   # Network Connections Discovery
+  - T1057   # Process Discovery
+  - T1069.001  # Local Groups
+  - T1083   # File Discovery
+  - T1005   # Data from Local System
+  - T1003   # Credential Access
+  - T1059   # Command Execution
+  - T1027   # Obfuscation
+  - T1105   # Ingress Tool Transfer
+  - T1098.004  # SSH Authorized Keys (Linux)
+  - T1543.002  # Systemd Service (Linux)
+  - T1071.001  # HTTP C2
+  - T1041   # Exfiltration over C2
+  - T1070.004  # Indicator Removal
+
+c2_profile:
+  jitter_mode: exponential
+  interval_seconds: 300
+  jitter_seconds: 120
+  profile: stealth
+  user_agent_rotation: true
+  sleep_windows:
+    - { start_hour: 1, end_hour: 8 }   # off-hours (Beijing time)
+
+evasion_preference: [T1027, T1070.004]
+persistence_preference: [T1098.004, T1543.002]
+
+target_platforms: [windows, linux, darwin]
+tags: [china, mss, dual-mission, supply-chain, gaming, healthcare]

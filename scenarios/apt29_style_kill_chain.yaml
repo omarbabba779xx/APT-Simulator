@@ -1,0 +1,60 @@
+name: apt29_style_kill_chain
+description: Cozy-Bear-style stealthy chain — recon, credential targeting, registry persistence, encoded C2 beaconing, indicator cleanup. Windows-only end to end.
+target_platforms: [windows]
+actor: APT29-style (emulation)
+tags: [demo, apt29, full_chain, windows]
+
+steps:
+  # --- Discovery ---
+  - id: discover_user
+    ttp: T1033
+    params: {}
+
+  - id: discover_processes
+    ttp: T1057
+    params: {}
+    depends_on: [discover_user]
+
+  - id: discover_user_files
+    ttp: T1083
+    params:
+      paths: ["%USERPROFILE%/Documents", "%USERPROFILE%/Desktop"]
+      max_depth: 2
+      max_entries: 100
+    depends_on: [discover_user]
+
+  # --- Credential access targeting (NO memory access) ---
+  - id: enum_credential_targets
+    ttp: T1003
+    params: {}
+    depends_on: [discover_processes]
+
+  # --- Defense evasion: drop encoded artifact ---
+  - id: drop_obfuscated_payload
+    ttp: T1027
+    params:
+      size_bytes: 8192
+    depends_on: [discover_user]
+
+  # --- Persistence: registry Run key (sim) ---
+  - id: install_runkey_persistence
+    ttp: T1547.001
+    params:
+      value_name: AptSimMarker_apt29
+    depends_on: [drop_obfuscated_payload]
+
+  # --- C2 beaconing to lab loopback ---
+  - id: c2_beacon
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 4
+      interval_seconds: 1
+      jitter_seconds: 0.5
+    depends_on: [install_runkey_persistence, enum_credential_targets]
+
+  # --- Indicator removal (delete the dropped marker) ---
+  - id: cleanup_artifacts
+    ttp: T1070.004
+    params: {}
+    depends_on: [c2_beacon]

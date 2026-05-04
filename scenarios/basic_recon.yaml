@@ -1,0 +1,22 @@
+name: basic_recon
+description: Minimal reconnaissance chain — enumerate user, then files
+target_platforms: [any]
+tags: [demo, discovery]
+
+steps:
+  - id: who_am_i
+    ttp: T1033
+    params: {}
+
+  - id: enum_files
+    ttp: T1083
+    params:
+      max_depth: 1
+      max_entries: 50
+    depends_on: [who_am_i]
+
+  - id: run_whoami_cmd
+    ttp: T1059
+    params:
+      command: whoami
+    depends_on: [who_am_i]

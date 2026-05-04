@@ -1,0 +1,46 @@
+{{- if .Values.agent.enabled }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "apt-simulator.agent.name" . }}
+  labels:
+    {{- include "apt-simulator.labels" . | nindent 4 }}
+    component: agent
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "apt-simulator.name" . }}
+      component: agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "apt-simulator.name" . }}
+        component: agent
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10002
+      containers:
+        - name: agent
+          image: "{{ .Values.agent.image.repository }}:{{ .Values.agent.image.tag }}"
+          imagePullPolicy: {{ .Values.agent.image.pullPolicy }}
+          args:
+            - run
+            - --server
+            - http://{{ include "apt-simulator.orchestrator.name" . }}:{{ .Values.orchestrator.service.port }}
+            - --interval
+            - {{ .Values.agent.beaconInterval | quote }}
+            - --jitter
+            - {{ .Values.agent.beaconJitter | quote }}
+            - --ttl-seconds
+            - {{ .Values.agent.ttlSeconds | quote }}
+          env:
+            {{- if .Values.agent.labOverride }}
+            - name: APT_SIM_LAB_OVERRIDE
+              value: "1"
+            {{- end }}
+            - name: NODE_NAME
+              valueFrom: { fieldRef: { fieldPath: spec.nodeName } }
+          resources:
+            {{- toYaml .Values.agent.resources | nindent 12 }}
+{{- end }}

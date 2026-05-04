@@ -1,0 +1,44 @@
+name: linux_recon_to_c2
+description: Cross-platform-safe chain that runs on Linux (and Windows). No registry / Windows-only steps.
+target_platforms: [linux, windows]
+actor: generic-apt
+tags: [demo, linux, cross_platform]
+
+steps:
+  - id: who_am_i
+    ttp: T1033
+
+  - id: process_recon
+    ttp: T1057
+    depends_on: [who_am_i]
+
+  - id: file_recon
+    ttp: T1083
+    params:
+      paths: ["/tmp", "/home"]
+      max_depth: 2
+      max_entries: 80
+    depends_on: [who_am_i]
+
+  - id: credential_target_enum
+    ttp: T1003
+    depends_on: [process_recon]
+
+  - id: drop_encoded_artifact
+    ttp: T1027
+    params:
+      size_bytes: 2048
+    depends_on: [who_am_i]
+
+  - id: c2_loopback
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 3
+      interval_seconds: 1
+      jitter_seconds: 0.4
+    depends_on: [credential_target_enum, drop_encoded_artifact]
+
+  - id: cleanup
+    ttp: T1070.004
+    depends_on: [c2_loopback]

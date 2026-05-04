@@ -1,0 +1,21 @@
+title: Indicator File Deletion (APT Simulator T1070.004)
+id: a1070004-0000-0000-0000-000000001070
+status: experimental
+description: Detects deletion of files matching simulator artifact naming.
+references:
+- https://attack.mitre.org/techniques/T1070/004
+tags:
+- attack.defense_evasion
+- attack.t1070.004
+logsource:
+  category: file_event
+detection:
+  selection:
+    TargetFilename|contains:
+    - \sim_artifacts\to_delete_
+    - /sim_artifacts/to_delete_
+    EventType: deletion
+  condition: selection
+falsepositives:
+- Simulator cleanup
+level: low

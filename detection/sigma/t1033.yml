@@ -1,0 +1,21 @@
+title: User and System Owner Discovery (APT Simulator T1033)
+id: a1033000-0000-0000-0000-000000001033
+status: experimental
+description: Detects enumeration of current user/host context (whoami, hostname).
+references:
+- https://attack.mitre.org/techniques/T1033
+tags:
+- attack.discovery
+- attack.t1033
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+    - \whoami.exe
+    - \hostname.exe
+  condition: selection
+falsepositives:
+- Legitimate admin scripts
+level: low

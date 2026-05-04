@@ -1,0 +1,16 @@
+{{- if .Values.orchestrator.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "apt-simulator.orchestrator.name" . }}-data
+  labels:
+    {{- include "apt-simulator.labels" . | nindent 4 }}
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: {{ .Values.orchestrator.persistence.size }}
+  {{- with .Values.orchestrator.persistence.storageClass }}
+  storageClassName: {{ . }}
+  {{- end }}
+{{- end }}

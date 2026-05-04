@@ -1,0 +1,105 @@
+"""Scenario endpoints: list, run, get run status."""
+from __future__ import annotations
+
+from fastapi import APIRouter, HTTPException
+
+from ..core.auth import require_role
+from ..dsl.schema import Scenario
+from .schemas import RunDetail, RunSummary, ScenarioRunRequest, StepDetail
+from .state import get_state
+
+
+router = APIRouter(tags=["scenarios"])
+
+
+@router.get("/scenarios")
+def list_scenarios(_claims=require_role("viewer")) -> dict[str, dict]:
+    s = get_state()
+    return {
+        name: {
+            "name": sc.name,
+            "description": sc.description,
+            "actor": sc.actor,
+            "steps": [{"id": st.id, "ttp": st.ttp} for st in sc.steps],
+            "tags": sc.tags,
+        }
+        for name, sc in s.scenarios.items()
+    }
+
+
+@router.post("/scenarios/run", response_model=RunSummary)
+def run_scenario(req: ScenarioRunRequest, _claims=require_role("operator")) -> RunSummary:
+    s = get_state()
+    if s.killswitch.is_active():
+        raise HTTPException(409, f"killswitch active: {s.killswitch.reason()}")
+    if req.name:
+        scenario = s.scenarios.get(req.name)
+        if not scenario:
+            raise HTTPException(404, f"scenario '{req.name}' not found")
+    elif req.inline:
+        scenario = Scenario(**req.inline)
+        scenario.validate_dag()
+    else:
+        raise HTTPException(400, "provide either 'name' or 'inline'")
+
+    run = s.planner.start_run(scenario)
+    if s.repo:
+        s.repo.create_run(
+            run_id=run.id,
+            scenario_name=scenario.name,
+            steps=[(st.id, st.ttp) for st in scenario.steps],
+        )
+    s.audit.append("run.start", {"run_id": run.id, "scenario": scenario.name})
+    return _summarize(run)
+
+
+@router.get("/runs")
+def list_runs(_claims=require_role("viewer")) -> list[RunSummary]:
+    return [_summarize(r) for r in get_state().planner.list_runs()]
+
+
+@router.get("/runs/{run_id}", response_model=RunSummary)
+def get_run(run_id: str, _claims=require_role("viewer")) -> RunSummary:
+    run = get_state().planner.get_run(run_id)
+    if not run:
+        raise HTTPException(404, "run not found")
+    return _summarize(run)
+
+
+@router.get("/runs/{run_id}/steps", response_model=RunDetail)
+def get_run_steps(run_id: str, _claims=require_role("viewer")) -> RunDetail:
+    """Return full per-step detail for a run (status, output, error, timing)."""
+    run = get_state().planner.get_run(run_id)
+    if not run:
+        raise HTTPException(404, "run not found")
+    steps = [
+        StepDetail(
+            id=sid,
+            attack_id=st.step.ttp,
+            status=st.status,
+            agent_id=st.assigned_agent,
+            started_at=st.started_at,
+            finished_at=st.finished_at,
+            output=st.output,
+            error=st.error,
+        )
+        for sid, st in run.steps.items()
+    ]
+    return RunDetail(
+        id=run.id,
+        scenario=run.scenario.name,
+        status=run.status,
+        started_at=run.started_at,
+        steps=steps,
+    )
+
+
+def _summarize(run) -> RunSummary:
+    return RunSummary(
+        id=run.id,
+        scenario=run.scenario.name,
+        status=run.status,
+        started_at=run.started_at,
+        finished_at=run.finished_at,
+        step_summary={sid: st.status for sid, st in run.steps.items()},
+    )

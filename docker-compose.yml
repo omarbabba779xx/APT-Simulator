@@ -1,0 +1,66 @@
+# Local lab stack: one orchestrator + one agent on an isolated bridge network.
+#
+# Usage:
+#   docker compose up --build
+#   docker compose down
+#
+# The orchestrator persists state in a named volume so audit logs survive restarts.
+# Agents are configured with allow_any=true on the lab whitelist (containers don't
+# match the host CIDR scheme); ONLY use this stack on a developer workstation.
+
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile.orchestrator
+    image: apt-sim/orchestrator:latest
+    container_name: apt-sim-orchestrator
+    ports:
+      - "8765:8765"
+    environment:
+      - APT_SIM_OTEL=0
+    volumes:
+      - apt_sim_data:/app/data
+      - apt_sim_keys:/app/keys
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys;sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8765/healthz', timeout=3).status==200 else 1)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - apt-sim-lab
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    image: apt-sim/agent:latest
+    container_name: apt-sim-agent
+    depends_on:
+      orchestrator:
+        condition: service_healthy
+    environment:
+      # Container hostnames don't match the default whitelist; this image is for
+      # local lab use only. To re-enable strict whitelist, mount a custom
+      # config/lab_whitelist.yaml in /app/config.
+      - APT_SIM_LAB_OVERRIDE=1
+    command:
+      - run
+      - --server
+      - http://orchestrator:8765
+      - --interval
+      - "3"
+      - --jitter
+      - "1"
+      - --ttl-seconds
+      - "3600"
+    networks:
+      - apt-sim-lab
+
+volumes:
+  apt_sim_data:
+  apt_sim_keys:
+
+networks:
+  apt-sim-lab:
+    driver: bridge

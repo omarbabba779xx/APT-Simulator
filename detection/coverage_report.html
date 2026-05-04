@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>APT Simulator — Coverage Report</title>
+<style>
+body { font-family: ui-monospace, Consolas, monospace; background: #0e1116; color: #d6deeb; margin: 24px; }
+h1 { color: #58a6ff; }
+table.matrix { border-collapse: collapse; width: 100%; }
+.matrix th, .matrix td { border: 1px solid #2a313a; padding: 8px; text-align: left; vertical-align: top; min-width: 120px; }
+.matrix th { background: #161b22; color: #58a6ff; text-transform: uppercase; font-size: 11px; }
+.matrix td.has-rule { background: rgba(63, 185, 80, 0.07); border-color: #3fb950; }
+.matrix td.no-rule { background: rgba(248, 81, 73, 0.05); }
+.matrix td.status-success { outline: 2px solid #3fb950; outline-offset: -2px; }
+.matrix td.status-failed { outline: 2px solid #f85149; outline-offset: -2px; }
+.matrix td.status-aborted { outline: 2px solid #d29922; outline-offset: -2px; }
+.ttp-id { font-weight: bold; color: #d6deeb; }
+.ttp-name { font-size: 11px; color: #6e7a8a; margin-top: 2px; }
+.ttp-meta { font-size: 10px; color: #6e7a8a; margin-top: 4px; }
+.legend { margin: 16px 0; font-size: 12px; color: #6e7a8a; }
+.legend span { display: inline-block; padding: 2px 8px; margin-right: 8px; border: 1px solid #2a313a; }
+</style>
+</head>
+<body>
+<h1>APT Simulator — MITRE ATT&amp;CK Coverage</h1>
+<p class="legend">
+  <span class="has-rule">Sigma rule exported</span>
+  <span class="no-rule">No Sigma rule</span>
+  <span style="outline: 2px solid #3fb950;">Last run: success</span>
+  <span style="outline: 2px solid #f85149;">Last run: failed</span>
+</p>
+<table class='matrix'><thead><tr><th>command_and_control</th><th>credential_access</th><th>defense_evasion</th><th>discovery</th><th>execution</th><th>persistence</th></tr></thead><tbody><tr><td class='has-rule status-success' title='Beacon to lab loopback URL with configurable jitter modes, sleep windows, and UA profiles'><div class='ttp-id'>T1071.001</div><div class='ttp-name'>HTTP C2 Beaconing (sim)</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td class='has-rule status-—' title='Enumerates which credential-store processes are running. Read-only — never accesses memory.'><div class='ttp-id'>T1003</div><div class='ttp-name'>Credential Storage Target Enumeration (sim)</div><div class='ttp-meta'>sigma:✓ · last:—</div></td><td class='has-rule status-success' title='Writes a base64+XOR-encoded benign payload to the sim marker directory'><div class='ttp-id'>T1027</div><div class='ttp-name'>Obfuscated Files or Information (sim)</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td class='has-rule status-success' title='Enumerate current user, hostname, domain'><div class='ttp-id'>T1033</div><div class='ttp-name'>System Owner/User Discovery</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td class='has-rule status-success' title='Run benign command from fixed allowlist; arbitrary commands rejected'><div class='ttp-id'>T1059</div><div class='ttp-name'>Command and Scripting Interpreter (sim)</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td class='has-rule status-—' title='Simulates Run-key persistence by writing to an isolated test key'><div class='ttp-id'>T1547.001</div><div class='ttp-name'>Registry Run Keys (sim)</div><div class='ttp-meta'>sigma:✓ · last:—</div></td></tr><tr><td></td><td></td><td class='has-rule status-—' title='Deletes simulator marker files only; rejects paths outside marker dir'><div class='ttp-id'>T1070.004</div><div class='ttp-name'>Indicator Removal: File Deletion (sim)</div><div class='ttp-meta'>sigma:✓ · last:—</div></td><td class='has-rule status-success' title='List running processes (read-only)'><div class='ttp-id'>T1057</div><div class='ttp-name'>Process Discovery</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td></td><td></td></tr><tr><td></td><td></td><td class='has-rule status-success' title='Writes a REG_DWORD to an isolated test key'><div class='ttp-id'>T1112</div><div class='ttp-name'>Modify Registry (sim)</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td class='has-rule status-success' title='Enumerate files in configured paths (read-only)'><div class='ttp-id'>T1083</div><div class='ttp-name'>File and Directory Discovery</div><div class='ttp-meta'>sigma:✓ · last:success</div></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td class='has-rule status-—' title='Enumerate EC2 instances and S3 buckets via Describe*/List* APIs only'><div class='ttp-id'>T1580</div><div class='ttp-name'>Cloud Infrastructure Discovery (AWS, sim)</div><div class='ttp-meta'>sigma:✓ · last:—</div></td><td></td><td></td></tr></tbody></table>
+<p style="margin-top: 24px; color: #6e7a8a; font-size: 11px;">
+Generated from registered TTPs + detection/sigma/coverage.json + data/apt_sim.db.
+</p>
+</body>
+</html>

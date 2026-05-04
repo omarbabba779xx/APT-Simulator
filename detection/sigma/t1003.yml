@@ -1,0 +1,26 @@
+title: Credential Storage Process Enumeration (APT Simulator T1003)
+id: a1003000-0000-0000-0000-000000001003
+status: experimental
+description: "Detects process listing followed by reference to lsass/ssh-agent/keychain\
+  \ \u2014 a recon precursor to credential dumping."
+references:
+- https://attack.mitre.org/techniques/T1003
+tags:
+- attack.credential_access
+- attack.t1003
+logsource:
+  category: process_creation
+detection:
+  selection_win:
+    CommandLine|contains:
+    - lsass
+    - vaultsvc
+  selection_posix:
+    CommandLine|contains:
+    - ssh-agent
+    - gnome-keyring
+    - securityd
+  condition: 1 of selection_*
+falsepositives:
+- EDR / monitoring agents
+level: high

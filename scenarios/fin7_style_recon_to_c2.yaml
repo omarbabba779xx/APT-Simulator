@@ -1,0 +1,48 @@
+name: fin7_style_recon_to_c2
+description: FIN7-style financial-crime emulation — quick recon, registry config tweak, encoded payload drop, HTTP C2 burst.
+target_platforms: [windows]
+actor: FIN7-style (emulation)
+tags: [demo, fin7, recon_to_c2, windows]
+
+steps:
+  - id: recon_user
+    ttp: T1033
+
+  - id: recon_processes
+    ttp: T1057
+    depends_on: [recon_user]
+
+  - id: recon_cmd_burst
+    ttp: T1059
+    params:
+      command: netstat
+    depends_on: [recon_user]
+
+  - id: recon_files
+    ttp: T1083
+    params:
+      max_depth: 1
+      max_entries: 50
+    depends_on: [recon_user]
+
+  - id: tweak_registry_dword
+    ttp: T1112
+    params:
+      value_name: ConfigFlag
+      value: 1
+    depends_on: [recon_processes]
+
+  - id: drop_obfuscated_payload
+    ttp: T1027
+    params:
+      size_bytes: 4096
+    depends_on: [recon_files]
+
+  - id: http_c2_burst
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 6
+      interval_seconds: 0.7
+      jitter_seconds: 0.3
+    depends_on: [tweak_registry_dword, drop_obfuscated_payload]

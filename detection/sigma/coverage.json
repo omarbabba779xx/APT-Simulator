@@ -1,0 +1,68 @@
+{
+  "T1003": {
+    "status": "exported",
+    "name": "Credential Storage Target Enumeration (sim)",
+    "path": "detection/sigma/t1003.yml",
+    "level": "high"
+  },
+  "T1027": {
+    "status": "exported",
+    "name": "Obfuscated Files or Information (sim)",
+    "path": "detection/sigma/t1027.yml",
+    "level": "medium"
+  },
+  "T1033": {
+    "status": "exported",
+    "name": "System Owner/User Discovery",
+    "path": "detection/sigma/t1033.yml",
+    "level": "low"
+  },
+  "T1057": {
+    "status": "exported",
+    "name": "Process Discovery",
+    "path": "detection/sigma/t1057.yml",
+    "level": "low"
+  },
+  "T1059": {
+    "status": "exported",
+    "name": "Command and Scripting Interpreter (sim)",
+    "path": "detection/sigma/t1059.yml",
+    "level": "medium"
+  },
+  "T1070.004": {
+    "status": "exported",
+    "name": "Indicator Removal: File Deletion (sim)",
+    "path": "detection/sigma/t1070_004.yml",
+    "level": "low"
+  },
+  "T1071.001": {
+    "status": "exported",
+    "name": "HTTP C2 Beaconing (sim)",
+    "path": "detection/sigma/t1071_001.yml",
+    "level": "medium"
+  },
+  "T1083": {
+    "status": "exported",
+    "name": "File and Directory Discovery",
+    "path": "detection/sigma/t1083.yml",
+    "level": "low"
+  },
+  "T1112": {
+    "status": "exported",
+    "name": "Modify Registry (sim)",
+    "path": "detection/sigma/t1112.yml",
+    "level": "medium"
+  },
+  "T1547.001": {
+    "status": "exported",
+    "name": "Registry Run Keys (sim)",
+    "path": "detection/sigma/t1547_001.yml",
+    "level": "high"
+  },
+  "T1580": {
+    "status": "exported",
+    "name": "Cloud Infrastructure Discovery (AWS, sim)",
+    "path": "detection/sigma/t1580.yml",
+    "level": "low"
+  }
+}

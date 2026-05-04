@@ -1,0 +1,24 @@
+orchestrator:
+  host: 127.0.0.1
+  port: 8000
+  audit_dir: data/audit
+  scenarios_dir: scenarios
+  db_path: data/apt_sim.db
+  killswitch_file: data/STOP
+
+agent:
+  beacon_interval_seconds: 5
+  beacon_jitter_seconds: 2
+  ttl_seconds: 14400
+  max_consecutive_failures: 5
+
+security:
+  require_signed_payloads: true
+  signing_key_path: keys/ed25519_private.pem
+  signing_pub_path: keys/ed25519_public.pem
+  enforce_lab_whitelist: true
+
+logging:
+  level: INFO
+  json: true
+  file: data/logs/apt_sim.jsonl

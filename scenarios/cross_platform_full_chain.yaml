@@ -1,0 +1,86 @@
+name: cross_platform_full_chain
+description: >
+  Cross-platform (Linux/Windows/macOS) complete kill-chain covering all six
+  ATT&CK phases available in the cross-platform TTP set. Ideal for purple team
+  exercises where both Linux and Windows endpoints are present.
+target_platforms: [linux, windows, darwin]
+actor: generic-apt
+tags: [demo, cross_platform, full_chain, linux, macos]
+
+steps:
+  # --- Discovery ---
+  - id: user_discovery
+    ttp: T1033
+    params: {}
+
+  - id: process_discovery
+    ttp: T1057
+    params: {}
+    depends_on: [user_discovery]
+
+  - id: network_config_discovery
+    ttp: T1016
+    params: {}
+    depends_on: [user_discovery]
+
+  - id: network_connections_discovery
+    ttp: T1049
+    params: {}
+    depends_on: [network_config_discovery]
+
+  - id: file_discovery
+    ttp: T1083
+    params:
+      max_depth: 2
+      max_entries: 60
+    depends_on: [user_discovery]
+
+  # --- Credential Access ---
+  - id: credential_target_enum
+    ttp: T1003
+    params: {}
+    depends_on: [process_discovery]
+
+  # --- Execution ---
+  - id: cmd_execution
+    ttp: T1059
+    params:
+      command: whoami
+    depends_on: [user_discovery]
+
+  # --- Defense Evasion ---
+  - id: drop_obfuscated_payload
+    ttp: T1027
+    params:
+      size_bytes: 4096
+    depends_on: [file_discovery]
+
+  # --- C2 Tool Staging ---
+  - id: stage_tool
+    ttp: T1105
+    params:
+      extension: .sh
+    depends_on: [network_connections_discovery]
+
+  # --- Command & Control ---
+  - id: c2_beacon
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 3
+      interval_seconds: 1
+      jitter_seconds: 0.3
+    depends_on: [credential_target_enum, drop_obfuscated_payload, stage_tool]
+
+  # --- Impact ---
+  - id: impact_sim
+    ttp: T1486
+    params:
+      file_count: 4
+    depends_on: [c2_beacon]
+
+  # --- Indicator Removal ---
+  - id: cleanup
+    ttp: T1070.004
+    params: {}
+    depends_on: [impact_sim]

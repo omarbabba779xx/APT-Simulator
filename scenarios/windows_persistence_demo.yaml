@@ -1,0 +1,30 @@
+name: windows_persistence_demo
+description: Windows-only chain — discovery + simulated Run-key persistence (cleanup runs separately)
+target_platforms: [windows]
+actor: generic-apt
+tags: [demo, persistence, windows]
+
+steps:
+  - id: who_am_i
+    ttp: T1033
+    params: {}
+
+  - id: enum_user_docs
+    ttp: T1083
+    params:
+      paths: ["%USERPROFILE%/Documents"]
+      max_depth: 2
+    depends_on: [who_am_i]
+
+  - id: list_processes
+    ttp: T1059
+    params:
+      command: ps
+    depends_on: [who_am_i]
+
+  - id: registry_persist_sim
+    ttp: T1547.001
+    params:
+      value_name: AptSimMarker
+    depends_on: [who_am_i, enum_user_docs]
+    abort_on_fail: false

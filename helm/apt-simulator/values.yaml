@@ -1,0 +1,50 @@
+# Default values for apt-simulator.
+
+# DANGER: only deploy this chart inside an isolated lab cluster. The agent
+# DaemonSet runs simulated TTPs on every node it lands on.
+
+orchestrator:
+  image:
+    repository: apt-sim/orchestrator
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8765
+  resources:
+    limits: { cpu: "500m", memory: "512Mi" }
+    requests: { cpu: "100m", memory: "128Mi" }
+  env:
+    APT_SIM_OTEL: "0"
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+
+agent:
+  enabled: true
+  image:
+    repository: apt-sim/agent
+    tag: latest
+    pullPolicy: IfNotPresent
+  beaconInterval: 5
+  beaconJitter: 2
+  ttlSeconds: 14400
+  # Containers don't match host CIDR/hostname whitelist; this flag disables it.
+  # ONLY enable in a confirmed lab cluster.
+  labOverride: true
+  resources:
+    limits: { cpu: "200m", memory: "128Mi" }
+    requests: { cpu: "50m", memory: "64Mi" }
+
+auth:
+  # When true, the orchestrator generates/loads a JWT secret and enforces
+  # bearer-token auth on every endpoint.
+  enabled: false
+
+networkPolicy:
+  enabled: true
+  # Restrict orchestrator ingress to agents in the same namespace + an optional
+  # operator namespace.
+  operatorNamespace: ""

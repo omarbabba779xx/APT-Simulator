@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "apt-simulator.orchestrator.name" . }}
+  labels:
+    {{- include "apt-simulator.labels" . | nindent 4 }}
+    component: orchestrator
+spec:
+  replicas: {{ .Values.orchestrator.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "apt-simulator.name" . }}
+      component: orchestrator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "apt-simulator.name" . }}
+        component: orchestrator
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        fsGroup: 10001
+      containers:
+        - name: orchestrator
+          image: "{{ .Values.orchestrator.image.repository }}:{{ .Values.orchestrator.image.tag }}"
+          imagePullPolicy: {{ .Values.orchestrator.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8765
+          env:
+            {{- range $k, $v := .Values.orchestrator.env }}
+            - name: {{ $k }}
+              value: {{ $v | quote }}
+            {{- end }}
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 2
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.orchestrator.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+            - name: keys
+              mountPath: /app/keys
+      volumes:
+        - name: data
+        {{- if .Values.orchestrator.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "apt-simulator.orchestrator.name" . }}-data
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+        - name: keys
+          emptyDir: {}

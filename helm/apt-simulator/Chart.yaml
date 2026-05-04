@@ -1,0 +1,14 @@
+apiVersion: v2
+name: apt-simulator
+description: Defensive APT emulation framework — orchestrator + agent DaemonSet
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - security
+  - purple-team
+  - mitre-attack
+  - detection-engineering
+home: https://github.com/your-org/apt-simulator
+maintainers:
+  - name: omarb

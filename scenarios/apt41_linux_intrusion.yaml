@@ -1,0 +1,107 @@
+name: apt41_linux_intrusion
+description: >
+  APT41 (Double Dragon) style Linux intrusion — dual-mission espionage + collection.
+  Full kill-chain: deep recon, credential access, SSH backdoor sim,
+  local data collection, tool staging, C2 beaconing, exfil sim, cleanup.
+  Cross-platform safe (Linux / macOS).
+target_platforms: [linux, darwin]
+actor: APT41-style (emulation)
+tags: [demo, apt41, linux, macos, full_chain, espionage, collection]
+
+steps:
+  # --- Deep Recon ---
+  - id: user_discovery
+    ttp: T1033
+    params: {}
+
+  - id: system_info
+    ttp: T1082
+    params: {}
+    depends_on: [user_discovery]
+
+  - id: network_config
+    ttp: T1016
+    params: {}
+    depends_on: [user_discovery]
+
+  - id: network_connections
+    ttp: T1049
+    params: {}
+    depends_on: [network_config]
+
+  - id: process_recon
+    ttp: T1057
+    params: {}
+    depends_on: [system_info]
+
+  - id: group_recon
+    ttp: T1069.001
+    params: {}
+    depends_on: [process_recon]
+
+  - id: file_recon
+    ttp: T1083
+    params:
+      max_depth: 3
+      max_entries: 120
+    depends_on: [user_discovery]
+
+  # --- Credential Access ---
+  - id: credential_targets
+    ttp: T1003
+    params: {}
+    depends_on: [process_recon, group_recon]
+
+  # --- Collection ---
+  - id: collect_sensitive_files
+    ttp: T1005
+    params:
+      max_depth: 4
+      max_entries: 80
+    depends_on: [file_recon, credential_targets]
+
+  # --- Persistence (Linux backdoor) ---
+  - id: ssh_backdoor
+    ttp: T1098.004
+    params: {}
+    depends_on: [credential_targets]
+    abort_on_fail: false
+
+  # --- Defense Evasion ---
+  - id: drop_obfuscated_payload
+    ttp: T1027
+    params:
+      size_bytes: 8192
+    depends_on: [collect_sensitive_files]
+
+  # --- Tool Staging ---
+  - id: stage_tool
+    ttp: T1105
+    params:
+      extension: .sh
+    depends_on: [network_connections]
+
+  # --- C2 Beaconing ---
+  - id: c2_beacon
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 4
+      interval_seconds: 1
+      jitter_seconds: 0.4
+      profile: stealth
+    depends_on: [ssh_backdoor, drop_obfuscated_payload, stage_tool]
+
+  # --- Exfiltration ---
+  - id: exfil_over_c2
+    ttp: T1041
+    params:
+      url: http://127.0.0.1:8765/healthz
+      max_bytes: 256
+    depends_on: [c2_beacon, collect_sensitive_files]
+
+  # --- Indicator Removal ---
+  - id: cleanup
+    ttp: T1070.004
+    params: {}
+    depends_on: [exfil_over_c2]

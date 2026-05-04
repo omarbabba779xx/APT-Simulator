@@ -1,0 +1,25 @@
+title: Registry Run Key Modification (APT Simulator T1547.001)
+id: a1547001-0000-0000-0000-000000001547
+status: experimental
+description: Detects writes under Software\AptSimulator\Test\Run (simulator test key)
+  and to real Run keys.
+references:
+- https://attack.mitre.org/techniques/T1547/001
+tags:
+- attack.persistence
+- attack.t1547.001
+logsource:
+  category: registry_set
+  product: windows
+detection:
+  selection_real:
+    TargetObject|contains:
+    - \Software\Microsoft\Windows\CurrentVersion\Run
+    - \Software\Microsoft\Windows\CurrentVersion\RunOnce
+  selection_sim:
+    TargetObject|contains:
+    - \Software\AptSimulator\Test\Run
+  condition: 1 of selection_*
+falsepositives:
+- Legitimate installers
+level: high

@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+apt_simulator.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project runtime
+data/
+logs/
+*.db
+*.sqlite
+*.sqlite3
+audit/*.jsonl
+keys/*.pem
+keys/*.key
+*.signed
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Local config
+config/local.yaml
+.env
+.env.local

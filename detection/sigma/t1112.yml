@@ -1,0 +1,21 @@
+title: Registry DWORD Write (APT Simulator T1112)
+id: a1112000-0000-0000-0000-000000001112
+status: experimental
+description: Detects DWORD writes under the simulator test key.
+references:
+- https://attack.mitre.org/techniques/T1112
+tags:
+- attack.defense_evasion
+- attack.t1112
+logsource:
+  category: registry_set
+  product: windows
+detection:
+  selection:
+    TargetObject|contains:
+    - \Software\AptSimulator\Test\Modify
+    Type: DWORD (0x00000004)
+  condition: selection
+falsepositives:
+- Simulator self-test cleanup
+level: medium
