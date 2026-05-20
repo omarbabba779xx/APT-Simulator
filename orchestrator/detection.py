@@ -4,7 +4,12 @@ Supports the subset of Sigma syntax used by APT Simulator's own rules:
 
   - Field modifiers: |endswith, |startswith, |contains, |all
   - Selection values: string, list (any-of) or list with |all (all-of)
-  - Condition primitives: 'selection', '1 of selection_*', 'all of selection_*'
+  - Condition primitives:
+      'selection'
+      '1 of selection_*' / 'all of selection_*'
+      'X and not Y'
+      'X or Y'
+      'X | count(...) > N'   (aggregation — base selection evaluated, count assumed met)
 
 For unknown conditions, returns False rather than raising — the matcher is a
 fast-path for the simulator's own ruleset, not a general Sigma engine.
@@ -27,6 +32,26 @@ def _field_match(event_value: Any, modifier: str | None, target: str) -> bool:
         return ev.startswith(tv)
     if modifier == "contains":
         return tv in ev
+    if modifier == "gt":
+        try:
+            return float(event_value) > float(target)
+        except (TypeError, ValueError):
+            return False
+    if modifier == "lt":
+        try:
+            return float(event_value) < float(target)
+        except (TypeError, ValueError):
+            return False
+    if modifier == "gte":
+        try:
+            return float(event_value) >= float(target)
+        except (TypeError, ValueError):
+            return False
+    if modifier == "lte":
+        try:
+            return float(event_value) <= float(target)
+        except (TypeError, ValueError):
+            return False
     return ev == tv
 
 
@@ -88,7 +113,42 @@ def evaluate(rule: dict[str, Any], event: dict[str, Any]) -> bool:
             return bool(matching) and all(matching)
         return sel_match.get(rest, False)
 
+    # "X and not Y" — e.g. "selection and not filter_legitimate"
+    if " and not " in condition:
+        pos = condition.index(" and not ")
+        lhs = condition[:pos].strip()
+        rhs = condition[pos + len(" and not "):].strip()
+        lhs_ok = _eval_atom(sel_match, lhs)
+        rhs_ok = _eval_atom(sel_match, rhs)
+        return lhs_ok and not rhs_ok
+
+    # "X or Y" — e.g. "selection_dns_txt or selection_icmp_large"
+    if " or " in condition and " and " not in condition:
+        parts = [p.strip() for p in condition.split(" or ")]
+        return any(_eval_atom(sel_match, p) for p in parts)
+
+    # "X | count(...) > N" — aggregation: evaluate base selection, assume count met
+    if " | " in condition:
+        base = condition.split(" | ")[0].strip()
+        return _eval_atom(sel_match, base)
+
     return False
+
+
+def _eval_atom(sel_match: dict[str, bool], atom: str) -> bool:
+    """Evaluate a single named selection atom against the pre-computed match map."""
+    if atom.startswith("1 of "):
+        rest = atom[len("1 of "):].strip()
+        if rest.endswith("*"):
+            return any(_selections_matching_prefix(sel_match, rest[:-1]))
+        return sel_match.get(rest, False)
+    if atom.startswith("all of "):
+        rest = atom[len("all of "):].strip()
+        if rest.endswith("*"):
+            matching = _selections_matching_prefix(sel_match, rest[:-1])
+            return bool(matching) and all(matching)
+        return sel_match.get(rest, False)
+    return sel_match.get(atom, False)
 
 
 def evaluate_many(rule: dict[str, Any], events: list[dict[str, Any]]) -> list[int]:

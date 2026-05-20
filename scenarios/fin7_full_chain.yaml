@@ -1,0 +1,150 @@
+name: fin7_full_chain
+description: >
+  FIN7-style full kill chain — initial recon, command execution, obfuscated staging,
+  brute-force credential spraying, SMB lateral movement, data archiving,
+  C2 beacon, and alternative-protocol exfiltration.
+  Mirrors Carbanak/FIN7 TTPs targeting financial sector environments.
+target_platforms: [windows]
+actor: FIN7-style (emulation)
+tags: [fin7, full_chain, windows, credential_access, lateral_movement, exfiltration]
+
+steps:
+  # --- Initial access recon ---
+  - id: net_config
+    ttp: T1016
+    params: {}
+
+  - id: network_connections
+    ttp: T1049
+    params: {}
+    depends_on: [net_config]
+
+  - id: local_groups
+    ttp: T1069.001
+    params: {}
+    depends_on: [net_config]
+
+  - id: sys_info
+    ttp: T1082
+    params: {}
+    depends_on: [net_config]
+
+  # --- Execution ---
+  - id: command_execution
+    ttp: T1059
+    params:
+      shell: cmd
+      command_count: 5
+    depends_on: [sys_info, local_groups]
+
+  # --- Defense evasion ---
+  - id: obfuscate_stager
+    ttp: T1027
+    params:
+      size_bytes: 16384
+    depends_on: [command_execution]
+
+  - id: process_injection_recon
+    ttp: T1055
+    params:
+      extra_targets: ["chrome.exe", "firefox.exe"]
+    depends_on: [command_execution]
+
+  # --- Credential access ---
+  - id: cred_targets
+    ttp: T1003
+    params: {}
+    depends_on: [process_injection_recon]
+
+  - id: brute_force
+    ttp: T1110
+    params:
+      attempts: 50
+      usernames: ["administrator", "admin", "root", "svc_sql", "svc_backup", "finance_admin"]
+      src_ip: "198.51.100.99"
+    depends_on: [net_config]
+
+  # --- Persistence ---
+  - id: scheduled_task
+    ttp: T1053.005
+    params:
+      task_name: "WindowsUpdateHelper_fin7"
+    depends_on: [obfuscate_stager]
+
+  - id: registry_runkey
+    ttp: T1547.001
+    params:
+      value_name: AptSimMarker_fin7
+    depends_on: [obfuscate_stager]
+
+  # --- Lateral movement ---
+  - id: smb_lateral
+    ttp: T1021.002
+    params:
+      hosts: ["127.0.0.1"]
+      shares: ["ADMIN$", "C$", "IPC$", "FINANCE"]
+    depends_on: [cred_targets]
+
+  - id: rdp_probe
+    ttp: T1021.001
+    params:
+      hosts: ["127.0.0.1"]
+    depends_on: [cred_targets]
+
+  # --- Collection ---
+  - id: file_discovery
+    ttp: T1083
+    params:
+      paths: ["%USERPROFILE%/Documents", "%USERPROFILE%/Desktop", "C:/Users/Public"]
+      extensions: [".xlsx", ".csv", ".docx", ".pdf", ".txt"]
+      max_depth: 3
+      max_entries: 200
+    depends_on: [smb_lateral]
+
+  - id: collect_files
+    ttp: T1005
+    params:
+      paths: ["%USERPROFILE%/Documents"]
+      max_depth: 3
+    depends_on: [file_discovery]
+
+  - id: archive_staged
+    ttp: T1560
+    params: {}
+    depends_on: [collect_files]
+
+  # --- C2 ---
+  - id: c2_beacon
+    ttp: T1071.001
+    params:
+      url: http://127.0.0.1:8765/healthz
+      beacons: 6
+      interval_seconds: 0.5
+      jitter_seconds: 0.2
+    depends_on: [registry_runkey, scheduled_task]
+
+  - id: tool_drop
+    ttp: T1105
+    params:
+      url: http://127.0.0.1:8765/healthz
+      filename: stager_fin7.bin
+    depends_on: [c2_beacon]
+
+  # --- Exfiltration ---
+  - id: exfil_icmp
+    ttp: T1048
+    params:
+      protocol: icmp
+      payload_bytes: 1024
+    depends_on: [archive_staged, c2_beacon]
+
+  - id: exfil_over_c2
+    ttp: T1041
+    params: {}
+    depends_on: [exfil_icmp]
+
+  # --- Cleanup ---
+  - id: delete_markers
+    ttp: T1070.004
+    params: {}
+    depends_on: [exfil_over_c2]
