@@ -183,19 +183,19 @@ def test_t1110_custom_usernames(tmp_path: Path) -> None:
     usernames = ["ceo", "cfo", "finance_admin"]
     res = ttp.run({"attempts": 6, "usernames": usernames, "marker_dir": str(tmp_path)})
     assert res.ok
-    events = [json.loads(l) for l in (tmp_path / "t1110_brute_force.jsonl").read_text().splitlines()]
+    events = [json.loads(ln) for ln in (tmp_path / "t1110_brute_force.jsonl").read_text().splitlines()]
     for ev in events:
         assert ev["TargetUserName"] in usernames
 
 
 def test_t1110_deterministic_with_seed(tmp_path: Path) -> None:
     ttp = registry.get("T1110")
-    res1 = ttp.run({"attempts": 5, "seed": 7, "marker_dir": str(tmp_path)})
+    ttp.run({"attempts": 5, "seed": 7, "marker_dir": str(tmp_path)})
     events1 = (tmp_path / "t1110_brute_force.jsonl").read_text()
-    res2 = ttp.run({"attempts": 5, "seed": 7, "marker_dir": str(tmp_path)})
+    ttp.run({"attempts": 5, "seed": 7, "marker_dir": str(tmp_path)})
     events2 = (tmp_path / "t1110_brute_force.jsonl").read_text()
-    users1 = [json.loads(l)["TargetUserName"] for l in events1.splitlines()]
-    users2 = [json.loads(l)["TargetUserName"] for l in events2.splitlines()]
+    users1 = [json.loads(ln)["TargetUserName"] for ln in events1.splitlines()]
+    users2 = [json.loads(ln)["TargetUserName"] for ln in events2.splitlines()]
     assert users1 == users2
 
 
@@ -227,8 +227,8 @@ def test_t1110_sigma_matches_synthetic() -> None:
 def test_t1110_src_ip_rfc5737(tmp_path: Path) -> None:
     """Default src_ip must be RFC 5737 TEST-NET (never routable)."""
     ttp = registry.get("T1110")
-    res = ttp.run({"attempts": 3, "marker_dir": str(tmp_path)})
-    events = [json.loads(l) for l in (tmp_path / "t1110_brute_force.jsonl").read_text().splitlines()]
+    ttp.run({"attempts": 3, "marker_dir": str(tmp_path)})
+    events = [json.loads(ln) for ln in (tmp_path / "t1110_brute_force.jsonl").read_text().splitlines()]
     ip = events[0]["IpAddress"]
     assert ip.startswith("192.0.2.") or ip.startswith("198.51.100.") or ip.startswith("203.0.113.")
 
