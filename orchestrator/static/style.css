@@ -233,6 +233,22 @@ h2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.boundary-panel {
+  grid-column: 1 / -1;
+}
+
+.boundary-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+}
+
+.boundary-list li {
+  line-height: 1.45;
+}
+
 .split-grid,
 .builder-layout {
   grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);

@@ -26,6 +26,8 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "Scenario Builder" in r.text
     assert "Scenario Library" in r.text
     assert "TTP Catalog" in r.text
+    assert "Project Boundaries" in r.text
+    assert "Not an offensive framework" in r.text
 
 
 def test_coverage_endpoint(tmp_path) -> None:

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>APT Simulator Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=dashboard-v3" />
+  <link rel="stylesheet" href="style.css?v=dashboard-v4" />
 </head>
 <body>
   <header class="topbar">
@@ -74,6 +74,19 @@
             </thead>
             <tbody id="agents-table"></tbody>
           </table>
+        </div>
+        <div class="panel boundary-panel">
+          <div class="panel-head">
+            <h2>Project Boundaries</h2>
+            <span class="pill neutral">Scope</span>
+          </div>
+          <ul class="boundary-list">
+            <li>Not an offensive framework.</li>
+            <li>Not intended for systems without written authorization.</li>
+            <li>Stores the complete 2,511-scenario loaded library; larger variant batches are generated on demand.</li>
+            <li>Does not contact cloud providers for marker-only cloud simulations.</li>
+            <li>Does not replace a full red-team engagement.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -356,6 +369,6 @@
     <div id="dialog-body"></div>
   </dialog>
 
-  <script src="app.js?v=dashboard-v3"></script>
+  <script src="app.js?v=dashboard-v4"></script>
 </body>
 </html>
