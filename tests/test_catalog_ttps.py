@@ -54,6 +54,6 @@ def test_safety_policy_blocks_live_mode_by_default() -> None:
 
 
 def test_runtime_applies_safety_policy() -> None:
-    res = execute("T1059.001:WINDOWS_POWERSHELL_ENCODED", {"live_mode": True})
+    res = execute("T1530:AWS_S3_OBJECT_BURST", {"live_mode": True})
     assert not res.ok
     assert "safety policy blocked" in (res.error or "")
