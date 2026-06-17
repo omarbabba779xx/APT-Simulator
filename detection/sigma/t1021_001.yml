@@ -1,0 +1,26 @@
+title: RDP Lateral Movement Probe (APT Simulator T1021.001)
+id: b1021001-0000-0000-0000-00001021001a
+status: stable
+description: Detects TCP connections to port 3389 (RDP) initiated from non-admin workstations,
+  indicative of lateral movement or network reconnaissance.
+references:
+- https://attack.mitre.org/techniques/T1021/001
+tags:
+- attack.lateral_movement
+- attack.t1021.001
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  selection:
+    DestinationPort: 3389
+    Initiated: 'true'
+  filter_rdp_client:
+    Image|endswith:
+    - \mstsc.exe
+    User|contains:
+    - SYSTEM
+  condition: selection and not filter_rdp_client
+falsepositives:
+- Legitimate remote administration by IT staff
+level: medium

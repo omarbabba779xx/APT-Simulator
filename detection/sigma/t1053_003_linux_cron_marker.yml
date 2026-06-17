@@ -1,0 +1,18 @@
+title: Cron Persistence Marker
+id: c1053003-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: linux
+  category: file_event
+detection:
+  selection:
+    TargetFilename|contains: /cron
+    Image|contains: crontab
+  condition: selection
+falsepositives:
+- administration
+level: medium
+references:
+- https://attack.mitre.org/techniques/1053/003/
+tags:
+- attack.t1053.003

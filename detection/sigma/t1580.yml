@@ -1,24 +1,29 @@
-title: AWS Cloud Discovery API Burst (APT Simulator T1580)
+title: Cloud Discovery API Burst (APT Simulator T1580)
 id: a1580000-0000-0000-0000-000000001580
 status: experimental
-description: Detects bursts of read-only AWS discovery API calls (DescribeInstances,
-  ListBuckets) from one principal.
+description: Detects bursts of read-only cloud discovery API calls.
 references:
 - https://attack.mitre.org/techniques/T1580
 tags:
 - attack.discovery
 - attack.t1580
 logsource:
-  product: aws
-  service: cloudtrail
+  product: cloud
 detection:
-  selection:
+  selection_aws:
     eventName:
     - DescribeInstances
     - ListBuckets
     - GetCallerIdentity
-    readOnly: true
-  condition: selection
+  selection_azure:
+    operationName|contains:
+    - resourceGroups/read
+    - subscriptions/read
+  selection_gcp:
+    methodName|contains:
+    - google.cloud.resourcemanager
+    - compute.instances.list
+  condition: 1 of selection_*
 falsepositives:
 - IaC tooling
 - Inventory scanners

@@ -84,6 +84,7 @@ def build_layer(db_path: str | None = None) -> dict[str, Any]:
     all_ttps = registry.all()
 
     for attack_id, ttp in sorted(all_ttps.items()):
+        base_attack_id = str(getattr(ttp, "base_attack_id", attack_id))
         has_rule = ttp.sigma_rule() is not None
         run_status = _last_run_status(attack_id, db_path)
         tactic_nav = _TACTIC_MAP.get(ttp.tactic, ttp.tactic.replace("_", "-"))
@@ -110,6 +111,9 @@ def build_layer(db_path: str | None = None) -> dict[str, Any]:
             "score": score,
             "metadata": [
                 {"name": "sigma_rule", "value": "yes" if has_rule else "no"},
+                {"name": "base_attack_id", "value": base_attack_id},
+                {"name": "pack", "value": str(getattr(ttp, "pack", "core"))},
+                {"name": "safety_tier", "value": str(getattr(ttp, "safety_tier", "lab-write"))},
                 {"name": "platforms", "value": ", ".join(ttp.supported_platforms)},
                 {"name": "last_run", "value": run_status or "—"},
             ],

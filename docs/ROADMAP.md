@@ -41,6 +41,12 @@
 ## Phase 4 — Cloud + Scale
 
 - [x] AWS Stratus-style simulated TTPs: T1078.004 (Cloud Account abuse), T1530 (Data from Storage)
+- [x] Catalog-driven TTP packs for Windows, Linux, cloud, identity, and SaaS marker-only variants
+- [x] ATT&CK STIX importer for safe marker-only coverage stubs
+- [x] ECS / OCSF golden telemetry fixture export
+- [x] Detection scoring with coverage percentage, missing fields, and false-positive risk
+- [x] Graph-based scenario builder with actor and difficulty profiles
+- [x] Campaign queue and synthetic replay event generation
 - [ ] Azure / Entra ID privilege escalation simulation
 - [ ] GCP resource manager discovery expansion
 - [ ] gRPC C2 channel option (alternative to HTTP)

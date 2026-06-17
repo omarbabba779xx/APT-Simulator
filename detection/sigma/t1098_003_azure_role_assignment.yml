@@ -1,0 +1,16 @@
+title: Azure Role Assignment Marker
+id: c1098003-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: azure
+detection:
+  selection:
+    operationName|contains: roleAssignments/write
+  condition: selection
+falsepositives:
+- IAM administration
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/003/
+tags:
+- attack.t1098.003

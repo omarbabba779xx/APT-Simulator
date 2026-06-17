@@ -1,0 +1,27 @@
+title: System Information Discovery (APT Simulator T1082)
+id: a1082000-0000-0000-0000-000000001082
+status: experimental
+description: "Detects commands commonly used to gather OS/hardware fingerprint \u2014\
+  \ standard adversary post-exploitation recon step."
+references:
+- https://attack.mitre.org/techniques/T1082
+tags:
+- attack.discovery
+- attack.t1082
+logsource:
+  category: process_creation
+detection:
+  selection_win:
+    Image|endswith:
+    - \systeminfo.exe
+    - \winver.exe
+  selection_posix:
+    CommandLine|contains:
+    - uname -a
+    - uname -r
+    - hostnamectl
+  condition: 1 of selection_*
+falsepositives:
+- IT inventory scripts
+- monitoring agents
+level: low

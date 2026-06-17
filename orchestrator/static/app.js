@@ -176,26 +176,38 @@ async function showRunDetail(runId) {
 
 async function refreshCoverage() {
   const container = document.getElementById("coverage-matrix");
+  const summary = document.getElementById("coverage-summary");
   try {
-    const ttps = await api("/ttps");
-    const tactics = [...new Set(ttps.map(t => t.tactic))].sort();
-    const rules = await fetch("/coverage").then(r => r.ok ? r.json() : {});
+    const matrix = await api("/coverage/matrix");
+    const tactics = Object.keys(matrix.tactics || {}).sort();
+    clear(summary);
+    [
+      ["TTPs", matrix.total],
+      ["Rules", matrix.with_rules],
+      ["Coverage", `${matrix.rule_coverage_percent}%`],
+      ["Packs", Object.keys(matrix.packs || {}).length],
+    ].forEach(([label, value]) => {
+      summary.appendChild(el("div", { class: "summary-item" }, [
+        el("span", { class: "summary-value" }, String(value)),
+        el("span", { class: "summary-label" }, String(label)),
+      ]));
+    });
     clear(container);
     const table = el("table", { class: "matrix" });
     const thead = el("thead", {}, [el("tr", {}, tactics.map(t => el("th", {}, t)))]);
     table.appendChild(thead);
-    const maxRows = Math.max(...tactics.map(t => ttps.filter(x => x.tactic === t).length));
+    const maxRows = Math.max(...tactics.map(t => matrix.tactics[t].items.length));
     const tbody = el("tbody");
     for (let i = 0; i < maxRows; i++) {
       const tr = el("tr");
       for (const t of tactics) {
-        const techs = ttps.filter(x => x.tactic === t);
+        const techs = matrix.tactics[t].items;
         const ttp = techs[i];
         if (ttp) {
-          const hasRule = rules[ttp.attack_id]?.status === "exported";
+          const hasRule = ttp.has_rule;
           tr.appendChild(el("td", { class: hasRule ? "has-rule" : "no-rule", title: ttp.description }, [
-            el("span", { class: "ttp-id" }, ttp.attack_id),
-            el("span", { class: "ttp-name" }, ttp.name),
+            el("span", { class: "ttp-id" }, ttp.id),
+            el("span", { class: "ttp-name" }, `${ttp.name} · ${ttp.pack} · ${ttp.safety_tier}`),
           ]));
         } else {
           tr.appendChild(el("td", {}, ""));
@@ -205,6 +217,27 @@ async function refreshCoverage() {
     }
     table.appendChild(tbody);
     container.appendChild(table);
+  } catch (e) { /* swallow */ }
+}
+
+async function refreshDetectionScores() {
+  const tbody = document.querySelector("#detection-score-table tbody");
+  if (!tbody) return;
+  try {
+    const scores = await api("/detections/score");
+    clear(tbody);
+    Object.entries(scores)
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .slice(0, 80)
+      .forEach(([id, score]) => {
+        tbody.appendChild(el("tr", {}, [
+          el("td", { class: "mono" }, id),
+          el("td", {}, `${score.coverage_score}%`),
+          el("td", {}, `${score.events_matched}/${score.events_total}`),
+          el("td", { class: `risk-${score.false_positive_risk}` }, score.false_positive_risk),
+          el("td", { class: "muted" }, (score.missing_fields || []).join(", ") || "—"),
+        ]));
+      });
   } catch (e) { /* swallow */ }
 }
 
@@ -237,6 +270,7 @@ function refreshAll() {
   refreshScenarios();
   refreshRuns();
   refreshCoverage();
+  refreshDetectionScores();
 }
 
 function connectWs() {

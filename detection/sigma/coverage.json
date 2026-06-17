@@ -5,6 +5,30 @@
     "path": "detection/sigma/t1003.yml",
     "level": "high"
   },
+  "T1005": {
+    "status": "exported",
+    "name": "Data from Local System",
+    "path": "detection/sigma/t1005.yml",
+    "level": "medium"
+  },
+  "T1016": {
+    "status": "exported",
+    "name": "System Network Configuration Discovery",
+    "path": "detection/sigma/t1016.yml",
+    "level": "low"
+  },
+  "T1021.001": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Probe (sim)",
+    "path": "detection/sigma/t1021_001.yml",
+    "level": "medium"
+  },
+  "T1021.002": {
+    "status": "exported",
+    "name": "SMB/Windows Admin Shares (sim)",
+    "path": "detection/sigma/t1021_002.yml",
+    "level": "medium"
+  },
   "T1027": {
     "status": "exported",
     "name": "Obfuscated Files or Information (sim)",
@@ -17,6 +41,48 @@
     "path": "detection/sigma/t1033.yml",
     "level": "low"
   },
+  "T1041": {
+    "status": "exported",
+    "name": "Exfiltration Over C2 Channel (sim)",
+    "path": "detection/sigma/t1041.yml",
+    "level": "high"
+  },
+  "T1047:WINDOWS_WMI_PROCESS_CREATE": {
+    "status": "exported",
+    "name": "WMI Process Create Marker",
+    "path": "detection/sigma/t1047_windows_wmi_process_create.yml",
+    "level": "medium"
+  },
+  "T1048": {
+    "status": "exported",
+    "name": "Exfiltration Over Alternative Protocol (sim)",
+    "path": "detection/sigma/t1048.yml",
+    "level": "high"
+  },
+  "T1049": {
+    "status": "exported",
+    "name": "System Network Connections Discovery",
+    "path": "detection/sigma/t1049.yml",
+    "level": "low"
+  },
+  "T1053.003:LINUX_CRON_MARKER": {
+    "status": "exported",
+    "name": "Cron Persistence Marker",
+    "path": "detection/sigma/t1053_003_linux_cron_marker.yml",
+    "level": "medium"
+  },
+  "T1053.005": {
+    "status": "exported",
+    "name": "Scheduled Task (sim)",
+    "path": "detection/sigma/t1053_005.yml",
+    "level": "medium"
+  },
+  "T1055": {
+    "status": "exported",
+    "name": "Process Injection Target Enumeration (sim)",
+    "path": "detection/sigma/t1055.yml",
+    "level": "high"
+  },
   "T1057": {
     "status": "exported",
     "name": "Process Discovery",
@@ -28,6 +94,30 @@
     "name": "Command and Scripting Interpreter (sim)",
     "path": "detection/sigma/t1059.yml",
     "level": "medium"
+  },
+  "T1059.001:WINDOWS_POWERSHELL_ENCODED": {
+    "status": "exported",
+    "name": "PowerShell Encoded Command Marker",
+    "path": "detection/sigma/t1059_001_windows_powershell_encoded.yml",
+    "level": "medium"
+  },
+  "T1059.004:LINUX_SHELL_HISTORY_DISABLE": {
+    "status": "exported",
+    "name": "Unix Shell History Disable Marker",
+    "path": "detection/sigma/t1059_004_linux_shell_history_disable.yml",
+    "level": "medium"
+  },
+  "T1069.001": {
+    "status": "exported",
+    "name": "Permission Groups Discovery: Local Groups",
+    "path": "detection/sigma/t1069_001.yml",
+    "level": "low"
+  },
+  "T1070.002:LINUX_LOG_CLEAR": {
+    "status": "exported",
+    "name": "Linux Log Clear Marker",
+    "path": "detection/sigma/t1070_002_linux_log_clear.yml",
+    "level": "high"
   },
   "T1070.004": {
     "status": "exported",
@@ -47,11 +137,89 @@
     "path": "detection/sigma/t1078_004.yml",
     "level": "high"
   },
+  "T1078.004:AWS_CONSOLE_LOGIN_SUCCESS": {
+    "status": "exported",
+    "name": "AWS Console Login Success Marker",
+    "path": "detection/sigma/t1078_004_aws_console_login_success.yml",
+    "level": "medium"
+  },
+  "T1078.004:IDENTITY_RISKY_SIGNIN": {
+    "status": "exported",
+    "name": "Risky Cloud Sign-in Marker",
+    "path": "detection/sigma/t1078_004_identity_risky_signin.yml",
+    "level": "high"
+  },
+  "T1082": {
+    "status": "exported",
+    "name": "System Information Discovery",
+    "path": "detection/sigma/t1082.yml",
+    "level": "low"
+  },
   "T1083": {
     "status": "exported",
     "name": "File and Directory Discovery",
     "path": "detection/sigma/t1083.yml",
     "level": "low"
+  },
+  "T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY": {
+    "status": "exported",
+    "name": "Linux Local Account Discovery Marker",
+    "path": "detection/sigma/t1087_001_linux_local_account_discovery.yml",
+    "level": "low"
+  },
+  "T1087.004:M365_GROUP_ENUMERATION": {
+    "status": "exported",
+    "name": "M365 Group Enumeration Marker",
+    "path": "detection/sigma/t1087_004_m365_group_enumeration.yml",
+    "level": "low"
+  },
+  "T1098.003:AZURE_ROLE_ASSIGNMENT": {
+    "status": "exported",
+    "name": "Azure Role Assignment Marker",
+    "path": "detection/sigma/t1098_003_azure_role_assignment.yml",
+    "level": "high"
+  },
+  "T1098.003:ENTRA_APP_ROLE_GRANT": {
+    "status": "exported",
+    "name": "Entra Application Role Grant Marker",
+    "path": "detection/sigma/t1098_003_entra_app_role_grant.yml",
+    "level": "high"
+  },
+  "T1098.004": {
+    "status": "exported",
+    "name": "SSH Authorized Keys (sim)",
+    "path": "detection/sigma/t1098_004.yml",
+    "level": "high"
+  },
+  "T1098.005:SAAS_TOKEN_CREATED": {
+    "status": "exported",
+    "name": "SaaS OAuth Token Created Marker",
+    "path": "detection/sigma/t1098_005_saas_token_created.yml",
+    "level": "high"
+  },
+  "T1105": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer (sim)",
+    "path": "detection/sigma/t1105.yml",
+    "level": "medium"
+  },
+  "T1105:LINUX_CURL_TOOL_TRANSFER": {
+    "status": "exported",
+    "name": "Curl Tool Transfer Marker",
+    "path": "detection/sigma/t1105_linux_curl_tool_transfer.yml",
+    "level": "medium"
+  },
+  "T1110": {
+    "status": "exported",
+    "name": "Brute Force Authentication Simulation",
+    "path": "detection/sigma/t1110.yml",
+    "level": "high"
+  },
+  "T1110.003:M365_PASSWORD_SPRAY": {
+    "status": "exported",
+    "name": "M365 Password Spray Marker",
+    "path": "detection/sigma/t1110_003_m365_password_spray.yml",
+    "level": "high"
   },
   "T1112": {
     "status": "exported",
@@ -59,11 +227,65 @@
     "path": "detection/sigma/t1112.yml",
     "level": "medium"
   },
+  "T1112:WINDOWS_REGISTRY_POLICY_CHANGE": {
+    "status": "exported",
+    "name": "Registry Policy Change Marker",
+    "path": "detection/sigma/t1112_windows_registry_policy_change.yml",
+    "level": "medium"
+  },
+  "T1213.003:GITHUB_PRIVATE_REPO_CLONE": {
+    "status": "exported",
+    "name": "GitHub Private Repository Clone Marker",
+    "path": "detection/sigma/t1213_003_github_private_repo_clone.yml",
+    "level": "medium"
+  },
+  "T1213:SLACK_CHANNEL_EXPORT": {
+    "status": "exported",
+    "name": "Slack Channel Export Marker",
+    "path": "detection/sigma/t1213_slack_channel_export.yml",
+    "level": "medium"
+  },
+  "T1218.011:WINDOWS_RUNDLL32_PROXY": {
+    "status": "exported",
+    "name": "Rundll32 Proxy Execution Marker",
+    "path": "detection/sigma/t1218_011_windows_rundll32_proxy.yml",
+    "level": "medium"
+  },
+  "T1486": {
+    "status": "exported",
+    "name": "Data Encrypted for Impact (sim)",
+    "path": "detection/sigma/t1486.yml",
+    "level": "high"
+  },
   "T1530": {
     "status": "exported",
     "name": "Data from Cloud Storage Object (sim)",
     "path": "detection/sigma/t1530.yml",
     "level": "medium"
+  },
+  "T1530:AWS_S3_OBJECT_BURST": {
+    "status": "exported",
+    "name": "AWS S3 Object Read Burst Marker",
+    "path": "detection/sigma/t1530_aws_s3_object_burst.yml",
+    "level": "medium"
+  },
+  "T1530:GOOGLE_DRIVE_BULK_DOWNLOAD": {
+    "status": "exported",
+    "name": "Google Drive Bulk Download Marker",
+    "path": "detection/sigma/t1530_google_drive_bulk_download.yml",
+    "level": "medium"
+  },
+  "T1543.002": {
+    "status": "exported",
+    "name": "Systemd User Service (sim)",
+    "path": "detection/sigma/t1543_002.yml",
+    "level": "medium"
+  },
+  "T1543.003:WINDOWS_SERVICE_CREATE": {
+    "status": "exported",
+    "name": "Windows Service Creation Marker",
+    "path": "detection/sigma/t1543_003_windows_service_create.yml",
+    "level": "high"
   },
   "T1547.001": {
     "status": "exported",
@@ -71,10 +293,40 @@
     "path": "detection/sigma/t1547_001.yml",
     "level": "high"
   },
+  "T1556.009:OKTA_MFA_POLICY_WEAKEN": {
+    "status": "exported",
+    "name": "Okta MFA Policy Weaken Marker",
+    "path": "detection/sigma/t1556_009_okta_mfa_policy_weaken.yml",
+    "level": "high"
+  },
+  "T1560": {
+    "status": "exported",
+    "name": "Archive Collected Data (sim)",
+    "path": "detection/sigma/t1560.yml",
+    "level": "medium"
+  },
+  "T1567.002:SAAS_EXTERNAL_SHARE": {
+    "status": "exported",
+    "name": "SaaS External Share Marker",
+    "path": "detection/sigma/t1567_002_saas_external_share.yml",
+    "level": "high"
+  },
   "T1580": {
     "status": "exported",
-    "name": "Cloud Infrastructure Discovery (AWS, sim)",
+    "name": "Cloud Infrastructure Discovery (multi-provider, sim)",
     "path": "detection/sigma/t1580.yml",
     "level": "low"
+  },
+  "T1580:GCP_PROJECT_ENUMERATION": {
+    "status": "exported",
+    "name": "GCP Project Enumeration Marker",
+    "path": "detection/sigma/t1580_gcp_project_enumeration.yml",
+    "level": "low"
+  },
+  "T1611:KUBERNETES_POD_CREATE": {
+    "status": "exported",
+    "name": "Kubernetes Pod Create Marker",
+    "path": "detection/sigma/t1611_kubernetes_pod_create.yml",
+    "level": "medium"
   }
 }

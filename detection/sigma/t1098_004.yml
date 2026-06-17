@@ -1,0 +1,23 @@
+title: Authorized Keys File Modification (APT Simulator T1098.004)
+id: a1098004-0000-0000-0000-000000001098
+status: experimental
+description: Detects writes to authorized_keys files in any user's ~/.ssh directory.
+references:
+- https://attack.mitre.org/techniques/T1098/004
+tags:
+- attack.persistence
+- attack.t1098.004
+logsource:
+  category: file_event
+  product: linux
+detection:
+  selection_real:
+    TargetFilename|contains:
+    - /.ssh/authorized_keys
+  selection_sim:
+    TargetFilename|contains:
+    - /.ssh/apt_sim_test_authorized_keys
+  condition: 1 of selection_*
+falsepositives:
+- Configuration management tools
+level: high

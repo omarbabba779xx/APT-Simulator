@@ -38,5 +38,8 @@ from .credential_access import t1110_brute_force_sim  # noqa: F401
 from .collection import t1530_data_from_cloud_storage  # noqa: F401
 from .collection import t1560_archive_collected  # noqa: F401
 from .defense_evasion import t1055_process_injection_sim  # noqa: F401
+from .catalog import register_catalog_ttps
+
+register_catalog_ttps()
 
 __all__ = ["TTP", "TTPResult", "registry"]

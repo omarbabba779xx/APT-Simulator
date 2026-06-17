@@ -1,0 +1,16 @@
+title: GCP Project Enumeration Marker
+id: c1580000-0002-0000-0000-000000000001
+status: experimental
+logsource:
+  product: gcp
+detection:
+  selection:
+    methodName|contains: resourcemanager
+  condition: selection
+falsepositives:
+- cloud inventory
+level: low
+references:
+- https://attack.mitre.org/techniques/1580/
+tags:
+- attack.t1580

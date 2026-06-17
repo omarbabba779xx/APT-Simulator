@@ -1,0 +1,24 @@
+title: Exfiltration Over Alternative Protocol (APT Simulator T1048)
+id: b1048000-0000-0000-0000-000000001048
+status: experimental
+description: Detects data staging artifacts indicative of exfiltration over non-standard
+  protocols (DNS TXT, ICMP, custom HTTPS headers).
+references:
+- https://attack.mitre.org/techniques/T1048
+tags:
+- attack.exfiltration
+- attack.t1048
+logsource:
+  category: dns
+detection:
+  selection_dns_txt:
+    QueryType: TXT
+    QueryLength|gt: 50
+  selection_icmp_large:
+    Protocol: ICMP
+    Length|gt: 128
+  condition: selection_dns_txt or selection_icmp_large
+falsepositives:
+- SPF/DKIM/DMARC DNS TXT lookups
+- Legitimate ICMP diagnostics
+level: high

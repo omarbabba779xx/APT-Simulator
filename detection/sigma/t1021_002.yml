@@ -1,0 +1,24 @@
+title: SMB Admin Share Enumeration (APT Simulator T1021.002)
+id: b1021002-0000-0000-0000-00001021002a
+status: stable
+description: Detects access to Windows administrative shares (ADMIN$, C$, IPC$) from
+  anomalous sources, indicating potential lateral movement.
+references:
+- https://attack.mitre.org/techniques/T1021/002
+tags:
+- attack.lateral_movement
+- attack.t1021.002
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  selection:
+    DestinationPort: 445
+    Initiated: 'true'
+  filter_legitimate:
+    Image|endswith:
+    - \System32\svchost.exe
+  condition: selection and not filter_legitimate
+falsepositives:
+- Legitimate backup or admin tools accessing shares
+level: medium

@@ -1,0 +1,17 @@
+title: Okta MFA Policy Weaken Marker
+id: c1556009-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: okta
+detection:
+  selection:
+    eventType|contains: policy.mfa
+    outcome.result: SUCCESS
+  condition: selection
+falsepositives:
+- planned policy change
+level: high
+references:
+- https://attack.mitre.org/techniques/1556/009/
+tags:
+- attack.t1556.009

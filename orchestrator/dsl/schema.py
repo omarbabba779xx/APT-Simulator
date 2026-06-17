@@ -42,7 +42,8 @@ class ScenarioStep(BaseModel):
     @classmethod
     def _ttp_format(cls, v: str) -> str:
         v = v.strip().upper()
-        if not v.startswith("T") or not v[1:].split(".")[0].isdigit():
+        base = v[1:].split(":", 1)[0].split(".", 1)[0]
+        if not v.startswith("T") or not base.isdigit():
             raise ValueError(f"invalid ATT&CK ID format: {v}")
         return v
 

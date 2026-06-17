@@ -104,6 +104,71 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         db = str(cfg.orchestrator.db_path)
         return build_layer(db_path=db)
 
+    @app.get("/coverage/matrix")
+    def coverage_matrix() -> dict[str, object]:
+        """Dynamic coverage matrix grouped by tactic, pack, and safety tier."""
+        from .detection_matrix import build_matrix
+        return build_matrix()
+
+    @app.get("/detections/score")
+    def detection_score() -> dict[str, object]:
+        """Rule-to-synthetic-event score for every registered TTP with events."""
+        import ttps  # noqa: F401
+        from ttps.base import registry
+        from .detection_diff import score_detection
+
+        out: dict[str, object] = {}
+        for attack_id, ttp in registry.all().items():
+            rule = ttp.sigma_rule()
+            events = ttp.synthetic_events({}, None)
+            if rule is None or not events:
+                continue
+            out[attack_id] = score_detection(rule, events)
+        return out
+
+    @app.get("/runs/{run_id}/timeline")
+    def run_timeline(run_id: str) -> dict[str, object]:
+        """Timeline view for one in-memory run."""
+        from .api.state import get_state as _gs
+        run = _gs().planner.get_run(run_id)
+        if not run:
+            return {"run_id": run_id, "events": []}
+        events = []
+        for state in run.steps.values():
+            events.append({
+                "step_id": state.step.id,
+                "attack_id": state.step.ttp,
+                "status": state.status,
+                "agent_id": state.assigned_agent,
+                "started_at": state.started_at,
+                "finished_at": state.finished_at,
+                "duration_seconds": round(state.finished_at - state.started_at, 3)
+                if state.finished_at and state.started_at else None,
+            })
+        return {"run_id": run_id, "scenario": run.scenario.name, "events": events}
+
+    @app.get("/runs/compare")
+    def compare_runs(ids: str) -> dict[str, object]:
+        """Compare high-level status and step counts for comma-separated run IDs."""
+        from .api.state import get_state as _gs
+        planner = _gs().planner
+        rows = []
+        for run_id in [item.strip() for item in ids.split(",") if item.strip()]:
+            run = planner.get_run(run_id)
+            if not run:
+                rows.append({"run_id": run_id, "missing": True})
+                continue
+            counts: dict[str, int] = {}
+            for step in run.steps.values():
+                counts[step.status] = counts.get(step.status, 0) + 1
+            rows.append({
+                "run_id": run_id,
+                "scenario": run.scenario.name,
+                "status": run.status,
+                "step_counts": counts,
+            })
+        return {"runs": rows}
+
     @app.get("/metrics")
     def metrics() -> dict[str, object]:
         """Operational statistics: run counts, TTP success rates, agent breakdown."""

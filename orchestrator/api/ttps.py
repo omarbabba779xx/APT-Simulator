@@ -22,6 +22,9 @@ def list_ttps(_claims=require_role("viewer")) -> list[TTPDescriptor]:
             tactic=t.tactic,
             description=t.description,
             supported_platforms=list(t.supported_platforms),
+            pack=getattr(t, "pack", "core"),
+            safety_tier=getattr(t, "safety_tier", "lab-write"),
+            base_attack_id=getattr(t, "base_attack_id", t.attack_id),
         )
         for t in registry.all().values()
     ]

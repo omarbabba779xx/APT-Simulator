@@ -1,0 +1,25 @@
+title: "Brute Force \u2014 Multiple Failed Logons (APT Simulator T1110)"
+id: b1110000-0000-0000-0000-000000001110
+status: stable
+description: "Detects more than 5 failed authentication attempts for the same user\
+  \ within 5 minutes \u2014 indicative of brute-force or password spray."
+references:
+- https://attack.mitre.org/techniques/T1110
+- https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625
+tags:
+- attack.credential_access
+- attack.t1110
+- attack.t1110.001
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4625
+    LogonType: 3
+  timeframe: 5m
+  condition: selection | count(TargetUserName) by IpAddress > 5
+falsepositives:
+- Misconfigured service accounts
+- Legitimate admin password reset
+level: high

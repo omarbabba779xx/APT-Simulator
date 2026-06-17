@@ -113,7 +113,7 @@ docs/           Architecture + threat model
 | Impact               | Data Encrypted for Impact (sim)    | T1486      | all                   |
 
 Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
-24 TTPs across 10 tactics. Full roadmap in `docs/ROADMAP.md`.
+55 TTPs and variants across 12 tactics. Full roadmap in `docs/ROADMAP.md`.
 
 ## Key Features
 
@@ -125,6 +125,9 @@ Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
 - **Live Audit Feed** — Dashboard WebSocket panel shows every audit event in real time.
 - **Step Detail Modal** — Click any run row in the dashboard to see per-step timing, output, and errors.
 - **Cloud Account + Storage Simulation** — `scenarios/cloud_account_storage_sim.yaml` generates CloudTrail-style markers for T1078.004 and T1530 without contacting cloud providers.
+- **Catalog-Driven TTP Packs** — `ttps/catalog/*.yaml` adds Windows, Linux, cloud, identity, and SaaS marker-only variants without one Python file per variant.
+- **Detection Engineering Exports** — `apt-detection-matrix fixtures` emits raw, ECS, and OCSF golden telemetry; `apt-detection-matrix queries` emits Splunk, Elastic, Sentinel, and Chronicle query sketches.
+- **Graph Scenario Builder** — `apt-scenario-builder generate --actor cloud-intrusion --difficulty realistic` creates DAG scenarios with dry-run params by default.
 
 ## CLI Reference
 
@@ -155,6 +158,19 @@ python -m orchestrator.replay list-runs
 
 # Detection diff
 python -m orchestrator.detection_diff verify --run-id <id>
+
+# Dynamic detection matrix + golden telemetry fixtures
+apt-detection-matrix matrix
+apt-detection-matrix fixtures --out-dir detection/fixtures
+apt-detection-matrix queries --out-dir detection/queries
+
+# Generate graph scenarios and campaign queues
+apt-scenario-builder generate --actor cloud-intrusion --difficulty realistic --steps 12
+apt-campaign build-queue --repeats 3 --steps 12
+apt-campaign replay-events --events 1000
+
+# Generate safe marker-only catalog stubs from ATT&CK STIX
+apt-attack-import import-stix --out ttps/catalog/attack_enterprise.yaml
 ```
 
 ## License

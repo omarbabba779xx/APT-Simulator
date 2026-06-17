@@ -13,6 +13,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 import ttps  # noqa: F401  (triggers TTP self-registration)
 from orchestrator.core import signer as signer_mod
+from orchestrator.core.safety_policy import SafetyPolicy
 from ttps.base import TTPResult, registry
 
 
@@ -39,4 +40,7 @@ def execute(attack_id: str, params: dict[str, Any]) -> TTPResult:
         return TTPResult(ok=False, error=f"unknown attack_id: {attack_id}")
     if not ttp.supports():
         return TTPResult(ok=False, error=f"TTP {attack_id} not supported on this platform")
+    verdict = SafetyPolicy.from_env().validate(ttp, params)
+    if not verdict.allowed:
+        return TTPResult(ok=False, error=f"safety policy blocked execution: {verdict.reason}")
     return ttp.run(params)

@@ -69,6 +69,9 @@ class TTPDescriptor(BaseModel):
     tactic: str
     description: str
     supported_platforms: list[str]
+    pack: str | None = None
+    safety_tier: str | None = None
+    base_attack_id: str | None = None
 
 
 class KillswitchStatus(BaseModel):

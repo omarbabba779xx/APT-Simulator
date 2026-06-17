@@ -1,0 +1,104 @@
+pack: linux
+ttps:
+  - id: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+    attack_id: T1059.004
+    name: Unix Shell History Disable Marker
+    tactic: defense_evasion
+    platforms: [linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Shell History Disable Marker
+      id: c1059004-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: linux, category: process_creation}
+      detection:
+        selection: {CommandLine|contains: "HISTFILE=/dev/null"}
+        condition: selection
+      falsepositives: [privacy-aware shell sessions]
+      level: medium
+    synthetic_events:
+      - category: process_creation
+        Image: /bin/bash
+        CommandLine: export HISTFILE=/dev/null
+  - id: T1053.003:LINUX_CRON_MARKER
+    attack_id: T1053.003
+    name: Cron Persistence Marker
+    tactic: persistence
+    platforms: [linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Cron Persistence Marker
+      id: c1053003-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: linux, category: file_event}
+      detection:
+        selection: {TargetFilename|contains: "/cron", Image|contains: "crontab"}
+        condition: selection
+      falsepositives: [administration]
+      level: medium
+    synthetic_events:
+      - category: file_event
+        Image: /usr/bin/crontab
+        TargetFilename: /var/spool/cron/aptsim
+  - id: T1105:LINUX_CURL_TOOL_TRANSFER
+    attack_id: T1105
+    name: Curl Tool Transfer Marker
+    tactic: command_and_control
+    platforms: [linux, darwin]
+    safety_tier: network-lab-only
+    params_schema:
+      url: {type: string, default: http://127.0.0.1/tool.sh}
+    sigma:
+      title: Curl Tool Transfer Marker
+      id: c1105000-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: linux, category: process_creation}
+      detection:
+        selection: {Image|endswith: "/curl", CommandLine|contains: ["http://", "https://"]}
+        condition: selection
+      falsepositives: [package install scripts]
+      level: medium
+    synthetic_events:
+      - category: process_creation
+        Image: /usr/bin/curl
+        CommandLine: curl -fsSL {url} -o /tmp/aptsim-tool.sh
+  - id: T1070.002:LINUX_LOG_CLEAR
+    attack_id: T1070.002
+    name: Linux Log Clear Marker
+    tactic: defense_evasion
+    platforms: [linux]
+    safety_tier: marker-only
+    sigma:
+      title: Linux Log Clear Marker
+      id: c1070002-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: linux, category: process_creation}
+      detection:
+        selection: {CommandLine|contains: ["/var/log", "truncate"]}
+        condition: selection
+      falsepositives: [log rotation maintenance]
+      level: high
+    synthetic_events:
+      - category: process_creation
+        Image: /usr/bin/truncate
+        CommandLine: truncate -s 0 /var/log/auth.log
+  - id: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+    attack_id: T1087.001
+    name: Linux Local Account Discovery Marker
+    tactic: discovery
+    platforms: [linux, darwin]
+    safety_tier: read-only
+    sigma:
+      title: Linux Local Account Discovery Marker
+      id: c1087001-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: linux, category: process_creation}
+      detection:
+        selection: {CommandLine|contains: ["/etc/passwd", "getent passwd"]}
+        condition: selection
+      falsepositives: [inventory scripts]
+      level: low
+    synthetic_events:
+      - category: process_creation
+        Image: /usr/bin/getent
+        CommandLine: getent passwd

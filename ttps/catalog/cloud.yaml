@@ -1,0 +1,113 @@
+pack: cloud
+ttps:
+  - id: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+    attack_id: T1078.004
+    name: AWS Console Login Success Marker
+    tactic: initial_access
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    params_schema:
+      user: {type: string, default: lab-admin}
+      source_ip: {type: string, default: 198.51.100.40}
+    sigma:
+      title: AWS Console Login Success Marker
+      id: c1078004-0002-0000-0000-000000000001
+      status: experimental
+      logsource: {product: aws, service: cloudtrail}
+      detection:
+        selection: {eventName: ConsoleLogin, responseElements.ConsoleLogin: Success}
+        condition: selection
+      falsepositives: [administrator login]
+      level: medium
+    synthetic_events:
+      - category: cloud
+        eventSource: signin.amazonaws.com
+        eventName: ConsoleLogin
+        responseElements.ConsoleLogin: Success
+        userIdentity.userName: "{user}"
+        sourceIPAddress: "{source_ip}"
+  - id: T1530:AWS_S3_OBJECT_BURST
+    attack_id: T1530
+    name: AWS S3 Object Read Burst Marker
+    tactic: collection
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    params_schema:
+      bucket: {type: string, default: apt-sim-lab-bucket}
+    sigma:
+      title: AWS S3 Object Read Burst Marker
+      id: c1530000-0002-0000-0000-000000000001
+      status: experimental
+      logsource: {product: aws, service: cloudtrail}
+      detection:
+        selection: {eventSource: s3.amazonaws.com, eventName: GetObject}
+        condition: selection
+      falsepositives: [backup jobs]
+      level: medium
+    synthetic_events:
+      - category: cloud
+        eventSource: s3.amazonaws.com
+        eventName: GetObject
+        requestParameters.bucketName: "{bucket}"
+        requestParameters.key: finance/export.csv
+  - id: T1098.003:AZURE_ROLE_ASSIGNMENT
+    attack_id: T1098.003
+    name: Azure Role Assignment Marker
+    tactic: persistence
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Azure Role Assignment Marker
+      id: c1098003-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: azure}
+      detection:
+        selection: {operationName|contains: "roleAssignments/write"}
+        condition: selection
+      falsepositives: [IAM administration]
+      level: high
+    synthetic_events:
+      - category: cloud
+        operationName: Microsoft.Authorization/roleAssignments/write
+        callerIpAddress: 198.51.100.41
+  - id: T1580:GCP_PROJECT_ENUMERATION
+    attack_id: T1580
+    name: GCP Project Enumeration Marker
+    tactic: discovery
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: GCP Project Enumeration Marker
+      id: c1580000-0002-0000-0000-000000000001
+      status: experimental
+      logsource: {product: gcp}
+      detection:
+        selection: {methodName|contains: "resourcemanager"}
+        condition: selection
+      falsepositives: [cloud inventory]
+      level: low
+    synthetic_events:
+      - category: cloud
+        serviceName: cloudresourcemanager.googleapis.com
+        methodName: google.cloud.resourcemanager.v3.Projects.SearchProjects
+  - id: T1611:KUBERNETES_POD_CREATE
+    attack_id: T1611
+    name: Kubernetes Pod Create Marker
+    tactic: privilege_escalation
+    platforms: [linux]
+    safety_tier: marker-only
+    sigma:
+      title: Kubernetes Pod Create Marker
+      id: c1611000-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: kubernetes, service: audit}
+      detection:
+        selection: {verb: create, objectRef.resource: pods}
+        condition: selection
+      falsepositives: [deployment controllers]
+      level: medium
+    synthetic_events:
+      - category: kubernetes
+        verb: create
+        objectRef.resource: pods
+        user.username: system:serviceaccount:lab:runner

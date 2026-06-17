@@ -1,0 +1,18 @@
+title: AWS S3 Object Read Burst Marker
+id: c1530000-0002-0000-0000-000000000001
+status: experimental
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName: GetObject
+  condition: selection
+falsepositives:
+- backup jobs
+level: medium
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530
