@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import platform
 import time
-from typing import Any
+from typing import Any, cast
 
 from ..base import TTP, TTPResult, registry
 
@@ -47,12 +47,13 @@ class T1547RegistryRunKey(TTP):
                 started_at=started,
                 finished_at=time.time(),
             )
+        winreg_api = cast(Any, winreg)
         value_name = str(params.get("value_name", DEFAULT_VALUE_NAME))
         value_data = str(params.get("value_data", "C:\\Windows\\System32\\cmd.exe /c rem apt-sim-marker"))
         try:
-            key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, SAFE_KEY_PATH, 0, winreg.KEY_SET_VALUE)
-            winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
-            winreg.CloseKey(key)
+            key = winreg_api.CreateKeyEx(winreg_api.HKEY_CURRENT_USER, SAFE_KEY_PATH, 0, winreg_api.KEY_SET_VALUE)
+            winreg_api.SetValueEx(key, value_name, 0, winreg_api.REG_SZ, value_data)
+            winreg_api.CloseKey(key)
             return TTPResult(
                 ok=True,
                 output=f"wrote HKCU\\{SAFE_KEY_PATH}\\{value_name}",
@@ -74,13 +75,14 @@ class T1547RegistryRunKey(TTP):
             import winreg  # type: ignore[import-not-found]
         except ImportError:
             return TTPResult(ok=True, output="winreg unavailable; skip", started_at=started, finished_at=time.time())
+        winreg_api = cast(Any, winreg)
         value_name = str(params.get("value_name", DEFAULT_VALUE_NAME))
         try:
-            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, SAFE_KEY_PATH, 0, winreg.KEY_SET_VALUE)
+            key = winreg_api.OpenKey(winreg_api.HKEY_CURRENT_USER, SAFE_KEY_PATH, 0, winreg_api.KEY_SET_VALUE)
             try:
-                winreg.DeleteValue(key, value_name)
+                winreg_api.DeleteValue(key, value_name)
             finally:
-                winreg.CloseKey(key)
+                winreg_api.CloseKey(key)
             return TTPResult(
                 ok=True,
                 output=f"removed HKCU\\{SAFE_KEY_PATH}\\{value_name}",
