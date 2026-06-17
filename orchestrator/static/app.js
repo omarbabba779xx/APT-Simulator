@@ -13,7 +13,9 @@ const state = {
   ttps: [],
   matrix: null,
   scores: {},
+  space: null,
   preview: null,
+  batch: null,
   feed: [],
 };
 
@@ -71,6 +73,10 @@ function fmtTs(value) {
   return date.toLocaleString();
 }
 
+function fmtInt(value) {
+  return Number(value || 0).toLocaleString();
+}
+
 function setStatus(label, kind = "neutral") {
   const element = byId("preview-status");
   if (!element) return;
@@ -122,12 +128,14 @@ async function refreshStatic() {
     api("/ttps").then((data) => { state.ttps = data; }),
     api("/coverage/matrix").then((data) => { state.matrix = data; }),
     api("/detections/score").then((data) => { state.scores = data; }),
+    api("/scenario-builder/space").then((data) => { state.space = data; }),
   ];
   await Promise.allSettled(tasks);
   renderScenarioSelect();
   renderCatalogFilters();
   renderCatalog();
   renderDetection();
+  renderVariantSpace();
   renderOverview();
 }
 
@@ -169,6 +177,7 @@ function renderMetrics() {
     ["TTPs", matrix.total ?? state.ttps.length, "Coverage catalog"],
     ["Sigma", matrix.with_rules ?? scored, "Rules linked"],
     ["Rule Fit", `${matrix.rule_coverage_percent ?? 0}%`, "Rule coverage"],
+    ["Variants", fmtInt(state.space?.total_variants), "Generable"],
     ["Scenarios", Object.keys(state.scenarios || {}).length, "Loaded"],
     ["Runs", runs.length, "In memory"],
     ["Agents", agents, "Registered"],
@@ -180,6 +189,21 @@ function renderMetrics() {
       node("span", { class: "metric-hint" }, hint),
     ]));
   }
+}
+
+function renderVariantSpace() {
+  if (!state.space) return;
+  const total = byId("variant-total");
+  const detail = byId("variant-detail");
+  if (!total || !detail) return;
+  total.textContent = fmtInt(state.space.total_variants);
+  detail.textContent = [
+    `${state.space.actors.length} actors`,
+    `${state.space.difficulties.length} difficulties`,
+    `${state.space.max_steps} step counts`,
+    `${state.space.seed_values} seeds`,
+    `${state.space.platform_combinations} platform sets`,
+  ].join(" - ");
 }
 
 function renderBars(containerId, rows) {
@@ -466,6 +490,47 @@ function renderPreview(error = "") {
   }
 }
 
+async function previewBatch() {
+  const count = byId("batch-count").value;
+  const offset = byId("batch-offset").value;
+  setStatus("Batch loading", "neutral");
+  const params = new URLSearchParams({ count, offset });
+  try {
+    state.batch = await api(`/scenario-builder/batch-preview?${params.toString()}`);
+    setStatus("Batch ready", "ok");
+    renderBatchPreview();
+  } catch (error) {
+    setStatus("Batch failed", "bad");
+    renderPreview(error.message);
+  }
+}
+
+function renderBatchPreview() {
+  const title = byId("scenario-title");
+  const meta = byId("scenario-meta");
+  const graph = byId("scenario-graph");
+  clear(graph);
+  if (!state.batch) return;
+  title.textContent = "Batch Preview";
+  meta.textContent = `${state.batch.count} scenarios`;
+  for (const scenario of state.batch.scenarios) {
+    graph.appendChild(node("article", { class: "scenario-step" }, [
+      node("div", { class: "step-index" }, String(scenario.steps.length)),
+      node("div", { class: "step-body" }, [
+        node("div", { class: "step-main" }, [
+          node("span", { class: "mono" }, scenario.name),
+          node("strong", {}, scenario.actor || "unknown"),
+        ]),
+        node("div", { class: "step-sub" }, [
+          node("span", {}, `${scenario.steps.length} steps`),
+          node("span", {}, (scenario.target_platforms || []).join(", ")),
+          node("span", {}, (scenario.tags || []).join(", ")),
+        ]),
+      ]),
+    ]));
+  }
+}
+
 async function runPreview() {
   if (!state.preview) await refreshPreview();
   if (!state.preview) return;
@@ -625,6 +690,7 @@ function bindEvents() {
     refreshPreview();
   });
   byId("run-preview").addEventListener("click", runPreview);
+  byId("batch-preview").addEventListener("click", previewBatch);
   byId("copy-preview").addEventListener("click", copyPreview);
   byId("run-selected").addEventListener("click", runSelectedScenario);
   byId("dialog-close").addEventListener("click", () => byId("run-dialog").close());

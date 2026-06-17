@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import random
+from itertools import combinations
 from pathlib import Path
 from typing import Any
 
@@ -53,6 +54,11 @@ DIFFICULTY_STEPS = {
     "noisy": 25,
 }
 
+DEFAULT_PLATFORM_POOL = ("windows", "linux", "darwin")
+MAX_VARIANT_STEPS = 80
+MAX_VARIANT_SEED = 1_000_000
+MAX_BATCH_SCENARIOS = 10_000
+
 
 def _sort_key(ttp: Any) -> tuple[int, str]:
     try:
@@ -73,6 +79,135 @@ def _eligible(actor: str, platforms: set[str]) -> list[Any]:
             continue
         out.append(ttp)
     return sorted(out, key=_sort_key)
+
+
+def platform_sets(platforms: list[str] | None = None) -> list[list[str]]:
+    pool = list(platforms or DEFAULT_PLATFORM_POOL)
+    return [
+        list(group)
+        for size in range(1, len(pool) + 1)
+        for group in combinations(pool, size)
+    ]
+
+
+def scenario_variant_space(
+    actors: list[str] | None = None,
+    difficulties: list[str] | None = None,
+    max_steps: int = MAX_VARIANT_STEPS,
+    max_seed: int = MAX_VARIANT_SEED,
+    platforms: list[str] | None = None,
+) -> dict[str, Any]:
+    selected_actors = actors or list(ACTOR_PACKS)
+    selected_difficulties = difficulties or list(DIFFICULTY_STEPS)
+    selected_platform_sets = platform_sets(platforms)
+    seed_values = max_seed + 1
+    total = (
+        len(selected_actors)
+        * len(selected_difficulties)
+        * max_steps
+        * seed_values
+        * len(selected_platform_sets)
+    )
+    return {
+        "actors": selected_actors,
+        "difficulties": selected_difficulties,
+        "max_steps": max_steps,
+        "seed_min": 0,
+        "seed_max": max_seed,
+        "seed_values": seed_values,
+        "platforms": list(platforms or DEFAULT_PLATFORM_POOL),
+        "platform_combinations": len(selected_platform_sets),
+        "total_variants": total,
+    }
+
+
+def _variant_dimensions(
+    actors: list[str] | None,
+    difficulties: list[str] | None,
+    max_steps: int,
+    max_seed: int,
+    platforms: list[str] | None,
+) -> tuple[list[str], list[str], list[list[str]], int, int]:
+    selected_actors = actors or list(ACTOR_PACKS)
+    selected_difficulties = difficulties or list(DIFFICULTY_STEPS)
+    selected_platform_sets = platform_sets(platforms)
+    seed_values = max_seed + 1
+    return selected_actors, selected_difficulties, selected_platform_sets, max_steps, seed_values
+
+
+def build_scenario_variant(
+    index: int,
+    *,
+    actors: list[str] | None = None,
+    difficulties: list[str] | None = None,
+    max_steps: int = MAX_VARIANT_STEPS,
+    max_seed: int = MAX_VARIANT_SEED,
+    platforms: list[str] | None = None,
+) -> dict[str, Any]:
+    if index < 0:
+        raise ValueError("index must be >= 0")
+
+    selected_actors, selected_difficulties, selected_platform_sets, step_values, seed_values = _variant_dimensions(
+        actors,
+        difficulties,
+        max_steps,
+        max_seed,
+        platforms,
+    )
+    total = len(selected_actors) * len(selected_difficulties) * len(selected_platform_sets) * step_values * seed_values
+    if index >= total:
+        raise ValueError(f"index {index} outside variant space of {total}")
+
+    platform_index = index % len(selected_platform_sets)
+    index //= len(selected_platform_sets)
+    seed = index % seed_values
+    index //= seed_values
+    steps = (index % step_values) + 1
+    index //= step_values
+    difficulty = selected_difficulties[index % len(selected_difficulties)]
+    index //= len(selected_difficulties)
+    actor = selected_actors[index % len(selected_actors)]
+
+    selected_platforms = selected_platform_sets[platform_index]
+    scenario = build_scenario(
+        actor=actor,
+        difficulty=difficulty,
+        steps=steps,
+        seed=seed,
+        platforms=selected_platforms,
+    )
+    platform_slug = "-".join(selected_platforms)
+    scenario["name"] = f"{actor}_{difficulty}_{steps}_seed{seed}_{platform_slug}"
+    scenario["tags"] = [*scenario.get("tags", []), "variant", platform_slug]
+    return scenario
+
+
+def build_scenario_batch(
+    count: int,
+    *,
+    offset: int = 0,
+    actors: list[str] | None = None,
+    difficulties: list[str] | None = None,
+    max_steps: int = MAX_VARIANT_STEPS,
+    max_seed: int = MAX_VARIANT_SEED,
+    platforms: list[str] | None = None,
+    max_count: int = MAX_BATCH_SCENARIOS,
+) -> list[dict[str, Any]]:
+    if count < 1:
+        raise ValueError("count must be >= 1")
+    if count > max_count:
+        raise ValueError(f"count must be <= {max_count}")
+    return [
+        build_scenario_variant(
+            offset + idx,
+            actors=actors,
+            difficulties=difficulties,
+            max_steps=max_steps,
+            max_seed=max_seed,
+            platforms=platforms,
+        )
+        for idx in range(count)
+    ]
 
 
 def build_scenario(
@@ -137,6 +272,27 @@ def generate(
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(yaml.safe_dump(scenario, sort_keys=False), encoding="utf-8")
     typer.echo(f"Wrote {len(scenario['steps'])} step(s) to {out_path}")
+
+
+@app.command()
+def count_variants() -> None:
+    """Print the scenario variant space size."""
+    data = scenario_variant_space()
+    typer.echo(yaml.safe_dump(data, sort_keys=False))
+
+
+@app.command()
+def batch(
+    count: int = typer.Option(100),
+    offset: int = typer.Option(0),
+    out: str = typer.Option("scenarios/generated_variants.yaml"),
+) -> None:
+    """Generate a bounded queue slice from the full variant space."""
+    scenarios = build_scenario_batch(count=count, offset=offset)
+    out_path = Path(out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(yaml.safe_dump({"campaign": scenarios}, sort_keys=False), encoding="utf-8")
+    typer.echo(f"Wrote {len(scenarios)} scenario variant(s) to {out_path}")
 
 
 if __name__ == "__main__":

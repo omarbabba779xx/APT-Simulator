@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from orchestrator.detection_matrix import build_matrix, export_fixtures, export_queries
-from orchestrator.scenario_builder import build_scenario
+from orchestrator.scenario_builder import build_scenario, build_scenario_batch, scenario_variant_space
 from orchestrator.dsl.schema import Scenario
 
 
@@ -31,3 +31,19 @@ def test_graph_scenario_builder_validates() -> None:
     scenario.validate_dag()
     assert len(scenario.steps) == 8
     assert any(step.depends_on for step in scenario.steps[1:])
+
+
+def test_scenario_variant_space_exact_count() -> None:
+    space = scenario_variant_space()
+    assert space["total_variants"] == 15_680_015_680
+    assert space["platform_combinations"] == 7
+    assert space["seed_values"] == 1_000_001
+
+
+def test_scenario_variant_batch_validates() -> None:
+    batch = build_scenario_batch(count=4, offset=1_000_000)
+    assert len(batch) == 4
+    assert len({scenario["name"] for scenario in batch}) == 4
+    for data in batch:
+        scenario = Scenario(**data)
+        scenario.validate_dag()

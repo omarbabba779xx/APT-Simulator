@@ -60,3 +60,23 @@ def test_scenario_builder_preview(tmp_path) -> None:
     assert body["actor"] == "cloud-intrusion"
     assert len(body["steps"]) == 10
     assert all(step["params"]["dry_run"] is True for step in body["steps"])
+
+
+def test_scenario_builder_space(tmp_path) -> None:
+    client = _client(tmp_path)
+    r = client.get("/scenario-builder/space")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["total_variants"] == 15_680_015_680
+    assert body["platform_combinations"] == 7
+
+
+def test_scenario_builder_batch_preview(tmp_path) -> None:
+    client = _client(tmp_path)
+    r = client.get("/scenario-builder/batch-preview", params={"count": 3, "offset": 100})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["count"] == 3
+    assert body["offset"] == 100
+    assert len(body["scenarios"]) == 3
+    assert len({scenario["name"] for scenario in body["scenarios"]}) == 3

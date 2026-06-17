@@ -10,7 +10,7 @@ import yaml
 import ttps  # noqa: F401
 from ttps.base import registry
 
-from .scenario_builder import build_scenario
+from .scenario_builder import build_scenario, build_scenario_batch, scenario_variant_space
 
 
 app = typer.Typer(no_args_is_help=True)
@@ -35,6 +35,26 @@ def build_queue(
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(yaml.safe_dump({"campaign": queue}, sort_keys=False), encoding="utf-8")
     typer.echo(f"Wrote {len(queue)} scenario(s) to {out_path}")
+
+
+@app.command()
+def build_variants(
+    out: str = "scenarios/generated_variants.yaml",
+    count: int = 1000,
+    offset: int = 0,
+) -> None:
+    """Build a bounded queue slice from all scenario variants."""
+    queue = build_scenario_batch(count=count, offset=offset)
+    out_path = Path(out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(yaml.safe_dump({"campaign": queue}, sort_keys=False), encoding="utf-8")
+    typer.echo(f"Wrote {len(queue)} scenario variant(s) to {out_path}")
+
+
+@app.command()
+def count_variants() -> None:
+    """Print the exact scenario variant space size."""
+    typer.echo(yaml.safe_dump(scenario_variant_space(), sort_keys=False))
 
 
 @app.command()

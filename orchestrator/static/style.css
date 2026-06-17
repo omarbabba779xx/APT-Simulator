@@ -181,7 +181,7 @@ h2 {
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(6, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
   margin-bottom: 16px;
 }
@@ -427,6 +427,26 @@ tbody tr:hover td {
 
 .tool-panel {
   align-self: start;
+}
+
+.variant-space {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfe;
+}
+
+.variant-space span,
+.variant-space small {
+  color: var(--muted);
+}
+
+.variant-space strong {
+  font-size: 22px;
+  line-height: 1.1;
 }
 
 .tool-panel label,

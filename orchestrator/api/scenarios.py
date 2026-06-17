@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from ..core.auth import require_role
 from ..dsl.schema import Scenario
-from ..scenario_builder import build_scenario
+from ..scenario_builder import build_scenario, build_scenario_batch, scenario_variant_space
 from .schemas import RunDetail, RunSummary, ScenarioRunRequest, StepDetail
 from .state import get_state
 
@@ -52,6 +52,31 @@ def preview_scenario(
     except ValueError as exc:
         raise HTTPException(400, str(exc)) from exc
     return scenario
+
+
+@router.get("/scenario-builder/space")
+def scenario_builder_space(_claims=require_role("viewer")) -> dict[str, object]:
+    return scenario_variant_space()
+
+
+@router.get("/scenario-builder/batch-preview")
+def preview_scenario_batch(
+    count: int = Query(25, ge=1, le=200),
+    offset: int = Query(0, ge=0),
+    _claims=require_role("viewer"),
+) -> dict[str, object]:
+    try:
+        scenarios = build_scenario_batch(count=count, offset=offset, max_count=200)
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+    for scenario in scenarios:
+        Scenario(**scenario).validate_dag()
+    return {
+        "offset": offset,
+        "count": len(scenarios),
+        "space": scenario_variant_space(),
+        "scenarios": scenarios,
+    }
 
 
 @router.post("/scenarios/run", response_model=RunSummary)
