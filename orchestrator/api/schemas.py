@@ -96,3 +96,26 @@ class RunDetail(BaseModel):
     status: str
     started_at: float
     steps: list[StepDetail]
+
+
+class CampaignRunRequest(BaseModel):
+    count: int = Field(default=10, ge=1, le=100)
+    scenario_names: list[str] | None = None
+    actor: str | None = None
+    difficulty: str | None = None
+    platform: str | None = None
+    source: str | None = None
+    min_steps: int | None = Field(default=None, ge=1)
+    max_steps: int | None = Field(default=None, ge=1)
+
+
+class CampaignSummary(BaseModel):
+    id: str
+    status: str
+    created_at: float
+    updated_at: float
+    total_runs: int
+    progress_percent: float
+    run_statuses: dict[str, int]
+    scenario_names: list[str]
+    run_ids: list[str]

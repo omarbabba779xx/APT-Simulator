@@ -1,6 +1,6 @@
 scenario_pack:
   name: generated_variant_pack
-  count: 625
+  count: 2500
   offset: 0
-  stride: 25088025
-  max_count: 625
+  stride: 6272006
+  max_count: 2500

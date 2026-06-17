@@ -391,6 +391,17 @@ table {
   min-width: 760px;
 }
 
+.panel table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.panel th,
+.panel td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 th,
 td {
   border-bottom: 1px solid var(--line);
@@ -493,6 +504,73 @@ legend {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.button-row.compact button {
+  min-height: 30px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.report-links {
+  display: flex;
+  gap: 8px;
+}
+
+.report-links a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.report-links a:hover {
+  text-decoration: underline;
+}
+
+.attack-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  max-height: 720px;
+  overflow: auto;
+}
+
+.matrix-column {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fbfcfe;
+}
+
+.matrix-column h3 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.matrix-tech {
+  width: 100%;
+  height: auto;
+  min-height: 42px;
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  padding: 8px;
+  text-align: left;
+  white-space: normal;
+}
+
+.matrix-tech.has-rule {
+  border-color: #b7ebc8;
+  background: #f0fdf4;
+}
+
+.matrix-tech small {
+  color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .scenario-panel {
@@ -725,6 +803,12 @@ dialog::backdrop {
   }
 
   .feed-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .metrics {
     grid-template-columns: 1fr;
   }
 }

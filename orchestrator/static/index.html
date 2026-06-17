@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>APT Simulator Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=dashboard-v2" />
+  <link rel="stylesheet" href="style.css?v=dashboard-v3" />
 </head>
 <body>
   <header class="topbar">
@@ -17,8 +17,11 @@
     </div>
     <nav class="tabs" aria-label="Dashboard views">
       <button class="tab is-active" data-view="overview">Overview</button>
+      <button class="tab" data-view="library">Scenario Library</button>
+      <button class="tab" data-view="matrix">Matrix</button>
       <button class="tab" data-view="catalog">Catalog</button>
       <button class="tab" data-view="builder">Scenario</button>
+      <button class="tab" data-view="campaigns">Campaigns</button>
       <button class="tab" data-view="runs">Runs</button>
       <button class="tab" data-view="detections">Detection</button>
       <button class="tab" data-view="events">Events</button>
@@ -72,6 +75,62 @@
             <tbody id="agents-table"></tbody>
           </table>
         </div>
+      </div>
+    </section>
+
+    <section id="view-library" class="view">
+      <div class="toolbar">
+        <label>
+          <span>Search</span>
+          <input id="library-search" type="search" placeholder="apt29, windows, T1059" />
+        </label>
+        <label>
+          <span>Actor</span>
+          <select id="library-actor"></select>
+        </label>
+        <label>
+          <span>Difficulty</span>
+          <select id="library-difficulty"></select>
+        </label>
+        <label>
+          <span>Platform</span>
+          <select id="library-platform"></select>
+        </label>
+        <label>
+          <span>Source</span>
+          <select id="library-source"></select>
+        </label>
+      </div>
+      <div class="table-shell">
+        <div class="table-title">
+          <h2>Scenario Library</h2>
+          <span id="library-count" class="pill neutral">0 scenarios</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Actor</th>
+              <th>Difficulty</th>
+              <th>Platforms</th>
+              <th>Steps</th>
+              <th>Source</th>
+              <th>Kind</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="library-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-matrix" class="view">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>ATT&CK Matrix</h2>
+          <span id="matrix-count" class="pill neutral">0 TTPs</span>
+        </div>
+        <div id="attack-matrix" class="attack-matrix"></div>
       </div>
     </section>
 
@@ -180,7 +239,7 @@
           </div>
           <label>
             <span>Batch Stride</span>
-            <input id="batch-stride" type="number" min="1" value="25088025" />
+            <input id="batch-stride" type="number" min="1" value="6272006" />
           </label>
           <div class="button-row">
             <button type="submit" class="primary">Preview</button>
@@ -199,6 +258,39 @@
       </div>
     </section>
 
+    <section id="view-campaigns" class="view">
+      <div class="panel tool-panel">
+        <div class="panel-head">
+          <h2>Campaign Runner</h2>
+          <span id="campaign-status" class="pill neutral">Ready</span>
+        </div>
+        <div class="button-row">
+          <button class="primary campaign-size" data-count="10">Run 10</button>
+          <button class="primary campaign-size" data-count="50">Run 50</button>
+          <button class="primary campaign-size" data-count="100">Run 100</button>
+        </div>
+      </div>
+      <div class="table-shell">
+        <div class="table-title">
+          <h2>Campaigns</h2>
+          <span id="campaign-count" class="pill neutral">0 campaigns</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Progress</th>
+              <th>Runs</th>
+              <th>Actions</th>
+              <th>Reports</th>
+            </tr>
+          </thead>
+          <tbody id="campaign-table"></tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="view-runs" class="view">
       <div class="toolbar">
         <label>
@@ -214,7 +306,7 @@
         </div>
         <table>
           <thead>
-            <tr><th>ID</th><th>Scenario</th><th>Status</th><th>Started</th><th>Steps</th></tr>
+            <tr><th>ID</th><th>Scenario</th><th>Status</th><th>Started</th><th>Steps</th><th>Reports</th></tr>
           </thead>
           <tbody id="runs-table"></tbody>
         </table>
@@ -264,6 +356,6 @@
     <div id="dialog-body"></div>
   </dialog>
 
-  <script src="app.js?v=dashboard-v2"></script>
+  <script src="app.js?v=dashboard-v3"></script>
 </body>
 </html>

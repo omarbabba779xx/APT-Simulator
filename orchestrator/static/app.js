@@ -1,6 +1,7 @@
 "use strict";
 
 const MAX_CATALOG_ROWS = 220;
+const MAX_LIBRARY_ROWS = 300;
 const MAX_FEED_ENTRIES = 80;
 const LIVE_REFRESH_MS = 6000;
 
@@ -14,6 +15,8 @@ const state = {
   matrix: null,
   scores: {},
   space: null,
+  library: { items: [], counts: {}, total: 0, filtered: 0 },
+  campaigns: [],
   preview: null,
   batch: null,
   feed: [],
@@ -114,11 +117,13 @@ async function refreshLive() {
     api("/killswitch").then((data) => { state.killswitch = data; }),
     api("/agents").then((data) => { state.agents = data; }),
     api("/runs").then((data) => { state.runs = data; }),
+    api("/campaigns").then((data) => { state.campaigns = data; }),
   ];
   await Promise.allSettled(tasks);
   renderHealth();
   renderAgents();
   renderRuns();
+  renderCampaigns();
   renderOverview();
 }
 
@@ -129,11 +134,15 @@ async function refreshStatic() {
     api("/coverage/matrix").then((data) => { state.matrix = data; }),
     api("/detections/score").then((data) => { state.scores = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
+    api("/scenario-library").then((data) => { state.library = data; }),
   ];
   await Promise.allSettled(tasks);
   renderScenarioSelect();
+  renderLibraryFilters();
+  renderScenarioLibrary();
   renderCatalogFilters();
   renderCatalog();
+  renderAttackMatrix();
   renderDetection();
   renderVariantSpace();
   renderOverview();
@@ -289,6 +298,67 @@ function renderScenarioSelect() {
   if (!select.options.length) select.appendChild(node("option", { value: "" }, "No scenarios"));
 }
 
+function renderLibraryFilters() {
+  const items = state.library.items || [];
+  if (!items.length || !byId("library-actor")) return;
+  fillSelect(byId("library-actor"), unique(items.map((item) => item.actor || "unknown")), "All actors");
+  fillSelect(byId("library-difficulty"), unique(items.map((item) => item.difficulty || "unknown")), "All difficulties");
+  fillSelect(
+    byId("library-platform"),
+    unique(items.flatMap((item) => item.platforms || [])),
+    "All platforms",
+  );
+  fillSelect(byId("library-source"), ["static", "pack", "generated variant"], "All sources");
+}
+
+function filteredLibraryItems() {
+  const items = state.library.items || [];
+  const search = byId("library-search")?.value.trim().toLowerCase() || "";
+  const actor = byId("library-actor")?.value || "";
+  const difficulty = byId("library-difficulty")?.value || "";
+  const platform = byId("library-platform")?.value || "";
+  const source = byId("library-source")?.value || "";
+  return items.filter((item) => {
+    const text = [
+      item.name,
+      item.actor,
+      item.difficulty,
+      item.source,
+      item.kind,
+      ...(item.platforms || []),
+      ...(item.ttps || []),
+    ].join(" ").toLowerCase();
+    if (search && !text.includes(search)) return false;
+    if (actor && (item.actor || "unknown") !== actor) return false;
+    if (difficulty && (item.difficulty || "unknown") !== difficulty) return false;
+    if (platform && !(item.platforms || []).includes(platform)) return false;
+    if (source && source !== item.source && source !== item.kind) return false;
+    return true;
+  });
+}
+
+function renderScenarioLibrary() {
+  const tbody = byId("library-table");
+  if (!tbody) return;
+  const filtered = filteredLibraryItems();
+  clear(tbody);
+  for (const item of filtered.slice(0, MAX_LIBRARY_ROWS)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono", title: item.description || "" }, item.name),
+      node("td", {}, item.actor || "-"),
+      node("td", {}, item.difficulty || "-"),
+      node("td", {}, (item.platforms || []).join(", ")),
+      node("td", {}, String(item.step_count)),
+      node("td", {}, node("span", { class: "pill neutral" }, item.source)),
+      node("td", {}, node("span", { class: "pill ok" }, item.kind)),
+      node("td", {}, node("button", { class: "secondary", onclick: () => runNamedScenario(item.name) }, "Run")),
+    ]));
+  }
+  if (!filtered.length) tbody.appendChild(emptyRow(8, "No scenarios"));
+  const shown = Math.min(filtered.length, MAX_LIBRARY_ROWS);
+  byId("library-count").textContent = `${shown}/${filtered.length} scenarios`;
+}
+
 function renderCatalogFilters() {
   if (!state.ttps.length) return;
   fillSelect(byId("catalog-tactic"), unique(state.ttps.map((ttp) => ttp.tactic)), "All tactics");
@@ -344,6 +414,37 @@ function renderCatalog() {
   byId("catalog-count").textContent = `${shown}/${filtered.length} items`;
 }
 
+function renderAttackMatrix() {
+  const container = byId("attack-matrix");
+  if (!container) return;
+  clear(container);
+  const tactics = Object.entries((state.matrix || {}).tactics || {});
+  let total = 0;
+  for (const [tactic, data] of tactics) {
+    const items = data.items || [];
+    total += items.length;
+    const column = node("div", { class: "matrix-column" }, [
+      node("h3", {}, `${tactic} (${items.length})`),
+    ]);
+    for (const item of items) {
+      column.appendChild(node("button", {
+        class: item.has_rule ? "matrix-tech has-rule" : "matrix-tech",
+        title: item.name,
+        onclick: () => {
+          byId("catalog-search").value = item.id;
+          renderCatalog();
+          switchView("catalog");
+        },
+      }, [
+        node("span", { class: "mono" }, item.id),
+        node("small", {}, item.name),
+      ]));
+    }
+    container.appendChild(column);
+  }
+  byId("matrix-count").textContent = `${total} TTPs`;
+}
+
 function renderDetection() {
   const tbody = byId("score-table");
   if (!tbody) return;
@@ -379,10 +480,18 @@ function renderRuns() {
       node("td", {}, statusPill(run.status)),
       node("td", {}, fmtTs(run.started_at)),
       node("td", {}, stepDots(run.step_summary || {})),
+      node("td", {}, reportLinks(`/reports/runs/${run.id}`)),
     ]));
   }
-  if (!runs.length) tbody.appendChild(emptyRow(5, "No runs"));
+  if (!runs.length) tbody.appendChild(emptyRow(6, "No runs"));
   byId("runs-count").textContent = `${runs.length} runs`;
+}
+
+function reportLinks(basePath) {
+  return node("div", { class: "report-links" }, [
+    node("a", { href: `${basePath}.json`, target: "_blank", rel: "noreferrer", onclick: (event) => event.stopPropagation() }, "JSON"),
+    node("a", { href: `${basePath}.html`, target: "_blank", rel: "noreferrer", onclick: (event) => event.stopPropagation() }, "HTML"),
+  ]);
 }
 
 function emptyRow(cols, text) {
@@ -546,9 +655,7 @@ async function runPreview() {
   }
 }
 
-async function runSelectedScenario() {
-  const name = byId("scenario-select").value;
-  if (!name) return;
+async function runNamedScenario(name) {
   try {
     const run = await postJson("/scenarios/run", { name });
     pushFeed({ event: "run.start", ts: Date.now() / 1000, payload: { run_id: run.id, scenario: run.scenario } });
@@ -556,6 +663,66 @@ async function runSelectedScenario() {
   } catch (error) {
     pushFeed({ event: "run.error", ts: Date.now() / 1000, payload: { error: error.message } });
   }
+}
+
+async function runSelectedScenario() {
+  const name = byId("scenario-select").value;
+  if (!name) return;
+  await runNamedScenario(name);
+}
+
+async function startCampaign(count) {
+  const names = filteredLibraryItems().slice(0, count).map((item) => item.name);
+  const status = byId("campaign-status");
+  if (!names.length) {
+    status.textContent = "No match";
+    status.className = "pill bad";
+    return;
+  }
+  status.textContent = "Starting";
+  status.className = "pill neutral";
+  try {
+    const campaign = await postJson("/campaigns/run", { count, scenario_names: names });
+    status.textContent = `Started ${campaign.total_runs}`;
+    status.className = "pill ok";
+    await refreshLive();
+    switchView("campaigns");
+  } catch (error) {
+    status.textContent = "Failed";
+    status.className = "pill bad";
+    pushFeed({ event: "campaign.error", ts: Date.now() / 1000, payload: { error: error.message } });
+  }
+}
+
+async function campaignAction(id, action) {
+  try {
+    await api(`/campaigns/${id}/${action}`, { method: "POST" });
+    await refreshLive();
+  } catch (error) {
+    pushFeed({ event: "campaign.error", ts: Date.now() / 1000, payload: { id, action, error: error.message } });
+  }
+}
+
+function renderCampaigns() {
+  const tbody = byId("campaign-table");
+  if (!tbody) return;
+  clear(tbody);
+  for (const campaign of [...state.campaigns].sort((a, b) => b.created_at - a.created_at)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono" }, campaign.id),
+      node("td", {}, statusPill(campaign.status)),
+      node("td", {}, `${campaign.progress_percent}%`),
+      node("td", {}, `${campaign.total_runs} (${Object.entries(campaign.run_statuses || {}).map(([k, v]) => `${k}:${v}`).join(", ")})`),
+      node("td", {}, node("div", { class: "button-row compact" }, [
+        node("button", { class: "secondary", onclick: () => campaignAction(campaign.id, "pause") }, "Pause"),
+        node("button", { class: "secondary", onclick: () => campaignAction(campaign.id, "resume") }, "Resume"),
+        node("button", { class: "secondary", onclick: () => campaignAction(campaign.id, "retry-failed") }, "Retry Failed"),
+      ])),
+      node("td", {}, reportLinks(`/reports/campaigns/${campaign.id}`)),
+    ]));
+  }
+  if (!state.campaigns.length) tbody.appendChild(emptyRow(6, "No campaigns"));
+  byId("campaign-count").textContent = `${state.campaigns.length} campaigns`;
 }
 
 async function copyPreview() {
@@ -685,6 +852,13 @@ function bindEvents() {
   for (const id of ["catalog-search", "catalog-tactic", "catalog-pack", "catalog-tier", "catalog-platform"]) {
     byId(id).addEventListener("input", renderCatalog);
     byId(id).addEventListener("change", renderCatalog);
+  }
+  for (const id of ["library-search", "library-actor", "library-difficulty", "library-platform", "library-source"]) {
+    byId(id).addEventListener("input", renderScenarioLibrary);
+    byId(id).addEventListener("change", renderScenarioLibrary);
+  }
+  for (const button of document.querySelectorAll(".campaign-size")) {
+    button.addEventListener("click", () => startCampaign(Number(button.dataset.count || 10)));
   }
   byId("scenario-form").addEventListener("submit", (event) => {
     event.preventDefault();

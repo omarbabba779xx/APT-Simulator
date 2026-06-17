@@ -28,6 +28,7 @@ class AppState:
     jwt_secret: bytes | None = None
     scenarios: dict[str, Scenario] = field(default_factory=dict)
     agents: dict[str, dict[str, Any]] = field(default_factory=dict)
+    campaigns: dict[str, dict[str, Any]] = field(default_factory=dict)
 
 
 _state: AppState | None = None

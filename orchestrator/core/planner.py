@@ -88,6 +88,26 @@ class Planner:
         with self._lock:
             return list(self._runs.values())
 
+    def pause_runs(self, run_ids: list[str]) -> int:
+        changed = 0
+        with self._lock:
+            for run_id in run_ids:
+                run = self._runs.get(run_id)
+                if run and run.status == "running":
+                    run.status = "paused"
+                    changed += 1
+        return changed
+
+    def resume_runs(self, run_ids: list[str]) -> int:
+        changed = 0
+        with self._lock:
+            for run_id in run_ids:
+                run = self._runs.get(run_id)
+                if run and run.status == "paused":
+                    run.status = "running"
+                    changed += 1
+        return changed
+
     def next_task_for_agent(self, agent_id: str, agent_platform: str) -> tuple[Run, StepState] | None:
         """Return the next ready step for this agent, or None."""
         with self._lock:
