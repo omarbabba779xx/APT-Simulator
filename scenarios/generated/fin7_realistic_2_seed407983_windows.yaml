@@ -1,0 +1,24 @@
+name: fin7_realistic_2_seed407983_windows
+description: Graph-generated fin7 scenario (realistic, seed=407983)
+target_platforms:
+- windows
+actor: fin7
+tags:
+- generated
+- fin7
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1087_004_m365_group_enumeration

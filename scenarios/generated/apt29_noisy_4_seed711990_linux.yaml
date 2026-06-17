@@ -1,0 +1,39 @@
+name: apt29_noisy_4_seed711990_linux
+description: Graph-generated apt29 scenario (noisy, seed=711990)
+target_platforms:
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- linux
+steps:
+- id: s001_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002
+- id: s003_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1083
+- id: s004_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1083
+  - s001_t1543_002

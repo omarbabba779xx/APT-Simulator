@@ -1,0 +1,31 @@
+name: cloud-intrusion_noisy_3_seed943907_linux
+description: Graph-generated cloud-intrusion scenario (noisy, seed=943907)
+target_platforms:
+- linux
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- noisy
+- variant
+- linux
+steps:
+- id: s001_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+- id: s003_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055

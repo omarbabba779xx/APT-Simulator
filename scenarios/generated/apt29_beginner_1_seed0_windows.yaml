@@ -1,0 +1,17 @@
+name: apt29_beginner_1_seed0_windows
+description: Graph-generated apt29 scenario (beginner, seed=0)
+target_platforms:
+- windows
+actor: apt29
+tags:
+- generated
+- apt29
+- beginner
+- variant
+- windows
+steps:
+- id: s001_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false

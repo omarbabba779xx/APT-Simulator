@@ -1,0 +1,25 @@
+name: apt41_beginner_2_seed407958_linux-darwin
+description: Graph-generated apt41 scenario (beginner, seed=407958)
+target_platforms:
+- linux
+- darwin
+actor: apt41
+tags:
+- generated
+- apt41
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004

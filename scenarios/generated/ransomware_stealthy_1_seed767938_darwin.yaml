@@ -1,0 +1,17 @@
+name: ransomware_stealthy_1_seed767938_darwin
+description: Graph-generated ransomware scenario (stealthy, seed=767938)
+target_platforms:
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false

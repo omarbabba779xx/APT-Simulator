@@ -1,0 +1,40 @@
+name: fin7_stealthy_4_seed839979_windows-linux-darwin
+description: Graph-generated fin7 scenario (stealthy, seed=839979)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- stealthy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s003_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s004_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1041

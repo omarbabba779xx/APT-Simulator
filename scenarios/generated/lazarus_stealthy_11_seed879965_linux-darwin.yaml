@@ -1,0 +1,88 @@
+name: lazarus_stealthy_11_seed879965_linux-darwin
+description: Graph-generated lazarus scenario (stealthy, seed=879965)
+target_platforms:
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- linux-darwin
+steps:
+- id: s001_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s003_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s004_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s005_t1059_004_linux_shell_history_disable
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s006_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1055
+- id: s007_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1611_kubernetes_pod_create
+- id: s008_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1055
+- id: s009_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1611_kubernetes_pod_create
+- id: s010_t1530_aws_s3_object_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s009_t1021_001
+- id: s011_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1611_kubernetes_pod_create

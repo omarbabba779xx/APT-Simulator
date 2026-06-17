@@ -1,0 +1,32 @@
+name: ransomware_realistic_3_seed815941_linux-darwin
+description: Graph-generated ransomware scenario (realistic, seed=815941)
+target_platforms:
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- linux-darwin
+steps:
+- id: s001_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s003_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003

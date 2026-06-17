@@ -1,0 +1,59 @@
+name: apt29_realistic_7_seed15996_darwin
+description: Graph-generated apt29 scenario (realistic, seed=15996)
+target_platforms:
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- darwin
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s003_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s004_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s005_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1556_009_okta_mfa_policy_weaken
+- id: s006_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1556_009_okta_mfa_policy_weaken
+- id: s007_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1580_gcp_project_enumeration

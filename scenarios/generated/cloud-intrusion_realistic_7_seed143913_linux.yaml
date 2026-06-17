@@ -1,0 +1,61 @@
+name: cloud-intrusion_realistic_7_seed143913_linux
+description: Graph-generated cloud-intrusion scenario (realistic, seed=143913)
+target_platforms:
+- linux
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- realistic
+- variant
+- linux
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s003_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+- id: s004_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+- id: s005_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+  - s003_t1556_009_okta_mfa_policy_weaken
+- id: s006_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1083
+- id: s007_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+  - s004_t1016

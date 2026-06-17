@@ -1,0 +1,46 @@
+name: fin7_noisy_5_seed479976_windows
+description: Graph-generated fin7 scenario (noisy, seed=479976)
+target_platforms:
+- windows
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- windows
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s004_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+  - s002_t1078_004_identity_risky_signin
+- id: s005_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1027

@@ -1,0 +1,53 @@
+name: ransomware_noisy_6_seed887934_linux-darwin
+description: Graph-generated ransomware scenario (noisy, seed=887934)
+target_platforms:
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- linux-darwin
+steps:
+- id: s001_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1556_009_okta_mfa_policy_weaken
+- id: s003_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1087_004_m365_group_enumeration
+- id: s004_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1087_004_m365_group_enumeration
+- id: s005_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1560
+- id: s006_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1105

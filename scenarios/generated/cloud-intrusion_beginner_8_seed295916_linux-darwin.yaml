@@ -1,0 +1,67 @@
+name: cloud-intrusion_beginner_8_seed295916_linux-darwin
+description: Graph-generated cloud-intrusion scenario (beginner, seed=295916)
+target_platforms:
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s003_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s004_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1003
+- id: s005_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s006_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s007_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s008_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1016

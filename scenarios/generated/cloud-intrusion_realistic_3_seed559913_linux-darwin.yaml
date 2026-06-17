@@ -1,0 +1,32 @@
+name: cloud-intrusion_realistic_3_seed559913_linux-darwin
+description: Graph-generated cloud-intrusion scenario (realistic, seed=559913)
+target_platforms:
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- realistic
+- variant
+- linux-darwin
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s003_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004

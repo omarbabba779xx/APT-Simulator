@@ -36,7 +36,7 @@ def test_coverage_endpoint(tmp_path) -> None:
     assert isinstance(body, dict)
 
 
-def test_loaded_scenarios_include_variant_pack(tmp_path) -> None:
+def test_loaded_scenarios_include_generated_yaml_variants(tmp_path) -> None:
     client = _client(tmp_path)
     health = client.get("/healthz").json()
     assert health["scenarios_loaded"] == 2511
@@ -54,6 +54,7 @@ def test_scenario_library_filters(tmp_path) -> None:
     assert body["filtered"] > 0
     first = body["items"][0]
     assert first["kind"] == "generated variant"
+    assert first["source"] == "generated YAML"
     assert "windows" in first["platforms"]
 
 

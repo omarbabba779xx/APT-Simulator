@@ -1,0 +1,18 @@
+name: apt29_stealthy_1_seed383993_windows-linux
+description: Graph-generated apt29 scenario (stealthy, seed=383993)
+target_platforms:
+- windows
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- windows-linux
+steps:
+- id: s001_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false

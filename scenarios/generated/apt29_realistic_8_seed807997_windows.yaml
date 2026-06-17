@@ -1,0 +1,69 @@
+name: apt29_realistic_8_seed807997_windows
+description: Graph-generated apt29 scenario (realistic, seed=807997)
+target_platforms:
+- windows
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+- id: s003_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+- id: s004_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+  - s003_t1049
+- id: s005_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1082
+- id: s006_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110_003_m365_password_spray
+- id: s007_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1082
+  - s006_t1105
+- id: s008_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1105
+  - s002_t1110_003_m365_password_spray

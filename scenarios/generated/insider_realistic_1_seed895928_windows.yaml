@@ -1,0 +1,17 @@
+name: insider_realistic_1_seed895928_windows
+description: Graph-generated insider scenario (realistic, seed=895928)
+target_platforms:
+- windows
+actor: insider
+tags:
+- generated
+- insider
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false

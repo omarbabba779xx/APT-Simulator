@@ -1,0 +1,47 @@
+name: ransomware_realistic_5_seed607941_windows-linux
+description: Graph-generated ransomware scenario (realistic, seed=607941)
+target_platforms:
+- windows
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- windows-linux
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005
+- id: s004_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005
+  - s003_t1543_002
+- id: s005_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059

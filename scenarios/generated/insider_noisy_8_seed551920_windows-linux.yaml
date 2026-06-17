@@ -1,0 +1,68 @@
+name: insider_noisy_8_seed551920_windows-linux
+description: Graph-generated insider scenario (noisy, seed=551920)
+target_platforms:
+- windows
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+- id: s003_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110_003_m365_password_spray
+- id: s004_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1580
+- id: s005_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110_003_m365_password_spray
+- id: s006_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1580
+- id: s007_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+  - s002_t1110_003_m365_password_spray
+- id: s008_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055

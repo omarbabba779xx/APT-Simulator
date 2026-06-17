@@ -1,0 +1,48 @@
+name: apt29_realistic_5_seed223996_windows-darwin
+description: Graph-generated apt29 scenario (realistic, seed=223996)
+target_platforms:
+- windows
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- windows-darwin
+steps:
+- id: s001_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s003_t1543_003_windows_service_create
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1047_windows_wmi_process_create
+- id: s004_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1543_003_windows_service_create
+  - s001_t1078_004_identity_risky_signin
+- id: s005_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1543_003_windows_service_create
+  - s002_t1047_windows_wmi_process_create

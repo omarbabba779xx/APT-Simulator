@@ -1,0 +1,67 @@
+name: lazarus_beginner_8_seed807972_linux-darwin
+description: Graph-generated lazarus scenario (beginner, seed=807972)
+target_platforms:
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s004_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1016
+- id: s005_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1580
+- id: s006_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1016
+- id: s007_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_003_azure_role_assignment
+- id: s008_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_003_azure_role_assignment

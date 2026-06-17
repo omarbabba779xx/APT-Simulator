@@ -1,0 +1,87 @@
+name: apt29_beginner_11_seed752000_darwin
+description: Graph-generated apt29 scenario (beginner, seed=752000)
+target_platforms:
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- beginner
+- variant
+- darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s004_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1059
+- id: s005_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_004
+- id: s006_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_identity_risky_signin
+- id: s007_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1055
+- id: s008_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_004
+- id: s009_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_004
+- id: s010_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1055
+- id: s011_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success

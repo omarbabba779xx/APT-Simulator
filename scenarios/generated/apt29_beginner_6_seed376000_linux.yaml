@@ -1,0 +1,52 @@
+name: apt29_beginner_6_seed376000_linux
+description: Graph-generated apt29 scenario (beginner, seed=376000)
+target_platforms:
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- beginner
+- variant
+- linux
+steps:
+- id: s001_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110
+- id: s003_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110
+- id: s004_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1033
+- id: s005_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1033
+- id: s006_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1021_001

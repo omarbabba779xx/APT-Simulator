@@ -1,0 +1,45 @@
+name: cloud-intrusion_beginner_5_seed607917_linux
+description: Graph-generated cloud-intrusion scenario (beginner, seed=607917)
+target_platforms:
+- linux
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- linux
+steps:
+- id: s001_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s003_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s004_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1003
+- id: s005_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1003

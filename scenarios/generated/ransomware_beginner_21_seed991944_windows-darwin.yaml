@@ -1,0 +1,158 @@
+name: ransomware_beginner_21_seed991944_windows-darwin
+description: Graph-generated ransomware scenario (beginner, seed=991944)
+target_platforms:
+- windows
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s003_t1543_003_windows_service_create
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s004_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1543_003_windows_service_create
+- id: s005_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s006_t1059_004_linux_shell_history_disable
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1547_001
+- id: s007_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1055
+- id: s008_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1547_001
+- id: s009_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s010_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s011_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1059_004_linux_shell_history_disable
+- id: s012_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1110
+- id: s013_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1059_004_linux_shell_history_disable
+- id: s014_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s012_t1069_001
+- id: s015_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s014_t1087_001_linux_local_account_discovery
+- id: s016_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s017_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s014_t1087_001_linux_local_account_discovery
+- id: s018_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1110
+- id: s019_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s016_t1005
+- id: s020_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1059_004_linux_shell_history_disable
+- id: s021_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s015_t1087_004_m365_group_enumeration

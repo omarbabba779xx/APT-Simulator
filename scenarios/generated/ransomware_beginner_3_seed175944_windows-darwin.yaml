@@ -1,0 +1,32 @@
+name: ransomware_beginner_3_seed175944_windows-darwin
+description: Graph-generated ransomware scenario (beginner, seed=175944)
+target_platforms:
+- windows
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s003_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded

@@ -1,0 +1,24 @@
+name: insider_stealthy_2_seed535924_linux
+description: Graph-generated insider scenario (stealthy, seed=535924)
+target_platforms:
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1082

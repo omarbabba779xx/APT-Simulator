@@ -1,0 +1,73 @@
+name: lazarus_stealthy_9_seed191965_linux
+description: Graph-generated lazarus scenario (stealthy, seed=191965)
+target_platforms:
+- linux
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002
+- id: s003_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110
+- id: s004_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002
+- id: s005_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002
+- id: s006_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1049
+- id: s007_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1049
+- id: s008_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1049
+- id: s009_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110

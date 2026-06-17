@@ -16,6 +16,11 @@ from .scenario_builder import build_scenario, build_scenario_batch, scenario_var
 app = typer.Typer(no_args_is_help=True)
 
 
+def _safe_scenario_filename(name: str) -> str:
+    safe = "".join(ch if ch.isalnum() or ch in {"-", "_"} else "_" for ch in name)
+    return f"{safe.strip('_')}.yaml"
+
+
 @app.command()
 def build_queue(
     out: str = "scenarios/campaign_queue.yaml",
@@ -50,6 +55,25 @@ def build_variants(
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(yaml.safe_dump({"campaign": queue}, sort_keys=False), encoding="utf-8")
     typer.echo(f"Wrote {len(queue)} scenario variant(s) to {out_path}")
+
+
+@app.command()
+def materialize_variants(
+    out_dir: str = "scenarios/generated",
+    count: int = 2500,
+    offset: int = 0,
+    stride: int = 6_272_006,
+) -> None:
+    """Write generated scenario variants as one complete YAML file per scenario."""
+    scenarios = build_scenario_batch(count=count, offset=offset, stride=stride, max_count=count)
+    target = Path(out_dir)
+    target.mkdir(parents=True, exist_ok=True)
+    written = 0
+    for scenario in scenarios:
+        path = target / _safe_scenario_filename(str(scenario["name"]))
+        path.write_text(yaml.safe_dump(scenario, sort_keys=False), encoding="utf-8")
+        written += 1
+    typer.echo(f"Wrote {written} scenario YAML file(s) to {target}")
 
 
 @app.command()

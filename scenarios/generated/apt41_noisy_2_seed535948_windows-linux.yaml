@@ -1,0 +1,25 @@
+name: apt41_noisy_2_seed535948_windows-linux
+description: Graph-generated apt41 scenario (noisy, seed=535948)
+target_platforms:
+- windows
+- linux
+actor: apt41
+tags:
+- generated
+- apt41
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created

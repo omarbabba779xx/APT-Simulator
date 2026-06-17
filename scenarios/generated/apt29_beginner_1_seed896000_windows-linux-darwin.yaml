@@ -1,0 +1,19 @@
+name: apt29_beginner_1_seed896000_windows-linux-darwin
+description: Graph-generated apt29 scenario (beginner, seed=896000)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false

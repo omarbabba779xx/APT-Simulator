@@ -1,0 +1,48 @@
+name: cloud-intrusion_realistic_5_seed351913_windows-linux
+description: Graph-generated cloud-intrusion scenario (realistic, seed=351913)
+target_platforms:
+- windows
+- linux
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- realistic
+- variant
+- windows-linux
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s003_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1087_004_m365_group_enumeration
+- id: s004_t1530_aws_s3_object_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+  - s003_t1530
+- id: s005_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1087_004_m365_group_enumeration
+  - s003_t1530

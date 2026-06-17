@@ -1,0 +1,54 @@
+name: lazarus_noisy_6_seed247961_windows-linux-darwin
+description: Graph-generated lazarus scenario (noisy, seed=247961)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- noisy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s003_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s004_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s005_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1070_004
+- id: s006_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create

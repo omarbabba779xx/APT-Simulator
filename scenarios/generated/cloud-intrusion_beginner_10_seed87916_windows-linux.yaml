@@ -1,0 +1,81 @@
+name: cloud-intrusion_beginner_10_seed87916_windows-linux
+description: Graph-generated cloud-intrusion scenario (beginner, seed=87916)
+target_platforms:
+- windows
+- linux
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- windows-linux
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s004_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_aws_console_login_success
+- id: s005_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s006_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s007_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_aws_console_login_success
+- id: s008_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1547_001
+- id: s009_t1213_slack_channel_export
+  ttp: T1213:SLACK_CHANNEL_EXPORT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1547_001
+- id: s010_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1003

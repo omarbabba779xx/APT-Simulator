@@ -1,0 +1,55 @@
+name: fin7_realistic_6_seed887983_darwin
+description: Graph-generated fin7 scenario (realistic, seed=887983)
+target_platforms:
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- realistic
+- variant
+- darwin
+steps:
+- id: s001_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+- id: s003_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110_003_m365_password_spray
+- id: s004_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1069_001
+  - s002_t1110_003_m365_password_spray
+- id: s005_t1213_slack_channel_export
+  ttp: T1213:SLACK_CHANNEL_EXPORT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110_003_m365_password_spray
+  - s004_t1087_004_m365_group_enumeration
+- id: s006_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1087_004_m365_group_enumeration
+  - s003_t1069_001

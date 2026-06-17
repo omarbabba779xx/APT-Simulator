@@ -1,0 +1,31 @@
+name: apt29_noisy_3_seed815990_darwin
+description: Graph-generated apt29 scenario (noisy, seed=815990)
+target_platforms:
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success

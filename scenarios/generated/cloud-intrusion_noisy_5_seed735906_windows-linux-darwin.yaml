@@ -1,0 +1,49 @@
+name: cloud-intrusion_noisy_5_seed735906_windows-linux-darwin
+description: Graph-generated cloud-intrusion scenario (noisy, seed=735906)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- noisy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s003_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s004_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+  - s002_t1016
+- id: s005_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1069_001
+  - s002_t1016

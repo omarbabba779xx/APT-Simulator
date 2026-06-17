@@ -1,0 +1,38 @@
+name: ransomware_beginner_4_seed967945_darwin
+description: Graph-generated ransomware scenario (beginner, seed=967945)
+target_platforms:
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- darwin
+steps:
+- id: s001_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003
+- id: s003_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003
+- id: s004_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003

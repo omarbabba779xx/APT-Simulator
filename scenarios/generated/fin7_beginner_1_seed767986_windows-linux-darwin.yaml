@@ -1,0 +1,19 @@
+name: fin7_beginner_1_seed767986_windows-linux-darwin
+description: Graph-generated fin7 scenario (beginner, seed=767986)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false

@@ -1,0 +1,19 @@
+name: insider_beginner_1_seed255930_windows-linux-darwin
+description: Graph-generated insider scenario (beginner, seed=255930)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false

@@ -1,0 +1,66 @@
+name: lazarus_stealthy_8_seed295965_darwin
+description: Graph-generated lazarus scenario (stealthy, seed=295965)
+target_platforms:
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s003_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+- id: s004_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+- id: s005_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s006_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+- id: s007_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1003
+- id: s008_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1057

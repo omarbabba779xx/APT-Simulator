@@ -1,0 +1,78 @@
+name: insider_realistic_9_seed959927_linux-darwin
+description: Graph-generated insider scenario (realistic, seed=959927)
+target_platforms:
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- realistic
+- variant
+- linux-darwin
+steps:
+- id: s001_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant
+- id: s003_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s004_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1556_009_okta_mfa_policy_weaken
+  - s002_t1543_002
+- id: s005_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1580_gcp_project_enumeration
+  - s002_t1543_002
+- id: s006_t1530_aws_s3_object_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1580_gcp_project_enumeration
+  - s002_t1543_002
+- id: s007_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1530_aws_s3_object_burst
+- id: s008_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+  - s001_t1098_003_entra_app_role_grant
+- id: s009_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1105

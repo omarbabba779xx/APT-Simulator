@@ -1,0 +1,145 @@
+name: cloud-intrusion_beginner_19_seed943916_windows-linux-darwin
+description: Graph-generated cloud-intrusion scenario (beginner, seed=943916)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s004_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s005_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_003_entra_app_role_grant
+- id: s006_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s007_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1611_kubernetes_pod_create
+- id: s008_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_003_entra_app_role_grant
+- id: s009_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_003_entra_app_role_grant
+- id: s010_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_003_entra_app_role_grant
+- id: s011_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s012_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1070_004
+- id: s013_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s012_t1082
+- id: s014_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s015_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1055
+- id: s016_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s017_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s018_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1611_kubernetes_pod_create
+- id: s019_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s012_t1082

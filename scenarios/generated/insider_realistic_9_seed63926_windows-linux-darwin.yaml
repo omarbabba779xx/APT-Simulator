@@ -1,0 +1,78 @@
+name: insider_realistic_9_seed63926_windows-linux-darwin
+description: Graph-generated insider scenario (realistic, seed=63926)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s003_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s004_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+  - s002_t1098_005_saas_token_created
+- id: s005_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1110_003_m365_password_spray
+  - s002_t1098_005_saas_token_created
+- id: s006_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s007_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1110_003_m365_password_spray
+- id: s008_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1057
+  - s002_t1098_005_saas_token_created
+- id: s009_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment

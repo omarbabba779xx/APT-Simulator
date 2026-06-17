@@ -1,0 +1,40 @@
+name: lazarus_stealthy_4_seed711965_windows-linux-darwin
+description: Graph-generated lazarus scenario (stealthy, seed=711965)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002
+- id: s003_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1033
+- id: s004_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1033

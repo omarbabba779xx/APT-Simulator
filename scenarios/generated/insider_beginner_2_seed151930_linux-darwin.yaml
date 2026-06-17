@@ -1,0 +1,25 @@
+name: insider_beginner_2_seed151930_linux-darwin
+description: Graph-generated insider scenario (beginner, seed=151930)
+target_platforms:
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success

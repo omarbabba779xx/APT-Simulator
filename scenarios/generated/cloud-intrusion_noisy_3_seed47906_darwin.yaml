@@ -1,0 +1,31 @@
+name: cloud-intrusion_noisy_3_seed47906_darwin
+description: Graph-generated cloud-intrusion scenario (noisy, seed=47906)
+target_platforms:
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059

@@ -1,0 +1,67 @@
+name: apt29_noisy_8_seed295989_windows-darwin
+description: Graph-generated apt29 scenario (noisy, seed=295989)
+target_platforms:
+- windows
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s003_t1218_011_windows_rundll32_proxy
+  ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005
+- id: s004_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s005_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005
+- id: s006_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1556_009_okta_mfa_policy_weaken
+- id: s007_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1016
+- id: s008_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1016

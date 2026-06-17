@@ -1,0 +1,136 @@
+name: lazarus_beginner_18_seed663972_linux
+description: Graph-generated lazarus scenario (beginner, seed=663972)
+target_platforms:
+- linux
+actor: lazarus
+tags:
+- generated
+- lazarus
+- beginner
+- variant
+- linux
+steps:
+- id: s001_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s003_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s004_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1611_kubernetes_pod_create
+- id: s005_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s006_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1611_kubernetes_pod_create
+- id: s007_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s008_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1055
+- id: s009_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s010_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1611_kubernetes_pod_create
+- id: s011_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s012_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1070_004
+- id: s013_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s012_t1580_gcp_project_enumeration
+- id: s014_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1083
+- id: s015_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s016_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1027
+- id: s017_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s011_t1087_001_linux_local_account_discovery
+- id: s018_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s015_t1530

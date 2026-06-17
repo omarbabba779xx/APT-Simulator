@@ -1,0 +1,40 @@
+name: insider_stealthy_4_seed327923_windows-linux-darwin
+description: Graph-generated insider scenario (stealthy, seed=327923)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- stealthy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055
+- id: s003_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1556_009_okta_mfa_policy_weaken
+- id: s004_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1055

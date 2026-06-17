@@ -1,0 +1,102 @@
+name: apt29_stealthy_13_seed31992_windows-darwin
+description: Graph-generated apt29 scenario (stealthy, seed=31992)
+target_platforms:
+- windows
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005
+- id: s004_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1027
+- id: s005_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005
+- id: s006_t1112_windows_registry_policy_change
+  ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1112
+- id: s007_t1218_011_windows_rundll32_proxy
+  ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1027
+- id: s008_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1055
+- id: s009_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1112_windows_registry_policy_change
+- id: s010_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s011_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1049
+- id: s012_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1027
+- id: s013_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005

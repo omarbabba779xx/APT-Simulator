@@ -1,0 +1,18 @@
+name: apt29_noisy_1_seed127989_linux-darwin
+description: Graph-generated apt29 scenario (noisy, seed=127989)
+target_platforms:
+- linux
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- linux-darwin
+steps:
+- id: s001_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false

@@ -1,0 +1,25 @@
+name: cloud-intrusion_beginner_2_seed23916_linux-darwin
+description: Graph-generated cloud-intrusion scenario (beginner, seed=23916)
+target_platforms:
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant

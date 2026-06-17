@@ -1,0 +1,102 @@
+name: apt41_stealthy_13_seed543951_windows-linux
+description: Graph-generated apt41 scenario (stealthy, seed=543951)
+target_platforms:
+- windows
+- linux
+actor: apt41
+tags:
+- generated
+- apt41
+- stealthy
+- variant
+- windows-linux
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_003_linux_cron_marker
+- id: s004_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_004
+- id: s005_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_004
+- id: s006_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1611_kubernetes_pod_create
+- id: s007_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s008_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1070_002_linux_log_clear
+- id: s009_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1082
+- id: s010_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_004
+- id: s011_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1611_kubernetes_pod_create
+- id: s012_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1021_001
+- id: s013_t1530_aws_s3_object_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s012_t1530

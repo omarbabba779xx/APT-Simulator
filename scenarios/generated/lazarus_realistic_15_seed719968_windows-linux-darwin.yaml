@@ -1,0 +1,123 @@
+name: lazarus_realistic_15_seed719968_windows-linux-darwin
+description: Graph-generated lazarus scenario (realistic, seed=719968)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1047_windows_wmi_process_create
+- id: s004_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s005_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1047_windows_wmi_process_create
+- id: s006_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+  - s003_t1059
+- id: s007_t1112_windows_registry_policy_change
+  ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1059
+  - s002_t1047_windows_wmi_process_create
+- id: s008_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1059
+- id: s009_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1112_windows_registry_policy_change
+  - s005_t1547_001
+- id: s010_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s011_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s012_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1059
+  - s010_t1560
+- id: s013_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_004
+- id: s014_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1047_windows_wmi_process_create
+  - s012_t1105_linux_curl_tool_transfer
+- id: s015_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1069_001
+  - s002_t1047_windows_wmi_process_create

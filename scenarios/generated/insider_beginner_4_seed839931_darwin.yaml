@@ -1,0 +1,38 @@
+name: insider_beginner_4_seed839931_darwin
+description: Graph-generated insider scenario (beginner, seed=839931)
+target_platforms:
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- beginner
+- variant
+- darwin
+steps:
+- id: s001_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s003_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s004_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1530_google_drive_bulk_download

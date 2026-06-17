@@ -1,0 +1,92 @@
+name: insider_realistic_11_seed751927_windows-linux
+description: Graph-generated insider scenario (realistic, seed=751927)
+target_platforms:
+- windows
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- realistic
+- variant
+- windows-linux
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s004_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1547_001
+  - s002_t1098_003_azure_role_assignment
+- id: s005_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1547_001
+- id: s006_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s007_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1547_001
+- id: s008_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s009_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1003
+  - s001_t1078_004_aws_console_login_success
+- id: s010_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1580_gcp_project_enumeration
+  - s001_t1078_004_aws_console_login_success
+- id: s011_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+  - s003_t1547_001

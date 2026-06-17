@@ -1,0 +1,17 @@
+name: apt29_realistic_1_seed639997_linux
+description: Graph-generated apt29 scenario (realistic, seed=639997)
+target_platforms:
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- linux
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false

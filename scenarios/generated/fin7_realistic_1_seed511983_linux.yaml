@@ -1,0 +1,17 @@
+name: fin7_realistic_1_seed511983_linux
+description: Graph-generated fin7 scenario (realistic, seed=511983)
+target_platforms:
+- linux
+actor: fin7
+tags:
+- generated
+- fin7
+- realistic
+- variant
+- linux
+steps:
+- id: s001_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false

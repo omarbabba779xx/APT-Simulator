@@ -1,0 +1,18 @@
+name: apt41_noisy_1_seed639948_windows-darwin
+description: Graph-generated apt41 scenario (noisy, seed=639948)
+target_platforms:
+- windows
+- darwin
+actor: apt41
+tags:
+- generated
+- apt41
+- noisy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1059_004_linux_shell_history_disable
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+  abort_on_fail: false

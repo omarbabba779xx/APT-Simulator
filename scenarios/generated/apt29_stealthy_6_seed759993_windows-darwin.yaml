@@ -1,0 +1,53 @@
+name: apt29_stealthy_6_seed759993_windows-darwin
+description: Graph-generated apt29 scenario (stealthy, seed=759993)
+target_platforms:
+- windows
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s003_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s004_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s005_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s006_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059

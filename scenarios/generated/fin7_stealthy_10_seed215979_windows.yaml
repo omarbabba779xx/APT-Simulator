@@ -1,0 +1,80 @@
+name: fin7_stealthy_10_seed215979_windows
+description: Graph-generated fin7 scenario (stealthy, seed=215979)
+target_platforms:
+- windows
+actor: fin7
+tags:
+- generated
+- fin7
+- stealthy
+- variant
+- windows
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1543_003_windows_service_create
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059_001_windows_powershell_encoded
+- id: s004_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s005_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1110
+- id: s006_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059_001_windows_powershell_encoded
+- id: s007_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1082
+- id: s008_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1033
+- id: s009_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059_001_windows_powershell_encoded
+- id: s010_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1005

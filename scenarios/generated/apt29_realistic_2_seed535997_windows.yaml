@@ -1,0 +1,24 @@
+name: apt29_realistic_2_seed535997_windows
+description: Graph-generated apt29 scenario (realistic, seed=535997)
+target_platforms:
+- windows
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant

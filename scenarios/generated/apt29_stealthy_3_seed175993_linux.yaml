@@ -1,0 +1,31 @@
+name: apt29_stealthy_3_seed175993_linux
+description: Graph-generated apt29 scenario (stealthy, seed=175993)
+target_platforms:
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1016
+- id: s003_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1005

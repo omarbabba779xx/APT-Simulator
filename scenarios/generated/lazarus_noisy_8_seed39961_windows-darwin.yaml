@@ -1,0 +1,67 @@
+name: lazarus_noisy_8_seed39961_windows-darwin
+description: Graph-generated lazarus scenario (noisy, seed=39961)
+target_platforms:
+- windows
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- noisy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s003_t1543_003_windows_service_create
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_003_azure_role_assignment
+- id: s004_t1218_011_windows_rundll32_proxy
+  ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s005_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1218_011_windows_rundll32_proxy
+- id: s006_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1543_003_windows_service_create
+- id: s007_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1543_003_windows_service_create
+- id: s008_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1005

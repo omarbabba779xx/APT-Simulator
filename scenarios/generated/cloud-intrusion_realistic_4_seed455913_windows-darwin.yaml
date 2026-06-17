@@ -1,0 +1,39 @@
+name: cloud-intrusion_realistic_4_seed455913_windows-darwin
+description: Graph-generated cloud-intrusion scenario (realistic, seed=455913)
+target_platforms:
+- windows
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- realistic
+- variant
+- windows-darwin
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027
+- id: s003_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027
+- id: s004_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1021_001

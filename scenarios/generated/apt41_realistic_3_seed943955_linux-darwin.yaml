@@ -1,0 +1,32 @@
+name: apt41_realistic_3_seed943955_linux-darwin
+description: Graph-generated apt41 scenario (realistic, seed=943955)
+target_platforms:
+- linux
+- darwin
+actor: apt41
+tags:
+- generated
+- apt41
+- realistic
+- variant
+- linux-darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1070_002_linux_log_clear

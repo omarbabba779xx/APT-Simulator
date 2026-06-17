@@ -1,0 +1,25 @@
+name: lazarus_noisy_2_seed663962_windows-linux
+description: Graph-generated lazarus scenario (noisy, seed=663962)
+target_platforms:
+- windows
+- linux
+actor: lazarus
+tags:
+- generated
+- lazarus
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1070_004

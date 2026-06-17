@@ -1,0 +1,24 @@
+name: ransomware_realistic_2_seed23941_windows
+description: Graph-generated ransomware scenario (realistic, seed=23941)
+target_platforms:
+- windows
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create

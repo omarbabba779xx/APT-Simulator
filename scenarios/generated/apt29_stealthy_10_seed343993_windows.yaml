@@ -1,0 +1,80 @@
+name: apt29_stealthy_10_seed343993_windows
+description: Graph-generated apt29 scenario (stealthy, seed=343993)
+target_platforms:
+- windows
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- windows
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059
+- id: s004_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s005_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s006_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s007_t1218_011_windows_rundll32_proxy
+  ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1547_001
+- id: s008_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s009_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1112
+- id: s010_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s009_t1057

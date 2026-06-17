@@ -1,0 +1,53 @@
+name: lazarus_stealthy_6_seed503965_windows-darwin
+description: Graph-generated lazarus scenario (stealthy, seed=503965)
+target_platforms:
+- windows
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_005
+- id: s003_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1547_001
+- id: s004_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_005
+- id: s005_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1580_gcp_project_enumeration
+- id: s006_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_005

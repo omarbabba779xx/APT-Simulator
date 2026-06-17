@@ -1,0 +1,74 @@
+name: cloud-intrusion_beginner_9_seed191916_windows-darwin
+description: Graph-generated cloud-intrusion scenario (beginner, seed=191916)
+target_platforms:
+- windows
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s003_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s004_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s005_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1055
+- id: s006_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1055
+- id: s007_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s008_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_005_saas_token_created
+- id: s009_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1055

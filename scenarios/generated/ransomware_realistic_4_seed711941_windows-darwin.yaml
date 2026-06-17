@@ -1,0 +1,39 @@
+name: ransomware_realistic_4_seed711941_windows-darwin
+description: Graph-generated ransomware scenario (realistic, seed=711941)
+target_platforms:
+- windows
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- windows-darwin
+steps:
+- id: s001_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110
+- id: s003_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110
+- id: s004_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1069_001

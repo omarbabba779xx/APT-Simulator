@@ -1,0 +1,39 @@
+name: ransomware_beginner_4_seed71944_windows-linux
+description: Graph-generated ransomware scenario (beginner, seed=71944)
+target_platforms:
+- windows
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- windows-linux
+steps:
+- id: s001_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_005
+- id: s003_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+- id: s004_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027

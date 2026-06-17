@@ -1,0 +1,45 @@
+name: ransomware_beginner_5_seed863945_linux
+description: Graph-generated ransomware scenario (beginner, seed=863945)
+target_platforms:
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- linux
+steps:
+- id: s001_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1070_002_linux_log_clear
+- id: s003_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1070_002_linux_log_clear
+- id: s004_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1021_002
+- id: s005_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1021_002

@@ -1,0 +1,24 @@
+name: lazarus_stealthy_2_seed23965_darwin
+description: Graph-generated lazarus scenario (stealthy, seed=23965)
+target_platforms:
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1049

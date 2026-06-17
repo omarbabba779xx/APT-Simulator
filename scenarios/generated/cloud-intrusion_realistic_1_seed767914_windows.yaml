@@ -1,0 +1,17 @@
+name: cloud-intrusion_realistic_1_seed767914_windows
+description: Graph-generated cloud-intrusion scenario (realistic, seed=767914)
+target_platforms:
+- windows
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false

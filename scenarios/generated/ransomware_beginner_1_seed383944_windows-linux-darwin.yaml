@@ -1,0 +1,19 @@
+name: ransomware_beginner_1_seed383944_windows-linux-darwin
+description: Graph-generated ransomware scenario (beginner, seed=383944)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false

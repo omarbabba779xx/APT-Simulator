@@ -1,0 +1,19 @@
+name: cloud-intrusion_beginner_1_seed127916_windows-linux-darwin
+description: Graph-generated cloud-intrusion scenario (beginner, seed=127916)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false

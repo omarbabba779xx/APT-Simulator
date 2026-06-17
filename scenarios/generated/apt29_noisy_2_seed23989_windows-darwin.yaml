@@ -1,0 +1,25 @@
+name: apt29_noisy_2_seed23989_windows-darwin
+description: Graph-generated apt29 scenario (noisy, seed=23989)
+target_platforms:
+- windows
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059

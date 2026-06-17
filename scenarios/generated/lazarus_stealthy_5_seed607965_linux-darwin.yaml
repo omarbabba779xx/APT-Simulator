@@ -1,0 +1,46 @@
+name: lazarus_stealthy_5_seed607965_linux-darwin
+description: Graph-generated lazarus scenario (stealthy, seed=607965)
+target_platforms:
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- linux-darwin
+steps:
+- id: s001_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1611_kubernetes_pod_create
+- id: s003_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1033
+- id: s004_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1611_kubernetes_pod_create
+- id: s005_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1033

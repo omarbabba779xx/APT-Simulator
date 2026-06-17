@@ -1,0 +1,38 @@
+name: ransomware_noisy_4_seed199934_linux
+description: Graph-generated ransomware scenario (noisy, seed=199934)
+target_platforms:
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- linux
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027
+- id: s003_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1070_004
+- id: s004_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027

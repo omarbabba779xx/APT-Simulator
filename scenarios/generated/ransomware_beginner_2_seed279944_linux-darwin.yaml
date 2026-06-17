@@ -1,0 +1,25 @@
+name: ransomware_beginner_2_seed279944_linux-darwin
+description: Graph-generated ransomware scenario (beginner, seed=279944)
+target_platforms:
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002

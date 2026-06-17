@@ -1,0 +1,38 @@
+name: cloud-intrusion_noisy_4_seed839907_windows
+description: Graph-generated cloud-intrusion scenario (noisy, seed=839907)
+target_platforms:
+- windows
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- noisy
+- variant
+- windows
+steps:
+- id: s001_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1033
+- id: s003_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1069_001
+- id: s004_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1069_001

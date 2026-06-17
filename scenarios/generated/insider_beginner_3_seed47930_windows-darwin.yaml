@@ -1,0 +1,32 @@
+name: insider_beginner_3_seed47930_windows-darwin
+description: Graph-generated insider scenario (beginner, seed=47930)
+target_platforms:
+- windows
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s003_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment

@@ -1,0 +1,32 @@
+name: insider_beginner_3_seed943931_windows-linux
+description: Graph-generated insider scenario (beginner, seed=943931)
+target_platforms:
+- windows
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- beginner
+- variant
+- windows-linux
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created
+- id: s003_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created

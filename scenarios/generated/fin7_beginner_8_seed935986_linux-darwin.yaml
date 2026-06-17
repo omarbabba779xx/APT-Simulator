@@ -1,0 +1,67 @@
+name: fin7_beginner_8_seed935986_linux-darwin
+description: Graph-generated fin7 scenario (beginner, seed=935986)
+target_platforms:
+- linux
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s003_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s004_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s005_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s006_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray
+- id: s007_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1082
+- id: s008_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110_003_m365_password_spray

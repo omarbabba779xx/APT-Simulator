@@ -1,0 +1,17 @@
+name: lazarus_realistic_1_seed383969_linux
+description: Graph-generated lazarus scenario (realistic, seed=383969)
+target_platforms:
+- linux
+actor: lazarus
+tags:
+- generated
+- lazarus
+- realistic
+- variant
+- linux
+steps:
+- id: s001_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false

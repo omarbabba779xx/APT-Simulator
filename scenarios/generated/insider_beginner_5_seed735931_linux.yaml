@@ -1,0 +1,45 @@
+name: insider_beginner_5_seed735931_linux
+description: Graph-generated insider scenario (beginner, seed=735931)
+target_platforms:
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- beginner
+- variant
+- linux
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created
+- id: s003_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1611_kubernetes_pod_create
+- id: s004_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1055
+- id: s005_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created

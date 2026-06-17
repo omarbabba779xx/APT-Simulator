@@ -1,0 +1,48 @@
+name: fin7_realistic_5_seed991983_windows-linux
+description: Graph-generated fin7 scenario (realistic, seed=991983)
+target_platforms:
+- windows
+- linux
+actor: fin7
+tags:
+- generated
+- fin7
+- realistic
+- variant
+- windows-linux
+steps:
+- id: s001_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+- id: s003_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1021_002
+- id: s004_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1530
+  - s002_t1021_002
+- id: s005_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_identity_risky_signin
+  - s002_t1021_002

@@ -1,0 +1,92 @@
+name: fin7_noisy_11_seed751976_windows
+description: Graph-generated fin7 scenario (noisy, seed=751976)
+target_platforms:
+- windows
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- windows
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059_001_windows_powershell_encoded
+- id: s004_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s005_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1098_003_entra_app_role_grant
+  - s003_t1053_005
+- id: s006_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059_001_windows_powershell_encoded
+- id: s007_t1112_windows_registry_policy_change
+  ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1070_004
+  - s003_t1053_005
+- id: s008_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1053_005
+  - s002_t1059_001_windows_powershell_encoded
+- id: s009_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1053_005
+  - s005_t1027
+- id: s010_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1003
+- id: s011_t1213_slack_channel_export
+  ttp: T1213:SLACK_CHANNEL_EXPORT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+  - s009_t1049

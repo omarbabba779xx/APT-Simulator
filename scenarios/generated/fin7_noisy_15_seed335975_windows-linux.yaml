@@ -1,0 +1,123 @@
+name: fin7_noisy_15_seed335975_windows-linux
+description: Graph-generated fin7 scenario (noisy, seed=335975)
+target_platforms:
+- windows
+- linux
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1547_001
+- id: s003_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+- id: s004_t1218_011_windows_rundll32_proxy
+  ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+  - s001_t1547_001
+- id: s005_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1547_001
+  - s003_t1112
+- id: s006_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+  - s004_t1218_011_windows_rundll32_proxy
+- id: s007_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1110_003_m365_password_spray
+  - s005_t1110
+- id: s008_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1112
+  - s007_t1016
+- id: s009_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1016
+- id: s010_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1027
+  - s009_t1049
+- id: s011_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1016
+- id: s012_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1016
+- id: s013_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s009_t1049
+- id: s014_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1069_001
+  - s012_t1083
+- id: s015_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s011_t1082

@@ -1,0 +1,66 @@
+name: ransomware_stealthy_8_seed935938_linux
+description: Graph-generated ransomware scenario (stealthy, seed=935938)
+target_platforms:
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1059_004_linux_shell_history_disable
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_004_linux_shell_history_disable
+- id: s003_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_004_linux_shell_history_disable
+- id: s004_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1110_003_m365_password_spray
+- id: s005_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1083
+- id: s006_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+- id: s007_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+- id: s008_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1021_002

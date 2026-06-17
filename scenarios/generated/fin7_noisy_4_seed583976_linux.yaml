@@ -1,0 +1,39 @@
+name: fin7_noisy_4_seed583976_linux
+description: Graph-generated fin7 scenario (noisy, seed=583976)
+target_platforms:
+- linux
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- linux
+steps:
+- id: s001_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003
+- id: s003_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1049
+- id: s004_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1069_001
+  - s001_t1003

@@ -35,7 +35,7 @@ def _scenario_library_entry(name: str, scenario: Scenario) -> dict[str, object]:
     tags = list(scenario.tags or [])
     tag_set = set(tags)
     kind = "generated variant" if "variant" in tag_set else "static"
-    source = "pack" if kind == "generated variant" else "static"
+    source = "generated YAML" if kind == "generated variant" else "static"
     difficulty = next((tag for tag in tags if tag in DIFFICULTY_STEPS), None)
     ttps = sorted({step.ttp for step in scenario.steps})
     return {
@@ -79,10 +79,12 @@ def _matches_filter(
         return False
     if source:
         selected = source.lower()
+        item_source = str(item["source"]).lower()
+        item_kind = str(item["kind"]).lower()
         if selected in {"generated", "generated variant"}:
             if item["kind"] != "generated variant":
                 return False
-        elif selected not in {str(item["source"]), str(item["kind"])}:
+        elif selected not in {item_source, item_kind}:
             return False
     step_count = cast(int, item["step_count"])
     if min_steps is not None and step_count < min_steps:

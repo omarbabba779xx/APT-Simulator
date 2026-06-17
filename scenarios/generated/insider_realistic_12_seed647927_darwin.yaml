@@ -1,0 +1,101 @@
+name: insider_realistic_12_seed647927_darwin
+description: Graph-generated insider scenario (realistic, seed=647927)
+target_platforms:
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- realistic
+- variant
+- darwin
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success
+- id: s003_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_identity_risky_signin
+- id: s004_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_identity_risky_signin
+  - s003_t1098_003_azure_role_assignment
+- id: s005_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_identity_risky_signin
+  - s003_t1098_003_azure_role_assignment
+- id: s006_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+  - s001_t1078_004_aws_console_login_success
+- id: s007_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1098_003_azure_role_assignment
+- id: s008_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_identity_risky_signin
+  - s007_t1016
+- id: s009_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1110_003_m365_password_spray
+  - s003_t1098_003_azure_role_assignment
+- id: s010_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1016
+  - s001_t1078_004_aws_console_login_success
+- id: s011_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1021_002
+  - s001_t1078_004_aws_console_login_success
+- id: s012_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s009_t1580

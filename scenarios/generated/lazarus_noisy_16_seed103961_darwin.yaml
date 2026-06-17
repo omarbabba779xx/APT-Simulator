@@ -1,0 +1,133 @@
+name: lazarus_noisy_16_seed103961_darwin
+description: Graph-generated lazarus scenario (noisy, seed=103961)
+target_platforms:
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s004_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s005_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1055
+  - s004_t1070_004
+- id: s006_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+  - s002_t1098_004
+- id: s007_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1003
+  - s002_t1098_004
+- id: s008_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+  - s006_t1110
+- id: s009_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1070_004
+  - s006_t1110
+- id: s010_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1003
+- id: s011_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+  - s001_t1059
+- id: s012_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1070_004
+  - s005_t1003
+- id: s013_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+  - s011_t1083
+- id: s014_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1070_004
+  - s011_t1083
+- id: s015_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+  - s004_t1070_004
+- id: s016_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1003
+  - s004_t1070_004

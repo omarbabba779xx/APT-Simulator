@@ -1,0 +1,19 @@
+name: lazarus_beginner_1_seed639972_windows-linux-darwin
+description: Graph-generated lazarus scenario (beginner, seed=639972)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- beginner
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false

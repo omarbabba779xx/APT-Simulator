@@ -1,0 +1,45 @@
+name: apt29_beginner_5_seed480000_darwin
+description: Graph-generated apt29 scenario (beginner, seed=480000)
+target_platforms:
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- beginner
+- variant
+- darwin
+steps:
+- id: s001_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1070_004
+- id: s003_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1070_004
+- id: s004_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+- id: s005_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003

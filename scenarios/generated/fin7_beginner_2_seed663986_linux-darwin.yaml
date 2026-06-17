@@ -1,0 +1,25 @@
+name: fin7_beginner_2_seed663986_linux-darwin
+description: Graph-generated fin7 scenario (beginner, seed=663986)
+target_platforms:
+- linux
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- beginner
+- variant
+- linux-darwin
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004

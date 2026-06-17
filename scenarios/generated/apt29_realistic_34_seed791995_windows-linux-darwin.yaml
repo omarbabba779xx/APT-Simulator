@@ -1,0 +1,265 @@
+name: apt29_realistic_34_seed791995_windows-linux-darwin
+description: Graph-generated apt29 scenario (realistic, seed=791995)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1078_004_identity_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_aws_console_login_success
+- id: s004_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1078_004_identity_risky_signin
+  - s002_t1078_004_aws_console_login_success
+- id: s005_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1078_004_identity_risky_signin
+- id: s006_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1047_windows_wmi_process_create
+  - s001_t1078_004
+- id: s007_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_aws_console_login_success
+- id: s008_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1078_004_aws_console_login_success
+- id: s009_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1098_003_entra_app_role_grant
+- id: s010_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s011_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1059
+- id: s012_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1059
+- id: s013_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s009_t1543_002
+- id: s014_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1047_windows_wmi_process_create
+- id: s015_t1218_011_windows_rundll32_proxy
+  ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1547_001
+  - s002_t1078_004_aws_console_login_success
+- id: s016_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1078_004_identity_risky_signin
+  - s006_t1059_001_windows_powershell_encoded
+- id: s017_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1047_windows_wmi_process_create
+  - s010_t1547_001
+- id: s018_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s011_t1027
+  - s015_t1218_011_windows_rundll32_proxy
+- id: s019_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s015_t1218_011_windows_rundll32_proxy
+- id: s020_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1098_003_entra_app_role_grant
+- id: s021_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s014_t1112
+  - s001_t1078_004
+- id: s022_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1047_windows_wmi_process_create
+  - s021_t1069_001
+- id: s023_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s013_t1070_004
+  - s003_t1078_004_identity_risky_signin
+- id: s024_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s015_t1218_011_windows_rundll32_proxy
+- id: s025_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1547_001
+  - s022_t1082
+- id: s026_t1580_gcp_project_enumeration
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1078_004_identity_risky_signin
+  - s014_t1112
+- id: s027_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s007_t1053_005
+- id: s028_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s025_t1580
+  - s007_t1053_005
+- id: s029_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s019_t1556_009_okta_mfa_policy_weaken
+  - s004_t1047_windows_wmi_process_create
+- id: s030_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s010_t1547_001
+  - s015_t1218_011_windows_rundll32_proxy
+- id: s031_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s009_t1543_002
+- id: s032_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1098_003_entra_app_role_grant
+- id: s033_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1078_004_identity_risky_signin
+  - s005_t1059
+- id: s034_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1059

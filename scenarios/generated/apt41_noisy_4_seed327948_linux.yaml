@@ -1,0 +1,39 @@
+name: apt41_noisy_4_seed327948_linux
+description: Graph-generated apt41 scenario (noisy, seed=327948)
+target_platforms:
+- linux
+actor: apt41
+tags:
+- generated
+- apt41
+- noisy
+- variant
+- linux
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created
+- id: s003_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110
+- id: s004_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1087_001_linux_local_account_discovery
+  - s002_t1110

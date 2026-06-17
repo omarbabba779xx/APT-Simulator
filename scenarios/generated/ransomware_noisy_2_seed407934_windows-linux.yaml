@@ -1,0 +1,25 @@
+name: ransomware_noisy_2_seed407934_windows-linux
+description: Graph-generated ransomware scenario (noisy, seed=407934)
+target_platforms:
+- windows
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003

@@ -1,0 +1,46 @@
+name: insider_stealthy_5_seed223923_linux-darwin
+description: Graph-generated insider scenario (stealthy, seed=223923)
+target_platforms:
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- stealthy
+- variant
+- linux-darwin
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s004_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1021_001
+- id: s005_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1005

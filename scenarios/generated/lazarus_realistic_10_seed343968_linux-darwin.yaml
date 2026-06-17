@@ -1,0 +1,84 @@
+name: lazarus_realistic_10_seed343968_linux-darwin
+description: Graph-generated lazarus scenario (realistic, seed=343968)
+target_platforms:
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- realistic
+- variant
+- linux-darwin
+steps:
+- id: s001_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s003_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s004_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+  - s002_t1098_004
+- id: s005_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+- id: s006_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+  - s003_t1543_002
+- id: s007_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1098_004
+  - s001_t1053_003_linux_cron_marker
+- id: s008_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s009_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1543_002
+- id: s010_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s008_t1021_001

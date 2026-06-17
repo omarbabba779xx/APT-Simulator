@@ -26,6 +26,7 @@ def test_exact_public_counts() -> None:
     scenarios = load_scenarios_from_dir(cfg.orchestrator.scenarios_dir)
     assert len(registry.all()) == 751
     assert len(scenarios) == 2511
+    assert len(list((ROOT / "scenarios" / "generated").glob("*.yaml"))) == 2500
 
 
 def test_readme_states_exact_counts() -> None:
@@ -34,7 +35,7 @@ def test_readme_states_exact_counts() -> None:
         "751 TTPs",
         "2,511 loaded scenarios",
         "11 classic YAML scenarios",
-        "2,500 scenarios loaded from one declarative pack",
+        "2,500 generated YAML scenarios",
         "15,680,015,680 generable scenario variants",
     ]:
         assert expected in readme

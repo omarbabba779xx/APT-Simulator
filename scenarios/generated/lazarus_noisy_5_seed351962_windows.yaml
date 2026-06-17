@@ -1,0 +1,47 @@
+name: lazarus_noisy_5_seed351962_windows
+description: Graph-generated lazarus scenario (noisy, seed=351962)
+target_platforms:
+- windows
+actor: lazarus
+tags:
+- generated
+- lazarus
+- noisy
+- variant
+- windows
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_003_windows_service_create
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s004_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+  - s002_t1543_003_windows_service_create
+- id: s005_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1070_004
+  - s002_t1543_003_windows_service_create

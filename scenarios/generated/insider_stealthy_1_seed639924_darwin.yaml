@@ -1,0 +1,17 @@
+name: insider_stealthy_1_seed639924_darwin
+description: Graph-generated insider scenario (stealthy, seed=639924)
+target_platforms:
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false

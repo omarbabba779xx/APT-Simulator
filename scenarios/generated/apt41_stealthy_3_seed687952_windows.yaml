@@ -1,0 +1,31 @@
+name: apt41_stealthy_3_seed687952_windows
+description: Graph-generated apt41 scenario (stealthy, seed=687952)
+target_platforms:
+- windows
+actor: apt41
+tags:
+- generated
+- apt41
+- stealthy
+- variant
+- windows
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created
+- id: s003_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created

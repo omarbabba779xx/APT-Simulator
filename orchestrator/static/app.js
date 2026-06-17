@@ -308,7 +308,11 @@ function renderLibraryFilters() {
     unique(items.flatMap((item) => item.platforms || [])),
     "All platforms",
   );
-  fillSelect(byId("library-source"), ["static", "pack", "generated variant"], "All sources");
+  fillSelect(
+    byId("library-source"),
+    unique(items.flatMap((item) => [item.source, item.kind])),
+    "All sources",
+  );
 }
 
 function filteredLibraryItems() {

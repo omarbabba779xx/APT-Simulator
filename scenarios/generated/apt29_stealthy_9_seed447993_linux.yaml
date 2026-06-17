@@ -1,0 +1,73 @@
+name: apt29_stealthy_9_seed447993_linux
+description: Graph-generated apt29 scenario (stealthy, seed=447993)
+target_platforms:
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant
+- id: s003_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1055
+- id: s004_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1110_003_m365_password_spray
+- id: s005_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1110_003_m365_password_spray
+- id: s006_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1016
+- id: s007_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant
+- id: s008_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1110_003_m365_password_spray
+- id: s009_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1055

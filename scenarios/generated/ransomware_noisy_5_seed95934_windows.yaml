@@ -1,0 +1,46 @@
+name: ransomware_noisy_5_seed95934_windows
+description: Graph-generated ransomware scenario (noisy, seed=95934)
+target_platforms:
+- windows
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- windows
+steps:
+- id: s001_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1547_001
+- id: s003_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1110_003_m365_password_spray
+- id: s004_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1033
+- id: s005_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1033
+  - s004_t1087_004_m365_group_enumeration

@@ -1,0 +1,55 @@
+name: fin7_noisy_6_seed375975_windows-linux-darwin
+description: Graph-generated fin7 scenario (noisy, seed=375975)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s003_t1543_003_windows_service_create
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s004_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s005_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1543_002
+- id: s006_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1069_001
+  - s004_t1112

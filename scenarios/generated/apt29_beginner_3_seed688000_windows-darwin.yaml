@@ -1,0 +1,32 @@
+name: apt29_beginner_3_seed688000_windows-darwin
+description: Graph-generated apt29 scenario (beginner, seed=688000)
+target_platforms:
+- windows
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1110
+- id: s003_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1556_009_okta_mfa_policy_weaken

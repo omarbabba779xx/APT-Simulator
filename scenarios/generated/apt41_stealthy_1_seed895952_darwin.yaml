@@ -1,0 +1,17 @@
+name: apt41_stealthy_1_seed895952_darwin
+description: Graph-generated apt41 scenario (stealthy, seed=895952)
+target_platforms:
+- darwin
+actor: apt41
+tags:
+- generated
+- apt41
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false

@@ -1,0 +1,17 @@
+name: ransomware_realistic_1_seed127941_linux
+description: Graph-generated ransomware scenario (realistic, seed=127941)
+target_platforms:
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- linux
+steps:
+- id: s001_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false

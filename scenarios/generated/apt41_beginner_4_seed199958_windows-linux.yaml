@@ -1,0 +1,39 @@
+name: apt41_beginner_4_seed199958_windows-linux
+description: Graph-generated apt41 scenario (beginner, seed=199958)
+target_platforms:
+- windows
+- linux
+actor: apt41
+tags:
+- generated
+- apt41
+- beginner
+- variant
+- windows-linux
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s004_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059

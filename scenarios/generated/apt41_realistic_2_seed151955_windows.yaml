@@ -1,0 +1,24 @@
+name: apt41_realistic_2_seed151955_windows
+description: Graph-generated apt41 scenario (realistic, seed=151955)
+target_platforms:
+- windows
+actor: apt41
+tags:
+- generated
+- apt41
+- realistic
+- variant
+- windows
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027

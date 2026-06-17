@@ -1,0 +1,40 @@
+name: lazarus_realistic_4_seed967969_windows-darwin
+description: Graph-generated lazarus scenario (realistic, seed=967969)
+target_platforms:
+- windows
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- realistic
+- variant
+- windows-darwin
+steps:
+- id: s001_t1098_004
+  ttp: T1098.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s003_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+- id: s004_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_004
+  - s002_t1070_004

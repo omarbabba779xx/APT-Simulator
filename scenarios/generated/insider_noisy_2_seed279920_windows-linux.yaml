@@ -1,0 +1,25 @@
+name: insider_noisy_2_seed279920_windows-linux
+description: Graph-generated insider scenario (noisy, seed=279920)
+target_platforms:
+- windows
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created

@@ -1,0 +1,32 @@
+name: fin7_beginner_3_seed559986_windows-darwin
+description: Graph-generated fin7 scenario (beginner, seed=559986)
+target_platforms:
+- windows
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1098_003_entra_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant
+- id: s003_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_entra_app_role_grant

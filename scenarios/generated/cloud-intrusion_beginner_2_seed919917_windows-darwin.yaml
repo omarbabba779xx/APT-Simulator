@@ -1,0 +1,25 @@
+name: cloud-intrusion_beginner_2_seed919917_windows-darwin
+description: Graph-generated cloud-intrusion scenario (beginner, seed=919917)
+target_platforms:
+- windows
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- beginner
+- variant
+- windows-darwin
+steps:
+- id: s001_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1556_009_okta_mfa_policy_weaken
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1112

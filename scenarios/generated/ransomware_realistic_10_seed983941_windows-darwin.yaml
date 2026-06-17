@@ -1,0 +1,84 @@
+name: ransomware_realistic_10_seed983941_windows-darwin
+description: Graph-generated ransomware scenario (realistic, seed=983941)
+target_platforms:
+- windows
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- windows-darwin
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s003_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_003_linux_cron_marker
+- id: s004_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_003_linux_cron_marker
+- id: s005_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1033
+  - s002_t1053_003_linux_cron_marker
+- id: s006_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s007_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1530
+- id: s008_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1057
+  - s002_t1053_003_linux_cron_marker
+- id: s009_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s006_t1530
+  - s002_t1053_003_linux_cron_marker
+- id: s010_t1048
+  ttp: T1048
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s005_t1087_004_m365_group_enumeration

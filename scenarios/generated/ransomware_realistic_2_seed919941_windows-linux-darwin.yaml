@@ -1,0 +1,26 @@
+name: ransomware_realistic_2_seed919941_windows-linux-darwin
+description: Graph-generated ransomware scenario (realistic, seed=919941)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004

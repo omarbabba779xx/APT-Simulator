@@ -1,0 +1,31 @@
+name: fin7_stealthy_3_seed943980_windows
+description: Graph-generated fin7 scenario (stealthy, seed=943980)
+target_platforms:
+- windows
+actor: fin7
+tags:
+- generated
+- fin7
+- stealthy
+- variant
+- windows
+steps:
+- id: s001_t1059_001_windows_powershell_encoded
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded
+- id: s003_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_001_windows_powershell_encoded

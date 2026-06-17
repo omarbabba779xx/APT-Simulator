@@ -68,6 +68,7 @@ Query sketches are emitted for:
 ```bash
 apt-scenario-builder generate --actor cloud-intrusion --difficulty realistic --steps 12
 apt-campaign build-queue --actors apt29,fin7,cloud-intrusion --repeats 5
+apt-campaign materialize-variants --count 2500 --offset 0 --stride 6272006 --out-dir scenarios/generated
 apt-campaign replay-events --events 10000
 ```
 

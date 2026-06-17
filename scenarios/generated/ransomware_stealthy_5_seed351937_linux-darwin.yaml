@@ -1,0 +1,46 @@
+name: ransomware_stealthy_5_seed351937_linux-darwin
+description: Graph-generated ransomware scenario (stealthy, seed=351937)
+target_platforms:
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- stealthy
+- variant
+- linux-darwin
+steps:
+- id: s001_t1087_004_m365_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1087_004_m365_group_enumeration
+- id: s003_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1087_004_m365_group_enumeration
+- id: s004_t1105_linux_curl_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1530
+- id: s005_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1530

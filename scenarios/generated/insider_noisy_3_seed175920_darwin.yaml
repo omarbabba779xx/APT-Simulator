@@ -1,0 +1,31 @@
+name: insider_noisy_3_seed175920_darwin
+description: Graph-generated insider scenario (noisy, seed=175920)
+target_platforms:
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1016
+- id: s003_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1016

@@ -1,0 +1,45 @@
+name: fin7_beginner_5_seed351986_darwin
+description: Graph-generated fin7 scenario (beginner, seed=351986)
+target_platforms:
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- beginner
+- variant
+- darwin
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1003
+- id: s004_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1016
+- id: s005_t1580
+  ttp: T1580
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004

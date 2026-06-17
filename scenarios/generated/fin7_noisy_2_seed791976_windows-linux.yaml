@@ -1,0 +1,25 @@
+name: fin7_noisy_2_seed791976_windows-linux
+description: Graph-generated fin7 scenario (noisy, seed=791976)
+target_platforms:
+- windows
+- linux
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059

@@ -1,0 +1,45 @@
+name: apt29_noisy_5_seed607990_windows
+description: Graph-generated apt29 scenario (noisy, seed=607990)
+target_platforms:
+- windows
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- windows
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1112_windows_registry_policy_change
+  ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027
+- id: s003_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027
+- id: s004_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1112_windows_registry_policy_change
+- id: s005_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1112_windows_registry_policy_change

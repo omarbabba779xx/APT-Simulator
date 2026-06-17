@@ -1,0 +1,33 @@
+name: apt29_realistic_3_seed431996_windows-linux-darwin
+description: Graph-generated apt29 scenario (realistic, seed=431996)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1047_windows_wmi_process_create
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1047_windows_wmi_process_create
+- id: s003_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1053_005

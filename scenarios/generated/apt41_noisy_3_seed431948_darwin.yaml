@@ -1,0 +1,31 @@
+name: apt41_noisy_3_seed431948_darwin
+description: Graph-generated apt41 scenario (noisy, seed=431948)
+target_platforms:
+- darwin
+actor: apt41
+tags:
+- generated
+- apt41
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1098_003_azure_role_assignment
+  ttp: T1098.003:AZURE_ROLE_ASSIGNMENT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment
+- id: s003_t1567_002_saas_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_003_azure_role_assignment

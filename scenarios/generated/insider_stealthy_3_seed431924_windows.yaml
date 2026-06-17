@@ -1,0 +1,31 @@
+name: insider_stealthy_3_seed431924_windows
+description: Graph-generated insider scenario (stealthy, seed=431924)
+target_platforms:
+- windows
+actor: insider
+tags:
+- generated
+- insider
+- stealthy
+- variant
+- windows
+steps:
+- id: s001_t1078_004
+  ttp: T1078.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004
+- id: s003_t1069_001
+  ttp: T1069.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004

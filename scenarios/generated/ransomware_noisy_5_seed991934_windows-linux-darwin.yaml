@@ -1,0 +1,48 @@
+name: ransomware_noisy_5_seed991934_windows-linux-darwin
+description: Graph-generated ransomware scenario (noisy, seed=991934)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s003_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s004_t1110_003_m365_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+  - s003_t1112
+- id: s005_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker

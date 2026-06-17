@@ -1,0 +1,24 @@
+name: lazarus_stealthy_2_seed919966_linux
+description: Graph-generated lazarus scenario (stealthy, seed=919966)
+target_platforms:
+- linux
+actor: lazarus
+tags:
+- generated
+- lazarus
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002

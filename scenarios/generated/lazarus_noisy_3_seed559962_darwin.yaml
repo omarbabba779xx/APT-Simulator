@@ -1,0 +1,31 @@
+name: lazarus_noisy_3_seed559962_darwin
+description: Graph-generated lazarus scenario (noisy, seed=559962)
+target_platforms:
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1059_004_linux_shell_history_disable
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_004_linux_shell_history_disable
+- id: s003_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059_004_linux_shell_history_disable

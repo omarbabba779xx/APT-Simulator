@@ -1,0 +1,18 @@
+name: fin7_noisy_1_seed895976_windows-darwin
+description: Graph-generated fin7 scenario (noisy, seed=895976)
+target_platforms:
+- windows
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- noisy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false

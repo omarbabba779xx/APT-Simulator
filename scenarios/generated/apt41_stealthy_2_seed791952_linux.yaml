@@ -1,0 +1,24 @@
+name: apt41_stealthy_2_seed791952_linux
+description: Graph-generated apt41 scenario (stealthy, seed=791952)
+target_platforms:
+- linux
+actor: apt41
+tags:
+- generated
+- apt41
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1033

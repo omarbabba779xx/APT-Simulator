@@ -1,0 +1,26 @@
+name: insider_realistic_2_seed791927_windows-linux-darwin
+description: Graph-generated insider scenario (realistic, seed=791927)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: insider
+tags:
+- generated
+- insider
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1543_002

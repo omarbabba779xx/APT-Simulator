@@ -1,0 +1,47 @@
+name: fin7_realistic_5_seed95982_windows-darwin
+description: Graph-generated fin7 scenario (realistic, seed=95982)
+target_platforms:
+- windows
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- realistic
+- variant
+- windows-darwin
+steps:
+- id: s001_t1112_windows_registry_policy_change
+  ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1112_windows_registry_policy_change
+- id: s003_t1213_003_github_private_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1112_windows_registry_policy_change
+- id: s004_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s003_t1213_003_github_private_repo_clone
+- id: s005_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s004_t1530
+  - s003_t1213_003_github_private_repo_clone

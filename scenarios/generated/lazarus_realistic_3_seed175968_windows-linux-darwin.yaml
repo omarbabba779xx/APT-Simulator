@@ -1,0 +1,33 @@
+name: lazarus_realistic_3_seed175968_windows-linux-darwin
+description: Graph-generated lazarus scenario (realistic, seed=175968)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1053_003_linux_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1053_003_linux_cron_marker
+- id: s003_t1112_windows_registry_policy_change
+  ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1070_004

@@ -1,0 +1,47 @@
+name: lazarus_realistic_5_seed863969_windows-linux
+description: Graph-generated lazarus scenario (realistic, seed=863969)
+target_platforms:
+- windows
+- linux
+actor: lazarus
+tags:
+- generated
+- lazarus
+- realistic
+- variant
+- windows-linux
+steps:
+- id: s001_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1070_002_linux_log_clear
+  ttp: T1070.002:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059
+- id: s003_t1087_001_linux_local_account_discovery
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1070_002_linux_log_clear
+- id: s004_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1070_002_linux_log_clear
+  - s003_t1087_001_linux_local_account_discovery
+- id: s005_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1059

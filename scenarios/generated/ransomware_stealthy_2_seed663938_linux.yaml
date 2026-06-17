@@ -1,0 +1,24 @@
+name: ransomware_stealthy_2_seed663938_linux
+description: Graph-generated ransomware scenario (stealthy, seed=663938)
+target_platforms:
+- linux
+actor: ransomware
+tags:
+- generated
+- ransomware
+- stealthy
+- variant
+- linux
+steps:
+- id: s001_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1082

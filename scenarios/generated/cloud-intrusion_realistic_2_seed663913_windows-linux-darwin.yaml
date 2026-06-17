@@ -1,0 +1,26 @@
+name: cloud-intrusion_realistic_2_seed663913_windows-linux-darwin
+description: Graph-generated cloud-intrusion scenario (realistic, seed=663913)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1611_kubernetes_pod_create
+  ttp: T1611:KUBERNETES_POD_CREATE
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1611_kubernetes_pod_create

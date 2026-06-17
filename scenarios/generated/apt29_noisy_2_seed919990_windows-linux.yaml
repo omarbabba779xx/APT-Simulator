@@ -1,0 +1,25 @@
+name: apt29_noisy_2_seed919990_windows-linux
+description: Graph-generated apt29 scenario (noisy, seed=919990)
+target_platforms:
+- windows
+- linux
+actor: apt29
+tags:
+- generated
+- apt29
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1070_004

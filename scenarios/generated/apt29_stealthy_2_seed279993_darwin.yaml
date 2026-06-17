@@ -1,0 +1,24 @@
+name: apt29_stealthy_2_seed279993_darwin
+description: Graph-generated apt29 scenario (stealthy, seed=279993)
+target_platforms:
+- darwin
+actor: apt29
+tags:
+- generated
+- apt29
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027

@@ -1,0 +1,33 @@
+name: fin7_realistic_3_seed303982_windows-linux-darwin
+description: Graph-generated fin7 scenario (realistic, seed=303982)
+target_platforms:
+- windows
+- linux
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- realistic
+- variant
+- windows-linux-darwin
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created
+- id: s003_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1021_002

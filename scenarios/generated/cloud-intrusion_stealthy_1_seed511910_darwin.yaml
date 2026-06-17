@@ -1,0 +1,17 @@
+name: cloud-intrusion_stealthy_1_seed511910_darwin
+description: Graph-generated cloud-intrusion scenario (stealthy, seed=511910)
+target_platforms:
+- darwin
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false

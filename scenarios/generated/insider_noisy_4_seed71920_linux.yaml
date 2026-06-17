@@ -1,0 +1,38 @@
+name: insider_noisy_4_seed71920_linux
+description: Graph-generated insider scenario (noisy, seed=71920)
+target_platforms:
+- linux
+actor: insider
+tags:
+- generated
+- insider
+- noisy
+- variant
+- linux
+steps:
+- id: s001_t1213_slack_channel_export
+  ttp: T1213:SLACK_CHANNEL_EXPORT
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1530_google_drive_bulk_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1213_slack_channel_export
+- id: s003_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1213_slack_channel_export
+- id: s004_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1213_slack_channel_export

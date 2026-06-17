@@ -1,0 +1,25 @@
+name: cloud-intrusion_noisy_2_seed151906_windows-linux
+description: Graph-generated cloud-intrusion scenario (noisy, seed=151906)
+target_platforms:
+- windows
+- linux
+actor: cloud-intrusion
+tags:
+- generated
+- cloud-intrusion
+- noisy
+- variant
+- windows-linux
+steps:
+- id: s001_t1078_004_aws_console_login_success
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1053_005
+  ttp: T1053.005
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1078_004_aws_console_login_success

@@ -1,0 +1,45 @@
+name: lazarus_beginner_5_seed223972_darwin
+description: Graph-generated lazarus scenario (beginner, seed=223972)
+target_platforms:
+- darwin
+actor: lazarus
+tags:
+- generated
+- lazarus
+- beginner
+- variant
+- darwin
+steps:
+- id: s001_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1016
+  ttp: T1016
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003
+- id: s003_t1530_aws_s3_object_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1016
+- id: s004_t1560
+  ttp: T1560
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003
+- id: s005_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1003

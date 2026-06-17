@@ -1,0 +1,18 @@
+name: ransomware_noisy_1_seed511934_windows-darwin
+description: Graph-generated ransomware scenario (noisy, seed=511934)
+target_platforms:
+- windows
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- windows-darwin
+steps:
+- id: s001_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+  abort_on_fail: false

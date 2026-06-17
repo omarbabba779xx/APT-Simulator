@@ -1,0 +1,24 @@
+name: fin7_stealthy_2_seed151979_darwin
+description: Graph-generated fin7 scenario (stealthy, seed=151979)
+target_platforms:
+- darwin
+actor: fin7
+tags:
+- generated
+- fin7
+- stealthy
+- variant
+- darwin
+steps:
+- id: s001_t1098_005_saas_token_created
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1098_005_saas_token_created

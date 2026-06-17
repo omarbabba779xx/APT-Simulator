@@ -1,0 +1,31 @@
+name: ransomware_noisy_3_seed303934_darwin
+description: Graph-generated ransomware scenario (noisy, seed=303934)
+target_platforms:
+- darwin
+actor: ransomware
+tags:
+- generated
+- ransomware
+- noisy
+- variant
+- darwin
+steps:
+- id: s001_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+  abort_on_fail: false
+- id: s002_t1059_004_linux_shell_history_disable
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s001_t1027
+- id: s003_t1530
+  ttp: T1530
+  params:
+    dry_run: true
+  abort_on_fail: false
+  depends_on:
+  - s002_t1059_004_linux_shell_history_disable

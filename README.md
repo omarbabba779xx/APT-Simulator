@@ -9,12 +9,12 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 - 751 TTPs
 - 2,511 loaded scenarios
 - 11 classic YAML scenarios
-- 2,500 scenarios loaded from one declarative pack
+- 2,500 generated YAML scenarios
 - 15,680,015,680 generable scenario variants
 - 751 Sigma rules
 - 14 ATT&CK tactics covered
 
-The 2,511 loaded scenarios are available through the orchestrator and dashboard. The 15,680,015,680 variants are deterministic variants that can be generated or previewed by offset and stride; they are not stored as individual files.
+The 2,511 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
 
 ## What This Project Does
 
@@ -29,7 +29,7 @@ The 2,511 loaded scenarios are available through the orchestrator and dashboard.
 
 - It is not an offensive framework.
 - It is not intended for systems without written authorization.
-- It does not store billions of scenario files.
+- It stores the complete 2,511-scenario loaded library; larger variant batches are generated on demand.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
 
@@ -48,7 +48,7 @@ The 2,511 loaded scenarios are available through the orchestrator and dashboard.
 orchestrator/   FastAPI app, planner, dashboard API, reports, scenario loader
 agent/          Beacon agent and local runner
 ttps/           TTP registry, Python TTPs, catalog-backed TTP packs
-scenarios/      11 classic scenarios plus generated_variant_pack.yaml
+scenarios/      11 classic YAML scenarios plus 2,500 generated YAML scenarios
 detection/      Sigma rules, coverage metadata, fixture/query export targets
 profiles/       Actor profile inputs
 config/         Default runtime and safety configuration
@@ -190,6 +190,16 @@ python -m orchestrator.campaign build-variants \
   --out scenarios/generated_variants.yaml
 ```
 
+Materialize generated variants as individual YAML scenario files:
+
+```bash
+python -m orchestrator.campaign materialize-variants \
+  --count 2500 \
+  --offset 0 \
+  --stride 6272006 \
+  --out-dir scenarios/generated
+```
+
 Export Sigma rules:
 
 ```bash
@@ -244,13 +254,12 @@ Conformance tests verify:
 
 ## Loaded Scenario Model
 
-The repository keeps source control compact:
+The repository stores the complete loaded scenario library:
 
 - `scenarios/*.yaml` contains 11 classic scenario files.
-- `scenarios/generated_variant_pack.yaml` declares a 2,500-scenario pack.
-- The loader expands that pack at startup into selectable scenarios.
-
-This is why the dashboard shows 2,511 loaded scenarios while the repository does not contain 2,511 separate scenario files.
+- `scenarios/generated/*.yaml` contains 2,500 generated scenario files.
+- Each generated file is a complete scenario DAG with actor, target platforms, tags, steps, TTP IDs, parameters, and dependencies.
+- The loader reads the full directory tree and loads all 2,511 scenarios directly.
 
 ## License
 
