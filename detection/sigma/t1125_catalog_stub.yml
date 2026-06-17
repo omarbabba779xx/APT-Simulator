@@ -1,0 +1,17 @@
+title: Video Capture Marker
+id: stub-t1125
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1125
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1125/
+tags:
+- attack.t1125

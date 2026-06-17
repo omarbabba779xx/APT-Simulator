@@ -1,0 +1,17 @@
+title: Communication Through Removable Media Marker
+id: stub-t1092
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1092
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1092/
+tags:
+- attack.t1092

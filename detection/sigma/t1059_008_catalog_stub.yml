@@ -1,0 +1,17 @@
+title: Network Device CLI Marker
+id: stub-t1059_008
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1059.008
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1059/008/
+tags:
+- attack.t1059.008

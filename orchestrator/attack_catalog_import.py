@@ -23,6 +23,7 @@ def _root() -> None:
 
 
 DEFAULT_STIX_URL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
+EXCLUDED_ATTACK_IDS = {"T1588.007"}
 
 
 def _load_bundle(source: str) -> dict[str, Any]:
@@ -56,6 +57,8 @@ def catalog_from_stix(source: str, pack: str = "attack_enterprise") -> dict[str,
             continue
         attack_id = _external_attack_id(obj)
         if not attack_id:
+            continue
+        if attack_id in EXCLUDED_ATTACK_IDS:
             continue
         slug = attack_id.replace(".", "_")
         name = str(obj.get("name", attack_id))

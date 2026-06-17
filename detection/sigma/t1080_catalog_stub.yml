@@ -1,0 +1,17 @@
+title: Taint Shared Content Marker
+id: stub-t1080
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1080
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1080/
+tags:
+- attack.t1080

@@ -1,0 +1,17 @@
+title: Search Open Websites/Domains Marker
+id: stub-t1593
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1593
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1593/
+tags:
+- attack.t1593

@@ -1,0 +1,17 @@
+title: Compression Marker
+id: stub-t1027_015
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1027.015
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1027/015/
+tags:
+- attack.t1027.015

@@ -1,0 +1,17 @@
+title: XDG Autostart Entries Marker
+id: stub-t1547_013
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1547.013
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1547/013/
+tags:
+- attack.t1547.013

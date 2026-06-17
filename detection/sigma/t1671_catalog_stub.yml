@@ -1,0 +1,17 @@
+title: Cloud Application Integration Marker
+id: stub-t1671
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1671
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1671/
+tags:
+- attack.t1671

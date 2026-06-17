@@ -1,0 +1,17 @@
+title: Group Policy Preferences Marker
+id: stub-t1552_006
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1552.006
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1552/006/
+tags:
+- attack.t1552.006

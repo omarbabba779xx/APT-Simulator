@@ -1,0 +1,17 @@
+title: Device Registration Marker
+id: stub-t1098_005
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1098.005
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1098/005/
+tags:
+- attack.t1098.005

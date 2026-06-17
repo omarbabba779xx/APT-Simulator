@@ -23,7 +23,11 @@ If `APT_SIM_SAFETY_TOKEN` is set, the run params must include the same
 
 ## Scaling ATT&CK Coverage
 
-Generate marker-only stubs from ATT&CK Enterprise STIX:
+The repository includes `ttps/catalog/attack_enterprise.yaml`, generated from
+ATT&CK Enterprise STIX, so the registry currently loads more than 625 safe
+TTPs/variants.
+
+Refresh marker-only stubs from ATT&CK Enterprise STIX:
 
 ```bash
 apt-attack-import import-stix --out ttps/catalog/attack_enterprise.yaml

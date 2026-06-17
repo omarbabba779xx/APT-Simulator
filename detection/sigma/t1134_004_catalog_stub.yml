@@ -1,0 +1,17 @@
+title: Parent PID Spoofing Marker
+id: stub-t1134_004
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1134.004
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1134/004/
+tags:
+- attack.t1134.004

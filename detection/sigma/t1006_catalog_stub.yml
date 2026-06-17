@@ -1,0 +1,17 @@
+title: Direct Volume Access Marker
+id: stub-t1006
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1006
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1006/
+tags:
+- attack.t1006

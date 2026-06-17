@@ -1,0 +1,17 @@
+title: Archive via Utility Marker
+id: stub-t1560_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1560.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1560/001/
+tags:
+- attack.t1560.001

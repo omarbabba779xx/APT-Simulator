@@ -1,0 +1,17 @@
+title: Acquire Infrastructure Marker
+id: stub-t1583
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1583
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1583/
+tags:
+- attack.t1583

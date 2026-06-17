@@ -12,9 +12,14 @@ from ttps.catalog import catalog_summary
 
 def test_catalog_packs_registered() -> None:
     summary = catalog_summary()
-    assert summary["items"] >= 25
+    assert summary["items"] >= 625
+    assert summary["packs"]["attack_enterprise"] >= 625
     for pack in ["windows", "linux", "cloud", "identity", "saas"]:
         assert summary["packs"][pack] >= 5
+
+
+def test_registry_has_625_plus_ttps() -> None:
+    assert len(registry.all()) >= 625
 
 
 def test_catalog_ttp_runs_marker_only(tmp_path: Path) -> None:

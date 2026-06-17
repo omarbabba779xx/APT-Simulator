@@ -113,7 +113,7 @@ docs/           Architecture + threat model
 | Impact               | Data Encrypted for Impact (sim)    | T1486      | all                   |
 
 Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
-55 TTPs and variants across 12 tactics. Full roadmap in `docs/ROADMAP.md`.
+751 TTPs and variants across 14 tactics. Full roadmap in `docs/ROADMAP.md`.
 
 ## Key Features
 
@@ -125,7 +125,7 @@ Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
 - **Live Audit Feed** — Dashboard WebSocket panel shows every audit event in real time.
 - **Step Detail Modal** — Click any run row in the dashboard to see per-step timing, output, and errors.
 - **Cloud Account + Storage Simulation** — `scenarios/cloud_account_storage_sim.yaml` generates CloudTrail-style markers for T1078.004 and T1530 without contacting cloud providers.
-- **Catalog-Driven TTP Packs** — `ttps/catalog/*.yaml` adds Windows, Linux, cloud, identity, and SaaS marker-only variants without one Python file per variant.
+- **Catalog-Driven TTP Packs** — `ttps/catalog/*.yaml` adds ATT&CK Enterprise plus Windows, Linux, cloud, identity, and SaaS marker-only variants without one Python file per variant.
 - **Detection Engineering Exports** — `apt-detection-matrix fixtures` emits raw, ECS, and OCSF golden telemetry; `apt-detection-matrix queries` emits Splunk, Elastic, Sentinel, and Chronicle query sketches.
 - **Graph Scenario Builder** — `apt-scenario-builder generate --actor cloud-intrusion --difficulty realistic` creates DAG scenarios with dry-run params by default.
 

@@ -1,0 +1,17 @@
+title: Exclusive Control Marker
+id: stub-t1668
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1668
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1668/
+tags:
+- attack.t1668

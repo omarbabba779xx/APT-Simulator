@@ -1,0 +1,17 @@
+title: Subvert Trust Controls Marker
+id: stub-t1553
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1553
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1553/
+tags:
+- attack.t1553

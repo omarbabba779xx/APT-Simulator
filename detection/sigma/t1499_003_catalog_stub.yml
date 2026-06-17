@@ -1,0 +1,17 @@
+title: Application Exhaustion Flood Marker
+id: stub-t1499_003
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1499.003
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1499/003/
+tags:
+- attack.t1499.003

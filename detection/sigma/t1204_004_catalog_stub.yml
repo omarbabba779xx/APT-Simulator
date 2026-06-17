@@ -1,0 +1,17 @@
+title: Malicious Copy and Paste Marker
+id: stub-t1204_004
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1204.004
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1204/004/
+tags:
+- attack.t1204.004

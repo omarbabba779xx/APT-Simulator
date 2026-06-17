@@ -1,0 +1,17 @@
+title: Compromise Software Dependencies and Development Tools Marker
+id: stub-t1195_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1195.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1195/001/
+tags:
+- attack.t1195.001

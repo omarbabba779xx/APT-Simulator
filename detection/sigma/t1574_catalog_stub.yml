@@ -1,0 +1,17 @@
+title: Hijack Execution Flow Marker
+id: stub-t1574
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1574
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1574/
+tags:
+- attack.t1574

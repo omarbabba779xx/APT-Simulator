@@ -1,0 +1,17 @@
+title: Token Impersonation/Theft Marker
+id: stub-t1134_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1134.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1134/001/
+tags:
+- attack.t1134.001

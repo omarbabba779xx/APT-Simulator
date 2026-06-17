@@ -1,0 +1,17 @@
+title: Network Provider DLL Marker
+id: stub-t1556_008
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1556.008
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1556/008/
+tags:
+- attack.t1556.008

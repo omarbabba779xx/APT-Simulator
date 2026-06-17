@@ -1,0 +1,17 @@
+title: Exploitation for Stealth Marker
+id: stub-t1211
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1211
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1211/
+tags:
+- attack.t1211

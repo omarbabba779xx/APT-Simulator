@@ -1,0 +1,17 @@
+title: Ingress Tool Transfer Marker
+id: stub-t1105
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1105
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105

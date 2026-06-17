@@ -1,0 +1,17 @@
+title: Windows Credential Manager Marker
+id: stub-t1555_004
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1555.004
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1555/004/
+tags:
+- attack.t1555.004

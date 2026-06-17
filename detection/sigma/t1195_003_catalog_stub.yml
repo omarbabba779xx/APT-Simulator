@@ -1,0 +1,17 @@
+title: Compromise Hardware Supply Chain Marker
+id: stub-t1195_003
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1195.003
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1195/003/
+tags:
+- attack.t1195.003

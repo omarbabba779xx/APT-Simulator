@@ -1,0 +1,17 @@
+title: Exfiltration Over Web Service Marker
+id: stub-t1567
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1567
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1567/
+tags:
+- attack.t1567

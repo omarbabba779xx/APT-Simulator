@@ -1,0 +1,17 @@
+title: Data Destruction Marker
+id: stub-t1485
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1485
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1485/
+tags:
+- attack.t1485

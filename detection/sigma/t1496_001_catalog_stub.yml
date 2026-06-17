@@ -1,0 +1,17 @@
+title: Compute Hijacking Marker
+id: stub-t1496_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1496.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1496/001/
+tags:
+- attack.t1496.001

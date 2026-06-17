@@ -1,0 +1,17 @@
+title: Digital Certificates Marker
+id: stub-t1588_004
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1588.004
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1588/004/
+tags:
+- attack.t1588.004

@@ -1,0 +1,17 @@
+title: Malvertising Marker
+id: stub-t1583_008
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1583.008
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1583/008/
+tags:
+- attack.t1583.008
