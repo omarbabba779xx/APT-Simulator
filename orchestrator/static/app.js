@@ -1,303 +1,644 @@
 "use strict";
 
-const POLL_MS = 3000;
-const MAX_FEED_ENTRIES = 60;
+const MAX_CATALOG_ROWS = 220;
+const MAX_FEED_ENTRIES = 80;
+const LIVE_REFRESH_MS = 6000;
 
-async function api(path, opts) {
-  const r = await fetch(path, opts);
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return r.json();
+const state = {
+  agents: {},
+  health: null,
+  killswitch: null,
+  scenarios: {},
+  runs: [],
+  ttps: [],
+  matrix: null,
+  scores: {},
+  preview: null,
+  feed: [],
+};
+
+const byId = (id) => document.getElementById(id);
+const clear = (node) => {
+  while (node.firstChild) node.removeChild(node.firstChild);
+};
+
+function node(tag, props = {}, children = []) {
+  const element = document.createElement(tag);
+  for (const [key, value] of Object.entries(props)) {
+    if (key === "class") element.className = value;
+    else if (key === "text") element.textContent = value;
+    else if (key === "title") element.title = value;
+    else if (key === "onclick") element.addEventListener("click", value);
+    else if (key === "dataset") {
+      for (const [name, dataValue] of Object.entries(value)) element.dataset[name] = dataValue;
+    } else element.setAttribute(key, value);
+  }
+  const items = Array.isArray(children) ? children : [children];
+  for (const child of items) {
+    if (child == null) continue;
+    element.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
+  }
+  return element;
 }
 
-function fmtTs(ts) {
-  if (!ts) return "—";
-  const d = typeof ts === "number" ? new Date(ts * 1000) : new Date(ts);
-  return d.toLocaleString();
-}
-
-function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
-
-function el(tag, props = {}, children = []) {
-  const e = document.createElement(tag);
-  Object.entries(props).forEach(([k, v]) => {
-    if (k === "class") e.className = v;
-    else if (k === "onclick") e.addEventListener("click", v);
-    else if (k === "html") e.innerHTML = v;
-    else e.setAttribute(k, v);
-  });
-  (Array.isArray(children) ? children : [children]).forEach(c => {
-    if (c == null) return;
-    e.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
-  });
-  return e;
-}
-
-async function refreshHealth() {
-  const badge = document.getElementById("health-badge");
-  const text = document.getElementById("health-text");
-  const ksBtn = document.getElementById("killswitch-btn");
-  try {
-    const h = await api("/healthz");
-    const ks = await api("/killswitch");
-    if (ks.active) {
-      badge.className = "badge err";
-      text.textContent = `KILLSWITCH ACTIVE — ${ks.reason || "manual"}`;
-      ksBtn.textContent = "DISENGAGE KILLSWITCH";
-      ksBtn.onclick = async () => { await fetch("/killswitch/disengage", { method: "POST" }); refreshAll(); };
-    } else {
-      badge.className = "badge ok";
-      text.textContent = `OK · ${h.scenarios_loaded} scenarios · ${h.agents_registered} agents`;
-      ksBtn.textContent = "ENGAGE KILLSWITCH";
-      ksBtn.onclick = async () => {
-        if (!confirm("Engage killswitch? All running scenarios will abort.")) return;
-        await fetch("/killswitch/engage", { method: "POST" });
-        refreshAll();
-      };
+async function api(path, options = {}) {
+  const response = await fetch(path, options);
+  if (!response.ok) {
+    let message = response.statusText;
+    try {
+      const body = await response.json();
+      message = body.detail || message;
+    } catch (_error) {
+      message = response.statusText;
     }
-  } catch (e) {
-    badge.className = "badge err";
-    text.textContent = `unreachable: ${e.message}`;
+    throw new Error(`${response.status} ${message}`);
+  }
+  return response.json();
+}
+
+function postJson(path, body) {
+  return api(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+function fmtTs(value) {
+  if (!value) return "-";
+  const date = typeof value === "number" ? new Date(value * 1000) : new Date(value);
+  if (Number.isNaN(date.getTime())) return "-";
+  return date.toLocaleString();
+}
+
+function setStatus(label, kind = "neutral") {
+  const element = byId("preview-status");
+  if (!element) return;
+  element.className = `pill ${kind}`;
+  element.textContent = label;
+}
+
+function optionValue(value) {
+  return value == null || value === "" ? "unknown" : String(value);
+}
+
+function fillSelect(select, values, allLabel = "All") {
+  const current = select.value;
+  clear(select);
+  select.appendChild(node("option", { value: "" }, allLabel));
+  for (const value of values) {
+    select.appendChild(node("option", { value }, value));
+  }
+  if ([...select.options].some((option) => option.value === current)) select.value = current;
+}
+
+function unique(items) {
+  return [...new Set(items.map(optionValue))].sort((a, b) => a.localeCompare(b));
+}
+
+function ttpLookup() {
+  const out = new Map();
+  for (const ttp of state.ttps) out.set(ttp.attack_id, ttp);
+  return out;
+}
+
+async function refreshLive() {
+  const tasks = [
+    api("/healthz").then((data) => { state.health = data; }),
+    api("/killswitch").then((data) => { state.killswitch = data; }),
+    api("/agents").then((data) => { state.agents = data; }),
+    api("/runs").then((data) => { state.runs = data; }),
+  ];
+  await Promise.allSettled(tasks);
+  renderHealth();
+  renderAgents();
+  renderRuns();
+  renderOverview();
+}
+
+async function refreshStatic() {
+  const tasks = [
+    api("/scenarios").then((data) => { state.scenarios = data; }),
+    api("/ttps").then((data) => { state.ttps = data; }),
+    api("/coverage/matrix").then((data) => { state.matrix = data; }),
+    api("/detections/score").then((data) => { state.scores = data; }),
+  ];
+  await Promise.allSettled(tasks);
+  renderScenarioSelect();
+  renderCatalogFilters();
+  renderCatalog();
+  renderDetection();
+  renderOverview();
+}
+
+function renderHealth() {
+  const health = state.health;
+  const killswitch = state.killswitch;
+  const line = byId("health-line");
+  const button = byId("killswitch-button");
+  if (!line || !button) return;
+
+  if (!health) {
+    line.textContent = "System unavailable";
+    button.className = "danger";
+    return;
+  }
+
+  const agents = health.agents_registered ?? Object.keys(state.agents).length;
+  const scenarios = health.scenarios_loaded ?? Object.keys(state.scenarios).length;
+  if (killswitch?.active) {
+    line.textContent = `Killswitch active - ${killswitch.reason || "manual"}`;
+    button.textContent = "Disengage";
+    button.className = "danger";
+  } else {
+    line.textContent = `Ready - ${scenarios} scenarios - ${agents} agents`;
+    button.textContent = "Killswitch";
+    button.className = "danger";
   }
 }
 
-async function refreshAgents() {
-  const tbody = document.querySelector("#agents-table tbody");
-  const empty = document.getElementById("agents-empty");
-  try {
-    const data = await api("/agents");
-    const rows = Object.entries(data);
-    clear(tbody);
-    empty.hidden = rows.length > 0;
-    for (const [id, a] of rows) {
-      tbody.appendChild(el("tr", {}, [
-        el("td", { class: "mono" }, id),
-        el("td", {}, a.hostname),
-        el("td", {}, a.platform),
-        el("td", {}, String(a.pid)),
-        el("td", {}, fmtTs(a.last_seen)),
-      ]));
-    }
-  } catch (e) { /* swallow */ }
+function renderMetrics() {
+  const grid = byId("metrics-grid");
+  if (!grid) return;
+  clear(grid);
+  const matrix = state.matrix || {};
+  const runs = state.runs || [];
+  const agents = Object.keys(state.agents || {}).length;
+  const scored = Object.keys(state.scores || {}).length;
+  const metrics = [
+    ["TTPs", matrix.total ?? state.ttps.length, "Coverage catalog"],
+    ["Sigma", matrix.with_rules ?? scored, "Rules linked"],
+    ["Rule Fit", `${matrix.rule_coverage_percent ?? 0}%`, "Rule coverage"],
+    ["Scenarios", Object.keys(state.scenarios || {}).length, "Loaded"],
+    ["Runs", runs.length, "In memory"],
+    ["Agents", agents, "Registered"],
+  ];
+  for (const [label, value, hint] of metrics) {
+    grid.appendChild(node("div", { class: "metric" }, [
+      node("span", { class: "metric-value" }, String(value)),
+      node("span", { class: "metric-label" }, label),
+      node("span", { class: "metric-hint" }, hint),
+    ]));
+  }
 }
 
-async function refreshScenarios() {
-  const list = document.getElementById("scenarios-list");
+function renderBars(containerId, rows) {
+  const container = byId(containerId);
+  if (!container) return;
+  clear(container);
+  if (!rows.length) {
+    container.appendChild(node("p", { class: "empty" }, "No data"));
+    return;
+  }
+  const max = Math.max(...rows.map((row) => row.count), 1);
+  for (const row of rows) {
+    const width = Math.max(4, Math.round((row.count / max) * 100));
+    container.appendChild(node("div", { class: "bar-row" }, [
+      node("div", { class: "bar-label" }, [
+        node("span", {}, row.label),
+        node("strong", {}, row.value || String(row.count)),
+      ]),
+      node("div", { class: "bar-track" }, node("span", { style: `width:${width}%` })),
+    ]));
+  }
+}
+
+function renderOverview() {
+  renderMetrics();
+  const matrix = state.matrix || {};
+  const tactics = Object.entries(matrix.tactics || {})
+    .map(([label, data]) => ({
+      label,
+      count: data.total || 0,
+      value: `${data.with_rules || 0}/${data.total || 0}`,
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10);
+  const tiers = Object.entries(matrix.safety_tiers || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+
+  renderBars("tactic-bars", tactics);
+  renderBars("tier-bars", tiers);
+  byId("coverage-label").textContent = `${matrix.rule_coverage_percent ?? 0}%`;
+
+  const activeRuns = state.runs.filter((run) => run.status === "running").length;
+  byId("run-label").textContent = `${activeRuns} active`;
+  byId("agent-label").textContent = `${Object.keys(state.agents).length} online`;
+
+  const overviewRuns = byId("overview-runs");
+  clear(overviewRuns);
+  for (const run of [...state.runs].sort((a, b) => b.started_at - a.started_at).slice(0, 8)) {
+    overviewRuns.appendChild(node("tr", { onclick: () => showRunDetail(run.id) }, [
+      node("td", { class: "mono" }, run.id),
+      node("td", {}, run.scenario),
+      node("td", {}, statusPill(run.status)),
+      node("td", {}, stepDots(run.step_summary || {})),
+    ]));
+  }
+  if (!state.runs.length) overviewRuns.appendChild(emptyRow(4, "No runs"));
+}
+
+function renderAgents() {
+  const tbody = byId("agents-table");
+  if (!tbody) return;
+  clear(tbody);
+  const entries = Object.entries(state.agents || {});
+  for (const [id, agent] of entries) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono" }, id),
+      node("td", {}, agent.hostname || "-"),
+      node("td", {}, agent.platform || "-"),
+      node("td", {}, fmtTs(agent.last_seen)),
+    ]));
+  }
+  if (!entries.length) tbody.appendChild(emptyRow(4, "No agents"));
+}
+
+function renderScenarioSelect() {
+  const select = byId("scenario-select");
+  if (!select) return;
+  clear(select);
+  for (const name of Object.keys(state.scenarios || {}).sort()) {
+    select.appendChild(node("option", { value: name }, name));
+  }
+  if (!select.options.length) select.appendChild(node("option", { value: "" }, "No scenarios"));
+}
+
+function renderCatalogFilters() {
+  if (!state.ttps.length) return;
+  fillSelect(byId("catalog-tactic"), unique(state.ttps.map((ttp) => ttp.tactic)), "All tactics");
+  fillSelect(byId("catalog-pack"), unique(state.ttps.map((ttp) => ttp.pack)), "All packs");
+  fillSelect(byId("catalog-tier"), unique(state.ttps.map((ttp) => ttp.safety_tier)), "All tiers");
+  fillSelect(
+    byId("catalog-platform"),
+    unique(state.ttps.flatMap((ttp) => ttp.supported_platforms || [])),
+    "All platforms",
+  );
+}
+
+function renderCatalog() {
+  const tbody = byId("catalog-table");
+  if (!tbody) return;
+  const search = byId("catalog-search").value.trim().toLowerCase();
+  const tactic = byId("catalog-tactic").value;
+  const pack = byId("catalog-pack").value;
+  const tier = byId("catalog-tier").value;
+  const platform = byId("catalog-platform").value;
+
+  const filtered = state.ttps.filter((ttp) => {
+    const text = [
+      ttp.attack_id,
+      ttp.base_attack_id,
+      ttp.name,
+      ttp.tactic,
+      ttp.pack,
+      ttp.safety_tier,
+      ...(ttp.supported_platforms || []),
+    ].join(" ").toLowerCase();
+    if (search && !text.includes(search)) return false;
+    if (tactic && ttp.tactic !== tactic) return false;
+    if (pack && optionValue(ttp.pack) !== pack) return false;
+    if (tier && optionValue(ttp.safety_tier) !== tier) return false;
+    if (platform && !(ttp.supported_platforms || []).includes(platform)) return false;
+    return true;
+  });
+
+  clear(tbody);
+  for (const ttp of filtered.slice(0, MAX_CATALOG_ROWS)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono" }, ttp.attack_id),
+      node("td", { title: ttp.description || "" }, ttp.name),
+      node("td", {}, ttp.tactic),
+      node("td", {}, ttp.pack || "core"),
+      node("td", {}, tierPill(ttp.safety_tier || "lab-write")),
+      node("td", {}, (ttp.supported_platforms || []).join(", ")),
+    ]));
+  }
+  if (!filtered.length) tbody.appendChild(emptyRow(6, "No matching TTPs"));
+  const shown = Math.min(filtered.length, MAX_CATALOG_ROWS);
+  byId("catalog-count").textContent = `${shown}/${filtered.length} items`;
+}
+
+function renderDetection() {
+  const tbody = byId("score-table");
+  if (!tbody) return;
+  clear(tbody);
+  const scores = Object.entries(state.scores || {}).sort((a, b) => a[0].localeCompare(b[0]));
+  for (const [id, score] of scores.slice(0, 180)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono" }, id),
+      node("td", {}, `${score.coverage_score}%`),
+      node("td", {}, `${score.events_matched}/${score.events_total}`),
+      node("td", {}, riskPill(score.false_positive_risk)),
+      node("td", { class: "muted" }, (score.missing_fields || []).join(", ") || "-"),
+    ]));
+  }
+  if (!scores.length) tbody.appendChild(emptyRow(5, "No scores"));
+  byId("score-count").textContent = `${scores.length} scored`;
+
+  const packs = Object.entries((state.matrix || {}).packs || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+  renderBars("pack-bars", packs);
+}
+
+function renderRuns() {
+  const tbody = byId("runs-table");
+  if (!tbody) return;
+  clear(tbody);
+  const runs = [...state.runs].sort((a, b) => b.started_at - a.started_at);
+  for (const run of runs) {
+    tbody.appendChild(node("tr", { onclick: () => showRunDetail(run.id), title: "Open run" }, [
+      node("td", { class: "mono" }, run.id),
+      node("td", {}, run.scenario),
+      node("td", {}, statusPill(run.status)),
+      node("td", {}, fmtTs(run.started_at)),
+      node("td", {}, stepDots(run.step_summary || {})),
+    ]));
+  }
+  if (!runs.length) tbody.appendChild(emptyRow(5, "No runs"));
+  byId("runs-count").textContent = `${runs.length} runs`;
+}
+
+function emptyRow(cols, text) {
+  return node("tr", { class: "empty-row" }, node("td", { colspan: String(cols) }, text));
+}
+
+function statusPill(status) {
+  return node("span", { class: `pill status-${status}` }, status || "unknown");
+}
+
+function tierPill(tier) {
+  const value = optionValue(tier);
+  const kind = value === "marker-only" || value === "read-only" ? "ok" : "warn";
+  return node("span", { class: `pill ${kind}` }, value);
+}
+
+function riskPill(risk) {
+  const value = optionValue(risk);
+  const kind = value === "low" ? "ok" : value === "medium" ? "warn" : "bad";
+  return node("span", { class: `pill ${kind}` }, value);
+}
+
+function stepDots(summary) {
+  const wrap = node("div", { class: "step-dots" });
+  for (const [id, status] of Object.entries(summary)) {
+    wrap.appendChild(node("span", { class: `dot status-${status}`, title: `${id}: ${status}` }));
+  }
+  if (!Object.keys(summary).length) wrap.appendChild(node("span", { class: "muted" }, "-"));
+  return wrap;
+}
+
+function currentBuilderPlatforms() {
+  return [...document.querySelectorAll("input[name='builder-platform']:checked")]
+    .map((item) => item.value);
+}
+
+async function refreshPreview() {
+  const actor = byId("builder-actor").value;
+  const difficulty = byId("builder-difficulty").value;
+  const steps = byId("builder-steps").value;
+  const seed = byId("builder-seed").value;
+  const platforms = currentBuilderPlatforms();
+  if (!platforms.length) {
+    setStatus("Select platform", "bad");
+    return;
+  }
+
+  setStatus("Loading", "neutral");
+  const params = new URLSearchParams({
+    actor,
+    difficulty,
+    steps,
+    seed,
+    platforms: platforms.join(","),
+  });
   try {
-    const data = await api("/scenarios");
-    clear(list);
-    for (const [name, s] of Object.entries(data)) {
-      const card = el("div", { class: "card" }, [
-        el("h3", {}, s.name),
-        el("div", { class: "meta" }, [s.actor || "unattributed", " · ", `${s.steps.length} steps`]),
-        el("div", { class: "tags" }, (s.tags || []).join(" · ")),
-        el("div", { style: "margin-top:8px" }, [
-          el("button", { class: "primary", onclick: () => runScenario(name) }, "Run"),
+    state.preview = await api(`/scenario-builder/preview?${params.toString()}`);
+    setStatus("Preview ready", "ok");
+    renderPreview();
+  } catch (error) {
+    setStatus("Preview failed", "bad");
+    state.preview = null;
+    renderPreview(error.message);
+  }
+}
+
+function renderPreview(error = "") {
+  const title = byId("scenario-title");
+  const meta = byId("scenario-meta");
+  const graph = byId("scenario-graph");
+  clear(graph);
+  if (error) {
+    title.textContent = "Preview error";
+    meta.textContent = "0 steps";
+    graph.appendChild(node("p", { class: "empty" }, error));
+    return;
+  }
+  const scenario = state.preview;
+  if (!scenario) {
+    title.textContent = "No preview";
+    meta.textContent = "0 steps";
+    graph.appendChild(node("p", { class: "empty" }, "No scenario"));
+    return;
+  }
+
+  title.textContent = scenario.name;
+  meta.textContent = `${scenario.steps.length} steps`;
+  const lookup = ttpLookup();
+  for (const step of scenario.steps) {
+    const ttp = lookup.get(step.ttp);
+    graph.appendChild(node("article", { class: "scenario-step" }, [
+      node("div", { class: "step-index" }, step.id.split("_")[0].replace("s", "")),
+      node("div", { class: "step-body" }, [
+        node("div", { class: "step-main" }, [
+          node("span", { class: "mono" }, step.ttp),
+          node("strong", {}, ttp?.name || step.ttp),
         ]),
-      ]);
-      list.appendChild(card);
-    }
-  } catch (e) { /* swallow */ }
+        node("div", { class: "step-sub" }, [
+          node("span", {}, ttp?.tactic || "unknown"),
+          node("span", {}, ttp?.pack || "core"),
+          node("span", {}, (step.depends_on || []).length ? `depends ${step.depends_on.join(", ")}` : "entry"),
+        ]),
+      ]),
+    ]));
+  }
 }
 
-async function runScenario(name) {
+async function runPreview() {
+  if (!state.preview) await refreshPreview();
+  if (!state.preview) return;
   try {
-    await fetch("/scenarios/run", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
-    refreshRuns();
-  } catch (e) { alert(`Failed to start: ${e.message}`); }
+    const run = await postJson("/scenarios/run", { inline: state.preview });
+    pushFeed({ event: "run.start", ts: Date.now() / 1000, payload: { run_id: run.id, scenario: run.scenario } });
+    await refreshLive();
+    switchView("runs");
+  } catch (error) {
+    setStatus("Run failed", "bad");
+    pushFeed({ event: "run.error", ts: Date.now() / 1000, payload: { error: error.message } });
+  }
 }
 
-async function refreshRuns() {
-  const tbody = document.querySelector("#runs-table tbody");
-  const empty = document.getElementById("runs-empty");
+async function runSelectedScenario() {
+  const name = byId("scenario-select").value;
+  if (!name) return;
   try {
-    const runs = await api("/runs");
-    clear(tbody);
-    empty.hidden = runs.length > 0;
-    for (const r of runs.sort((a, b) => b.started_at - a.started_at)) {
-      const stepCells = Object.entries(r.step_summary || {}).map(([sid, st]) =>
-        el("span", { class: `status-${st}`, title: `${sid}: ${st}` }, "■")
-      );
-      const row = el("tr", { class: "run-row", style: "cursor:pointer", title: "Click for step details" }, [
-        el("td", { class: "mono" }, r.id),
-        el("td", {}, r.scenario),
-        el("td", { class: `status-${r.status}` }, r.status),
-        el("td", {}, fmtTs(r.started_at)),
-        el("td", {}, stepCells),
-      ]);
-      row.addEventListener("click", () => showRunDetail(r.id));
-      tbody.appendChild(row);
-    }
-  } catch (e) { /* swallow */ }
+    const run = await postJson("/scenarios/run", { name });
+    pushFeed({ event: "run.start", ts: Date.now() / 1000, payload: { run_id: run.id, scenario: run.scenario } });
+    await refreshLive();
+  } catch (error) {
+    pushFeed({ event: "run.error", ts: Date.now() / 1000, payload: { error: error.message } });
+  }
+}
+
+async function copyPreview() {
+  if (!state.preview) await refreshPreview();
+  if (!state.preview) return;
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(state.preview, null, 2));
+    setStatus("Copied", "ok");
+  } catch (_error) {
+    setStatus("Copy blocked", "warn");
+  }
 }
 
 async function showRunDetail(runId) {
-  const modal = document.getElementById("step-modal");
-  const title = document.getElementById("modal-title");
-  const body = document.getElementById("modal-body");
-  title.textContent = `Run: ${runId}`;
+  const dialog = byId("run-dialog");
+  const title = byId("dialog-title");
+  const body = byId("dialog-body");
+  title.textContent = `Run ${runId}`;
   clear(body);
-  body.appendChild(el("p", { class: "muted" }, "Loading…"));
-  modal.hidden = false;
+  body.appendChild(node("p", { class: "empty" }, "Loading"));
+  if (!dialog.open) dialog.showModal();
   try {
     const detail = await api(`/runs/${runId}/steps`);
     clear(body);
-    const tbl = el("table", {});
-    tbl.appendChild(el("thead", {}, [el("tr", {}, [
-      el("th", {}, "Step ID"), el("th", {}, "TTP"), el("th", {}, "Status"),
-      el("th", {}, "Agent"), el("th", {}, "Started"), el("th", {}, "Duration"),
-      el("th", {}, "Output / Error"),
-    ])]));
-    const tb = el("tbody");
-    for (const s of detail.steps) {
-      const dur = (s.started_at && s.finished_at)
-        ? `${(s.finished_at - s.started_at).toFixed(2)}s` : "—";
-      tb.appendChild(el("tr", {}, [
-        el("td", { class: "mono" }, s.id),
-        el("td", { class: "mono" }, s.attack_id),
-        el("td", { class: `status-${s.status}` }, s.status),
-        el("td", { class: "muted" }, s.agent_id || "—"),
-        el("td", {}, fmtTs(s.started_at)),
-        el("td", {}, dur),
-        el("td", { class: "muted", style: "max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap",
-          title: s.error || s.output || "" }, s.error ? `❌ ${s.error}` : (s.output || "—")),
+    const table = node("table");
+    table.appendChild(node("thead", {}, node("tr", {}, [
+      node("th", {}, "Step"),
+      node("th", {}, "TTP"),
+      node("th", {}, "Status"),
+      node("th", {}, "Agent"),
+      node("th", {}, "Started"),
+      node("th", {}, "Output"),
+    ])));
+    const tbody = node("tbody");
+    for (const step of detail.steps) {
+      tbody.appendChild(node("tr", {}, [
+        node("td", { class: "mono" }, step.id),
+        node("td", { class: "mono" }, step.attack_id),
+        node("td", {}, statusPill(step.status)),
+        node("td", {}, step.agent_id || "-"),
+        node("td", {}, fmtTs(step.started_at)),
+        node("td", { class: "muted output-cell", title: step.error || step.output || "" }, step.error || step.output || "-"),
       ]));
-    }
-    tbl.appendChild(tb);
-    body.appendChild(tbl);
-  } catch (e) {
-    clear(body);
-    body.appendChild(el("p", { class: "muted" }, `Error: ${e.message}`));
-  }
-}
-
-async function refreshCoverage() {
-  const container = document.getElementById("coverage-matrix");
-  const summary = document.getElementById("coverage-summary");
-  try {
-    const matrix = await api("/coverage/matrix");
-    const tactics = Object.keys(matrix.tactics || {}).sort();
-    clear(summary);
-    [
-      ["TTPs", matrix.total],
-      ["Rules", matrix.with_rules],
-      ["Coverage", `${matrix.rule_coverage_percent}%`],
-      ["Packs", Object.keys(matrix.packs || {}).length],
-    ].forEach(([label, value]) => {
-      summary.appendChild(el("div", { class: "summary-item" }, [
-        el("span", { class: "summary-value" }, String(value)),
-        el("span", { class: "summary-label" }, String(label)),
-      ]));
-    });
-    clear(container);
-    const table = el("table", { class: "matrix" });
-    const thead = el("thead", {}, [el("tr", {}, tactics.map(t => el("th", {}, t)))]);
-    table.appendChild(thead);
-    const maxRows = Math.max(...tactics.map(t => matrix.tactics[t].items.length));
-    const tbody = el("tbody");
-    for (let i = 0; i < maxRows; i++) {
-      const tr = el("tr");
-      for (const t of tactics) {
-        const techs = matrix.tactics[t].items;
-        const ttp = techs[i];
-        if (ttp) {
-          const hasRule = ttp.has_rule;
-          tr.appendChild(el("td", { class: hasRule ? "has-rule" : "no-rule", title: ttp.description }, [
-            el("span", { class: "ttp-id" }, ttp.id),
-            el("span", { class: "ttp-name" }, `${ttp.name} · ${ttp.pack} · ${ttp.safety_tier}`),
-          ]));
-        } else {
-          tr.appendChild(el("td", {}, ""));
-        }
-      }
-      tbody.appendChild(tr);
     }
     table.appendChild(tbody);
-    container.appendChild(table);
-  } catch (e) { /* swallow */ }
-}
-
-async function refreshDetectionScores() {
-  const tbody = document.querySelector("#detection-score-table tbody");
-  if (!tbody) return;
-  try {
-    const scores = await api("/detections/score");
-    clear(tbody);
-    Object.entries(scores)
-      .sort((a, b) => a[0].localeCompare(b[0]))
-      .slice(0, 80)
-      .forEach(([id, score]) => {
-        tbody.appendChild(el("tr", {}, [
-          el("td", { class: "mono" }, id),
-          el("td", {}, `${score.coverage_score}%`),
-          el("td", {}, `${score.events_matched}/${score.events_total}`),
-          el("td", { class: `risk-${score.false_positive_risk}` }, score.false_positive_risk),
-          el("td", { class: "muted" }, (score.missing_fields || []).join(", ") || "—"),
-        ]));
-      });
-  } catch (e) { /* swallow */ }
-}
-
-function pushEventFeed(ev) {
-  const feed = document.getElementById("event-feed");
-  if (!feed) return;
-  const ts = ev.ts ? new Date(ev.ts * 1000).toLocaleTimeString() : "—";
-  const kind = ev.event || "?";
-  const payload = ev.payload ? JSON.stringify(ev.payload, null, 0) : "";
-  const cls = kind.startsWith("kill") ? "feed-entry feed-kill"
-    : kind.startsWith("run.") ? "feed-entry feed-run"
-    : kind.startsWith("task.") ? "feed-entry feed-task"
-    : kind.startsWith("agent.") ? "feed-entry feed-agent"
-    : "feed-entry";
-  const entry = el("div", { class: cls }, [
-    el("span", { class: "feed-ts" }, ts + " "),
-    el("span", { class: "feed-kind" }, kind + " "),
-    el("span", { class: "feed-payload" }, payload.slice(0, 120)),
-  ]);
-  feed.insertBefore(entry, feed.firstChild);
-  // Trim old entries
-  while (feed.childElementCount > MAX_FEED_ENTRIES) {
-    feed.removeChild(feed.lastChild);
+    body.appendChild(table);
+  } catch (error) {
+    clear(body);
+    body.appendChild(node("p", { class: "empty" }, error.message));
   }
 }
 
-function refreshAll() {
-  refreshHealth();
-  refreshAgents();
-  refreshScenarios();
-  refreshRuns();
-  refreshCoverage();
-  refreshDetectionScores();
+function pushFeed(event) {
+  state.feed.unshift(event);
+  state.feed = state.feed.slice(0, MAX_FEED_ENTRIES);
+  renderFeed();
+}
+
+function renderFeed() {
+  const feed = byId("event-feed");
+  if (!feed) return;
+  clear(feed);
+  for (const event of state.feed) {
+    const kind = event.event || "event";
+    feed.appendChild(node("div", { class: "feed-row" }, [
+      node("span", { class: "feed-time" }, fmtTs(event.ts)),
+      node("span", { class: "feed-kind" }, kind),
+      node("span", { class: "feed-payload" }, JSON.stringify(event.payload || {}).slice(0, 180)),
+    ]));
+  }
+  if (!state.feed.length) feed.appendChild(node("p", { class: "empty" }, "No events"));
+  byId("event-count").textContent = `${state.feed.length} events`;
 }
 
 function connectWs() {
-  const proto = location.protocol === "https:" ? "wss:" : "ws:";
-  const ws = new WebSocket(`${proto}//${location.host}/ws`);
-  ws.addEventListener("open", () => {
-    console.log("[ws] connected");
-  });
-  ws.addEventListener("message", (msg) => {
+  const protocol = location.protocol === "https:" ? "wss:" : "ws:";
+  const socket = new WebSocket(`${protocol}//${location.host}/ws`);
+  socket.addEventListener("message", (message) => {
     try {
-      const ev = JSON.parse(msg.data);
-      if (ev.event === "ws.heartbeat") return;
-      pushEventFeed(ev);
-      // Lightweight: refresh affected sections.
-      if (ev.event && ev.event.startsWith("agent.")) refreshAgents();
-      if (ev.event && (ev.event.startsWith("run.") || ev.event.startsWith("task."))) refreshRuns();
-      if (ev.event && ev.event.startsWith("killswitch.")) refreshHealth();
-    } catch (e) { /* ignore */ }
+      const event = JSON.parse(message.data);
+      if (event.event === "ws.heartbeat") return;
+      pushFeed(event);
+      if (event.event?.startsWith("agent.")) refreshLive();
+      if (event.event?.startsWith("run.") || event.event?.startsWith("task.")) refreshLive();
+      if (event.event?.startsWith("killswitch.")) refreshLive();
+    } catch (_error) {
+      return;
+    }
   });
-  ws.addEventListener("close", () => {
-    console.log("[ws] disconnected, retrying in 2s");
+  socket.addEventListener("close", () => {
     setTimeout(connectWs, 2000);
   });
-  ws.addEventListener("error", () => ws.close());
+  socket.addEventListener("error", () => socket.close());
 }
 
-refreshAll();
-// Periodic full refresh as fallback if WS misses an event.
-setInterval(refreshAll, POLL_MS * 4);
-connectWs();
+function switchView(view) {
+  for (const tab of document.querySelectorAll(".tab")) {
+    tab.classList.toggle("is-active", tab.dataset.view === view);
+  }
+  for (const panel of document.querySelectorAll(".view")) {
+    panel.classList.toggle("is-active", panel.id === `view-${view}`);
+  }
+}
+
+async function toggleKillswitch() {
+  try {
+    if (state.killswitch?.active) {
+      await api("/killswitch/disengage", { method: "POST" });
+    } else if (confirm("Engage killswitch?")) {
+      await api("/killswitch/engage?reason=dashboard", { method: "POST" });
+    }
+    await refreshLive();
+  } catch (error) {
+    pushFeed({ event: "killswitch.error", ts: Date.now() / 1000, payload: { error: error.message } });
+  }
+}
+
+function bindEvents() {
+  for (const tab of document.querySelectorAll(".tab")) {
+    tab.addEventListener("click", () => switchView(tab.dataset.view));
+  }
+  byId("refresh-button").addEventListener("click", async () => {
+    await refreshLive();
+    await refreshStatic();
+  });
+  byId("killswitch-button").addEventListener("click", toggleKillswitch);
+  for (const id of ["catalog-search", "catalog-tactic", "catalog-pack", "catalog-tier", "catalog-platform"]) {
+    byId(id).addEventListener("input", renderCatalog);
+    byId(id).addEventListener("change", renderCatalog);
+  }
+  byId("scenario-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    refreshPreview();
+  });
+  byId("run-preview").addEventListener("click", runPreview);
+  byId("copy-preview").addEventListener("click", copyPreview);
+  byId("run-selected").addEventListener("click", runSelectedScenario);
+  byId("dialog-close").addEventListener("click", () => byId("run-dialog").close());
+}
+
+async function init() {
+  bindEvents();
+  renderPreview();
+  renderFeed();
+  await refreshLive();
+  await refreshStatic();
+  await refreshPreview();
+  connectWs();
+  setInterval(refreshLive, LIVE_REFRESH_MS);
+}
+
+document.addEventListener("DOMContentLoaded", init);

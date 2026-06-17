@@ -23,6 +23,8 @@ def test_dashboard_index_served(tmp_path) -> None:
     r = client.get("/dashboard/")
     assert r.status_code == 200
     assert "APT Simulator" in r.text
+    assert "Scenario Builder" in r.text
+    assert "TTP Catalog" in r.text
 
 
 def test_coverage_endpoint(tmp_path) -> None:
@@ -39,3 +41,22 @@ def test_ttps_listing(tmp_path) -> None:
     assert r.status_code == 200
     ids = {t["attack_id"] for t in r.json()}
     assert {"T1033", "T1083", "T1059", "T1547.001", "T1057", "T1071.001", "T1003", "T1027", "T1112", "T1070.004", "T1580"} <= ids
+
+
+def test_scenario_builder_preview(tmp_path) -> None:
+    client = _client(tmp_path)
+    r = client.get(
+        "/scenario-builder/preview",
+        params={
+            "actor": "cloud-intrusion",
+            "difficulty": "realistic",
+            "steps": 10,
+            "seed": 7,
+            "platforms": "windows,linux,darwin",
+        },
+    )
+    assert r.status_code == 200
+    body = r.json()
+    assert body["actor"] == "cloud-intrusion"
+    assert len(body["steps"]) == 10
+    assert all(step["params"]["dry_run"] is True for step in body["steps"])

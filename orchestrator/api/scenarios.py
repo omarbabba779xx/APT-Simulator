@@ -1,10 +1,11 @@
 """Scenario endpoints: list, run, get run status."""
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 
 from ..core.auth import require_role
 from ..dsl.schema import Scenario
+from ..scenario_builder import build_scenario
 from .schemas import RunDetail, RunSummary, ScenarioRunRequest, StepDetail
 from .state import get_state
 
@@ -25,6 +26,32 @@ def list_scenarios(_claims=require_role("viewer")) -> dict[str, dict]:
         }
         for name, sc in s.scenarios.items()
     }
+
+
+@router.get("/scenario-builder/preview")
+def preview_scenario(
+    actor: str = Query("cloud-intrusion"),
+    difficulty: str = Query("realistic"),
+    steps: int = Query(12, ge=1, le=80),
+    seed: int = Query(1, ge=0, le=1_000_000),
+    platforms: str = Query("windows,linux,darwin"),
+    _claims=require_role("viewer"),
+) -> dict[str, object]:
+    selected_platforms = [item.strip().lower() for item in platforms.split(",") if item.strip()]
+    if not selected_platforms:
+        raise HTTPException(400, "provide at least one platform")
+    try:
+        scenario = build_scenario(
+            actor=actor,
+            difficulty=difficulty,
+            steps=steps,
+            seed=seed,
+            platforms=selected_platforms,
+        )
+        Scenario(**scenario).validate_dag()
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+    return scenario
 
 
 @router.post("/scenarios/run", response_model=RunSummary)

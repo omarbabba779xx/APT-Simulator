@@ -2,82 +2,248 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>APT Simulator — Console</title>
+  <title>APT Simulator Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=dashboard-v2" />
 </head>
 <body>
-  <header>
-    <h1>APT Simulator</h1>
-    <div class="status-bar">
-      <span id="health-badge" class="badge unknown">●</span>
-      <span id="health-text">checking...</span>
-      <span class="grow"></span>
-      <button id="killswitch-btn" class="danger">ENGAGE KILLSWITCH</button>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">AS</span>
+      <div>
+        <h1>APT Simulator</h1>
+        <p id="health-line">Checking system</p>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="Dashboard views">
+      <button class="tab is-active" data-view="overview">Overview</button>
+      <button class="tab" data-view="catalog">Catalog</button>
+      <button class="tab" data-view="builder">Scenario</button>
+      <button class="tab" data-view="runs">Runs</button>
+      <button class="tab" data-view="detections">Detection</button>
+      <button class="tab" data-view="events">Events</button>
+    </nav>
+    <div class="actions">
+      <a class="link-button" href="/docs" target="_blank" rel="noreferrer">API</a>
+      <button id="refresh-button" class="secondary">Refresh</button>
+      <button id="killswitch-button" class="danger">Killswitch</button>
     </div>
   </header>
 
-  <main>
-    <section>
-      <h2>Agents</h2>
-      <table id="agents-table">
-        <thead><tr><th>ID</th><th>Hostname</th><th>Platform</th><th>PID</th><th>Last Seen</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <p class="muted" id="agents-empty" hidden>No agents registered.</p>
+  <main class="workspace">
+    <section id="view-overview" class="view is-active">
+      <div class="metrics" id="metrics-grid"></div>
+      <div class="overview-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>ATT&CK Coverage</h2>
+            <span id="coverage-label" class="pill neutral">0%</span>
+          </div>
+          <div id="tactic-bars" class="bar-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Safety Tiers</h2>
+            <span class="pill neutral">Policy</span>
+          </div>
+          <div id="tier-bars" class="bar-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Runs</h2>
+            <span id="run-label" class="pill neutral">0 active</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Scenario</th><th>Status</th><th>Steps</th></tr>
+            </thead>
+            <tbody id="overview-runs"></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Agents</h2>
+            <span id="agent-label" class="pill neutral">0 online</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Host</th><th>Platform</th><th>Seen</th></tr>
+            </thead>
+            <tbody id="agents-table"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Scenarios</h2>
-      <div id="scenarios-list" class="card-grid"></div>
+    <section id="view-catalog" class="view">
+      <div class="toolbar">
+        <label>
+          <span>Search</span>
+          <input id="catalog-search" type="search" placeholder="T1059, PowerShell, cloud" />
+        </label>
+        <label>
+          <span>Tactic</span>
+          <select id="catalog-tactic"></select>
+        </label>
+        <label>
+          <span>Pack</span>
+          <select id="catalog-pack"></select>
+        </label>
+        <label>
+          <span>Safety</span>
+          <select id="catalog-tier"></select>
+        </label>
+        <label>
+          <span>Platform</span>
+          <select id="catalog-platform"></select>
+        </label>
+      </div>
+      <div class="table-shell">
+        <div class="table-title">
+          <h2>TTP Catalog</h2>
+          <span id="catalog-count" class="pill neutral">0 items</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Tactic</th>
+              <th>Pack</th>
+              <th>Safety</th>
+              <th>Platforms</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-table"></tbody>
+        </table>
+      </div>
     </section>
 
-    <section>
-      <h2>Runs</h2>
-      <table id="runs-table">
-        <thead><tr><th>ID</th><th>Scenario</th><th>Status</th><th>Started</th><th>Steps</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <p class="muted" id="runs-empty" hidden>No runs yet. Trigger a scenario above.</p>
+    <section id="view-builder" class="view">
+      <div class="builder-layout">
+        <form id="scenario-form" class="panel tool-panel">
+          <div class="panel-head">
+            <h2>Scenario Builder</h2>
+            <span id="preview-status" class="pill neutral">Ready</span>
+          </div>
+          <label>
+            <span>Actor</span>
+            <select id="builder-actor">
+              <option value="cloud-intrusion">cloud-intrusion</option>
+              <option value="apt29">apt29</option>
+              <option value="fin7">fin7</option>
+              <option value="lazarus">lazarus</option>
+              <option value="apt41">apt41</option>
+              <option value="ransomware">ransomware</option>
+              <option value="insider">insider</option>
+            </select>
+          </label>
+          <label>
+            <span>Difficulty</span>
+            <select id="builder-difficulty">
+              <option value="realistic">realistic</option>
+              <option value="beginner">beginner</option>
+              <option value="stealthy">stealthy</option>
+              <option value="noisy">noisy</option>
+            </select>
+          </label>
+          <div class="field-pair">
+            <label>
+              <span>Steps</span>
+              <input id="builder-steps" type="number" min="1" max="80" value="12" />
+            </label>
+            <label>
+              <span>Seed</span>
+              <input id="builder-seed" type="number" min="0" max="1000000" value="1" />
+            </label>
+          </div>
+          <fieldset>
+            <legend>Platforms</legend>
+            <label class="check"><input type="checkbox" name="builder-platform" value="windows" checked /> Windows</label>
+            <label class="check"><input type="checkbox" name="builder-platform" value="linux" checked /> Linux</label>
+            <label class="check"><input type="checkbox" name="builder-platform" value="darwin" checked /> macOS</label>
+          </fieldset>
+          <div class="button-row">
+            <button type="submit" class="primary">Preview</button>
+            <button type="button" id="run-preview" class="secondary">Run Preview</button>
+            <button type="button" id="copy-preview" class="secondary">Copy JSON</button>
+          </div>
+        </form>
+        <div class="panel scenario-panel">
+          <div class="panel-head">
+            <h2 id="scenario-title">No preview</h2>
+            <span id="scenario-meta" class="pill neutral">0 steps</span>
+          </div>
+          <div id="scenario-graph" class="scenario-graph"></div>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>MITRE ATT&amp;CK Coverage</h2>
-      <div id="coverage-summary" class="summary-grid"></div>
-      <div id="coverage-matrix"></div>
+    <section id="view-runs" class="view">
+      <div class="toolbar">
+        <label>
+          <span>Scenario</span>
+          <select id="scenario-select"></select>
+        </label>
+        <button id="run-selected" class="primary">Run</button>
+      </div>
+      <div class="table-shell">
+        <div class="table-title">
+          <h2>Runs</h2>
+          <span id="runs-count" class="pill neutral">0 runs</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Scenario</th><th>Status</th><th>Started</th><th>Steps</th></tr>
+          </thead>
+          <tbody id="runs-table"></tbody>
+        </table>
+      </div>
     </section>
 
-    <section>
-      <h2>Detection Score</h2>
-      <table id="detection-score-table">
-        <thead><tr><th>TTP</th><th>Coverage</th><th>Matched</th><th>FP Risk</th><th>Missing Fields</th></tr></thead>
-        <tbody></tbody>
-      </table>
+    <section id="view-detections" class="view">
+      <div class="split-grid">
+        <div class="table-shell">
+          <div class="table-title">
+            <h2>Detection Score</h2>
+            <span id="score-count" class="pill neutral">0 scored</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>TTP</th><th>Coverage</th><th>Matched</th><th>FP Risk</th><th>Missing Fields</th></tr>
+            </thead>
+            <tbody id="score-table"></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Packs</h2>
+            <span class="pill neutral">Catalog</span>
+          </div>
+          <div id="pack-bars" class="bar-list"></div>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Live Event Feed</h2>
-      <div id="event-feed" class="event-feed"></div>
+    <section id="view-events" class="view">
+      <div class="panel event-panel">
+        <div class="panel-head">
+          <h2>Event Feed</h2>
+          <span id="event-count" class="pill neutral">0 events</span>
+        </div>
+        <div id="event-feed" class="event-feed"></div>
+      </div>
     </section>
   </main>
 
-  <div id="step-modal" class="modal" hidden>
-    <div class="modal-box">
-      <div class="modal-header">
-        <span id="modal-title">Run Detail</span>
-        <button id="modal-close" onclick="document.getElementById('step-modal').hidden=true">✕</button>
-      </div>
-      <div id="modal-body"></div>
+  <dialog id="run-dialog">
+    <div class="dialog-head">
+      <h2 id="dialog-title">Run Detail</h2>
+      <button id="dialog-close" class="icon-button" aria-label="Close">x</button>
     </div>
-  </div>
+    <div id="dialog-body"></div>
+  </dialog>
 
-  <footer>
-    <small>
-      Defensive emulation — lab use only. Refresh interval: 3s.
-      <a href="/docs" target="_blank">API docs</a>
-    </small>
-  </footer>
-
-  <script src="app.js"></script>
+  <script src="app.js?v=dashboard-v2"></script>
 </body>
 </html>
