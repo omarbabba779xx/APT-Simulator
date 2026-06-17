@@ -1,0 +1,33 @@
+title: Valid Cloud Account Abuse (APT Simulator T1078.004)
+id: b1078004-0000-0000-0000-000000107804
+status: experimental
+description: Detects simulated use of a valid AWS identity through console login,
+  STS identity checks, role assumption, or initial storage enumeration.
+references:
+- https://attack.mitre.org/techniques/T1078/004/
+tags:
+- attack.initial_access
+- attack.persistence
+- attack.privilege_escalation
+- attack.defense_evasion
+- attack.t1078.004
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection_console:
+    eventName: ConsoleLogin
+    responseElements.ConsoleLogin: Success
+  selection_api:
+    eventName:
+    - GetCallerIdentity
+    - AssumeRole
+    - ListBuckets
+    userIdentity.type:
+    - IAMUser
+    - AssumedRole
+  condition: 1 of selection_*
+falsepositives:
+- Cloud inventory jobs
+- Administrator break-glass activity
+level: high

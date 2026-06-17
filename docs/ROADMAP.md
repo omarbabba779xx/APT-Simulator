@@ -40,7 +40,7 @@
 
 ## Phase 4 — Cloud + Scale
 
-- [ ] AWS Stratus-style additional TTPs: T1078.004 (Cloud Account abuse), T1530 (Data from Storage)
+- [x] AWS Stratus-style simulated TTPs: T1078.004 (Cloud Account abuse), T1530 (Data from Storage)
 - [ ] Azure / Entra ID privilege escalation simulation
 - [ ] GCP resource manager discovery expansion
 - [ ] gRPC C2 channel option (alternative to HTTP)

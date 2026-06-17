@@ -8,6 +8,7 @@ import time
 from typing import Any
 
 import httpx
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from . import runtime, safety
 
@@ -28,7 +29,7 @@ class Beacon:
         self.ttl_seconds = ttl_seconds
         self.max_failures = max_failures
         self.agent_id: str | None = None
-        self.public_key = None
+        self.public_key: Ed25519PublicKey | None = None
         headers = {"Authorization": f"Bearer {auth_token}"} if auth_token else {}
         self.client = httpx.Client(timeout=20.0, headers=headers)
         self.failures = 0

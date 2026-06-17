@@ -96,6 +96,7 @@ docs/           Architecture + threat model
 | Discovery            | Network Connections Discovery      | T1049      | all                   |
 | Discovery            | Cloud Infrastructure Discovery     | T1580      | all (cloud creds req) |
 | Execution            | Command Interpreter (sim)          | T1059      | all                   |
+| Initial Access       | Valid Cloud Accounts (sim)         | T1078.004  | all                   |
 | Persistence          | Registry Run Key (sim, Windows)    | T1547.001  | windows               |
 | Persistence          | Scheduled Task (sim, Windows)      | T1053.005  | windows               |
 | Persistence          | SSH Authorized Keys (sim)          | T1098.004  | linux/macOS           |
@@ -107,11 +108,12 @@ docs/           Architecture + threat model
 | Command & Control    | HTTP C2 Beaconing (sim)            | T1071.001  | all                   |
 | Command & Control    | Ingress Tool Transfer (sim)        | T1105      | all                   |
 | Collection           | Data from Local System (sim)       | T1005      | all                   |
+| Collection           | Data from Cloud Storage Object     | T1530      | all                   |
 | Exfiltration         | Exfil Over C2 Channel (sim)        | T1041      | all                   |
 | Impact               | Data Encrypted for Impact (sim)    | T1486      | all                   |
 
 Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
-22 TTPs across 9 tactics. Full roadmap in `docs/ROADMAP.md`.
+24 TTPs across 10 tactics. Full roadmap in `docs/ROADMAP.md`.
 
 ## Key Features
 
@@ -122,6 +124,7 @@ Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
 - **Metrics API** — `GET /metrics` returns run counts, TTP success rates, agent breakdown.
 - **Live Audit Feed** — Dashboard WebSocket panel shows every audit event in real time.
 - **Step Detail Modal** — Click any run row in the dashboard to see per-step timing, output, and errors.
+- **Cloud Account + Storage Simulation** — `scenarios/cloud_account_storage_sim.yaml` generates CloudTrail-style markers for T1078.004 and T1530 without contacting cloud providers.
 
 ## CLI Reference
 

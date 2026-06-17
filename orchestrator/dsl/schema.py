@@ -26,6 +26,10 @@ from pydantic import BaseModel, Field, field_validator
 Platform = Literal["windows", "linux", "darwin", "any"]
 
 
+def _default_platforms() -> list[Platform]:
+    return ["any"]
+
+
 class ScenarioStep(BaseModel):
     id: str
     ttp: str  # MITRE ATT&CK technique ID like "T1033", "T1083", "T1547.001"
@@ -46,7 +50,7 @@ class ScenarioStep(BaseModel):
 class Scenario(BaseModel):
     name: str
     description: str = ""
-    target_platforms: list[Platform] = Field(default_factory=lambda: ["any"])
+    target_platforms: list[Platform] = Field(default_factory=_default_platforms)
     steps: list[ScenarioStep]
     tags: list[str] = Field(default_factory=list)
     actor: str | None = None  # APT group emulated, optional. Informational only.

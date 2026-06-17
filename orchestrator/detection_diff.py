@@ -131,14 +131,18 @@ def report(
         run_results: list[dict] = []
         for step in steps:
             ttp = registry.get(step["attack_id"])
-            if ttp is None or ttp.sigma_rule() is None:
+            if ttp is None:
+                run_results.append({**step, "verdict": "NO-RULE"})
+                continue
+            rule = ttp.sigma_rule()
+            if rule is None:
                 run_results.append({**step, "verdict": "NO-RULE"})
                 continue
             events = ttp.synthetic_events({}, None)
             if not events:
                 run_results.append({**step, "verdict": "NO-EVENTS"})
                 continue
-            matches = [evaluate(ttp.sigma_rule(), ev) for ev in events]
+            matches = [evaluate(rule, ev) for ev in events]
             run_results.append({
                 **step,
                 "verdict": "COVERED" if any(matches) else "GAP",

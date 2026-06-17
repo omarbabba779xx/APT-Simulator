@@ -1,0 +1,29 @@
+title: Cloud Storage Object Access Burst (APT Simulator T1530)
+id: b1530000-0000-0000-0000-000000001530
+status: experimental
+description: Detects cloud storage listing or object reads that can indicate collection
+  from S3, Azure Blob Storage, or GCS.
+references:
+- https://attack.mitre.org/techniques/T1530/
+tags:
+- attack.collection
+- attack.t1530
+logsource:
+  product: cloud
+detection:
+  selection_aws:
+    eventSource: s3.amazonaws.com
+    eventName:
+    - ListBucket
+    - GetObject
+  selection_azure:
+    operationName|contains: storageAccounts/blobServices/containers/blobs/read
+  selection_gcp:
+    serviceName: storage.googleapis.com
+    methodName|contains: storage.objects.
+  condition: 1 of selection_*
+falsepositives:
+- Backup jobs
+- Data lake ETL jobs
+- Cloud inventory scanners
+level: medium

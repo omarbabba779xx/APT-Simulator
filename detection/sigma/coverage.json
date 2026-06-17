@@ -41,6 +41,12 @@
     "path": "detection/sigma/t1071_001.yml",
     "level": "medium"
   },
+  "T1078.004": {
+    "status": "exported",
+    "name": "Valid Accounts: Cloud Accounts (sim)",
+    "path": "detection/sigma/t1078_004.yml",
+    "level": "high"
+  },
   "T1083": {
     "status": "exported",
     "name": "File and Directory Discovery",
@@ -51,6 +57,12 @@
     "status": "exported",
     "name": "Modify Registry (sim)",
     "path": "detection/sigma/t1112.yml",
+    "level": "medium"
+  },
+  "T1530": {
+    "status": "exported",
+    "name": "Data from Cloud Storage Object (sim)",
+    "path": "detection/sigma/t1530.yml",
     "level": "medium"
   },
   "T1547.001": {

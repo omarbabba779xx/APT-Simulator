@@ -25,6 +25,7 @@ from .execution import t1059_command_sim  # noqa: F401
 from .exfiltration import t1041_exfil_over_c2  # noqa: F401
 from .exfiltration import t1048_exfil_alt_protocol  # noqa: F401
 from .impact import t1486_data_encrypted_sim  # noqa: F401
+from .initial_access import t1078_004_cloud_account_abuse  # noqa: F401
 from .persistence import (  # noqa: F401
     t1053_005_scheduled_task,
     t1098_004_ssh_authorized_keys,
@@ -34,6 +35,7 @@ from .persistence import (  # noqa: F401
 from .lateral_movement import t1021_001_rdp  # noqa: F401
 from .lateral_movement import t1021_002_smb_admin_shares  # noqa: F401
 from .credential_access import t1110_brute_force_sim  # noqa: F401
+from .collection import t1530_data_from_cloud_storage  # noqa: F401
 from .collection import t1560_archive_collected  # noqa: F401
 from .defense_evasion import t1055_process_injection_sim  # noqa: F401
 
