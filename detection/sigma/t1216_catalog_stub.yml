@@ -1,0 +1,17 @@
+title: System Script Proxy Execution Marker
+id: stub-t1216
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1216
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1216/
+tags:
+- attack.t1216

@@ -1,0 +1,17 @@
+title: Search Closed Sources Marker
+id: stub-t1597
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1597
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1597/
+tags:
+- attack.t1597

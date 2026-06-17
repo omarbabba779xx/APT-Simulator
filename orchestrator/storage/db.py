@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from sqlmodel import Field, Session, SQLModel, create_engine, select
+from sqlmodel import Field, Session, SQLModel, col, create_engine, select
 
 
 def _now() -> datetime:
@@ -135,7 +135,7 @@ class Repository:
 
     def list_runs(self) -> list[Run]:
         with Session(self.engine) as s:
-            return list(s.exec(select(Run).order_by(Run.started_at.desc())).all())
+            return list(s.exec(select(Run).order_by(col(Run.started_at).desc())).all())
 
     def get_run(self, run_id: str) -> Run | None:
         with Session(self.engine) as s:
@@ -143,5 +143,5 @@ class Repository:
 
     def steps_for_run(self, run_id: str) -> list[StepInstance]:
         with Session(self.engine) as s:
-            stmt = select(StepInstance).where(StepInstance.run_id == run_id).order_by(StepInstance.id)
+            stmt = select(StepInstance).where(StepInstance.run_id == run_id).order_by(col(StepInstance.id))
             return list(s.exec(stmt).all())

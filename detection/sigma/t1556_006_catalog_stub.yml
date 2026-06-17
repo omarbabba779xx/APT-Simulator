@@ -1,0 +1,17 @@
+title: Multi-Factor Authentication Marker
+id: stub-t1556_006
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1556.006
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1556/006/
+tags:
+- attack.t1556.006

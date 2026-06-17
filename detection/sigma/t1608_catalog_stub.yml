@@ -1,0 +1,17 @@
+title: Stage Capabilities Marker
+id: stub-t1608
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1608
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1608/
+tags:
+- attack.t1608

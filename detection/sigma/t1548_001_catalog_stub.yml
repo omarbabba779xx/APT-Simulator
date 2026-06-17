@@ -1,0 +1,17 @@
+title: Setuid and Setgid Marker
+id: stub-t1548_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1548.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1548/001/
+tags:
+- attack.t1548.001

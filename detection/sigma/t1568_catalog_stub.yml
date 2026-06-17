@@ -1,0 +1,17 @@
+title: Dynamic Resolution Marker
+id: stub-t1568
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1568
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1568/
+tags:
+- attack.t1568

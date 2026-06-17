@@ -1,0 +1,24 @@
+title: Network Connections Enumeration (APT Simulator T1049)
+id: a1049000-0000-0000-0000-000000001049
+status: experimental
+description: "Detects use of netstat to enumerate active connections \u2014 commonly\
+  \ used to identify C2 channels and pivot targets."
+references:
+- https://attack.mitre.org/techniques/T1049
+tags:
+- attack.discovery
+- attack.t1049
+logsource:
+  category: process_creation
+detection:
+  selection_win:
+    Image|endswith:
+    - \netstat.exe
+  selection_posix:
+    CommandLine|contains:
+    - netstat
+  condition: 1 of selection_*
+falsepositives:
+- Monitoring agents
+- IT diagnostic scripts
+level: low

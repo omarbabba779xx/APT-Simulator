@@ -1,0 +1,17 @@
+title: Process Argument Spoofing Marker
+id: stub-t1564_010
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1564.010
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1564/010/
+tags:
+- attack.t1564.010

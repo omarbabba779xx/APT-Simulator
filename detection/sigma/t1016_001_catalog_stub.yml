@@ -1,0 +1,17 @@
+title: Internet Connection Discovery Marker
+id: stub-t1016_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1016.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1016/001/
+tags:
+- attack.t1016.001

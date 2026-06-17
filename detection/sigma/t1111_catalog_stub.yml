@@ -1,0 +1,17 @@
+title: Multi-Factor Authentication Interception Marker
+id: stub-t1111
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1111
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1111/
+tags:
+- attack.t1111

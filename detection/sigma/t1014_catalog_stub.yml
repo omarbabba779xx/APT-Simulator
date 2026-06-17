@@ -1,0 +1,17 @@
+title: Rootkit Marker
+id: stub-t1014
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1014
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1014/
+tags:
+- attack.t1014

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 import typer
 
@@ -57,6 +58,33 @@ def _build_run_steps(audit_path: Path, run_id: str) -> list[dict]:
     return out
 
 
+def _rule_fields(rule: dict[str, Any]) -> set[str]:
+    fields: set[str] = set()
+    detection = rule.get("detection") or {}
+    for key, selection in detection.items():
+        if key == "condition" or not isinstance(selection, dict):
+            continue
+        for field in selection:
+            fields.add(field.split("|")[0])
+    return fields
+
+
+def score_detection(rule: dict[str, Any], events: list[dict[str, Any]]) -> dict[str, Any]:
+    """Score rule-to-event fit for coverage and field completeness."""
+    matches = [evaluate(rule, ev) for ev in events]
+    fields = _rule_fields(rule)
+    missing = sorted({field for field in fields if not any(field in ev for ev in events)})
+    coverage = round((sum(matches) / len(events)) * 100, 2) if events else 0.0
+    fp_risk = "high" if len(fields) <= 1 else "medium" if len(fields) <= 3 else "low"
+    return {
+        "coverage_score": coverage,
+        "events_total": len(events),
+        "events_matched": sum(matches),
+        "missing_fields": missing,
+        "false_positive_risk": fp_risk,
+    }
+
+
 @app.command()
 def verify(
     run_id: str,
@@ -87,13 +115,12 @@ def verify(
         if not events:
             results.append({**step, "verdict": "NO-EVENTS"})
             continue
-        matches = [evaluate(rule, ev) for ev in events]
-        verdict = "COVERED" if any(matches) else "GAP"
+        score = score_detection(rule, events)
+        verdict = "COVERED" if score["events_matched"] else "GAP"
         results.append({
             **step,
             "verdict": verdict,
-            "events_total": len(events),
-            "events_matched": sum(matches),
+            **score,
         })
 
     covered = sum(1 for r in results if r["verdict"] == "COVERED")
@@ -131,19 +158,22 @@ def report(
         run_results: list[dict] = []
         for step in steps:
             ttp = registry.get(step["attack_id"])
-            if ttp is None or ttp.sigma_rule() is None:
+            if ttp is None:
+                run_results.append({**step, "verdict": "NO-RULE"})
+                continue
+            rule = ttp.sigma_rule()
+            if rule is None:
                 run_results.append({**step, "verdict": "NO-RULE"})
                 continue
             events = ttp.synthetic_events({}, None)
             if not events:
                 run_results.append({**step, "verdict": "NO-EVENTS"})
                 continue
-            matches = [evaluate(ttp.sigma_rule(), ev) for ev in events]
+            score = score_detection(rule, events)
             run_results.append({
                 **step,
-                "verdict": "COVERED" if any(matches) else "GAP",
-                "events_matched": sum(matches),
-                "events_total": len(events),
+                "verdict": "COVERED" if score["events_matched"] else "GAP",
+                **score,
             })
         out_data[rid] = run_results
 

@@ -1,0 +1,17 @@
+title: Modify Authentication Process Marker
+id: stub-t1556
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1556
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1556/
+tags:
+- attack.t1556

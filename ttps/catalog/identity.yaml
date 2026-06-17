@@ -1,0 +1,104 @@
+pack: identity
+ttps:
+  - id: T1098.003:ENTRA_APP_ROLE_GRANT
+    attack_id: T1098.003
+    name: Entra Application Role Grant Marker
+    tactic: persistence
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Entra Application Role Grant Marker
+      id: c1098003-0002-0000-0000-000000000001
+      status: experimental
+      logsource: {product: azure, service: auditlogs}
+      detection:
+        selection: {activityDisplayName|contains: "Add app role assignment"}
+        condition: selection
+      falsepositives: [application onboarding]
+      level: high
+    synthetic_events:
+      - category: identity
+        activityDisplayName: Add app role assignment to service principal
+        result: success
+  - id: T1556.009:OKTA_MFA_POLICY_WEAKEN
+    attack_id: T1556.009
+    name: Okta MFA Policy Weaken Marker
+    tactic: credential_access
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Okta MFA Policy Weaken Marker
+      id: c1556009-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: okta}
+      detection:
+        selection: {eventType|contains: "policy.mfa", outcome.result: SUCCESS}
+        condition: selection
+      falsepositives: [planned policy change]
+      level: high
+    synthetic_events:
+      - category: identity
+        eventType: policy.mfa.update
+        outcome.result: SUCCESS
+  - id: T1110.003:M365_PASSWORD_SPRAY
+    attack_id: T1110.003
+    name: M365 Password Spray Marker
+    tactic: credential_access
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: M365 Password Spray Marker
+      id: c1110003-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: m365}
+      detection:
+        selection: {Operation: UserLoginFailed, ResultStatus: Failed}
+        condition: selection
+      falsepositives: [user lockouts]
+      level: high
+    synthetic_events:
+      - category: identity
+        Operation: UserLoginFailed
+        ResultStatus: Failed
+        ClientIP: 198.51.100.42
+  - id: T1078.004:IDENTITY_RISKY_SIGNIN
+    attack_id: T1078.004
+    name: Risky Cloud Sign-in Marker
+    tactic: initial_access
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Risky Cloud Sign-in Marker
+      id: c1078004-0003-0000-0000-000000000001
+      status: experimental
+      logsource: {product: azure, service: signinlogs}
+      detection:
+        selection: {riskState: atRisk, status.errorCode: 0}
+        condition: selection
+      falsepositives: [travel]
+      level: high
+    synthetic_events:
+      - category: identity
+        riskState: atRisk
+        status.errorCode: 0
+        userPrincipalName: lab.user@example.com
+  - id: T1087.004:M365_GROUP_ENUMERATION
+    attack_id: T1087.004
+    name: M365 Group Enumeration Marker
+    tactic: discovery
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: M365 Group Enumeration Marker
+      id: c1087004-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: m365}
+      detection:
+        selection: {Operation|contains: "Group"}
+        condition: selection
+      falsepositives: [directory sync]
+      level: low
+    synthetic_events:
+      - category: identity
+        Operation: Get-Group
+        UserId: lab.user@example.com

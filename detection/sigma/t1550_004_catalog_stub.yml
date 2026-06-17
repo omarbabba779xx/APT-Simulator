@@ -1,0 +1,17 @@
+title: Web Session Cookie Marker
+id: stub-t1550_004
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1550.004
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1550/004/
+tags:
+- attack.t1550.004

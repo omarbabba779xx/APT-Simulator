@@ -21,8 +21,8 @@ from ..base import TTP, TTPResult, registry
 
 def _run_aws(params: dict[str, Any], started: float) -> TTPResult:
     try:
-        import boto3  # type: ignore[import-not-found]
-        from botocore.exceptions import (  # type: ignore[import-not-found]
+        import boto3  # type: ignore[import-not-found,import-untyped]
+        from botocore.exceptions import (  # type: ignore[import-not-found,import-untyped]
             BotoCoreError,
             ClientError,
             NoCredentialsError,
@@ -83,8 +83,8 @@ def _run_aws(params: dict[str, Any], started: float) -> TTPResult:
 
 def _run_gcp(params: dict[str, Any], started: float) -> TTPResult:
     try:
-        from google.cloud import resourcemanager_v3  # type: ignore[import-not-found]
-        from google.api_core.exceptions import GoogleAPIError  # type: ignore[import-not-found]
+        from google.cloud import resourcemanager_v3  # type: ignore[import-not-found,import-untyped]
+        from google.api_core.exceptions import GoogleAPIError  # type: ignore[import-not-found,import-untyped]
     except ImportError:
         return TTPResult(
             ok=False,

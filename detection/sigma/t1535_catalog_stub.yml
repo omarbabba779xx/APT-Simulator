@@ -1,0 +1,17 @@
+title: Unused/Unsupported Cloud Regions Marker
+id: stub-t1535
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1535
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1535/
+tags:
+- attack.t1535

@@ -1,0 +1,17 @@
+title: Systemd Timers Marker
+id: stub-t1053_006
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1053.006
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1053/006/
+tags:
+- attack.t1053.006

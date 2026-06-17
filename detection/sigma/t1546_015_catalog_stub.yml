@@ -1,0 +1,17 @@
+title: Component Object Model Hijacking Marker
+id: stub-t1546_015
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1546.015
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1546/015/
+tags:
+- attack.t1546.015

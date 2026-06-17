@@ -1,0 +1,35 @@
+name: cloud_account_storage_sim
+description: >
+  Lab-safe cloud account abuse and storage collection simulation.
+  Generates synthetic audit markers only; it never contacts a cloud provider.
+target_platforms: [any]
+actor: Cloud intrusion simulation
+tags: [demo, cloud, aws, collection, simulation]
+
+steps:
+  - id: valid_cloud_account_use
+    ttp: T1078.004
+    params:
+      provider: aws
+      username: lab-valid-user
+      source_ip: 198.51.100.23
+      event_names:
+        - GetCallerIdentity
+        - AssumeRole
+        - ListBuckets
+
+  - id: cloud_storage_collection
+    ttp: T1530
+    params:
+      provider: aws
+      bucket: apt-sim-lab-bucket
+      object_count: 5
+      source_ip: 198.51.100.24
+    depends_on: [valid_cloud_account_use]
+
+  - id: exfil_marker
+    ttp: T1048
+    params:
+      protocol: dns-txt
+      payload_bytes: 256
+    depends_on: [cloud_storage_collection]

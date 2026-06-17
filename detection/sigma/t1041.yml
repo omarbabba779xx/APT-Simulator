@@ -1,0 +1,21 @@
+title: Data Exfiltration over HTTP C2 Channel (APT Simulator T1041)
+id: a1041000-0000-0000-0000-000000001041
+status: experimental
+description: "Detects HTTP POST requests to internal addresses with binary body and\
+  \ non-standard User-Agent \u2014 pattern of data exfiltration over a C2 channel."
+references:
+- https://attack.mitre.org/techniques/T1041
+tags:
+- attack.exfiltration
+- attack.t1041
+logsource:
+  category: proxy
+detection:
+  selection:
+    c-useragent|contains:
+    - AptSim/
+    cs-method: POST
+  condition: selection
+falsepositives:
+- Legitimate monitoring agents posting metrics
+level: high

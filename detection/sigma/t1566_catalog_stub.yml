@@ -1,0 +1,17 @@
+title: Phishing Marker
+id: stub-t1566
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1566
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

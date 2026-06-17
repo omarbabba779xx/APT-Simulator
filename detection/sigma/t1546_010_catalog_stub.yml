@@ -1,0 +1,17 @@
+title: AppInit DLLs Marker
+id: stub-t1546_010
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1546.010
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1546/010/
+tags:
+- attack.t1546.010

@@ -1,0 +1,17 @@
+title: Build Image on Host Marker
+id: stub-t1612
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1612
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1612/
+tags:
+- attack.t1612

@@ -1,0 +1,17 @@
+title: GitHub Private Repository Clone Marker
+id: c1213003-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: github
+detection:
+  selection:
+    action: git.clone
+    visibility: private
+  condition: selection
+falsepositives:
+- developer activity
+level: medium
+references:
+- https://attack.mitre.org/techniques/1213/003/
+tags:
+- attack.t1213.003

@@ -1,0 +1,16 @@
+title: Slack Channel Export Marker
+id: c1213000-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: slack
+detection:
+  selection:
+    action: channel_export_started
+  condition: selection
+falsepositives:
+- compliance export
+level: medium
+references:
+- https://attack.mitre.org/techniques/1213/
+tags:
+- attack.t1213

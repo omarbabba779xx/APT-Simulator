@@ -1,0 +1,24 @@
+title: Mass .encrypted File Creation (APT Simulator T1486)
+id: a1486000-0000-0000-0000-000000001486
+status: experimental
+description: "Detects creation of files with .encrypted extension \u2014 the primary\
+  \ indicator of ransomware-style impact. Triggers on the simulator's benign markers\
+  \ as well as real ransomware."
+references:
+- https://attack.mitre.org/techniques/T1486
+tags:
+- attack.impact
+- attack.t1486
+logsource:
+  category: file_event
+detection:
+  selection:
+    TargetFilename|endswith:
+    - .encrypted
+    - .enc
+    - .locked
+    - .crypt
+  condition: selection
+falsepositives:
+- Legitimate file encryption utilities
+level: high

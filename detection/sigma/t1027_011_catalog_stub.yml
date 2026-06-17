@@ -1,0 +1,17 @@
+title: Fileless Storage Marker
+id: stub-t1027_011
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1027.011
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1027/011/
+tags:
+- attack.t1027.011

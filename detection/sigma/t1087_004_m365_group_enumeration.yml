@@ -1,0 +1,16 @@
+title: M365 Group Enumeration Marker
+id: c1087004-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: m365
+detection:
+  selection:
+    Operation|contains: Group
+  condition: selection
+falsepositives:
+- directory sync
+level: low
+references:
+- https://attack.mitre.org/techniques/1087/004/
+tags:
+- attack.t1087.004

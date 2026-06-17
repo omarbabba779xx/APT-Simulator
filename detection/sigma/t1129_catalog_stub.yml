@@ -1,0 +1,17 @@
+title: Shared Modules Marker
+id: stub-t1129
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1129
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1129/
+tags:
+- attack.t1129

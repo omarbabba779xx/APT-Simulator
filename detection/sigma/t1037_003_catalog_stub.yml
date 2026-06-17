@@ -1,0 +1,17 @@
+title: Network Logon Script Marker
+id: stub-t1037_003
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1037.003
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1037/003/
+tags:
+- attack.t1037.003

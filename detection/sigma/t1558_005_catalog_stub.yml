@@ -1,0 +1,17 @@
+title: Ccache Files Marker
+id: stub-t1558_005
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1558.005
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1558/005/
+tags:
+- attack.t1558.005

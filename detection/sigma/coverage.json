@@ -1,9 +1,261 @@
 {
+  "T1001.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Junk Data Marker",
+    "path": "detection/sigma/t1001_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1001.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Steganography Marker",
+    "path": "detection/sigma/t1001_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1001.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Protocol or Service Impersonation Marker",
+    "path": "detection/sigma/t1001_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Obfuscation Marker",
+    "path": "detection/sigma/t1001_catalog_stub.yml",
+    "level": "informational"
+  },
   "T1003": {
     "status": "exported",
     "name": "Credential Storage Target Enumeration (sim)",
     "path": "detection/sigma/t1003.yml",
     "level": "high"
+  },
+  "T1003.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "LSASS Memory Marker",
+    "path": "detection/sigma/t1003_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Security Account Manager Marker",
+    "path": "detection/sigma/t1003_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "NTDS Marker",
+    "path": "detection/sigma/t1003_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "LSA Secrets Marker",
+    "path": "detection/sigma/t1003_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cached Domain Credentials Marker",
+    "path": "detection/sigma/t1003_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DCSync Marker",
+    "path": "detection/sigma/t1003_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Proc Filesystem Marker",
+    "path": "detection/sigma/t1003_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "/etc/passwd and /etc/shadow Marker",
+    "path": "detection/sigma/t1003_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "OS Credential Dumping Marker",
+    "path": "detection/sigma/t1003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1005": {
+    "status": "exported",
+    "name": "Data from Local System",
+    "path": "detection/sigma/t1005.yml",
+    "level": "medium"
+  },
+  "T1005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data from Local System Marker",
+    "path": "detection/sigma/t1005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Direct Volume Access Marker",
+    "path": "detection/sigma/t1006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Service Discovery Marker",
+    "path": "detection/sigma/t1007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Fallback Channels Marker",
+    "path": "detection/sigma/t1008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Application Window Discovery Marker",
+    "path": "detection/sigma/t1010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1011.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Bluetooth Marker",
+    "path": "detection/sigma/t1011_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Other Network Medium Marker",
+    "path": "detection/sigma/t1011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Query Registry Marker",
+    "path": "detection/sigma/t1012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Rootkit Marker",
+    "path": "detection/sigma/t1014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1016": {
+    "status": "exported",
+    "name": "System Network Configuration Discovery",
+    "path": "detection/sigma/t1016.yml",
+    "level": "low"
+  },
+  "T1016.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Internet Connection Discovery Marker",
+    "path": "detection/sigma/t1016_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1016.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Wi-Fi Discovery Marker",
+    "path": "detection/sigma/t1016_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1016:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Network Configuration Discovery Marker",
+    "path": "detection/sigma/t1016_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1018:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote System Discovery Marker",
+    "path": "detection/sigma/t1018_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1020.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Traffic Duplication Marker",
+    "path": "detection/sigma/t1020_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1020:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Automated Exfiltration Marker",
+    "path": "detection/sigma/t1020_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.001": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Probe (sim)",
+    "path": "detection/sigma/t1021_001.yml",
+    "level": "medium"
+  },
+  "T1021.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Marker",
+    "path": "detection/sigma/t1021_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.002": {
+    "status": "exported",
+    "name": "SMB/Windows Admin Shares (sim)",
+    "path": "detection/sigma/t1021_002.yml",
+    "level": "medium"
+  },
+  "T1021.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SMB/Windows Admin Shares Marker",
+    "path": "detection/sigma/t1021_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Distributed Component Object Model Marker",
+    "path": "detection/sigma/t1021_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SSH Marker",
+    "path": "detection/sigma/t1021_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "VNC Marker",
+    "path": "detection/sigma/t1021_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Remote Management Marker",
+    "path": "detection/sigma/t1021_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Services Marker",
+    "path": "detection/sigma/t1021_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Direct Cloud VM Connections Marker",
+    "path": "detection/sigma/t1021_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1021:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Services Marker",
+    "path": "detection/sigma/t1021_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1025:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data from Removable Media Marker",
+    "path": "detection/sigma/t1025_catalog_stub.yml",
+    "level": "informational"
   },
   "T1027": {
     "status": "exported",
@@ -11,11 +263,515 @@
     "path": "detection/sigma/t1027.yml",
     "level": "medium"
   },
+  "T1027.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Binary Padding Marker",
+    "path": "detection/sigma/t1027_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Software Packing Marker",
+    "path": "detection/sigma/t1027_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Steganography Marker",
+    "path": "detection/sigma/t1027_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compile After Delivery Marker",
+    "path": "detection/sigma/t1027_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Indicator Removal from Tools Marker",
+    "path": "detection/sigma/t1027_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "HTML Smuggling Marker",
+    "path": "detection/sigma/t1027_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dynamic API Resolution Marker",
+    "path": "detection/sigma/t1027_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Stripped Payloads Marker",
+    "path": "detection/sigma/t1027_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Embedded Payloads Marker",
+    "path": "detection/sigma/t1027_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Command Obfuscation Marker",
+    "path": "detection/sigma/t1027_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Fileless Storage Marker",
+    "path": "detection/sigma/t1027_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "LNK Icon Smuggling Marker",
+    "path": "detection/sigma/t1027_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Encrypted/Encoded File Marker",
+    "path": "detection/sigma/t1027_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Polymorphic Code Marker",
+    "path": "detection/sigma/t1027_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.015:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compression Marker",
+    "path": "detection/sigma/t1027_015_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.016:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Junk Code Insertion Marker",
+    "path": "detection/sigma/t1027_016_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.017:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SVG Smuggling Marker",
+    "path": "detection/sigma/t1027_017_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027.018:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Invisible Unicode Marker",
+    "path": "detection/sigma/t1027_018_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1027:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Obfuscated Files or Information Marker",
+    "path": "detection/sigma/t1027_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1029:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Scheduled Transfer Marker",
+    "path": "detection/sigma/t1029_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1030:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Transfer Size Limits Marker",
+    "path": "detection/sigma/t1030_catalog_stub.yml",
+    "level": "informational"
+  },
   "T1033": {
     "status": "exported",
     "name": "System Owner/User Discovery",
     "path": "detection/sigma/t1033.yml",
     "level": "low"
+  },
+  "T1033:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Owner/User Discovery Marker",
+    "path": "detection/sigma/t1033_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Invalid Code Signature Marker",
+    "path": "detection/sigma/t1036_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Right-to-Left Override Marker",
+    "path": "detection/sigma/t1036_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Rename Legitimate Utilities Marker",
+    "path": "detection/sigma/t1036_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Masquerade Task or Service Marker",
+    "path": "detection/sigma/t1036_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Match Legitimate Resource Name or Location Marker",
+    "path": "detection/sigma/t1036_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Space after Filename Marker",
+    "path": "detection/sigma/t1036_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Double File Extension Marker",
+    "path": "detection/sigma/t1036_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Masquerade File Type Marker",
+    "path": "detection/sigma/t1036_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Break Process Trees Marker",
+    "path": "detection/sigma/t1036_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Masquerade Account Name Marker",
+    "path": "detection/sigma/t1036_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Overwrite Process Arguments Marker",
+    "path": "detection/sigma/t1036_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Browser Fingerprint Marker",
+    "path": "detection/sigma/t1036_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1036:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Masquerading Marker",
+    "path": "detection/sigma/t1036_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1037.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Logon Script (Windows) Marker",
+    "path": "detection/sigma/t1037_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1037.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Login Hook Marker",
+    "path": "detection/sigma/t1037_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1037.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Logon Script Marker",
+    "path": "detection/sigma/t1037_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1037.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "RC Scripts Marker",
+    "path": "detection/sigma/t1037_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1037.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Startup Items Marker",
+    "path": "detection/sigma/t1037_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1037:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Boot or Logon Initialization Scripts Marker",
+    "path": "detection/sigma/t1037_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1039:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data from Network Shared Drive Marker",
+    "path": "detection/sigma/t1039_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1040:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Sniffing Marker",
+    "path": "detection/sigma/t1040_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1041": {
+    "status": "exported",
+    "name": "Exfiltration Over C2 Channel (sim)",
+    "path": "detection/sigma/t1041.yml",
+    "level": "high"
+  },
+  "T1041:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over C2 Channel Marker",
+    "path": "detection/sigma/t1041_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1046:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Service Discovery Marker",
+    "path": "detection/sigma/t1046_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1047:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Management Instrumentation Marker",
+    "path": "detection/sigma/t1047_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1047:WINDOWS_WMI_PROCESS_CREATE": {
+    "status": "exported",
+    "name": "WMI Process Create Marker",
+    "path": "detection/sigma/t1047_windows_wmi_process_create.yml",
+    "level": "medium"
+  },
+  "T1048": {
+    "status": "exported",
+    "name": "Exfiltration Over Alternative Protocol (sim)",
+    "path": "detection/sigma/t1048.yml",
+    "level": "high"
+  },
+  "T1048.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Symmetric Encrypted Non-C2 Protocol Marker",
+    "path": "detection/sigma/t1048_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1048.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Asymmetric Encrypted Non-C2 Protocol Marker",
+    "path": "detection/sigma/t1048_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1048.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Unencrypted Non-C2 Protocol Marker",
+    "path": "detection/sigma/t1048_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1048:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Alternative Protocol Marker",
+    "path": "detection/sigma/t1048_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1049": {
+    "status": "exported",
+    "name": "System Network Connections Discovery",
+    "path": "detection/sigma/t1049.yml",
+    "level": "low"
+  },
+  "T1049:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Network Connections Discovery Marker",
+    "path": "detection/sigma/t1049_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1052.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration over USB Marker",
+    "path": "detection/sigma/t1052_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1052:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Physical Medium Marker",
+    "path": "detection/sigma/t1052_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1053.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "At Marker",
+    "path": "detection/sigma/t1053_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1053.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cron Marker",
+    "path": "detection/sigma/t1053_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1053.003:LINUX_CRON_MARKER": {
+    "status": "exported",
+    "name": "Cron Persistence Marker",
+    "path": "detection/sigma/t1053_003_linux_cron_marker.yml",
+    "level": "medium"
+  },
+  "T1053.005": {
+    "status": "exported",
+    "name": "Scheduled Task (sim)",
+    "path": "detection/sigma/t1053_005.yml",
+    "level": "medium"
+  },
+  "T1053.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Scheduled Task Marker",
+    "path": "detection/sigma/t1053_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1053.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Systemd Timers Marker",
+    "path": "detection/sigma/t1053_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1053.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Container Orchestration Job Marker",
+    "path": "detection/sigma/t1053_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1053:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Scheduled Task/Job Marker",
+    "path": "detection/sigma/t1053_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055": {
+    "status": "exported",
+    "name": "Process Injection Target Enumeration (sim)",
+    "path": "detection/sigma/t1055.yml",
+    "level": "high"
+  },
+  "T1055.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dynamic-link Library Injection Marker",
+    "path": "detection/sigma/t1055_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Portable Executable Injection Marker",
+    "path": "detection/sigma/t1055_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Thread Execution Hijacking Marker",
+    "path": "detection/sigma/t1055_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Asynchronous Procedure Call Marker",
+    "path": "detection/sigma/t1055_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Thread Local Storage Marker",
+    "path": "detection/sigma/t1055_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Ptrace System Calls Marker",
+    "path": "detection/sigma/t1055_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Proc Memory Marker",
+    "path": "detection/sigma/t1055_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Extra Window Memory Injection Marker",
+    "path": "detection/sigma/t1055_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Process Hollowing Marker",
+    "path": "detection/sigma/t1055_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Process Doppelg\u00e4nging Marker",
+    "path": "detection/sigma/t1055_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "VDSO Hijacking Marker",
+    "path": "detection/sigma/t1055_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055.015:CATALOG_STUB": {
+    "status": "exported",
+    "name": "ListPlanting Marker",
+    "path": "detection/sigma/t1055_015_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1055:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Process Injection Marker",
+    "path": "detection/sigma/t1055_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1056.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Keylogging Marker",
+    "path": "detection/sigma/t1056_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1056.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "GUI Input Capture Marker",
+    "path": "detection/sigma/t1056_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1056.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Portal Capture Marker",
+    "path": "detection/sigma/t1056_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1056.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credential API Hooking Marker",
+    "path": "detection/sigma/t1056_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1056:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Input Capture Marker",
+    "path": "detection/sigma/t1056_catalog_stub.yml",
+    "level": "informational"
   },
   "T1057": {
     "status": "exported",
@@ -23,11 +779,161 @@
     "path": "detection/sigma/t1057.yml",
     "level": "low"
   },
+  "T1057:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Process Discovery Marker",
+    "path": "detection/sigma/t1057_catalog_stub.yml",
+    "level": "informational"
+  },
   "T1059": {
     "status": "exported",
     "name": "Command and Scripting Interpreter (sim)",
     "path": "detection/sigma/t1059.yml",
     "level": "medium"
+  },
+  "T1059.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "PowerShell Marker",
+    "path": "detection/sigma/t1059_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.001:WINDOWS_POWERSHELL_ENCODED": {
+    "status": "exported",
+    "name": "PowerShell Encoded Command Marker",
+    "path": "detection/sigma/t1059_001_windows_powershell_encoded.yml",
+    "level": "medium"
+  },
+  "T1059.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "AppleScript Marker",
+    "path": "detection/sigma/t1059_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Command Shell Marker",
+    "path": "detection/sigma/t1059_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Unix Shell Marker",
+    "path": "detection/sigma/t1059_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.004:LINUX_SHELL_HISTORY_DISABLE": {
+    "status": "exported",
+    "name": "Unix Shell History Disable Marker",
+    "path": "detection/sigma/t1059_004_linux_shell_history_disable.yml",
+    "level": "medium"
+  },
+  "T1059.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Visual Basic Marker",
+    "path": "detection/sigma/t1059_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Python Marker",
+    "path": "detection/sigma/t1059_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "JavaScript Marker",
+    "path": "detection/sigma/t1059_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Device CLI Marker",
+    "path": "detection/sigma/t1059_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud API Marker",
+    "path": "detection/sigma/t1059_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "AutoHotKey & AutoIT Marker",
+    "path": "detection/sigma/t1059_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Lua Marker",
+    "path": "detection/sigma/t1059_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hypervisor CLI Marker",
+    "path": "detection/sigma/t1059_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Container CLI/API Marker",
+    "path": "detection/sigma/t1059_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1059:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Command and Scripting Interpreter Marker",
+    "path": "detection/sigma/t1059_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1068:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploitation for Privilege Escalation Marker",
+    "path": "detection/sigma/t1068_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1069.001": {
+    "status": "exported",
+    "name": "Permission Groups Discovery: Local Groups",
+    "path": "detection/sigma/t1069_001.yml",
+    "level": "low"
+  },
+  "T1069.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Groups Marker",
+    "path": "detection/sigma/t1069_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1069.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Groups Marker",
+    "path": "detection/sigma/t1069_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1069.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Groups Marker",
+    "path": "detection/sigma/t1069_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1069:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Permission Groups Discovery Marker",
+    "path": "detection/sigma/t1069_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.002:LINUX_LOG_CLEAR": {
+    "status": "exported",
+    "name": "Linux Log Clear Marker",
+    "path": "detection/sigma/t1070_002_linux_log_clear.yml",
+    "level": "high"
+  },
+  "T1070.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clear Command History Marker",
+    "path": "detection/sigma/t1070_003_catalog_stub.yml",
+    "level": "informational"
   },
   "T1070.004": {
     "status": "exported",
@@ -35,11 +941,185 @@
     "path": "detection/sigma/t1070_004.yml",
     "level": "low"
   },
+  "T1070.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "File Deletion Marker",
+    "path": "detection/sigma/t1070_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Share Connection Removal Marker",
+    "path": "detection/sigma/t1070_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Timestomp Marker",
+    "path": "detection/sigma/t1070_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clear Network Connection History and Configurations Marker",
+    "path": "detection/sigma/t1070_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clear Mailbox Data Marker",
+    "path": "detection/sigma/t1070_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clear Persistence Marker",
+    "path": "detection/sigma/t1070_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Relocate Malware Marker",
+    "path": "detection/sigma/t1070_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1070:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Indicator Removal Marker",
+    "path": "detection/sigma/t1070_catalog_stub.yml",
+    "level": "informational"
+  },
   "T1071.001": {
     "status": "exported",
     "name": "HTTP C2 Beaconing (sim)",
     "path": "detection/sigma/t1071_001.yml",
     "level": "medium"
+  },
+  "T1071.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Protocols Marker",
+    "path": "detection/sigma/t1071_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1071.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "File Transfer Protocols Marker",
+    "path": "detection/sigma/t1071_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1071.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Mail Protocols Marker",
+    "path": "detection/sigma/t1071_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1071.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DNS Marker",
+    "path": "detection/sigma/t1071_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1071.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Publish/Subscribe Protocols Marker",
+    "path": "detection/sigma/t1071_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1071:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Application Layer Protocol Marker",
+    "path": "detection/sigma/t1071_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1072:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Software Deployment Tools Marker",
+    "path": "detection/sigma/t1072_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1074.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Data Staging Marker",
+    "path": "detection/sigma/t1074_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1074.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Data Staging Marker",
+    "path": "detection/sigma/t1074_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1074:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Staged Marker",
+    "path": "detection/sigma/t1074_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1078.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Default Accounts Marker",
+    "path": "detection/sigma/t1078_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1078.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Accounts Marker",
+    "path": "detection/sigma/t1078_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1078.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Accounts Marker",
+    "path": "detection/sigma/t1078_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1078.004": {
+    "status": "exported",
+    "name": "Valid Accounts: Cloud Accounts (sim)",
+    "path": "detection/sigma/t1078_004.yml",
+    "level": "high"
+  },
+  "T1078.004:AWS_CONSOLE_LOGIN_SUCCESS": {
+    "status": "exported",
+    "name": "AWS Console Login Success Marker",
+    "path": "detection/sigma/t1078_004_aws_console_login_success.yml",
+    "level": "medium"
+  },
+  "T1078.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Accounts Marker",
+    "path": "detection/sigma/t1078_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1078.004:IDENTITY_RISKY_SIGNIN": {
+    "status": "exported",
+    "name": "Risky Cloud Sign-in Marker",
+    "path": "detection/sigma/t1078_004_identity_risky_signin.yml",
+    "level": "high"
+  },
+  "T1078:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Valid Accounts Marker",
+    "path": "detection/sigma/t1078_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1080:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Taint Shared Content Marker",
+    "path": "detection/sigma/t1080_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1082": {
+    "status": "exported",
+    "name": "System Information Discovery",
+    "path": "detection/sigma/t1082.yml",
+    "level": "low"
+  },
+  "T1082:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Information Discovery Marker",
+    "path": "detection/sigma/t1082_catalog_stub.yml",
+    "level": "informational"
   },
   "T1083": {
     "status": "exported",
@@ -47,11 +1127,1481 @@
     "path": "detection/sigma/t1083.yml",
     "level": "low"
   },
+  "T1083:CATALOG_STUB": {
+    "status": "exported",
+    "name": "File and Directory Discovery Marker",
+    "path": "detection/sigma/t1083_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1087.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Account Marker",
+    "path": "detection/sigma/t1087_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY": {
+    "status": "exported",
+    "name": "Linux Local Account Discovery Marker",
+    "path": "detection/sigma/t1087_001_linux_local_account_discovery.yml",
+    "level": "low"
+  },
+  "T1087.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Account Marker",
+    "path": "detection/sigma/t1087_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1087.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Account Marker",
+    "path": "detection/sigma/t1087_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1087.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Account Marker",
+    "path": "detection/sigma/t1087_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1087.004:M365_GROUP_ENUMERATION": {
+    "status": "exported",
+    "name": "M365 Group Enumeration Marker",
+    "path": "detection/sigma/t1087_004_m365_group_enumeration.yml",
+    "level": "low"
+  },
+  "T1087:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Account Discovery Marker",
+    "path": "detection/sigma/t1087_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1090.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Internal Proxy Marker",
+    "path": "detection/sigma/t1090_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1090.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "External Proxy Marker",
+    "path": "detection/sigma/t1090_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1090.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Multi-hop Proxy Marker",
+    "path": "detection/sigma/t1090_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1090.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Fronting Marker",
+    "path": "detection/sigma/t1090_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1090:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Proxy Marker",
+    "path": "detection/sigma/t1090_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1091:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Replication Through Removable Media Marker",
+    "path": "detection/sigma/t1091_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1092:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Communication Through Removable Media Marker",
+    "path": "detection/sigma/t1092_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1095:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Non-Application Layer Protocol Marker",
+    "path": "detection/sigma/t1095_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Additional Cloud Credentials Marker",
+    "path": "detection/sigma/t1098_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Additional Email Delegate Permissions Marker",
+    "path": "detection/sigma/t1098_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.003:AZURE_ROLE_ASSIGNMENT": {
+    "status": "exported",
+    "name": "Azure Role Assignment Marker",
+    "path": "detection/sigma/t1098_003_azure_role_assignment.yml",
+    "level": "high"
+  },
+  "T1098.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Additional Cloud Roles Marker",
+    "path": "detection/sigma/t1098_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.003:ENTRA_APP_ROLE_GRANT": {
+    "status": "exported",
+    "name": "Entra Application Role Grant Marker",
+    "path": "detection/sigma/t1098_003_entra_app_role_grant.yml",
+    "level": "high"
+  },
+  "T1098.004": {
+    "status": "exported",
+    "name": "SSH Authorized Keys (sim)",
+    "path": "detection/sigma/t1098_004.yml",
+    "level": "high"
+  },
+  "T1098.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SSH Authorized Keys Marker",
+    "path": "detection/sigma/t1098_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Device Registration Marker",
+    "path": "detection/sigma/t1098_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.005:SAAS_TOKEN_CREATED": {
+    "status": "exported",
+    "name": "SaaS OAuth Token Created Marker",
+    "path": "detection/sigma/t1098_005_saas_token_created.yml",
+    "level": "high"
+  },
+  "T1098.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Additional Container Cluster Roles Marker",
+    "path": "detection/sigma/t1098_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Additional Local or Domain Groups Marker",
+    "path": "detection/sigma/t1098_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1098:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Account Manipulation Marker",
+    "path": "detection/sigma/t1098_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1102.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dead Drop Resolver Marker",
+    "path": "detection/sigma/t1102_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1102.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Bidirectional Communication Marker",
+    "path": "detection/sigma/t1102_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1102.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "One-Way Communication Marker",
+    "path": "detection/sigma/t1102_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1102:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Service Marker",
+    "path": "detection/sigma/t1102_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1104:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Multi-Stage Channels Marker",
+    "path": "detection/sigma/t1104_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1105": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer (sim)",
+    "path": "detection/sigma/t1105.yml",
+    "level": "medium"
+  },
+  "T1105:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer Marker",
+    "path": "detection/sigma/t1105_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1105:LINUX_CURL_TOOL_TRANSFER": {
+    "status": "exported",
+    "name": "Curl Tool Transfer Marker",
+    "path": "detection/sigma/t1105_linux_curl_tool_transfer.yml",
+    "level": "medium"
+  },
+  "T1106:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Native API Marker",
+    "path": "detection/sigma/t1106_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1110": {
+    "status": "exported",
+    "name": "Brute Force Authentication Simulation",
+    "path": "detection/sigma/t1110.yml",
+    "level": "high"
+  },
+  "T1110.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Password Guessing Marker",
+    "path": "detection/sigma/t1110_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1110.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Password Cracking Marker",
+    "path": "detection/sigma/t1110_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1110.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Password Spraying Marker",
+    "path": "detection/sigma/t1110_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1110.003:M365_PASSWORD_SPRAY": {
+    "status": "exported",
+    "name": "M365 Password Spray Marker",
+    "path": "detection/sigma/t1110_003_m365_password_spray.yml",
+    "level": "high"
+  },
+  "T1110.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credential Stuffing Marker",
+    "path": "detection/sigma/t1110_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1110:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Brute Force Marker",
+    "path": "detection/sigma/t1110_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1111:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Multi-Factor Authentication Interception Marker",
+    "path": "detection/sigma/t1111_catalog_stub.yml",
+    "level": "informational"
+  },
   "T1112": {
     "status": "exported",
     "name": "Modify Registry (sim)",
     "path": "detection/sigma/t1112.yml",
     "level": "medium"
+  },
+  "T1112:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify Registry Marker",
+    "path": "detection/sigma/t1112_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1112:WINDOWS_REGISTRY_POLICY_CHANGE": {
+    "status": "exported",
+    "name": "Registry Policy Change Marker",
+    "path": "detection/sigma/t1112_windows_registry_policy_change.yml",
+    "level": "medium"
+  },
+  "T1113:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Screen Capture Marker",
+    "path": "detection/sigma/t1113_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1114.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Email Collection Marker",
+    "path": "detection/sigma/t1114_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1114.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Email Collection Marker",
+    "path": "detection/sigma/t1114_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1114.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Forwarding Rule Marker",
+    "path": "detection/sigma/t1114_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1114:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Collection Marker",
+    "path": "detection/sigma/t1114_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1115:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clipboard Data Marker",
+    "path": "detection/sigma/t1115_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1119:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Automated Collection Marker",
+    "path": "detection/sigma/t1119_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1120:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Peripheral Device Discovery Marker",
+    "path": "detection/sigma/t1120_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1123:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Audio Capture Marker",
+    "path": "detection/sigma/t1123_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1124:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Time Discovery Marker",
+    "path": "detection/sigma/t1124_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1125:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Video Capture Marker",
+    "path": "detection/sigma/t1125_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1127.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "MSBuild Marker",
+    "path": "detection/sigma/t1127_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1127.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "ClickOnce Marker",
+    "path": "detection/sigma/t1127_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1127.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "JamPlus Marker",
+    "path": "detection/sigma/t1127_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1127:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Trusted Developer Utilities Proxy Execution Marker",
+    "path": "detection/sigma/t1127_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1129:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Shared Modules Marker",
+    "path": "detection/sigma/t1129_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1132.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Standard Encoding Marker",
+    "path": "detection/sigma/t1132_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1132.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Non-Standard Encoding Marker",
+    "path": "detection/sigma/t1132_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1132:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Encoding Marker",
+    "path": "detection/sigma/t1132_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1133:CATALOG_STUB": {
+    "status": "exported",
+    "name": "External Remote Services Marker",
+    "path": "detection/sigma/t1133_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1134.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Token Impersonation/Theft Marker",
+    "path": "detection/sigma/t1134_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1134.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Create Process with Token Marker",
+    "path": "detection/sigma/t1134_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1134.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Make and Impersonate Token Marker",
+    "path": "detection/sigma/t1134_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1134.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Parent PID Spoofing Marker",
+    "path": "detection/sigma/t1134_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1134.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SID-History Injection Marker",
+    "path": "detection/sigma/t1134_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1134:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Access Token Manipulation Marker",
+    "path": "detection/sigma/t1134_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1135:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Share Discovery Marker",
+    "path": "detection/sigma/t1135_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1136.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Account Marker",
+    "path": "detection/sigma/t1136_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1136.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Account Marker",
+    "path": "detection/sigma/t1136_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1136.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Account Marker",
+    "path": "detection/sigma/t1136_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1136:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Create Account Marker",
+    "path": "detection/sigma/t1136_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Office Template Macros Marker",
+    "path": "detection/sigma/t1137_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Office Test Marker",
+    "path": "detection/sigma/t1137_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Outlook Forms Marker",
+    "path": "detection/sigma/t1137_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Outlook Home Page Marker",
+    "path": "detection/sigma/t1137_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Outlook Rules Marker",
+    "path": "detection/sigma/t1137_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Add-ins Marker",
+    "path": "detection/sigma/t1137_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1137:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Office Application Startup Marker",
+    "path": "detection/sigma/t1137_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1140:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Deobfuscate/Decode Files or Information Marker",
+    "path": "detection/sigma/t1140_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1176.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Browser Extensions Marker",
+    "path": "detection/sigma/t1176_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1176.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "IDE Extensions Marker",
+    "path": "detection/sigma/t1176_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1176:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Software Extensions Marker",
+    "path": "detection/sigma/t1176_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1185:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Browser Session Hijacking Marker",
+    "path": "detection/sigma/t1185_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1187:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Forced Authentication Marker",
+    "path": "detection/sigma/t1187_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1189:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Drive-by Compromise Marker",
+    "path": "detection/sigma/t1189_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1190:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploit Public-Facing Application Marker",
+    "path": "detection/sigma/t1190_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1195.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compromise Software Dependencies and Development Tools Marker",
+    "path": "detection/sigma/t1195_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1195.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compromise Software Supply Chain Marker",
+    "path": "detection/sigma/t1195_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1195.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compromise Hardware Supply Chain Marker",
+    "path": "detection/sigma/t1195_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1195:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Supply Chain Compromise Marker",
+    "path": "detection/sigma/t1195_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1197:CATALOG_STUB": {
+    "status": "exported",
+    "name": "BITS Jobs Marker",
+    "path": "detection/sigma/t1197_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1199:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Trusted Relationship Marker",
+    "path": "detection/sigma/t1199_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1200:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hardware Additions Marker",
+    "path": "detection/sigma/t1200_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1201:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Password Policy Discovery Marker",
+    "path": "detection/sigma/t1201_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1202:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Indirect Command Execution Marker",
+    "path": "detection/sigma/t1202_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1203:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploitation for Client Execution Marker",
+    "path": "detection/sigma/t1203_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1204.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malicious Link Marker",
+    "path": "detection/sigma/t1204_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1204.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malicious File Marker",
+    "path": "detection/sigma/t1204_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1204.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malicious Image Marker",
+    "path": "detection/sigma/t1204_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1204.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malicious Copy and Paste Marker",
+    "path": "detection/sigma/t1204_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1204.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malicious Library Marker",
+    "path": "detection/sigma/t1204_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1204:CATALOG_STUB": {
+    "status": "exported",
+    "name": "User Execution Marker",
+    "path": "detection/sigma/t1204_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1205.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Port Knocking Marker",
+    "path": "detection/sigma/t1205_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1205.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Socket Filters Marker",
+    "path": "detection/sigma/t1205_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1205:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Traffic Signaling Marker",
+    "path": "detection/sigma/t1205_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1207:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Rogue Domain Controller Marker",
+    "path": "detection/sigma/t1207_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1210:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploitation of Remote Services Marker",
+    "path": "detection/sigma/t1210_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1211:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploitation for Stealth Marker",
+    "path": "detection/sigma/t1211_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1212:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploitation for Credential Access Marker",
+    "path": "detection/sigma/t1212_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Confluence Marker",
+    "path": "detection/sigma/t1213_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Sharepoint Marker",
+    "path": "detection/sigma/t1213_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Code Repositories Marker",
+    "path": "detection/sigma/t1213_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213.003:GITHUB_PRIVATE_REPO_CLONE": {
+    "status": "exported",
+    "name": "GitHub Private Repository Clone Marker",
+    "path": "detection/sigma/t1213_003_github_private_repo_clone.yml",
+    "level": "medium"
+  },
+  "T1213.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Customer Relationship Management Software Marker",
+    "path": "detection/sigma/t1213_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Messaging Applications Marker",
+    "path": "detection/sigma/t1213_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Databases Marker",
+    "path": "detection/sigma/t1213_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data from Information Repositories Marker",
+    "path": "detection/sigma/t1213_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1213:SLACK_CHANNEL_EXPORT": {
+    "status": "exported",
+    "name": "Slack Channel Export Marker",
+    "path": "detection/sigma/t1213_slack_channel_export.yml",
+    "level": "medium"
+  },
+  "T1216.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "PubPrn Marker",
+    "path": "detection/sigma/t1216_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1216.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SyncAppvPublishingServer Marker",
+    "path": "detection/sigma/t1216_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1216:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Script Proxy Execution Marker",
+    "path": "detection/sigma/t1216_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1217:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Browser Information Discovery Marker",
+    "path": "detection/sigma/t1217_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compiled HTML File Marker",
+    "path": "detection/sigma/t1218_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Control Panel Marker",
+    "path": "detection/sigma/t1218_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "CMSTP Marker",
+    "path": "detection/sigma/t1218_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "InstallUtil Marker",
+    "path": "detection/sigma/t1218_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Mshta Marker",
+    "path": "detection/sigma/t1218_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Msiexec Marker",
+    "path": "detection/sigma/t1218_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Odbcconf Marker",
+    "path": "detection/sigma/t1218_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Regsvcs/Regasm Marker",
+    "path": "detection/sigma/t1218_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Regsvr32 Marker",
+    "path": "detection/sigma/t1218_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Rundll32 Marker",
+    "path": "detection/sigma/t1218_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.011:WINDOWS_RUNDLL32_PROXY": {
+    "status": "exported",
+    "name": "Rundll32 Proxy Execution Marker",
+    "path": "detection/sigma/t1218_011_windows_rundll32_proxy.yml",
+    "level": "medium"
+  },
+  "T1218.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Verclsid Marker",
+    "path": "detection/sigma/t1218_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Mavinject Marker",
+    "path": "detection/sigma/t1218_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "MMC Marker",
+    "path": "detection/sigma/t1218_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218.015:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Electron Applications Marker",
+    "path": "detection/sigma/t1218_015_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1218:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Binary Proxy Execution Marker",
+    "path": "detection/sigma/t1218_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1219.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "IDE Tunneling Marker",
+    "path": "detection/sigma/t1219_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1219.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Desktop Software Marker",
+    "path": "detection/sigma/t1219_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1219.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Access Hardware Marker",
+    "path": "detection/sigma/t1219_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1219:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Access Tools Marker",
+    "path": "detection/sigma/t1219_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1220:CATALOG_STUB": {
+    "status": "exported",
+    "name": "XSL Script Processing Marker",
+    "path": "detection/sigma/t1220_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1221:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Template Injection Marker",
+    "path": "detection/sigma/t1221_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1222.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Permissions Marker",
+    "path": "detection/sigma/t1222_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1222.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Linux and Mac Permissions Marker",
+    "path": "detection/sigma/t1222_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1222:CATALOG_STUB": {
+    "status": "exported",
+    "name": "File and Directory Permissions Modification Marker",
+    "path": "detection/sigma/t1222_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1480.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Environmental Keying Marker",
+    "path": "detection/sigma/t1480_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1480.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Mutual Exclusion Marker",
+    "path": "detection/sigma/t1480_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1480:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Execution Guardrails Marker",
+    "path": "detection/sigma/t1480_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1482:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Trust Discovery Marker",
+    "path": "detection/sigma/t1482_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1484.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Group Policy Modification Marker",
+    "path": "detection/sigma/t1484_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1484.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Trust Modification Marker",
+    "path": "detection/sigma/t1484_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1484:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain or Tenant Policy Modification Marker",
+    "path": "detection/sigma/t1484_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1485.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Lifecycle-Triggered Deletion Marker",
+    "path": "detection/sigma/t1485_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1485:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Destruction Marker",
+    "path": "detection/sigma/t1485_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1486": {
+    "status": "exported",
+    "name": "Data Encrypted for Impact (sim)",
+    "path": "detection/sigma/t1486.yml",
+    "level": "high"
+  },
+  "T1486:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Encrypted for Impact Marker",
+    "path": "detection/sigma/t1486_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1489:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Service Stop Marker",
+    "path": "detection/sigma/t1489_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1490:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Inhibit System Recovery Marker",
+    "path": "detection/sigma/t1490_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1491.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Internal Defacement Marker",
+    "path": "detection/sigma/t1491_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1491.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "External Defacement Marker",
+    "path": "detection/sigma/t1491_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1491:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Defacement Marker",
+    "path": "detection/sigma/t1491_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1495:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Firmware Corruption Marker",
+    "path": "detection/sigma/t1495_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1496.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compute Hijacking Marker",
+    "path": "detection/sigma/t1496_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1496.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Bandwidth Hijacking Marker",
+    "path": "detection/sigma/t1496_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1496.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SMS Pumping Marker",
+    "path": "detection/sigma/t1496_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1496.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Service Hijacking Marker",
+    "path": "detection/sigma/t1496_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1496:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Resource Hijacking Marker",
+    "path": "detection/sigma/t1496_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1497.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Checks Marker",
+    "path": "detection/sigma/t1497_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1497.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "User Activity Based Checks Marker",
+    "path": "detection/sigma/t1497_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1497.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Time Based Checks Marker",
+    "path": "detection/sigma/t1497_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1497:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Virtualization/Sandbox Evasion Marker",
+    "path": "detection/sigma/t1497_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1498.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Direct Network Flood Marker",
+    "path": "detection/sigma/t1498_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1498.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Reflection Amplification Marker",
+    "path": "detection/sigma/t1498_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1498:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Denial of Service Marker",
+    "path": "detection/sigma/t1498_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1499.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "OS Exhaustion Flood Marker",
+    "path": "detection/sigma/t1499_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1499.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Service Exhaustion Flood Marker",
+    "path": "detection/sigma/t1499_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1499.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Application Exhaustion Flood Marker",
+    "path": "detection/sigma/t1499_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1499.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Application or System Exploitation Marker",
+    "path": "detection/sigma/t1499_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1499:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Endpoint Denial of Service Marker",
+    "path": "detection/sigma/t1499_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SQL Stored Procedures Marker",
+    "path": "detection/sigma/t1505_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Transport Agent Marker",
+    "path": "detection/sigma/t1505_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Shell Marker",
+    "path": "detection/sigma/t1505_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "IIS Components Marker",
+    "path": "detection/sigma/t1505_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Terminal Services DLL Marker",
+    "path": "detection/sigma/t1505_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "vSphere Installation Bundles Marker",
+    "path": "detection/sigma/t1505_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1505:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Server Software Component Marker",
+    "path": "detection/sigma/t1505_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1518.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Security Software Discovery Marker",
+    "path": "detection/sigma/t1518_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1518.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Backup Software Discovery Marker",
+    "path": "detection/sigma/t1518_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1518:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Software Discovery Marker",
+    "path": "detection/sigma/t1518_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1525:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Implant Internal Image Marker",
+    "path": "detection/sigma/t1525_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1526:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Service Discovery Marker",
+    "path": "detection/sigma/t1526_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1528:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Steal Application Access Token Marker",
+    "path": "detection/sigma/t1528_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1529:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Shutdown/Reboot Marker",
+    "path": "detection/sigma/t1529_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1530": {
+    "status": "exported",
+    "name": "Data from Cloud Storage Object (sim)",
+    "path": "detection/sigma/t1530.yml",
+    "level": "medium"
+  },
+  "T1530:AWS_S3_OBJECT_BURST": {
+    "status": "exported",
+    "name": "AWS S3 Object Read Burst Marker",
+    "path": "detection/sigma/t1530_aws_s3_object_burst.yml",
+    "level": "medium"
+  },
+  "T1530:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data from Cloud Storage Marker",
+    "path": "detection/sigma/t1530_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1530:GOOGLE_DRIVE_BULK_DOWNLOAD": {
+    "status": "exported",
+    "name": "Google Drive Bulk Download Marker",
+    "path": "detection/sigma/t1530_google_drive_bulk_download.yml",
+    "level": "medium"
+  },
+  "T1531:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Account Access Removal Marker",
+    "path": "detection/sigma/t1531_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1534:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Internal Spearphishing Marker",
+    "path": "detection/sigma/t1534_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1535:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Unused/Unsupported Cloud Regions Marker",
+    "path": "detection/sigma/t1535_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1537:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Transfer Data to Cloud Account Marker",
+    "path": "detection/sigma/t1537_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1538:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Service Dashboard Marker",
+    "path": "detection/sigma/t1538_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1539:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Steal Web Session Cookie Marker",
+    "path": "detection/sigma/t1539_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1542.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Firmware Marker",
+    "path": "detection/sigma/t1542_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1542.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Component Firmware Marker",
+    "path": "detection/sigma/t1542_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1542.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Bootkit Marker",
+    "path": "detection/sigma/t1542_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1542.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "ROMMONkit Marker",
+    "path": "detection/sigma/t1542_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1542.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "TFTP Boot Marker",
+    "path": "detection/sigma/t1542_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1542:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Pre-OS Boot Marker",
+    "path": "detection/sigma/t1542_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1543.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Launch Agent Marker",
+    "path": "detection/sigma/t1543_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1543.002": {
+    "status": "exported",
+    "name": "Systemd User Service (sim)",
+    "path": "detection/sigma/t1543_002.yml",
+    "level": "medium"
+  },
+  "T1543.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Systemd Service Marker",
+    "path": "detection/sigma/t1543_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1543.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Service Marker",
+    "path": "detection/sigma/t1543_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1543.003:WINDOWS_SERVICE_CREATE": {
+    "status": "exported",
+    "name": "Windows Service Creation Marker",
+    "path": "detection/sigma/t1543_003_windows_service_create.yml",
+    "level": "high"
+  },
+  "T1543.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Launch Daemon Marker",
+    "path": "detection/sigma/t1543_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1543.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Container Service Marker",
+    "path": "detection/sigma/t1543_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1543:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Create or Modify System Process Marker",
+    "path": "detection/sigma/t1543_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Change Default File Association Marker",
+    "path": "detection/sigma/t1546_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Screensaver Marker",
+    "path": "detection/sigma/t1546_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Management Instrumentation Event Subscription Marker",
+    "path": "detection/sigma/t1546_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Unix Shell Configuration Modification Marker",
+    "path": "detection/sigma/t1546_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Trap Marker",
+    "path": "detection/sigma/t1546_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "LC_LOAD_DYLIB Addition Marker",
+    "path": "detection/sigma/t1546_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Netsh Helper DLL Marker",
+    "path": "detection/sigma/t1546_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Accessibility Features Marker",
+    "path": "detection/sigma/t1546_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "AppCert DLLs Marker",
+    "path": "detection/sigma/t1546_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "AppInit DLLs Marker",
+    "path": "detection/sigma/t1546_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Application Shimming Marker",
+    "path": "detection/sigma/t1546_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Image File Execution Options Injection Marker",
+    "path": "detection/sigma/t1546_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "PowerShell Profile Marker",
+    "path": "detection/sigma/t1546_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Emond Marker",
+    "path": "detection/sigma/t1546_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.015:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Component Object Model Hijacking Marker",
+    "path": "detection/sigma/t1546_015_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.016:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Installer Packages Marker",
+    "path": "detection/sigma/t1546_016_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.017:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Udev Rules Marker",
+    "path": "detection/sigma/t1546_017_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546.018:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Python Startup Hooks Marker",
+    "path": "detection/sigma/t1546_018_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1546:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Event Triggered Execution Marker",
+    "path": "detection/sigma/t1546_catalog_stub.yml",
+    "level": "informational"
   },
   "T1547.001": {
     "status": "exported",
@@ -59,10 +2609,1900 @@
     "path": "detection/sigma/t1547_001.yml",
     "level": "high"
   },
+  "T1547.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Registry Run Keys / Startup Folder Marker",
+    "path": "detection/sigma/t1547_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Authentication Package Marker",
+    "path": "detection/sigma/t1547_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Time Providers Marker",
+    "path": "detection/sigma/t1547_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Winlogon Helper DLL Marker",
+    "path": "detection/sigma/t1547_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Security Support Provider Marker",
+    "path": "detection/sigma/t1547_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Kernel Modules and Extensions Marker",
+    "path": "detection/sigma/t1547_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Re-opened Applications Marker",
+    "path": "detection/sigma/t1547_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "LSASS Driver Marker",
+    "path": "detection/sigma/t1547_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Shortcut Modification Marker",
+    "path": "detection/sigma/t1547_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Port Monitors Marker",
+    "path": "detection/sigma/t1547_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Print Processors Marker",
+    "path": "detection/sigma/t1547_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "XDG Autostart Entries Marker",
+    "path": "detection/sigma/t1547_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Active Setup Marker",
+    "path": "detection/sigma/t1547_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547.015:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Login Items Marker",
+    "path": "detection/sigma/t1547_015_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1547:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Boot or Logon Autostart Execution Marker",
+    "path": "detection/sigma/t1547_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Setuid and Setgid Marker",
+    "path": "detection/sigma/t1548_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Bypass User Account Control Marker",
+    "path": "detection/sigma/t1548_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Sudo and Sudo Caching Marker",
+    "path": "detection/sigma/t1548_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Elevated Execution with Prompt Marker",
+    "path": "detection/sigma/t1548_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Temporary Elevated Cloud Access Marker",
+    "path": "detection/sigma/t1548_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "TCC Manipulation Marker",
+    "path": "detection/sigma/t1548_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1548:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Abuse Elevation Control Mechanism Marker",
+    "path": "detection/sigma/t1548_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1550.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Application Access Token Marker",
+    "path": "detection/sigma/t1550_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1550.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Pass the Hash Marker",
+    "path": "detection/sigma/t1550_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1550.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Pass the Ticket Marker",
+    "path": "detection/sigma/t1550_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1550.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Session Cookie Marker",
+    "path": "detection/sigma/t1550_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1550:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Use Alternate Authentication Material Marker",
+    "path": "detection/sigma/t1550_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credentials In Files Marker",
+    "path": "detection/sigma/t1552_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credentials in Registry Marker",
+    "path": "detection/sigma/t1552_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Shell History Marker",
+    "path": "detection/sigma/t1552_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Private Keys Marker",
+    "path": "detection/sigma/t1552_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Instance Metadata API Marker",
+    "path": "detection/sigma/t1552_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Group Policy Preferences Marker",
+    "path": "detection/sigma/t1552_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Container API Marker",
+    "path": "detection/sigma/t1552_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Chat Messages Marker",
+    "path": "detection/sigma/t1552_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1552:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Unsecured Credentials Marker",
+    "path": "detection/sigma/t1552_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Gatekeeper Bypass Marker",
+    "path": "detection/sigma/t1553_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Code Signing Marker",
+    "path": "detection/sigma/t1553_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SIP and Trust Provider Hijacking Marker",
+    "path": "detection/sigma/t1553_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Install Root Certificate Marker",
+    "path": "detection/sigma/t1553_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Mark-of-the-Web Bypass Marker",
+    "path": "detection/sigma/t1553_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Code Signing Policy Modification Marker",
+    "path": "detection/sigma/t1553_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1553:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Subvert Trust Controls Marker",
+    "path": "detection/sigma/t1553_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1554:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compromise Host Software Binary Marker",
+    "path": "detection/sigma/t1554_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Keychain Marker",
+    "path": "detection/sigma/t1555_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Securityd Memory Marker",
+    "path": "detection/sigma/t1555_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credentials from Web Browsers Marker",
+    "path": "detection/sigma/t1555_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Credential Manager Marker",
+    "path": "detection/sigma/t1555_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Password Managers Marker",
+    "path": "detection/sigma/t1555_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Secrets Management Stores Marker",
+    "path": "detection/sigma/t1555_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1555:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credentials from Password Stores Marker",
+    "path": "detection/sigma/t1555_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Controller Authentication Marker",
+    "path": "detection/sigma/t1556_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Password Filter DLL Marker",
+    "path": "detection/sigma/t1556_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Pluggable Authentication Modules Marker",
+    "path": "detection/sigma/t1556_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Device Authentication Marker",
+    "path": "detection/sigma/t1556_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Reversible Encryption Marker",
+    "path": "detection/sigma/t1556_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Multi-Factor Authentication Marker",
+    "path": "detection/sigma/t1556_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hybrid Identity Marker",
+    "path": "detection/sigma/t1556_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Provider DLL Marker",
+    "path": "detection/sigma/t1556_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Conditional Access Policies Marker",
+    "path": "detection/sigma/t1556_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1556.009:OKTA_MFA_POLICY_WEAKEN": {
+    "status": "exported",
+    "name": "Okta MFA Policy Weaken Marker",
+    "path": "detection/sigma/t1556_009_okta_mfa_policy_weaken.yml",
+    "level": "high"
+  },
+  "T1556:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify Authentication Process Marker",
+    "path": "detection/sigma/t1556_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1557.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Name Resolution Poisoning and SMB Relay Marker",
+    "path": "detection/sigma/t1557_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1557.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "ARP Cache Poisoning Marker",
+    "path": "detection/sigma/t1557_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1557.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DHCP Spoofing Marker",
+    "path": "detection/sigma/t1557_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1557.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Evil Twin Marker",
+    "path": "detection/sigma/t1557_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1557:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Adversary-in-the-Middle Marker",
+    "path": "detection/sigma/t1557_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1558.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Golden Ticket Marker",
+    "path": "detection/sigma/t1558_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1558.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Silver Ticket Marker",
+    "path": "detection/sigma/t1558_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1558.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Kerberoasting Marker",
+    "path": "detection/sigma/t1558_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1558.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "AS-REP Roasting Marker",
+    "path": "detection/sigma/t1558_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1558.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Ccache Files Marker",
+    "path": "detection/sigma/t1558_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1558:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Steal or Forge Kerberos Tickets Marker",
+    "path": "detection/sigma/t1558_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1559.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Component Object Model Marker",
+    "path": "detection/sigma/t1559_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1559.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dynamic Data Exchange Marker",
+    "path": "detection/sigma/t1559_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1559.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "XPC Services Marker",
+    "path": "detection/sigma/t1559_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1559:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Inter-Process Communication Marker",
+    "path": "detection/sigma/t1559_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1560": {
+    "status": "exported",
+    "name": "Archive Collected Data (sim)",
+    "path": "detection/sigma/t1560.yml",
+    "level": "medium"
+  },
+  "T1560.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Archive via Utility Marker",
+    "path": "detection/sigma/t1560_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1560.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Archive via Library Marker",
+    "path": "detection/sigma/t1560_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1560.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Archive via Custom Method Marker",
+    "path": "detection/sigma/t1560_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1560:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Archive Collected Data Marker",
+    "path": "detection/sigma/t1560_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1561.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disk Content Wipe Marker",
+    "path": "detection/sigma/t1561_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1561.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disk Structure Wipe Marker",
+    "path": "detection/sigma/t1561_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1561:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disk Wipe Marker",
+    "path": "detection/sigma/t1561_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1563.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SSH Hijacking Marker",
+    "path": "detection/sigma/t1563_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1563.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "RDP Hijacking Marker",
+    "path": "detection/sigma/t1563_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1563:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Remote Service Session Hijacking Marker",
+    "path": "detection/sigma/t1563_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hidden Files and Directories Marker",
+    "path": "detection/sigma/t1564_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hidden Users Marker",
+    "path": "detection/sigma/t1564_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hidden Window Marker",
+    "path": "detection/sigma/t1564_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "NTFS File Attributes Marker",
+    "path": "detection/sigma/t1564_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hidden File System Marker",
+    "path": "detection/sigma/t1564_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Run Virtual Instance Marker",
+    "path": "detection/sigma/t1564_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "VBA Stomping Marker",
+    "path": "detection/sigma/t1564_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Hiding Rules Marker",
+    "path": "detection/sigma/t1564_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Resource Forking Marker",
+    "path": "detection/sigma/t1564_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Process Argument Spoofing Marker",
+    "path": "detection/sigma/t1564_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Ignore Process Interrupts Marker",
+    "path": "detection/sigma/t1564_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "File/Path Exclusions Marker",
+    "path": "detection/sigma/t1564_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Bind Mounts Marker",
+    "path": "detection/sigma/t1564_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Extended Attributes Marker",
+    "path": "detection/sigma/t1564_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1564:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hide Artifacts Marker",
+    "path": "detection/sigma/t1564_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1565.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Stored Data Manipulation Marker",
+    "path": "detection/sigma/t1565_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1565.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Transmitted Data Manipulation Marker",
+    "path": "detection/sigma/t1565_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1565.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Runtime Data Manipulation Marker",
+    "path": "detection/sigma/t1565_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1565:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data Manipulation Marker",
+    "path": "detection/sigma/t1565_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1566.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Attachment Marker",
+    "path": "detection/sigma/t1566_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1566.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Link Marker",
+    "path": "detection/sigma/t1566_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1566.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing via Service Marker",
+    "path": "detection/sigma/t1566_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1566.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Voice Marker",
+    "path": "detection/sigma/t1566_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1566:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Phishing Marker",
+    "path": "detection/sigma/t1566_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1567.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration to Code Repository Marker",
+    "path": "detection/sigma/t1567_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1567.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration to Cloud Storage Marker",
+    "path": "detection/sigma/t1567_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1567.002:SAAS_EXTERNAL_SHARE": {
+    "status": "exported",
+    "name": "SaaS External Share Marker",
+    "path": "detection/sigma/t1567_002_saas_external_share.yml",
+    "level": "high"
+  },
+  "T1567.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration to Text Storage Sites Marker",
+    "path": "detection/sigma/t1567_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1567.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Webhook Marker",
+    "path": "detection/sigma/t1567_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1567:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exfiltration Over Web Service Marker",
+    "path": "detection/sigma/t1567_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1568.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Fast Flux DNS Marker",
+    "path": "detection/sigma/t1568_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1568.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Generation Algorithms Marker",
+    "path": "detection/sigma/t1568_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1568.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DNS Calculation Marker",
+    "path": "detection/sigma/t1568_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1568:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dynamic Resolution Marker",
+    "path": "detection/sigma/t1568_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1569.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Launchctl Marker",
+    "path": "detection/sigma/t1569_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1569.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Service Execution Marker",
+    "path": "detection/sigma/t1569_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1569.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Systemctl Marker",
+    "path": "detection/sigma/t1569_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1569:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Services Marker",
+    "path": "detection/sigma/t1569_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1570:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Lateral Tool Transfer Marker",
+    "path": "detection/sigma/t1570_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1571:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Non-Standard Port Marker",
+    "path": "detection/sigma/t1571_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1572:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Protocol Tunneling Marker",
+    "path": "detection/sigma/t1572_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1573.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Symmetric Cryptography Marker",
+    "path": "detection/sigma/t1573_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1573.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Asymmetric Cryptography Marker",
+    "path": "detection/sigma/t1573_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1573:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Encrypted Channel Marker",
+    "path": "detection/sigma/t1573_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DLL Marker",
+    "path": "detection/sigma/t1574_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dylib Hijacking Marker",
+    "path": "detection/sigma/t1574_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Executable Installer File Permissions Weakness Marker",
+    "path": "detection/sigma/t1574_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Dynamic Linker Hijacking Marker",
+    "path": "detection/sigma/t1574_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Path Interception by PATH Environment Variable Marker",
+    "path": "detection/sigma/t1574_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Path Interception by Search Order Hijacking Marker",
+    "path": "detection/sigma/t1574_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.009:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Path Interception by Unquoted Path Marker",
+    "path": "detection/sigma/t1574_009_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.010:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Services File Permissions Weakness Marker",
+    "path": "detection/sigma/t1574_010_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.011:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Services Registry Permissions Weakness Marker",
+    "path": "detection/sigma/t1574_011_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.012:CATALOG_STUB": {
+    "status": "exported",
+    "name": "COR_PROFILER Marker",
+    "path": "detection/sigma/t1574_012_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.013:CATALOG_STUB": {
+    "status": "exported",
+    "name": "KernelCallbackTable Marker",
+    "path": "detection/sigma/t1574_013_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574.014:CATALOG_STUB": {
+    "status": "exported",
+    "name": "AppDomainManager Marker",
+    "path": "detection/sigma/t1574_014_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1574:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hijack Execution Flow Marker",
+    "path": "detection/sigma/t1574_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1578.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Create Snapshot Marker",
+    "path": "detection/sigma/t1578_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1578.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Create Cloud Instance Marker",
+    "path": "detection/sigma/t1578_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1578.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Delete Cloud Instance Marker",
+    "path": "detection/sigma/t1578_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1578.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Revert Cloud Instance Marker",
+    "path": "detection/sigma/t1578_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1578.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify Cloud Compute Configurations Marker",
+    "path": "detection/sigma/t1578_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1578:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify Cloud Compute Infrastructure Marker",
+    "path": "detection/sigma/t1578_catalog_stub.yml",
+    "level": "informational"
+  },
   "T1580": {
     "status": "exported",
-    "name": "Cloud Infrastructure Discovery (AWS, sim)",
+    "name": "Cloud Infrastructure Discovery (multi-provider, sim)",
     "path": "detection/sigma/t1580.yml",
     "level": "low"
+  },
+  "T1580:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Infrastructure Discovery Marker",
+    "path": "detection/sigma/t1580_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1580:GCP_PROJECT_ENUMERATION": {
+    "status": "exported",
+    "name": "GCP Project Enumeration Marker",
+    "path": "detection/sigma/t1580_gcp_project_enumeration.yml",
+    "level": "low"
+  },
+  "T1583.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domains Marker",
+    "path": "detection/sigma/t1583_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DNS Server Marker",
+    "path": "detection/sigma/t1583_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Virtual Private Server Marker",
+    "path": "detection/sigma/t1583_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Server Marker",
+    "path": "detection/sigma/t1583_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Botnet Marker",
+    "path": "detection/sigma/t1583_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Services Marker",
+    "path": "detection/sigma/t1583_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Serverless Marker",
+    "path": "detection/sigma/t1583_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malvertising Marker",
+    "path": "detection/sigma/t1583_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1583:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Acquire Infrastructure Marker",
+    "path": "detection/sigma/t1583_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domains Marker",
+    "path": "detection/sigma/t1584_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DNS Server Marker",
+    "path": "detection/sigma/t1584_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Virtual Private Server Marker",
+    "path": "detection/sigma/t1584_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Server Marker",
+    "path": "detection/sigma/t1584_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Botnet Marker",
+    "path": "detection/sigma/t1584_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Services Marker",
+    "path": "detection/sigma/t1584_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.007:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Serverless Marker",
+    "path": "detection/sigma/t1584_007_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584.008:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Devices Marker",
+    "path": "detection/sigma/t1584_008_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1584:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compromise Infrastructure Marker",
+    "path": "detection/sigma/t1584_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1585.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Social Media Accounts Marker",
+    "path": "detection/sigma/t1585_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1585.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Accounts Marker",
+    "path": "detection/sigma/t1585_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1585.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Accounts Marker",
+    "path": "detection/sigma/t1585_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1585:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Establish Accounts Marker",
+    "path": "detection/sigma/t1585_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1586.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Social Media Accounts Marker",
+    "path": "detection/sigma/t1586_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1586.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Accounts Marker",
+    "path": "detection/sigma/t1586_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1586.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Accounts Marker",
+    "path": "detection/sigma/t1586_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1586:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Compromise Accounts Marker",
+    "path": "detection/sigma/t1586_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1587.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malware Marker",
+    "path": "detection/sigma/t1587_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1587.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Code Signing Certificates Marker",
+    "path": "detection/sigma/t1587_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1587.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Digital Certificates Marker",
+    "path": "detection/sigma/t1587_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1587.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploits Marker",
+    "path": "detection/sigma/t1587_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1587:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Develop Capabilities Marker",
+    "path": "detection/sigma/t1587_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Malware Marker",
+    "path": "detection/sigma/t1588_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Tool Marker",
+    "path": "detection/sigma/t1588_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Code Signing Certificates Marker",
+    "path": "detection/sigma/t1588_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Digital Certificates Marker",
+    "path": "detection/sigma/t1588_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploits Marker",
+    "path": "detection/sigma/t1588_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Vulnerabilities Marker",
+    "path": "detection/sigma/t1588_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1588:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Obtain Capabilities Marker",
+    "path": "detection/sigma/t1588_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1589.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Credentials Marker",
+    "path": "detection/sigma/t1589_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1589.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Addresses Marker",
+    "path": "detection/sigma/t1589_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1589.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Employee Names Marker",
+    "path": "detection/sigma/t1589_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1589:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Gather Victim Identity Information Marker",
+    "path": "detection/sigma/t1589_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Domain Properties Marker",
+    "path": "detection/sigma/t1590_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DNS Marker",
+    "path": "detection/sigma/t1590_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Trust Dependencies Marker",
+    "path": "detection/sigma/t1590_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Topology Marker",
+    "path": "detection/sigma/t1590_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "IP Addresses Marker",
+    "path": "detection/sigma/t1590_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Security Appliances Marker",
+    "path": "detection/sigma/t1590_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1590:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Gather Victim Network Information Marker",
+    "path": "detection/sigma/t1590_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1591.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Determine Physical Locations Marker",
+    "path": "detection/sigma/t1591_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1591.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Business Relationships Marker",
+    "path": "detection/sigma/t1591_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1591.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Identify Business Tempo Marker",
+    "path": "detection/sigma/t1591_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1591.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Identify Roles Marker",
+    "path": "detection/sigma/t1591_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1591:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Gather Victim Org Information Marker",
+    "path": "detection/sigma/t1591_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1592.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hardware Marker",
+    "path": "detection/sigma/t1592_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1592.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Software Marker",
+    "path": "detection/sigma/t1592_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1592.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Firmware Marker",
+    "path": "detection/sigma/t1592_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1592.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Client Configurations Marker",
+    "path": "detection/sigma/t1592_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1592:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Gather Victim Host Information Marker",
+    "path": "detection/sigma/t1592_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1593.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Social Media Marker",
+    "path": "detection/sigma/t1593_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1593.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Search Engines Marker",
+    "path": "detection/sigma/t1593_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1593.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Code Repositories Marker",
+    "path": "detection/sigma/t1593_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1593:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Search Open Websites/Domains Marker",
+    "path": "detection/sigma/t1593_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1594:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Search Victim-Owned Websites Marker",
+    "path": "detection/sigma/t1594_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1595.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Scanning IP Blocks Marker",
+    "path": "detection/sigma/t1595_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1595.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Vulnerability Scanning Marker",
+    "path": "detection/sigma/t1595_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1595.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Wordlist Scanning Marker",
+    "path": "detection/sigma/t1595_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1595:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Active Scanning Marker",
+    "path": "detection/sigma/t1595_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1596.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "DNS/Passive DNS Marker",
+    "path": "detection/sigma/t1596_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1596.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "WHOIS Marker",
+    "path": "detection/sigma/t1596_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1596.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Digital Certificates Marker",
+    "path": "detection/sigma/t1596_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1596.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "CDNs Marker",
+    "path": "detection/sigma/t1596_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1596.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Scan Databases Marker",
+    "path": "detection/sigma/t1596_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1596:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Search Open Technical Databases Marker",
+    "path": "detection/sigma/t1596_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1597.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Threat Intel Vendors Marker",
+    "path": "detection/sigma/t1597_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1597.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Purchase Technical Data Marker",
+    "path": "detection/sigma/t1597_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1597:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Search Closed Sources Marker",
+    "path": "detection/sigma/t1597_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1598.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Service Marker",
+    "path": "detection/sigma/t1598_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1598.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Attachment Marker",
+    "path": "detection/sigma/t1598_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1598.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Link Marker",
+    "path": "detection/sigma/t1598_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1598.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Spearphishing Voice Marker",
+    "path": "detection/sigma/t1598_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1598:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Phishing for Information Marker",
+    "path": "detection/sigma/t1598_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1599.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Address Translation Traversal Marker",
+    "path": "detection/sigma/t1599_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1599:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Boundary Bridging Marker",
+    "path": "detection/sigma/t1599_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1600.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Reduce Key Space Marker",
+    "path": "detection/sigma/t1600_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1600.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disable Crypto Hardware Marker",
+    "path": "detection/sigma/t1600_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1600:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Weaken Encryption Marker",
+    "path": "detection/sigma/t1600_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1601.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Patch System Image Marker",
+    "path": "detection/sigma/t1601_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1601.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Downgrade System Image Marker",
+    "path": "detection/sigma/t1601_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1601:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify System Image Marker",
+    "path": "detection/sigma/t1601_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1602.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SNMP (MIB Dump) Marker",
+    "path": "detection/sigma/t1602_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1602.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Device Configuration Dump Marker",
+    "path": "detection/sigma/t1602_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1602:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Data from Configuration Repository Marker",
+    "path": "detection/sigma/t1602_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1606.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Web Cookies Marker",
+    "path": "detection/sigma/t1606_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1606.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SAML Tokens Marker",
+    "path": "detection/sigma/t1606_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1606:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Forge Web Credentials Marker",
+    "path": "detection/sigma/t1606_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Upload Malware Marker",
+    "path": "detection/sigma/t1608_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Upload Tool Marker",
+    "path": "detection/sigma/t1608_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Install Digital Certificate Marker",
+    "path": "detection/sigma/t1608_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Drive-by Target Marker",
+    "path": "detection/sigma/t1608_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Link Target Marker",
+    "path": "detection/sigma/t1608_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "SEO Poisoning Marker",
+    "path": "detection/sigma/t1608_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1608:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Stage Capabilities Marker",
+    "path": "detection/sigma/t1608_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1609:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Container Administration Command Marker",
+    "path": "detection/sigma/t1609_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1610:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Deploy Container Marker",
+    "path": "detection/sigma/t1610_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1611:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Escape to Host Marker",
+    "path": "detection/sigma/t1611_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1611:KUBERNETES_POD_CREATE": {
+    "status": "exported",
+    "name": "Kubernetes Pod Create Marker",
+    "path": "detection/sigma/t1611_kubernetes_pod_create.yml",
+    "level": "medium"
+  },
+  "T1612:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Build Image on Host Marker",
+    "path": "detection/sigma/t1612_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1613:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Container and Resource Discovery Marker",
+    "path": "detection/sigma/t1613_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1614.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Language Discovery Marker",
+    "path": "detection/sigma/t1614_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1614:CATALOG_STUB": {
+    "status": "exported",
+    "name": "System Location Discovery Marker",
+    "path": "detection/sigma/t1614_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1615:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Group Policy Discovery Marker",
+    "path": "detection/sigma/t1615_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1619:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Storage Object Discovery Marker",
+    "path": "detection/sigma/t1619_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1620:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Reflective Code Loading Marker",
+    "path": "detection/sigma/t1620_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1621:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Multi-Factor Authentication Request Generation Marker",
+    "path": "detection/sigma/t1621_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1622:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Debugger Evasion Marker",
+    "path": "detection/sigma/t1622_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1647:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Plist File Modification Marker",
+    "path": "detection/sigma/t1647_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1648:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Serverless Execution Marker",
+    "path": "detection/sigma/t1648_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1649:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Steal or Forge Authentication Certificates Marker",
+    "path": "detection/sigma/t1649_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1650:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Acquire Access Marker",
+    "path": "detection/sigma/t1650_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1651:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Administration Command Marker",
+    "path": "detection/sigma/t1651_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1652:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Device Driver Discovery Marker",
+    "path": "detection/sigma/t1652_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1653:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Power Settings Marker",
+    "path": "detection/sigma/t1653_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1654:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Log Enumeration Marker",
+    "path": "detection/sigma/t1654_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1657:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Financial Theft Marker",
+    "path": "detection/sigma/t1657_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1659:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Content Injection Marker",
+    "path": "detection/sigma/t1659_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1665:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Hide Infrastructure Marker",
+    "path": "detection/sigma/t1665_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1666:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify Cloud Resource Hierarchy Marker",
+    "path": "detection/sigma/t1666_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1667:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Bombing Marker",
+    "path": "detection/sigma/t1667_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1668:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exclusive Control Marker",
+    "path": "detection/sigma/t1668_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1669:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Wi-Fi Networks Marker",
+    "path": "detection/sigma/t1669_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1671:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Application Integration Marker",
+    "path": "detection/sigma/t1671_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1673:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Virtual Machine Discovery Marker",
+    "path": "detection/sigma/t1673_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1674:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Input Injection Marker",
+    "path": "detection/sigma/t1674_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1675:CATALOG_STUB": {
+    "status": "exported",
+    "name": "ESXi Administration Command Marker",
+    "path": "detection/sigma/t1675_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1677:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Poisoned Pipeline Execution Marker",
+    "path": "detection/sigma/t1677_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1678:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Delay Execution Marker",
+    "path": "detection/sigma/t1678_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1679:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Selective Exclusion Marker",
+    "path": "detection/sigma/t1679_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1680:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Local Storage Discovery Marker",
+    "path": "detection/sigma/t1680_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1681:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Search Threat Vendor Data Marker",
+    "path": "detection/sigma/t1681_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1682:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Query Public AI Services Marker",
+    "path": "detection/sigma/t1682_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1683.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Written Content Marker",
+    "path": "detection/sigma/t1683_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1683.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Audio-Visual Content Marker",
+    "path": "detection/sigma/t1683_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1683:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Generate Content Marker",
+    "path": "detection/sigma/t1683_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1684.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Impersonation Marker",
+    "path": "detection/sigma/t1684_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1684.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Email Spoofing Marker",
+    "path": "detection/sigma/t1684_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1684:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Social Engineering Marker",
+    "path": "detection/sigma/t1684_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disable or Modify Windows Event Log Marker",
+    "path": "detection/sigma/t1685_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disable or Modify Cloud Log Marker",
+    "path": "detection/sigma/t1685_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Modify or Spoof Tool UI Marker",
+    "path": "detection/sigma/t1685_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685.004:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disable or Modify Linux Audit System Log Marker",
+    "path": "detection/sigma/t1685_004_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685.005:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clear Windows Event Logs Marker",
+    "path": "detection/sigma/t1685_005_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685.006:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Clear Linux or Mac System Logs Marker",
+    "path": "detection/sigma/t1685_006_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1685:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disable or Modify Tools Marker",
+    "path": "detection/sigma/t1685_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1686.001:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Cloud Firewall Marker",
+    "path": "detection/sigma/t1686_001_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1686.002:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Network Device Firewall Marker",
+    "path": "detection/sigma/t1686_002_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1686.003:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Windows Host Firewall Marker",
+    "path": "detection/sigma/t1686_003_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1686:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Disable or Modify System Firewall Marker",
+    "path": "detection/sigma/t1686_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1687:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Exploitation for Defense Impairment Marker",
+    "path": "detection/sigma/t1687_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1688:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Safe Mode Boot Marker",
+    "path": "detection/sigma/t1688_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1689:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Downgrade Attack Marker",
+    "path": "detection/sigma/t1689_catalog_stub.yml",
+    "level": "informational"
+  },
+  "T1690:CATALOG_STUB": {
+    "status": "exported",
+    "name": "Prevent Command History Logging Marker",
+    "path": "detection/sigma/t1690_catalog_stub.yml",
+    "level": "informational"
   }
 }

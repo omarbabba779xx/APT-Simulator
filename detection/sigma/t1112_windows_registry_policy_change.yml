@@ -1,0 +1,18 @@
+title: Registry Policy Change Marker
+id: c1112000-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: windows
+  category: registry_set
+detection:
+  selection:
+    TargetObject|contains: \Policies\
+    Details|contains: APT_SIM
+  condition: selection
+falsepositives:
+- group policy updates
+level: medium
+references:
+- https://attack.mitre.org/techniques/1112/
+tags:
+- attack.t1112

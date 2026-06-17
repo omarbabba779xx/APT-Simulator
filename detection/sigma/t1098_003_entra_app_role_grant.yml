@@ -1,0 +1,17 @@
+title: Entra Application Role Grant Marker
+id: c1098003-0002-0000-0000-000000000001
+status: experimental
+logsource:
+  product: azure
+  service: auditlogs
+detection:
+  selection:
+    activityDisplayName|contains: Add app role assignment
+  condition: selection
+falsepositives:
+- application onboarding
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/003/
+tags:
+- attack.t1098.003

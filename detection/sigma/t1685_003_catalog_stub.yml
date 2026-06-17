@@ -1,0 +1,17 @@
+title: Modify or Spoof Tool UI Marker
+id: stub-t1685_003
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1685.003
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1685/003/
+tags:
+- attack.t1685.003

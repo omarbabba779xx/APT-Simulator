@@ -1,0 +1,106 @@
+pack: windows
+ttps:
+  - id: T1059.001:WINDOWS_POWERSHELL_ENCODED
+    attack_id: T1059.001
+    name: PowerShell Encoded Command Marker
+    tactic: execution
+    platforms: [windows]
+    safety_tier: marker-only
+    params_schema:
+      command: {type: string, default: Get-Process}
+    sigma:
+      title: PowerShell Encoded Command Marker
+      id: c1059001-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: windows, category: process_creation}
+      detection:
+        selection: {Image|endswith: "\\powershell.exe", CommandLine|contains: "-enc"}
+        condition: selection
+      falsepositives: [administration scripts]
+      level: medium
+    synthetic_events:
+      - category: process_creation
+        Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        CommandLine: powershell.exe -NoProfile -enc {command}
+  - id: T1047:WINDOWS_WMI_PROCESS_CREATE
+    attack_id: T1047
+    name: WMI Process Create Marker
+    tactic: execution
+    platforms: [windows]
+    safety_tier: marker-only
+    params_schema:
+      target: {type: string, default: localhost}
+    sigma:
+      title: WMI Process Creation Marker
+      id: c1047000-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: windows, category: process_creation}
+      detection:
+        selection: {Image|endswith: "\\wmic.exe", CommandLine|contains: "process call create"}
+        condition: selection
+      falsepositives: [legacy administration]
+      level: medium
+    synthetic_events:
+      - category: process_creation
+        Image: C:\Windows\System32\wbem\wmic.exe
+        CommandLine: wmic /node:{target} process call create calc.exe
+  - id: T1218.011:WINDOWS_RUNDLL32_PROXY
+    attack_id: T1218.011
+    name: Rundll32 Proxy Execution Marker
+    tactic: defense_evasion
+    platforms: [windows]
+    safety_tier: marker-only
+    sigma:
+      title: Rundll32 Proxy Execution Marker
+      id: c1218011-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: windows, category: process_creation}
+      detection:
+        selection: {Image|endswith: "\\rundll32.exe", CommandLine|contains: ".dll,"}
+        condition: selection
+      falsepositives: [control panel applets]
+      level: medium
+    synthetic_events:
+      - category: process_creation
+        Image: C:\Windows\System32\rundll32.exe
+        CommandLine: rundll32.exe benign.dll,Control_RunDLL
+  - id: T1543.003:WINDOWS_SERVICE_CREATE
+    attack_id: T1543.003
+    name: Windows Service Creation Marker
+    tactic: persistence
+    platforms: [windows]
+    safety_tier: marker-only
+    sigma:
+      title: Windows Service Creation Marker
+      id: c1543003-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: windows, category: process_creation}
+      detection:
+        selection: {Image|endswith: "\\sc.exe", CommandLine|contains|all: ["create", "binPath"]}
+        condition: selection
+      falsepositives: [software deployment]
+      level: high
+    synthetic_events:
+      - category: process_creation
+        Image: C:\Windows\System32\sc.exe
+        CommandLine: sc.exe create AptSimSvc binPath= C:\Windows\Temp\aptsim.exe
+  - id: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
+    attack_id: T1112
+    name: Registry Policy Change Marker
+    tactic: defense_evasion
+    platforms: [windows]
+    safety_tier: marker-only
+    sigma:
+      title: Registry Policy Change Marker
+      id: c1112000-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: windows, category: registry_set}
+      detection:
+        selection: {TargetObject|contains: "\\Policies\\", Details|contains: "APT_SIM"}
+        condition: selection
+      falsepositives: [group policy updates]
+      level: medium
+    synthetic_events:
+      - category: registry_set
+        TargetObject: HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+        Details: APT_SIM_MARKER_ONLY

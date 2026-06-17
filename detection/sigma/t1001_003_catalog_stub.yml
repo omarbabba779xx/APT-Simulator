@@ -1,0 +1,17 @@
+title: Protocol or Service Impersonation Marker
+id: stub-t1001_003
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1001.003
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1001/003/
+tags:
+- attack.t1001.003

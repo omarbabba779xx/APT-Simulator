@@ -1,0 +1,24 @@
+title: Scheduled Task Creation via schtasks (APT Simulator T1053.005)
+id: a1053005-0000-0000-0000-000000001053
+status: experimental
+description: "Detects schtasks /create \u2014 the primary Windows mechanism for scheduling\
+  \ persistent payload execution."
+references:
+- https://attack.mitre.org/techniques/T1053/005
+tags:
+- attack.persistence
+- attack.t1053.005
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+    - \schtasks.exe
+    CommandLine|contains:
+    - /create
+  condition: selection
+falsepositives:
+- Software installers
+- IT automation scripts
+level: medium

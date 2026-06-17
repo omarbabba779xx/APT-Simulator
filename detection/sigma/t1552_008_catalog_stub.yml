@@ -1,0 +1,17 @@
+title: Chat Messages Marker
+id: stub-t1552_008
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1552.008
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1552/008/
+tags:
+- attack.t1552.008

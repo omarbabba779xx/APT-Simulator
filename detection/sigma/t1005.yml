@@ -1,0 +1,31 @@
+title: Sensitive File Search from Local System (APT Simulator T1005)
+id: a1005000-0000-0000-0000-000000001005
+status: experimental
+description: "Detects filesystem enumeration targeting credential and key files \u2014\
+  \ a pre-exfiltration collection step used by most APT groups."
+references:
+- https://attack.mitre.org/techniques/T1005
+tags:
+- attack.collection
+- attack.t1005
+logsource:
+  category: process_creation
+detection:
+  selection_win:
+    CommandLine|contains:
+    - .pem
+    - .key
+    - .pfx
+    - password
+    - credential
+  selection_posix:
+    CommandLine|contains:
+    - id_rsa
+    - .pem
+    - .key
+    - password
+  condition: 1 of selection_*
+falsepositives:
+- Developer tooling
+- certificate management scripts
+level: medium

@@ -1,0 +1,17 @@
+title: Re-opened Applications Marker
+id: stub-t1547_007
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1547.007
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1547/007/
+tags:
+- attack.t1547.007

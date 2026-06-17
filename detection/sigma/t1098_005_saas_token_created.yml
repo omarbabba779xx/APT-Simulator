@@ -1,0 +1,17 @@
+title: SaaS OAuth Token Created Marker
+id: c1098005-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: saas
+detection:
+  selection:
+    action|contains: oauth
+    result: success
+  condition: selection
+falsepositives:
+- approved app install
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/005/
+tags:
+- attack.t1098.005

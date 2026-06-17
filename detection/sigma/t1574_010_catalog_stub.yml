@@ -1,0 +1,17 @@
+title: Services File Permissions Weakness Marker
+id: stub-t1574_010
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1574.010
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1574/010/
+tags:
+- attack.t1574.010

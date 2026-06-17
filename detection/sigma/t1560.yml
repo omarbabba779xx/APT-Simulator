@@ -1,0 +1,37 @@
+title: "Suspicious Archive Creation \u2014 Data Staging (APT Simulator T1560)"
+id: b1560000-0000-0000-0000-000000001560
+status: stable
+description: Detects zip/rar/7z archive creation in temp or staging directories by
+  non-standard processes, indicative of data collection before exfiltration.
+references:
+- https://attack.mitre.org/techniques/T1560
+tags:
+- attack.collection
+- attack.t1560
+- attack.t1560.001
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|endswith:
+    - .zip
+    - .7z
+    - .rar
+    - .tar.gz
+    TargetFilename|contains:
+    - \AppData\
+    - \Temp\
+    - \Users\Public\
+  filter_legitimate:
+    Image|endswith:
+    - \7zFM.exe
+    - \WinRAR.exe
+    - \7z.exe
+    User|contains:
+    - SYSTEM
+  condition: selection and not filter_legitimate
+falsepositives:
+- Legitimate archiving tools run by users
+- Backup software
+level: medium

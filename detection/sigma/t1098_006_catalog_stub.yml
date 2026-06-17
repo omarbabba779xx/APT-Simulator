@@ -1,0 +1,17 @@
+title: Additional Container Cluster Roles Marker
+id: stub-t1098_006
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1098.006
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1098/006/
+tags:
+- attack.t1098.006

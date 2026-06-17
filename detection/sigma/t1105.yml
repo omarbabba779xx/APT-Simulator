@@ -1,0 +1,28 @@
+title: Suspicious Executable Dropped in Temp Dir (APT Simulator T1105)
+id: a1105000-0000-0000-0000-000000001105
+status: experimental
+description: "Detects executable files written to the system temp directory \u2014\
+  \ a common staging location for downloaded tools and payloads."
+references:
+- https://attack.mitre.org/techniques/T1105
+tags:
+- attack.command_and_control
+- attack.t1105
+logsource:
+  category: file_event
+detection:
+  selection_win:
+    TargetFilename|contains:
+    - \Temp\apt_sim_
+    TargetFilename|endswith:
+    - .exe
+    - .dll
+    - .bat
+    - .ps1
+  selection_posix:
+    TargetFilename|contains:
+    - /tmp/apt_sim_
+  condition: 1 of selection_*
+falsepositives:
+- Legitimate installers staging to temp
+level: medium

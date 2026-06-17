@@ -38,10 +38,15 @@ jobs:
 
       - name: Type check (mypy)
         run: mypy orchestrator agent ttps --ignore-missing-imports
-        continue-on-error: true
+
+      - name: Dashboard JavaScript syntax
+        run: node --check orchestrator/static/app.js
 
       - name: Test
         run: pytest -q --tb=short
+
+      - name: Conformance counts and marker scan
+        run: pytest -q tests/test_conformance.py --tb=short
 
       - name: Verify Sigma export
         run: |

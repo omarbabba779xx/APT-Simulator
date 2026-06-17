@@ -1,0 +1,106 @@
+pack: saas
+ttps:
+  - id: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+    attack_id: T1213.003
+    name: GitHub Private Repository Clone Marker
+    tactic: collection
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: GitHub Private Repository Clone Marker
+      id: c1213003-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: github}
+      detection:
+        selection: {action: git.clone, visibility: private}
+        condition: selection
+      falsepositives: [developer activity]
+      level: medium
+    synthetic_events:
+      - category: saas
+        action: git.clone
+        visibility: private
+        actor: lab-user
+  - id: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+    attack_id: T1530
+    name: Google Drive Bulk Download Marker
+    tactic: collection
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Google Drive Bulk Download Marker
+      id: c1530000-0003-0000-0000-000000000001
+      status: experimental
+      logsource: {product: google_workspace}
+      detection:
+        selection: {events.name: download, doc_type: document}
+        condition: selection
+      falsepositives: [legal export]
+      level: medium
+    synthetic_events:
+      - category: saas
+        events.name: download
+        doc_type: document
+        actor.email: lab.user@example.com
+  - id: T1213:SLACK_CHANNEL_EXPORT
+    attack_id: T1213
+    name: Slack Channel Export Marker
+    tactic: collection
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: Slack Channel Export Marker
+      id: c1213000-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: slack}
+      detection:
+        selection: {action: channel_export_started}
+        condition: selection
+      falsepositives: [compliance export]
+      level: medium
+    synthetic_events:
+      - category: saas
+        action: channel_export_started
+        user: lab-user
+  - id: T1567.002:SAAS_EXTERNAL_SHARE
+    attack_id: T1567.002
+    name: SaaS External Share Marker
+    tactic: exfiltration
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: SaaS External Share Marker
+      id: c1567002-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: saas}
+      detection:
+        selection: {sharing.visibility: external, action|contains: share}
+        condition: selection
+      falsepositives: [partner collaboration]
+      level: high
+    synthetic_events:
+      - category: saas
+        sharing.visibility: external
+        action: file_share_created
+        actor: lab-user
+  - id: T1098.005:SAAS_TOKEN_CREATED
+    attack_id: T1098.005
+    name: SaaS OAuth Token Created Marker
+    tactic: persistence
+    platforms: [windows, linux, darwin]
+    safety_tier: marker-only
+    sigma:
+      title: SaaS OAuth Token Created Marker
+      id: c1098005-0001-0000-0000-000000000001
+      status: experimental
+      logsource: {product: saas}
+      detection:
+        selection: {action|contains: oauth, result: success}
+        condition: selection
+      falsepositives: [approved app install]
+      level: high
+    synthetic_events:
+      - category: saas
+        action: oauth_token_created
+        result: success
+        actor: lab-user

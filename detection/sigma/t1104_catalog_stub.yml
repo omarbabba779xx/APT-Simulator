@@ -1,0 +1,17 @@
+title: Multi-Stage Channels Marker
+id: stub-t1104
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1104
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1104/
+tags:
+- attack.t1104

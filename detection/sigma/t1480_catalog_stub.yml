@@ -1,0 +1,17 @@
+title: Execution Guardrails Marker
+id: stub-t1480
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1480
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1480/
+tags:
+- attack.t1480

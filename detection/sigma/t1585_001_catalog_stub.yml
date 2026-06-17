@@ -1,0 +1,17 @@
+title: Social Media Accounts Marker
+id: stub-t1585_001
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1585.001
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1585/001/
+tags:
+- attack.t1585.001

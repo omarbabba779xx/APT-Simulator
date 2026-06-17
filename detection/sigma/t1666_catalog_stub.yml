@@ -1,0 +1,17 @@
+title: Modify Cloud Resource Hierarchy Marker
+id: stub-t1666
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1666
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1666/
+tags:
+- attack.t1666

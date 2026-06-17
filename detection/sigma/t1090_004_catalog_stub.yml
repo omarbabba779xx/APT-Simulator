@@ -1,0 +1,17 @@
+title: Domain Fronting Marker
+id: stub-t1090_004
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1090.004
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1090/004/
+tags:
+- attack.t1090.004

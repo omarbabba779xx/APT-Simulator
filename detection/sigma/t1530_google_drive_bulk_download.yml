@@ -1,0 +1,17 @@
+title: Google Drive Bulk Download Marker
+id: c1530000-0003-0000-0000-000000000001
+status: experimental
+logsource:
+  product: google_workspace
+detection:
+  selection:
+    events.name: download
+    doc_type: document
+  condition: selection
+falsepositives:
+- legal export
+level: medium
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530

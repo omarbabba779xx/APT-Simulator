@@ -1,0 +1,17 @@
+title: Print Processors Marker
+id: stub-t1547_012
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1547.012
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1547/012/
+tags:
+- attack.t1547.012

@@ -13,6 +13,7 @@ import yaml
 
 import ttps  # noqa: F401  (triggers registration)
 from ttps.base import registry
+from ttps.catalog import slugify
 
 
 app = typer.Typer(no_args_is_help=True)
@@ -36,7 +37,7 @@ def export(out_dir: str = "detection/sigma") -> None:
         if rule is None:
             coverage[attack_id] = {"status": "no_rule", "name": ttp.name}
             continue
-        slug = attack_id.lower().replace(".", "_")
+        slug = slugify(attack_id)
         path = out / f"{slug}.yml"
         path.write_text(yaml.safe_dump(rule, sort_keys=False), encoding="utf-8")
         coverage[attack_id] = {

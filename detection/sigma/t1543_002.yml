@@ -1,0 +1,22 @@
+title: Systemd User Unit File Created (APT Simulator T1543.002)
+id: a1543002-0000-0000-0000-000000001543
+status: experimental
+description: Detects creation of user-scope systemd .service files.
+references:
+- https://attack.mitre.org/techniques/T1543/002
+tags:
+- attack.persistence
+- attack.t1543.002
+logsource:
+  category: file_event
+  product: linux
+detection:
+  selection:
+    TargetFilename|contains:
+    - /.config/systemd/user/
+    TargetFilename|endswith:
+    - .service
+  condition: selection
+falsepositives:
+- Legitimate user-installed services
+level: medium

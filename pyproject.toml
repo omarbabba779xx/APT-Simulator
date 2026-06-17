@@ -53,6 +53,10 @@ transpile = [
 [project.scripts]
 apt-orchestrator = "orchestrator.main:cli"
 apt-agent = "agent.main:cli"
+apt-detection-matrix = "orchestrator.detection_matrix:app"
+apt-scenario-builder = "orchestrator.scenario_builder:app"
+apt-attack-import = "orchestrator.attack_catalog_import:app"
+apt-campaign = "orchestrator.campaign:app"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
@@ -60,6 +64,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["orchestrator*", "agent*", "ttps*"]
+
+[tool.setuptools.package-data]
+ttps = ["catalog/*.yaml"]
 
 [tool.ruff]
 line-length = 100

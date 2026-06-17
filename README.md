@@ -1,159 +1,257 @@
 # APT Simulator
 
-Defensive Advanced Persistent Threat emulation framework. Built for purple team exercises, detection engineering, and SOC training in **authorized lab environments only**.
+APT Simulator is a defensive ATT&CK emulation and detection-engineering lab project. It is built for authorized purple-team exercises, SOC training, SIEM rule validation, and offline telemetry testing.
 
-## Mission
+It does not run destructive malware. The catalog-scale coverage added in this repository is marker-only and dry-run oriented by default.
 
-Replay realistic adversary behavior chains (mapped to MITRE ATT&CK) so blue teams can validate detections, tune SIEM rules, and measure coverage gaps — without using real malware.
+## Exact Current Counts
 
-## Non-goals
+- 751 TTPs
+- 2,511 loaded scenarios
+- 11 classic YAML scenarios
+- 2,500 scenarios loaded from one declarative pack
+- 15,680,015,680 generable scenario variants
+- 751 Sigma rules
+- 14 ATT&CK tactics covered
 
-- Not a weaponized offensive tool. Payloads are simulated artifacts, not destructive code.
-- Not for use against systems you do not own or have written authorization to test.
-- Not a replacement for full red team engagement.
+The 2,511 loaded scenarios are available through the orchestrator and dashboard. The 15,680,015,680 variants are deterministic variants that can be generated or previewed by offset and stride; they are not stored as individual files.
 
-## Architecture
+## What This Project Does
 
+- Loads ATT&CK-mapped TTPs from Python modules and catalog YAML.
+- Runs scenario DAGs through a FastAPI orchestrator and beaconing agents.
+- Provides a browser dashboard for coverage, scenario selection, campaign runs, reports, and event feed.
+- Exports Sigma coverage, raw telemetry fixtures, ECS fixtures, OCSF fixtures, and simple SIEM query sketches.
+- Builds scenario batches from deterministic variant space.
+- Produces JSON and HTML reports for runs and campaigns.
+
+## What This Project Does Not Do
+
+- It is not an offensive framework.
+- It is not intended for systems without written authorization.
+- It does not store billions of scenario files.
+- It does not contact cloud providers for the marker-only cloud simulations.
+- It does not replace a full red-team engagement.
+
+## Safety Model
+
+- Dry-run parameters are enabled by default for generated scenarios.
+- Marker-only TTPs produce benign telemetry and cleanup metadata.
+- A central safety policy blocks higher-risk modes unless explicitly allowed.
+- The orchestrator has a killswitch endpoint and file-based stop condition.
+- Agents are intended for lab hosts defined by configuration.
+- Audit logs record orchestrator and task activity.
+
+## Project Layout
+
+```text
+orchestrator/   FastAPI app, planner, dashboard API, reports, scenario loader
+agent/          Beacon agent and local runner
+ttps/           TTP registry, Python TTPs, catalog-backed TTP packs
+scenarios/      11 classic scenarios plus generated_variant_pack.yaml
+detection/      Sigma rules, coverage metadata, fixture/query export targets
+profiles/       Actor profile inputs
+config/         Default runtime and safety configuration
+tests/          Unit, API, dashboard, coverage, and conformance tests
+docs/           Supporting architecture and roadmap notes
 ```
-+-------------------+        +---------------------+
-|  Scenario YAML    | -----> |  Orchestrator       |
-|  (DSL)            |        |  (FastAPI)          |
-+-------------------+        +----------+----------+
-                                        |
-                          +-------------+-------------+
-                          |             |             |
-                     +----v---+    +----v---+    +----v---+
-                     | Agent  |    | Agent  |    | Agent  |
-                     | Win/Lin|    | Win/Lin|    | Win/Lin|
-                     +--------+    +--------+    +--------+
-                          |             |             |
-                       (TTPs executed inside lab VM only)
-                          |             |             |
-                          +------+------+------+------+
-                                 |
-                       +---------v---------+
-                       | Telemetry / JSONL |
-                       | (SIEM-compatible) |
-                       +-------------------+
-```
 
-## Safety guardrails
-
-1. **Kill-switch**: presence of `data/STOP` or env `APT_SIM_STOP=1` halts all agents within one beacon cycle.
-2. **Lab whitelist**: agents refuse to run if hostname/IP is not in `config/lab_whitelist.yaml`.
-3. **Signed payloads**: every TTP payload signed with Ed25519. Agents verify before execution.
-4. **TTL auto-uninstall**: agents self-terminate after configured TTL without orchestrator heartbeat.
-5. **Simulation-only Impact**: destructive tactics (T1485, T1486) write benign marker files, never real data.
-6. **Audit log**: hash-chained JSONL of every action; tampering detectable.
-
-## Quick start
+## Install
 
 ```bash
-# 1. Install
 python -m venv .venv
-. .venv/Scripts/activate   # Windows
+. .venv/Scripts/activate
 pip install -e ".[dev]"
-
-# 2. Generate signing keys (one-time)
-python -m orchestrator.core.signer init
-
-# 3. Add this host to lab whitelist
-edit config/lab_whitelist.yaml
-
-# 4. Start orchestrator
-apt-orchestrator serve
-
-# 5. In another terminal — run agent
-apt-agent run --server http://127.0.0.1:8000
-
-# 6. Launch a scenario
-curl -X POST http://127.0.0.1:8000/scenarios/run \
-     -H "Content-Type: application/json" \
-     -d @scenarios/basic_recon.yaml
 ```
 
-## Project layout
-
-```
-orchestrator/   FastAPI server, planner, kill-switch, audit, DSL loader
-agent/          Beacon agent (Windows / Linux)
-ttps/           TTP plugin library, mapped to MITRE ATT&CK IDs
-scenarios/      YAML scenario definitions
-detection/      Generated Sigma rules + detection coverage reports
-config/         Defaults + lab whitelist
-tests/          pytest suite
-docs/           Architecture + threat model
-```
-
-## MITRE ATT&CK coverage (Phase 1 + 2 + 3)
-
-| Tactic               | TTP                                | ATT&CK ID  | Platforms             |
-|----------------------|------------------------------------|------------|-----------------------|
-| Discovery            | System Owner/User Discovery        | T1033      | all                   |
-| Discovery            | File and Directory Discovery       | T1083      | all                   |
-| Discovery            | Process Discovery                  | T1057      | all                   |
-| Discovery            | Network Config Discovery           | T1016      | all                   |
-| Discovery            | Network Connections Discovery      | T1049      | all                   |
-| Discovery            | Cloud Infrastructure Discovery     | T1580      | all (cloud creds req) |
-| Execution            | Command Interpreter (sim)          | T1059      | all                   |
-| Persistence          | Registry Run Key (sim, Windows)    | T1547.001  | windows               |
-| Persistence          | Scheduled Task (sim, Windows)      | T1053.005  | windows               |
-| Persistence          | SSH Authorized Keys (sim)          | T1098.004  | linux/macOS           |
-| Persistence          | Systemd User Service (sim)         | T1543.002  | linux                 |
-| Credential Access    | Credential Target Enumeration      | T1003      | all                   |
-| Defense Evasion      | Obfuscated File Artifact (sim)     | T1027      | all                   |
-| Defense Evasion      | Indicator Removal: File Deletion   | T1070.004  | all                   |
-| Defense Evasion      | Modify Registry (sim, Windows)     | T1112      | windows               |
-| Command & Control    | HTTP C2 Beaconing (sim)            | T1071.001  | all                   |
-| Command & Control    | Ingress Tool Transfer (sim)        | T1105      | all                   |
-| Collection           | Data from Local System (sim)       | T1005      | all                   |
-| Exfiltration         | Exfil Over C2 Channel (sim)        | T1041      | all                   |
-| Impact               | Data Encrypted for Impact (sim)    | T1486      | all                   |
-
-Each TTP ships a Sigma rule, synthetic SIEM events, and cleanup method.
-22 TTPs across 9 tactics. Full roadmap in `docs/ROADMAP.md`.
-
-## Key Features
-
-- **ATT&CK Navigator Export** — `GET /coverage/navigator` returns a full Navigator v4 layer JSON. Import directly into [ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/) to visualize coverage.
-- **Adversary Profiles** — 4 built-in profiles (APT29, FIN7, Lazarus, APT41) in `profiles/`. `POST /profiles/{name}/generate` generates a scenario matching that actor's documented behaviour.
-- **Profile-Driven Scenario Generator** — `python -m orchestrator.profile_gen generate apt29 --steps 8`
-- **Standalone Agent** — `apt-agent run-local scenarios/basic_recon.yaml --dry-run` runs TTPs without an orchestrator (offline CI mode).
-- **Metrics API** — `GET /metrics` returns run counts, TTP success rates, agent breakdown.
-- **Live Audit Feed** — Dashboard WebSocket panel shows every audit event in real time.
-- **Step Detail Modal** — Click any run row in the dashboard to see per-step timing, output, and errors.
-
-## CLI Reference
+On Linux or macOS:
 
 ```bash
-# Start orchestrator
-apt-orchestrator serve
-
-# Run a scenario locally (no orchestrator needed)
-apt-agent run-local scenarios/basic_recon.yaml --skip-safety
-
-# Export ATT&CK Navigator layer
-python -m orchestrator.navigator_export export --out layer.json
-
-# List adversary profiles
-python -m orchestrator.profile_gen list
-
-# Generate a scenario from a profile
-python -m orchestrator.profile_gen generate lazarus --steps 10 --out scenarios/lazarus_gen.yaml
-
-# Export Sigma rules
-python -m orchestrator.sigma_export export --out detection/sigma/
-
-# Fuzz a random scenario
-python -m orchestrator.fuzz generate --seed 42
-
-# Replay audit log
-python -m orchestrator.replay list-runs
-
-# Detection diff
-python -m orchestrator.detection_diff verify --run-id <id>
+python -m venv .venv
+. .venv/bin/activate
+pip install -e ".[dev]"
 ```
+
+## Run The Dashboard
+
+```bash
+python -m orchestrator.main serve --host 127.0.0.1 --port 8000
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000/dashboard/
+```
+
+The dashboard includes:
+
+- Overview metrics.
+- Scenario Library with actor, difficulty, platform, source, and kind filters.
+- Clickable ATT&CK matrix.
+- TTP catalog filters.
+- Scenario preview and batch preview.
+- Campaign Runner for 10, 50, or 100 selected scenarios.
+- Campaign pause, resume, and retry-failed actions.
+- Run and campaign JSON/HTML report links.
+- Detection score view.
+- Live event feed.
+
+## API Checks
+
+Health and exact loaded scenario count:
+
+```bash
+curl http://127.0.0.1:8000/healthz
+```
+
+Scenario library:
+
+```bash
+curl http://127.0.0.1:8000/scenario-library
+curl "http://127.0.0.1:8000/scenario-library?source=generated%20variant&platform=windows"
+```
+
+Variant-space count:
+
+```bash
+curl http://127.0.0.1:8000/scenario-builder/space
+```
+
+Preview one scenario:
+
+```bash
+curl "http://127.0.0.1:8000/scenario-builder/preview?actor=cloud-intrusion&difficulty=realistic&steps=12&seed=1&platforms=windows,linux,darwin"
+```
+
+Preview a scenario batch:
+
+```bash
+curl "http://127.0.0.1:8000/scenario-builder/batch-preview?count=25&offset=0&stride=6272006"
+```
+
+Run one loaded scenario:
+
+```bash
+curl -X POST http://127.0.0.1:8000/scenarios/run \
+  -H "Content-Type: application/json" \
+  -d "{\"name\":\"basic_recon\"}"
+```
+
+Start a campaign:
+
+```bash
+curl -X POST http://127.0.0.1:8000/campaigns/run \
+  -H "Content-Type: application/json" \
+  -d "{\"count\":10,\"source\":\"generated variant\"}"
+```
+
+Campaign reports:
+
+```bash
+curl http://127.0.0.1:8000/reports/campaigns/<campaign_id>.json
+curl http://127.0.0.1:8000/reports/campaigns/<campaign_id>.html
+```
+
+Run reports:
+
+```bash
+curl http://127.0.0.1:8000/reports/runs/<run_id>.json
+curl http://127.0.0.1:8000/reports/runs/<run_id>.html
+```
+
+## CLI Examples
+
+Count the variant space:
+
+```bash
+python -m orchestrator.scenario_builder count-variants
+python -m orchestrator.campaign count-variants
+```
+
+Generate a single scenario:
+
+```bash
+python -m orchestrator.scenario_builder generate \
+  --actor cloud-intrusion \
+  --difficulty realistic \
+  --steps 12 \
+  --seed 1 \
+  --out scenarios/generated_campaign.yaml
+```
+
+Generate a bounded scenario batch:
+
+```bash
+python -m orchestrator.campaign build-variants \
+  --count 1000 \
+  --offset 0 \
+  --stride 6272006 \
+  --out scenarios/generated_variants.yaml
+```
+
+Export Sigma rules:
+
+```bash
+python -m orchestrator.sigma_export export --out detection/sigma
+```
+
+Export detection matrix fixtures and query sketches:
+
+```bash
+python -m orchestrator.detection_matrix fixtures --out-dir detection/fixtures
+python -m orchestrator.detection_matrix queries --out-dir detection/queries
+```
+
+Run a local dry-run style scenario without the orchestrator:
+
+```bash
+python -m agent.main run-local scenarios/basic_recon.yaml --dry-run
+```
+
+## Testing
+
+Run the full test suite:
+
+```bash
+pytest -q
+```
+
+Run linting:
+
+```bash
+ruff check .
+```
+
+Run type checks:
+
+```bash
+mypy orchestrator agent ttps
+```
+
+Run JavaScript syntax check:
+
+```bash
+node --check orchestrator/static/app.js
+```
+
+Conformance tests verify:
+
+- TTP count is exactly 751.
+- Loaded scenario count is exactly 2,511.
+- README count statements match the current implementation.
+- Public text files do not include forbidden public tooling markers.
+
+## Loaded Scenario Model
+
+The repository keeps source control compact:
+
+- `scenarios/*.yaml` contains 11 classic scenario files.
+- `scenarios/generated_variant_pack.yaml` declares a 2,500-scenario pack.
+- The loader expands that pack at startup into selectable scenarios.
+
+This is why the dashboard shows 2,511 loaded scenarios while the repository does not contain 2,511 separate scenario files.
 
 ## License
 
-MIT — see `LICENSE`. Includes ethical use notice.
+MIT. See `LICENSE`.

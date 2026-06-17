@@ -1,0 +1,18 @@
+title: Kubernetes Pod Create Marker
+id: c1611000-0001-0000-0000-000000000001
+status: experimental
+logsource:
+  product: kubernetes
+  service: audit
+detection:
+  selection:
+    verb: create
+    objectRef.resource: pods
+  condition: selection
+falsepositives:
+- deployment controllers
+level: medium
+references:
+- https://attack.mitre.org/techniques/1611/
+tags:
+- attack.t1611

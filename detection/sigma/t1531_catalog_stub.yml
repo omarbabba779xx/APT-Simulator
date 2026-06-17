@@ -1,0 +1,17 @@
+title: Account Access Removal Marker
+id: stub-t1531
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1531
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

@@ -1,0 +1,28 @@
+title: Local Group Enumeration (APT Simulator T1069.001)
+id: a1069001-0000-0000-0000-000000001069
+status: experimental
+description: "Detects enumeration of local security groups \u2014 a common post-exploitation\
+  \ step to identify privileged accounts before lateral movement."
+references:
+- https://attack.mitre.org/techniques/T1069/001
+tags:
+- attack.discovery
+- attack.t1069.001
+logsource:
+  category: process_creation
+detection:
+  selection_win:
+    Image|endswith:
+    - \net.exe
+    - \net1.exe
+    CommandLine|contains:
+    - localgroup
+  selection_posix:
+    CommandLine|contains:
+    - getent group
+    - dscl . -list /Groups
+  condition: 1 of selection_*
+falsepositives:
+- IT admin scripts
+- configuration management tools
+level: low

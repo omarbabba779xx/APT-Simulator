@@ -1,0 +1,17 @@
+title: Browser Fingerprint Marker
+id: stub-t1036_012
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1036.012
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1036/012/
+tags:
+- attack.t1036.012

@@ -1,0 +1,17 @@
+title: Trusted Relationship Marker
+id: stub-t1199
+status: experimental
+logsource:
+  category: generic
+detection:
+  selection:
+    attack_id: T1199
+    _sim: APT_SIM_CATALOG_TTP
+  condition: selection
+falsepositives:
+- simulator-generated marker events
+level: informational
+references:
+- https://attack.mitre.org/techniques/1199/
+tags:
+- attack.t1199
