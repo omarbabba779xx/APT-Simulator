@@ -63,16 +63,18 @@ def scenario_builder_space(_claims=require_role("viewer")) -> dict[str, object]:
 def preview_scenario_batch(
     count: int = Query(25, ge=1, le=200),
     offset: int = Query(0, ge=0),
+    stride: int = Query(1, ge=1),
     _claims=require_role("viewer"),
 ) -> dict[str, object]:
     try:
-        scenarios = build_scenario_batch(count=count, offset=offset, max_count=200)
+        scenarios = build_scenario_batch(count=count, offset=offset, stride=stride, max_count=200)
     except ValueError as exc:
         raise HTTPException(400, str(exc)) from exc
     for scenario in scenarios:
         Scenario(**scenario).validate_dag()
     return {
         "offset": offset,
+        "stride": stride,
         "count": len(scenarios),
         "space": scenario_variant_space(),
         "scenarios": scenarios,

@@ -493,8 +493,9 @@ function renderPreview(error = "") {
 async function previewBatch() {
   const count = byId("batch-count").value;
   const offset = byId("batch-offset").value;
+  const stride = byId("batch-stride").value;
   setStatus("Batch loading", "neutral");
-  const params = new URLSearchParams({ count, offset });
+  const params = new URLSearchParams({ count, offset, stride });
   try {
     state.batch = await api(`/scenario-builder/batch-preview?${params.toString()}`);
     setStatus("Batch ready", "ok");

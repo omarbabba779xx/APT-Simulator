@@ -42,9 +42,10 @@ def build_variants(
     out: str = "scenarios/generated_variants.yaml",
     count: int = 1000,
     offset: int = 0,
+    stride: int = 1,
 ) -> None:
     """Build a bounded queue slice from all scenario variants."""
-    queue = build_scenario_batch(count=count, offset=offset)
+    queue = build_scenario_batch(count=count, offset=offset, stride=stride)
     out_path = Path(out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(yaml.safe_dump({"campaign": queue}, sort_keys=False), encoding="utf-8")

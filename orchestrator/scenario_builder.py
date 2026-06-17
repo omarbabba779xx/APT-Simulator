@@ -186,6 +186,7 @@ def build_scenario_batch(
     count: int,
     *,
     offset: int = 0,
+    stride: int = 1,
     actors: list[str] | None = None,
     difficulties: list[str] | None = None,
     max_steps: int = MAX_VARIANT_STEPS,
@@ -197,9 +198,11 @@ def build_scenario_batch(
         raise ValueError("count must be >= 1")
     if count > max_count:
         raise ValueError(f"count must be <= {max_count}")
+    if stride < 1:
+        raise ValueError("stride must be >= 1")
     return [
         build_scenario_variant(
-            offset + idx,
+            offset + (idx * stride),
             actors=actors,
             difficulties=difficulties,
             max_steps=max_steps,
@@ -285,10 +288,11 @@ def count_variants() -> None:
 def batch(
     count: int = typer.Option(100),
     offset: int = typer.Option(0),
+    stride: int = typer.Option(1),
     out: str = typer.Option("scenarios/generated_variants.yaml"),
 ) -> None:
     """Generate a bounded queue slice from the full variant space."""
-    scenarios = build_scenario_batch(count=count, offset=offset)
+    scenarios = build_scenario_batch(count=count, offset=offset, stride=stride)
     out_path = Path(out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(yaml.safe_dump({"campaign": scenarios}, sort_keys=False), encoding="utf-8")

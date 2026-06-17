@@ -35,6 +35,15 @@ def test_coverage_endpoint(tmp_path) -> None:
     assert isinstance(body, dict)
 
 
+def test_loaded_scenarios_include_variant_pack(tmp_path) -> None:
+    client = _client(tmp_path)
+    health = client.get("/healthz").json()
+    assert health["scenarios_loaded"] == 636
+    scenarios = client.get("/scenarios").json()
+    assert len(scenarios) == 636
+    assert any(name.startswith("apt29_beginner_") for name in scenarios)
+
+
 def test_ttps_listing(tmp_path) -> None:
     client = _client(tmp_path)
     r = client.get("/ttps")
@@ -73,10 +82,14 @@ def test_scenario_builder_space(tmp_path) -> None:
 
 def test_scenario_builder_batch_preview(tmp_path) -> None:
     client = _client(tmp_path)
-    r = client.get("/scenario-builder/batch-preview", params={"count": 3, "offset": 100})
+    r = client.get(
+        "/scenario-builder/batch-preview",
+        params={"count": 3, "offset": 100, "stride": 25088025},
+    )
     assert r.status_code == 200
     body = r.json()
     assert body["count"] == 3
     assert body["offset"] == 100
+    assert body["stride"] == 25088025
     assert len(body["scenarios"]) == 3
     assert len({scenario["name"] for scenario in body["scenarios"]}) == 3
