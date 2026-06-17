@@ -1,0 +1,20 @@
+title: Acquire Infrastructure Variant 054 Marker
+id: 1cf85833-c508-59d6-ac87-dbbbc56fb913
+status: experimental
+description: Detects simulator telemetry for Acquire Infrastructure variant 054.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1583
+    apt_sim.variant: attack_variant_054
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/
+tags:
+- attack.t1583

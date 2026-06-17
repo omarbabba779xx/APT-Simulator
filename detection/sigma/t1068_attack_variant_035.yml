@@ -1,0 +1,21 @@
+title: Exploitation for Privilege Escalation Variant 035 Marker
+id: e8068f78-1c2a-555f-a446-dc96e8b68bb6
+status: experimental
+description: Detects simulator telemetry for Exploitation for Privilege Escalation
+  variant 035.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1068
+    apt_sim.variant: attack_variant_035
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1068/
+tags:
+- attack.t1068

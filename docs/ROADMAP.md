@@ -36,7 +36,7 @@
 - [x] **Standalone agent local-run mode** — `apt-agent run-local <scenario.yaml>` (no orchestrator needed)
 - [x] **Metrics endpoint** — `GET /metrics` (run stats, TTP success rates, agent breakdown)
 - [x] APT41 Linux intrusion scenario (full kill-chain with collection + exfil)
-- [x] 167 tests covering all features
+- [x] pytest suite covering current features
 
 ## Phase 4 — Cloud + Scale
 

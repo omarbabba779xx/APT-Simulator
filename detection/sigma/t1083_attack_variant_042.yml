@@ -1,0 +1,21 @@
+title: File and Directory Discovery Variant 042 Marker
+id: 82d8d1d0-a354-5306-a547-8e28760a3458
+status: experimental
+description: Detects simulator telemetry for File and Directory Discovery variant
+  042.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1083
+    apt_sim.variant: attack_variant_042
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1083/
+tags:
+- attack.t1083

@@ -1,0 +1,20 @@
+title: Phishing Variant 056 Marker
+id: eb283c75-e7bd-5dd6-a5e0-16a042300c9f
+status: experimental
+description: Detects simulator telemetry for Phishing variant 056.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_variant_056
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

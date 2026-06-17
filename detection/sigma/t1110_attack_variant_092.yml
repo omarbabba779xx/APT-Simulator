@@ -1,0 +1,20 @@
+title: Brute Force Variant 092 Marker
+id: 15e3f607-baf7-5830-8155-51345926f897
+status: experimental
+description: Detects simulator telemetry for Brute Force variant 092.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1110
+    apt_sim.variant: attack_variant_092
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/
+tags:
+- attack.t1110

@@ -1,0 +1,21 @@
+title: Obfuscated Files or Information Variant 089 Marker
+id: 3fedf1a3-471e-5a53-8d99-f4ecde846df5
+status: experimental
+description: Detects simulator telemetry for Obfuscated Files or Information variant
+  089.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1027
+    apt_sim.variant: attack_variant_089
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/
+tags:
+- attack.t1027

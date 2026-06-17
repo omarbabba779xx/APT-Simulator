@@ -1,0 +1,20 @@
+title: Account Manipulation Variant 033 Marker
+id: e15463c2-5d7a-5341-9b85-f6b358ebbdb3
+status: experimental
+description: Detects simulator telemetry for Account Manipulation variant 033.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1098
+    apt_sim.variant: attack_variant_033
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/
+tags:
+- attack.t1098

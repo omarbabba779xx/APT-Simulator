@@ -1,0 +1,21 @@
+title: File and Directory Discovery Variant 016 Marker
+id: ce0d5fb1-c8f3-502a-8215-012b393d1bef
+status: experimental
+description: Detects simulator telemetry for File and Directory Discovery variant
+  016.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1083
+    apt_sim.variant: attack_variant_016
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1083/
+tags:
+- attack.t1083

@@ -1,0 +1,20 @@
+title: Active Scanning Variant 079 Marker
+id: 209a7465-dd2d-551b-b8b5-344bd139c471
+status: experimental
+description: Detects simulator telemetry for Active Scanning variant 079.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1595
+    apt_sim.variant: attack_variant_079
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/
+tags:
+- attack.t1595

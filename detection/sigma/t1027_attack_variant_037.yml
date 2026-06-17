@@ -1,0 +1,21 @@
+title: Obfuscated Files or Information Variant 037 Marker
+id: b9425e21-02bd-56e4-953b-e6ab466d2d60
+status: experimental
+description: Detects simulator telemetry for Obfuscated Files or Information variant
+  037.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1027
+    apt_sim.variant: attack_variant_037
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/
+tags:
+- attack.t1027

@@ -1,0 +1,20 @@
+title: Archive Collected Data Variant 046 Marker
+id: 67176bca-118b-5140-abb8-bee3fab4422b
+status: experimental
+description: Detects simulator telemetry for Archive Collected Data variant 046.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1560
+    apt_sim.variant: attack_variant_046
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/
+tags:
+- attack.t1560

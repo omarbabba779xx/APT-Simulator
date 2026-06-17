@@ -1,0 +1,20 @@
+title: Ingress Tool Transfer Variant 100 Marker
+id: a103c9a8-275b-5c08-bedf-cdc689738d9a
+status: experimental
+description: Detects simulator telemetry for Ingress Tool Transfer variant 100.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1105
+    apt_sim.variant: attack_variant_100
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105

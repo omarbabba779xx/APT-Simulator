@@ -1,0 +1,20 @@
+title: Data from Local System Variant 019 Marker
+id: f160eccc-8b36-5c3a-981a-4cd8ff41fa57
+status: experimental
+description: Detects simulator telemetry for Data from Local System variant 019.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1005
+    apt_sim.variant: attack_variant_019
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1005/
+tags:
+- attack.t1005

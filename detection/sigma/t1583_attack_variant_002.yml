@@ -1,0 +1,20 @@
+title: Acquire Infrastructure Variant 002 Marker
+id: 06e8202f-3cfb-5907-972c-3c7c8fa65c5d
+status: experimental
+description: Detects simulator telemetry for Acquire Infrastructure variant 002.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1583
+    apt_sim.variant: attack_variant_002
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/
+tags:
+- attack.t1583

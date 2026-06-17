@@ -1,0 +1,20 @@
+title: Ingress Tool Transfer Variant 022 Marker
+id: 932d5227-b282-5205-89a2-30c4dd9b83f1
+status: experimental
+description: Detects simulator telemetry for Ingress Tool Transfer variant 022.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1105
+    apt_sim.variant: attack_variant_022
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105

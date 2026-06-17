@@ -1,0 +1,20 @@
+title: Inhibit System Recovery Variant 078 Marker
+id: fb31f56f-f23c-52b5-87b2-9dda47362f0b
+status: experimental
+description: Detects simulator telemetry for Inhibit System Recovery variant 078.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1490
+    apt_sim.variant: attack_variant_078
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1490/
+tags:
+- attack.t1490

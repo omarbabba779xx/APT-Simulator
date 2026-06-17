@@ -1,0 +1,21 @@
+title: Exfiltration Over C2 Channel Variant 023 Marker
+id: ccfd85b3-aeaf-541d-a84f-813d3913b97b
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over C2 Channel variant
+  023.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1041
+    apt_sim.variant: attack_variant_023
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1041/
+tags:
+- attack.t1041

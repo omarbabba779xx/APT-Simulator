@@ -1,0 +1,20 @@
+title: User Execution Variant 058 Marker
+id: cbdd5f8b-ff55-5981-b42d-538bc693959d
+status: experimental
+description: Detects simulator telemetry for User Execution variant 058.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1204
+    apt_sim.variant: attack_variant_058
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/
+tags:
+- attack.t1204

@@ -77,6 +77,30 @@
     "path": "detection/sigma/t1003_008_catalog_stub.yml",
     "level": "informational"
   },
+  "T1003:ATTACK_VARIANT_013": {
+    "status": "exported",
+    "name": "OS Credential Dumping Variant 013 Marker",
+    "path": "detection/sigma/t1003_attack_variant_013.yml",
+    "level": "low"
+  },
+  "T1003:ATTACK_VARIANT_039": {
+    "status": "exported",
+    "name": "OS Credential Dumping Variant 039 Marker",
+    "path": "detection/sigma/t1003_attack_variant_039.yml",
+    "level": "low"
+  },
+  "T1003:ATTACK_VARIANT_065": {
+    "status": "exported",
+    "name": "OS Credential Dumping Variant 065 Marker",
+    "path": "detection/sigma/t1003_attack_variant_065.yml",
+    "level": "low"
+  },
+  "T1003:ATTACK_VARIANT_091": {
+    "status": "exported",
+    "name": "OS Credential Dumping Variant 091 Marker",
+    "path": "detection/sigma/t1003_attack_variant_091.yml",
+    "level": "low"
+  },
   "T1003:CATALOG_STUB": {
     "status": "exported",
     "name": "OS Credential Dumping Marker",
@@ -88,6 +112,30 @@
     "name": "Data from Local System",
     "path": "detection/sigma/t1005.yml",
     "level": "medium"
+  },
+  "T1005:ATTACK_VARIANT_019": {
+    "status": "exported",
+    "name": "Data from Local System Variant 019 Marker",
+    "path": "detection/sigma/t1005_attack_variant_019.yml",
+    "level": "low"
+  },
+  "T1005:ATTACK_VARIANT_045": {
+    "status": "exported",
+    "name": "Data from Local System Variant 045 Marker",
+    "path": "detection/sigma/t1005_attack_variant_045.yml",
+    "level": "low"
+  },
+  "T1005:ATTACK_VARIANT_071": {
+    "status": "exported",
+    "name": "Data from Local System Variant 071 Marker",
+    "path": "detection/sigma/t1005_attack_variant_071.yml",
+    "level": "low"
+  },
+  "T1005:ATTACK_VARIANT_097": {
+    "status": "exported",
+    "name": "Data from Local System Variant 097 Marker",
+    "path": "detection/sigma/t1005_attack_variant_097.yml",
+    "level": "low"
   },
   "T1005:CATALOG_STUB": {
     "status": "exported",
@@ -190,6 +238,30 @@
     "name": "Remote Desktop Protocol Probe (sim)",
     "path": "detection/sigma/t1021_001.yml",
     "level": "medium"
+  },
+  "T1021.001:ATTACK_VARIANT_017": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Variant 017 Marker",
+    "path": "detection/sigma/t1021_001_attack_variant_017.yml",
+    "level": "low"
+  },
+  "T1021.001:ATTACK_VARIANT_043": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Variant 043 Marker",
+    "path": "detection/sigma/t1021_001_attack_variant_043.yml",
+    "level": "low"
+  },
+  "T1021.001:ATTACK_VARIANT_069": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Variant 069 Marker",
+    "path": "detection/sigma/t1021_001_attack_variant_069.yml",
+    "level": "low"
+  },
+  "T1021.001:ATTACK_VARIANT_095": {
+    "status": "exported",
+    "name": "Remote Desktop Protocol Variant 095 Marker",
+    "path": "detection/sigma/t1021_001_attack_variant_095.yml",
+    "level": "low"
   },
   "T1021.001:CATALOG_STUB": {
     "status": "exported",
@@ -371,6 +443,30 @@
     "path": "detection/sigma/t1027_018_catalog_stub.yml",
     "level": "informational"
   },
+  "T1027:ATTACK_VARIANT_011": {
+    "status": "exported",
+    "name": "Obfuscated Files or Information Variant 011 Marker",
+    "path": "detection/sigma/t1027_attack_variant_011.yml",
+    "level": "low"
+  },
+  "T1027:ATTACK_VARIANT_037": {
+    "status": "exported",
+    "name": "Obfuscated Files or Information Variant 037 Marker",
+    "path": "detection/sigma/t1027_attack_variant_037.yml",
+    "level": "low"
+  },
+  "T1027:ATTACK_VARIANT_063": {
+    "status": "exported",
+    "name": "Obfuscated Files or Information Variant 063 Marker",
+    "path": "detection/sigma/t1027_attack_variant_063.yml",
+    "level": "low"
+  },
+  "T1027:ATTACK_VARIANT_089": {
+    "status": "exported",
+    "name": "Obfuscated Files or Information Variant 089 Marker",
+    "path": "detection/sigma/t1027_attack_variant_089.yml",
+    "level": "low"
+  },
   "T1027:CATALOG_STUB": {
     "status": "exported",
     "name": "Obfuscated Files or Information Marker",
@@ -533,6 +629,24 @@
     "path": "detection/sigma/t1041.yml",
     "level": "high"
   },
+  "T1041:ATTACK_VARIANT_023": {
+    "status": "exported",
+    "name": "Exfiltration Over C2 Channel Variant 023 Marker",
+    "path": "detection/sigma/t1041_attack_variant_023.yml",
+    "level": "low"
+  },
+  "T1041:ATTACK_VARIANT_049": {
+    "status": "exported",
+    "name": "Exfiltration Over C2 Channel Variant 049 Marker",
+    "path": "detection/sigma/t1041_attack_variant_049.yml",
+    "level": "low"
+  },
+  "T1041:ATTACK_VARIANT_075": {
+    "status": "exported",
+    "name": "Exfiltration Over C2 Channel Variant 075 Marker",
+    "path": "detection/sigma/t1041_attack_variant_075.yml",
+    "level": "low"
+  },
   "T1041:CATALOG_STUB": {
     "status": "exported",
     "name": "Exfiltration Over C2 Channel Marker",
@@ -580,6 +694,24 @@
     "name": "Exfiltration Over Unencrypted Non-C2 Protocol Marker",
     "path": "detection/sigma/t1048_003_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1048:ATTACK_VARIANT_024": {
+    "status": "exported",
+    "name": "Exfiltration Over Alternative Protocol Variant 024 Marker",
+    "path": "detection/sigma/t1048_attack_variant_024.yml",
+    "level": "low"
+  },
+  "T1048:ATTACK_VARIANT_050": {
+    "status": "exported",
+    "name": "Exfiltration Over Alternative Protocol Variant 050 Marker",
+    "path": "detection/sigma/t1048_attack_variant_050.yml",
+    "level": "low"
+  },
+  "T1048:ATTACK_VARIANT_076": {
+    "status": "exported",
+    "name": "Exfiltration Over Alternative Protocol Variant 076 Marker",
+    "path": "detection/sigma/t1048_attack_variant_076.yml",
+    "level": "low"
   },
   "T1048:CATALOG_STUB": {
     "status": "exported",
@@ -881,11 +1013,59 @@
     "path": "detection/sigma/t1059_013_catalog_stub.yml",
     "level": "informational"
   },
+  "T1059:ATTACK_VARIANT_005": {
+    "status": "exported",
+    "name": "Command and Scripting Interpreter Variant 005 Marker",
+    "path": "detection/sigma/t1059_attack_variant_005.yml",
+    "level": "low"
+  },
+  "T1059:ATTACK_VARIANT_031": {
+    "status": "exported",
+    "name": "Command and Scripting Interpreter Variant 031 Marker",
+    "path": "detection/sigma/t1059_attack_variant_031.yml",
+    "level": "low"
+  },
+  "T1059:ATTACK_VARIANT_057": {
+    "status": "exported",
+    "name": "Command and Scripting Interpreter Variant 057 Marker",
+    "path": "detection/sigma/t1059_attack_variant_057.yml",
+    "level": "low"
+  },
+  "T1059:ATTACK_VARIANT_083": {
+    "status": "exported",
+    "name": "Command and Scripting Interpreter Variant 083 Marker",
+    "path": "detection/sigma/t1059_attack_variant_083.yml",
+    "level": "low"
+  },
   "T1059:CATALOG_STUB": {
     "status": "exported",
     "name": "Command and Scripting Interpreter Marker",
     "path": "detection/sigma/t1059_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1068:ATTACK_VARIANT_009": {
+    "status": "exported",
+    "name": "Exploitation for Privilege Escalation Variant 009 Marker",
+    "path": "detection/sigma/t1068_attack_variant_009.yml",
+    "level": "low"
+  },
+  "T1068:ATTACK_VARIANT_035": {
+    "status": "exported",
+    "name": "Exploitation for Privilege Escalation Variant 035 Marker",
+    "path": "detection/sigma/t1068_attack_variant_035.yml",
+    "level": "low"
+  },
+  "T1068:ATTACK_VARIANT_061": {
+    "status": "exported",
+    "name": "Exploitation for Privilege Escalation Variant 061 Marker",
+    "path": "detection/sigma/t1068_attack_variant_061.yml",
+    "level": "low"
+  },
+  "T1068:ATTACK_VARIANT_087": {
+    "status": "exported",
+    "name": "Exploitation for Privilege Escalation Variant 087 Marker",
+    "path": "detection/sigma/t1068_attack_variant_087.yml",
+    "level": "low"
   },
   "T1068:CATALOG_STUB": {
     "status": "exported",
@@ -941,6 +1121,30 @@
     "path": "detection/sigma/t1070_004.yml",
     "level": "low"
   },
+  "T1070.004:ATTACK_VARIANT_012": {
+    "status": "exported",
+    "name": "File Deletion Variant 012 Marker",
+    "path": "detection/sigma/t1070_004_attack_variant_012.yml",
+    "level": "low"
+  },
+  "T1070.004:ATTACK_VARIANT_038": {
+    "status": "exported",
+    "name": "File Deletion Variant 038 Marker",
+    "path": "detection/sigma/t1070_004_attack_variant_038.yml",
+    "level": "low"
+  },
+  "T1070.004:ATTACK_VARIANT_064": {
+    "status": "exported",
+    "name": "File Deletion Variant 064 Marker",
+    "path": "detection/sigma/t1070_004_attack_variant_064.yml",
+    "level": "low"
+  },
+  "T1070.004:ATTACK_VARIANT_090": {
+    "status": "exported",
+    "name": "File Deletion Variant 090 Marker",
+    "path": "detection/sigma/t1070_004_attack_variant_090.yml",
+    "level": "low"
+  },
   "T1070.004:CATALOG_STUB": {
     "status": "exported",
     "name": "File Deletion Marker",
@@ -994,6 +1198,30 @@
     "name": "HTTP C2 Beaconing (sim)",
     "path": "detection/sigma/t1071_001.yml",
     "level": "medium"
+  },
+  "T1071.001:ATTACK_VARIANT_021": {
+    "status": "exported",
+    "name": "Web Protocols Variant 021 Marker",
+    "path": "detection/sigma/t1071_001_attack_variant_021.yml",
+    "level": "low"
+  },
+  "T1071.001:ATTACK_VARIANT_047": {
+    "status": "exported",
+    "name": "Web Protocols Variant 047 Marker",
+    "path": "detection/sigma/t1071_001_attack_variant_047.yml",
+    "level": "low"
+  },
+  "T1071.001:ATTACK_VARIANT_073": {
+    "status": "exported",
+    "name": "Web Protocols Variant 073 Marker",
+    "path": "detection/sigma/t1071_001_attack_variant_073.yml",
+    "level": "low"
+  },
+  "T1071.001:ATTACK_VARIANT_099": {
+    "status": "exported",
+    "name": "Web Protocols Variant 099 Marker",
+    "path": "detection/sigma/t1071_001_attack_variant_099.yml",
+    "level": "low"
   },
   "T1071.001:CATALOG_STUB": {
     "status": "exported",
@@ -1115,6 +1343,30 @@
     "path": "detection/sigma/t1082.yml",
     "level": "low"
   },
+  "T1082:ATTACK_VARIANT_015": {
+    "status": "exported",
+    "name": "System Information Discovery Variant 015 Marker",
+    "path": "detection/sigma/t1082_attack_variant_015.yml",
+    "level": "low"
+  },
+  "T1082:ATTACK_VARIANT_041": {
+    "status": "exported",
+    "name": "System Information Discovery Variant 041 Marker",
+    "path": "detection/sigma/t1082_attack_variant_041.yml",
+    "level": "low"
+  },
+  "T1082:ATTACK_VARIANT_067": {
+    "status": "exported",
+    "name": "System Information Discovery Variant 067 Marker",
+    "path": "detection/sigma/t1082_attack_variant_067.yml",
+    "level": "low"
+  },
+  "T1082:ATTACK_VARIANT_093": {
+    "status": "exported",
+    "name": "System Information Discovery Variant 093 Marker",
+    "path": "detection/sigma/t1082_attack_variant_093.yml",
+    "level": "low"
+  },
   "T1082:CATALOG_STUB": {
     "status": "exported",
     "name": "System Information Discovery Marker",
@@ -1125,6 +1377,30 @@
     "status": "exported",
     "name": "File and Directory Discovery",
     "path": "detection/sigma/t1083.yml",
+    "level": "low"
+  },
+  "T1083:ATTACK_VARIANT_016": {
+    "status": "exported",
+    "name": "File and Directory Discovery Variant 016 Marker",
+    "path": "detection/sigma/t1083_attack_variant_016.yml",
+    "level": "low"
+  },
+  "T1083:ATTACK_VARIANT_042": {
+    "status": "exported",
+    "name": "File and Directory Discovery Variant 042 Marker",
+    "path": "detection/sigma/t1083_attack_variant_042.yml",
+    "level": "low"
+  },
+  "T1083:ATTACK_VARIANT_068": {
+    "status": "exported",
+    "name": "File and Directory Discovery Variant 068 Marker",
+    "path": "detection/sigma/t1083_attack_variant_068.yml",
+    "level": "low"
+  },
+  "T1083:ATTACK_VARIANT_094": {
+    "status": "exported",
+    "name": "File and Directory Discovery Variant 094 Marker",
+    "path": "detection/sigma/t1083_attack_variant_094.yml",
     "level": "low"
   },
   "T1083:CATALOG_STUB": {
@@ -1289,6 +1565,30 @@
     "path": "detection/sigma/t1098_007_catalog_stub.yml",
     "level": "informational"
   },
+  "T1098:ATTACK_VARIANT_007": {
+    "status": "exported",
+    "name": "Account Manipulation Variant 007 Marker",
+    "path": "detection/sigma/t1098_attack_variant_007.yml",
+    "level": "low"
+  },
+  "T1098:ATTACK_VARIANT_033": {
+    "status": "exported",
+    "name": "Account Manipulation Variant 033 Marker",
+    "path": "detection/sigma/t1098_attack_variant_033.yml",
+    "level": "low"
+  },
+  "T1098:ATTACK_VARIANT_059": {
+    "status": "exported",
+    "name": "Account Manipulation Variant 059 Marker",
+    "path": "detection/sigma/t1098_attack_variant_059.yml",
+    "level": "low"
+  },
+  "T1098:ATTACK_VARIANT_085": {
+    "status": "exported",
+    "name": "Account Manipulation Variant 085 Marker",
+    "path": "detection/sigma/t1098_attack_variant_085.yml",
+    "level": "low"
+  },
   "T1098:CATALOG_STUB": {
     "status": "exported",
     "name": "Account Manipulation Marker",
@@ -1330,6 +1630,30 @@
     "name": "Ingress Tool Transfer (sim)",
     "path": "detection/sigma/t1105.yml",
     "level": "medium"
+  },
+  "T1105:ATTACK_VARIANT_022": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer Variant 022 Marker",
+    "path": "detection/sigma/t1105_attack_variant_022.yml",
+    "level": "low"
+  },
+  "T1105:ATTACK_VARIANT_048": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer Variant 048 Marker",
+    "path": "detection/sigma/t1105_attack_variant_048.yml",
+    "level": "low"
+  },
+  "T1105:ATTACK_VARIANT_074": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer Variant 074 Marker",
+    "path": "detection/sigma/t1105_attack_variant_074.yml",
+    "level": "low"
+  },
+  "T1105:ATTACK_VARIANT_100": {
+    "status": "exported",
+    "name": "Ingress Tool Transfer Variant 100 Marker",
+    "path": "detection/sigma/t1105_attack_variant_100.yml",
+    "level": "low"
   },
   "T1105:CATALOG_STUB": {
     "status": "exported",
@@ -1384,6 +1708,30 @@
     "name": "Credential Stuffing Marker",
     "path": "detection/sigma/t1110_004_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1110:ATTACK_VARIANT_014": {
+    "status": "exported",
+    "name": "Brute Force Variant 014 Marker",
+    "path": "detection/sigma/t1110_attack_variant_014.yml",
+    "level": "low"
+  },
+  "T1110:ATTACK_VARIANT_040": {
+    "status": "exported",
+    "name": "Brute Force Variant 040 Marker",
+    "path": "detection/sigma/t1110_attack_variant_040.yml",
+    "level": "low"
+  },
+  "T1110:ATTACK_VARIANT_066": {
+    "status": "exported",
+    "name": "Brute Force Variant 066 Marker",
+    "path": "detection/sigma/t1110_attack_variant_066.yml",
+    "level": "low"
+  },
+  "T1110:ATTACK_VARIANT_092": {
+    "status": "exported",
+    "name": "Brute Force Variant 092 Marker",
+    "path": "detection/sigma/t1110_attack_variant_092.yml",
+    "level": "low"
   },
   "T1110:CATALOG_STUB": {
     "status": "exported",
@@ -1685,6 +2033,30 @@
     "path": "detection/sigma/t1189_catalog_stub.yml",
     "level": "informational"
   },
+  "T1190:ATTACK_VARIANT_003": {
+    "status": "exported",
+    "name": "Exploit Public-Facing Application Variant 003 Marker",
+    "path": "detection/sigma/t1190_attack_variant_003.yml",
+    "level": "low"
+  },
+  "T1190:ATTACK_VARIANT_029": {
+    "status": "exported",
+    "name": "Exploit Public-Facing Application Variant 029 Marker",
+    "path": "detection/sigma/t1190_attack_variant_029.yml",
+    "level": "low"
+  },
+  "T1190:ATTACK_VARIANT_055": {
+    "status": "exported",
+    "name": "Exploit Public-Facing Application Variant 055 Marker",
+    "path": "detection/sigma/t1190_attack_variant_055.yml",
+    "level": "low"
+  },
+  "T1190:ATTACK_VARIANT_081": {
+    "status": "exported",
+    "name": "Exploit Public-Facing Application Variant 081 Marker",
+    "path": "detection/sigma/t1190_attack_variant_081.yml",
+    "level": "low"
+  },
   "T1190:CATALOG_STUB": {
     "status": "exported",
     "name": "Exploit Public-Facing Application Marker",
@@ -1780,6 +2152,30 @@
     "name": "Malicious Library Marker",
     "path": "detection/sigma/t1204_005_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1204:ATTACK_VARIANT_006": {
+    "status": "exported",
+    "name": "User Execution Variant 006 Marker",
+    "path": "detection/sigma/t1204_attack_variant_006.yml",
+    "level": "low"
+  },
+  "T1204:ATTACK_VARIANT_032": {
+    "status": "exported",
+    "name": "User Execution Variant 032 Marker",
+    "path": "detection/sigma/t1204_attack_variant_032.yml",
+    "level": "low"
+  },
+  "T1204:ATTACK_VARIANT_058": {
+    "status": "exported",
+    "name": "User Execution Variant 058 Marker",
+    "path": "detection/sigma/t1204_attack_variant_058.yml",
+    "level": "low"
+  },
+  "T1204:ATTACK_VARIANT_084": {
+    "status": "exported",
+    "name": "User Execution Variant 084 Marker",
+    "path": "detection/sigma/t1204_attack_variant_084.yml",
+    "level": "low"
   },
   "T1204:CATALOG_STUB": {
     "status": "exported",
@@ -2117,6 +2513,24 @@
     "path": "detection/sigma/t1486.yml",
     "level": "high"
   },
+  "T1486:ATTACK_VARIANT_025": {
+    "status": "exported",
+    "name": "Data Encrypted for Impact Variant 025 Marker",
+    "path": "detection/sigma/t1486_attack_variant_025.yml",
+    "level": "low"
+  },
+  "T1486:ATTACK_VARIANT_051": {
+    "status": "exported",
+    "name": "Data Encrypted for Impact Variant 051 Marker",
+    "path": "detection/sigma/t1486_attack_variant_051.yml",
+    "level": "low"
+  },
+  "T1486:ATTACK_VARIANT_077": {
+    "status": "exported",
+    "name": "Data Encrypted for Impact Variant 077 Marker",
+    "path": "detection/sigma/t1486_attack_variant_077.yml",
+    "level": "low"
+  },
   "T1486:CATALOG_STUB": {
     "status": "exported",
     "name": "Data Encrypted for Impact Marker",
@@ -2128,6 +2542,24 @@
     "name": "Service Stop Marker",
     "path": "detection/sigma/t1489_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1490:ATTACK_VARIANT_026": {
+    "status": "exported",
+    "name": "Inhibit System Recovery Variant 026 Marker",
+    "path": "detection/sigma/t1490_attack_variant_026.yml",
+    "level": "low"
+  },
+  "T1490:ATTACK_VARIANT_052": {
+    "status": "exported",
+    "name": "Inhibit System Recovery Variant 052 Marker",
+    "path": "detection/sigma/t1490_attack_variant_052.yml",
+    "level": "low"
+  },
+  "T1490:ATTACK_VARIANT_078": {
+    "status": "exported",
+    "name": "Inhibit System Recovery Variant 078 Marker",
+    "path": "detection/sigma/t1490_attack_variant_078.yml",
+    "level": "low"
   },
   "T1490:CATALOG_STUB": {
     "status": "exported",
@@ -2609,6 +3041,30 @@
     "path": "detection/sigma/t1547_001.yml",
     "level": "high"
   },
+  "T1547.001:ATTACK_VARIANT_008": {
+    "status": "exported",
+    "name": "Registry Run Keys / Startup Folder Variant 008 Marker",
+    "path": "detection/sigma/t1547_001_attack_variant_008.yml",
+    "level": "low"
+  },
+  "T1547.001:ATTACK_VARIANT_034": {
+    "status": "exported",
+    "name": "Registry Run Keys / Startup Folder Variant 034 Marker",
+    "path": "detection/sigma/t1547_001_attack_variant_034.yml",
+    "level": "low"
+  },
+  "T1547.001:ATTACK_VARIANT_060": {
+    "status": "exported",
+    "name": "Registry Run Keys / Startup Folder Variant 060 Marker",
+    "path": "detection/sigma/t1547_001_attack_variant_060.yml",
+    "level": "low"
+  },
+  "T1547.001:ATTACK_VARIANT_086": {
+    "status": "exported",
+    "name": "Registry Run Keys / Startup Folder Variant 086 Marker",
+    "path": "detection/sigma/t1547_001_attack_variant_086.yml",
+    "level": "low"
+  },
   "T1547.001:CATALOG_STUB": {
     "status": "exported",
     "name": "Registry Run Keys / Startup Folder Marker",
@@ -2734,6 +3190,30 @@
     "name": "TCC Manipulation Marker",
     "path": "detection/sigma/t1548_006_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1548:ATTACK_VARIANT_010": {
+    "status": "exported",
+    "name": "Abuse Elevation Control Mechanism Variant 010 Marker",
+    "path": "detection/sigma/t1548_attack_variant_010.yml",
+    "level": "low"
+  },
+  "T1548:ATTACK_VARIANT_036": {
+    "status": "exported",
+    "name": "Abuse Elevation Control Mechanism Variant 036 Marker",
+    "path": "detection/sigma/t1548_attack_variant_036.yml",
+    "level": "low"
+  },
+  "T1548:ATTACK_VARIANT_062": {
+    "status": "exported",
+    "name": "Abuse Elevation Control Mechanism Variant 062 Marker",
+    "path": "detection/sigma/t1548_attack_variant_062.yml",
+    "level": "low"
+  },
+  "T1548:ATTACK_VARIANT_088": {
+    "status": "exported",
+    "name": "Abuse Elevation Control Mechanism Variant 088 Marker",
+    "path": "detection/sigma/t1548_attack_variant_088.yml",
+    "level": "low"
   },
   "T1548:CATALOG_STUB": {
     "status": "exported",
@@ -3095,6 +3575,30 @@
     "path": "detection/sigma/t1560_003_catalog_stub.yml",
     "level": "informational"
   },
+  "T1560:ATTACK_VARIANT_020": {
+    "status": "exported",
+    "name": "Archive Collected Data Variant 020 Marker",
+    "path": "detection/sigma/t1560_attack_variant_020.yml",
+    "level": "low"
+  },
+  "T1560:ATTACK_VARIANT_046": {
+    "status": "exported",
+    "name": "Archive Collected Data Variant 046 Marker",
+    "path": "detection/sigma/t1560_attack_variant_046.yml",
+    "level": "low"
+  },
+  "T1560:ATTACK_VARIANT_072": {
+    "status": "exported",
+    "name": "Archive Collected Data Variant 072 Marker",
+    "path": "detection/sigma/t1560_attack_variant_072.yml",
+    "level": "low"
+  },
+  "T1560:ATTACK_VARIANT_098": {
+    "status": "exported",
+    "name": "Archive Collected Data Variant 098 Marker",
+    "path": "detection/sigma/t1560_attack_variant_098.yml",
+    "level": "low"
+  },
   "T1560:CATALOG_STUB": {
     "status": "exported",
     "name": "Archive Collected Data Marker",
@@ -3275,6 +3779,30 @@
     "path": "detection/sigma/t1566_004_catalog_stub.yml",
     "level": "informational"
   },
+  "T1566:ATTACK_VARIANT_004": {
+    "status": "exported",
+    "name": "Phishing Variant 004 Marker",
+    "path": "detection/sigma/t1566_attack_variant_004.yml",
+    "level": "low"
+  },
+  "T1566:ATTACK_VARIANT_030": {
+    "status": "exported",
+    "name": "Phishing Variant 030 Marker",
+    "path": "detection/sigma/t1566_attack_variant_030.yml",
+    "level": "low"
+  },
+  "T1566:ATTACK_VARIANT_056": {
+    "status": "exported",
+    "name": "Phishing Variant 056 Marker",
+    "path": "detection/sigma/t1566_attack_variant_056.yml",
+    "level": "low"
+  },
+  "T1566:ATTACK_VARIANT_082": {
+    "status": "exported",
+    "name": "Phishing Variant 082 Marker",
+    "path": "detection/sigma/t1566_attack_variant_082.yml",
+    "level": "low"
+  },
   "T1566:CATALOG_STUB": {
     "status": "exported",
     "name": "Phishing Marker",
@@ -3364,6 +3892,30 @@
     "name": "System Services Marker",
     "path": "detection/sigma/t1569_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1570:ATTACK_VARIANT_018": {
+    "status": "exported",
+    "name": "Lateral Tool Transfer Variant 018 Marker",
+    "path": "detection/sigma/t1570_attack_variant_018.yml",
+    "level": "low"
+  },
+  "T1570:ATTACK_VARIANT_044": {
+    "status": "exported",
+    "name": "Lateral Tool Transfer Variant 044 Marker",
+    "path": "detection/sigma/t1570_attack_variant_044.yml",
+    "level": "low"
+  },
+  "T1570:ATTACK_VARIANT_070": {
+    "status": "exported",
+    "name": "Lateral Tool Transfer Variant 070 Marker",
+    "path": "detection/sigma/t1570_attack_variant_070.yml",
+    "level": "low"
+  },
+  "T1570:ATTACK_VARIANT_096": {
+    "status": "exported",
+    "name": "Lateral Tool Transfer Variant 096 Marker",
+    "path": "detection/sigma/t1570_attack_variant_096.yml",
+    "level": "low"
   },
   "T1570:CATALOG_STUB": {
     "status": "exported",
@@ -3580,6 +4132,30 @@
     "name": "Malvertising Marker",
     "path": "detection/sigma/t1583_008_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1583:ATTACK_VARIANT_002": {
+    "status": "exported",
+    "name": "Acquire Infrastructure Variant 002 Marker",
+    "path": "detection/sigma/t1583_attack_variant_002.yml",
+    "level": "low"
+  },
+  "T1583:ATTACK_VARIANT_028": {
+    "status": "exported",
+    "name": "Acquire Infrastructure Variant 028 Marker",
+    "path": "detection/sigma/t1583_attack_variant_028.yml",
+    "level": "low"
+  },
+  "T1583:ATTACK_VARIANT_054": {
+    "status": "exported",
+    "name": "Acquire Infrastructure Variant 054 Marker",
+    "path": "detection/sigma/t1583_attack_variant_054.yml",
+    "level": "low"
+  },
+  "T1583:ATTACK_VARIANT_080": {
+    "status": "exported",
+    "name": "Acquire Infrastructure Variant 080 Marker",
+    "path": "detection/sigma/t1583_attack_variant_080.yml",
+    "level": "low"
   },
   "T1583:CATALOG_STUB": {
     "status": "exported",
@@ -3934,6 +4510,30 @@
     "name": "Wordlist Scanning Marker",
     "path": "detection/sigma/t1595_003_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1595:ATTACK_VARIANT_001": {
+    "status": "exported",
+    "name": "Active Scanning Variant 001 Marker",
+    "path": "detection/sigma/t1595_attack_variant_001.yml",
+    "level": "low"
+  },
+  "T1595:ATTACK_VARIANT_027": {
+    "status": "exported",
+    "name": "Active Scanning Variant 027 Marker",
+    "path": "detection/sigma/t1595_attack_variant_027.yml",
+    "level": "low"
+  },
+  "T1595:ATTACK_VARIANT_053": {
+    "status": "exported",
+    "name": "Active Scanning Variant 053 Marker",
+    "path": "detection/sigma/t1595_attack_variant_053.yml",
+    "level": "low"
+  },
+  "T1595:ATTACK_VARIANT_079": {
+    "status": "exported",
+    "name": "Active Scanning Variant 079 Marker",
+    "path": "detection/sigma/t1595_attack_variant_079.yml",
+    "level": "low"
   },
   "T1595:CATALOG_STUB": {
     "status": "exported",

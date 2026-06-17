@@ -14,6 +14,7 @@ def test_catalog_packs_registered() -> None:
     summary = catalog_summary()
     assert summary["items"] >= 625
     assert summary["packs"]["attack_enterprise"] >= 625
+    assert summary["packs"]["attack_variants"] == 100
     for pack in ["windows", "linux", "cloud", "identity", "saas"]:
         assert summary["packs"][pack] >= 5
 

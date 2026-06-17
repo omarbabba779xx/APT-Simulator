@@ -1,0 +1,4643 @@
+pack: attack_variants
+ttps:
+- id: T1595:ATTACK_VARIANT_001
+  attack_id: T1595
+  name: Active Scanning Variant 001 Marker
+  description: Marker-only ATT&CK variant for Active Scanning; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: reconnaissance
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-001
+    asset:
+      type: string
+      default: lab-host-001
+  artifact: attack_variant_001.json
+  sigma:
+    title: Active Scanning Variant 001 Marker
+    id: e6c8e9a0-eeee-5e12-a4fa-c5acacc568de
+    status: experimental
+    description: Detects simulator telemetry for Active Scanning variant 001.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1595
+        apt_sim.variant: attack_variant_001
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_001
+    attack.tactic: reconnaissance
+    attack.technique.id: T1595
+    attack.technique.name: Active Scanning
+    apt_sim.variant: attack_variant_001
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1583:ATTACK_VARIANT_002
+  attack_id: T1583
+  name: Acquire Infrastructure Variant 002 Marker
+  description: Marker-only ATT&CK variant for Acquire Infrastructure; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: resource_development
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-002
+    asset:
+      type: string
+      default: lab-host-002
+  artifact: attack_variant_002.json
+  sigma:
+    title: Acquire Infrastructure Variant 002 Marker
+    id: 06e8202f-3cfb-5907-972c-3c7c8fa65c5d
+    status: experimental
+    description: Detects simulator telemetry for Acquire Infrastructure variant 002.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1583
+        apt_sim.variant: attack_variant_002
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_002
+    attack.tactic: resource_development
+    attack.technique.id: T1583
+    attack.technique.name: Acquire Infrastructure
+    apt_sim.variant: attack_variant_002
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1190:ATTACK_VARIANT_003
+  attack_id: T1190
+  name: Exploit Public-Facing Application Variant 003 Marker
+  description: Marker-only ATT&CK variant for Exploit Public-Facing Application; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-003
+    asset:
+      type: string
+      default: lab-host-003
+  artifact: attack_variant_003.json
+  sigma:
+    title: Exploit Public-Facing Application Variant 003 Marker
+    id: 8c8e07c5-ff97-5533-9832-c9692ef1e31f
+    status: experimental
+    description: Detects simulator telemetry for Exploit Public-Facing Application
+      variant 003.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1190
+        apt_sim.variant: attack_variant_003
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_003
+    attack.tactic: initial_access
+    attack.technique.id: T1190
+    attack.technique.name: Exploit Public-Facing Application
+    apt_sim.variant: attack_variant_003
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1566:ATTACK_VARIANT_004
+  attack_id: T1566
+  name: Phishing Variant 004 Marker
+  description: Marker-only ATT&CK variant for Phishing; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-004
+    asset:
+      type: string
+      default: lab-host-004
+  artifact: attack_variant_004.json
+  sigma:
+    title: Phishing Variant 004 Marker
+    id: 8e9672d0-5c7b-5b03-9497-0ab95d69ac62
+    status: experimental
+    description: Detects simulator telemetry for Phishing variant 004.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1566
+        apt_sim.variant: attack_variant_004
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_004
+    attack.tactic: initial_access
+    attack.technique.id: T1566
+    attack.technique.name: Phishing
+    apt_sim.variant: attack_variant_004
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1059:ATTACK_VARIANT_005
+  attack_id: T1059
+  name: Command and Scripting Interpreter Variant 005 Marker
+  description: Marker-only ATT&CK variant for Command and Scripting Interpreter; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-005
+    asset:
+      type: string
+      default: lab-host-005
+  artifact: attack_variant_005.json
+  sigma:
+    title: Command and Scripting Interpreter Variant 005 Marker
+    id: 02327f68-9e26-52ad-a2a5-1d527100f128
+    status: experimental
+    description: Detects simulator telemetry for Command and Scripting Interpreter
+      variant 005.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1059
+        apt_sim.variant: attack_variant_005
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_005
+    attack.tactic: execution
+    attack.technique.id: T1059
+    attack.technique.name: Command and Scripting Interpreter
+    apt_sim.variant: attack_variant_005
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1204:ATTACK_VARIANT_006
+  attack_id: T1204
+  name: User Execution Variant 006 Marker
+  description: Marker-only ATT&CK variant for User Execution; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-006
+    asset:
+      type: string
+      default: lab-host-006
+  artifact: attack_variant_006.json
+  sigma:
+    title: User Execution Variant 006 Marker
+    id: 6fad6934-4a93-5e68-9607-3c632818ebe0
+    status: experimental
+    description: Detects simulator telemetry for User Execution variant 006.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1204
+        apt_sim.variant: attack_variant_006
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_006
+    attack.tactic: execution
+    attack.technique.id: T1204
+    attack.technique.name: User Execution
+    apt_sim.variant: attack_variant_006
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1098:ATTACK_VARIANT_007
+  attack_id: T1098
+  name: Account Manipulation Variant 007 Marker
+  description: Marker-only ATT&CK variant for Account Manipulation; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-007
+    asset:
+      type: string
+      default: lab-host-007
+  artifact: attack_variant_007.json
+  sigma:
+    title: Account Manipulation Variant 007 Marker
+    id: 5b646ba8-4280-51eb-9a58-5c3e3d373d56
+    status: experimental
+    description: Detects simulator telemetry for Account Manipulation variant 007.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1098
+        apt_sim.variant: attack_variant_007
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_007
+    attack.tactic: persistence
+    attack.technique.id: T1098
+    attack.technique.name: Account Manipulation
+    apt_sim.variant: attack_variant_007
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1547.001:ATTACK_VARIANT_008
+  attack_id: T1547.001
+  name: Registry Run Keys / Startup Folder Variant 008 Marker
+  description: Marker-only ATT&CK variant for Registry Run Keys / Startup Folder;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-008
+    asset:
+      type: string
+      default: lab-host-008
+  artifact: attack_variant_008.json
+  sigma:
+    title: Registry Run Keys / Startup Folder Variant 008 Marker
+    id: b9d256b1-0e7f-588e-b4be-f2f5acb0adb5
+    status: experimental
+    description: Detects simulator telemetry for Registry Run Keys / Startup Folder
+      variant 008.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1547.001
+        apt_sim.variant: attack_variant_008
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_008
+    attack.tactic: persistence
+    attack.technique.id: T1547.001
+    attack.technique.name: Registry Run Keys / Startup Folder
+    apt_sim.variant: attack_variant_008
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1068:ATTACK_VARIANT_009
+  attack_id: T1068
+  name: Exploitation for Privilege Escalation Variant 009 Marker
+  description: Marker-only ATT&CK variant for Exploitation for Privilege Escalation;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-009
+    asset:
+      type: string
+      default: lab-host-009
+  artifact: attack_variant_009.json
+  sigma:
+    title: Exploitation for Privilege Escalation Variant 009 Marker
+    id: 32d917eb-9678-5ae2-af5f-3639096a6363
+    status: experimental
+    description: Detects simulator telemetry for Exploitation for Privilege Escalation
+      variant 009.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1068
+        apt_sim.variant: attack_variant_009
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_009
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1068
+    attack.technique.name: Exploitation for Privilege Escalation
+    apt_sim.variant: attack_variant_009
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1548:ATTACK_VARIANT_010
+  attack_id: T1548
+  name: Abuse Elevation Control Mechanism Variant 010 Marker
+  description: Marker-only ATT&CK variant for Abuse Elevation Control Mechanism; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-010
+    asset:
+      type: string
+      default: lab-host-010
+  artifact: attack_variant_010.json
+  sigma:
+    title: Abuse Elevation Control Mechanism Variant 010 Marker
+    id: 3cd3cbef-5736-5a49-8ece-0e91d6d8e465
+    status: experimental
+    description: Detects simulator telemetry for Abuse Elevation Control Mechanism
+      variant 010.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1548
+        apt_sim.variant: attack_variant_010
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_010
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1548
+    attack.technique.name: Abuse Elevation Control Mechanism
+    apt_sim.variant: attack_variant_010
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1027:ATTACK_VARIANT_011
+  attack_id: T1027
+  name: Obfuscated Files or Information Variant 011 Marker
+  description: Marker-only ATT&CK variant for Obfuscated Files or Information; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-011
+    asset:
+      type: string
+      default: lab-host-011
+  artifact: attack_variant_011.json
+  sigma:
+    title: Obfuscated Files or Information Variant 011 Marker
+    id: 834be9ad-37c2-5190-9c7f-357ee91aceb0
+    status: experimental
+    description: Detects simulator telemetry for Obfuscated Files or Information variant
+      011.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1027
+        apt_sim.variant: attack_variant_011
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_011
+    attack.tactic: defense_evasion
+    attack.technique.id: T1027
+    attack.technique.name: Obfuscated Files or Information
+    apt_sim.variant: attack_variant_011
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1070.004:ATTACK_VARIANT_012
+  attack_id: T1070.004
+  name: File Deletion Variant 012 Marker
+  description: Marker-only ATT&CK variant for File Deletion; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-012
+    asset:
+      type: string
+      default: lab-host-012
+  artifact: attack_variant_012.json
+  sigma:
+    title: File Deletion Variant 012 Marker
+    id: 1ac0cdcc-f1aa-57e6-a6ed-a80c6731329f
+    status: experimental
+    description: Detects simulator telemetry for File Deletion variant 012.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1070.004
+        apt_sim.variant: attack_variant_012
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_012
+    attack.tactic: defense_evasion
+    attack.technique.id: T1070.004
+    attack.technique.name: File Deletion
+    apt_sim.variant: attack_variant_012
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1003:ATTACK_VARIANT_013
+  attack_id: T1003
+  name: OS Credential Dumping Variant 013 Marker
+  description: Marker-only ATT&CK variant for OS Credential Dumping; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-013
+    asset:
+      type: string
+      default: lab-host-013
+  artifact: attack_variant_013.json
+  sigma:
+    title: OS Credential Dumping Variant 013 Marker
+    id: 8f4ab376-2a51-53e9-9a4f-2d5d5f45924b
+    status: experimental
+    description: Detects simulator telemetry for OS Credential Dumping variant 013.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1003
+        apt_sim.variant: attack_variant_013
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_013
+    attack.tactic: credential_access
+    attack.technique.id: T1003
+    attack.technique.name: OS Credential Dumping
+    apt_sim.variant: attack_variant_013
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1110:ATTACK_VARIANT_014
+  attack_id: T1110
+  name: Brute Force Variant 014 Marker
+  description: Marker-only ATT&CK variant for Brute Force; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-014
+    asset:
+      type: string
+      default: lab-host-014
+  artifact: attack_variant_014.json
+  sigma:
+    title: Brute Force Variant 014 Marker
+    id: 7ce6ce3f-d699-51a6-912d-2fcb72d37d0e
+    status: experimental
+    description: Detects simulator telemetry for Brute Force variant 014.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1110
+        apt_sim.variant: attack_variant_014
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_014
+    attack.tactic: credential_access
+    attack.technique.id: T1110
+    attack.technique.name: Brute Force
+    apt_sim.variant: attack_variant_014
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1082:ATTACK_VARIANT_015
+  attack_id: T1082
+  name: System Information Discovery Variant 015 Marker
+  description: Marker-only ATT&CK variant for System Information Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-015
+    asset:
+      type: string
+      default: lab-host-015
+  artifact: attack_variant_015.json
+  sigma:
+    title: System Information Discovery Variant 015 Marker
+    id: 1745c618-f13f-5606-b4e7-0797352d21c6
+    status: experimental
+    description: Detects simulator telemetry for System Information Discovery variant
+      015.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1082
+        apt_sim.variant: attack_variant_015
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_015
+    attack.tactic: discovery
+    attack.technique.id: T1082
+    attack.technique.name: System Information Discovery
+    apt_sim.variant: attack_variant_015
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1083:ATTACK_VARIANT_016
+  attack_id: T1083
+  name: File and Directory Discovery Variant 016 Marker
+  description: Marker-only ATT&CK variant for File and Directory Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-016
+    asset:
+      type: string
+      default: lab-host-016
+  artifact: attack_variant_016.json
+  sigma:
+    title: File and Directory Discovery Variant 016 Marker
+    id: ce0d5fb1-c8f3-502a-8215-012b393d1bef
+    status: experimental
+    description: Detects simulator telemetry for File and Directory Discovery variant
+      016.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1083
+        apt_sim.variant: attack_variant_016
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_016
+    attack.tactic: discovery
+    attack.technique.id: T1083
+    attack.technique.name: File and Directory Discovery
+    apt_sim.variant: attack_variant_016
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1021.001:ATTACK_VARIANT_017
+  attack_id: T1021.001
+  name: Remote Desktop Protocol Variant 017 Marker
+  description: Marker-only ATT&CK variant for Remote Desktop Protocol; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-017
+    asset:
+      type: string
+      default: lab-host-017
+  artifact: attack_variant_017.json
+  sigma:
+    title: Remote Desktop Protocol Variant 017 Marker
+    id: 2c051095-ab60-54c5-9c63-07dee54b4591
+    status: experimental
+    description: Detects simulator telemetry for Remote Desktop Protocol variant 017.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1021.001
+        apt_sim.variant: attack_variant_017
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_017
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.001
+    attack.technique.name: Remote Desktop Protocol
+    apt_sim.variant: attack_variant_017
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1570:ATTACK_VARIANT_018
+  attack_id: T1570
+  name: Lateral Tool Transfer Variant 018 Marker
+  description: Marker-only ATT&CK variant for Lateral Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-018
+    asset:
+      type: string
+      default: lab-host-018
+  artifact: attack_variant_018.json
+  sigma:
+    title: Lateral Tool Transfer Variant 018 Marker
+    id: 299f2b3b-50eb-569a-af10-22354ab48a67
+    status: experimental
+    description: Detects simulator telemetry for Lateral Tool Transfer variant 018.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1570
+        apt_sim.variant: attack_variant_018
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_018
+    attack.tactic: lateral_movement
+    attack.technique.id: T1570
+    attack.technique.name: Lateral Tool Transfer
+    apt_sim.variant: attack_variant_018
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1005:ATTACK_VARIANT_019
+  attack_id: T1005
+  name: Data from Local System Variant 019 Marker
+  description: Marker-only ATT&CK variant for Data from Local System; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-019
+    asset:
+      type: string
+      default: lab-host-019
+  artifact: attack_variant_019.json
+  sigma:
+    title: Data from Local System Variant 019 Marker
+    id: f160eccc-8b36-5c3a-981a-4cd8ff41fa57
+    status: experimental
+    description: Detects simulator telemetry for Data from Local System variant 019.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1005
+        apt_sim.variant: attack_variant_019
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_019
+    attack.tactic: collection
+    attack.technique.id: T1005
+    attack.technique.name: Data from Local System
+    apt_sim.variant: attack_variant_019
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1560:ATTACK_VARIANT_020
+  attack_id: T1560
+  name: Archive Collected Data Variant 020 Marker
+  description: Marker-only ATT&CK variant for Archive Collected Data; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-020
+    asset:
+      type: string
+      default: lab-host-020
+  artifact: attack_variant_020.json
+  sigma:
+    title: Archive Collected Data Variant 020 Marker
+    id: af73fb90-659a-53af-871a-282fd5efaa91
+    status: experimental
+    description: Detects simulator telemetry for Archive Collected Data variant 020.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1560
+        apt_sim.variant: attack_variant_020
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_020
+    attack.tactic: collection
+    attack.technique.id: T1560
+    attack.technique.name: Archive Collected Data
+    apt_sim.variant: attack_variant_020
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1071.001:ATTACK_VARIANT_021
+  attack_id: T1071.001
+  name: Web Protocols Variant 021 Marker
+  description: Marker-only ATT&CK variant for Web Protocols; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-021
+    asset:
+      type: string
+      default: lab-host-021
+  artifact: attack_variant_021.json
+  sigma:
+    title: Web Protocols Variant 021 Marker
+    id: 7de6beba-21bd-56b3-9275-701bbcf95709
+    status: experimental
+    description: Detects simulator telemetry for Web Protocols variant 021.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1071.001
+        apt_sim.variant: attack_variant_021
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_021
+    attack.tactic: command_and_control
+    attack.technique.id: T1071.001
+    attack.technique.name: Web Protocols
+    apt_sim.variant: attack_variant_021
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1105:ATTACK_VARIANT_022
+  attack_id: T1105
+  name: Ingress Tool Transfer Variant 022 Marker
+  description: Marker-only ATT&CK variant for Ingress Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-022
+    asset:
+      type: string
+      default: lab-host-022
+  artifact: attack_variant_022.json
+  sigma:
+    title: Ingress Tool Transfer Variant 022 Marker
+    id: 932d5227-b282-5205-89a2-30c4dd9b83f1
+    status: experimental
+    description: Detects simulator telemetry for Ingress Tool Transfer variant 022.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1105
+        apt_sim.variant: attack_variant_022
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_022
+    attack.tactic: command_and_control
+    attack.technique.id: T1105
+    attack.technique.name: Ingress Tool Transfer
+    apt_sim.variant: attack_variant_022
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1041:ATTACK_VARIANT_023
+  attack_id: T1041
+  name: Exfiltration Over C2 Channel Variant 023 Marker
+  description: Marker-only ATT&CK variant for Exfiltration Over C2 Channel; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-023
+    asset:
+      type: string
+      default: lab-host-023
+  artifact: attack_variant_023.json
+  sigma:
+    title: Exfiltration Over C2 Channel Variant 023 Marker
+    id: ccfd85b3-aeaf-541d-a84f-813d3913b97b
+    status: experimental
+    description: Detects simulator telemetry for Exfiltration Over C2 Channel variant
+      023.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1041
+        apt_sim.variant: attack_variant_023
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_023
+    attack.tactic: exfiltration
+    attack.technique.id: T1041
+    attack.technique.name: Exfiltration Over C2 Channel
+    apt_sim.variant: attack_variant_023
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1048:ATTACK_VARIANT_024
+  attack_id: T1048
+  name: Exfiltration Over Alternative Protocol Variant 024 Marker
+  description: Marker-only ATT&CK variant for Exfiltration Over Alternative Protocol;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-024
+    asset:
+      type: string
+      default: lab-host-024
+  artifact: attack_variant_024.json
+  sigma:
+    title: Exfiltration Over Alternative Protocol Variant 024 Marker
+    id: 367f2934-a6e8-5e55-a31a-4b6a9ba557a1
+    status: experimental
+    description: Detects simulator telemetry for Exfiltration Over Alternative Protocol
+      variant 024.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1048
+        apt_sim.variant: attack_variant_024
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_024
+    attack.tactic: exfiltration
+    attack.technique.id: T1048
+    attack.technique.name: Exfiltration Over Alternative Protocol
+    apt_sim.variant: attack_variant_024
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1486:ATTACK_VARIANT_025
+  attack_id: T1486
+  name: Data Encrypted for Impact Variant 025 Marker
+  description: Marker-only ATT&CK variant for Data Encrypted for Impact; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-025
+    asset:
+      type: string
+      default: lab-host-025
+  artifact: attack_variant_025.json
+  sigma:
+    title: Data Encrypted for Impact Variant 025 Marker
+    id: 20325f75-2bc8-5588-b797-d77621b01706
+    status: experimental
+    description: Detects simulator telemetry for Data Encrypted for Impact variant
+      025.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1486
+        apt_sim.variant: attack_variant_025
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_025
+    attack.tactic: impact
+    attack.technique.id: T1486
+    attack.technique.name: Data Encrypted for Impact
+    apt_sim.variant: attack_variant_025
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1490:ATTACK_VARIANT_026
+  attack_id: T1490
+  name: Inhibit System Recovery Variant 026 Marker
+  description: Marker-only ATT&CK variant for Inhibit System Recovery; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-026
+    asset:
+      type: string
+      default: lab-host-026
+  artifact: attack_variant_026.json
+  sigma:
+    title: Inhibit System Recovery Variant 026 Marker
+    id: 6430db91-a9eb-52a9-a271-184f8ff3c8b7
+    status: experimental
+    description: Detects simulator telemetry for Inhibit System Recovery variant 026.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1490
+        apt_sim.variant: attack_variant_026
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_026
+    attack.tactic: impact
+    attack.technique.id: T1490
+    attack.technique.name: Inhibit System Recovery
+    apt_sim.variant: attack_variant_026
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1595:ATTACK_VARIANT_027
+  attack_id: T1595
+  name: Active Scanning Variant 027 Marker
+  description: Marker-only ATT&CK variant for Active Scanning; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: reconnaissance
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-027
+    asset:
+      type: string
+      default: lab-host-027
+  artifact: attack_variant_027.json
+  sigma:
+    title: Active Scanning Variant 027 Marker
+    id: 5542d0c2-9ec5-5992-8494-4063ecb15964
+    status: experimental
+    description: Detects simulator telemetry for Active Scanning variant 027.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1595
+        apt_sim.variant: attack_variant_027
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_027
+    attack.tactic: reconnaissance
+    attack.technique.id: T1595
+    attack.technique.name: Active Scanning
+    apt_sim.variant: attack_variant_027
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1583:ATTACK_VARIANT_028
+  attack_id: T1583
+  name: Acquire Infrastructure Variant 028 Marker
+  description: Marker-only ATT&CK variant for Acquire Infrastructure; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: resource_development
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-028
+    asset:
+      type: string
+      default: lab-host-028
+  artifact: attack_variant_028.json
+  sigma:
+    title: Acquire Infrastructure Variant 028 Marker
+    id: caf9b7a5-7001-566c-93f7-ce83547211fe
+    status: experimental
+    description: Detects simulator telemetry for Acquire Infrastructure variant 028.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1583
+        apt_sim.variant: attack_variant_028
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_028
+    attack.tactic: resource_development
+    attack.technique.id: T1583
+    attack.technique.name: Acquire Infrastructure
+    apt_sim.variant: attack_variant_028
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1190:ATTACK_VARIANT_029
+  attack_id: T1190
+  name: Exploit Public-Facing Application Variant 029 Marker
+  description: Marker-only ATT&CK variant for Exploit Public-Facing Application; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-029
+    asset:
+      type: string
+      default: lab-host-029
+  artifact: attack_variant_029.json
+  sigma:
+    title: Exploit Public-Facing Application Variant 029 Marker
+    id: 8a988975-ddae-559a-898f-b59eef05231c
+    status: experimental
+    description: Detects simulator telemetry for Exploit Public-Facing Application
+      variant 029.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1190
+        apt_sim.variant: attack_variant_029
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_029
+    attack.tactic: initial_access
+    attack.technique.id: T1190
+    attack.technique.name: Exploit Public-Facing Application
+    apt_sim.variant: attack_variant_029
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1566:ATTACK_VARIANT_030
+  attack_id: T1566
+  name: Phishing Variant 030 Marker
+  description: Marker-only ATT&CK variant for Phishing; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-030
+    asset:
+      type: string
+      default: lab-host-030
+  artifact: attack_variant_030.json
+  sigma:
+    title: Phishing Variant 030 Marker
+    id: d365f1b8-6600-51b0-807f-f69d789d182a
+    status: experimental
+    description: Detects simulator telemetry for Phishing variant 030.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1566
+        apt_sim.variant: attack_variant_030
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_030
+    attack.tactic: initial_access
+    attack.technique.id: T1566
+    attack.technique.name: Phishing
+    apt_sim.variant: attack_variant_030
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1059:ATTACK_VARIANT_031
+  attack_id: T1059
+  name: Command and Scripting Interpreter Variant 031 Marker
+  description: Marker-only ATT&CK variant for Command and Scripting Interpreter; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-031
+    asset:
+      type: string
+      default: lab-host-031
+  artifact: attack_variant_031.json
+  sigma:
+    title: Command and Scripting Interpreter Variant 031 Marker
+    id: d5857aa7-780b-5dd4-883d-323085905193
+    status: experimental
+    description: Detects simulator telemetry for Command and Scripting Interpreter
+      variant 031.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1059
+        apt_sim.variant: attack_variant_031
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_031
+    attack.tactic: execution
+    attack.technique.id: T1059
+    attack.technique.name: Command and Scripting Interpreter
+    apt_sim.variant: attack_variant_031
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1204:ATTACK_VARIANT_032
+  attack_id: T1204
+  name: User Execution Variant 032 Marker
+  description: Marker-only ATT&CK variant for User Execution; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-032
+    asset:
+      type: string
+      default: lab-host-032
+  artifact: attack_variant_032.json
+  sigma:
+    title: User Execution Variant 032 Marker
+    id: d9d532c9-af4d-5a89-af77-1d4201325b73
+    status: experimental
+    description: Detects simulator telemetry for User Execution variant 032.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1204
+        apt_sim.variant: attack_variant_032
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_032
+    attack.tactic: execution
+    attack.technique.id: T1204
+    attack.technique.name: User Execution
+    apt_sim.variant: attack_variant_032
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1098:ATTACK_VARIANT_033
+  attack_id: T1098
+  name: Account Manipulation Variant 033 Marker
+  description: Marker-only ATT&CK variant for Account Manipulation; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-033
+    asset:
+      type: string
+      default: lab-host-033
+  artifact: attack_variant_033.json
+  sigma:
+    title: Account Manipulation Variant 033 Marker
+    id: e15463c2-5d7a-5341-9b85-f6b358ebbdb3
+    status: experimental
+    description: Detects simulator telemetry for Account Manipulation variant 033.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1098
+        apt_sim.variant: attack_variant_033
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_033
+    attack.tactic: persistence
+    attack.technique.id: T1098
+    attack.technique.name: Account Manipulation
+    apt_sim.variant: attack_variant_033
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1547.001:ATTACK_VARIANT_034
+  attack_id: T1547.001
+  name: Registry Run Keys / Startup Folder Variant 034 Marker
+  description: Marker-only ATT&CK variant for Registry Run Keys / Startup Folder;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-034
+    asset:
+      type: string
+      default: lab-host-034
+  artifact: attack_variant_034.json
+  sigma:
+    title: Registry Run Keys / Startup Folder Variant 034 Marker
+    id: 4621aa5c-8aec-5119-afed-1c830123166f
+    status: experimental
+    description: Detects simulator telemetry for Registry Run Keys / Startup Folder
+      variant 034.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1547.001
+        apt_sim.variant: attack_variant_034
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_034
+    attack.tactic: persistence
+    attack.technique.id: T1547.001
+    attack.technique.name: Registry Run Keys / Startup Folder
+    apt_sim.variant: attack_variant_034
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1068:ATTACK_VARIANT_035
+  attack_id: T1068
+  name: Exploitation for Privilege Escalation Variant 035 Marker
+  description: Marker-only ATT&CK variant for Exploitation for Privilege Escalation;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-035
+    asset:
+      type: string
+      default: lab-host-035
+  artifact: attack_variant_035.json
+  sigma:
+    title: Exploitation for Privilege Escalation Variant 035 Marker
+    id: e8068f78-1c2a-555f-a446-dc96e8b68bb6
+    status: experimental
+    description: Detects simulator telemetry for Exploitation for Privilege Escalation
+      variant 035.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1068
+        apt_sim.variant: attack_variant_035
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_035
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1068
+    attack.technique.name: Exploitation for Privilege Escalation
+    apt_sim.variant: attack_variant_035
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1548:ATTACK_VARIANT_036
+  attack_id: T1548
+  name: Abuse Elevation Control Mechanism Variant 036 Marker
+  description: Marker-only ATT&CK variant for Abuse Elevation Control Mechanism; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-036
+    asset:
+      type: string
+      default: lab-host-036
+  artifact: attack_variant_036.json
+  sigma:
+    title: Abuse Elevation Control Mechanism Variant 036 Marker
+    id: 993c4ea3-2fc3-590a-be52-850cc146469b
+    status: experimental
+    description: Detects simulator telemetry for Abuse Elevation Control Mechanism
+      variant 036.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1548
+        apt_sim.variant: attack_variant_036
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_036
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1548
+    attack.technique.name: Abuse Elevation Control Mechanism
+    apt_sim.variant: attack_variant_036
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1027:ATTACK_VARIANT_037
+  attack_id: T1027
+  name: Obfuscated Files or Information Variant 037 Marker
+  description: Marker-only ATT&CK variant for Obfuscated Files or Information; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-037
+    asset:
+      type: string
+      default: lab-host-037
+  artifact: attack_variant_037.json
+  sigma:
+    title: Obfuscated Files or Information Variant 037 Marker
+    id: b9425e21-02bd-56e4-953b-e6ab466d2d60
+    status: experimental
+    description: Detects simulator telemetry for Obfuscated Files or Information variant
+      037.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1027
+        apt_sim.variant: attack_variant_037
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_037
+    attack.tactic: defense_evasion
+    attack.technique.id: T1027
+    attack.technique.name: Obfuscated Files or Information
+    apt_sim.variant: attack_variant_037
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1070.004:ATTACK_VARIANT_038
+  attack_id: T1070.004
+  name: File Deletion Variant 038 Marker
+  description: Marker-only ATT&CK variant for File Deletion; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-038
+    asset:
+      type: string
+      default: lab-host-038
+  artifact: attack_variant_038.json
+  sigma:
+    title: File Deletion Variant 038 Marker
+    id: f96d77c6-bd7f-5064-882a-85d0c2ef1dd4
+    status: experimental
+    description: Detects simulator telemetry for File Deletion variant 038.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1070.004
+        apt_sim.variant: attack_variant_038
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_038
+    attack.tactic: defense_evasion
+    attack.technique.id: T1070.004
+    attack.technique.name: File Deletion
+    apt_sim.variant: attack_variant_038
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1003:ATTACK_VARIANT_039
+  attack_id: T1003
+  name: OS Credential Dumping Variant 039 Marker
+  description: Marker-only ATT&CK variant for OS Credential Dumping; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-039
+    asset:
+      type: string
+      default: lab-host-039
+  artifact: attack_variant_039.json
+  sigma:
+    title: OS Credential Dumping Variant 039 Marker
+    id: 582e2dda-fe07-52c0-89a7-c8f9fc533062
+    status: experimental
+    description: Detects simulator telemetry for OS Credential Dumping variant 039.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1003
+        apt_sim.variant: attack_variant_039
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_039
+    attack.tactic: credential_access
+    attack.technique.id: T1003
+    attack.technique.name: OS Credential Dumping
+    apt_sim.variant: attack_variant_039
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1110:ATTACK_VARIANT_040
+  attack_id: T1110
+  name: Brute Force Variant 040 Marker
+  description: Marker-only ATT&CK variant for Brute Force; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-040
+    asset:
+      type: string
+      default: lab-host-040
+  artifact: attack_variant_040.json
+  sigma:
+    title: Brute Force Variant 040 Marker
+    id: 179f6ade-d6be-5961-ad38-f9addbc6fd17
+    status: experimental
+    description: Detects simulator telemetry for Brute Force variant 040.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1110
+        apt_sim.variant: attack_variant_040
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_040
+    attack.tactic: credential_access
+    attack.technique.id: T1110
+    attack.technique.name: Brute Force
+    apt_sim.variant: attack_variant_040
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1082:ATTACK_VARIANT_041
+  attack_id: T1082
+  name: System Information Discovery Variant 041 Marker
+  description: Marker-only ATT&CK variant for System Information Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-041
+    asset:
+      type: string
+      default: lab-host-041
+  artifact: attack_variant_041.json
+  sigma:
+    title: System Information Discovery Variant 041 Marker
+    id: 0aabf4ae-fdff-5c82-b16e-4ee202da0d3e
+    status: experimental
+    description: Detects simulator telemetry for System Information Discovery variant
+      041.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1082
+        apt_sim.variant: attack_variant_041
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_041
+    attack.tactic: discovery
+    attack.technique.id: T1082
+    attack.technique.name: System Information Discovery
+    apt_sim.variant: attack_variant_041
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1083:ATTACK_VARIANT_042
+  attack_id: T1083
+  name: File and Directory Discovery Variant 042 Marker
+  description: Marker-only ATT&CK variant for File and Directory Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-042
+    asset:
+      type: string
+      default: lab-host-042
+  artifact: attack_variant_042.json
+  sigma:
+    title: File and Directory Discovery Variant 042 Marker
+    id: 82d8d1d0-a354-5306-a547-8e28760a3458
+    status: experimental
+    description: Detects simulator telemetry for File and Directory Discovery variant
+      042.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1083
+        apt_sim.variant: attack_variant_042
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_042
+    attack.tactic: discovery
+    attack.technique.id: T1083
+    attack.technique.name: File and Directory Discovery
+    apt_sim.variant: attack_variant_042
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1021.001:ATTACK_VARIANT_043
+  attack_id: T1021.001
+  name: Remote Desktop Protocol Variant 043 Marker
+  description: Marker-only ATT&CK variant for Remote Desktop Protocol; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-043
+    asset:
+      type: string
+      default: lab-host-043
+  artifact: attack_variant_043.json
+  sigma:
+    title: Remote Desktop Protocol Variant 043 Marker
+    id: 26b4ced3-c314-55a4-9cbc-335770697702
+    status: experimental
+    description: Detects simulator telemetry for Remote Desktop Protocol variant 043.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1021.001
+        apt_sim.variant: attack_variant_043
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_043
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.001
+    attack.technique.name: Remote Desktop Protocol
+    apt_sim.variant: attack_variant_043
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1570:ATTACK_VARIANT_044
+  attack_id: T1570
+  name: Lateral Tool Transfer Variant 044 Marker
+  description: Marker-only ATT&CK variant for Lateral Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-044
+    asset:
+      type: string
+      default: lab-host-044
+  artifact: attack_variant_044.json
+  sigma:
+    title: Lateral Tool Transfer Variant 044 Marker
+    id: 0699deb2-6789-57be-ad2f-31295a989f5f
+    status: experimental
+    description: Detects simulator telemetry for Lateral Tool Transfer variant 044.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1570
+        apt_sim.variant: attack_variant_044
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_044
+    attack.tactic: lateral_movement
+    attack.technique.id: T1570
+    attack.technique.name: Lateral Tool Transfer
+    apt_sim.variant: attack_variant_044
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1005:ATTACK_VARIANT_045
+  attack_id: T1005
+  name: Data from Local System Variant 045 Marker
+  description: Marker-only ATT&CK variant for Data from Local System; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-045
+    asset:
+      type: string
+      default: lab-host-045
+  artifact: attack_variant_045.json
+  sigma:
+    title: Data from Local System Variant 045 Marker
+    id: cf9eeb5c-2ce5-5c0c-9a85-25b033c75f60
+    status: experimental
+    description: Detects simulator telemetry for Data from Local System variant 045.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1005
+        apt_sim.variant: attack_variant_045
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_045
+    attack.tactic: collection
+    attack.technique.id: T1005
+    attack.technique.name: Data from Local System
+    apt_sim.variant: attack_variant_045
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1560:ATTACK_VARIANT_046
+  attack_id: T1560
+  name: Archive Collected Data Variant 046 Marker
+  description: Marker-only ATT&CK variant for Archive Collected Data; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-046
+    asset:
+      type: string
+      default: lab-host-046
+  artifact: attack_variant_046.json
+  sigma:
+    title: Archive Collected Data Variant 046 Marker
+    id: 67176bca-118b-5140-abb8-bee3fab4422b
+    status: experimental
+    description: Detects simulator telemetry for Archive Collected Data variant 046.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1560
+        apt_sim.variant: attack_variant_046
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_046
+    attack.tactic: collection
+    attack.technique.id: T1560
+    attack.technique.name: Archive Collected Data
+    apt_sim.variant: attack_variant_046
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1071.001:ATTACK_VARIANT_047
+  attack_id: T1071.001
+  name: Web Protocols Variant 047 Marker
+  description: Marker-only ATT&CK variant for Web Protocols; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-047
+    asset:
+      type: string
+      default: lab-host-047
+  artifact: attack_variant_047.json
+  sigma:
+    title: Web Protocols Variant 047 Marker
+    id: a145af75-6c70-5b21-aa9e-d5d4fdb13ba6
+    status: experimental
+    description: Detects simulator telemetry for Web Protocols variant 047.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1071.001
+        apt_sim.variant: attack_variant_047
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_047
+    attack.tactic: command_and_control
+    attack.technique.id: T1071.001
+    attack.technique.name: Web Protocols
+    apt_sim.variant: attack_variant_047
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1105:ATTACK_VARIANT_048
+  attack_id: T1105
+  name: Ingress Tool Transfer Variant 048 Marker
+  description: Marker-only ATT&CK variant for Ingress Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-048
+    asset:
+      type: string
+      default: lab-host-048
+  artifact: attack_variant_048.json
+  sigma:
+    title: Ingress Tool Transfer Variant 048 Marker
+    id: e0c0ac63-3d8c-5e00-803f-ff44aee5232b
+    status: experimental
+    description: Detects simulator telemetry for Ingress Tool Transfer variant 048.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1105
+        apt_sim.variant: attack_variant_048
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_048
+    attack.tactic: command_and_control
+    attack.technique.id: T1105
+    attack.technique.name: Ingress Tool Transfer
+    apt_sim.variant: attack_variant_048
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1041:ATTACK_VARIANT_049
+  attack_id: T1041
+  name: Exfiltration Over C2 Channel Variant 049 Marker
+  description: Marker-only ATT&CK variant for Exfiltration Over C2 Channel; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-049
+    asset:
+      type: string
+      default: lab-host-049
+  artifact: attack_variant_049.json
+  sigma:
+    title: Exfiltration Over C2 Channel Variant 049 Marker
+    id: b648d441-311e-5c27-a8d7-6d2218094801
+    status: experimental
+    description: Detects simulator telemetry for Exfiltration Over C2 Channel variant
+      049.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1041
+        apt_sim.variant: attack_variant_049
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_049
+    attack.tactic: exfiltration
+    attack.technique.id: T1041
+    attack.technique.name: Exfiltration Over C2 Channel
+    apt_sim.variant: attack_variant_049
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1048:ATTACK_VARIANT_050
+  attack_id: T1048
+  name: Exfiltration Over Alternative Protocol Variant 050 Marker
+  description: Marker-only ATT&CK variant for Exfiltration Over Alternative Protocol;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-050
+    asset:
+      type: string
+      default: lab-host-050
+  artifact: attack_variant_050.json
+  sigma:
+    title: Exfiltration Over Alternative Protocol Variant 050 Marker
+    id: 5a4d6553-5849-526c-86d8-74a24eab01c4
+    status: experimental
+    description: Detects simulator telemetry for Exfiltration Over Alternative Protocol
+      variant 050.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1048
+        apt_sim.variant: attack_variant_050
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_050
+    attack.tactic: exfiltration
+    attack.technique.id: T1048
+    attack.technique.name: Exfiltration Over Alternative Protocol
+    apt_sim.variant: attack_variant_050
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1486:ATTACK_VARIANT_051
+  attack_id: T1486
+  name: Data Encrypted for Impact Variant 051 Marker
+  description: Marker-only ATT&CK variant for Data Encrypted for Impact; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-051
+    asset:
+      type: string
+      default: lab-host-051
+  artifact: attack_variant_051.json
+  sigma:
+    title: Data Encrypted for Impact Variant 051 Marker
+    id: 66e74b25-8679-52e4-8376-76ac4875e466
+    status: experimental
+    description: Detects simulator telemetry for Data Encrypted for Impact variant
+      051.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1486
+        apt_sim.variant: attack_variant_051
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_051
+    attack.tactic: impact
+    attack.technique.id: T1486
+    attack.technique.name: Data Encrypted for Impact
+    apt_sim.variant: attack_variant_051
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1490:ATTACK_VARIANT_052
+  attack_id: T1490
+  name: Inhibit System Recovery Variant 052 Marker
+  description: Marker-only ATT&CK variant for Inhibit System Recovery; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-052
+    asset:
+      type: string
+      default: lab-host-052
+  artifact: attack_variant_052.json
+  sigma:
+    title: Inhibit System Recovery Variant 052 Marker
+    id: d8baa0ba-5844-5da4-a541-8be9012fc8b7
+    status: experimental
+    description: Detects simulator telemetry for Inhibit System Recovery variant 052.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1490
+        apt_sim.variant: attack_variant_052
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_052
+    attack.tactic: impact
+    attack.technique.id: T1490
+    attack.technique.name: Inhibit System Recovery
+    apt_sim.variant: attack_variant_052
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1595:ATTACK_VARIANT_053
+  attack_id: T1595
+  name: Active Scanning Variant 053 Marker
+  description: Marker-only ATT&CK variant for Active Scanning; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: reconnaissance
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-053
+    asset:
+      type: string
+      default: lab-host-053
+  artifact: attack_variant_053.json
+  sigma:
+    title: Active Scanning Variant 053 Marker
+    id: aa9590f8-e808-5893-871b-4a58f3a65234
+    status: experimental
+    description: Detects simulator telemetry for Active Scanning variant 053.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1595
+        apt_sim.variant: attack_variant_053
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_053
+    attack.tactic: reconnaissance
+    attack.technique.id: T1595
+    attack.technique.name: Active Scanning
+    apt_sim.variant: attack_variant_053
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1583:ATTACK_VARIANT_054
+  attack_id: T1583
+  name: Acquire Infrastructure Variant 054 Marker
+  description: Marker-only ATT&CK variant for Acquire Infrastructure; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: resource_development
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-054
+    asset:
+      type: string
+      default: lab-host-054
+  artifact: attack_variant_054.json
+  sigma:
+    title: Acquire Infrastructure Variant 054 Marker
+    id: 1cf85833-c508-59d6-ac87-dbbbc56fb913
+    status: experimental
+    description: Detects simulator telemetry for Acquire Infrastructure variant 054.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1583
+        apt_sim.variant: attack_variant_054
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_054
+    attack.tactic: resource_development
+    attack.technique.id: T1583
+    attack.technique.name: Acquire Infrastructure
+    apt_sim.variant: attack_variant_054
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1190:ATTACK_VARIANT_055
+  attack_id: T1190
+  name: Exploit Public-Facing Application Variant 055 Marker
+  description: Marker-only ATT&CK variant for Exploit Public-Facing Application; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-055
+    asset:
+      type: string
+      default: lab-host-055
+  artifact: attack_variant_055.json
+  sigma:
+    title: Exploit Public-Facing Application Variant 055 Marker
+    id: b91c5ad3-af2f-5b97-a457-ada35e593ba0
+    status: experimental
+    description: Detects simulator telemetry for Exploit Public-Facing Application
+      variant 055.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1190
+        apt_sim.variant: attack_variant_055
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_055
+    attack.tactic: initial_access
+    attack.technique.id: T1190
+    attack.technique.name: Exploit Public-Facing Application
+    apt_sim.variant: attack_variant_055
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1566:ATTACK_VARIANT_056
+  attack_id: T1566
+  name: Phishing Variant 056 Marker
+  description: Marker-only ATT&CK variant for Phishing; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-056
+    asset:
+      type: string
+      default: lab-host-056
+  artifact: attack_variant_056.json
+  sigma:
+    title: Phishing Variant 056 Marker
+    id: eb283c75-e7bd-5dd6-a5e0-16a042300c9f
+    status: experimental
+    description: Detects simulator telemetry for Phishing variant 056.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1566
+        apt_sim.variant: attack_variant_056
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_056
+    attack.tactic: initial_access
+    attack.technique.id: T1566
+    attack.technique.name: Phishing
+    apt_sim.variant: attack_variant_056
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1059:ATTACK_VARIANT_057
+  attack_id: T1059
+  name: Command and Scripting Interpreter Variant 057 Marker
+  description: Marker-only ATT&CK variant for Command and Scripting Interpreter; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-057
+    asset:
+      type: string
+      default: lab-host-057
+  artifact: attack_variant_057.json
+  sigma:
+    title: Command and Scripting Interpreter Variant 057 Marker
+    id: c1871b41-9e14-58bd-b076-b2d0c2ff3bac
+    status: experimental
+    description: Detects simulator telemetry for Command and Scripting Interpreter
+      variant 057.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1059
+        apt_sim.variant: attack_variant_057
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_057
+    attack.tactic: execution
+    attack.technique.id: T1059
+    attack.technique.name: Command and Scripting Interpreter
+    apt_sim.variant: attack_variant_057
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1204:ATTACK_VARIANT_058
+  attack_id: T1204
+  name: User Execution Variant 058 Marker
+  description: Marker-only ATT&CK variant for User Execution; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-058
+    asset:
+      type: string
+      default: lab-host-058
+  artifact: attack_variant_058.json
+  sigma:
+    title: User Execution Variant 058 Marker
+    id: cbdd5f8b-ff55-5981-b42d-538bc693959d
+    status: experimental
+    description: Detects simulator telemetry for User Execution variant 058.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1204
+        apt_sim.variant: attack_variant_058
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_058
+    attack.tactic: execution
+    attack.technique.id: T1204
+    attack.technique.name: User Execution
+    apt_sim.variant: attack_variant_058
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1098:ATTACK_VARIANT_059
+  attack_id: T1098
+  name: Account Manipulation Variant 059 Marker
+  description: Marker-only ATT&CK variant for Account Manipulation; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-059
+    asset:
+      type: string
+      default: lab-host-059
+  artifact: attack_variant_059.json
+  sigma:
+    title: Account Manipulation Variant 059 Marker
+    id: d2a5ca8e-dcc8-5dc6-91e8-fd99cc0004b1
+    status: experimental
+    description: Detects simulator telemetry for Account Manipulation variant 059.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1098
+        apt_sim.variant: attack_variant_059
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_059
+    attack.tactic: persistence
+    attack.technique.id: T1098
+    attack.technique.name: Account Manipulation
+    apt_sim.variant: attack_variant_059
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1547.001:ATTACK_VARIANT_060
+  attack_id: T1547.001
+  name: Registry Run Keys / Startup Folder Variant 060 Marker
+  description: Marker-only ATT&CK variant for Registry Run Keys / Startup Folder;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-060
+    asset:
+      type: string
+      default: lab-host-060
+  artifact: attack_variant_060.json
+  sigma:
+    title: Registry Run Keys / Startup Folder Variant 060 Marker
+    id: fd4b52a6-1612-5b73-813d-fa04ce076b1c
+    status: experimental
+    description: Detects simulator telemetry for Registry Run Keys / Startup Folder
+      variant 060.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1547.001
+        apt_sim.variant: attack_variant_060
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_060
+    attack.tactic: persistence
+    attack.technique.id: T1547.001
+    attack.technique.name: Registry Run Keys / Startup Folder
+    apt_sim.variant: attack_variant_060
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1068:ATTACK_VARIANT_061
+  attack_id: T1068
+  name: Exploitation for Privilege Escalation Variant 061 Marker
+  description: Marker-only ATT&CK variant for Exploitation for Privilege Escalation;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-061
+    asset:
+      type: string
+      default: lab-host-061
+  artifact: attack_variant_061.json
+  sigma:
+    title: Exploitation for Privilege Escalation Variant 061 Marker
+    id: eb7a28c8-fc8a-5bf7-b95b-07d208cd547f
+    status: experimental
+    description: Detects simulator telemetry for Exploitation for Privilege Escalation
+      variant 061.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1068
+        apt_sim.variant: attack_variant_061
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_061
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1068
+    attack.technique.name: Exploitation for Privilege Escalation
+    apt_sim.variant: attack_variant_061
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1548:ATTACK_VARIANT_062
+  attack_id: T1548
+  name: Abuse Elevation Control Mechanism Variant 062 Marker
+  description: Marker-only ATT&CK variant for Abuse Elevation Control Mechanism; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-062
+    asset:
+      type: string
+      default: lab-host-062
+  artifact: attack_variant_062.json
+  sigma:
+    title: Abuse Elevation Control Mechanism Variant 062 Marker
+    id: e7374554-0784-5d75-b001-6dd7f75e1a6f
+    status: experimental
+    description: Detects simulator telemetry for Abuse Elevation Control Mechanism
+      variant 062.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1548
+        apt_sim.variant: attack_variant_062
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_062
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1548
+    attack.technique.name: Abuse Elevation Control Mechanism
+    apt_sim.variant: attack_variant_062
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1027:ATTACK_VARIANT_063
+  attack_id: T1027
+  name: Obfuscated Files or Information Variant 063 Marker
+  description: Marker-only ATT&CK variant for Obfuscated Files or Information; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-063
+    asset:
+      type: string
+      default: lab-host-063
+  artifact: attack_variant_063.json
+  sigma:
+    title: Obfuscated Files or Information Variant 063 Marker
+    id: f2d2cdc5-c62d-58b4-b0c6-3c40df0db593
+    status: experimental
+    description: Detects simulator telemetry for Obfuscated Files or Information variant
+      063.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1027
+        apt_sim.variant: attack_variant_063
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_063
+    attack.tactic: defense_evasion
+    attack.technique.id: T1027
+    attack.technique.name: Obfuscated Files or Information
+    apt_sim.variant: attack_variant_063
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1070.004:ATTACK_VARIANT_064
+  attack_id: T1070.004
+  name: File Deletion Variant 064 Marker
+  description: Marker-only ATT&CK variant for File Deletion; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-064
+    asset:
+      type: string
+      default: lab-host-064
+  artifact: attack_variant_064.json
+  sigma:
+    title: File Deletion Variant 064 Marker
+    id: e1d61333-cf8d-561f-ad21-81c3c4f928f1
+    status: experimental
+    description: Detects simulator telemetry for File Deletion variant 064.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1070.004
+        apt_sim.variant: attack_variant_064
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_064
+    attack.tactic: defense_evasion
+    attack.technique.id: T1070.004
+    attack.technique.name: File Deletion
+    apt_sim.variant: attack_variant_064
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1003:ATTACK_VARIANT_065
+  attack_id: T1003
+  name: OS Credential Dumping Variant 065 Marker
+  description: Marker-only ATT&CK variant for OS Credential Dumping; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-065
+    asset:
+      type: string
+      default: lab-host-065
+  artifact: attack_variant_065.json
+  sigma:
+    title: OS Credential Dumping Variant 065 Marker
+    id: ab487752-398f-5a45-9dd6-8af937c96a41
+    status: experimental
+    description: Detects simulator telemetry for OS Credential Dumping variant 065.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1003
+        apt_sim.variant: attack_variant_065
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_065
+    attack.tactic: credential_access
+    attack.technique.id: T1003
+    attack.technique.name: OS Credential Dumping
+    apt_sim.variant: attack_variant_065
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1110:ATTACK_VARIANT_066
+  attack_id: T1110
+  name: Brute Force Variant 066 Marker
+  description: Marker-only ATT&CK variant for Brute Force; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-066
+    asset:
+      type: string
+      default: lab-host-066
+  artifact: attack_variant_066.json
+  sigma:
+    title: Brute Force Variant 066 Marker
+    id: 42472e3f-08c7-5637-b646-16ec898e188c
+    status: experimental
+    description: Detects simulator telemetry for Brute Force variant 066.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1110
+        apt_sim.variant: attack_variant_066
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_066
+    attack.tactic: credential_access
+    attack.technique.id: T1110
+    attack.technique.name: Brute Force
+    apt_sim.variant: attack_variant_066
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1082:ATTACK_VARIANT_067
+  attack_id: T1082
+  name: System Information Discovery Variant 067 Marker
+  description: Marker-only ATT&CK variant for System Information Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-067
+    asset:
+      type: string
+      default: lab-host-067
+  artifact: attack_variant_067.json
+  sigma:
+    title: System Information Discovery Variant 067 Marker
+    id: 4388c260-49af-52a4-b6b1-ee27080eed3f
+    status: experimental
+    description: Detects simulator telemetry for System Information Discovery variant
+      067.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1082
+        apt_sim.variant: attack_variant_067
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_067
+    attack.tactic: discovery
+    attack.technique.id: T1082
+    attack.technique.name: System Information Discovery
+    apt_sim.variant: attack_variant_067
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1083:ATTACK_VARIANT_068
+  attack_id: T1083
+  name: File and Directory Discovery Variant 068 Marker
+  description: Marker-only ATT&CK variant for File and Directory Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-068
+    asset:
+      type: string
+      default: lab-host-068
+  artifact: attack_variant_068.json
+  sigma:
+    title: File and Directory Discovery Variant 068 Marker
+    id: 204248ee-6ac6-5178-ae3e-e6ce76b62700
+    status: experimental
+    description: Detects simulator telemetry for File and Directory Discovery variant
+      068.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1083
+        apt_sim.variant: attack_variant_068
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_068
+    attack.tactic: discovery
+    attack.technique.id: T1083
+    attack.technique.name: File and Directory Discovery
+    apt_sim.variant: attack_variant_068
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1021.001:ATTACK_VARIANT_069
+  attack_id: T1021.001
+  name: Remote Desktop Protocol Variant 069 Marker
+  description: Marker-only ATT&CK variant for Remote Desktop Protocol; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-069
+    asset:
+      type: string
+      default: lab-host-069
+  artifact: attack_variant_069.json
+  sigma:
+    title: Remote Desktop Protocol Variant 069 Marker
+    id: 66b62e82-b598-5ed6-8b5d-8516112bc5d6
+    status: experimental
+    description: Detects simulator telemetry for Remote Desktop Protocol variant 069.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1021.001
+        apt_sim.variant: attack_variant_069
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_069
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.001
+    attack.technique.name: Remote Desktop Protocol
+    apt_sim.variant: attack_variant_069
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1570:ATTACK_VARIANT_070
+  attack_id: T1570
+  name: Lateral Tool Transfer Variant 070 Marker
+  description: Marker-only ATT&CK variant for Lateral Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-070
+    asset:
+      type: string
+      default: lab-host-070
+  artifact: attack_variant_070.json
+  sigma:
+    title: Lateral Tool Transfer Variant 070 Marker
+    id: 63766e81-f532-5cff-a187-3b40da274d75
+    status: experimental
+    description: Detects simulator telemetry for Lateral Tool Transfer variant 070.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1570
+        apt_sim.variant: attack_variant_070
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_070
+    attack.tactic: lateral_movement
+    attack.technique.id: T1570
+    attack.technique.name: Lateral Tool Transfer
+    apt_sim.variant: attack_variant_070
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1005:ATTACK_VARIANT_071
+  attack_id: T1005
+  name: Data from Local System Variant 071 Marker
+  description: Marker-only ATT&CK variant for Data from Local System; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-071
+    asset:
+      type: string
+      default: lab-host-071
+  artifact: attack_variant_071.json
+  sigma:
+    title: Data from Local System Variant 071 Marker
+    id: 18ccf9d0-147b-51ba-b45c-6976b6c87929
+    status: experimental
+    description: Detects simulator telemetry for Data from Local System variant 071.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1005
+        apt_sim.variant: attack_variant_071
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_071
+    attack.tactic: collection
+    attack.technique.id: T1005
+    attack.technique.name: Data from Local System
+    apt_sim.variant: attack_variant_071
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1560:ATTACK_VARIANT_072
+  attack_id: T1560
+  name: Archive Collected Data Variant 072 Marker
+  description: Marker-only ATT&CK variant for Archive Collected Data; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-072
+    asset:
+      type: string
+      default: lab-host-072
+  artifact: attack_variant_072.json
+  sigma:
+    title: Archive Collected Data Variant 072 Marker
+    id: 971f6f2a-f00b-5c63-ac83-ae49a8820603
+    status: experimental
+    description: Detects simulator telemetry for Archive Collected Data variant 072.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1560
+        apt_sim.variant: attack_variant_072
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_072
+    attack.tactic: collection
+    attack.technique.id: T1560
+    attack.technique.name: Archive Collected Data
+    apt_sim.variant: attack_variant_072
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1071.001:ATTACK_VARIANT_073
+  attack_id: T1071.001
+  name: Web Protocols Variant 073 Marker
+  description: Marker-only ATT&CK variant for Web Protocols; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-073
+    asset:
+      type: string
+      default: lab-host-073
+  artifact: attack_variant_073.json
+  sigma:
+    title: Web Protocols Variant 073 Marker
+    id: 02fab66f-2330-543c-9a48-2a258990ade6
+    status: experimental
+    description: Detects simulator telemetry for Web Protocols variant 073.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1071.001
+        apt_sim.variant: attack_variant_073
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_073
+    attack.tactic: command_and_control
+    attack.technique.id: T1071.001
+    attack.technique.name: Web Protocols
+    apt_sim.variant: attack_variant_073
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1105:ATTACK_VARIANT_074
+  attack_id: T1105
+  name: Ingress Tool Transfer Variant 074 Marker
+  description: Marker-only ATT&CK variant for Ingress Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-074
+    asset:
+      type: string
+      default: lab-host-074
+  artifact: attack_variant_074.json
+  sigma:
+    title: Ingress Tool Transfer Variant 074 Marker
+    id: 1472931b-fc5b-5542-b315-842ade639a40
+    status: experimental
+    description: Detects simulator telemetry for Ingress Tool Transfer variant 074.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1105
+        apt_sim.variant: attack_variant_074
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_074
+    attack.tactic: command_and_control
+    attack.technique.id: T1105
+    attack.technique.name: Ingress Tool Transfer
+    apt_sim.variant: attack_variant_074
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1041:ATTACK_VARIANT_075
+  attack_id: T1041
+  name: Exfiltration Over C2 Channel Variant 075 Marker
+  description: Marker-only ATT&CK variant for Exfiltration Over C2 Channel; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-075
+    asset:
+      type: string
+      default: lab-host-075
+  artifact: attack_variant_075.json
+  sigma:
+    title: Exfiltration Over C2 Channel Variant 075 Marker
+    id: d8662ed8-840a-589c-9b4c-6e9d10aa86c4
+    status: experimental
+    description: Detects simulator telemetry for Exfiltration Over C2 Channel variant
+      075.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1041
+        apt_sim.variant: attack_variant_075
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_075
+    attack.tactic: exfiltration
+    attack.technique.id: T1041
+    attack.technique.name: Exfiltration Over C2 Channel
+    apt_sim.variant: attack_variant_075
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1048:ATTACK_VARIANT_076
+  attack_id: T1048
+  name: Exfiltration Over Alternative Protocol Variant 076 Marker
+  description: Marker-only ATT&CK variant for Exfiltration Over Alternative Protocol;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-076
+    asset:
+      type: string
+      default: lab-host-076
+  artifact: attack_variant_076.json
+  sigma:
+    title: Exfiltration Over Alternative Protocol Variant 076 Marker
+    id: c9a0b1f9-5df2-5f22-bed9-5adadf466577
+    status: experimental
+    description: Detects simulator telemetry for Exfiltration Over Alternative Protocol
+      variant 076.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1048
+        apt_sim.variant: attack_variant_076
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_076
+    attack.tactic: exfiltration
+    attack.technique.id: T1048
+    attack.technique.name: Exfiltration Over Alternative Protocol
+    apt_sim.variant: attack_variant_076
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1486:ATTACK_VARIANT_077
+  attack_id: T1486
+  name: Data Encrypted for Impact Variant 077 Marker
+  description: Marker-only ATT&CK variant for Data Encrypted for Impact; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-077
+    asset:
+      type: string
+      default: lab-host-077
+  artifact: attack_variant_077.json
+  sigma:
+    title: Data Encrypted for Impact Variant 077 Marker
+    id: 5939066b-1425-50a9-bbe2-73a5b05780c4
+    status: experimental
+    description: Detects simulator telemetry for Data Encrypted for Impact variant
+      077.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1486
+        apt_sim.variant: attack_variant_077
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_077
+    attack.tactic: impact
+    attack.technique.id: T1486
+    attack.technique.name: Data Encrypted for Impact
+    apt_sim.variant: attack_variant_077
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1490:ATTACK_VARIANT_078
+  attack_id: T1490
+  name: Inhibit System Recovery Variant 078 Marker
+  description: Marker-only ATT&CK variant for Inhibit System Recovery; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-078
+    asset:
+      type: string
+      default: lab-host-078
+  artifact: attack_variant_078.json
+  sigma:
+    title: Inhibit System Recovery Variant 078 Marker
+    id: fb31f56f-f23c-52b5-87b2-9dda47362f0b
+    status: experimental
+    description: Detects simulator telemetry for Inhibit System Recovery variant 078.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1490
+        apt_sim.variant: attack_variant_078
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_078
+    attack.tactic: impact
+    attack.technique.id: T1490
+    attack.technique.name: Inhibit System Recovery
+    apt_sim.variant: attack_variant_078
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1595:ATTACK_VARIANT_079
+  attack_id: T1595
+  name: Active Scanning Variant 079 Marker
+  description: Marker-only ATT&CK variant for Active Scanning; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: reconnaissance
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-079
+    asset:
+      type: string
+      default: lab-host-079
+  artifact: attack_variant_079.json
+  sigma:
+    title: Active Scanning Variant 079 Marker
+    id: 209a7465-dd2d-551b-b8b5-344bd139c471
+    status: experimental
+    description: Detects simulator telemetry for Active Scanning variant 079.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1595
+        apt_sim.variant: attack_variant_079
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_079
+    attack.tactic: reconnaissance
+    attack.technique.id: T1595
+    attack.technique.name: Active Scanning
+    apt_sim.variant: attack_variant_079
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1583:ATTACK_VARIANT_080
+  attack_id: T1583
+  name: Acquire Infrastructure Variant 080 Marker
+  description: Marker-only ATT&CK variant for Acquire Infrastructure; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: resource_development
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-080
+    asset:
+      type: string
+      default: lab-host-080
+  artifact: attack_variant_080.json
+  sigma:
+    title: Acquire Infrastructure Variant 080 Marker
+    id: 734d47b0-5516-5b38-9a0e-7609320ed455
+    status: experimental
+    description: Detects simulator telemetry for Acquire Infrastructure variant 080.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1583
+        apt_sim.variant: attack_variant_080
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_080
+    attack.tactic: resource_development
+    attack.technique.id: T1583
+    attack.technique.name: Acquire Infrastructure
+    apt_sim.variant: attack_variant_080
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1190:ATTACK_VARIANT_081
+  attack_id: T1190
+  name: Exploit Public-Facing Application Variant 081 Marker
+  description: Marker-only ATT&CK variant for Exploit Public-Facing Application; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-081
+    asset:
+      type: string
+      default: lab-host-081
+  artifact: attack_variant_081.json
+  sigma:
+    title: Exploit Public-Facing Application Variant 081 Marker
+    id: 4f7c9bc8-9874-5927-87b4-ea1321deb70b
+    status: experimental
+    description: Detects simulator telemetry for Exploit Public-Facing Application
+      variant 081.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1190
+        apt_sim.variant: attack_variant_081
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_081
+    attack.tactic: initial_access
+    attack.technique.id: T1190
+    attack.technique.name: Exploit Public-Facing Application
+    apt_sim.variant: attack_variant_081
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1566:ATTACK_VARIANT_082
+  attack_id: T1566
+  name: Phishing Variant 082 Marker
+  description: Marker-only ATT&CK variant for Phishing; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-082
+    asset:
+      type: string
+      default: lab-host-082
+  artifact: attack_variant_082.json
+  sigma:
+    title: Phishing Variant 082 Marker
+    id: 502813c4-6d96-552c-bb3f-b01ead83034f
+    status: experimental
+    description: Detects simulator telemetry for Phishing variant 082.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1566
+        apt_sim.variant: attack_variant_082
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_082
+    attack.tactic: initial_access
+    attack.technique.id: T1566
+    attack.technique.name: Phishing
+    apt_sim.variant: attack_variant_082
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1059:ATTACK_VARIANT_083
+  attack_id: T1059
+  name: Command and Scripting Interpreter Variant 083 Marker
+  description: Marker-only ATT&CK variant for Command and Scripting Interpreter; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-083
+    asset:
+      type: string
+      default: lab-host-083
+  artifact: attack_variant_083.json
+  sigma:
+    title: Command and Scripting Interpreter Variant 083 Marker
+    id: 52ef2c7d-55a9-578f-8c0a-ce6c5175ea8d
+    status: experimental
+    description: Detects simulator telemetry for Command and Scripting Interpreter
+      variant 083.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1059
+        apt_sim.variant: attack_variant_083
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_083
+    attack.tactic: execution
+    attack.technique.id: T1059
+    attack.technique.name: Command and Scripting Interpreter
+    apt_sim.variant: attack_variant_083
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1204:ATTACK_VARIANT_084
+  attack_id: T1204
+  name: User Execution Variant 084 Marker
+  description: Marker-only ATT&CK variant for User Execution; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-084
+    asset:
+      type: string
+      default: lab-host-084
+  artifact: attack_variant_084.json
+  sigma:
+    title: User Execution Variant 084 Marker
+    id: 2d6059d2-d71a-5b21-a6bf-8971e4bebea3
+    status: experimental
+    description: Detects simulator telemetry for User Execution variant 084.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1204
+        apt_sim.variant: attack_variant_084
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_084
+    attack.tactic: execution
+    attack.technique.id: T1204
+    attack.technique.name: User Execution
+    apt_sim.variant: attack_variant_084
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1098:ATTACK_VARIANT_085
+  attack_id: T1098
+  name: Account Manipulation Variant 085 Marker
+  description: Marker-only ATT&CK variant for Account Manipulation; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-085
+    asset:
+      type: string
+      default: lab-host-085
+  artifact: attack_variant_085.json
+  sigma:
+    title: Account Manipulation Variant 085 Marker
+    id: 688545b9-7856-5169-ab2b-3399ae715576
+    status: experimental
+    description: Detects simulator telemetry for Account Manipulation variant 085.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1098
+        apt_sim.variant: attack_variant_085
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_085
+    attack.tactic: persistence
+    attack.technique.id: T1098
+    attack.technique.name: Account Manipulation
+    apt_sim.variant: attack_variant_085
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1547.001:ATTACK_VARIANT_086
+  attack_id: T1547.001
+  name: Registry Run Keys / Startup Folder Variant 086 Marker
+  description: Marker-only ATT&CK variant for Registry Run Keys / Startup Folder;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-086
+    asset:
+      type: string
+      default: lab-host-086
+  artifact: attack_variant_086.json
+  sigma:
+    title: Registry Run Keys / Startup Folder Variant 086 Marker
+    id: b3bf16bc-2940-5528-87d4-18fe7e5ccbd6
+    status: experimental
+    description: Detects simulator telemetry for Registry Run Keys / Startup Folder
+      variant 086.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1547.001
+        apt_sim.variant: attack_variant_086
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_086
+    attack.tactic: persistence
+    attack.technique.id: T1547.001
+    attack.technique.name: Registry Run Keys / Startup Folder
+    apt_sim.variant: attack_variant_086
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1068:ATTACK_VARIANT_087
+  attack_id: T1068
+  name: Exploitation for Privilege Escalation Variant 087 Marker
+  description: Marker-only ATT&CK variant for Exploitation for Privilege Escalation;
+    emits deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-087
+    asset:
+      type: string
+      default: lab-host-087
+  artifact: attack_variant_087.json
+  sigma:
+    title: Exploitation for Privilege Escalation Variant 087 Marker
+    id: a7031a82-255d-5498-9db9-4a6c33edf938
+    status: experimental
+    description: Detects simulator telemetry for Exploitation for Privilege Escalation
+      variant 087.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1068
+        apt_sim.variant: attack_variant_087
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_087
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1068
+    attack.technique.name: Exploitation for Privilege Escalation
+    apt_sim.variant: attack_variant_087
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1548:ATTACK_VARIANT_088
+  attack_id: T1548
+  name: Abuse Elevation Control Mechanism Variant 088 Marker
+  description: Marker-only ATT&CK variant for Abuse Elevation Control Mechanism; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-088
+    asset:
+      type: string
+      default: lab-host-088
+  artifact: attack_variant_088.json
+  sigma:
+    title: Abuse Elevation Control Mechanism Variant 088 Marker
+    id: 8b825af7-06b1-5e76-a1e8-19aa8d812ab3
+    status: experimental
+    description: Detects simulator telemetry for Abuse Elevation Control Mechanism
+      variant 088.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1548
+        apt_sim.variant: attack_variant_088
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_088
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1548
+    attack.technique.name: Abuse Elevation Control Mechanism
+    apt_sim.variant: attack_variant_088
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1027:ATTACK_VARIANT_089
+  attack_id: T1027
+  name: Obfuscated Files or Information Variant 089 Marker
+  description: Marker-only ATT&CK variant for Obfuscated Files or Information; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-089
+    asset:
+      type: string
+      default: lab-host-089
+  artifact: attack_variant_089.json
+  sigma:
+    title: Obfuscated Files or Information Variant 089 Marker
+    id: 3fedf1a3-471e-5a53-8d99-f4ecde846df5
+    status: experimental
+    description: Detects simulator telemetry for Obfuscated Files or Information variant
+      089.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1027
+        apt_sim.variant: attack_variant_089
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_089
+    attack.tactic: defense_evasion
+    attack.technique.id: T1027
+    attack.technique.name: Obfuscated Files or Information
+    apt_sim.variant: attack_variant_089
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1070.004:ATTACK_VARIANT_090
+  attack_id: T1070.004
+  name: File Deletion Variant 090 Marker
+  description: Marker-only ATT&CK variant for File Deletion; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: defense_evasion
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-090
+    asset:
+      type: string
+      default: lab-host-090
+  artifact: attack_variant_090.json
+  sigma:
+    title: File Deletion Variant 090 Marker
+    id: 1fd74a83-6314-5ebc-9835-4b18f2aef4f0
+    status: experimental
+    description: Detects simulator telemetry for File Deletion variant 090.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1070.004
+        apt_sim.variant: attack_variant_090
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_090
+    attack.tactic: defense_evasion
+    attack.technique.id: T1070.004
+    attack.technique.name: File Deletion
+    apt_sim.variant: attack_variant_090
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1003:ATTACK_VARIANT_091
+  attack_id: T1003
+  name: OS Credential Dumping Variant 091 Marker
+  description: Marker-only ATT&CK variant for OS Credential Dumping; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-091
+    asset:
+      type: string
+      default: lab-host-091
+  artifact: attack_variant_091.json
+  sigma:
+    title: OS Credential Dumping Variant 091 Marker
+    id: ebe5913f-5322-540e-bc31-611668f6b80b
+    status: experimental
+    description: Detects simulator telemetry for OS Credential Dumping variant 091.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1003
+        apt_sim.variant: attack_variant_091
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_091
+    attack.tactic: credential_access
+    attack.technique.id: T1003
+    attack.technique.name: OS Credential Dumping
+    apt_sim.variant: attack_variant_091
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1110:ATTACK_VARIANT_092
+  attack_id: T1110
+  name: Brute Force Variant 092 Marker
+  description: Marker-only ATT&CK variant for Brute Force; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-092
+    asset:
+      type: string
+      default: lab-host-092
+  artifact: attack_variant_092.json
+  sigma:
+    title: Brute Force Variant 092 Marker
+    id: 15e3f607-baf7-5830-8155-51345926f897
+    status: experimental
+    description: Detects simulator telemetry for Brute Force variant 092.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1110
+        apt_sim.variant: attack_variant_092
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_092
+    attack.tactic: credential_access
+    attack.technique.id: T1110
+    attack.technique.name: Brute Force
+    apt_sim.variant: attack_variant_092
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1082:ATTACK_VARIANT_093
+  attack_id: T1082
+  name: System Information Discovery Variant 093 Marker
+  description: Marker-only ATT&CK variant for System Information Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-093
+    asset:
+      type: string
+      default: lab-host-093
+  artifact: attack_variant_093.json
+  sigma:
+    title: System Information Discovery Variant 093 Marker
+    id: ee4d179c-6eac-564d-bb00-16ad90d5949d
+    status: experimental
+    description: Detects simulator telemetry for System Information Discovery variant
+      093.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1082
+        apt_sim.variant: attack_variant_093
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_093
+    attack.tactic: discovery
+    attack.technique.id: T1082
+    attack.technique.name: System Information Discovery
+    apt_sim.variant: attack_variant_093
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1083:ATTACK_VARIANT_094
+  attack_id: T1083
+  name: File and Directory Discovery Variant 094 Marker
+  description: Marker-only ATT&CK variant for File and Directory Discovery; emits
+    deterministic synthetic telemetry for detection validation.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-094
+    asset:
+      type: string
+      default: lab-host-094
+  artifact: attack_variant_094.json
+  sigma:
+    title: File and Directory Discovery Variant 094 Marker
+    id: ac22e1a7-a9a6-5754-b1dd-0bfb41506d4a
+    status: experimental
+    description: Detects simulator telemetry for File and Directory Discovery variant
+      094.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1083
+        apt_sim.variant: attack_variant_094
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_094
+    attack.tactic: discovery
+    attack.technique.id: T1083
+    attack.technique.name: File and Directory Discovery
+    apt_sim.variant: attack_variant_094
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1021.001:ATTACK_VARIANT_095
+  attack_id: T1021.001
+  name: Remote Desktop Protocol Variant 095 Marker
+  description: Marker-only ATT&CK variant for Remote Desktop Protocol; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-095
+    asset:
+      type: string
+      default: lab-host-095
+  artifact: attack_variant_095.json
+  sigma:
+    title: Remote Desktop Protocol Variant 095 Marker
+    id: 04b6ca79-043b-5319-81d5-26beb4f2715e
+    status: experimental
+    description: Detects simulator telemetry for Remote Desktop Protocol variant 095.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1021.001
+        apt_sim.variant: attack_variant_095
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_095
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.001
+    attack.technique.name: Remote Desktop Protocol
+    apt_sim.variant: attack_variant_095
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1570:ATTACK_VARIANT_096
+  attack_id: T1570
+  name: Lateral Tool Transfer Variant 096 Marker
+  description: Marker-only ATT&CK variant for Lateral Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-096
+    asset:
+      type: string
+      default: lab-host-096
+  artifact: attack_variant_096.json
+  sigma:
+    title: Lateral Tool Transfer Variant 096 Marker
+    id: 478b2dec-c926-5b6b-8f7f-99214d6bbb0a
+    status: experimental
+    description: Detects simulator telemetry for Lateral Tool Transfer variant 096.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1570
+        apt_sim.variant: attack_variant_096
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_096
+    attack.tactic: lateral_movement
+    attack.technique.id: T1570
+    attack.technique.name: Lateral Tool Transfer
+    apt_sim.variant: attack_variant_096
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1005:ATTACK_VARIANT_097
+  attack_id: T1005
+  name: Data from Local System Variant 097 Marker
+  description: Marker-only ATT&CK variant for Data from Local System; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-097
+    asset:
+      type: string
+      default: lab-host-097
+  artifact: attack_variant_097.json
+  sigma:
+    title: Data from Local System Variant 097 Marker
+    id: bdffc81d-7ca7-527d-af8d-8665ef708b11
+    status: experimental
+    description: Detects simulator telemetry for Data from Local System variant 097.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1005
+        apt_sim.variant: attack_variant_097
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_097
+    attack.tactic: collection
+    attack.technique.id: T1005
+    attack.technique.name: Data from Local System
+    apt_sim.variant: attack_variant_097
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1560:ATTACK_VARIANT_098
+  attack_id: T1560
+  name: Archive Collected Data Variant 098 Marker
+  description: Marker-only ATT&CK variant for Archive Collected Data; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-098
+    asset:
+      type: string
+      default: lab-host-098
+  artifact: attack_variant_098.json
+  sigma:
+    title: Archive Collected Data Variant 098 Marker
+    id: 405a4ffd-1969-570f-b5d0-a1ad97b77f30
+    status: experimental
+    description: Detects simulator telemetry for Archive Collected Data variant 098.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1560
+        apt_sim.variant: attack_variant_098
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_098
+    attack.tactic: collection
+    attack.technique.id: T1560
+    attack.technique.name: Archive Collected Data
+    apt_sim.variant: attack_variant_098
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1071.001:ATTACK_VARIANT_099
+  attack_id: T1071.001
+  name: Web Protocols Variant 099 Marker
+  description: Marker-only ATT&CK variant for Web Protocols; emits deterministic synthetic
+    telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-099
+    asset:
+      type: string
+      default: lab-host-099
+  artifact: attack_variant_099.json
+  sigma:
+    title: Web Protocols Variant 099 Marker
+    id: d0aa7633-bbf9-5e9d-a89a-43ea5796ea6c
+    status: experimental
+    description: Detects simulator telemetry for Web Protocols variant 099.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1071.001
+        apt_sim.variant: attack_variant_099
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_099
+    attack.tactic: command_and_control
+    attack.technique.id: T1071.001
+    attack.technique.name: Web Protocols
+    apt_sim.variant: attack_variant_099
+    user.name: '{principal}'
+    host.name: '{asset}'
+- id: T1105:ATTACK_VARIANT_100
+  attack_id: T1105
+  name: Ingress Tool Transfer Variant 100 Marker
+  description: Marker-only ATT&CK variant for Ingress Tool Transfer; emits deterministic
+    synthetic telemetry for detection validation.
+  tactic: command_and_control
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  params_schema:
+    principal:
+      type: string
+      default: lab-user-100
+    asset:
+      type: string
+      default: lab-host-100
+  artifact: attack_variant_100.json
+  sigma:
+    title: Ingress Tool Transfer Variant 100 Marker
+    id: a103c9a8-275b-5c08-bedf-cdc689738d9a
+    status: experimental
+    description: Detects simulator telemetry for Ingress Tool Transfer variant 100.
+    logsource:
+      product: apt_simulator
+      category: attack_variant
+    detection:
+      selection:
+        event.dataset: apt_sim.attack_variant
+        attack.technique.id: T1105
+        apt_sim.variant: attack_variant_100
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: attack_variant
+    event.dataset: apt_sim.attack_variant
+    event.action: attack_variant_100
+    attack.tactic: command_and_control
+    attack.technique.id: T1105
+    attack.technique.name: Ingress Tool Transfer
+    apt_sim.variant: attack_variant_100
+    user.name: '{principal}'
+    host.name: '{asset}'

@@ -1,0 +1,21 @@
+title: Exploit Public-Facing Application Variant 003 Marker
+id: 8c8e07c5-ff97-5533-9832-c9692ef1e31f
+status: experimental
+description: Detects simulator telemetry for Exploit Public-Facing Application variant
+  003.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1190
+    apt_sim.variant: attack_variant_003
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1190/
+tags:
+- attack.t1190

@@ -1,0 +1,21 @@
+title: Obfuscated Files or Information Variant 063 Marker
+id: f2d2cdc5-c62d-58b4-b0c6-3c40df0db593
+status: experimental
+description: Detects simulator telemetry for Obfuscated Files or Information variant
+  063.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1027
+    apt_sim.variant: attack_variant_063
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/
+tags:
+- attack.t1027

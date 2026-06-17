@@ -1,0 +1,20 @@
+title: Data from Local System Variant 071 Marker
+id: 18ccf9d0-147b-51ba-b45c-6976b6c87929
+status: experimental
+description: Detects simulator telemetry for Data from Local System variant 071.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1005
+    apt_sim.variant: attack_variant_071
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1005/
+tags:
+- attack.t1005

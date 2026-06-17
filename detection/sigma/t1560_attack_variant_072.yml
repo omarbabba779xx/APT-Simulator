@@ -1,0 +1,20 @@
+title: Archive Collected Data Variant 072 Marker
+id: 971f6f2a-f00b-5c63-ac83-ae49a8820603
+status: experimental
+description: Detects simulator telemetry for Archive Collected Data variant 072.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1560
+    apt_sim.variant: attack_variant_072
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/
+tags:
+- attack.t1560

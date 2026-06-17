@@ -1,0 +1,20 @@
+title: User Execution Variant 006 Marker
+id: 6fad6934-4a93-5e68-9607-3c632818ebe0
+status: experimental
+description: Detects simulator telemetry for User Execution variant 006.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1204
+    apt_sim.variant: attack_variant_006
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/
+tags:
+- attack.t1204

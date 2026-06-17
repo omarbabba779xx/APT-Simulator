@@ -1,0 +1,21 @@
+title: Exploit Public-Facing Application Variant 055 Marker
+id: b91c5ad3-af2f-5b97-a457-ada35e593ba0
+status: experimental
+description: Detects simulator telemetry for Exploit Public-Facing Application variant
+  055.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1190
+    apt_sim.variant: attack_variant_055
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1190/
+tags:
+- attack.t1190

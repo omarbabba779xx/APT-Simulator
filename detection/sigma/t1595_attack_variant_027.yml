@@ -1,0 +1,20 @@
+title: Active Scanning Variant 027 Marker
+id: 5542d0c2-9ec5-5992-8494-4063ecb15964
+status: experimental
+description: Detects simulator telemetry for Active Scanning variant 027.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1595
+    apt_sim.variant: attack_variant_027
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/
+tags:
+- attack.t1595

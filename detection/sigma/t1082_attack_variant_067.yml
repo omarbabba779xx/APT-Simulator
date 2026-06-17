@@ -1,0 +1,21 @@
+title: System Information Discovery Variant 067 Marker
+id: 4388c260-49af-52a4-b6b1-ee27080eed3f
+status: experimental
+description: Detects simulator telemetry for System Information Discovery variant
+  067.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1082
+    apt_sim.variant: attack_variant_067
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1082/
+tags:
+- attack.t1082

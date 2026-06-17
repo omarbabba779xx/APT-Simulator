@@ -1,0 +1,20 @@
+title: Phishing Variant 082 Marker
+id: 502813c4-6d96-552c-bb3f-b01ead83034f
+status: experimental
+description: Detects simulator telemetry for Phishing variant 082.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_variant_082
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

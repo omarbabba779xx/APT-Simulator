@@ -1,0 +1,20 @@
+title: Phishing Variant 004 Marker
+id: 8e9672d0-5c7b-5b03-9497-0ab95d69ac62
+status: experimental
+description: Detects simulator telemetry for Phishing variant 004.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_variant_004
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

@@ -1,0 +1,21 @@
+title: Registry Run Keys / Startup Folder Variant 060 Marker
+id: fd4b52a6-1612-5b73-813d-fa04ce076b1c
+status: experimental
+description: Detects simulator telemetry for Registry Run Keys / Startup Folder variant
+  060.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1547.001
+    apt_sim.variant: attack_variant_060
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/001/
+tags:
+- attack.t1547.001

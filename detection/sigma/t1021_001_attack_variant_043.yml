@@ -1,0 +1,20 @@
+title: Remote Desktop Protocol Variant 043 Marker
+id: 26b4ced3-c314-55a4-9cbc-335770697702
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Protocol variant 043.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1021.001
+    apt_sim.variant: attack_variant_043
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/001/
+tags:
+- attack.t1021.001

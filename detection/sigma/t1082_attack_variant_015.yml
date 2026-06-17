@@ -1,0 +1,21 @@
+title: System Information Discovery Variant 015 Marker
+id: 1745c618-f13f-5606-b4e7-0797352d21c6
+status: experimental
+description: Detects simulator telemetry for System Information Discovery variant
+  015.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1082
+    apt_sim.variant: attack_variant_015
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1082/
+tags:
+- attack.t1082

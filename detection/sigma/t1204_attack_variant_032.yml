@@ -1,0 +1,20 @@
+title: User Execution Variant 032 Marker
+id: d9d532c9-af4d-5a89-af77-1d4201325b73
+status: experimental
+description: Detects simulator telemetry for User Execution variant 032.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1204
+    apt_sim.variant: attack_variant_032
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/
+tags:
+- attack.t1204

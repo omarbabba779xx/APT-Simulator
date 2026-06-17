@@ -1,0 +1,21 @@
+title: Command and Scripting Interpreter Variant 057 Marker
+id: c1871b41-9e14-58bd-b076-b2d0c2ff3bac
+status: experimental
+description: Detects simulator telemetry for Command and Scripting Interpreter variant
+  057.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1059
+    apt_sim.variant: attack_variant_057
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/
+tags:
+- attack.t1059

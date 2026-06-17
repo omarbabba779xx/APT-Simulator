@@ -1,0 +1,20 @@
+title: Web Protocols Variant 073 Marker
+id: 02fab66f-2330-543c-9a48-2a258990ade6
+status: experimental
+description: Detects simulator telemetry for Web Protocols variant 073.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1071.001
+    apt_sim.variant: attack_variant_073
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/001/
+tags:
+- attack.t1071.001

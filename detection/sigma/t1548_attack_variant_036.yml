@@ -1,0 +1,21 @@
+title: Abuse Elevation Control Mechanism Variant 036 Marker
+id: 993c4ea3-2fc3-590a-be52-850cc146469b
+status: experimental
+description: Detects simulator telemetry for Abuse Elevation Control Mechanism variant
+  036.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1548
+    apt_sim.variant: attack_variant_036
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/
+tags:
+- attack.t1548

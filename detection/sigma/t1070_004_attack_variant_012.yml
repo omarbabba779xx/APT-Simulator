@@ -1,0 +1,20 @@
+title: File Deletion Variant 012 Marker
+id: 1ac0cdcc-f1aa-57e6-a6ed-a80c6731329f
+status: experimental
+description: Detects simulator telemetry for File Deletion variant 012.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1070.004
+    apt_sim.variant: attack_variant_012
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/004/
+tags:
+- attack.t1070.004

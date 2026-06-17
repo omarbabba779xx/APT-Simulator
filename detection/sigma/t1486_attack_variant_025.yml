@@ -1,0 +1,20 @@
+title: Data Encrypted for Impact Variant 025 Marker
+id: 20325f75-2bc8-5588-b797-d77621b01706
+status: experimental
+description: Detects simulator telemetry for Data Encrypted for Impact variant 025.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1486
+    apt_sim.variant: attack_variant_025
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1486/
+tags:
+- attack.t1486

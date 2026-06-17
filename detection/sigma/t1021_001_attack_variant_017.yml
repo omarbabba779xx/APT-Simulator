@@ -1,0 +1,20 @@
+title: Remote Desktop Protocol Variant 017 Marker
+id: 2c051095-ab60-54c5-9c63-07dee54b4591
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Protocol variant 017.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1021.001
+    apt_sim.variant: attack_variant_017
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/001/
+tags:
+- attack.t1021.001

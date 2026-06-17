@@ -6,13 +6,14 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 
 ## Exact Current Counts
 
-- 751 TTPs
+- 851 TTPs
 - 2,511 loaded scenarios
 - 11 classic YAML scenarios
 - 2,500 generated YAML scenarios
 - 15,680,015,680 generable scenario variants
-- 751 Sigma rules
-- 14 ATT&CK tactics covered
+- 851 Sigma rules
+- 14 ATT&CK Enterprise tactics covered
+- 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
 
 The 2,511 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
 
@@ -203,7 +204,7 @@ python -m orchestrator.campaign materialize-variants \
 Export Sigma rules:
 
 ```bash
-python -m orchestrator.sigma_export export --out detection/sigma
+python -m orchestrator.sigma_export export --out-dir detection/sigma
 ```
 
 Export detection matrix fixtures and query sketches:
@@ -247,7 +248,7 @@ node --check orchestrator/static/app.js
 
 Conformance tests verify:
 
-- TTP count is exactly 751.
+- TTP count is exactly 851.
 - Loaded scenario count is exactly 2,511.
 - README count statements match the current implementation.
 - Public text files do not include forbidden public tooling markers.

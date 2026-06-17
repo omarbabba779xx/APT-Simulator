@@ -1,0 +1,20 @@
+title: Ingress Tool Transfer Variant 074 Marker
+id: 1472931b-fc5b-5542-b315-842ade639a40
+status: experimental
+description: Detects simulator telemetry for Ingress Tool Transfer variant 074.
+logsource:
+  product: apt_simulator
+  category: attack_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_variant
+    attack.technique.id: T1105
+    apt_sim.variant: attack_variant_074
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105
