@@ -26,8 +26,9 @@ If `APT_SIM_SAFETY_TOKEN` is set, the run params must include the same
 The repository includes `ttps/catalog/attack_enterprise.yaml`, generated from
 ATT&CK Enterprise STIX, plus controlled marker-only variants in
 `ttps/catalog/attack_variants.yaml`, and the larger
-`ttps/catalog/attack_scale_variants.yaml` pack. The registry currently loads
-5,000 safe TTPs/variants across Python modules and catalog-backed entries.
+`ttps/catalog/attack_scale_variants.yaml`, `ttps/catalog/cloud_k8s_lab.yaml`,
+and `ttps/catalog/ad_enterprise_lab.yaml` packs. The registry currently loads
+5,064 safe TTPs/variants across Python modules and catalog-backed entries.
 
 Refresh marker-only stubs from ATT&CK Enterprise STIX:
 
@@ -41,6 +42,12 @@ Use `--limit` for partial imports during review:
 apt-attack-import import-stix --limit 50 --out ttps/catalog/attack_enterprise_sample.yaml
 ```
 
+Check the bundled ATT&CK snapshot and local drift:
+
+```bash
+apt-attack-sync status --path config/attack_enterprise_snapshot.json
+```
+
 This is how the project maintains broad ATT&CK coverage without handwritten
 Python modules for every technique.
 
@@ -50,6 +57,8 @@ Python modules for every technique.
 apt-detection-matrix matrix
 apt-detection-matrix fixtures --out-dir detection/fixtures
 apt-detection-matrix queries --out-dir detection/queries
+apt-detection-workbench score
+apt-exposure-graph graph --out exposure-graph.json
 ```
 
 Fixtures are emitted as:
@@ -72,6 +81,8 @@ apt-scenario-builder generate --actor cloud-intrusion --difficulty realistic --s
 apt-campaign build-queue --actors apt29,fin7,cloud-intrusion --repeats 5
 apt-campaign materialize-variants --count 2500 --offset 0 --stride 6272006 --out-dir scenarios/generated
 apt-campaign replay-events --events 10000
+apt-emulation-plan-import scan <path-to-emulation-library>
+apt-emulation-plan-import convert <path-to-emulation-library> --out-dir scenarios/ael
 ```
 
 Generated scenarios use DAG dependencies and dry-run parameters by default.

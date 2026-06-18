@@ -100,8 +100,8 @@ steps:
   depends_on:
   - s006_t1098_003_azure_role_assignment
   - s008_t1543_003_windows_service_create
-- id: s013_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s013_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -115,14 +115,14 @@ steps:
   abort_on_fail: false
   depends_on:
   - s012_t1055
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
 - id: s015_t1112
   ttp: T1112
   params:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
 - id: s016_t1112_windows_registry_policy_change
   ttp: T1112:WINDOWS_REGISTRY_POLICY_CHANGE
   params:

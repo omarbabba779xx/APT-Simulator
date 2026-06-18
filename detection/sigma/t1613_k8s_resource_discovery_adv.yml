@@ -1,0 +1,21 @@
+title: Kubernetes resource discovery marker
+id: 982f4dc9-2819-55d5-ae4c-dce38817d657
+status: experimental
+description: Detects simulator telemetry for Kubernetes resource discovery marker.
+logsource:
+  product: apt_simulator
+  category: kubernetes_audit
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: list_resources
+    attack.technique.id: T1613
+    apt_sim.variant: k8s_resource_discovery_adv
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1613/
+tags:
+- attack.t1613

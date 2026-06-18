@@ -1,0 +1,21 @@
+title: AS-REP roasting signal marker
+id: de7c36bb-d889-5c26-9286-7b74aa1497cd
+status: experimental
+description: Detects simulator telemetry for AS-REP roasting signal marker.
+logsource:
+  product: apt_simulator
+  category: kerberos
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.kerberos
+    event.action: asrep_roasting_signal
+    attack.technique.id: T1558.004
+    apt_sim.variant: ad_asrep_roasting_signal
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1558/004/
+tags:
+- attack.t1558.004

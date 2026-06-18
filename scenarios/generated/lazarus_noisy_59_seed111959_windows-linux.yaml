@@ -128,8 +128,8 @@ steps:
   depends_on:
   - s004_t1059
   - s008_t1098_003_azure_role_assignment
-- id: s017_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s017_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -158,7 +158,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s001_t1078_004
-  - s017_t1070_002_linux_log_clear
+  - s017_t1070_004_linux_log_clear
 - id: s021_t1218_011_windows_rundll32_proxy
   ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
   params:
@@ -179,7 +179,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s017_t1070_002_linux_log_clear
+  - s017_t1070_004_linux_log_clear
 - id: s024_t1016
   ttp: T1016
   params:
@@ -252,7 +252,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s017_t1070_002_linux_log_clear
+  - s017_t1070_004_linux_log_clear
   - s031_t1087_001_linux_local_account_discovery
 - id: s034_t1021_001
   ttp: T1021.001

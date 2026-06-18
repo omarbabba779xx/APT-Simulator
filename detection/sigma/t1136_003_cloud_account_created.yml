@@ -1,0 +1,21 @@
+title: Cloud account created marker
+id: 6176e703-e504-5ba9-adfa-cd6bc7f078ce
+status: experimental
+description: Detects simulator telemetry for Cloud account created marker.
+logsource:
+  product: apt_simulator
+  category: identity
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: CreateUser
+    attack.technique.id: T1136.003
+    apt_sim.variant: cloud_account_created
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1136/003/
+tags:
+- attack.t1136.003

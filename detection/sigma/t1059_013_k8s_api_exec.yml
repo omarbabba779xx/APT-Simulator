@@ -1,0 +1,21 @@
+title: Kubernetes API execution marker
+id: 345c6d44-06b4-56b8-9b9e-d66b2bf73aee
+status: experimental
+description: Detects simulator telemetry for Kubernetes API execution marker.
+logsource:
+  product: apt_simulator
+  category: kubernetes_audit
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: pods_exec
+    attack.technique.id: T1059.013
+    apt_sim.variant: k8s_api_exec
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/013/
+tags:
+- attack.t1059.013

@@ -1,0 +1,21 @@
+title: Azure blob collection marker
+id: c1cb4ae8-a6a1-5750-9833-39324776af2b
+status: experimental
+description: Detects simulator telemetry for Azure blob collection marker.
+logsource:
+  product: apt_simulator
+  category: storage
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: BlobRead
+    attack.technique.id: T1530
+    apt_sim.variant: azure_blob_collection
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530

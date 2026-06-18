@@ -30,8 +30,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s001_t1059
-- id: s004_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s004_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -44,7 +44,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s003_t1059_004_linux_shell_history_disable
-  - s004_t1070_002_linux_log_clear
+  - s004_t1070_004_linux_log_clear
 - id: s006_t1049
   ttp: T1049
   params:

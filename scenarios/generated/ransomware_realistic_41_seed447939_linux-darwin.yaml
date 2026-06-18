@@ -83,8 +83,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s004_t1053_003_linux_cron_marker
-- id: s011_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s011_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -103,7 +103,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
   - s005_t1098_003_entra_app_role_grant
 - id: s014_t1110
   ttp: T1110
@@ -203,7 +203,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
   - s007_t1543_002
 - id: s027_t1021_001
   ttp: T1021.001

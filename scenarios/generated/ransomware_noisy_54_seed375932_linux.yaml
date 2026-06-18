@@ -83,8 +83,8 @@ steps:
   depends_on:
   - s007_t1543_002
   - s006_t1098_004
-- id: s011_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s011_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -118,7 +118,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
   - s008_t1027
 - id: s016_t1556_009_okta_mfa_policy_weaken
   ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
@@ -149,7 +149,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
   - s001_t1078_004
 - id: s020_t1057
   ttp: T1057

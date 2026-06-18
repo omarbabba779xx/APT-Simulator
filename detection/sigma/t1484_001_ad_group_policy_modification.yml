@@ -1,0 +1,21 @@
+title: Group policy modification marker
+id: f7a180d9-234c-5890-ab91-5e240b8b659f
+status: experimental
+description: Detects simulator telemetry for Group policy modification marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: gpo_change
+    attack.technique.id: T1484.001
+    apt_sim.variant: ad_group_policy_modification
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1484/001/
+tags:
+- attack.t1484.001

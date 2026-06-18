@@ -1,0 +1,21 @@
+title: GCP console session marker
+id: 7ad2298c-d156-5bd4-8c6f-8523fafc1038
+status: experimental
+description: Detects simulator telemetry for GCP console session marker.
+logsource:
+  product: apt_simulator
+  category: identity
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: google.login
+    attack.technique.id: T1078.004
+    apt_sim.variant: gcp_console_session
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1078/004/
+tags:
+- attack.t1078.004

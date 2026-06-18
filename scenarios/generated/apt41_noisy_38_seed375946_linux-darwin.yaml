@@ -97,8 +97,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s002_t1078_004_aws_console_login_success
-- id: s013_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s013_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -175,7 +175,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
 - id: s024_t1580
   ttp: T1580
   params:
@@ -189,7 +189,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
   - s023_t1087_001_linux_local_account_discovery
 - id: s026_t1021_001
   ttp: T1021.001
@@ -205,7 +205,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
 - id: s028_t1213_003_github_private_repo_clone
   ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
   params:
@@ -228,14 +228,14 @@ steps:
   abort_on_fail: false
   depends_on:
   - s020_t1069_001
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
 - id: s031_t1530_aws_s3_object_burst
   ttp: T1530:AWS_S3_OBJECT_BURST
   params:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s013_t1070_002_linux_log_clear
+  - s013_t1070_004_linux_log_clear
 - id: s032_t1530_google_drive_bulk_download
   ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
   params:

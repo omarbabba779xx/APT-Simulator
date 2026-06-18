@@ -1,0 +1,21 @@
+title: Instance metadata token read marker
+id: 87dea778-b34c-545a-944d-e25275fe9de8
+status: experimental
+description: Detects simulator telemetry for Instance metadata token read marker.
+logsource:
+  product: apt_simulator
+  category: metadata
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.metadata
+    event.action: MetadataTokenRead
+    attack.technique.id: T1552.005
+    apt_sim.variant: instance_metadata_token_read
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1552/005/
+tags:
+- attack.t1552.005

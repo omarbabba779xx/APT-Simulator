@@ -1,0 +1,21 @@
+title: Cloud dashboard review marker
+id: 79d6eba8-e02d-5526-bf8b-6aa8860d4434
+status: experimental
+description: Detects simulator telemetry for Cloud dashboard review marker.
+logsource:
+  product: apt_simulator
+  category: dashboard
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.dashboard
+    event.action: OpenDashboard
+    attack.technique.id: T1538
+    apt_sim.variant: cloud_dashboard_review
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1538/
+tags:
+- attack.t1538

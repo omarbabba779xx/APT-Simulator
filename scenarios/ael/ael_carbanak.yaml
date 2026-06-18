@@ -1,0 +1,513 @@
+name: ael_carbanak
+description: Safe scenario derived from ATT&CK Emulation Library metadata for Carbanak;
+  runs local simulator TTPs only.
+target_platforms:
+- any
+actor: carbanak
+tags:
+- ael_import
+- source_ael
+- static
+steps:
+- id: s001_t1113
+  ttp: T1113:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1113
+  abort_on_fail: false
+- id: s002_t1112
+  ttp: T1112
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1112
+  abort_on_fail: false
+  depends_on:
+  - s001_t1113
+- id: s003_t1140
+  ttp: T1140:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1140
+  abort_on_fail: false
+  depends_on:
+  - s002_t1112
+- id: s004_t1003_001
+  ttp: T1003.001:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1003.001
+  abort_on_fail: false
+  depends_on:
+  - s003_t1140
+- id: s005_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1105
+  abort_on_fail: false
+  depends_on:
+  - s004_t1003_001
+- id: s006_t1570
+  ttp: T1570:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1570
+  abort_on_fail: false
+  depends_on:
+  - s005_t1105
+- id: s007_t1021_004
+  ttp: T1021.004:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021.004
+  abort_on_fail: false
+  depends_on:
+  - s006_t1570
+- id: s008_t1057
+  ttp: T1057
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1057
+  abort_on_fail: false
+  depends_on:
+  - s007_t1021_004
+- id: s009_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1083
+  abort_on_fail: false
+  depends_on:
+  - s008_t1057
+- id: s010_t1005
+  ttp: T1005
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1005
+  abort_on_fail: false
+  depends_on:
+  - s009_t1083
+- id: s011_t1018
+  ttp: T1018:AD_REMOTE_SYSTEM_DISCOVERY
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1018
+  abort_on_fail: false
+  depends_on:
+  - s010_t1005
+- id: s012_t1569_002
+  ttp: T1569.002:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1569.002
+  abort_on_fail: false
+  depends_on:
+  - s011_t1018
+- id: s013_t1571
+  ttp: T1571:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1571
+  abort_on_fail: false
+  depends_on:
+  - s012_t1569_002
+- id: s014_t1572
+  ttp: T1572:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1572
+  abort_on_fail: false
+  depends_on:
+  - s013_t1571
+- id: s015_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1033
+  abort_on_fail: false
+  depends_on:
+  - s014_t1572
+- id: s016_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1547.001
+  abort_on_fail: false
+  depends_on:
+  - s015_t1033
+- id: s017_t1056_001
+  ttp: T1056.001:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1056.001
+  abort_on_fail: false
+  depends_on:
+  - s016_t1547_001
+- id: s018_t1555_003
+  ttp: T1555.003:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1555.003
+  abort_on_fail: false
+  depends_on:
+  - s017_t1056_001
+- id: s019_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1070.004
+  abort_on_fail: false
+  depends_on:
+  - s018_t1555_003
+- id: s020_t1003
+  ttp: T1003
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1003
+  abort_on_fail: false
+  depends_on:
+  - s019_t1070_004
+- id: s021_t1012
+  ttp: T1012:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1012
+  abort_on_fail: false
+  depends_on:
+  - s020_t1003
+- id: s022_t1021
+  ttp: T1021:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021
+  abort_on_fail: false
+  depends_on:
+  - s021_t1012
+- id: s023_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021.001
+  abort_on_fail: false
+  depends_on:
+  - s022_t1021
+- id: s024_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021.002
+  abort_on_fail: false
+  depends_on:
+  - s023_t1021_001
+- id: s025_t1021_005
+  ttp: T1021.005:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021.005
+  abort_on_fail: false
+  depends_on:
+  - s024_t1021_002
+- id: s026_t1027
+  ttp: T1027
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1027
+  abort_on_fail: false
+  depends_on:
+  - s025_t1021_005
+- id: s027_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1041
+  abort_on_fail: false
+  depends_on:
+  - s026_t1027
+- id: s028_t1047
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1047
+  abort_on_fail: false
+  depends_on:
+  - s027_t1041
+- id: s029_t1055
+  ttp: T1055
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1055
+  abort_on_fail: false
+  depends_on:
+  - s028_t1047
+- id: s030_t1056
+  ttp: T1056:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1056
+  abort_on_fail: false
+  depends_on:
+  - s029_t1055
+- id: s031_t1059
+  ttp: T1059
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1059
+  abort_on_fail: false
+  depends_on:
+  - s030_t1056
+- id: s032_t1059_001
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1059.001
+  abort_on_fail: false
+  depends_on:
+  - s031_t1059
+- id: s033_t1059_005
+  ttp: T1059.005:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1059.005
+  abort_on_fail: false
+  depends_on:
+  - s032_t1059_001
+- id: s034_t1059_007
+  ttp: T1059.007:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1059.007
+  abort_on_fail: false
+  depends_on:
+  - s033_t1059_005
+- id: s035_t1069
+  ttp: T1069:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1069
+  abort_on_fail: false
+  depends_on:
+  - s034_t1059_007
+- id: s036_t1070
+  ttp: T1070:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1070
+  abort_on_fail: false
+  depends_on:
+  - s035_t1069
+- id: s037_t1071
+  ttp: T1071:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1071
+  abort_on_fail: false
+  depends_on:
+  - s036_t1070
+- id: s038_t1071_001
+  ttp: T1071.001
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1071.001
+  abort_on_fail: false
+  depends_on:
+  - s037_t1071
+- id: s039_t1078
+  ttp: T1078:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1078
+  abort_on_fail: false
+  depends_on:
+  - s038_t1071_001
+- id: s040_t1078_002
+  ttp: T1078.002:AD_DOMAIN_ACCOUNT_LOGIN
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1078.002
+  abort_on_fail: false
+  depends_on:
+  - s039_t1078
+- id: s041_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1082
+  abort_on_fail: false
+  depends_on:
+  - s040_t1078_002
+- id: s042_t1087
+  ttp: T1087:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1087
+  abort_on_fail: false
+  depends_on:
+  - s041_t1082
+- id: s043_t1087_002
+  ttp: T1087.002:AD_DOMAIN_ACCOUNT_ENUM
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1087.002
+  abort_on_fail: false
+  depends_on:
+  - s042_t1087
+- id: s044_t1110
+  ttp: T1110
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1110
+  abort_on_fail: false
+  depends_on:
+  - s043_t1087_002
+- id: s045_t1110_003
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1110.003
+  abort_on_fail: false
+  depends_on:
+  - s044_t1110
+- id: s046_t1204
+  ttp: T1204:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1204
+  abort_on_fail: false
+  depends_on:
+  - s045_t1110_003
+- id: s047_t1204_002
+  ttp: T1204.002:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1204.002
+  abort_on_fail: false
+  depends_on:
+  - s046_t1204
+- id: s048_t1543
+  ttp: T1543:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1543
+  abort_on_fail: false
+  depends_on:
+  - s047_t1204_002
+- id: s049_t1543_003
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1543.003
+  abort_on_fail: false
+  depends_on:
+  - s048_t1543
+- id: s050_t1547
+  ttp: T1547:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1547
+  abort_on_fail: false
+  depends_on:
+  - s049_t1543_003
+- id: s051_t1548
+  ttp: T1548:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1548
+  abort_on_fail: false
+  depends_on:
+  - s050_t1547
+- id: s052_t1550
+  ttp: T1550:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1550
+  abort_on_fail: false
+  depends_on:
+  - s051_t1548
+- id: s053_t1555
+  ttp: T1555:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1555
+  abort_on_fail: false
+  depends_on:
+  - s052_t1550
+- id: s054_t1563
+  ttp: T1563:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1563
+  abort_on_fail: false
+  depends_on:
+  - s053_t1555
+- id: s055_t1563_002
+  ttp: T1563.002:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1563.002
+  abort_on_fail: false
+  depends_on:
+  - s054_t1563
+- id: s056_t1569
+  ttp: T1569:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1569
+  abort_on_fail: false
+  depends_on:
+  - s055_t1563_002

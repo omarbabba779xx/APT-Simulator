@@ -51,8 +51,8 @@ steps:
   depends_on:
   - s003_t1059
   - s005_t1611_kubernetes_pod_create
-- id: s007_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s007_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false

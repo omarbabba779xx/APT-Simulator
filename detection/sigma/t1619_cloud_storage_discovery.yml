@@ -1,0 +1,21 @@
+title: Cloud storage object discovery marker
+id: f8773d9f-3d0f-5772-bc89-737f7b2a4aaf
+status: experimental
+description: Detects simulator telemetry for Cloud storage object discovery marker.
+logsource:
+  product: apt_simulator
+  category: storage
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: ListObjects
+    attack.technique.id: T1619
+    apt_sim.variant: cloud_storage_discovery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1619/
+tags:
+- attack.t1619

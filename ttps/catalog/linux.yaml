@@ -62,15 +62,15 @@ ttps:
       - category: process_creation
         Image: /usr/bin/curl
         CommandLine: curl -fsSL {url} -o /tmp/aptsim-tool.sh
-  - id: T1070.002:LINUX_LOG_CLEAR
-    attack_id: T1070.002
+  - id: T1070.004:LINUX_LOG_CLEAR
+    attack_id: T1070.004
     name: Linux Log Clear Marker
-    tactic: defense_evasion
+    tactic: stealth
     platforms: [linux]
     safety_tier: marker-only
     sigma:
       title: Linux Log Clear Marker
-      id: c1070002-0001-0000-0000-000000000001
+      id: c1070004-0001-0000-0000-000000000001
       status: experimental
       logsource: {product: linux, category: process_creation}
       detection:

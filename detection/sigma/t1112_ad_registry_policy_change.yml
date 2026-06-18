@@ -1,0 +1,21 @@
+title: Registry policy change marker
+id: 84d9b1fb-cd21-52b0-8fa1-033347c6ecbc
+status: experimental
+description: Detects simulator telemetry for Registry policy change marker.
+logsource:
+  product: apt_simulator
+  category: windows_registry
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_registry
+    event.action: registry_policy_change
+    attack.technique.id: T1112
+    apt_sim.variant: ad_registry_policy_change
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1112/
+tags:
+- attack.t1112

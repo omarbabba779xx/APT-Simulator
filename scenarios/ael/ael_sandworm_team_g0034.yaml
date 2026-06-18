@@ -1,0 +1,207 @@
+name: ael_sandworm_team_g0034
+description: Safe scenario derived from ATT&CK Emulation Library metadata for Sandworm
+  Team (G0034); runs local simulator TTPs only.
+target_platforms:
+- any
+actor: sandworm_team_g0034
+tags:
+- ael_import
+- source_ael
+- static
+steps:
+- id: s001_t1105
+  ttp: T1105
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1105
+  abort_on_fail: false
+- id: s002_t1505_003
+  ttp: T1505.003:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1505.003
+  abort_on_fail: false
+  depends_on:
+  - s001_t1105
+- id: s003_t1033
+  ttp: T1033
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1033
+  abort_on_fail: false
+  depends_on:
+  - s002_t1505_003
+- id: s004_t1082
+  ttp: T1082
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1082
+  abort_on_fail: false
+  depends_on:
+  - s003_t1033
+- id: s005_t1083
+  ttp: T1083
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1083
+  abort_on_fail: false
+  depends_on:
+  - s004_t1082
+- id: s006_t1003_008
+  ttp: T1003.008:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1003.008
+  abort_on_fail: false
+  depends_on:
+  - s005_t1083
+- id: s007_t1548_001
+  ttp: T1548.001:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1548.001
+  abort_on_fail: false
+  depends_on:
+  - s006_t1003_008
+- id: s008_t1053_003
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1053.003
+  abort_on_fail: false
+  depends_on:
+  - s007_t1548_001
+- id: s009_t1543_002
+  ttp: T1543.002
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1543.002
+  abort_on_fail: false
+  depends_on:
+  - s008_t1053_003
+- id: s010_t1552_003
+  ttp: T1552.003:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1552.003
+  abort_on_fail: false
+  depends_on:
+  - s009_t1543_002
+- id: s011_t1552_004
+  ttp: T1552.004:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1552.004
+  abort_on_fail: false
+  depends_on:
+  - s010_t1552_003
+- id: s012_t1021_002
+  ttp: T1021.002
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021.002
+  abort_on_fail: false
+  depends_on:
+  - s011_t1552_004
+- id: s013_t1569_002
+  ttp: T1569.002:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1569.002
+  abort_on_fail: false
+  depends_on:
+  - s012_t1021_002
+- id: s014_t1547_001
+  ttp: T1547.001
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1547.001
+  abort_on_fail: false
+  depends_on:
+  - s013_t1569_002
+- id: s015_t1049
+  ttp: T1049
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1049
+  abort_on_fail: false
+  depends_on:
+  - s014_t1547_001
+- id: s016_t1555_003
+  ttp: T1555.003:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1555.003
+  abort_on_fail: false
+  depends_on:
+  - s015_t1049
+- id: s017_t1056_001
+  ttp: T1056.001:CATALOG_STUB
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1056.001
+  abort_on_fail: false
+  depends_on:
+  - s016_t1555_003
+- id: s018_t1041
+  ttp: T1041
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1041
+  abort_on_fail: false
+  depends_on:
+  - s017_t1056_001
+- id: s019_t1018
+  ttp: T1018:AD_REMOTE_SYSTEM_DISCOVERY
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1018
+  abort_on_fail: false
+  depends_on:
+  - s018_t1041
+- id: s020_t1021_001
+  ttp: T1021.001
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1021.001
+  abort_on_fail: false
+  depends_on:
+  - s019_t1018
+- id: s021_t1070_004
+  ttp: T1070.004
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1070.004
+  abort_on_fail: false
+  depends_on:
+  - s020_t1021_001
+- id: s022_t1486
+  ttp: T1486
+  params:
+    dry_run: true
+    source_plan: attack_emulation_library
+    source_attack_id: T1486
+  abort_on_fail: false
+  depends_on:
+  - s021_t1070_004

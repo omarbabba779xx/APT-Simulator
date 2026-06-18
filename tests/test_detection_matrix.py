@@ -9,10 +9,15 @@ from orchestrator.dsl.schema import Scenario
 
 def test_detection_matrix_includes_packs() -> None:
     matrix = build_matrix()
-    assert matrix["total"] == 5000
+    assert matrix["total"] == 5064
     assert matrix["packs"]["cloud"] >= 5
-    assert matrix["safety_tiers"]["marker-only"] == 4968
+    assert matrix["packs"]["cloud_k8s_lab"] == 36
+    assert matrix["packs"]["ad_enterprise_lab"] == 28
+    assert matrix["safety_tiers"]["marker-only"] == 5032
     assert matrix["rule_coverage_percent"] == 100.0
+    assert len(matrix["tactics"]) == 15
+    assert matrix["attack_sync"]["coverage_label"] == "15/15"
+    assert matrix["attack_sync"]["status"] == "synced"
 
 
 def test_export_fixtures_and_queries(tmp_path: Path) -> None:

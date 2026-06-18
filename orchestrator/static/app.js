@@ -14,6 +14,9 @@ const state = {
   ttps: [],
   matrix: null,
   scores: {},
+  attackSync: null,
+  workbench: null,
+  exposure: null,
   space: null,
   library: { items: [], counts: {}, total: 0, filtered: 0 },
   campaigns: [],
@@ -133,6 +136,9 @@ async function refreshStatic() {
     api("/ttps").then((data) => { state.ttps = data; }),
     api("/coverage/matrix").then((data) => { state.matrix = data; }),
     api("/detections/score").then((data) => { state.scores = data; }),
+    api("/attack/sync/status").then((data) => { state.attackSync = data; }),
+    api("/detections/workbench").then((data) => { state.workbench = data; }),
+    api("/exposure/graph").then((data) => { state.exposure = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
     api("/scenario-library").then((data) => { state.library = data; }),
   ];
@@ -144,6 +150,9 @@ async function refreshStatic() {
   renderCatalog();
   renderAttackMatrix();
   renderDetection();
+  renderAttackSync();
+  renderWorkbench();
+  renderExposure();
   renderVariantSpace();
   renderOverview();
 }
@@ -182,9 +191,11 @@ function renderMetrics() {
   const runs = state.runs || [];
   const agents = Object.keys(state.agents || {}).length;
   const scored = Object.keys(state.scores || {}).length;
+  const sync = state.attackSync || state.matrix?.attack_sync || {};
   const metrics = [
     ["TTPs", matrix.total ?? state.ttps.length, "Coverage catalog"],
     ["Sigma", matrix.with_rules ?? scored, "Rules linked"],
+    ["ATT&CK", sync.coverage_label || "-", "Enterprise tactics"],
     ["Rule Fit", `${matrix.rule_coverage_percent ?? 0}%`, "Rule coverage"],
     ["Variants", fmtInt(state.space?.total_variants), "Generable"],
     ["Scenarios", Object.keys(state.scenarios || {}).length, "Loaded"],
@@ -254,6 +265,10 @@ function renderOverview() {
   renderBars("tactic-bars", tactics);
   renderBars("tier-bars", tiers);
   byId("coverage-label").textContent = `${matrix.rule_coverage_percent ?? 0}%`;
+  const boundary = byId("boundary-scenario-line");
+  if (boundary) {
+    boundary.textContent = `Stores the complete ${fmtInt(Object.keys(state.scenarios || {}).length)}-scenario loaded library as YAML; larger variant batches are generated on demand.`;
+  }
 
   const activeRuns = state.runs.filter((run) => run.status === "running").length;
   byId("run-label").textContent = `${activeRuns} active`;
@@ -449,6 +464,57 @@ function renderAttackMatrix() {
   byId("matrix-count").textContent = `${total} TTPs`;
 }
 
+function renderAttackSync() {
+  const sync = state.attackSync || state.matrix?.attack_sync;
+  const status = byId("sync-status");
+  const summary = byId("sync-summary");
+  const drift = byId("sync-drift");
+  const driftLabel = byId("sync-drift-label");
+  if (!status || !summary || !drift || !driftLabel) return;
+  clear(summary);
+  clear(drift);
+  if (!sync) {
+    status.textContent = "Unavailable";
+    status.className = "pill bad";
+    drift.appendChild(node("p", { class: "empty" }, "No sync data"));
+    return;
+  }
+  const driftTotal = (sync.missing_count || 0)
+    + (sync.extra_count || 0)
+    + (sync.deprecated_present_count || 0)
+    + (sync.revoked_present_count || 0);
+  status.textContent = sync.status || "unknown";
+  status.className = sync.status === "synced" ? "pill ok" : "pill warn";
+  driftLabel.textContent = `${driftTotal} drift`;
+  driftLabel.className = driftTotal ? "pill warn" : "pill ok";
+  const rows = [
+    ["Tactics", sync.coverage_label || "-"],
+    ["Active techniques", fmtInt(sync.official_active)],
+    ["Local base IDs", fmtInt(sync.local_base_ids)],
+    ["Latest modified", sync.latest_modified || "-"],
+    ["Snapshot", sync.snapshot_generated_at || "-"],
+    ["Excluded IDs", (sync.excluded_attack_ids || []).join(", ") || "-"],
+  ];
+  for (const [label, value] of rows) {
+    summary.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, label),
+      node("strong", {}, String(value)),
+    ]));
+  }
+  const groups = [
+    ["Missing", sync.missing || []],
+    ["Extra", sync.extra || []],
+    ["Deprecated local", sync.deprecated_present || []],
+    ["Revoked local", sync.revoked_present || []],
+  ];
+  for (const [label, values] of groups) {
+    drift.appendChild(node("div", { class: "drift-group" }, [
+      node("strong", {}, `${label} (${values.length})`),
+      node("p", { class: values.length ? "mono" : "muted" }, values.slice(0, 20).join(", ") || "none"),
+    ]));
+  }
+}
+
 function renderDetection() {
   const tbody = byId("score-table");
   if (!tbody) return;
@@ -470,6 +536,62 @@ function renderDetection() {
     .map(([label, count]) => ({ label, count }))
     .sort((a, b) => b.count - a.count);
   renderBars("pack-bars", packs);
+}
+
+function renderWorkbench() {
+  const tbody = byId("workbench-table");
+  if (!tbody) return;
+  const workbench = state.workbench || {};
+  const items = workbench.items || [];
+  clear(tbody);
+  for (const item of items.slice(0, 180)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono", title: item.name || "" }, item.attack_id),
+      node("td", {}, `${item.quality_score}%`),
+      node("td", {}, riskPill(item.false_positive_risk)),
+      node("td", { class: "muted" }, (item.missing_fields || []).join(", ") || "-"),
+      node("td", {}, (item.exports || []).join(", ")),
+    ]));
+  }
+  if (!items.length) tbody.appendChild(emptyRow(5, "No workbench data"));
+  byId("workbench-count").textContent = `${fmtInt(workbench.total_rules)} rules`;
+  byId("workbench-score").textContent = `${workbench.average_quality_score || 0}% avg`;
+
+  const gaps = Object.entries(workbench.missing_field_counts || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+  renderBars("workbench-bars", gaps);
+}
+
+function renderExposure() {
+  const container = byId("exposure-graph");
+  if (!container) return;
+  const graph = state.exposure || {};
+  clear(container);
+  const domains = Object.entries(graph.domain_counts || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+  renderBars("exposure-bars", domains);
+  byId("exposure-count").textContent = `${fmtInt(graph.scenario_count)} scenarios`;
+
+  for (const path of graph.reference_paths || []) {
+    container.appendChild(node("div", { class: "exposure-path" }, path.map((part, index) => [
+      node("span", { class: "pill neutral" }, part),
+      index < path.length - 1 ? node("span", { class: "path-arrow" }, "->") : null,
+    ]).flat()));
+  }
+  const edges = (graph.edges || []).filter((edge) => edge.label === "path").slice(0, 60);
+  if (edges.length) {
+    container.appendChild(node("h3", {}, "Observed scenario paths"));
+    for (const edge of edges) {
+      container.appendChild(node("div", { class: "edge-row" }, [
+        node("span", {}, edge.source.replace("domain:", "")),
+        node("span", { class: "path-arrow" }, "->"),
+        node("strong", {}, edge.target.replace("domain:", "")),
+      ]));
+    }
+  }
+  if (!container.childNodes.length) container.appendChild(node("p", { class: "empty" }, "No graph data"));
 }
 
 function renderRuns() {
@@ -686,8 +808,18 @@ async function startCampaign(count) {
   status.textContent = "Starting";
   status.className = "pill neutral";
   try {
-    const campaign = await postJson("/campaigns/run", { count, scenario_names: names });
-    status.textContent = `Started ${campaign.total_runs}`;
+    const body = { count, scenario_names: names };
+    const startAt = byId("campaign-start-at").value;
+    const repeatInterval = Number(byId("campaign-repeat-interval").value || 0);
+    const repeatCount = Number(byId("campaign-repeat-count").value || 1);
+    if (startAt) {
+      const startDate = new Date(startAt);
+      if (!Number.isNaN(startDate.getTime())) body.scheduled_at = startDate.getTime() / 1000;
+    }
+    if (repeatInterval > 0) body.repeat_interval_seconds = repeatInterval;
+    if (repeatCount > 1) body.repeat_count = repeatCount;
+    const campaign = await postJson("/campaigns/run", body);
+    status.textContent = campaign.status === "scheduled" ? `Scheduled ${campaign.total_runs}` : `Started ${campaign.total_runs}`;
     status.className = "pill ok";
     await refreshLive();
     switchView("campaigns");
@@ -717,6 +849,10 @@ function renderCampaigns() {
       node("td", {}, statusPill(campaign.status)),
       node("td", {}, `${campaign.progress_percent}%`),
       node("td", {}, `${campaign.total_runs} (${Object.entries(campaign.run_statuses || {}).map(([k, v]) => `${k}:${v}`).join(", ")})`),
+      node("td", {}, [
+        node("div", {}, campaign.scheduled_at ? fmtTs(campaign.scheduled_at) : "immediate"),
+        node("small", { class: "muted" }, campaign.repeat_interval_seconds ? `${campaign.repeat_remaining} repeats / ${campaign.repeat_interval_seconds}s` : "no repeat"),
+      ]),
       node("td", {}, node("div", { class: "button-row compact" }, [
         node("button", { class: "secondary", onclick: () => campaignAction(campaign.id, "pause") }, "Pause"),
         node("button", { class: "secondary", onclick: () => campaignAction(campaign.id, "resume") }, "Resume"),
@@ -725,7 +861,7 @@ function renderCampaigns() {
       node("td", {}, reportLinks(`/reports/campaigns/${campaign.id}`)),
     ]));
   }
-  if (!state.campaigns.length) tbody.appendChild(emptyRow(6, "No campaigns"));
+  if (!state.campaigns.length) tbody.appendChild(emptyRow(7, "No campaigns"));
   byId("campaign-count").textContent = `${state.campaigns.length} campaigns`;
 }
 

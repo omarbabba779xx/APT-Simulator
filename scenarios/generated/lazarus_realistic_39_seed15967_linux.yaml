@@ -89,8 +89,8 @@ steps:
   depends_on:
   - s007_t1543_002
   - s005_t1098_003_azure_role_assignment
-- id: s012_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s012_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -181,7 +181,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
 - id: s025_t1580_gcp_project_enumeration
   ttp: T1580:GCP_PROJECT_ENUMERATION
   params:
@@ -189,7 +189,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s007_t1543_002
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
 - id: s026_t1021_001
   ttp: T1021.001
   params:
@@ -226,7 +226,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
   - s019_t1057
 - id: s031_t1560
   ttp: T1560
@@ -257,7 +257,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
   - s020_t1069_001
 - id: s035_t1041
   ttp: T1041

@@ -1,0 +1,21 @@
+title: Scheduled task creation marker
+id: cdf723a9-1329-5eec-829a-da3b63368457
+status: experimental
+description: Detects simulator telemetry for Scheduled task creation marker.
+logsource:
+  product: apt_simulator
+  category: windows_process
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: scheduled_task_create
+    attack.technique.id: T1053.005
+    apt_sim.variant: ad_scheduled_task_create
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/005/
+tags:
+- attack.t1053.005

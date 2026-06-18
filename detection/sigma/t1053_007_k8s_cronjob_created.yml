@@ -1,0 +1,21 @@
+title: Kubernetes CronJob created marker
+id: 8d20d600-e6da-5db1-9dc8-8b6ef4d8a0d1
+status: experimental
+description: Detects simulator telemetry for Kubernetes CronJob created marker.
+logsource:
+  product: apt_simulator
+  category: kubernetes_audit
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_cronjob
+    attack.technique.id: T1053.007
+    apt_sim.variant: k8s_cronjob_created
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/007/
+tags:
+- attack.t1053.007

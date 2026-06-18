@@ -1,0 +1,21 @@
+title: Temporary elevated cloud access marker
+id: 44ee9162-7181-5dfb-9bf1-805fb18bd4cc
+status: experimental
+description: Detects simulator telemetry for Temporary elevated cloud access marker.
+logsource:
+  product: apt_simulator
+  category: identity
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: ActivatePrivilege
+    attack.technique.id: T1548.005
+    apt_sim.variant: temp_elevated_cloud_access
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1548/005/
+tags:
+- attack.t1548.005

@@ -1,0 +1,21 @@
+title: Cloud account data transfer marker
+id: 0c2dd6fc-e204-57d1-ac87-d2fe6ae3adee
+status: experimental
+description: Detects simulator telemetry for Cloud account data transfer marker.
+logsource:
+  product: apt_simulator
+  category: storage
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: CrossAccountTransfer
+    attack.technique.id: T1537
+    apt_sim.variant: cloud_account_data_transfer
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1537/
+tags:
+- attack.t1537

@@ -56,7 +56,11 @@ apt-agent = "agent.main:cli"
 apt-detection-matrix = "orchestrator.detection_matrix:app"
 apt-scenario-builder = "orchestrator.scenario_builder:app"
 apt-attack-import = "orchestrator.attack_catalog_import:app"
+apt-attack-sync = "orchestrator.attack_sync:app"
+apt-emulation-plan-import = "orchestrator.emulation_plan_import:app"
 apt-campaign = "orchestrator.campaign:app"
+apt-detection-workbench = "orchestrator.detection_workbench:app"
+apt-exposure-graph = "orchestrator.exposure_graph:app"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]

@@ -1,0 +1,21 @@
+title: AWS service discovery marker
+id: 06a14867-faec-5738-901c-35bb3dc29fa1
+status: experimental
+description: Detects simulator telemetry for AWS service discovery marker.
+logsource:
+  product: apt_simulator
+  category: discovery
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.discovery
+    event.action: ListServices
+    attack.technique.id: T1526
+    apt_sim.variant: aws_service_discovery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1526/
+tags:
+- attack.t1526

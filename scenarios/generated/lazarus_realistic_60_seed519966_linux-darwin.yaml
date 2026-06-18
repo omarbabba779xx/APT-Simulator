@@ -89,8 +89,8 @@ steps:
   depends_on:
   - s002_t1078_004_aws_console_login_success
   - s010_t1055
-- id: s012_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s012_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -132,7 +132,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s009_t1027
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
 - id: s018_t1049
   ttp: T1049
   params:
@@ -147,7 +147,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
   - s008_t1611_kubernetes_pod_create
 - id: s020_t1069_001
   ttp: T1069.001
@@ -155,7 +155,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
   - s008_t1611_kubernetes_pod_create
 - id: s021_t1082
   ttp: T1082

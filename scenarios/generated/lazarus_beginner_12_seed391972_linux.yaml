@@ -22,8 +22,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s001_t1055
-- id: s003_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s003_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -49,7 +49,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s003_t1070_002_linux_log_clear
+  - s003_t1070_004_linux_log_clear
 - id: s007_t1580
   ttp: T1580
   params:
@@ -70,7 +70,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s003_t1070_002_linux_log_clear
+  - s003_t1070_004_linux_log_clear
 - id: s010_t1530_aws_s3_object_burst
   ttp: T1530:AWS_S3_OBJECT_BURST
   params:

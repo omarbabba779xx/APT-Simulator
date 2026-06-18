@@ -107,6 +107,9 @@ class CampaignRunRequest(BaseModel):
     source: str | None = None
     min_steps: int | None = Field(default=None, ge=1)
     max_steps: int | None = Field(default=None, ge=1)
+    scheduled_at: float | None = None
+    repeat_interval_seconds: int | None = Field(default=None, ge=1)
+    repeat_count: int = Field(default=1, ge=1, le=50)
 
 
 class CampaignSummary(BaseModel):
@@ -119,3 +122,6 @@ class CampaignSummary(BaseModel):
     run_statuses: dict[str, int]
     scenario_names: list[str]
     run_ids: list[str]
+    scheduled_at: float | None = None
+    repeat_interval_seconds: int | None = None
+    repeat_remaining: int = 0

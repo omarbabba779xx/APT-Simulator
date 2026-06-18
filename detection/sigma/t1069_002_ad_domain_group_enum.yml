@@ -1,0 +1,21 @@
+title: Domain group enumeration marker
+id: 75d90c3c-f6a8-563d-b4dd-fc532d89770c
+status: experimental
+description: Detects simulator telemetry for Domain group enumeration marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: group_enum
+    attack.technique.id: T1069.002
+    apt_sim.variant: ad_domain_group_enum
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1069/002/
+tags:
+- attack.t1069.002

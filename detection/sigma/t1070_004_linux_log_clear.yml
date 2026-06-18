@@ -1,5 +1,5 @@
 title: Linux Log Clear Marker
-id: c1070002-0001-0000-0000-000000000001
+id: c1070004-0001-0000-0000-000000000001
 status: experimental
 logsource:
   product: linux
@@ -14,6 +14,6 @@ falsepositives:
 - log rotation maintenance
 level: high
 references:
-- https://attack.mitre.org/techniques/1070/002/
+- https://attack.mitre.org/techniques/1070/004/
 tags:
-- attack.t1070.002
+- attack.t1070.004

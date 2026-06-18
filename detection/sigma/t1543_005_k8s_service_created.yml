@@ -1,0 +1,21 @@
+title: Kubernetes service created marker
+id: 38db3dce-f7d3-5846-90de-c22337a49c32
+status: experimental
+description: Detects simulator telemetry for Kubernetes service created marker.
+logsource:
+  product: apt_simulator
+  category: kubernetes_audit
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_service
+    attack.technique.id: T1543.005
+    apt_sim.variant: k8s_service_created
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1543/005/
+tags:
+- attack.t1543.005

@@ -76,8 +76,8 @@ steps:
   depends_on:
   - s001_t1053_003_linux_cron_marker
   - s002_t1098_003_azure_role_assignment
-- id: s010_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s010_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -254,7 +254,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s010_t1070_002_linux_log_clear
+  - s010_t1070_004_linux_log_clear
   - s022_t1021_001
 - id: s034_t1567_002_saas_external_share
   ttp: T1567.002:SAAS_EXTERNAL_SHARE

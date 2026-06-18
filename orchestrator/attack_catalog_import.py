@@ -5,13 +5,13 @@ does not generate offensive payloads.
 """
 from __future__ import annotations
 
-import json
-import urllib.request
 from pathlib import Path
 from typing import Any
 
 import typer
 import yaml
+
+from .attack_sync import DEFAULT_STIX_URL, EXCLUDED_ATTACK_IDS, _external_attack_id, _load_json_source, _primary_tactic
 
 
 app = typer.Typer(no_args_is_help=True)
@@ -22,29 +22,8 @@ def _root() -> None:
     """ATT&CK catalog import tools."""
 
 
-DEFAULT_STIX_URL = "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
-EXCLUDED_ATTACK_IDS = {"T1588.007"}
-
-
 def _load_bundle(source: str) -> dict[str, Any]:
-    if source.startswith("http://") or source.startswith("https://"):
-        with urllib.request.urlopen(source, timeout=30) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    return json.loads(Path(source).read_text(encoding="utf-8-sig"))
-
-
-def _external_attack_id(obj: dict[str, Any]) -> str | None:
-    for ref in obj.get("external_references", []):
-        if ref.get("source_name") == "mitre-attack" and ref.get("external_id"):
-            return str(ref["external_id"])
-    return None
-
-
-def _kill_chain_tactic(obj: dict[str, Any]) -> str:
-    phases = obj.get("kill_chain_phases") or []
-    if not phases:
-        return "discovery"
-    return str(phases[0].get("phase_name", "discovery")).replace("-", "_")
+    return _load_json_source(source)
 
 
 def catalog_from_stix(source: str, pack: str = "attack_enterprise") -> dict[str, Any]:
@@ -62,7 +41,7 @@ def catalog_from_stix(source: str, pack: str = "attack_enterprise") -> dict[str,
             continue
         slug = attack_id.replace(".", "_")
         name = str(obj.get("name", attack_id))
-        tactic = _kill_chain_tactic(obj)
+        tactic = _primary_tactic(obj)
         items.append(
             {
                 "id": f"{attack_id}:CATALOG_STUB",

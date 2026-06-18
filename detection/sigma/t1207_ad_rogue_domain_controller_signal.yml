@@ -1,0 +1,21 @@
+title: Rogue domain controller signal marker
+id: 13fecd6b-440c-5d46-84d5-1010b7779afa
+status: experimental
+description: Detects simulator telemetry for Rogue domain controller signal marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: rogue_dc_signal
+    attack.technique.id: T1207
+    apt_sim.variant: ad_rogue_domain_controller_signal
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1207/
+tags:
+- attack.t1207

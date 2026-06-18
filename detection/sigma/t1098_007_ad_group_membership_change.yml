@@ -1,0 +1,21 @@
+title: Domain group membership change marker
+id: 6afb0110-57ee-52e8-9ac7-cd54272b6654
+status: experimental
+description: Detects simulator telemetry for Domain group membership change marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: group_membership_change
+    attack.technique.id: T1098.007
+    apt_sim.variant: ad_group_membership_change
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/007/
+tags:
+- attack.t1098.007

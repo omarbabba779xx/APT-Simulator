@@ -1,0 +1,21 @@
+title: Windows service creation marker
+id: 48714ad2-c448-5f74-8e14-4b7c7b3ea080
+status: experimental
+description: Detects simulator telemetry for Windows service creation marker.
+logsource:
+  product: apt_simulator
+  category: windows_process
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: service_create
+    attack.technique.id: T1543.003
+    apt_sim.variant: ad_windows_service_create
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1543/003/
+tags:
+- attack.t1543.003

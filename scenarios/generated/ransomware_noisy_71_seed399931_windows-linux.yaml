@@ -120,8 +120,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s003_t1047_windows_wmi_process_create
-- id: s016_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s016_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -158,7 +158,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s007_t1053_005
-  - s016_t1070_002_linux_log_clear
+  - s016_t1070_004_linux_log_clear
 - id: s021_t1003
   ttp: T1003
   params:
@@ -301,7 +301,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s016_t1070_002_linux_log_clear
+  - s016_t1070_004_linux_log_clear
 - id: s040_t1071_001
   ttp: T1071.001
   params:

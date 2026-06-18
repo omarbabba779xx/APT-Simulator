@@ -28,6 +28,9 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "TTP Catalog" in r.text
     assert "Project Boundaries" in r.text
     assert "Not an offensive framework" in r.text
+    assert "ATT&CK Sync" in r.text
+    assert "Detection Workbench" in r.text
+    assert "Exposure Graph" in r.text
 
 
 def test_coverage_endpoint(tmp_path) -> None:
@@ -41,10 +44,11 @@ def test_coverage_endpoint(tmp_path) -> None:
 def test_loaded_scenarios_include_generated_yaml_variants(tmp_path) -> None:
     client = _client(tmp_path)
     health = client.get("/healthz").json()
-    assert health["scenarios_loaded"] == 2511
+    assert health["scenarios_loaded"] == 2522
     scenarios = client.get("/scenarios").json()
-    assert len(scenarios) == 2511
+    assert len(scenarios) == 2522
     assert any(name.startswith("apt29_beginner_") for name in scenarios)
+    assert "ael_apt29" in scenarios
 
 
 def test_scenario_library_filters(tmp_path) -> None:
@@ -52,12 +56,16 @@ def test_scenario_library_filters(tmp_path) -> None:
     r = client.get("/scenario-library", params={"source": "generated variant", "platform": "windows"})
     assert r.status_code == 200
     body = r.json()
-    assert body["total"] == 2511
+    assert body["total"] == 2522
     assert body["filtered"] > 0
     first = body["items"][0]
     assert first["kind"] == "generated variant"
     assert first["source"] == "generated YAML"
     assert "windows" in first["platforms"]
+
+    ael = client.get("/scenario-library", params={"source": "emulation plan"}).json()
+    assert ael["filtered"] == 11
+    assert ael["items"][0]["kind"] == "emulation plan"
 
 
 def test_ttps_listing(tmp_path) -> None:
@@ -65,9 +73,26 @@ def test_ttps_listing(tmp_path) -> None:
     r = client.get("/ttps")
     assert r.status_code == 200
     ttps = r.json()
-    assert len(ttps) == 5000
+    assert len(ttps) == 5064
     ids = {t["attack_id"] for t in ttps}
     assert {"T1033", "T1083", "T1059", "T1547.001", "T1057", "T1071.001", "T1003", "T1027", "T1112", "T1070.004", "T1580"} <= ids
+
+
+def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
+    client = _client(tmp_path)
+
+    sync = client.get("/attack/sync/status").json()
+    assert sync["coverage_label"] == "15/15"
+    assert sync["status"] == "synced"
+
+    workbench = client.get("/detections/workbench").json()
+    assert workbench["total_rules"] == 5064
+    assert set(workbench["targets"]) == {"splunk", "elastic", "sentinel", "chronicle"}
+
+    graph = client.get("/exposure/graph").json()
+    assert graph["scenario_count"] == 2522
+    assert graph["domain_counts"]["cloud"] > 0
+    assert graph["domain_counts"]["container"] > 0
 
 
 def test_scenario_builder_preview(tmp_path) -> None:
@@ -138,3 +163,24 @@ def test_campaign_runner_and_reports(tmp_path) -> None:
     html = client.get(f"/reports/campaigns/{campaign['id']}.html")
     assert html.status_code == 200
     assert "Campaign" in html.text
+
+
+def test_scheduled_campaign_request(tmp_path) -> None:
+    client = _client(tmp_path)
+    campaign_resp = client.post(
+        "/campaigns/run",
+        json={
+            "count": 3,
+            "source": "generated variant",
+            "scheduled_at": 4_102_444_800,
+            "repeat_interval_seconds": 3600,
+            "repeat_count": 2,
+        },
+    )
+    assert campaign_resp.status_code == 200
+    campaign = campaign_resp.json()
+    assert campaign["status"] == "scheduled"
+    assert campaign["total_runs"] == 3
+    assert campaign["run_ids"] == []
+    assert campaign["repeat_interval_seconds"] == 3600
+    assert campaign["repeat_remaining"] == 2

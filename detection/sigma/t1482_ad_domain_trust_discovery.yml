@@ -1,0 +1,21 @@
+title: Domain trust discovery marker
+id: 6d1f9ccc-940e-58e1-afbf-00cdf52d994c
+status: experimental
+description: Detects simulator telemetry for Domain trust discovery marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: trust_discovery
+    attack.technique.id: T1482
+    apt_sim.variant: ad_domain_trust_discovery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1482/
+tags:
+- attack.t1482

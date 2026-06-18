@@ -34,8 +34,15 @@ router = APIRouter(tags=["scenarios"])
 def _scenario_library_entry(name: str, scenario: Scenario) -> dict[str, object]:
     tags = list(scenario.tags or [])
     tag_set = set(tags)
-    kind = "generated variant" if "variant" in tag_set else "static"
-    source = "generated YAML" if kind == "generated variant" else "static"
+    if "variant" in tag_set:
+        kind = "generated variant"
+        source = "generated YAML"
+    elif "ael_import" in tag_set or "source_ael" in tag_set:
+        kind = "emulation plan"
+        source = "emulation library"
+    else:
+        kind = "static"
+        source = "static"
     difficulty = next((tag for tag in tags if tag in DIFFICULTY_STEPS), None)
     ttps = sorted({step.ttp for step in scenario.steps})
     return {
@@ -125,6 +132,64 @@ def _start_run(s, scenario: Scenario) -> Any:
         )
     s.audit.append("run.start", {"run_id": run.id, "scenario": scenario.name})
     return run
+
+
+def _select_campaign_names(req: CampaignRunRequest) -> list[str]:
+    s = get_state()
+    if req.scenario_names:
+        names = [name for name in req.scenario_names if name in s.scenarios]
+    else:
+        names = [
+            str(item["name"])
+            for item in _scenario_library_items()
+            if _matches_filter(
+                item,
+                actor=req.actor,
+                difficulty=req.difficulty,
+                platform=req.platform,
+                source=req.source,
+                min_steps=req.min_steps,
+                max_steps=req.max_steps,
+            )
+        ]
+    return names[: req.count]
+
+
+def _launch_campaign_runs(record: dict[str, Any]) -> list[str]:
+    s = get_state()
+    launched = [_start_run(s, s.scenarios[name]).id for name in record["scenario_names"] if name in s.scenarios]
+    record["run_ids"].extend(launched)
+    record["status"] = "running"
+    record["updated_at"] = time.time()
+    if int(record.get("repeat_remaining", 0)) > 0:
+        record["repeat_remaining"] = int(record["repeat_remaining"]) - 1
+    s.audit.append("campaign.launch", {"campaign_id": record["id"], "runs": len(launched)})
+    return launched
+
+
+def tick_scheduled_campaigns() -> None:
+    """Start due scheduled campaigns and requeue repeat campaigns."""
+    s = get_state()
+    now = time.time()
+    for record in list(s.campaigns.values()):
+        status = str(record.get("status"))
+        if status == "scheduled" and float(record.get("scheduled_at") or 0) <= now:
+            _launch_campaign_runs(record)
+            continue
+        if status != "running":
+            continue
+        interval = record.get("repeat_interval_seconds")
+        if not interval or int(record.get("repeat_remaining", 0)) <= 0:
+            continue
+        runs = [s.planner.get_run(str(run_id)) for run_id in record["run_ids"]]
+        if runs and all(run and run.status in {"completed", "failed", "aborted"} for run in runs):
+            record["status"] = "scheduled"
+            record["scheduled_at"] = now + int(interval)
+            record["updated_at"] = now
+            s.audit.append(
+                "campaign.repeat_scheduled",
+                {"campaign_id": record["id"], "scheduled_at": record["scheduled_at"]},
+            )
 
 
 @router.get("/scenarios")
@@ -256,49 +321,42 @@ def run_campaign(req: CampaignRunRequest, _claims=require_role("operator")) -> C
     s = get_state()
     if s.killswitch.is_active():
         raise HTTPException(409, f"killswitch active: {s.killswitch.reason()}")
-    if req.scenario_names:
-        names = [name for name in req.scenario_names if name in s.scenarios]
-    else:
-        names = [
-            str(item["name"])
-            for item in _scenario_library_items()
-            if _matches_filter(
-                item,
-                actor=req.actor,
-                difficulty=req.difficulty,
-                platform=req.platform,
-                source=req.source,
-                min_steps=req.min_steps,
-                max_steps=req.max_steps,
-            )
-        ]
-    selected = names[: req.count]
+    selected = _select_campaign_names(req)
     if not selected:
         raise HTTPException(404, "no scenarios matched campaign request")
 
-    run_ids = [_start_run(s, s.scenarios[name]).id for name in selected]
     now = time.time()
     campaign_id = uuid.uuid4().hex[:12]
-    record = {
+    scheduled_at = req.scheduled_at if req.scheduled_at and req.scheduled_at > now else None
+    record: dict[str, Any] = {
         "id": campaign_id,
-        "status": "running",
+        "status": "scheduled" if scheduled_at else "running",
         "created_at": now,
         "updated_at": now,
         "scenario_names": selected,
-        "run_ids": run_ids,
+        "run_ids": [],
+        "scheduled_at": scheduled_at,
+        "repeat_interval_seconds": req.repeat_interval_seconds,
+        "repeat_remaining": req.repeat_count,
     }
     s.campaigns[campaign_id] = record
-    s.audit.append("campaign.start", {"campaign_id": campaign_id, "runs": len(run_ids)})
+    if scheduled_at:
+        s.audit.append("campaign.schedule", {"campaign_id": campaign_id, "scheduled_at": scheduled_at})
+    else:
+        _launch_campaign_runs(record)
+        s.audit.append("campaign.start", {"campaign_id": campaign_id, "runs": len(record["run_ids"])})
     return _campaign_summary(record)
 
 
 @router.get("/campaigns", response_model=list[CampaignSummary])
 def list_campaigns(_claims=require_role("viewer")) -> list[CampaignSummary]:
+    tick_scheduled_campaigns()
     return [_campaign_summary(record) for record in get_state().campaigns.values()]
 
 
 @router.get("/campaigns/{campaign_id}", response_model=CampaignSummary)
 def get_campaign(campaign_id: str, _claims=require_role("viewer")) -> CampaignSummary:
+    tick_scheduled_campaigns()
     return _campaign_summary(_campaign_record(campaign_id))
 
 
@@ -318,7 +376,7 @@ def resume_campaign(campaign_id: str, _claims=require_role("operator")) -> Campa
     s = get_state()
     record = _campaign_record(campaign_id)
     s.planner.resume_runs(list(record["run_ids"]))
-    record["status"] = "running"
+    record["status"] = "scheduled" if record.get("scheduled_at") else "running"
     record["updated_at"] = time.time()
     s.audit.append("campaign.resume", {"campaign_id": campaign_id})
     return _campaign_summary(record)
@@ -454,7 +512,9 @@ def _campaign_summary(record: dict[str, Any]) -> CampaignSummary:
             terminal += 1
     total = len(record["run_ids"])
     status = str(record["status"])
-    if status != "paused" and total and terminal == total:
+    if status == "scheduled" and not total:
+        total = len(record["scenario_names"])
+    if status not in {"paused", "scheduled"} and total and terminal == total:
         status = "failed" if run_statuses.get("failed") else "completed"
         record["status"] = status
     return CampaignSummary(
@@ -467,6 +527,9 @@ def _campaign_summary(record: dict[str, Any]) -> CampaignSummary:
         run_statuses=run_statuses,
         scenario_names=[str(name) for name in record["scenario_names"]],
         run_ids=[str(run_id) for run_id in record["run_ids"]],
+        scheduled_at=record.get("scheduled_at"),
+        repeat_interval_seconds=record.get("repeat_interval_seconds"),
+        repeat_remaining=int(record.get("repeat_remaining", 0)),
     )
 
 

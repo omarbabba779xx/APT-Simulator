@@ -1,0 +1,1686 @@
+pack: ad_enterprise_lab
+ttps:
+- id: T1078.002:AD_DOMAIN_ACCOUNT_LOGIN
+  attack_id: T1078.002
+  name: Domain account login marker
+  description: Marker-only active_directory simulation for Domain Accounts.
+  tactic: initial_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Domain Accounts
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_domain_account_login.json
+  sigma:
+    title: Domain account login marker
+    id: 38c2551c-4502-50bd-8bf0-9dc3ed17f792
+    status: experimental
+    description: Detects simulator telemetry for Domain account login marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: '4624'
+        attack.technique.id: T1078.002
+        apt_sim.variant: ad_domain_account_login
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: '4624'
+    event.provider: active_directory
+    attack.tactic: initial_access
+    attack.technique.id: T1078.002
+    attack.technique.name: Domain Accounts
+    apt_sim.variant: ad_domain_account_login
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1087.002:AD_DOMAIN_ACCOUNT_ENUM
+  attack_id: T1087.002
+  name: Domain account enumeration marker
+  description: Marker-only active_directory simulation for Domain Account.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Domain Account
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_domain_account_enum.json
+  sigma:
+    title: Domain account enumeration marker
+    id: a9428f49-fa36-51b1-8654-90fa0bf32a5a
+    status: experimental
+    description: Detects simulator telemetry for Domain account enumeration marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: account_enum
+        attack.technique.id: T1087.002
+        apt_sim.variant: ad_domain_account_enum
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: account_enum
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1087.002
+    attack.technique.name: Domain Account
+    apt_sim.variant: ad_domain_account_enum
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1069.002:AD_DOMAIN_GROUP_ENUM
+  attack_id: T1069.002
+  name: Domain group enumeration marker
+  description: Marker-only active_directory simulation for Domain Groups.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Domain Groups
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_domain_group_enum.json
+  sigma:
+    title: Domain group enumeration marker
+    id: 75d90c3c-f6a8-563d-b4dd-fc532d89770c
+    status: experimental
+    description: Detects simulator telemetry for Domain group enumeration marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: group_enum
+        attack.technique.id: T1069.002
+        apt_sim.variant: ad_domain_group_enum
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: group_enum
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1069.002
+    attack.technique.name: Domain Groups
+    apt_sim.variant: ad_domain_group_enum
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1482:AD_DOMAIN_TRUST_DISCOVERY
+  attack_id: T1482
+  name: Domain trust discovery marker
+  description: Marker-only active_directory simulation for Domain Trust Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Domain Trust Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_domain_trust_discovery.json
+  sigma:
+    title: Domain trust discovery marker
+    id: 6d1f9ccc-940e-58e1-afbf-00cdf52d994c
+    status: experimental
+    description: Detects simulator telemetry for Domain trust discovery marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: trust_discovery
+        attack.technique.id: T1482
+        apt_sim.variant: ad_domain_trust_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: trust_discovery
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1482
+    attack.technique.name: Domain Trust Discovery
+    apt_sim.variant: ad_domain_trust_discovery
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1018:AD_REMOTE_SYSTEM_DISCOVERY
+  attack_id: T1018
+  name: Remote system discovery marker
+  description: Marker-only active_directory simulation for Remote System Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_process
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Remote System Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_remote_system_discovery.json
+  sigma:
+    title: Remote system discovery marker
+    id: c825f90a-e350-5987-bca6-f0728c9302a7
+    status: experimental
+    description: Detects simulator telemetry for Remote system discovery marker.
+    logsource:
+      product: apt_simulator
+      category: windows_process
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_process
+        event.action: remote_system_discovery
+        attack.technique.id: T1018
+        apt_sim.variant: ad_remote_system_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: windows_process
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: remote_system_discovery
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1018
+    attack.technique.name: Remote System Discovery
+    apt_sim.variant: ad_remote_system_discovery
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1049:AD_NETWORK_CONNECTION_DISCOVERY
+  attack_id: T1049
+  name: Network connection discovery marker
+  description: Marker-only active_directory simulation for System Network Connections
+    Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_process
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: System Network Connections Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_network_connection_discovery.json
+  sigma:
+    title: Network connection discovery marker
+    id: e8c9ec4b-b011-56b9-bef2-01729b247f62
+    status: experimental
+    description: Detects simulator telemetry for Network connection discovery marker.
+    logsource:
+      product: apt_simulator
+      category: windows_process
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_process
+        event.action: net_connection_discovery
+        attack.technique.id: T1049
+        apt_sim.variant: ad_network_connection_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: windows_process
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: net_connection_discovery
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1049
+    attack.technique.name: System Network Connections Discovery
+    apt_sim.variant: ad_network_connection_discovery
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1007:AD_SERVICE_DISCOVERY
+  attack_id: T1007
+  name: Windows service discovery marker
+  description: Marker-only active_directory simulation for System Service Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_process
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: System Service Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_service_discovery.json
+  sigma:
+    title: Windows service discovery marker
+    id: 3d9a758f-d060-518a-96dd-37f08d7860cd
+    status: experimental
+    description: Detects simulator telemetry for Windows service discovery marker.
+    logsource:
+      product: apt_simulator
+      category: windows_process
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_process
+        event.action: service_discovery
+        attack.technique.id: T1007
+        apt_sim.variant: ad_service_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: windows_process
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: service_discovery
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1007
+    attack.technique.name: System Service Discovery
+    apt_sim.variant: ad_service_discovery
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1201:AD_PASSWORD_POLICY_DISCOVERY
+  attack_id: T1201
+  name: Password policy discovery marker
+  description: Marker-only active_directory simulation for Password Policy Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Password Policy Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_password_policy_discovery.json
+  sigma:
+    title: Password policy discovery marker
+    id: 857a61fe-7593-5bbe-9fb7-e044e8f60ec8
+    status: experimental
+    description: Detects simulator telemetry for Password policy discovery marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: password_policy
+        attack.technique.id: T1201
+        apt_sim.variant: ad_password_policy_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: password_policy
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1201
+    attack.technique.name: Password Policy Discovery
+    apt_sim.variant: ad_password_policy_discovery
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1033:AD_USER_DISCOVERY
+  attack_id: T1033
+  name: Domain user discovery marker
+  description: Marker-only active_directory simulation for System Owner/User Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_process
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: System Owner/User Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_user_discovery.json
+  sigma:
+    title: Domain user discovery marker
+    id: cb1b5029-bda4-5b14-baa9-f8a282e1d1b5
+    status: experimental
+    description: Detects simulator telemetry for Domain user discovery marker.
+    logsource:
+      product: apt_simulator
+      category: windows_process
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_process
+        event.action: user_discovery
+        attack.technique.id: T1033
+        apt_sim.variant: ad_user_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: windows_process
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: user_discovery
+    event.provider: active_directory
+    attack.tactic: discovery
+    attack.technique.id: T1033
+    attack.technique.name: System Owner/User Discovery
+    apt_sim.variant: ad_user_discovery
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1003.003:AD_NTDS_ACCESS_MARKER
+  attack_id: T1003.003
+  name: NTDS access marker
+  description: Marker-only active_directory simulation for NTDS.
+  tactic: credential_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: NTDS
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_ntds_access_marker.json
+  sigma:
+    title: NTDS access marker
+    id: 299f3791-808b-5013-905b-903c081a44e3
+    status: experimental
+    description: Detects simulator telemetry for NTDS access marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: ntds_access
+        attack.technique.id: T1003.003
+        apt_sim.variant: ad_ntds_access_marker
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: ntds_access
+    event.provider: active_directory
+    attack.tactic: credential_access
+    attack.technique.id: T1003.003
+    attack.technique.name: NTDS
+    apt_sim.variant: ad_ntds_access_marker
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1003.002:AD_SAM_ACCESS_MARKER
+  attack_id: T1003.002
+  name: SAM access marker
+  description: Marker-only active_directory simulation for Security Account Manager.
+  tactic: credential_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Security Account Manager
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_sam_access_marker.json
+  sigma:
+    title: SAM access marker
+    id: 6d5074c7-a4ac-50ea-b7f6-94fe06e67eea
+    status: experimental
+    description: Detects simulator telemetry for SAM access marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: sam_access
+        attack.technique.id: T1003.002
+        apt_sim.variant: ad_sam_access_marker
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: sam_access
+    event.provider: active_directory
+    attack.tactic: credential_access
+    attack.technique.id: T1003.002
+    attack.technique.name: Security Account Manager
+    apt_sim.variant: ad_sam_access_marker
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1003.005:AD_CACHED_DOMAIN_CREDENTIAL_MARKER
+  attack_id: T1003.005
+  name: Cached domain credential marker
+  description: Marker-only active_directory simulation for Cached Domain Credentials.
+  tactic: credential_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Cached Domain Credentials
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_cached_domain_credential_marker.json
+  sigma:
+    title: Cached domain credential marker
+    id: d22c4b4e-8028-50fb-abc6-3cbd35eac0e7
+    status: experimental
+    description: Detects simulator telemetry for Cached domain credential marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: cached_domain_credential
+        attack.technique.id: T1003.005
+        apt_sim.variant: ad_cached_domain_credential_marker
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: cached_domain_credential
+    event.provider: active_directory
+    attack.tactic: credential_access
+    attack.technique.id: T1003.005
+    attack.technique.name: Cached Domain Credentials
+    apt_sim.variant: ad_cached_domain_credential_marker
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1558:AD_KERBEROS_TICKET_SIGNAL
+  attack_id: T1558
+  name: Kerberos ticket signal marker
+  description: Marker-only active_directory simulation for Steal or Forge Kerberos
+    Tickets.
+  tactic: credential_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: kerberos
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Steal or Forge Kerberos Tickets
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_kerberos_ticket_signal.json
+  sigma:
+    title: Kerberos ticket signal marker
+    id: 2aa17005-3848-5801-95f8-7fd8d226b2ff
+    status: experimental
+    description: Detects simulator telemetry for Kerberos ticket signal marker.
+    logsource:
+      product: apt_simulator
+      category: kerberos
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.kerberos
+        event.action: kerberos_ticket_signal
+        attack.technique.id: T1558
+        apt_sim.variant: ad_kerberos_ticket_signal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kerberos
+    event.dataset: apt_sim.ad_enterprise_lab.kerberos
+    event.action: kerberos_ticket_signal
+    event.provider: active_directory
+    attack.tactic: credential_access
+    attack.technique.id: T1558
+    attack.technique.name: Steal or Forge Kerberos Tickets
+    apt_sim.variant: ad_kerberos_ticket_signal
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1558.003:AD_KERBEROASTING_SIGNAL
+  attack_id: T1558.003
+  name: Kerberoasting signal marker
+  description: Marker-only active_directory simulation for Kerberoasting.
+  tactic: credential_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: kerberos
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Kerberoasting
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_kerberoasting_signal.json
+  sigma:
+    title: Kerberoasting signal marker
+    id: 28d27305-5375-5cf2-a3a4-e8dc3cf76ce0
+    status: experimental
+    description: Detects simulator telemetry for Kerberoasting signal marker.
+    logsource:
+      product: apt_simulator
+      category: kerberos
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.kerberos
+        event.action: kerberoasting_signal
+        attack.technique.id: T1558.003
+        apt_sim.variant: ad_kerberoasting_signal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kerberos
+    event.dataset: apt_sim.ad_enterprise_lab.kerberos
+    event.action: kerberoasting_signal
+    event.provider: active_directory
+    attack.tactic: credential_access
+    attack.technique.id: T1558.003
+    attack.technique.name: Kerberoasting
+    apt_sim.variant: ad_kerberoasting_signal
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1558.004:AD_ASREP_ROASTING_SIGNAL
+  attack_id: T1558.004
+  name: AS-REP roasting signal marker
+  description: Marker-only active_directory simulation for AS-REP Roasting.
+  tactic: credential_access
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: kerberos
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: AS-REP Roasting
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_asrep_roasting_signal.json
+  sigma:
+    title: AS-REP roasting signal marker
+    id: de7c36bb-d889-5c26-9286-7b74aa1497cd
+    status: experimental
+    description: Detects simulator telemetry for AS-REP roasting signal marker.
+    logsource:
+      product: apt_simulator
+      category: kerberos
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.kerberos
+        event.action: asrep_roasting_signal
+        attack.technique.id: T1558.004
+        apt_sim.variant: ad_asrep_roasting_signal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kerberos
+    event.dataset: apt_sim.ad_enterprise_lab.kerberos
+    event.action: asrep_roasting_signal
+    event.provider: active_directory
+    attack.tactic: credential_access
+    attack.technique.id: T1558.004
+    attack.technique.name: AS-REP Roasting
+    apt_sim.variant: ad_asrep_roasting_signal
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1550.003:AD_PASS_THE_TICKET_SIGNAL
+  attack_id: T1550.003
+  name: Pass-the-ticket signal marker
+  description: Marker-only active_directory simulation for Pass the Ticket.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: kerberos
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Pass the Ticket
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_pass_the_ticket_signal.json
+  sigma:
+    title: Pass-the-ticket signal marker
+    id: 02d2d9f7-357d-5aed-9e49-1efc5ce6264e
+    status: experimental
+    description: Detects simulator telemetry for Pass-the-ticket signal marker.
+    logsource:
+      product: apt_simulator
+      category: kerberos
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.kerberos
+        event.action: pass_the_ticket_signal
+        attack.technique.id: T1550.003
+        apt_sim.variant: ad_pass_the_ticket_signal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: kerberos
+    event.dataset: apt_sim.ad_enterprise_lab.kerberos
+    event.action: pass_the_ticket_signal
+    event.provider: active_directory
+    attack.tactic: lateral_movement
+    attack.technique.id: T1550.003
+    attack.technique.name: Pass the Ticket
+    apt_sim.variant: ad_pass_the_ticket_signal
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1098.007:AD_GROUP_MEMBERSHIP_CHANGE
+  attack_id: T1098.007
+  name: Domain group membership change marker
+  description: Marker-only active_directory simulation for Additional Local or Domain
+    Groups.
+  tactic: persistence
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Additional Local or Domain Groups
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_group_membership_change.json
+  sigma:
+    title: Domain group membership change marker
+    id: 6afb0110-57ee-52e8-9ac7-cd54272b6654
+    status: experimental
+    description: Detects simulator telemetry for Domain group membership change marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: group_membership_change
+        attack.technique.id: T1098.007
+        apt_sim.variant: ad_group_membership_change
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: group_membership_change
+    event.provider: active_directory
+    attack.tactic: persistence
+    attack.technique.id: T1098.007
+    attack.technique.name: Additional Local or Domain Groups
+    apt_sim.variant: ad_group_membership_change
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1136.002:AD_DOMAIN_ACCOUNT_CREATE
+  attack_id: T1136.002
+  name: Domain account creation marker
+  description: Marker-only active_directory simulation for Domain Account.
+  tactic: persistence
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Domain Account
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_domain_account_create.json
+  sigma:
+    title: Domain account creation marker
+    id: 17b6c96d-c1af-5b50-b760-c164202aa290
+    status: experimental
+    description: Detects simulator telemetry for Domain account creation marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: account_create
+        attack.technique.id: T1136.002
+        apt_sim.variant: ad_domain_account_create
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: account_create
+    event.provider: active_directory
+    attack.tactic: persistence
+    attack.technique.id: T1136.002
+    attack.technique.name: Domain Account
+    apt_sim.variant: ad_domain_account_create
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1484.001:AD_GROUP_POLICY_MODIFICATION
+  attack_id: T1484.001
+  name: Group policy modification marker
+  description: Marker-only active_directory simulation for Group Policy Modification.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Group Policy Modification
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_group_policy_modification.json
+  sigma:
+    title: Group policy modification marker
+    id: f7a180d9-234c-5890-ab91-5e240b8b659f
+    status: experimental
+    description: Detects simulator telemetry for Group policy modification marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: gpo_change
+        attack.technique.id: T1484.001
+        apt_sim.variant: ad_group_policy_modification
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: gpo_change
+    event.provider: active_directory
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1484.001
+    attack.technique.name: Group Policy Modification
+    apt_sim.variant: ad_group_policy_modification
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1207:AD_ROGUE_DOMAIN_CONTROLLER_SIGNAL
+  attack_id: T1207
+  name: Rogue domain controller signal marker
+  description: Marker-only active_directory simulation for Rogue Domain Controller.
+  tactic: defense_impairment
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Rogue Domain Controller
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_rogue_domain_controller_signal.json
+  sigma:
+    title: Rogue domain controller signal marker
+    id: 13fecd6b-440c-5d46-84d5-1010b7779afa
+    status: experimental
+    description: Detects simulator telemetry for Rogue domain controller signal marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: rogue_dc_signal
+        attack.technique.id: T1207
+        apt_sim.variant: ad_rogue_domain_controller_signal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: rogue_dc_signal
+    event.provider: active_directory
+    attack.tactic: defense_impairment
+    attack.technique.id: T1207
+    attack.technique.name: Rogue Domain Controller
+    apt_sim.variant: ad_rogue_domain_controller_signal
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1556.001:AD_DOMAIN_CONTROLLER_AUTH_CHANGE
+  attack_id: T1556.001
+  name: Domain controller authentication change marker
+  description: Marker-only active_directory simulation for Domain Controller Authentication.
+  tactic: persistence
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Domain Controller Authentication
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_domain_controller_auth_change.json
+  sigma:
+    title: Domain controller authentication change marker
+    id: 6130c463-bc76-580f-abb8-23601710ff2f
+    status: experimental
+    description: Detects simulator telemetry for Domain controller authentication
+      change marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: dc_auth_change
+        attack.technique.id: T1556.001
+        apt_sim.variant: ad_domain_controller_auth_change
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: dc_auth_change
+    event.provider: active_directory
+    attack.tactic: persistence
+    attack.technique.id: T1556.001
+    attack.technique.name: Domain Controller Authentication
+    apt_sim.variant: ad_domain_controller_auth_change
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1543.003:AD_WINDOWS_SERVICE_CREATE
+  attack_id: T1543.003
+  name: Windows service creation marker
+  description: Marker-only active_directory simulation for Windows Service.
+  tactic: persistence
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_process
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Windows Service
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_windows_service_create.json
+  sigma:
+    title: Windows service creation marker
+    id: 48714ad2-c448-5f74-8e14-4b7c7b3ea080
+    status: experimental
+    description: Detects simulator telemetry for Windows service creation marker.
+    logsource:
+      product: apt_simulator
+      category: windows_process
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_process
+        event.action: service_create
+        attack.technique.id: T1543.003
+        apt_sim.variant: ad_windows_service_create
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: windows_process
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: service_create
+    event.provider: active_directory
+    attack.tactic: persistence
+    attack.technique.id: T1543.003
+    attack.technique.name: Windows Service
+    apt_sim.variant: ad_windows_service_create
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1053.005:AD_SCHEDULED_TASK_CREATE
+  attack_id: T1053.005
+  name: Scheduled task creation marker
+  description: Marker-only active_directory simulation for Scheduled Task.
+  tactic: execution
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_process
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Scheduled Task
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_scheduled_task_create.json
+  sigma:
+    title: Scheduled task creation marker
+    id: cdf723a9-1329-5eec-829a-da3b63368457
+    status: experimental
+    description: Detects simulator telemetry for Scheduled task creation marker.
+    logsource:
+      product: apt_simulator
+      category: windows_process
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_process
+        event.action: scheduled_task_create
+        attack.technique.id: T1053.005
+        apt_sim.variant: ad_scheduled_task_create
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: windows_process
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: scheduled_task_create
+    event.provider: active_directory
+    attack.tactic: execution
+    attack.technique.id: T1053.005
+    attack.technique.name: Scheduled Task
+    apt_sim.variant: ad_scheduled_task_create
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1021.001:AD_RDP_LATERAL_PATH
+  attack_id: T1021.001
+  name: RDP lateral path marker
+  description: Marker-only active_directory simulation for Remote Desktop Protocol.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Remote Desktop Protocol
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_rdp_lateral_path.json
+  sigma:
+    title: RDP lateral path marker
+    id: 49e8b1f5-4b69-5f3d-8981-5d720ad63c36
+    status: experimental
+    description: Detects simulator telemetry for RDP lateral path marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: rdp_lateral_path
+        attack.technique.id: T1021.001
+        apt_sim.variant: ad_rdp_lateral_path
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: rdp_lateral_path
+    event.provider: active_directory
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.001
+    attack.technique.name: Remote Desktop Protocol
+    apt_sim.variant: ad_rdp_lateral_path
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1021.002:AD_SMB_ADMIN_SHARE_PATH
+  attack_id: T1021.002
+  name: SMB admin share path marker
+  description: Marker-only active_directory simulation for SMB/Windows Admin Shares.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: SMB/Windows Admin Shares
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_smb_admin_share_path.json
+  sigma:
+    title: SMB admin share path marker
+    id: ce7fbe78-7dd7-5780-8f9c-87278b564d65
+    status: experimental
+    description: Detects simulator telemetry for SMB admin share path marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: smb_admin_share_path
+        attack.technique.id: T1021.002
+        apt_sim.variant: ad_smb_admin_share_path
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: smb_admin_share_path
+    event.provider: active_directory
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.002
+    attack.technique.name: SMB/Windows Admin Shares
+    apt_sim.variant: ad_smb_admin_share_path
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1021.006:AD_WINRM_LATERAL_PATH
+  attack_id: T1021.006
+  name: WinRM lateral path marker
+  description: Marker-only active_directory simulation for Windows Remote Management.
+  tactic: lateral_movement
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_security
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Windows Remote Management
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_winrm_lateral_path.json
+  sigma:
+    title: WinRM lateral path marker
+    id: eb7132f8-2f1d-5700-8e29-d28bd495bbb1
+    status: experimental
+    description: Detects simulator telemetry for WinRM lateral path marker.
+    logsource:
+      product: apt_simulator
+      category: windows_security
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_security
+        event.action: winrm_lateral_path
+        attack.technique.id: T1021.006
+        apt_sim.variant: ad_winrm_lateral_path
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: windows_security
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: winrm_lateral_path
+    event.provider: active_directory
+    attack.tactic: lateral_movement
+    attack.technique.id: T1021.006
+    attack.technique.name: Windows Remote Management
+    apt_sim.variant: ad_winrm_lateral_path
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1112:AD_REGISTRY_POLICY_CHANGE
+  attack_id: T1112
+  name: Registry policy change marker
+  description: Marker-only active_directory simulation for Modify Registry.
+  tactic: persistence
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: windows_registry
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Modify Registry
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_registry_policy_change.json
+  sigma:
+    title: Registry policy change marker
+    id: 84d9b1fb-cd21-52b0-8fa1-033347c6ecbc
+    status: experimental
+    description: Detects simulator telemetry for Registry policy change marker.
+    logsource:
+      product: apt_simulator
+      category: windows_registry
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.windows_registry
+        event.action: registry_policy_change
+        attack.technique.id: T1112
+        apt_sim.variant: ad_registry_policy_change
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: windows_registry
+    event.dataset: apt_sim.ad_enterprise_lab.windows_registry
+    event.action: registry_policy_change
+    event.provider: active_directory
+    attack.tactic: persistence
+    attack.technique.id: T1112
+    attack.technique.name: Modify Registry
+    apt_sim.variant: ad_registry_policy_change
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1531:AD_ACCOUNT_ACCESS_REMOVAL
+  attack_id: T1531
+  name: Account access removal marker
+  description: Marker-only active_directory simulation for Account Access Removal.
+  tactic: impact
+  platforms:
+  - windows
+  safety_tier: marker-only
+  metadata:
+    provider: active_directory
+    telemetry_source: directory_service
+    source_model: defensive_lab
+    variant_family: ad_enterprise_lab
+    mitre_name: Account Access Removal
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: active_directory-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: ad_enterprise_lab_ad_account_access_removal.json
+  sigma:
+    title: Account access removal marker
+    id: abfff3c5-cfd1-5f2c-bc37-ec79649b190f
+    status: experimental
+    description: Detects simulator telemetry for Account access removal marker.
+    logsource:
+      product: apt_simulator
+      category: directory_service
+    detection:
+      selection:
+        event.dataset: apt_sim.ad_enterprise_lab.directory_service
+        event.action: account_access_removal
+        attack.technique.id: T1531
+        apt_sim.variant: ad_account_access_removal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: directory_service
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: account_access_removal
+    event.provider: active_directory
+    attack.tactic: impact
+    attack.technique.id: T1531
+    attack.technique.name: Account Access Removal
+    apt_sim.variant: ad_account_access_removal
+    apt_sim.variant_family: ad_enterprise_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'

@@ -8,19 +8,22 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 
 | Area | Current state |
 | --- | --- |
-| Coverage catalog | 5,000 TTPs mapped to ATT&CK Enterprise techniques and variants |
-| Scenario library | 2,511 loaded scenarios available to the API and dashboard |
-| Scenario sources | 11 classic YAML scenarios plus 2,500 generated YAML scenarios |
+| Coverage catalog | 5,064 TTPs mapped to ATT&CK Enterprise techniques and controlled variants |
+| Scenario library | 2,522 loaded YAML scenarios available to the API and dashboard |
+| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, and 11 emulation-plan scenarios |
 | Variant space | 15,680,015,680 generable scenario variants |
-| Detection content | 5,000 Sigma rules with coverage metadata |
-| ATT&CK scope | 14/14 ATT&CK Enterprise tactics covered, with scale at TTP and rule level |
+| Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
+| ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
 | Safety default | Dry-run and marker-only behavior for generated scale coverage |
 
 ```mermaid
 flowchart LR
     Dashboard["Browser dashboard"] --> Library["Scenario Library"]
     Dashboard --> Matrix["ATT&CK Matrix"]
+    Dashboard --> Sync["ATT&CK Sync"]
     Dashboard --> Campaigns["Campaign Runner"]
+    Dashboard --> Workbench["Detection Workbench"]
+    Dashboard --> Exposure["Exposure Graph"]
     Dashboard --> Reports["Run and campaign reports"]
     Library --> API["FastAPI orchestrator"]
     Matrix --> API
@@ -30,19 +33,23 @@ flowchart LR
 
 ## Exact Current Counts
 
-- 5,000 TTPs
-- 2,511 loaded scenarios
+- 5,064 TTPs
+- 2,522 loaded scenarios
 - 11 classic YAML scenarios
 - 2,500 generated YAML scenarios
+- 11 emulation-plan YAML scenarios
 - 15,680,015,680 generable scenario variants
-- 5,000 Sigma rules
-- 14/14 ATT&CK Enterprise tactics covered
+- 5,064 Sigma rules
+- 15/15 current ATT&CK Enterprise tactics covered
+- 696 current ATT&CK Enterprise base technique/sub-technique IDs tracked locally
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
 - 4,149 ATT&CK scale variants in the `attack_scale_variants` pack
+- 36 Cloud/Kubernetes lab TTPs in the `cloud_k8s_lab` pack
+- 28 Active Directory/Windows enterprise lab TTPs in the `ad_enterprise_lab` pack
 
-The 2,511 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+The 2,522 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
 
-The ATT&CK Enterprise tactic layer has 14 tactics in this project model, so the advanced scale is expressed through TTP-level coverage: techniques, sub-techniques, platform variants, telemetry-source variants, SIEM-format variants, and fidelity variants.
+The ATT&CK sync layer uses a bundled Enterprise STIX snapshot, detects missing, extra, deprecated, and revoked local technique IDs, and keeps the dashboard aligned to the current 15 tactic Enterprise model.
 
 ## Runtime Graph
 
@@ -65,6 +72,7 @@ flowchart TD
 pie title Loaded scenario library
     "Classic YAML scenarios" : 11
     "Generated YAML scenarios" : 2500
+    "Emulation-plan scenarios" : 11
 ```
 
 ```mermaid
@@ -72,8 +80,21 @@ flowchart LR
     Actors["Actor profiles"] --> Variants["Deterministic variant builder"]
     Difficulty["Difficulty levels"] --> Variants
     Platforms["Windows, Linux, macOS, cloud, identity, SaaS"] --> Variants
-    Variants --> Loaded["2,511 loaded scenarios"]
+    AEL["Emulation-plan imports"] --> Loaded["2,522 loaded YAML scenarios"]
+    Variants --> Loaded
     Variants --> Space["15,680,015,680 generable variants"]
+```
+
+## Detection And Exposure Graph
+
+```mermaid
+flowchart TD
+    Catalog["TTP catalog"] --> Sigma["5,064 Sigma rules"]
+    Catalog --> Events["Synthetic telemetry fixtures"]
+    Sigma --> Workbench["Rule quality scoring"]
+    Events --> Workbench
+    Workbench --> Targets["Splunk, Elastic, Sentinel, Chronicle export readiness"]
+    Scenarios["2,522 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
 ```
 
 ## What This Project Does
@@ -84,12 +105,14 @@ flowchart LR
 - Exports Sigma coverage, raw telemetry fixtures, ECS fixtures, OCSF fixtures, and simple SIEM query sketches.
 - Builds scenario batches from deterministic variant space.
 - Produces JSON and HTML reports for runs and campaigns.
+- Tracks ATT&CK snapshot drift and detection-rule quality.
+- Builds a controlled exposure graph from loaded scenarios and catalog domains.
 
 ## What This Project Does Not Do
 
 - It is not an offensive framework.
 - It is not intended for systems without written authorization.
-- It stores the complete 2,511-scenario loaded library; larger variant batches are generated on demand.
+- It stores the complete 2,522-scenario loaded library; larger variant batches are generated on demand.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
 
@@ -108,7 +131,7 @@ flowchart LR
 orchestrator/   FastAPI app, planner, dashboard API, reports, scenario loader
 agent/          Beacon agent and local runner
 ttps/           TTP registry, Python TTPs, catalog-backed TTP packs
-scenarios/      11 classic YAML scenarios plus 2,500 generated YAML scenarios
+scenarios/      11 classic, 2,500 generated, and 11 emulation-plan YAML scenarios
 detection/      Sigma rules, coverage metadata, fixture/query export targets
 profiles/       Actor profile inputs
 config/         Default runtime and safety configuration
@@ -151,8 +174,11 @@ The dashboard includes:
 | Overview | Counts, coverage, detection score, and recent run state. |
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
+| ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
 | TTP Catalog | Search and filter registered TTPs and safety tiers. |
-| Campaigns | Select 10, 50, or 100 scenarios, then pause, resume, or retry failed work. |
+| Campaigns | Select 10, 50, or 100 scenarios, schedule campaigns, repeat them, pause, resume, or retry failed work. |
+| Detection Workbench | Score Sigma quality, field gaps, false-positive risk, and export readiness. |
+| Exposure Graph | Browse controlled identity, endpoint, cloud, SaaS, and container paths. |
 | Reports | Open JSON and HTML reports for runs and campaigns. |
 | Event Feed | Watch recent orchestrator and simulation activity. |
 
@@ -203,6 +229,22 @@ Start a campaign:
 curl -X POST http://127.0.0.1:8000/campaigns/run \
   -H "Content-Type: application/json" \
   -d "{\"count\":10,\"source\":\"generated variant\"}"
+```
+
+Schedule a recurring campaign:
+
+```bash
+curl -X POST http://127.0.0.1:8000/campaigns/run \
+  -H "Content-Type: application/json" \
+  -d "{\"count\":10,\"source\":\"generated variant\",\"scheduled_at\":1781800000,\"repeat_interval_seconds\":3600,\"repeat_count\":3}"
+```
+
+ATT&CK sync status, detection workbench, and exposure graph:
+
+```bash
+curl http://127.0.0.1:8000/attack/sync/status
+curl http://127.0.0.1:8000/detections/workbench
+curl http://127.0.0.1:8000/exposure/graph
 ```
 
 Campaign reports:
@@ -272,6 +314,27 @@ python -m orchestrator.detection_matrix fixtures --out-dir detection/fixtures
 python -m orchestrator.detection_matrix queries --out-dir detection/queries
 ```
 
+Refresh the bundled ATT&CK snapshot:
+
+```bash
+python -m orchestrator.attack_sync snapshot --out config/attack_enterprise_snapshot.json
+python -m orchestrator.attack_sync status --path config/attack_enterprise_snapshot.json
+```
+
+Import safe emulation-plan scenarios from a local plan checkout:
+
+```bash
+python -m orchestrator.emulation_plan_import scan <path-to-emulation-library>
+python -m orchestrator.emulation_plan_import convert <path-to-emulation-library> --out-dir scenarios/ael
+```
+
+Score local detection content:
+
+```bash
+python -m orchestrator.detection_workbench score
+python -m orchestrator.exposure_graph graph --out exposure-graph.json
+```
+
 Run a local dry-run style scenario without the orchestrator:
 
 ```bash
@@ -306,9 +369,10 @@ node --check orchestrator/static/app.js
 
 Conformance tests verify:
 
-- TTP count is exactly 5,000.
-- Loaded scenario count is exactly 2,511.
+- TTP count is exactly 5,064.
+- Loaded scenario count is exactly 2,522.
 - README count statements match the current implementation.
+- ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
 - Public text files do not include forbidden public tooling markers.
 
 ## Loaded Scenario Model
@@ -317,8 +381,9 @@ The repository stores the complete loaded scenario library:
 
 - `scenarios/*.yaml` contains 11 classic scenario files.
 - `scenarios/generated/*.yaml` contains 2,500 generated scenario files.
+- `scenarios/ael/*.yaml` contains 11 emulation-plan scenario files.
 - Each generated file is a complete scenario DAG with actor, target platforms, tags, steps, TTP IDs, parameters, and dependencies.
-- The loader reads the full directory tree and loads all 2,511 scenarios directly.
+- The loader reads the full directory tree and loads all 2,522 scenarios directly.
 
 ## License
 

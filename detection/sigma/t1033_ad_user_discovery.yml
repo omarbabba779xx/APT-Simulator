@@ -1,0 +1,21 @@
+title: Domain user discovery marker
+id: cb1b5029-bda4-5b14-baa9-f8a282e1d1b5
+status: experimental
+description: Detects simulator telemetry for Domain user discovery marker.
+logsource:
+  product: apt_simulator
+  category: windows_process
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: user_discovery
+    attack.technique.id: T1033
+    apt_sim.variant: ad_user_discovery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1033/
+tags:
+- attack.t1033

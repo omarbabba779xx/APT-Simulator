@@ -85,8 +85,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s005_t1098_003_azure_role_assignment
-- id: s012_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s012_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -112,7 +112,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
 - id: s016_t1016
   ttp: T1016
   params:
@@ -189,7 +189,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
 - id: s027_t1021_002
   ttp: T1021.002
   params:
@@ -210,7 +210,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s012_t1070_002_linux_log_clear
+  - s012_t1070_004_linux_log_clear
 - id: s030_t1530_aws_s3_object_burst
   ttp: T1530:AWS_S3_OBJECT_BURST
   params:

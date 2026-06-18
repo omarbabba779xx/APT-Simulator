@@ -76,8 +76,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s004_t1098_003_entra_app_role_grant
-- id: s010_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s010_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -112,7 +112,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s010_t1070_002_linux_log_clear
+  - s010_t1070_004_linux_log_clear
 - id: s015_t1033
   ttp: T1033
   params:
@@ -232,7 +232,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s008_t1055
-  - s010_t1070_002_linux_log_clear
+  - s010_t1070_004_linux_log_clear
 - id: s031_t1486
   ttp: T1486
   params:

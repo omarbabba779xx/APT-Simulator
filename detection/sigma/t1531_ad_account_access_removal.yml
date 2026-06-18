@@ -1,0 +1,21 @@
+title: Account access removal marker
+id: abfff3c5-cfd1-5f2c-bc37-ec79649b190f
+status: experimental
+description: Detects simulator telemetry for Account access removal marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: account_access_removal
+    attack.technique.id: T1531
+    apt_sim.variant: ad_account_access_removal
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

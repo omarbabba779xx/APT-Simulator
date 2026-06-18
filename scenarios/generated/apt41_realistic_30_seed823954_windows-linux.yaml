@@ -73,8 +73,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s006_t1543_002
-- id: s010_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s010_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -88,7 +88,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s006_t1543_002
-  - s010_t1070_002_linux_log_clear
+  - s010_t1070_004_linux_log_clear
 - id: s012_t1112
   ttp: T1112
   params:
@@ -111,7 +111,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s013_t1003
-  - s010_t1070_002_linux_log_clear
+  - s010_t1070_004_linux_log_clear
 - id: s015_t1033
   ttp: T1033
   params:

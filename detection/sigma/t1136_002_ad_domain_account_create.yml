@@ -1,0 +1,21 @@
+title: Domain account creation marker
+id: 17b6c96d-c1af-5b50-b760-c164202aa290
+status: experimental
+description: Detects simulator telemetry for Domain account creation marker.
+logsource:
+  product: apt_simulator
+  category: directory_service
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.directory_service
+    event.action: account_create
+    attack.technique.id: T1136.002
+    apt_sim.variant: ad_domain_account_create
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1136/002/
+tags:
+- attack.t1136.002

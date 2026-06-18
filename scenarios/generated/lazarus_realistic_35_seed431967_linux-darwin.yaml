@@ -83,8 +83,8 @@ steps:
   depends_on:
   - s006_t1543_002
   - s005_t1098_004
-- id: s011_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s011_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -164,7 +164,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
   - s018_t1057
 - id: s022_t1087_001_linux_local_account_discovery
   ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
@@ -241,14 +241,14 @@ steps:
   abort_on_fail: false
   depends_on:
   - s014_t1110
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
 - id: s032_t1105_linux_curl_tool_transfer
   ttp: T1105:LINUX_CURL_TOOL_TRANSFER
   params:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s011_t1070_002_linux_log_clear
+  - s011_t1070_004_linux_log_clear
   - s023_t1580
 - id: s033_t1041
   ttp: T1041

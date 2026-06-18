@@ -1,0 +1,21 @@
+title: Cloud role assignment added marker
+id: d75b9c51-90a9-5236-85d7-fdd5ff794844
+status: experimental
+description: Detects simulator telemetry for Cloud role assignment added marker.
+logsource:
+  product: apt_simulator
+  category: identity
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: CreateRoleAssignment
+    attack.technique.id: T1098.003
+    apt_sim.variant: cloud_role_assignment_added
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/003/
+tags:
+- attack.t1098.003

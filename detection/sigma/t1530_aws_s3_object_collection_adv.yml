@@ -1,0 +1,21 @@
+title: AWS S3 object collection marker
+id: 13c02fbf-957b-5a04-9c08-ac30e0a915d7
+status: experimental
+description: Detects simulator telemetry for AWS S3 object collection marker.
+logsource:
+  product: apt_simulator
+  category: storage
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: GetObject
+    attack.technique.id: T1530
+    apt_sim.variant: aws_s3_object_collection_adv
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530

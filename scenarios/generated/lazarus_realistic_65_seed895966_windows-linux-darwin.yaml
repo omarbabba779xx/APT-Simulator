@@ -129,8 +129,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s005_t1059_001_windows_powershell_encoded
-- id: s017_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s017_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -181,7 +181,7 @@ steps:
   abort_on_fail: false
   depends_on:
   - s010_t1543_002
-  - s017_t1070_002_linux_log_clear
+  - s017_t1070_004_linux_log_clear
 - id: s024_t1016
   ttp: T1016
   params:
@@ -315,7 +315,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s017_t1070_002_linux_log_clear
+  - s017_t1070_004_linux_log_clear
 - id: s042_t1105_linux_curl_tool_transfer
   ttp: T1105:LINUX_CURL_TOOL_TRANSFER
   params:

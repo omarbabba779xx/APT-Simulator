@@ -11,6 +11,7 @@ import yaml
 import ttps  # noqa: F401
 from ttps.base import registry
 from ttps.catalog import slugify
+from .attack_sync import drift_status, official_tactic_for, tactic_sort_key
 
 
 app = typer.Typer(no_args_is_help=True)
@@ -18,6 +19,10 @@ app = typer.Typer(no_args_is_help=True)
 
 def _base_attack_id(ttp: Any) -> str:
     return str(getattr(ttp, "base_attack_id", ttp.attack_id))
+
+
+def _official_tactic(ttp: Any) -> str:
+    return official_tactic_for(_base_attack_id(ttp), str(getattr(ttp, "tactic", "discovery")))
 
 
 def build_matrix() -> dict[str, Any]:
@@ -28,7 +33,7 @@ def build_matrix() -> dict[str, Any]:
     with_rules = 0
     for ttp in registry.all().values():
         total += 1
-        tactic = ttp.tactic
+        tactic = _official_tactic(ttp)
         pack = str(getattr(ttp, "pack", "core"))
         safety_tier = str(getattr(ttp, "safety_tier", "lab-write"))
         packs[pack] = packs.get(pack, 0) + 1
@@ -44,6 +49,7 @@ def build_matrix() -> dict[str, Any]:
                 "id": ttp.attack_id,
                 "attack_id": _base_attack_id(ttp),
                 "name": ttp.name,
+                "declared_tactic": ttp.tactic,
                 "pack": pack,
                 "safety_tier": safety_tier,
                 "platforms": list(ttp.supported_platforms),
@@ -57,7 +63,8 @@ def build_matrix() -> dict[str, Any]:
         "rule_coverage_percent": round((with_rules / total) * 100, 2) if total else 0,
         "packs": packs,
         "safety_tiers": safety_tiers,
-        "tactics": tactics,
+        "tactics": dict(sorted(tactics.items(), key=lambda item: tactic_sort_key(item[0]))),
+        "attack_sync": drift_status(),
     }
 
 
@@ -68,7 +75,7 @@ def to_ecs_event(event: dict[str, Any], ttp: Any) -> dict[str, Any]:
         "event.action": str(event.get("eventName") or event.get("Operation") or event.get("action") or "simulated"),
         "threat.technique.id": _base_attack_id(ttp),
         "threat.technique.name": ttp.name,
-        "threat.tactic.name": ttp.tactic,
+        "threat.tactic.name": _official_tactic(ttp),
         "observer.product": "APT Simulator",
         "apt_sim.catalog_id": ttp.attack_id,
         "apt_sim.pack": str(getattr(ttp, "pack", "core")),
@@ -84,7 +91,7 @@ def to_ocsf_event(event: dict[str, Any], ttp: Any) -> dict[str, Any]:
         "metadata": {"product": {"name": "APT Simulator"}},
         "threat": {
             "technique": {"uid": _base_attack_id(ttp), "name": ttp.name},
-            "tactic": {"name": ttp.tactic},
+            "tactic": {"name": _official_tactic(ttp)},
         },
         "unmapped": event,
     }

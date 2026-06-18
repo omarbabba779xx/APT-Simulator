@@ -215,6 +215,12 @@
     "path": "detection/sigma/t1003_001_scale_variant_3486.yml",
     "level": "low"
   },
+  "T1003.002:AD_SAM_ACCESS_MARKER": {
+    "status": "exported",
+    "name": "SAM access marker",
+    "path": "detection/sigma/t1003_002_ad_sam_access_marker.yml",
+    "level": "high"
+  },
   "T1003.002:CATALOG_STUB": {
     "status": "exported",
     "name": "Security Account Manager Marker",
@@ -256,6 +262,12 @@
     "name": "Security Account Manager Scale Variant 3487 Marker",
     "path": "detection/sigma/t1003_002_scale_variant_3487.yml",
     "level": "low"
+  },
+  "T1003.003:AD_NTDS_ACCESS_MARKER": {
+    "status": "exported",
+    "name": "NTDS access marker",
+    "path": "detection/sigma/t1003_003_ad_ntds_access_marker.yml",
+    "level": "high"
   },
   "T1003.003:CATALOG_STUB": {
     "status": "exported",
@@ -340,6 +352,12 @@
     "name": "LSA Secrets Scale Variant 3489 Marker",
     "path": "detection/sigma/t1003_004_scale_variant_3489.yml",
     "level": "low"
+  },
+  "T1003.005:AD_CACHED_DOMAIN_CREDENTIAL_MARKER": {
+    "status": "exported",
+    "name": "Cached domain credential marker",
+    "path": "detection/sigma/t1003_005_ad_cached_domain_credential_marker.yml",
+    "level": "high"
   },
   "T1003.005:CATALOG_STUB": {
     "status": "exported",
@@ -687,6 +705,12 @@
     "status": "exported",
     "name": "Direct Volume Access Scale Variant 3495 Marker",
     "path": "detection/sigma/t1006_scale_variant_3495.yml",
+    "level": "low"
+  },
+  "T1007:AD_SERVICE_DISCOVERY": {
+    "status": "exported",
+    "name": "Windows service discovery marker",
+    "path": "detection/sigma/t1007_ad_service_discovery.yml",
     "level": "low"
   },
   "T1007:CATALOG_STUB": {
@@ -1115,6 +1139,12 @@
     "path": "detection/sigma/t1016_scale_variant_3503.yml",
     "level": "low"
   },
+  "T1018:AD_REMOTE_SYSTEM_DISCOVERY": {
+    "status": "exported",
+    "name": "Remote system discovery marker",
+    "path": "detection/sigma/t1018_ad_remote_system_discovery.yml",
+    "level": "low"
+  },
   "T1018:CATALOG_STUB": {
     "status": "exported",
     "name": "Remote System Discovery Marker",
@@ -1247,6 +1277,12 @@
     "path": "detection/sigma/t1021_001.yml",
     "level": "medium"
   },
+  "T1021.001:AD_RDP_LATERAL_PATH": {
+    "status": "exported",
+    "name": "RDP lateral path marker",
+    "path": "detection/sigma/t1021_001_ad_rdp_lateral_path.yml",
+    "level": "medium"
+  },
   "T1021.001:ATTACK_VARIANT_017": {
     "status": "exported",
     "name": "Remote Desktop Protocol Variant 017 Marker",
@@ -1317,6 +1353,12 @@
     "status": "exported",
     "name": "SMB/Windows Admin Shares (sim)",
     "path": "detection/sigma/t1021_002.yml",
+    "level": "medium"
+  },
+  "T1021.002:AD_SMB_ADMIN_SHARE_PATH": {
+    "status": "exported",
+    "name": "SMB admin share path marker",
+    "path": "detection/sigma/t1021_002_ad_smb_admin_share_path.yml",
     "level": "medium"
   },
   "T1021.002:CATALOG_STUB": {
@@ -1486,6 +1528,12 @@
     "name": "VNC Scale Variant 3514 Marker",
     "path": "detection/sigma/t1021_005_scale_variant_3514.yml",
     "level": "low"
+  },
+  "T1021.006:AD_WINRM_LATERAL_PATH": {
+    "status": "exported",
+    "name": "WinRM lateral path marker",
+    "path": "detection/sigma/t1021_006_ad_winrm_lateral_path.yml",
+    "level": "medium"
   },
   "T1021.006:CATALOG_STUB": {
     "status": "exported",
@@ -2613,6 +2661,12 @@
     "status": "exported",
     "name": "System Owner/User Discovery",
     "path": "detection/sigma/t1033.yml",
+    "level": "low"
+  },
+  "T1033:AD_USER_DISCOVERY": {
+    "status": "exported",
+    "name": "Domain user discovery marker",
+    "path": "detection/sigma/t1033_ad_user_discovery.yml",
     "level": "low"
   },
   "T1033:CATALOG_STUB": {
@@ -3893,6 +3947,12 @@
     "path": "detection/sigma/t1049.yml",
     "level": "low"
   },
+  "T1049:AD_NETWORK_CONNECTION_DISCOVERY": {
+    "status": "exported",
+    "name": "Network connection discovery marker",
+    "path": "detection/sigma/t1049_ad_network_connection_discovery.yml",
+    "level": "low"
+  },
   "T1049:CATALOG_STUB": {
     "status": "exported",
     "name": "System Network Connections Discovery Marker",
@@ -4115,6 +4175,12 @@
     "path": "detection/sigma/t1053_005.yml",
     "level": "medium"
   },
+  "T1053.005:AD_SCHEDULED_TASK_CREATE": {
+    "status": "exported",
+    "name": "Scheduled task creation marker",
+    "path": "detection/sigma/t1053_005_ad_scheduled_task_create.yml",
+    "level": "low"
+  },
   "T1053.005:CATALOG_STUB": {
     "status": "exported",
     "name": "Scheduled Task Marker",
@@ -4204,6 +4270,12 @@
     "name": "Container Orchestration Job Marker",
     "path": "detection/sigma/t1053_007_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1053.007:K8S_CRONJOB_CREATED": {
+    "status": "exported",
+    "name": "Kubernetes CronJob created marker",
+    "path": "detection/sigma/t1053_007_k8s_cronjob_created.yml",
+    "level": "low"
   },
   "T1053.007:SCALE_VARIANT_0097": {
     "status": "exported",
@@ -5447,6 +5519,12 @@
     "path": "detection/sigma/t1059_008_scale_variant_3605.yml",
     "level": "low"
   },
+  "T1059.009:AWS_API_COMMAND": {
+    "status": "exported",
+    "name": "AWS API command marker",
+    "path": "detection/sigma/t1059_009_aws_api_command.yml",
+    "level": "low"
+  },
   "T1059.009:CATALOG_STUB": {
     "status": "exported",
     "name": "Cloud API Marker",
@@ -5620,6 +5698,12 @@
     "name": "Container CLI/API Marker",
     "path": "detection/sigma/t1059_013_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1059.013:K8S_API_EXEC": {
+    "status": "exported",
+    "name": "Kubernetes API execution marker",
+    "path": "detection/sigma/t1059_013_k8s_api_exec.yml",
+    "level": "low"
   },
   "T1059.013:SCALE_VARIANT_0130": {
     "status": "exported",
@@ -5837,6 +5921,12 @@
     "path": "detection/sigma/t1069_001_scale_variant_3613.yml",
     "level": "low"
   },
+  "T1069.002:AD_DOMAIN_GROUP_ENUM": {
+    "status": "exported",
+    "name": "Domain group enumeration marker",
+    "path": "detection/sigma/t1069_002_ad_domain_group_enum.yml",
+    "level": "low"
+  },
   "T1069.002:CATALOG_STUB": {
     "status": "exported",
     "name": "Domain Groups Marker",
@@ -5963,12 +6053,6 @@
     "path": "detection/sigma/t1069_scale_variant_3612.yml",
     "level": "low"
   },
-  "T1070.002:LINUX_LOG_CLEAR": {
-    "status": "exported",
-    "name": "Linux Log Clear Marker",
-    "path": "detection/sigma/t1070_002_linux_log_clear.yml",
-    "level": "high"
-  },
   "T1070.003:CATALOG_STUB": {
     "status": "exported",
     "name": "Clear Command History Marker",
@@ -6046,6 +6130,12 @@
     "name": "File Deletion Marker",
     "path": "detection/sigma/t1070_004_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1070.004:LINUX_LOG_CLEAR": {
+    "status": "exported",
+    "name": "Linux Log Clear Marker",
+    "path": "detection/sigma/t1070_004_linux_log_clear.yml",
+    "level": "high"
   },
   "T1070.004:SCALE_VARIANT_0138": {
     "status": "exported",
@@ -6869,6 +6959,12 @@
     "path": "detection/sigma/t1078_001_scale_variant_3636.yml",
     "level": "low"
   },
+  "T1078.002:AD_DOMAIN_ACCOUNT_LOGIN": {
+    "status": "exported",
+    "name": "Domain account login marker",
+    "path": "detection/sigma/t1078_002_ad_domain_account_login.yml",
+    "level": "medium"
+  },
   "T1078.002:CATALOG_STUB": {
     "status": "exported",
     "name": "Domain Accounts Marker",
@@ -6965,11 +7061,29 @@
     "path": "detection/sigma/t1078_004_aws_console_login_success.yml",
     "level": "medium"
   },
+  "T1078.004:AWS_IAM_CONSOLE_RISK": {
+    "status": "exported",
+    "name": "AWS IAM console risk marker",
+    "path": "detection/sigma/t1078_004_aws_iam_console_risk.yml",
+    "level": "medium"
+  },
+  "T1078.004:AZURE_PORTAL_RISKY_SIGNIN": {
+    "status": "exported",
+    "name": "Azure portal risky sign-in marker",
+    "path": "detection/sigma/t1078_004_azure_portal_risky_signin.yml",
+    "level": "medium"
+  },
   "T1078.004:CATALOG_STUB": {
     "status": "exported",
     "name": "Cloud Accounts Marker",
     "path": "detection/sigma/t1078_004_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1078.004:GCP_CONSOLE_SESSION": {
+    "status": "exported",
+    "name": "GCP console session marker",
+    "path": "detection/sigma/t1078_004_gcp_console_session.yml",
+    "level": "medium"
   },
   "T1078.004:IDENTITY_RISKY_SIGNIN": {
     "status": "exported",
@@ -7287,6 +7401,12 @@
     "status": "exported",
     "name": "Local Account Scale Variant 3644 Marker",
     "path": "detection/sigma/t1087_001_scale_variant_3644.yml",
+    "level": "low"
+  },
+  "T1087.002:AD_DOMAIN_ACCOUNT_ENUM": {
+    "status": "exported",
+    "name": "Domain account enumeration marker",
+    "path": "detection/sigma/t1087_002_ad_domain_account_enum.yml",
     "level": "low"
   },
   "T1087.002:CATALOG_STUB": {
@@ -7805,6 +7925,12 @@
     "path": "detection/sigma/t1098_001_catalog_stub.yml",
     "level": "informational"
   },
+  "T1098.001:CLOUD_ACCESS_KEY_ADDED": {
+    "status": "exported",
+    "name": "Cloud access key added marker",
+    "path": "detection/sigma/t1098_001_cloud_access_key_added.yml",
+    "level": "high"
+  },
   "T1098.001:SCALE_VARIANT_0177": {
     "status": "exported",
     "name": "Additional Cloud Credentials Scale Variant 0177 Marker",
@@ -7894,6 +8020,12 @@
     "name": "Additional Cloud Roles Marker",
     "path": "detection/sigma/t1098_003_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1098.003:CLOUD_ROLE_ASSIGNMENT_ADDED": {
+    "status": "exported",
+    "name": "Cloud role assignment added marker",
+    "path": "detection/sigma/t1098_003_cloud_role_assignment_added.yml",
+    "level": "high"
   },
   "T1098.003:ENTRA_APP_ROLE_GRANT": {
     "status": "exported",
@@ -8039,6 +8171,12 @@
     "path": "detection/sigma/t1098_006_catalog_stub.yml",
     "level": "informational"
   },
+  "T1098.006:K8S_CLUSTER_ROLE_BINDING": {
+    "status": "exported",
+    "name": "Kubernetes cluster role binding marker",
+    "path": "detection/sigma/t1098_006_k8s_cluster_role_binding.yml",
+    "level": "high"
+  },
   "T1098.006:SCALE_VARIANT_0182": {
     "status": "exported",
     "name": "Additional Container Cluster Roles Scale Variant 0182 Marker",
@@ -8074,6 +8212,12 @@
     "name": "Additional Container Cluster Roles Scale Variant 3662 Marker",
     "path": "detection/sigma/t1098_006_scale_variant_3662.yml",
     "level": "low"
+  },
+  "T1098.007:AD_GROUP_MEMBERSHIP_CHANGE": {
+    "status": "exported",
+    "name": "Domain group membership change marker",
+    "path": "detection/sigma/t1098_007_ad_group_membership_change.yml",
+    "level": "high"
   },
   "T1098.007:CATALOG_STUB": {
     "status": "exported",
@@ -8806,6 +8950,12 @@
     "name": "Modify Registry (sim)",
     "path": "detection/sigma/t1112.yml",
     "level": "medium"
+  },
+  "T1112:AD_REGISTRY_POLICY_CHANGE": {
+    "status": "exported",
+    "name": "Registry policy change marker",
+    "path": "detection/sigma/t1112_ad_registry_policy_change.yml",
+    "level": "high"
   },
   "T1112:CATALOG_STUB": {
     "status": "exported",
@@ -10031,6 +10181,12 @@
     "path": "detection/sigma/t1136_001_scale_variant_3706.yml",
     "level": "low"
   },
+  "T1136.002:AD_DOMAIN_ACCOUNT_CREATE": {
+    "status": "exported",
+    "name": "Domain account creation marker",
+    "path": "detection/sigma/t1136_002_ad_domain_account_create.yml",
+    "level": "high"
+  },
   "T1136.002:CATALOG_STUB": {
     "status": "exported",
     "name": "Domain Account Marker",
@@ -10078,6 +10234,12 @@
     "name": "Cloud Account Marker",
     "path": "detection/sigma/t1136_003_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1136.003:CLOUD_ACCOUNT_CREATED": {
+    "status": "exported",
+    "name": "Cloud account created marker",
+    "path": "detection/sigma/t1136_003_cloud_account_created.yml",
+    "level": "high"
   },
   "T1136.003:SCALE_VARIANT_0228": {
     "status": "exported",
@@ -11105,6 +11267,12 @@
     "path": "detection/sigma/t1200_scale_variant_3730.yml",
     "level": "low"
   },
+  "T1201:AD_PASSWORD_POLICY_DISCOVERY": {
+    "status": "exported",
+    "name": "Password policy discovery marker",
+    "path": "detection/sigma/t1201_ad_password_policy_discovery.yml",
+    "level": "low"
+  },
   "T1201:CATALOG_STUB": {
     "status": "exported",
     "name": "Password Policy Discovery Marker",
@@ -11632,6 +11800,12 @@
     "name": "Traffic Signaling Scale Variant 3740 Marker",
     "path": "detection/sigma/t1205_scale_variant_3740.yml",
     "level": "low"
+  },
+  "T1207:AD_ROGUE_DOMAIN_CONTROLLER_SIGNAL": {
+    "status": "exported",
+    "name": "Rogue domain controller signal marker",
+    "path": "detection/sigma/t1207_ad_rogue_domain_controller_signal.yml",
+    "level": "high"
   },
   "T1207:CATALOG_STUB": {
     "status": "exported",
@@ -13415,6 +13589,12 @@
     "path": "detection/sigma/t1480_scale_variant_3782.yml",
     "level": "low"
   },
+  "T1482:AD_DOMAIN_TRUST_DISCOVERY": {
+    "status": "exported",
+    "name": "Domain trust discovery marker",
+    "path": "detection/sigma/t1482_ad_domain_trust_discovery.yml",
+    "level": "low"
+  },
   "T1482:CATALOG_STUB": {
     "status": "exported",
     "name": "Domain Trust Discovery Marker",
@@ -13456,6 +13636,12 @@
     "name": "Domain Trust Discovery Scale Variant 3785 Marker",
     "path": "detection/sigma/t1482_scale_variant_3785.yml",
     "level": "low"
+  },
+  "T1484.001:AD_GROUP_POLICY_MODIFICATION": {
+    "status": "exported",
+    "name": "Group policy modification marker",
+    "path": "detection/sigma/t1484_001_ad_group_policy_modification.yml",
+    "level": "high"
   },
   "T1484.001:CATALOG_STUB": {
     "status": "exported",
@@ -14134,6 +14320,12 @@
     "name": "Cloud Service Hijacking Marker",
     "path": "detection/sigma/t1496_004_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1496.004:CLOUD_SERVICE_HIJACKING_COST_SPIKE": {
+    "status": "exported",
+    "name": "Cloud service hijacking cost spike marker",
+    "path": "detection/sigma/t1496_004_cloud_service_hijacking_cost_spike.yml",
+    "level": "high"
   },
   "T1496.004:SCALE_VARIANT_0322": {
     "status": "exported",
@@ -15179,6 +15371,12 @@
     "path": "detection/sigma/t1525_scale_variant_3825.yml",
     "level": "low"
   },
+  "T1526:AWS_SERVICE_DISCOVERY": {
+    "status": "exported",
+    "name": "AWS service discovery marker",
+    "path": "detection/sigma/t1526_aws_service_discovery.yml",
+    "level": "low"
+  },
   "T1526:CATALOG_STUB": {
     "status": "exported",
     "name": "Cloud Service Discovery Marker",
@@ -15317,11 +15515,29 @@
     "path": "detection/sigma/t1530_aws_s3_object_burst.yml",
     "level": "medium"
   },
+  "T1530:AWS_S3_OBJECT_COLLECTION_ADV": {
+    "status": "exported",
+    "name": "AWS S3 object collection marker",
+    "path": "detection/sigma/t1530_aws_s3_object_collection_adv.yml",
+    "level": "medium"
+  },
+  "T1530:AZURE_BLOB_COLLECTION": {
+    "status": "exported",
+    "name": "Azure blob collection marker",
+    "path": "detection/sigma/t1530_azure_blob_collection.yml",
+    "level": "medium"
+  },
   "T1530:CATALOG_STUB": {
     "status": "exported",
     "name": "Data from Cloud Storage Marker",
     "path": "detection/sigma/t1530_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1530:GCS_BUCKET_COLLECTION": {
+    "status": "exported",
+    "name": "GCS bucket collection marker",
+    "path": "detection/sigma/t1530_gcs_bucket_collection.yml",
+    "level": "medium"
   },
   "T1530:GOOGLE_DRIVE_BULK_DOWNLOAD": {
     "status": "exported",
@@ -15364,6 +15580,12 @@
     "name": "Data from Cloud Storage Scale Variant 3829 Marker",
     "path": "detection/sigma/t1530_scale_variant_3829.yml",
     "level": "low"
+  },
+  "T1531:AD_ACCOUNT_ACCESS_REMOVAL": {
+    "status": "exported",
+    "name": "Account access removal marker",
+    "path": "detection/sigma/t1531_ad_account_access_removal.yml",
+    "level": "high"
   },
   "T1531:CATALOG_STUB": {
     "status": "exported",
@@ -15491,11 +15713,23 @@
     "path": "detection/sigma/t1535_scale_variant_3832.yml",
     "level": "low"
   },
+  "T1535:UNUSED_REGION_ENABLEMENT": {
+    "status": "exported",
+    "name": "Unused cloud region enablement marker",
+    "path": "detection/sigma/t1535_unused_region_enablement.yml",
+    "level": "medium"
+  },
   "T1537:CATALOG_STUB": {
     "status": "exported",
     "name": "Transfer Data to Cloud Account Marker",
     "path": "detection/sigma/t1537_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1537:CLOUD_ACCOUNT_DATA_TRANSFER": {
+    "status": "exported",
+    "name": "Cloud account data transfer marker",
+    "path": "detection/sigma/t1537_cloud_account_data_transfer.yml",
+    "level": "medium"
   },
   "T1537:SCALE_VARIANT_0353": {
     "status": "exported",
@@ -15538,6 +15772,12 @@
     "name": "Cloud Service Dashboard Marker",
     "path": "detection/sigma/t1538_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1538:CLOUD_DASHBOARD_REVIEW": {
+    "status": "exported",
+    "name": "Cloud dashboard review marker",
+    "path": "detection/sigma/t1538_cloud_dashboard_review.yml",
+    "level": "low"
   },
   "T1538:SCALE_VARIANT_0354": {
     "status": "exported",
@@ -15959,6 +16199,12 @@
     "path": "detection/sigma/t1543_002_scale_variant_3844.yml",
     "level": "low"
   },
+  "T1543.003:AD_WINDOWS_SERVICE_CREATE": {
+    "status": "exported",
+    "name": "Windows service creation marker",
+    "path": "detection/sigma/t1543_003_ad_windows_service_create.yml",
+    "level": "high"
+  },
   "T1543.003:CATALOG_STUB": {
     "status": "exported",
     "name": "Windows Service Marker",
@@ -16054,6 +16300,12 @@
     "name": "Container Service Marker",
     "path": "detection/sigma/t1543_005_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1543.005:K8S_SERVICE_CREATED": {
+    "status": "exported",
+    "name": "Kubernetes service created marker",
+    "path": "detection/sigma/t1543_005_k8s_service_created.yml",
+    "level": "high"
   },
   "T1543.005:SCALE_VARIANT_0367": {
     "status": "exported",
@@ -17801,6 +18053,12 @@
     "path": "detection/sigma/t1548_005_scale_variant_3887.yml",
     "level": "low"
   },
+  "T1548.005:TEMP_ELEVATED_CLOUD_ACCESS": {
+    "status": "exported",
+    "name": "Temporary elevated cloud access marker",
+    "path": "detection/sigma/t1548_005_temp_elevated_cloud_access.yml",
+    "level": "high"
+  },
   "T1548.006:CATALOG_STUB": {
     "status": "exported",
     "name": "TCC Manipulation Marker",
@@ -17992,6 +18250,12 @@
     "name": "Pass the Hash Scale Variant 3891 Marker",
     "path": "detection/sigma/t1550_002_scale_variant_3891.yml",
     "level": "low"
+  },
+  "T1550.003:AD_PASS_THE_TICKET_SIGNAL": {
+    "status": "exported",
+    "name": "Pass-the-ticket signal marker",
+    "path": "detection/sigma/t1550_003_ad_pass_the_ticket_signal.yml",
+    "level": "medium"
   },
   "T1550.003:CATALOG_STUB": {
     "status": "exported",
@@ -18293,6 +18557,12 @@
     "path": "detection/sigma/t1552_005_catalog_stub.yml",
     "level": "informational"
   },
+  "T1552.005:INSTANCE_METADATA_TOKEN_READ": {
+    "status": "exported",
+    "name": "Instance metadata token read marker",
+    "path": "detection/sigma/t1552_005_instance_metadata_token_read.yml",
+    "level": "high"
+  },
   "T1552.005:SCALE_VARIANT_0419": {
     "status": "exported",
     "name": "Cloud Instance Metadata API Scale Variant 0419 Marker",
@@ -18376,6 +18646,12 @@
     "name": "Container API Marker",
     "path": "detection/sigma/t1552_007_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1552.007:K8S_SECRET_READ": {
+    "status": "exported",
+    "name": "Kubernetes secret read marker",
+    "path": "detection/sigma/t1552_007_k8s_secret_read.yml",
+    "level": "high"
   },
   "T1552.007:SCALE_VARIANT_0421": {
     "status": "exported",
@@ -19085,6 +19361,12 @@
     "path": "detection/sigma/t1555_006_scale_variant_3917.yml",
     "level": "low"
   },
+  "T1555.006:SECRETS_MANAGER_READ": {
+    "status": "exported",
+    "name": "Cloud secrets manager read marker",
+    "path": "detection/sigma/t1555_006_secrets_manager_read.yml",
+    "level": "high"
+  },
   "T1555:CATALOG_STUB": {
     "status": "exported",
     "name": "Credentials from Password Stores Marker",
@@ -19126,6 +19408,12 @@
     "name": "Credentials from Password Stores Scale Variant 3911 Marker",
     "path": "detection/sigma/t1555_scale_variant_3911.yml",
     "level": "low"
+  },
+  "T1556.001:AD_DOMAIN_CONTROLLER_AUTH_CHANGE": {
+    "status": "exported",
+    "name": "Domain controller authentication change marker",
+    "path": "detection/sigma/t1556_001_ad_domain_controller_auth_change.yml",
+    "level": "high"
   },
   "T1556.001:CATALOG_STUB": {
     "status": "exported",
@@ -19847,6 +20135,12 @@
     "path": "detection/sigma/t1558_002_scale_variant_3935.yml",
     "level": "low"
   },
+  "T1558.003:AD_KERBEROASTING_SIGNAL": {
+    "status": "exported",
+    "name": "Kerberoasting signal marker",
+    "path": "detection/sigma/t1558_003_ad_kerberoasting_signal.yml",
+    "level": "high"
+  },
   "T1558.003:CATALOG_STUB": {
     "status": "exported",
     "name": "Kerberoasting Marker",
@@ -19888,6 +20182,12 @@
     "name": "Kerberoasting Scale Variant 3936 Marker",
     "path": "detection/sigma/t1558_003_scale_variant_3936.yml",
     "level": "low"
+  },
+  "T1558.004:AD_ASREP_ROASTING_SIGNAL": {
+    "status": "exported",
+    "name": "AS-REP roasting signal marker",
+    "path": "detection/sigma/t1558_004_ad_asrep_roasting_signal.yml",
+    "level": "high"
   },
   "T1558.004:CATALOG_STUB": {
     "status": "exported",
@@ -19972,6 +20272,12 @@
     "name": "Ccache Files Scale Variant 3938 Marker",
     "path": "detection/sigma/t1558_005_scale_variant_3938.yml",
     "level": "low"
+  },
+  "T1558:AD_KERBEROS_TICKET_SIGNAL": {
+    "status": "exported",
+    "name": "Kerberos ticket signal marker",
+    "path": "detection/sigma/t1558_ad_kerberos_ticket_signal.yml",
+    "level": "high"
   },
   "T1558:CATALOG_STUB": {
     "status": "exported",
@@ -21713,6 +22019,12 @@
     "path": "detection/sigma/t1567_002_catalog_stub.yml",
     "level": "informational"
   },
+  "T1567.002:CLOUD_STORAGE_EXFIL_PATH": {
+    "status": "exported",
+    "name": "Cloud storage exfiltration path marker",
+    "path": "detection/sigma/t1567_002_cloud_storage_exfil_path.yml",
+    "level": "medium"
+  },
   "T1567.002:SAAS_EXTERNAL_SHARE": {
     "status": "exported",
     "name": "SaaS External Share Marker",
@@ -23087,6 +23399,12 @@
     "path": "detection/sigma/t1578_002_catalog_stub.yml",
     "level": "informational"
   },
+  "T1578.002:CLOUD_INSTANCE_CREATED": {
+    "status": "exported",
+    "name": "Cloud instance created marker",
+    "path": "detection/sigma/t1578_002_cloud_instance_created.yml",
+    "level": "high"
+  },
   "T1578.002:SCALE_VARIANT_0531": {
     "status": "exported",
     "name": "Create Cloud Instance Scale Variant 0531 Marker",
@@ -23128,6 +23446,12 @@
     "name": "Delete Cloud Instance Marker",
     "path": "detection/sigma/t1578_003_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1578.003:CLOUD_INSTANCE_DELETE": {
+    "status": "exported",
+    "name": "Cloud instance delete marker",
+    "path": "detection/sigma/t1578_003_cloud_instance_delete.yml",
+    "level": "high"
   },
   "T1578.003:SCALE_VARIANT_0532": {
     "status": "exported",
@@ -23212,6 +23536,12 @@
     "name": "Modify Cloud Compute Configurations Marker",
     "path": "detection/sigma/t1578_005_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1578.005:CLOUD_SECURITY_CONFIG_CHANGE": {
+    "status": "exported",
+    "name": "Cloud security configuration change marker",
+    "path": "detection/sigma/t1578_005_cloud_security_config_change.yml",
+    "level": "high"
   },
   "T1578.005:SCALE_VARIANT_0534": {
     "status": "exported",
@@ -23302,6 +23632,12 @@
     "name": "Cloud Infrastructure Discovery Marker",
     "path": "detection/sigma/t1580_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1580:CLOUD_INFRA_DISCOVERY": {
+    "status": "exported",
+    "name": "Cloud infrastructure discovery marker",
+    "path": "detection/sigma/t1580_cloud_infra_discovery.yml",
+    "level": "low"
   },
   "T1580:GCP_PROJECT_ENUMERATION": {
     "status": "exported",
@@ -27725,6 +28061,12 @@
     "path": "detection/sigma/t1609_catalog_stub.yml",
     "level": "informational"
   },
+  "T1609:K8S_ADMIN_COMMAND": {
+    "status": "exported",
+    "name": "Kubernetes admin command marker",
+    "path": "detection/sigma/t1609_k8s_admin_command.yml",
+    "level": "low"
+  },
   "T1609:SCALE_VARIANT_0639": {
     "status": "exported",
     "name": "Container Administration Command Scale Variant 0639 Marker",
@@ -27767,6 +28109,12 @@
     "path": "detection/sigma/t1610_catalog_stub.yml",
     "level": "informational"
   },
+  "T1610:K8S_DEPLOYMENT_CREATED": {
+    "status": "exported",
+    "name": "Kubernetes deployment created marker",
+    "path": "detection/sigma/t1610_k8s_deployment_created.yml",
+    "level": "low"
+  },
   "T1610:SCALE_VARIANT_0640": {
     "status": "exported",
     "name": "Deploy Container Scale Variant 0640 Marker",
@@ -27808,6 +28156,12 @@
     "name": "Escape to Host Marker",
     "path": "detection/sigma/t1611_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1611:K8S_HOST_ESCAPE_SIGNAL": {
+    "status": "exported",
+    "name": "Kubernetes host escape signal marker",
+    "path": "detection/sigma/t1611_k8s_host_escape_signal.yml",
+    "level": "high"
   },
   "T1611:KUBERNETES_POD_CREATE": {
     "status": "exported",
@@ -27857,6 +28211,12 @@
     "path": "detection/sigma/t1612_catalog_stub.yml",
     "level": "informational"
   },
+  "T1612:K8S_IMAGE_BUILD_ON_HOST": {
+    "status": "exported",
+    "name": "Kubernetes image build on host marker",
+    "path": "detection/sigma/t1612_k8s_image_build_on_host.yml",
+    "level": "medium"
+  },
   "T1612:SCALE_VARIANT_0642": {
     "status": "exported",
     "name": "Build Image on Host Scale Variant 0642 Marker",
@@ -27898,6 +28258,12 @@
     "name": "Container and Resource Discovery Marker",
     "path": "detection/sigma/t1613_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1613:K8S_RESOURCE_DISCOVERY_ADV": {
+    "status": "exported",
+    "name": "Kubernetes resource discovery marker",
+    "path": "detection/sigma/t1613_k8s_resource_discovery_adv.yml",
+    "level": "low"
   },
   "T1613:SCALE_VARIANT_0643": {
     "status": "exported",
@@ -28066,6 +28432,12 @@
     "name": "Cloud Storage Object Discovery Marker",
     "path": "detection/sigma/t1619_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1619:CLOUD_STORAGE_DISCOVERY": {
+    "status": "exported",
+    "name": "Cloud storage object discovery marker",
+    "path": "detection/sigma/t1619_cloud_storage_discovery.yml",
+    "level": "low"
   },
   "T1619:SCALE_VARIANT_0647": {
     "status": "exported",
@@ -28403,6 +28775,12 @@
     "path": "detection/sigma/t1651_catalog_stub.yml",
     "level": "informational"
   },
+  "T1651:CLOUD_ADMIN_COMMAND": {
+    "status": "exported",
+    "name": "Cloud administration command marker",
+    "path": "detection/sigma/t1651_cloud_admin_command.yml",
+    "level": "low"
+  },
   "T1651:SCALE_VARIANT_0655": {
     "status": "exported",
     "name": "Cloud Administration Command Scale Variant 0655 Marker",
@@ -28696,6 +29074,12 @@
     "name": "Modify Cloud Resource Hierarchy Marker",
     "path": "detection/sigma/t1666_catalog_stub.yml",
     "level": "informational"
+  },
+  "T1666:CLOUD_RESOURCE_HIERARCHY_CHANGE": {
+    "status": "exported",
+    "name": "Cloud resource hierarchy change marker",
+    "path": "detection/sigma/t1666_cloud_resource_hierarchy_change.yml",
+    "level": "high"
   },
   "T1666:SCALE_VARIANT_0662": {
     "status": "exported",

@@ -19,11 +19,14 @@
       <button class="tab is-active" data-view="overview">Overview</button>
       <button class="tab" data-view="library">Scenario Library</button>
       <button class="tab" data-view="matrix">Matrix</button>
+      <button class="tab" data-view="sync">Sync</button>
       <button class="tab" data-view="catalog">Catalog</button>
       <button class="tab" data-view="builder">Scenario</button>
       <button class="tab" data-view="campaigns">Campaigns</button>
       <button class="tab" data-view="runs">Runs</button>
       <button class="tab" data-view="detections">Detection</button>
+      <button class="tab" data-view="workbench">Workbench</button>
+      <button class="tab" data-view="exposure">Exposure</button>
       <button class="tab" data-view="events">Events</button>
     </nav>
     <div class="actions">
@@ -83,7 +86,7 @@
           <ul class="boundary-list">
             <li>Not an offensive framework.</li>
             <li>Not intended for systems without written authorization.</li>
-            <li>Stores the complete 2,511-scenario loaded library; larger variant batches are generated on demand.</li>
+            <li id="boundary-scenario-line">Stores the loaded scenario library as complete YAML scenarios.</li>
             <li>Does not contact cloud providers for marker-only cloud simulations.</li>
             <li>Does not replace a full red-team engagement.</li>
           </ul>
@@ -144,6 +147,25 @@
           <span id="matrix-count" class="pill neutral">0 TTPs</span>
         </div>
         <div id="attack-matrix" class="attack-matrix"></div>
+      </div>
+    </section>
+
+    <section id="view-sync" class="view">
+      <div class="sync-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>ATT&CK Sync</h2>
+            <span id="sync-status" class="pill neutral">Loading</span>
+          </div>
+          <div class="sync-summary" id="sync-summary"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Version Drift</h2>
+            <span id="sync-drift-label" class="pill neutral">0</span>
+          </div>
+          <div id="sync-drift" class="drift-list"></div>
+        </div>
       </div>
     </section>
 
@@ -282,6 +304,20 @@
           <button class="primary campaign-size" data-count="50">Run 50</button>
           <button class="primary campaign-size" data-count="100">Run 100</button>
         </div>
+        <div class="scheduler-controls">
+          <label>
+            <span>Start at</span>
+            <input id="campaign-start-at" type="datetime-local" />
+          </label>
+          <label>
+            <span>Repeat every seconds</span>
+            <input id="campaign-repeat-interval" type="number" min="1" placeholder="off" />
+          </label>
+          <label>
+            <span>Repeat count</span>
+            <input id="campaign-repeat-count" type="number" min="1" max="50" value="1" />
+          </label>
+        </div>
       </div>
       <div class="table-shell">
         <div class="table-title">
@@ -295,6 +331,7 @@
               <th>Status</th>
               <th>Progress</th>
               <th>Runs</th>
+              <th>Schedule</th>
               <th>Actions</th>
               <th>Reports</th>
             </tr>
@@ -346,6 +383,49 @@
             <span class="pill neutral">Catalog</span>
           </div>
           <div id="pack-bars" class="bar-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-workbench" class="view">
+      <div class="split-grid">
+        <div class="table-shell">
+          <div class="table-title">
+            <h2>Detection Workbench</h2>
+            <span id="workbench-count" class="pill neutral">0 rules</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Rule</th><th>Score</th><th>Risk</th><th>Missing Fields</th><th>Targets</th></tr>
+            </thead>
+            <tbody id="workbench-table"></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Field Gaps</h2>
+            <span id="workbench-score" class="pill neutral">0</span>
+          </div>
+          <div id="workbench-bars" class="bar-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-exposure" class="view">
+      <div class="split-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Exposure Graph</h2>
+            <span id="exposure-count" class="pill neutral">0 paths</span>
+          </div>
+          <div id="exposure-graph" class="exposure-graph"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Domains</h2>
+            <span class="pill neutral">Paths</span>
+          </div>
+          <div id="exposure-bars" class="bar-list"></div>
         </div>
       </div>
     </section>

@@ -77,7 +77,15 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
     @asynccontextmanager
     async def lifespan(_app: FastAPI):
         bus.attach_loop(asyncio.get_running_loop())
-        yield
+        scheduler_task = asyncio.create_task(_campaign_scheduler_loop())
+        try:
+            yield
+        finally:
+            scheduler_task.cancel()
+            try:
+                await scheduler_task
+            except asyncio.CancelledError:
+                pass
 
     app = FastAPI(title="APT Simulator", version="0.1.0", lifespan=lifespan)
 
@@ -110,6 +118,12 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         from .detection_matrix import build_matrix
         return build_matrix()
 
+    @app.get("/attack/sync/status")
+    def attack_sync_status() -> dict[str, object]:
+        """Local ATT&CK snapshot status and registry drift."""
+        from .attack_sync import drift_status
+        return drift_status()
+
     @app.get("/detections/score")
     def detection_score() -> dict[str, object]:
         """Rule-to-synthetic-event score for every registered TTP with events."""
@@ -125,6 +139,18 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
                 continue
             out[attack_id] = score_detection(rule, events)
         return out
+
+    @app.get("/detections/workbench")
+    def detection_workbench() -> dict[str, object]:
+        """Sigma rule quality, field coverage, and SIEM target status."""
+        from .detection_workbench import build_workbench
+        return build_workbench(limit_items=300)
+
+    @app.get("/exposure/graph")
+    def exposure_graph() -> dict[str, object]:
+        """Controlled exposure graph across identity, endpoint, cloud, SaaS, and container domains."""
+        from .exposure_graph import build_exposure_graph
+        return build_exposure_graph(state.scenarios)
 
     @app.get("/runs/{run_id}/timeline")
     def run_timeline(run_id: str) -> dict[str, object]:
@@ -235,6 +261,15 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
     audit.append("orchestrator.start", {"version": "0.1.0", "scenarios": list(scenarios)})
     return app
+
+
+async def _campaign_scheduler_loop() -> None:
+    """Background scheduler for in-memory campaign records."""
+    from .api.scenarios import tick_scheduled_campaigns
+
+    while True:
+        tick_scheduled_campaigns()
+        await asyncio.sleep(2)
 
 
 cli = typer.Typer(no_args_is_help=True)

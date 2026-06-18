@@ -1,0 +1,21 @@
+title: AWS API command marker
+id: dcf1a963-26d2-509d-aad3-098ae2f865b7
+status: experimental
+description: Detects simulator telemetry for AWS API command marker.
+logsource:
+  product: apt_simulator
+  category: cloud_api
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.cloud_api
+    event.action: RunInstances
+    attack.technique.id: T1059.009
+    apt_sim.variant: aws_api_command
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/009/
+tags:
+- attack.t1059.009

@@ -1,0 +1,21 @@
+title: Unused cloud region enablement marker
+id: 9b23476e-3b6e-5ba3-9128-51cab0a44129
+status: experimental
+description: Detects simulator telemetry for Unused cloud region enablement marker.
+logsource:
+  product: apt_simulator
+  category: governance
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.governance
+    event.action: EnableRegion
+    attack.technique.id: T1535
+    apt_sim.variant: unused_region_enablement
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1535/
+tags:
+- attack.t1535

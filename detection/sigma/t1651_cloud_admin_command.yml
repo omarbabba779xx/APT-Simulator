@@ -1,0 +1,21 @@
+title: Cloud administration command marker
+id: 7ff6de81-b988-559e-9c1d-6cb8d519049b
+status: experimental
+description: Detects simulator telemetry for Cloud administration command marker.
+logsource:
+  product: apt_simulator
+  category: cloud_api
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.cloud_api
+    event.action: admin_command
+    attack.technique.id: T1651
+    apt_sim.variant: cloud_admin_command
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1651/
+tags:
+- attack.t1651

@@ -1,0 +1,21 @@
+title: Kubernetes image build on host marker
+id: 563ef4ee-7e89-5ff2-ab67-1c1e81c1c177
+status: experimental
+description: Detects simulator telemetry for Kubernetes image build on host marker.
+logsource:
+  product: apt_simulator
+  category: container_runtime
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.container_runtime
+    event.action: build_image
+    attack.technique.id: T1612
+    apt_sim.variant: k8s_image_build_on_host
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1612/
+tags:
+- attack.t1612

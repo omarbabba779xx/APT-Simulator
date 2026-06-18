@@ -1,0 +1,2217 @@
+pack: cloud_k8s_lab
+ttps:
+- id: T1078.004:AWS_IAM_CONSOLE_RISK
+  attack_id: T1078.004
+  name: AWS IAM console risk marker
+  description: Marker-only aws simulation for Cloud Accounts.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: aws
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Accounts
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: aws-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_aws_iam_console_risk.json
+  sigma:
+    title: AWS IAM console risk marker
+    id: 01e48809-8793-54d7-bd9c-19af14e592af
+    status: experimental
+    description: Detects simulator telemetry for AWS IAM console risk marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: ConsoleLogin
+        attack.technique.id: T1078.004
+        apt_sim.variant: aws_iam_console_risk
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: ConsoleLogin
+    event.provider: aws
+    attack.tactic: initial_access
+    attack.technique.id: T1078.004
+    attack.technique.name: Cloud Accounts
+    apt_sim.variant: aws_iam_console_risk
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1078.004:AZURE_PORTAL_RISKY_SIGNIN
+  attack_id: T1078.004
+  name: Azure portal risky sign-in marker
+  description: Marker-only azure simulation for Cloud Accounts.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: azure
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Accounts
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: azure-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_azure_portal_risky_signin.json
+  sigma:
+    title: Azure portal risky sign-in marker
+    id: 77d7b68e-8fa5-5f69-bc3c-2197a099bcac
+    status: experimental
+    description: Detects simulator telemetry for Azure portal risky sign-in marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: SignInLogs
+        attack.technique.id: T1078.004
+        apt_sim.variant: azure_portal_risky_signin
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: SignInLogs
+    event.provider: azure
+    attack.tactic: initial_access
+    attack.technique.id: T1078.004
+    attack.technique.name: Cloud Accounts
+    apt_sim.variant: azure_portal_risky_signin
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1078.004:GCP_CONSOLE_SESSION
+  attack_id: T1078.004
+  name: GCP console session marker
+  description: Marker-only gcp simulation for Cloud Accounts.
+  tactic: initial_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: gcp
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Accounts
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: gcp-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_gcp_console_session.json
+  sigma:
+    title: GCP console session marker
+    id: 7ad2298c-d156-5bd4-8c6f-8523fafc1038
+    status: experimental
+    description: Detects simulator telemetry for GCP console session marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: google.login
+        attack.technique.id: T1078.004
+        apt_sim.variant: gcp_console_session
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: google.login
+    event.provider: gcp
+    attack.tactic: initial_access
+    attack.technique.id: T1078.004
+    attack.technique.name: Cloud Accounts
+    apt_sim.variant: gcp_console_session
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1059.009:AWS_API_COMMAND
+  attack_id: T1059.009
+  name: AWS API command marker
+  description: Marker-only aws simulation for Cloud API.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: aws
+    telemetry_source: cloud_api
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud API
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: aws-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_aws_api_command.json
+  sigma:
+    title: AWS API command marker
+    id: dcf1a963-26d2-509d-aad3-098ae2f865b7
+    status: experimental
+    description: Detects simulator telemetry for AWS API command marker.
+    logsource:
+      product: apt_simulator
+      category: cloud_api
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.cloud_api
+        event.action: RunInstances
+        attack.technique.id: T1059.009
+        apt_sim.variant: aws_api_command
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: cloud_api
+    event.dataset: apt_sim.cloud_k8s_lab.cloud_api
+    event.action: RunInstances
+    event.provider: aws
+    attack.tactic: execution
+    attack.technique.id: T1059.009
+    attack.technique.name: Cloud API
+    apt_sim.variant: aws_api_command
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1651:CLOUD_ADMIN_COMMAND
+  attack_id: T1651
+  name: Cloud administration command marker
+  description: Marker-only multi_cloud simulation for Cloud Administration Command.
+  tactic: execution
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: cloud_api
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Administration Command
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_admin_command.json
+  sigma:
+    title: Cloud administration command marker
+    id: 7ff6de81-b988-559e-9c1d-6cb8d519049b
+    status: experimental
+    description: Detects simulator telemetry for Cloud administration command marker.
+    logsource:
+      product: apt_simulator
+      category: cloud_api
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.cloud_api
+        event.action: admin_command
+        attack.technique.id: T1651
+        apt_sim.variant: cloud_admin_command
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: cloud_api
+    event.dataset: apt_sim.cloud_k8s_lab.cloud_api
+    event.action: admin_command
+    event.provider: multi_cloud
+    attack.tactic: execution
+    attack.technique.id: T1651
+    attack.technique.name: Cloud Administration Command
+    apt_sim.variant: cloud_admin_command
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1526:AWS_SERVICE_DISCOVERY
+  attack_id: T1526
+  name: AWS service discovery marker
+  description: Marker-only aws simulation for Cloud Service Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: aws
+    telemetry_source: discovery
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Service Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: aws-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_aws_service_discovery.json
+  sigma:
+    title: AWS service discovery marker
+    id: 06a14867-faec-5738-901c-35bb3dc29fa1
+    status: experimental
+    description: Detects simulator telemetry for AWS service discovery marker.
+    logsource:
+      product: apt_simulator
+      category: discovery
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.discovery
+        event.action: ListServices
+        attack.technique.id: T1526
+        apt_sim.variant: aws_service_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: discovery
+    event.dataset: apt_sim.cloud_k8s_lab.discovery
+    event.action: ListServices
+    event.provider: aws
+    attack.tactic: discovery
+    attack.technique.id: T1526
+    attack.technique.name: Cloud Service Discovery
+    apt_sim.variant: aws_service_discovery
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1580:CLOUD_INFRA_DISCOVERY
+  attack_id: T1580
+  name: Cloud infrastructure discovery marker
+  description: Marker-only multi_cloud simulation for Cloud Infrastructure Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: discovery
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Infrastructure Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_infra_discovery.json
+  sigma:
+    title: Cloud infrastructure discovery marker
+    id: 3d1df127-105f-5443-89dd-6c8ab624cf49
+    status: experimental
+    description: Detects simulator telemetry for Cloud infrastructure discovery marker.
+    logsource:
+      product: apt_simulator
+      category: discovery
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.discovery
+        event.action: DescribeInfrastructure
+        attack.technique.id: T1580
+        apt_sim.variant: cloud_infra_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: discovery
+    event.dataset: apt_sim.cloud_k8s_lab.discovery
+    event.action: DescribeInfrastructure
+    event.provider: multi_cloud
+    attack.tactic: discovery
+    attack.technique.id: T1580
+    attack.technique.name: Cloud Infrastructure Discovery
+    apt_sim.variant: cloud_infra_discovery
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1538:CLOUD_DASHBOARD_REVIEW
+  attack_id: T1538
+  name: Cloud dashboard review marker
+  description: Marker-only multi_cloud simulation for Cloud Service Dashboard.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: dashboard
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Service Dashboard
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_dashboard_review.json
+  sigma:
+    title: Cloud dashboard review marker
+    id: 79d6eba8-e02d-5526-bf8b-6aa8860d4434
+    status: experimental
+    description: Detects simulator telemetry for Cloud dashboard review marker.
+    logsource:
+      product: apt_simulator
+      category: dashboard
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.dashboard
+        event.action: OpenDashboard
+        attack.technique.id: T1538
+        apt_sim.variant: cloud_dashboard_review
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: dashboard
+    event.dataset: apt_sim.cloud_k8s_lab.dashboard
+    event.action: OpenDashboard
+    event.provider: multi_cloud
+    attack.tactic: discovery
+    attack.technique.id: T1538
+    attack.technique.name: Cloud Service Dashboard
+    apt_sim.variant: cloud_dashboard_review
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1619:CLOUD_STORAGE_DISCOVERY
+  attack_id: T1619
+  name: Cloud storage object discovery marker
+  description: Marker-only multi_cloud simulation for Cloud Storage Object Discovery.
+  tactic: discovery
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: storage
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Storage Object Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_storage_discovery.json
+  sigma:
+    title: Cloud storage object discovery marker
+    id: f8773d9f-3d0f-5772-bc89-737f7b2a4aaf
+    status: experimental
+    description: Detects simulator telemetry for Cloud storage object discovery marker.
+    logsource:
+      product: apt_simulator
+      category: storage
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.storage
+        event.action: ListObjects
+        attack.technique.id: T1619
+        apt_sim.variant: cloud_storage_discovery
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: storage
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: ListObjects
+    event.provider: multi_cloud
+    attack.tactic: discovery
+    attack.technique.id: T1619
+    attack.technique.name: Cloud Storage Object Discovery
+    apt_sim.variant: cloud_storage_discovery
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1530:AWS_S3_OBJECT_COLLECTION_ADV
+  attack_id: T1530
+  name: AWS S3 object collection marker
+  description: Marker-only aws simulation for Data from Cloud Storage.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: aws
+    telemetry_source: storage
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Data from Cloud Storage
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: aws-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_aws_s3_object_collection_adv.json
+  sigma:
+    title: AWS S3 object collection marker
+    id: 13c02fbf-957b-5a04-9c08-ac30e0a915d7
+    status: experimental
+    description: Detects simulator telemetry for AWS S3 object collection marker.
+    logsource:
+      product: apt_simulator
+      category: storage
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.storage
+        event.action: GetObject
+        attack.technique.id: T1530
+        apt_sim.variant: aws_s3_object_collection_adv
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: storage
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: GetObject
+    event.provider: aws
+    attack.tactic: collection
+    attack.technique.id: T1530
+    attack.technique.name: Data from Cloud Storage
+    apt_sim.variant: aws_s3_object_collection_adv
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1530:AZURE_BLOB_COLLECTION
+  attack_id: T1530
+  name: Azure blob collection marker
+  description: Marker-only azure simulation for Data from Cloud Storage.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: azure
+    telemetry_source: storage
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Data from Cloud Storage
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: azure-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_azure_blob_collection.json
+  sigma:
+    title: Azure blob collection marker
+    id: c1cb4ae8-a6a1-5750-9833-39324776af2b
+    status: experimental
+    description: Detects simulator telemetry for Azure blob collection marker.
+    logsource:
+      product: apt_simulator
+      category: storage
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.storage
+        event.action: BlobRead
+        attack.technique.id: T1530
+        apt_sim.variant: azure_blob_collection
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: storage
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: BlobRead
+    event.provider: azure
+    attack.tactic: collection
+    attack.technique.id: T1530
+    attack.technique.name: Data from Cloud Storage
+    apt_sim.variant: azure_blob_collection
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1530:GCS_BUCKET_COLLECTION
+  attack_id: T1530
+  name: GCS bucket collection marker
+  description: Marker-only gcp simulation for Data from Cloud Storage.
+  tactic: collection
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: gcp
+    telemetry_source: storage
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Data from Cloud Storage
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: gcp-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_gcs_bucket_collection.json
+  sigma:
+    title: GCS bucket collection marker
+    id: 33418e3e-5d23-53eb-9c3e-e67fb1aa9600
+    status: experimental
+    description: Detects simulator telemetry for GCS bucket collection marker.
+    logsource:
+      product: apt_simulator
+      category: storage
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.storage
+        event.action: storage.objects.get
+        attack.technique.id: T1530
+        apt_sim.variant: gcs_bucket_collection
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: storage
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: storage.objects.get
+    event.provider: gcp
+    attack.tactic: collection
+    attack.technique.id: T1530
+    attack.technique.name: Data from Cloud Storage
+    apt_sim.variant: gcs_bucket_collection
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1552.005:INSTANCE_METADATA_TOKEN_READ
+  attack_id: T1552.005
+  name: Instance metadata token read marker
+  description: Marker-only multi_cloud simulation for Cloud Instance Metadata API.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: metadata
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Instance Metadata API
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_instance_metadata_token_read.json
+  sigma:
+    title: Instance metadata token read marker
+    id: 87dea778-b34c-545a-944d-e25275fe9de8
+    status: experimental
+    description: Detects simulator telemetry for Instance metadata token read marker.
+    logsource:
+      product: apt_simulator
+      category: metadata
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.metadata
+        event.action: MetadataTokenRead
+        attack.technique.id: T1552.005
+        apt_sim.variant: instance_metadata_token_read
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: metadata
+    event.dataset: apt_sim.cloud_k8s_lab.metadata
+    event.action: MetadataTokenRead
+    event.provider: multi_cloud
+    attack.tactic: credential_access
+    attack.technique.id: T1552.005
+    attack.technique.name: Cloud Instance Metadata API
+    apt_sim.variant: instance_metadata_token_read
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1555.006:SECRETS_MANAGER_READ
+  attack_id: T1555.006
+  name: Cloud secrets manager read marker
+  description: Marker-only multi_cloud simulation for Cloud Secrets Management Stores.
+  tactic: credential_access
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: secrets
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Secrets Management Stores
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_secrets_manager_read.json
+  sigma:
+    title: Cloud secrets manager read marker
+    id: 8f02f9c3-b74d-582e-ba4c-cda48cb9563f
+    status: experimental
+    description: Detects simulator telemetry for Cloud secrets manager read marker.
+    logsource:
+      product: apt_simulator
+      category: secrets
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.secrets
+        event.action: GetSecretValue
+        attack.technique.id: T1555.006
+        apt_sim.variant: secrets_manager_read
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: secrets
+    event.dataset: apt_sim.cloud_k8s_lab.secrets
+    event.action: GetSecretValue
+    event.provider: multi_cloud
+    attack.tactic: credential_access
+    attack.technique.id: T1555.006
+    attack.technique.name: Cloud Secrets Management Stores
+    apt_sim.variant: secrets_manager_read
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1098.001:CLOUD_ACCESS_KEY_ADDED
+  attack_id: T1098.001
+  name: Cloud access key added marker
+  description: Marker-only multi_cloud simulation for Additional Cloud Credentials.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Additional Cloud Credentials
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_access_key_added.json
+  sigma:
+    title: Cloud access key added marker
+    id: ca7cebb1-4f16-5b1e-9bde-9f6c91575511
+    status: experimental
+    description: Detects simulator telemetry for Cloud access key added marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: CreateAccessKey
+        attack.technique.id: T1098.001
+        apt_sim.variant: cloud_access_key_added
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: CreateAccessKey
+    event.provider: multi_cloud
+    attack.tactic: persistence
+    attack.technique.id: T1098.001
+    attack.technique.name: Additional Cloud Credentials
+    apt_sim.variant: cloud_access_key_added
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1098.003:CLOUD_ROLE_ASSIGNMENT_ADDED
+  attack_id: T1098.003
+  name: Cloud role assignment added marker
+  description: Marker-only multi_cloud simulation for Additional Cloud Roles.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Additional Cloud Roles
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_role_assignment_added.json
+  sigma:
+    title: Cloud role assignment added marker
+    id: d75b9c51-90a9-5236-85d7-fdd5ff794844
+    status: experimental
+    description: Detects simulator telemetry for Cloud role assignment added marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: CreateRoleAssignment
+        attack.technique.id: T1098.003
+        apt_sim.variant: cloud_role_assignment_added
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: CreateRoleAssignment
+    event.provider: multi_cloud
+    attack.tactic: persistence
+    attack.technique.id: T1098.003
+    attack.technique.name: Additional Cloud Roles
+    apt_sim.variant: cloud_role_assignment_added
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1136.003:CLOUD_ACCOUNT_CREATED
+  attack_id: T1136.003
+  name: Cloud account created marker
+  description: Marker-only multi_cloud simulation for Cloud Account.
+  tactic: persistence
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Account
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_account_created.json
+  sigma:
+    title: Cloud account created marker
+    id: 6176e703-e504-5ba9-adfa-cd6bc7f078ce
+    status: experimental
+    description: Detects simulator telemetry for Cloud account created marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: CreateUser
+        attack.technique.id: T1136.003
+        apt_sim.variant: cloud_account_created
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: CreateUser
+    event.provider: multi_cloud
+    attack.tactic: persistence
+    attack.technique.id: T1136.003
+    attack.technique.name: Cloud Account
+    apt_sim.variant: cloud_account_created
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1548.005:TEMP_ELEVATED_CLOUD_ACCESS
+  attack_id: T1548.005
+  name: Temporary elevated cloud access marker
+  description: Marker-only multi_cloud simulation for Temporary Elevated Cloud Access.
+  tactic: privilege_escalation
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: identity
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Temporary Elevated Cloud Access
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_temp_elevated_cloud_access.json
+  sigma:
+    title: Temporary elevated cloud access marker
+    id: 44ee9162-7181-5dfb-9bf1-805fb18bd4cc
+    status: experimental
+    description: Detects simulator telemetry for Temporary elevated cloud access marker.
+    logsource:
+      product: apt_simulator
+      category: identity
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.identity
+        event.action: ActivatePrivilege
+        attack.technique.id: T1548.005
+        apt_sim.variant: temp_elevated_cloud_access
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: identity
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: ActivatePrivilege
+    event.provider: multi_cloud
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1548.005
+    attack.technique.name: Temporary Elevated Cloud Access
+    apt_sim.variant: temp_elevated_cloud_access
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1578.002:CLOUD_INSTANCE_CREATED
+  attack_id: T1578.002
+  name: Cloud instance created marker
+  description: Marker-only multi_cloud simulation for Create Cloud Instance.
+  tactic: defense_impairment
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: compute
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Create Cloud Instance
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_instance_created.json
+  sigma:
+    title: Cloud instance created marker
+    id: ed011e55-63c0-5e18-954a-d123cf29bb97
+    status: experimental
+    description: Detects simulator telemetry for Cloud instance created marker.
+    logsource:
+      product: apt_simulator
+      category: compute
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.compute
+        event.action: CreateInstance
+        attack.technique.id: T1578.002
+        apt_sim.variant: cloud_instance_created
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: compute
+    event.dataset: apt_sim.cloud_k8s_lab.compute
+    event.action: CreateInstance
+    event.provider: multi_cloud
+    attack.tactic: defense_impairment
+    attack.technique.id: T1578.002
+    attack.technique.name: Create Cloud Instance
+    apt_sim.variant: cloud_instance_created
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1578.005:CLOUD_SECURITY_CONFIG_CHANGE
+  attack_id: T1578.005
+  name: Cloud security configuration change marker
+  description: Marker-only multi_cloud simulation for Modify Cloud Compute Configurations.
+  tactic: defense_impairment
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: compute
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Modify Cloud Compute Configurations
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_security_config_change.json
+  sigma:
+    title: Cloud security configuration change marker
+    id: fae82970-36ef-5c1f-87d3-2650b25d6a5c
+    status: experimental
+    description: Detects simulator telemetry for Cloud security configuration change
+      marker.
+    logsource:
+      product: apt_simulator
+      category: compute
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.compute
+        event.action: UpdateSecurityConfiguration
+        attack.technique.id: T1578.005
+        apt_sim.variant: cloud_security_config_change
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: compute
+    event.dataset: apt_sim.cloud_k8s_lab.compute
+    event.action: UpdateSecurityConfiguration
+    event.provider: multi_cloud
+    attack.tactic: defense_impairment
+    attack.technique.id: T1578.005
+    attack.technique.name: Modify Cloud Compute Configurations
+    apt_sim.variant: cloud_security_config_change
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1578.003:CLOUD_INSTANCE_DELETE
+  attack_id: T1578.003
+  name: Cloud instance delete marker
+  description: Marker-only multi_cloud simulation for Delete Cloud Instance.
+  tactic: defense_impairment
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: compute
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Delete Cloud Instance
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_instance_delete.json
+  sigma:
+    title: Cloud instance delete marker
+    id: 90c76249-8a49-51b1-b0aa-acc14e2cc721
+    status: experimental
+    description: Detects simulator telemetry for Cloud instance delete marker.
+    logsource:
+      product: apt_simulator
+      category: compute
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.compute
+        event.action: DeleteInstance
+        attack.technique.id: T1578.003
+        apt_sim.variant: cloud_instance_delete
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: compute
+    event.dataset: apt_sim.cloud_k8s_lab.compute
+    event.action: DeleteInstance
+    event.provider: multi_cloud
+    attack.tactic: defense_impairment
+    attack.technique.id: T1578.003
+    attack.technique.name: Delete Cloud Instance
+    apt_sim.variant: cloud_instance_delete
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1666:CLOUD_RESOURCE_HIERARCHY_CHANGE
+  attack_id: T1666
+  name: Cloud resource hierarchy change marker
+  description: Marker-only multi_cloud simulation for Modify Cloud Resource Hierarchy.
+  tactic: defense_impairment
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: governance
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Modify Cloud Resource Hierarchy
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_resource_hierarchy_change.json
+  sigma:
+    title: Cloud resource hierarchy change marker
+    id: ce0fa14f-f4c9-5880-8930-552b8d38a4c0
+    status: experimental
+    description: Detects simulator telemetry for Cloud resource hierarchy change marker.
+    logsource:
+      product: apt_simulator
+      category: governance
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.governance
+        event.action: MoveResource
+        attack.technique.id: T1666
+        apt_sim.variant: cloud_resource_hierarchy_change
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: governance
+    event.dataset: apt_sim.cloud_k8s_lab.governance
+    event.action: MoveResource
+    event.provider: multi_cloud
+    attack.tactic: defense_impairment
+    attack.technique.id: T1666
+    attack.technique.name: Modify Cloud Resource Hierarchy
+    apt_sim.variant: cloud_resource_hierarchy_change
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1535:UNUSED_REGION_ENABLEMENT
+  attack_id: T1535
+  name: Unused cloud region enablement marker
+  description: Marker-only multi_cloud simulation for Unused/Unsupported Cloud Regions.
+  tactic: stealth
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: governance
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Unused/Unsupported Cloud Regions
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_unused_region_enablement.json
+  sigma:
+    title: Unused cloud region enablement marker
+    id: 9b23476e-3b6e-5ba3-9128-51cab0a44129
+    status: experimental
+    description: Detects simulator telemetry for Unused cloud region enablement marker.
+    logsource:
+      product: apt_simulator
+      category: governance
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.governance
+        event.action: EnableRegion
+        attack.technique.id: T1535
+        apt_sim.variant: unused_region_enablement
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: governance
+    event.dataset: apt_sim.cloud_k8s_lab.governance
+    event.action: EnableRegion
+    event.provider: multi_cloud
+    attack.tactic: stealth
+    attack.technique.id: T1535
+    attack.technique.name: Unused/Unsupported Cloud Regions
+    apt_sim.variant: unused_region_enablement
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1537:CLOUD_ACCOUNT_DATA_TRANSFER
+  attack_id: T1537
+  name: Cloud account data transfer marker
+  description: Marker-only multi_cloud simulation for Transfer Data to Cloud Account.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: storage
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Transfer Data to Cloud Account
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_account_data_transfer.json
+  sigma:
+    title: Cloud account data transfer marker
+    id: 0c2dd6fc-e204-57d1-ac87-d2fe6ae3adee
+    status: experimental
+    description: Detects simulator telemetry for Cloud account data transfer marker.
+    logsource:
+      product: apt_simulator
+      category: storage
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.storage
+        event.action: CrossAccountTransfer
+        attack.technique.id: T1537
+        apt_sim.variant: cloud_account_data_transfer
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: storage
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: CrossAccountTransfer
+    event.provider: multi_cloud
+    attack.tactic: exfiltration
+    attack.technique.id: T1537
+    attack.technique.name: Transfer Data to Cloud Account
+    apt_sim.variant: cloud_account_data_transfer
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1567.002:CLOUD_STORAGE_EXFIL_PATH
+  attack_id: T1567.002
+  name: Cloud storage exfiltration path marker
+  description: Marker-only multi_cloud simulation for Exfiltration to Cloud Storage.
+  tactic: exfiltration
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: storage
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Exfiltration to Cloud Storage
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_storage_exfil_path.json
+  sigma:
+    title: Cloud storage exfiltration path marker
+    id: 73dd72fa-a3c2-58cd-9b48-09b768efe623
+    status: experimental
+    description: Detects simulator telemetry for Cloud storage exfiltration path marker.
+    logsource:
+      product: apt_simulator
+      category: storage
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.storage
+        event.action: ExternalShare
+        attack.technique.id: T1567.002
+        apt_sim.variant: cloud_storage_exfil_path
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: storage
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: ExternalShare
+    event.provider: multi_cloud
+    attack.tactic: exfiltration
+    attack.technique.id: T1567.002
+    attack.technique.name: Exfiltration to Cloud Storage
+    apt_sim.variant: cloud_storage_exfil_path
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1496.004:CLOUD_SERVICE_HIJACKING_COST_SPIKE
+  attack_id: T1496.004
+  name: Cloud service hijacking cost spike marker
+  description: Marker-only multi_cloud simulation for Cloud Service Hijacking.
+  tactic: impact
+  platforms:
+  - windows
+  - linux
+  - darwin
+  safety_tier: marker-only
+  metadata:
+    provider: multi_cloud
+    telemetry_source: billing
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Cloud Service Hijacking
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: multi_cloud-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_cloud_service_hijacking_cost_spike.json
+  sigma:
+    title: Cloud service hijacking cost spike marker
+    id: 6f79f757-929d-545b-904a-d7ec2c7c3f91
+    status: experimental
+    description: Detects simulator telemetry for Cloud service hijacking cost spike
+      marker.
+    logsource:
+      product: apt_simulator
+      category: billing
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.billing
+        event.action: UsageSpike
+        attack.technique.id: T1496.004
+        apt_sim.variant: cloud_service_hijacking_cost_spike
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: billing
+    event.dataset: apt_sim.cloud_k8s_lab.billing
+    event.action: UsageSpike
+    event.provider: multi_cloud
+    attack.tactic: impact
+    attack.technique.id: T1496.004
+    attack.technique.name: Cloud Service Hijacking
+    apt_sim.variant: cloud_service_hijacking_cost_spike
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1053.007:K8S_CRONJOB_CREATED
+  attack_id: T1053.007
+  name: Kubernetes CronJob created marker
+  description: Marker-only kubernetes simulation for Container Orchestration Job.
+  tactic: execution
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Container Orchestration Job
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_cronjob_created.json
+  sigma:
+    title: Kubernetes CronJob created marker
+    id: 8d20d600-e6da-5db1-9dc8-8b6ef4d8a0d1
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes CronJob created marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: create_cronjob
+        attack.technique.id: T1053.007
+        apt_sim.variant: k8s_cronjob_created
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_cronjob
+    event.provider: kubernetes
+    attack.tactic: execution
+    attack.technique.id: T1053.007
+    attack.technique.name: Container Orchestration Job
+    apt_sim.variant: k8s_cronjob_created
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1059.013:K8S_API_EXEC
+  attack_id: T1059.013
+  name: Kubernetes API execution marker
+  description: Marker-only kubernetes simulation for Container CLI/API.
+  tactic: execution
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Container CLI/API
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_api_exec.json
+  sigma:
+    title: Kubernetes API execution marker
+    id: 345c6d44-06b4-56b8-9b9e-d66b2bf73aee
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes API execution marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: pods_exec
+        attack.technique.id: T1059.013
+        apt_sim.variant: k8s_api_exec
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: pods_exec
+    event.provider: kubernetes
+    attack.tactic: execution
+    attack.technique.id: T1059.013
+    attack.technique.name: Container CLI/API
+    apt_sim.variant: k8s_api_exec
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1098.006:K8S_CLUSTER_ROLE_BINDING
+  attack_id: T1098.006
+  name: Kubernetes cluster role binding marker
+  description: Marker-only kubernetes simulation for Additional Container Cluster
+    Roles.
+  tactic: persistence
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Additional Container Cluster Roles
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_cluster_role_binding.json
+  sigma:
+    title: Kubernetes cluster role binding marker
+    id: 1763f8dd-410f-5a74-9d0c-27a145026788
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes cluster role binding marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: create_clusterrolebinding
+        attack.technique.id: T1098.006
+        apt_sim.variant: k8s_cluster_role_binding
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_clusterrolebinding
+    event.provider: kubernetes
+    attack.tactic: persistence
+    attack.technique.id: T1098.006
+    attack.technique.name: Additional Container Cluster Roles
+    apt_sim.variant: k8s_cluster_role_binding
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1543.005:K8S_SERVICE_CREATED
+  attack_id: T1543.005
+  name: Kubernetes service created marker
+  description: Marker-only kubernetes simulation for Container Service.
+  tactic: persistence
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Container Service
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_service_created.json
+  sigma:
+    title: Kubernetes service created marker
+    id: 38db3dce-f7d3-5846-90de-c22337a49c32
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes service created marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: create_service
+        attack.technique.id: T1543.005
+        apt_sim.variant: k8s_service_created
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_service
+    event.provider: kubernetes
+    attack.tactic: persistence
+    attack.technique.id: T1543.005
+    attack.technique.name: Container Service
+    apt_sim.variant: k8s_service_created
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1552.007:K8S_SECRET_READ
+  attack_id: T1552.007
+  name: Kubernetes secret read marker
+  description: Marker-only kubernetes simulation for Container API.
+  tactic: credential_access
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Container API
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_secret_read.json
+  sigma:
+    title: Kubernetes secret read marker
+    id: 3ac3fd29-e477-5143-9a51-c37a7c604cd5
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes secret read marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: get_secret
+        attack.technique.id: T1552.007
+        apt_sim.variant: k8s_secret_read
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: get_secret
+    event.provider: kubernetes
+    attack.tactic: credential_access
+    attack.technique.id: T1552.007
+    attack.technique.name: Container API
+    apt_sim.variant: k8s_secret_read
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1609:K8S_ADMIN_COMMAND
+  attack_id: T1609
+  name: Kubernetes admin command marker
+  description: Marker-only kubernetes simulation for Container Administration Command.
+  tactic: execution
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Container Administration Command
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_admin_command.json
+  sigma:
+    title: Kubernetes admin command marker
+    id: 3b151596-15b6-525d-9ab1-c3f005c562e7
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes admin command marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: admin_command
+        attack.technique.id: T1609
+        apt_sim.variant: k8s_admin_command
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: admin_command
+    event.provider: kubernetes
+    attack.tactic: execution
+    attack.technique.id: T1609
+    attack.technique.name: Container Administration Command
+    apt_sim.variant: k8s_admin_command
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1610:K8S_DEPLOYMENT_CREATED
+  attack_id: T1610
+  name: Kubernetes deployment created marker
+  description: Marker-only kubernetes simulation for Deploy Container.
+  tactic: execution
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Deploy Container
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_deployment_created.json
+  sigma:
+    title: Kubernetes deployment created marker
+    id: 9baf9ef4-d214-56dd-93ec-155af5be16be
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes deployment created marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: create_deployment
+        attack.technique.id: T1610
+        apt_sim.variant: k8s_deployment_created
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_deployment
+    event.provider: kubernetes
+    attack.tactic: execution
+    attack.technique.id: T1610
+    attack.technique.name: Deploy Container
+    apt_sim.variant: k8s_deployment_created
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1613:K8S_RESOURCE_DISCOVERY_ADV
+  attack_id: T1613
+  name: Kubernetes resource discovery marker
+  description: Marker-only kubernetes simulation for Container and Resource Discovery.
+  tactic: discovery
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Container and Resource Discovery
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_resource_discovery_adv.json
+  sigma:
+    title: Kubernetes resource discovery marker
+    id: 982f4dc9-2819-55d5-ae4c-dce38817d657
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes resource discovery marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: list_resources
+        attack.technique.id: T1613
+        apt_sim.variant: k8s_resource_discovery_adv
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: low
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: list_resources
+    event.provider: kubernetes
+    attack.tactic: discovery
+    attack.technique.id: T1613
+    attack.technique.name: Container and Resource Discovery
+    apt_sim.variant: k8s_resource_discovery_adv
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1611:K8S_HOST_ESCAPE_SIGNAL
+  attack_id: T1611
+  name: Kubernetes host escape signal marker
+  description: Marker-only kubernetes simulation for Escape to Host.
+  tactic: privilege_escalation
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: kubernetes_audit
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Escape to Host
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_host_escape_signal.json
+  sigma:
+    title: Kubernetes host escape signal marker
+    id: 0107d5fc-fcf5-58b6-a7a3-52ad4f9c4b4b
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes host escape signal marker.
+    logsource:
+      product: apt_simulator
+      category: kubernetes_audit
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+        event.action: host_escape_signal
+        attack.technique.id: T1611
+        apt_sim.variant: k8s_host_escape_signal
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: high
+  synthetic_events:
+  - category: kubernetes_audit
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: host_escape_signal
+    event.provider: kubernetes
+    attack.tactic: privilege_escalation
+    attack.technique.id: T1611
+    attack.technique.name: Escape to Host
+    apt_sim.variant: k8s_host_escape_signal
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'
+- id: T1612:K8S_IMAGE_BUILD_ON_HOST
+  attack_id: T1612
+  name: Kubernetes image build on host marker
+  description: Marker-only kubernetes simulation for Build Image on Host.
+  tactic: stealth
+  platforms:
+  - linux
+  safety_tier: marker-only
+  metadata:
+    provider: kubernetes
+    telemetry_source: container_runtime
+    source_model: defensive_lab
+    variant_family: cloud_k8s_lab
+    mitre_name: Build Image on Host
+  params_schema:
+    principal:
+      type: string
+      default: lab.operator
+    asset:
+      type: string
+      default: lab-endpoint-01
+    resource:
+      type: string
+      default: kubernetes-resource-01
+    source_ip:
+      type: string
+      default: 198.51.100.77
+  artifact: cloud_k8s_lab_k8s_image_build_on_host.json
+  sigma:
+    title: Kubernetes image build on host marker
+    id: 563ef4ee-7e89-5ff2-ab67-1c1e81c1c177
+    status: experimental
+    description: Detects simulator telemetry for Kubernetes image build on host marker.
+    logsource:
+      product: apt_simulator
+      category: container_runtime
+    detection:
+      selection:
+        event.dataset: apt_sim.cloud_k8s_lab.container_runtime
+        event.action: build_image
+        attack.technique.id: T1612
+        apt_sim.variant: k8s_image_build_on_host
+      condition: selection
+    falsepositives:
+    - authorized simulator replay
+    level: medium
+  synthetic_events:
+  - category: container_runtime
+    event.dataset: apt_sim.cloud_k8s_lab.container_runtime
+    event.action: build_image
+    event.provider: kubernetes
+    attack.tactic: stealth
+    attack.technique.id: T1612
+    attack.technique.name: Build Image on Host
+    apt_sim.variant: k8s_image_build_on_host
+    apt_sim.variant_family: cloud_k8s_lab
+    source.ip: '{source_ip}'
+    user.name: '{principal}'
+    host.name: '{asset}'
+    resource.name: '{resource}'

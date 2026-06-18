@@ -1,0 +1,21 @@
+title: RDP lateral path marker
+id: 49e8b1f5-4b69-5f3d-8981-5d720ad63c36
+status: experimental
+description: Detects simulator telemetry for RDP lateral path marker.
+logsource:
+  product: apt_simulator
+  category: windows_security
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: rdp_lateral_path
+    attack.technique.id: T1021.001
+    apt_sim.variant: ad_rdp_lateral_path
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1021/001/
+tags:
+- attack.t1021.001

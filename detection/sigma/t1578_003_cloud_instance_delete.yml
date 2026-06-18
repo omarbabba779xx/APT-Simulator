@@ -1,0 +1,21 @@
+title: Cloud instance delete marker
+id: 90c76249-8a49-51b1-b0aa-acc14e2cc721
+status: experimental
+description: Detects simulator telemetry for Cloud instance delete marker.
+logsource:
+  product: apt_simulator
+  category: compute
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.compute
+    event.action: DeleteInstance
+    attack.technique.id: T1578.003
+    apt_sim.variant: cloud_instance_delete
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1578/003/
+tags:
+- attack.t1578.003

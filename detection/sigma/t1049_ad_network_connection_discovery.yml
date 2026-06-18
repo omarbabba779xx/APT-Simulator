@@ -1,0 +1,21 @@
+title: Network connection discovery marker
+id: e8c9ec4b-b011-56b9-bef2-01729b247f62
+status: experimental
+description: Detects simulator telemetry for Network connection discovery marker.
+logsource:
+  product: apt_simulator
+  category: windows_process
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: net_connection_discovery
+    attack.technique.id: T1049
+    apt_sim.variant: ad_network_connection_discovery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1049/
+tags:
+- attack.t1049

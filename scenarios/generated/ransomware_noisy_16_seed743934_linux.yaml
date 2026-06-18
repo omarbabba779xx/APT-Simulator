@@ -29,8 +29,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s001_t1078_004_identity_risky_signin
-- id: s004_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s004_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -43,7 +43,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s004_t1070_002_linux_log_clear
+  - s004_t1070_004_linux_log_clear
 - id: s006_t1003
   ttp: T1003
   params:
@@ -81,14 +81,14 @@ steps:
   abort_on_fail: false
   depends_on:
   - s007_t1556_009_okta_mfa_policy_weaken
-  - s004_t1070_002_linux_log_clear
+  - s004_t1070_004_linux_log_clear
 - id: s011_t1083
   ttp: T1083
   params:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s004_t1070_002_linux_log_clear
+  - s004_t1070_004_linux_log_clear
 - id: s012_t1087_004_m365_group_enumeration
   ttp: T1087.004:M365_GROUP_ENUMERATION
   params:
@@ -102,7 +102,7 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s004_t1070_002_linux_log_clear
+  - s004_t1070_004_linux_log_clear
   - s012_t1087_004_m365_group_enumeration
 - id: s014_t1021_002
   ttp: T1021.002

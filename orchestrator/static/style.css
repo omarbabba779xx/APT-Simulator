@@ -224,7 +224,8 @@ h2 {
 
 .overview-grid,
 .split-grid,
-.builder-layout {
+.builder-layout,
+.sync-grid {
   display: grid;
   gap: 14px;
 }
@@ -250,7 +251,8 @@ h2 {
 }
 
 .split-grid,
-.builder-layout {
+.builder-layout,
+.sync-grid {
   grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
 }
 
@@ -316,6 +318,7 @@ h2 {
 }
 
 .status-queued,
+.status-scheduled,
 .status-skipped {
   background: var(--surface-2);
   color: var(--muted);
@@ -526,6 +529,72 @@ legend {
   min-height: 30px;
   padding: 0 8px;
   font-size: 12px;
+}
+
+.scheduler-controls {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.summary-row,
+.drift-group,
+.edge-row,
+.exposure-path {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfe;
+}
+
+.summary-row {
+  min-height: 42px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.summary-row span,
+.drift-group p {
+  color: var(--muted);
+}
+
+.sync-summary,
+.drift-list,
+.exposure-graph {
+  display: grid;
+  gap: 8px;
+}
+
+.drift-group {
+  padding: 10px;
+}
+
+.drift-group p {
+  margin-top: 5px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.exposure-path,
+.edge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding: 9px;
+}
+
+.exposure-graph h3 {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.path-arrow {
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .report-links {
@@ -770,7 +839,9 @@ dialog::backdrop {
 
   .overview-grid,
   .split-grid,
-  .builder-layout {
+  .builder-layout,
+  .sync-grid,
+  .scheduler-controls {
     grid-template-columns: 1fr;
   }
 }

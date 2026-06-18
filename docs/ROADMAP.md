@@ -42,13 +42,20 @@
 
 - [x] AWS Stratus-style simulated TTPs: T1078.004 (Cloud Account abuse), T1530 (Data from Storage)
 - [x] Catalog-driven TTP packs for Windows, Linux, cloud, identity, and SaaS marker-only variants
-- [x] ATT&CK STIX importer and full Enterprise marker-only catalog with 5,000 registered TTPs/variants
+- [x] ATT&CK STIX importer and full Enterprise marker-only catalog with 5,064 registered TTPs/variants
 - [x] ECS / OCSF golden telemetry fixture export
 - [x] Detection scoring with coverage percentage, missing fields, and false-positive risk
 - [x] Graph-based scenario builder with actor and difficulty profiles
 - [x] Campaign queue and synthetic replay event generation
-- [ ] Azure / Entra ID privilege escalation simulation
-- [ ] GCP resource manager discovery expansion
+- [x] ATT&CK sync snapshot and drift status for 15/15 Enterprise tactics
+- [x] ATT&CK Emulation Library safe scenario import
+- [x] Cloud/Kubernetes marker-only lab pack
+- [x] Active Directory/Windows enterprise marker-only lab pack
+- [x] Scheduled and recurring campaign runs
+- [x] Detection-as-code workbench for Sigma quality, fields, risk, and target readiness
+- [x] Controlled exposure graph across identity, endpoint, cloud, SaaS, and container domains
+- [x] Azure / Entra ID privilege escalation simulation
+- [x] GCP resource manager discovery expansion
 - [ ] gRPC C2 channel option (alternative to HTTP)
 - [ ] PyInstaller / Nuitka agent builds for portable Windows/Linux/macOS deployment
 - [ ] Multi-agent parallel dispatch (multiple agents on same scenario)

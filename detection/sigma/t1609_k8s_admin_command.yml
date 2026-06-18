@@ -1,0 +1,21 @@
+title: Kubernetes admin command marker
+id: 3b151596-15b6-525d-9ab1-c3f005c562e7
+status: experimental
+description: Detects simulator telemetry for Kubernetes admin command marker.
+logsource:
+  product: apt_simulator
+  category: kubernetes_audit
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: admin_command
+    attack.technique.id: T1609
+    apt_sim.variant: k8s_admin_command
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1609/
+tags:
+- attack.t1609

@@ -1,0 +1,21 @@
+title: WinRM lateral path marker
+id: eb7132f8-2f1d-5700-8e29-d28bd495bbb1
+status: experimental
+description: Detects simulator telemetry for WinRM lateral path marker.
+logsource:
+  product: apt_simulator
+  category: windows_security
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_security
+    event.action: winrm_lateral_path
+    attack.technique.id: T1021.006
+    apt_sim.variant: ad_winrm_lateral_path
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1021/006/
+tags:
+- attack.t1021.006

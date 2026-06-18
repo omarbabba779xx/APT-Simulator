@@ -1,0 +1,21 @@
+title: Remote system discovery marker
+id: c825f90a-e350-5987-bca6-f0728c9302a7
+status: experimental
+description: Detects simulator telemetry for Remote system discovery marker.
+logsource:
+  product: apt_simulator
+  category: windows_process
+detection:
+  selection:
+    event.dataset: apt_sim.ad_enterprise_lab.windows_process
+    event.action: remote_system_discovery
+    attack.technique.id: T1018
+    apt_sim.variant: ad_remote_system_discovery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1018/
+tags:
+- attack.t1018

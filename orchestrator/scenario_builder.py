@@ -11,6 +11,7 @@ import yaml
 
 import ttps  # noqa: F401
 from ttps.base import registry
+from .attack_sync import OFFICIAL_TACTIC_ORDER, official_tactic_for, tactic_sort_key
 
 
 app = typer.Typer(no_args_is_help=True)
@@ -20,22 +21,7 @@ app = typer.Typer(no_args_is_help=True)
 def _root() -> None:
     """Graph scenario generation."""
 
-TACTIC_ORDER = [
-    "reconnaissance",
-    "resource_development",
-    "initial_access",
-    "execution",
-    "persistence",
-    "privilege_escalation",
-    "defense_evasion",
-    "credential_access",
-    "discovery",
-    "lateral_movement",
-    "collection",
-    "command_and_control",
-    "exfiltration",
-    "impact",
-]
+TACTIC_ORDER = OFFICIAL_TACTIC_ORDER
 
 ACTOR_PACKS: dict[str, list[str]] = {
     "apt29": ["windows", "identity", "cloud"],
@@ -60,12 +46,9 @@ MAX_VARIANT_SEED = 1_000_000
 MAX_BATCH_SCENARIOS = 10_000
 
 
-def _sort_key(ttp: Any) -> tuple[int, str]:
-    try:
-        idx = TACTIC_ORDER.index(ttp.tactic)
-    except ValueError:
-        idx = len(TACTIC_ORDER)
-    return idx, ttp.attack_id
+def _sort_key(ttp: Any) -> tuple[int, str, str]:
+    tactic = official_tactic_for(str(getattr(ttp, "base_attack_id", ttp.attack_id)), ttp.tactic)
+    return (*tactic_sort_key(tactic), ttp.attack_id)
 
 
 def _eligible(actor: str, platforms: set[str]) -> list[Any]:

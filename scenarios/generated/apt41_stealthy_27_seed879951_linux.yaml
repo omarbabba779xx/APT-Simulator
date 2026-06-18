@@ -57,8 +57,8 @@ steps:
   abort_on_fail: false
   depends_on:
   - s005_t1098_003_azure_role_assignment
-- id: s008_t1070_002_linux_log_clear
-  ttp: T1070.002:LINUX_LOG_CLEAR
+- id: s008_t1070_004_linux_log_clear
+  ttp: T1070.004:LINUX_LOG_CLEAR
   params:
     dry_run: true
   abort_on_fail: false
@@ -196,4 +196,4 @@ steps:
     dry_run: true
   abort_on_fail: false
   depends_on:
-  - s008_t1070_002_linux_log_clear
+  - s008_t1070_004_linux_log_clear

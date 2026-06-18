@@ -1,0 +1,21 @@
+title: Cloud storage exfiltration path marker
+id: 73dd72fa-a3c2-58cd-9b48-09b768efe623
+status: experimental
+description: Detects simulator telemetry for Cloud storage exfiltration path marker.
+logsource:
+  product: apt_simulator
+  category: storage
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.storage
+    event.action: ExternalShare
+    attack.technique.id: T1567.002
+    apt_sim.variant: cloud_storage_exfil_path
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: medium
+references:
+- https://attack.mitre.org/techniques/1567/002/
+tags:
+- attack.t1567.002

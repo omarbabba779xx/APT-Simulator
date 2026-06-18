@@ -1,0 +1,21 @@
+title: Cloud access key added marker
+id: ca7cebb1-4f16-5b1e-9bde-9f6c91575511
+status: experimental
+description: Detects simulator telemetry for Cloud access key added marker.
+logsource:
+  product: apt_simulator
+  category: identity
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.identity
+    event.action: CreateAccessKey
+    attack.technique.id: T1098.001
+    apt_sim.variant: cloud_access_key_added
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/001/
+tags:
+- attack.t1098.001

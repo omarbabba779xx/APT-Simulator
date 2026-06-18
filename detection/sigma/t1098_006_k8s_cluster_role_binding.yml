@@ -1,0 +1,21 @@
+title: Kubernetes cluster role binding marker
+id: 1763f8dd-410f-5a74-9d0c-27a145026788
+status: experimental
+description: Detects simulator telemetry for Kubernetes cluster role binding marker.
+logsource:
+  product: apt_simulator
+  category: kubernetes_audit
+detection:
+  selection:
+    event.dataset: apt_sim.cloud_k8s_lab.kubernetes_audit
+    event.action: create_clusterrolebinding
+    attack.technique.id: T1098.006
+    apt_sim.variant: k8s_cluster_role_binding
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: high
+references:
+- https://attack.mitre.org/techniques/1098/006/
+tags:
+- attack.t1098.006
