@@ -25,6 +25,9 @@
       <button class="tab" data-view="builder">Scenario</button>
       <button class="tab" data-view="campaigns">Campaigns</button>
       <button class="tab" data-view="runs">Runs</button>
+      <button class="tab" data-view="history">History</button>
+      <button class="tab" data-view="labs">Labs</button>
+      <button class="tab" data-view="access">Access</button>
       <button class="tab" data-view="detections">Detection</button>
       <button class="tab" data-view="workbench">Workbench</button>
       <button class="tab" data-view="exposure">Exposure</button>
@@ -393,6 +396,67 @@
           </thead>
           <tbody id="runs-table"></tbody>
         </table>
+      </div>
+    </section>
+
+    <section id="view-history" class="view">
+      <div class="split-grid">
+        <div class="table-shell">
+          <div class="table-title">
+            <h2>Persistent Run History</h2>
+            <span id="history-count" class="pill neutral">0 runs</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Scenario</th><th>Status</th><th>Steps</th><th>Artifacts</th><th>Reports</th></tr>
+            </thead>
+            <tbody id="history-table"></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Execution Queue</h2>
+            <span id="queue-count" class="pill neutral">0 tasks</span>
+          </div>
+          <div id="queue-bars" class="bar-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-labs" class="view">
+      <div class="table-shell">
+        <div class="table-title">
+          <h2>Lab Profiles</h2>
+          <span id="lab-count" class="pill neutral">0 profiles</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Profile</th><th>Platforms</th><th>Telemetry</th><th>Recommended Scenarios</th><th>Checks</th></tr>
+          </thead>
+          <tbody id="lab-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-access" class="view">
+      <div class="split-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>RBAC</h2>
+            <span id="access-status" class="pill neutral">Loading</span>
+          </div>
+          <div id="access-summary" class="sync-summary"></div>
+        </div>
+        <div class="table-shell">
+          <div class="table-title">
+            <h2>Role Matrix</h2>
+            <span class="pill neutral">viewer / operator / admin</span>
+          </div>
+          <table>
+            <thead><tr><th>Role</th><th>Capabilities</th></tr></thead>
+            <tbody id="access-table"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 

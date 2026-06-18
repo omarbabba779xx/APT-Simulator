@@ -1,0 +1,101 @@
+name: validated_cloud_intrusion_aws_to_k8s
+description: Fixture-backed Cloud Intrusion realistic actor-chain covering cloud k8s
+  telemetry with dry-run markers.
+target_platforms:
+- linux
+actor: Cloud Intrusion
+tags:
+- validated
+- actor_chain
+- realistic
+- cloud_intrusion
+- cloud
+- kubernetes
+- container
+steps:
+- id: s01_cloud_login
+  ttp: T1078.004:AWS_IAM_CONSOLE_RISK
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    principal: lab.validated_cloud_intrusion_aws_to_k8s
+    resource: lab-resource
+- id: s02_service_discovery
+  ttp: T1526:AWS_SERVICE_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    principal: lab.validated_cloud_intrusion_aws_to_k8s
+    resource: lab-resource
+  depends_on:
+  - s01_cloud_login
+- id: s03_cloud_infra
+  ttp: T1580:CLOUD_INFRA_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    principal: lab.validated_cloud_intrusion_aws_to_k8s
+    resource: lab-resource
+  depends_on:
+  - s02_service_discovery
+- id: s04_metadata_token
+  ttp: T1552.005:INSTANCE_METADATA_TOKEN_READ
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+  depends_on:
+  - s03_cloud_infra
+- id: s05_admin_command
+  ttp: T1651:CLOUD_ADMIN_COMMAND
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    principal: lab.validated_cloud_intrusion_aws_to_k8s
+    resource: lab-resource
+  depends_on:
+  - s04_metadata_token
+- id: s06_k8s_discovery
+  ttp: T1613:K8S_RESOURCE_DISCOVERY_ADV
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    cluster: lab-cluster
+    namespace: purple-lab
+  depends_on:
+  - s05_admin_command
+- id: s07_k8s_exec
+  ttp: T1059.013:K8S_API_EXEC
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    cluster: lab-cluster
+    namespace: purple-lab
+  depends_on:
+  - s06_k8s_discovery
+- id: s08_role_binding
+  ttp: T1098.006:K8S_CLUSTER_ROLE_BINDING
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    cluster: lab-cluster
+    namespace: purple-lab
+  depends_on:
+  - s07_k8s_exec
+- id: s09_deployment
+  ttp: T1610:K8S_DEPLOYMENT_CREATED
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    cluster: lab-cluster
+    namespace: purple-lab
+  depends_on:
+  - s08_role_binding
+- id: s10_escape_signal
+  ttp: T1611:K8S_HOST_ESCAPE_SIGNAL
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_aws_to_k8s
+    cluster: lab-cluster
+    namespace: purple-lab
+  depends_on:
+  - s09_deployment

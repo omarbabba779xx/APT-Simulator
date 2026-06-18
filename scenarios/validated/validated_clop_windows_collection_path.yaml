@@ -1,0 +1,98 @@
+name: validated_clop_windows_collection_path
+description: Fixture-backed Cl0p-style noisy actor-chain covering fincrime telemetry
+  with dry-run markers.
+target_platforms:
+- windows
+actor: Cl0p-style
+tags:
+- validated
+- actor_chain
+- noisy
+- cl0p_style
+- fincrime
+- windows
+- collection
+- lateral_movement
+steps:
+- id: s01_powershell
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+- id: s02_wmi
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s01_powershell
+- id: s03_scheduled_task
+  ttp: T1053.005
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s02_wmi
+- id: s04_service
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s03_scheduled_task
+- id: s05_process_discovery
+  ttp: T1057
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s04_service
+- id: s06_credentials
+  ttp: T1003
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s05_process_discovery
+- id: s07_bruteforce_marker
+  ttp: T1110
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s06_credentials
+- id: s08_smb_path
+  ttp: T1021.002
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s07_bruteforce_marker
+- id: s09_local_collection
+  ttp: T1005
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s08_smb_path
+- id: s10_archive
+  ttp: T1560
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s09_local_collection
+- id: s11_transfer
+  ttp: T1105
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s10_archive
+- id: s12_exfil
+  ttp: T1041
+  params:
+    dry_run: true
+    scenario: validated_clop_windows_collection_path
+  depends_on:
+  - s11_transfer

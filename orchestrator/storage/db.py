@@ -1,6 +1,7 @@
 """SQLite storage via SQLModel. Tracks agents, runs, step instances."""
 from __future__ import annotations
 
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -44,6 +45,56 @@ class StepInstance(SQLModel, table=True):
     error: Optional[str] = None
 
 
+class QueueEntry(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    run_id: str = Field(foreign_key="run.id", index=True)
+    step_id: str
+    attack_id: str
+    status: str = Field(default="queued", index=True)
+    assigned_agent: Optional[str] = Field(default=None, foreign_key="agent.id")
+    target_platforms_json: str = "[]"
+    attempt: int = 0
+    max_attempts: int = 1
+    cleanup_required: bool = True
+    cleanup_status: str = "pending"
+    created_at: datetime = Field(default_factory=_now)
+    updated_at: datetime = Field(default_factory=_now)
+    next_attempt_at: Optional[datetime] = None
+    last_error: Optional[str] = None
+
+
+class RunLog(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    run_id: str = Field(foreign_key="run.id", index=True)
+    step_id: Optional[str] = None
+    level: str = "info"
+    event: str
+    message: str
+    created_at: datetime = Field(default_factory=_now)
+
+
+class RunArtifact(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    run_id: str = Field(foreign_key="run.id", index=True)
+    kind: str
+    name: str
+    path: str
+    metadata_json: str = "{}"
+    created_at: datetime = Field(default_factory=_now)
+
+
+class CampaignRecord(SQLModel, table=True):
+    id: str = Field(primary_key=True)
+    status: str = Field(index=True)
+    created_at: datetime = Field(default_factory=_now)
+    updated_at: datetime = Field(default_factory=_now)
+    scenario_names_json: str = "[]"
+    run_ids_json: str = "[]"
+    scheduled_at: Optional[datetime] = None
+    repeat_interval_seconds: Optional[int] = None
+    repeat_remaining: int = 0
+
+
 def init_engine(db_path: str | Path):
     Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     engine = create_engine(f"sqlite:///{db_path}", echo=False)
@@ -83,11 +134,47 @@ class Repository:
             return list(s.exec(select(Agent)).all())
 
     # --- runs ---
-    def create_run(self, run_id: str, scenario_name: str, steps: list[tuple[str, str]]) -> None:
+    def create_run(
+        self,
+        run_id: str,
+        scenario_name: str,
+        steps: list[tuple[str, str]],
+        *,
+        target_platforms: list[str] | None = None,
+        max_attempts: int = 1,
+    ) -> None:
         with Session(self.engine) as s:
             s.add(Run(id=run_id, scenario_name=scenario_name, status="running"))
             for step_id, attack_id in steps:
                 s.add(StepInstance(run_id=run_id, step_id=step_id, attack_id=attack_id, status="queued"))
+                s.add(
+                    QueueEntry(
+                        run_id=run_id,
+                        step_id=step_id,
+                        attack_id=attack_id,
+                        target_platforms_json=json.dumps(target_platforms or ["any"]),
+                        max_attempts=max(max_attempts, 1),
+                    )
+                )
+            s.add(
+                RunArtifact(
+                    run_id=run_id,
+                    kind="report",
+                    name="run-report-json",
+                    path=f"/reports/runs/{run_id}.json",
+                    metadata_json=json.dumps({"format": "json"}),
+                )
+            )
+            s.add(
+                RunArtifact(
+                    run_id=run_id,
+                    kind="bundle",
+                    name="run-artifact-zip",
+                    path=f"/execution/artifacts/{run_id}.zip",
+                    metadata_json=json.dumps({"format": "zip"}),
+                )
+            )
+            s.add(RunLog(run_id=run_id, event="run.created", message=f"run {run_id} queued"))
             s.commit()
 
     def update_run_status(self, run_id: str, status: str, finished: bool = False) -> None:
@@ -98,7 +185,9 @@ class Repository:
             r.status = status
             if finished:
                 r.finished_at = _now()
+                self._mark_cleanup_complete(s, run_id)
             s.add(r)
+            s.add(RunLog(run_id=run_id, event="run.status", message=f"run status set to {status}"))
             s.commit()
 
     def update_step(
@@ -131,6 +220,33 @@ class Repository:
             if mark_finished:
                 row.finished_at = _now()
             s.add(row)
+            q = s.exec(
+                select(QueueEntry).where(QueueEntry.run_id == run_id, QueueEntry.step_id == step_id)
+            ).first()
+            if q:
+                q.status = status
+                q.updated_at = _now()
+                if agent_id:
+                    q.assigned_agent = agent_id
+                if mark_started:
+                    q.attempt += 1
+                if error:
+                    q.last_error = error
+                if status == "success":
+                    q.cleanup_status = "not_required"
+                elif status in {"failed", "aborted", "skipped"}:
+                    q.cleanup_status = "pending"
+                s.add(q)
+            message = error or output or f"step status set to {status}"
+            s.add(
+                RunLog(
+                    run_id=run_id,
+                    step_id=step_id,
+                    level="error" if status == "failed" else "info",
+                    event=f"step.{status}",
+                    message=message[:1000],
+                )
+            )
             s.commit()
 
     def list_runs(self) -> list[Run]:
@@ -145,3 +261,87 @@ class Repository:
         with Session(self.engine) as s:
             stmt = select(StepInstance).where(StepInstance.run_id == run_id).order_by(col(StepInstance.id))
             return list(s.exec(stmt).all())
+
+    def queue_entries(self, run_id: str | None = None) -> list[QueueEntry]:
+        with Session(self.engine) as s:
+            stmt = select(QueueEntry)
+            if run_id:
+                stmt = stmt.where(QueueEntry.run_id == run_id)
+            stmt = stmt.order_by(col(QueueEntry.id))
+            return list(s.exec(stmt).all())
+
+    def logs_for_run(self, run_id: str) -> list[RunLog]:
+        with Session(self.engine) as s:
+            stmt = select(RunLog).where(RunLog.run_id == run_id).order_by(col(RunLog.id))
+            return list(s.exec(stmt).all())
+
+    def artifacts_for_run(self, run_id: str) -> list[RunArtifact]:
+        with Session(self.engine) as s:
+            stmt = select(RunArtifact).where(RunArtifact.run_id == run_id).order_by(col(RunArtifact.id))
+            return list(s.exec(stmt).all())
+
+    def create_campaign(
+        self,
+        campaign_id: str,
+        status: str,
+        scenario_names: list[str],
+        run_ids: list[str],
+        *,
+        scheduled_at: datetime | None = None,
+        repeat_interval_seconds: int | None = None,
+        repeat_remaining: int = 0,
+    ) -> None:
+        with Session(self.engine) as s:
+            s.add(
+                CampaignRecord(
+                    id=campaign_id,
+                    status=status,
+                    scenario_names_json=json.dumps(scenario_names),
+                    run_ids_json=json.dumps(run_ids),
+                    scheduled_at=scheduled_at,
+                    repeat_interval_seconds=repeat_interval_seconds,
+                    repeat_remaining=repeat_remaining,
+                )
+            )
+            s.commit()
+
+    def update_campaign(
+        self,
+        campaign_id: str,
+        *,
+        status: str | None = None,
+        run_ids: list[str] | None = None,
+        scenario_names: list[str] | None = None,
+        scheduled_at: datetime | None = None,
+        repeat_remaining: int | None = None,
+    ) -> None:
+        with Session(self.engine) as s:
+            record = s.get(CampaignRecord, campaign_id)
+            if not record:
+                return
+            if status is not None:
+                record.status = status
+            if run_ids is not None:
+                record.run_ids_json = json.dumps(run_ids)
+            if scenario_names is not None:
+                record.scenario_names_json = json.dumps(scenario_names)
+            if scheduled_at is not None:
+                record.scheduled_at = scheduled_at
+            if repeat_remaining is not None:
+                record.repeat_remaining = repeat_remaining
+            record.updated_at = _now()
+            s.add(record)
+            s.commit()
+
+    def list_campaigns(self) -> list[CampaignRecord]:
+        with Session(self.engine) as s:
+            return list(s.exec(select(CampaignRecord).order_by(col(CampaignRecord.created_at).desc())).all())
+
+    @staticmethod
+    def _mark_cleanup_complete(session: Session, run_id: str) -> None:
+        entries = session.exec(select(QueueEntry).where(QueueEntry.run_id == run_id)).all()
+        for entry in entries:
+            if entry.cleanup_status == "pending":
+                entry.cleanup_status = "complete"
+                entry.updated_at = _now()
+                session.add(entry)

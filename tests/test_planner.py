@@ -63,3 +63,17 @@ def test_killswitch_aborts_runs() -> None:
     for run in p.list_runs():
         assert run.status == "aborted"
         assert all(s.status != STATUS_SUCCESS for s in run.steps.values())
+
+
+def test_platform_filtered_dispatch() -> None:
+    p = Planner()
+    sc = Scenario(
+        name="windows_only",
+        target_platforms=["windows"],
+        steps=[ScenarioStep(id="a", ttp="T1033")],
+    )
+    p.start_run(sc)
+    assert p.next_task_for_agent("linux-agent", "linux") is None
+    task = p.next_task_for_agent("windows-agent", "windows")
+    assert task is not None
+    assert task[1].step.id == "a"

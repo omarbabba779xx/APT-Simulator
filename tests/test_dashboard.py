@@ -32,6 +32,9 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "Detection Workbench" in r.text
     assert "Exposure Graph" in r.text
     assert "Scenario Maturity" in r.text
+    assert "Persistent Run History" in r.text
+    assert "Lab Profiles" in r.text
+    assert "RBAC" in r.text
 
 
 def test_coverage_endpoint(tmp_path) -> None:
@@ -45,9 +48,9 @@ def test_coverage_endpoint(tmp_path) -> None:
 def test_loaded_scenarios_include_generated_yaml_variants(tmp_path) -> None:
     client = _client(tmp_path)
     health = client.get("/healthz").json()
-    assert health["scenarios_loaded"] == 2534
+    assert health["scenarios_loaded"] == 2572
     scenarios = client.get("/scenarios").json()
-    assert len(scenarios) == 2534
+    assert len(scenarios) == 2572
     assert any(name.startswith("apt29_beginner_") for name in scenarios)
     assert "ael_apt29" in scenarios
     assert "validated_apt29_identity_cloud_chain" in scenarios
@@ -58,7 +61,7 @@ def test_scenario_library_filters(tmp_path) -> None:
     r = client.get("/scenario-library", params={"source": "generated variant", "platform": "windows"})
     assert r.status_code == 200
     body = r.json()
-    assert body["total"] == 2534
+    assert body["total"] == 2572
     assert body["filtered"] > 0
     first = body["items"][0]
     assert first["kind"] == "generated variant"
@@ -70,7 +73,7 @@ def test_scenario_library_filters(tmp_path) -> None:
     assert ael["items"][0]["kind"] == "emulation plan"
 
     validated = client.get("/scenario-library", params={"source": "validated actor-chain"}).json()
-    assert validated["filtered"] == 12
+    assert validated["filtered"] == 50
     assert validated["items"][0]["kind"] == "validated actor-chain"
 
 
@@ -96,18 +99,25 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert set(workbench["targets"]) == {"splunk", "elastic", "sentinel", "chronicle"}
 
     graph = client.get("/exposure/graph").json()
-    assert graph["scenario_count"] == 2534
+    assert graph["scenario_count"] == 2572
     assert graph["domain_counts"]["cloud"] > 0
     assert graph["domain_counts"]["container"] > 0
 
     maturity = client.get("/scenario-maturity").json()
-    assert maturity["total_scenarios"] == 2534
-    assert maturity["validated_scenarios"] == 12
-    assert maturity["fixture_backed_scenarios"] == 12
+    assert maturity["total_scenarios"] == 2572
+    assert maturity["validated_scenarios"] == 50
+    assert maturity["fixture_backed_scenarios"] == 50
+    assert maturity["evidence_quality"]["with_siem_fields"] == 50
 
     evidence = client.get("/scenario-evidence/validated_apt29_identity_cloud_chain").json()
     assert evidence["found"] is True
     assert len(evidence["golden_events"]) == 2
+
+    labs = client.get("/lab-profiles").json()
+    assert len(labs) == 4
+
+    access = client.get("/access/rbac").json()
+    assert access["roles"] == ["viewer", "operator", "admin"]
 
 
 def test_scenario_builder_preview(tmp_path) -> None:
@@ -178,6 +188,34 @@ def test_campaign_runner_and_reports(tmp_path) -> None:
     html = client.get(f"/reports/campaigns/{campaign['id']}.html")
     assert html.status_code == 200
     assert "Campaign" in html.text
+
+
+def test_persistent_history_queue_and_run_artifact_bundle(tmp_path) -> None:
+    client = _client(tmp_path)
+    run_resp = client.post("/scenarios/run", json={"name": "validated_saas_lab_token_abuse_chain"})
+    assert run_resp.status_code == 200
+    run_id = run_resp.json()["id"]
+
+    history = client.get("/history/runs").json()
+    assert history["total"] >= 1
+    assert any(item["id"] == run_id and item["artifact_count"] >= 2 for item in history["items"])
+
+    detail = client.get(f"/history/runs/{run_id}").json()
+    assert detail["id"] == run_id
+    assert len(detail["queue"]) == len(detail["steps"])
+    assert detail["artifacts"]
+
+    queue = client.get("/execution/queue", params={"run_id": run_id}).json()
+    assert queue["total"] == len(detail["steps"])
+    assert all(item["cleanup_required"] is True for item in queue["items"])
+
+    cleanup = client.get(f"/runs/{run_id}/cleanup-plan").json()
+    assert cleanup["run_id"] == run_id
+    assert cleanup["pending_count"] == len(detail["steps"])
+
+    bundle = client.get(f"/reports/runs/{run_id}.zip")
+    assert bundle.status_code == 200
+    assert bundle.headers["content-type"] == "application/zip"
 
 
 def test_scheduled_campaign_request(tmp_path) -> None:

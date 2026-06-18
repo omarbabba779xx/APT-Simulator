@@ -75,8 +75,8 @@ flowchart LR
 ## Current Scale
 
 - 5,064 registered TTPs/variants.
-- 2,534 loaded YAML scenarios.
-- 12 fixture-backed validated actor-chain scenarios.
+- 2,572 loaded YAML scenarios.
+- 50 fixture-backed validated actor-chain scenarios.
 - 5,064 Sigma rules.
 - 15/15 current ATT&CK Enterprise tactics covered.
-- Dashboard, campaign runner, reports, coverage matrix, scenario library, scenario maturity, sync status, detection workbench, and exposure graph are implemented.
+- Dashboard, campaign runner, persistent run history, execution queue, ZIP artifacts, reports, coverage matrix, scenario library, scenario maturity, lab profiles, sync status, detection workbench, and exposure graph are implemented.

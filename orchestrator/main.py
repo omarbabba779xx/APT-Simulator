@@ -172,6 +172,27 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
         return scenario_evidence(scenario_name)
 
+    @app.get("/lab-profiles")
+    def lab_profiles() -> list[dict[str, object]]:
+        """Recommended lab profiles for scenario testing."""
+        from .lab_profiles import list_lab_profiles
+
+        return list_lab_profiles()
+
+    @app.get("/access/rbac")
+    def access_rbac() -> dict[str, object]:
+        """RBAC role matrix exposed for dashboard and compliance checks."""
+        return {
+            "enabled": cfg.security.require_auth,
+            "roles": ["viewer", "operator", "admin"],
+            "matrix": {
+                "viewer": ["read catalog", "read scenarios", "read reports", "read history"],
+                "operator": ["viewer", "start runs", "start campaigns", "register agents"],
+                "admin": ["operator", "engage killswitch", "disengage killswitch"],
+            },
+            "token_cli": "python -m orchestrator.auth_cli issue --role admin --subject analyst",
+        }
+
     @app.get("/runs/{run_id}/timeline")
     def run_timeline(run_id: str) -> dict[str, object]:
         """Timeline view for one in-memory run."""

@@ -9,9 +9,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Area | Current state |
 | --- | --- |
 | Coverage catalog | 5,064 TTPs mapped to ATT&CK Enterprise techniques and controlled variants |
-| Scenario library | 2,534 loaded YAML scenarios available to the API and dashboard |
-| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 12 validated actor-chain scenarios |
-| Scenario maturity | 12 fixture-backed validated actor-chain scenarios with evidence contracts |
+| Scenario library | 2,572 loaded YAML scenarios available to the API and dashboard |
+| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 50 validated actor-chain scenarios |
+| Scenario maturity | 50 fixture-backed validated actor-chain scenarios with SOC evidence contracts |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -37,11 +37,11 @@ flowchart LR
 ## Exact Current Counts
 
 - 5,064 TTPs
-- 2,534 loaded scenarios
+- 2,572 loaded scenarios
 - 11 classic YAML scenarios
 - 2,500 generated YAML scenarios
 - 11 emulation-plan YAML scenarios
-- 12 validated actor-chain YAML scenarios
+- 50 validated actor-chain YAML scenarios
 - 15,680,015,680 generable scenario variants
 - 5,064 Sigma rules
 - 15/15 current ATT&CK Enterprise tactics covered
@@ -51,9 +51,9 @@ flowchart LR
 - 36 Cloud/Kubernetes lab TTPs in the `cloud_k8s_lab` pack
 - 28 Active Directory/Windows enterprise lab TTPs in the `ad_enterprise_lab` pack
 
-The 2,534 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+The 2,572 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
 
-The 12 validated actor-chain scenarios are manually authored scenario DAGs with fixture-backed evidence contracts under `evidence/`. They are not counted as generated variants and are exposed separately in the Scenario Library and Scenario Maturity views.
+The 50 validated actor-chain scenarios are full scenario DAGs with fixture-backed SOC evidence contracts under `evidence/`. They are not counted as generated variants and are exposed separately in the Scenario Library and Scenario Maturity views.
 
 The ATT&CK sync layer uses a bundled Enterprise STIX snapshot, detects missing, extra, deprecated, and revoked local technique IDs, and keeps the dashboard aligned to the current 15 tactic Enterprise model.
 
@@ -87,7 +87,7 @@ flowchart LR
     Actors["Actor profiles"] --> Variants["Deterministic variant builder"]
     Difficulty["Difficulty levels"] --> Variants
     Platforms["Windows, Linux, macOS, cloud, identity, SaaS"] --> Variants
-    AEL["Emulation-plan imports"] --> Loaded["2,534 loaded YAML scenarios"]
+    AEL["Emulation-plan imports"] --> Loaded["2,572 loaded YAML scenarios"]
     Validated["Fixture-backed actor-chain scenarios"] --> Loaded
     Variants --> Loaded
     Variants --> Space["15,680,015,680 generable variants"]
@@ -102,7 +102,7 @@ flowchart TD
     Sigma --> Workbench["Rule quality scoring"]
     Events --> Workbench
     Workbench --> Targets["Splunk, Elastic, Sentinel, Chronicle export readiness"]
-    Scenarios["2,534 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
+    Scenarios["2,572 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
     Scenarios --> Maturity["Scenario maturity and evidence scoring"]
     Evidence["Golden event contracts"] --> Maturity
 ```
@@ -115,6 +115,7 @@ flowchart TD
 - Exports Sigma coverage, raw telemetry fixtures, ECS fixtures, OCSF fixtures, and simple SIEM query sketches.
 - Builds scenario batches from deterministic variant space.
 - Produces JSON and HTML reports for runs and campaigns.
+- Produces ZIP artifact bundles for persistent run history.
 - Tracks ATT&CK snapshot drift and detection-rule quality.
 - Builds a controlled exposure graph from loaded scenarios and catalog domains.
 - Scores scenario maturity using actor depth, DAG structure, tactic coverage, detection coverage, and evidence fixtures.
@@ -123,7 +124,7 @@ flowchart TD
 
 - It is not an offensive framework.
 - It is not intended for systems without written authorization.
-- It stores the complete 2,534-scenario loaded library; larger variant batches are generated on demand.
+- It stores the complete 2,572-scenario loaded library; larger variant batches are generated on demand.
 - Fixture-backed scenarios include expected telemetry contracts; they are not claims of external SIEM certification.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
@@ -143,7 +144,7 @@ flowchart TD
 orchestrator/   FastAPI app, planner, dashboard API, reports, scenario loader
 agent/          Beacon agent and local runner
 ttps/           TTP registry, Python TTPs, catalog-backed TTP packs
-scenarios/      11 classic, 2,500 generated, 11 emulation-plan, and 12 validated YAML scenarios
+scenarios/      11 classic, 2,500 generated, 11 emulation-plan, and 50 validated YAML scenarios
 evidence/       Scenario evidence contracts and SOC golden event fixtures
 detection/      Sigma rules, coverage metadata, fixture/query export targets
 profiles/       Actor profile inputs
@@ -151,6 +152,8 @@ config/         Default runtime and safety configuration
 tests/          Unit, API, dashboard, coverage, and conformance tests
 docs/           Supporting architecture and roadmap notes
 ```
+
+Public verification notes live in `docs/PUBLIC_EVIDENCE.md`.
 
 ## Install
 
@@ -191,6 +194,9 @@ The dashboard includes:
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
 | TTP Catalog | Search and filter registered TTPs and safety tiers. |
 | Campaigns | Select 10, 50, or 100 scenarios, schedule campaigns, repeat them, pause, resume, or retry failed work. |
+| History | Read persistent run history, execution queue state, cleanup status, and ZIP artifacts. |
+| Labs | Select Windows AD, Linux fleet, Cloud/Kubernetes, or SaaS/Identity lab profiles. |
+| Access | Inspect RBAC roles and token issuance command. |
 | Detection Workbench | Score Sigma quality, field gaps, false-positive risk, and export readiness. |
 | Exposure Graph | Browse controlled identity, endpoint, cloud, SaaS, and container paths. |
 | Reports | Open JSON and HTML reports for runs and campaigns. |
@@ -218,6 +224,9 @@ Scenario maturity and evidence:
 curl http://127.0.0.1:8000/scenario-maturity
 curl http://127.0.0.1:8000/scenario-evidence/validated_apt29_identity_cloud_chain
 curl http://127.0.0.1:8000/reports/scenarios/validated_apt29_identity_cloud_chain.json
+curl http://127.0.0.1:8000/history/runs
+curl http://127.0.0.1:8000/execution/queue
+curl http://127.0.0.1:8000/lab-profiles
 ```
 
 Variant-space count:
@@ -282,6 +291,8 @@ Run reports:
 ```bash
 curl http://127.0.0.1:8000/reports/runs/<run_id>.json
 curl http://127.0.0.1:8000/reports/runs/<run_id>.html
+curl -o run-artifacts.zip http://127.0.0.1:8000/reports/runs/<run_id>.zip
+curl http://127.0.0.1:8000/runs/<run_id>/cleanup-plan
 ```
 
 ## CLI Examples
@@ -359,6 +370,17 @@ python -m orchestrator.exposure_graph graph --out exposure-graph.json
 python -m orchestrator.scenario_maturity summary
 ```
 
+The maturity report separates generated variants from validated actor-chain scenarios, tracks evidence-backed scenarios, and surfaces missing evidence for static or imported scenarios. The 50 validated scenarios include Sigma match references, ECS fields, OCSF categories, SIEM fields, detection latency targets, report expectations, and 100 golden SOC events.
+
+## Lab Profiles
+
+The dashboard and `/lab-profiles` endpoint expose four practical lab tracks:
+
+- Windows AD Lab: domain login, discovery, credential marker, lateral movement, policy and service markers.
+- Linux Fleet Lab: shell, cron, transfer, archive, C2, and cleanup markers.
+- Cloud/Kubernetes Lab: cloud access, metadata, Kubernetes discovery, role binding, deployment, and escape signal markers.
+- SaaS/Identity Lab: password spray, MFA policy, risky sign-in, token creation, collection, and external sharing markers.
+
 Run a local dry-run style scenario without the orchestrator:
 
 ```bash
@@ -394,8 +416,8 @@ node --check orchestrator/static/app.js
 Conformance tests verify:
 
 - TTP count is exactly 5,064.
-- Loaded scenario count is exactly 2,534.
-- Validated actor-chain scenario count is exactly 12.
+- Loaded scenario count is exactly 2,572.
+- Validated actor-chain scenario count is exactly 50.
 - README count statements match the current implementation.
 - ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
 - Public text files do not include forbidden public tooling markers.
@@ -407,9 +429,10 @@ The repository stores the complete loaded scenario library:
 - `scenarios/*.yaml` contains 11 classic scenario files.
 - `scenarios/generated/*.yaml` contains 2,500 generated scenario files.
 - `scenarios/ael/*.yaml` contains 11 emulation-plan scenario files.
-- `scenarios/validated/*.yaml` contains 12 fixture-backed validated actor-chain scenario files.
+- `scenarios/validated/*.yaml` contains 50 fixture-backed validated actor-chain scenario files.
+- `evidence/soc_golden_events.jsonl` contains two golden event rows per validated scenario, 100 rows total.
 - Each generated file is a complete scenario DAG with actor, target platforms, tags, steps, TTP IDs, parameters, and dependencies.
-- The loader reads the full directory tree and loads all 2,534 scenarios directly.
+- The loader reads the full directory tree and loads all 2,572 scenarios directly.
 
 ## License
 

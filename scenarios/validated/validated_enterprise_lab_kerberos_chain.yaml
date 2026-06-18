@@ -1,0 +1,90 @@
+name: validated_enterprise_lab_kerberos_chain
+description: Fixture-backed Enterprise Lab realistic actor-chain covering windows
+  ad telemetry with dry-run markers.
+target_platforms:
+- windows
+actor: Enterprise Lab
+tags:
+- validated
+- actor_chain
+- realistic
+- enterprise_lab
+- active_directory
+- windows
+- lateral_movement
+steps:
+- id: s01_domain_login
+  ttp: T1078.002:AD_DOMAIN_ACCOUNT_LOGIN
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+- id: s02_user_discovery
+  ttp: T1033:AD_USER_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s01_domain_login
+- id: s03_account_enum
+  ttp: T1087.002:AD_DOMAIN_ACCOUNT_ENUM
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s02_user_discovery
+- id: s04_group_enum
+  ttp: T1069.002:AD_DOMAIN_GROUP_ENUM
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s03_account_enum
+- id: s05_remote_systems
+  ttp: T1018:AD_REMOTE_SYSTEM_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s04_group_enum
+- id: s06_password_policy
+  ttp: T1201:AD_PASSWORD_POLICY_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s05_remote_systems
+- id: s07_sam_marker
+  ttp: T1003.002:AD_SAM_ACCESS_MARKER
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s06_password_policy
+- id: s08_smb_path
+  ttp: T1021.002:AD_SMB_ADMIN_SHARE_PATH
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s07_sam_marker
+- id: s09_winrm_path
+  ttp: T1021.006:AD_WINRM_LATERAL_PATH
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s08_smb_path
+- id: s10_registry_policy
+  ttp: T1112:AD_REGISTRY_POLICY_CHANGE
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s09_winrm_path
+- id: s11_service_marker
+  ttp: T1543.003:AD_WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+    scenario: validated_enterprise_lab_kerberos_chain
+  depends_on:
+  - s10_registry_policy

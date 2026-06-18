@@ -1,0 +1,111 @@
+name: validated_insider_repo_export_path
+description: Fixture-backed Insider realistic actor-chain covering hybrid telemetry
+  with dry-run markers.
+target_platforms:
+- windows
+- linux
+- darwin
+actor: Insider
+tags:
+- validated
+- actor_chain
+- realistic
+- insider
+- cross_platform
+- cloud
+- saas
+- kubernetes
+steps:
+- id: s01_system_info
+  ttp: T1082
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+- id: s02_user_discovery
+  ttp: T1033
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+  depends_on:
+  - s01_system_info
+- id: s03_wmi_marker
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+  depends_on:
+  - s02_user_discovery
+- id: s04_cloud_session
+  ttp: T1078.004:GCP_CONSOLE_SESSION
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    principal: lab.validated_insider_repo_export_path
+    resource: lab-resource
+  depends_on:
+  - s03_wmi_marker
+- id: s05_project_enum
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    principal: lab.validated_insider_repo_export_path
+    resource: lab-resource
+  depends_on:
+  - s04_cloud_session
+- id: s06_saas_token
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    principal: validated_insider_repo_export_path@lab.local
+  depends_on:
+  - s05_project_enum
+- id: s07_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    principal: validated_insider_repo_export_path@lab.local
+  depends_on:
+  - s06_saas_token
+- id: s08_k8s_discovery
+  ttp: T1613:K8S_RESOURCE_DISCOVERY_ADV
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    cluster: lab-cluster
+    namespace: purple-lab
+  depends_on:
+  - s07_repo_clone
+- id: s09_c2
+  ttp: T1071.001
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    url: http://127.0.0.1:8765/healthz
+    beacons: 2
+  depends_on:
+  - s08_k8s_discovery
+- id: s10_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+    principal: validated_insider_repo_export_path@lab.local
+  depends_on:
+  - s09_c2
+- id: s11_archive
+  ttp: T1560
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+  depends_on:
+  - s10_external_share
+- id: s12_cleanup
+  ttp: T1070.004
+  params:
+    dry_run: true
+    scenario: validated_insider_repo_export_path
+  depends_on:
+  - s11_archive

@@ -110,9 +110,12 @@ class Planner:
 
     def next_task_for_agent(self, agent_id: str, agent_platform: str) -> tuple[Run, StepState] | None:
         """Return the next ready step for this agent, or None."""
+        platform = agent_platform.lower()
         with self._lock:
             for run in self._runs.values():
                 if run.status != "running":
+                    continue
+                if "any" not in run.scenario.target_platforms and platform not in run.scenario.target_platforms:
                     continue
                 for step_id, state in run.steps.items():
                     if not run.is_step_ready(step_id):

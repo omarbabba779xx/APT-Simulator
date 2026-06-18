@@ -1,0 +1,93 @@
+name: validated_cloud_intrusion_saas_pivot
+description: Fixture-backed Cloud Intrusion realistic actor-chain covering identity
+  saas telemetry with dry-run markers.
+target_platforms:
+- windows
+- linux
+- darwin
+actor: Cloud Intrusion
+tags:
+- validated
+- actor_chain
+- realistic
+- cloud_intrusion
+- identity
+- saas
+- cloud
+steps:
+- id: s01_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: validated_cloud_intrusion_saas_pivot@lab.local
+- id: s02_mfa_policy_change
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: validated_cloud_intrusion_saas_pivot@lab.local
+  depends_on:
+  - s01_password_spray
+- id: s03_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+  depends_on:
+  - s02_mfa_policy_change
+- id: s04_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+  depends_on:
+  - s03_risky_signin
+- id: s05_saas_token
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: validated_cloud_intrusion_saas_pivot@lab.local
+  depends_on:
+  - s04_role_grant
+- id: s06_group_enum
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: validated_cloud_intrusion_saas_pivot@lab.local
+  depends_on:
+  - s05_saas_token
+- id: s07_drive_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: validated_cloud_intrusion_saas_pivot@lab.local
+  depends_on:
+  - s06_group_enum
+- id: s08_cloud_login
+  ttp: T1078.004:AZURE_PORTAL_RISKY_SIGNIN
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: lab.validated_cloud_intrusion_saas_pivot
+    resource: lab-resource
+  depends_on:
+  - s07_drive_download
+- id: s09_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+    principal: validated_cloud_intrusion_saas_pivot@lab.local
+  depends_on:
+  - s08_cloud_login
+- id: s10_cleanup_marker
+  ttp: T1070.004
+  params:
+    dry_run: true
+    scenario: validated_cloud_intrusion_saas_pivot
+  depends_on:
+  - s09_external_share

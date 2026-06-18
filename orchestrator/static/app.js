@@ -21,6 +21,10 @@ const state = {
   space: null,
   library: { items: [], counts: {}, total: 0, filtered: 0 },
   campaigns: [],
+  history: { items: [], total: 0 },
+  queue: { items: [], total: 0 },
+  labProfiles: [],
+  access: null,
   preview: null,
   batch: null,
   feed: [],
@@ -122,12 +126,15 @@ async function refreshLive() {
     api("/agents").then((data) => { state.agents = data; }),
     api("/runs").then((data) => { state.runs = data; }),
     api("/campaigns").then((data) => { state.campaigns = data; }),
+    api("/history/runs").then((data) => { state.history = data; }),
+    api("/execution/queue").then((data) => { state.queue = data; }),
   ];
   await Promise.allSettled(tasks);
   renderHealth();
   renderAgents();
   renderRuns();
   renderCampaigns();
+  renderHistory();
   renderOverview();
 }
 
@@ -143,6 +150,8 @@ async function refreshStatic() {
     api("/scenario-maturity").then((data) => { state.maturity = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
     api("/scenario-library").then((data) => { state.library = data; }),
+    api("/lab-profiles").then((data) => { state.labProfiles = data; }),
+    api("/access/rbac").then((data) => { state.access = data; }),
   ];
   await Promise.allSettled(tasks);
   renderScenarioSelect();
@@ -156,6 +165,8 @@ async function refreshStatic() {
   renderWorkbench();
   renderExposure();
   renderMaturity();
+  renderLabProfiles();
+  renderAccess();
   renderVariantSpace();
   renderOverview();
 }
@@ -204,7 +215,7 @@ function renderMetrics() {
     ["Variants", fmtInt(state.space?.total_variants), "Generable"],
     ["Scenarios", Object.keys(state.scenarios || {}).length, "Loaded"],
     ["Validated", maturity.validated_scenarios ?? 0, "Actor-chain"],
-    ["Runs", runs.length, "In memory"],
+    ["Runs", state.history?.total ?? runs.length, "Stored"],
     ["Agents", agents, "Registered"],
   ];
   for (const [label, value, hint] of metrics) {
@@ -645,18 +656,97 @@ function renderRuns() {
       node("td", {}, statusPill(run.status)),
       node("td", {}, fmtTs(run.started_at)),
       node("td", {}, stepDots(run.step_summary || {})),
-      node("td", {}, reportLinks(`/reports/runs/${run.id}`)),
+      node("td", {}, reportLinks(`/reports/runs/${run.id}`, `/reports/runs/${run.id}.zip`)),
     ]));
   }
   if (!runs.length) tbody.appendChild(emptyRow(6, "No runs"));
   byId("runs-count").textContent = `${runs.length} runs`;
 }
 
-function reportLinks(basePath) {
-  return node("div", { class: "report-links" }, [
+function reportLinks(basePath, zipPath = "") {
+  const links = [
     node("a", { href: `${basePath}.json`, target: "_blank", rel: "noreferrer", onclick: (event) => event.stopPropagation() }, "JSON"),
     node("a", { href: `${basePath}.html`, target: "_blank", rel: "noreferrer", onclick: (event) => event.stopPropagation() }, "HTML"),
-  ]);
+  ];
+  if (zipPath) {
+    links.push(node("a", { href: zipPath, target: "_blank", rel: "noreferrer", onclick: (event) => event.stopPropagation() }, "ZIP"));
+  }
+  return node("div", { class: "report-links" }, links);
+}
+
+function renderHistory() {
+  const tbody = byId("history-table");
+  if (!tbody) return;
+  clear(tbody);
+  const items = state.history.items || [];
+  for (const run of items.slice(0, 120)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono" }, run.id),
+      node("td", {}, run.scenario),
+      node("td", {}, statusPill(run.status)),
+      node("td", {}, String(run.step_count || 0)),
+      node("td", {}, String(run.artifact_count || 0)),
+      node("td", {}, reportLinks(`/reports/runs/${run.id}`, `/reports/runs/${run.id}.zip`)),
+    ]));
+  }
+  if (!items.length) tbody.appendChild(emptyRow(6, "No persistent runs"));
+  byId("history-count").textContent = `${state.history.total || items.length} runs`;
+
+  const queueItems = state.queue.items || [];
+  const counts = {};
+  for (const item of queueItems) counts[item.status] = (counts[item.status] || 0) + 1;
+  const bars = Object.entries(counts).map(([label, count]) => ({ label, count }));
+  renderBars("queue-bars", bars);
+  byId("queue-count").textContent = `${state.queue.total || queueItems.length} tasks`;
+}
+
+function renderLabProfiles() {
+  const tbody = byId("lab-table");
+  if (!tbody) return;
+  clear(tbody);
+  for (const profile of state.labProfiles || []) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", {}, [
+        node("strong", {}, profile.name),
+        node("div", { class: "mono muted" }, profile.id),
+      ]),
+      node("td", {}, (profile.platforms || []).join(", ")),
+      node("td", {}, (profile.telemetry_sources || []).join(", ")),
+      node("td", { class: "muted" }, (profile.recommended_scenarios || []).join(", ")),
+      node("td", { class: "muted" }, (profile.success_checks || []).join(" | ")),
+    ]));
+  }
+  if (!state.labProfiles.length) tbody.appendChild(emptyRow(5, "No lab profiles"));
+  byId("lab-count").textContent = `${state.labProfiles.length} profiles`;
+}
+
+function renderAccess() {
+  const access = state.access || {};
+  const status = byId("access-status");
+  const summary = byId("access-summary");
+  const tbody = byId("access-table");
+  if (!status || !summary || !tbody) return;
+  status.textContent = access.enabled ? "enabled" : "disabled";
+  status.className = access.enabled ? "pill ok" : "pill warn";
+  clear(summary);
+  clear(tbody);
+  const rows = [
+    ["Roles", (access.roles || []).join(", ") || "-"],
+    ["Token CLI", access.token_cli || "-"],
+  ];
+  for (const [label, value] of rows) {
+    summary.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, label),
+      node("strong", {}, value),
+    ]));
+  }
+  for (const [role, capabilities] of Object.entries(access.matrix || {})) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono" }, role),
+      node("td", {}, (capabilities || []).join(", ")),
+    ]));
+  }
+  if (!Object.keys(access.matrix || {}).length) tbody.appendChild(emptyRow(2, "No RBAC data"));
 }
 
 function emptyRow(cols, text) {

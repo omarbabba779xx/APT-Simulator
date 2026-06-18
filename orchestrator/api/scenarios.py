@@ -2,12 +2,16 @@
 from __future__ import annotations
 
 import html
+import io
+import json
 import time
 import uuid
+import zipfile
+from datetime import datetime, timezone
 from typing import Any, cast
 
 from fastapi import APIRouter, HTTPException, Query
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 
 from ..core.auth import require_role
 from ..dsl.schema import Scenario
@@ -135,6 +139,7 @@ def _start_run(s, scenario: Scenario) -> Any:
             run_id=run.id,
             scenario_name=scenario.name,
             steps=[(st.id, st.ttp) for st in scenario.steps],
+            target_platforms=list(scenario.target_platforms),
         )
     s.audit.append("run.start", {"run_id": run.id, "scenario": scenario.name})
     return run
@@ -169,6 +174,14 @@ def _launch_campaign_runs(record: dict[str, Any]) -> list[str]:
     record["updated_at"] = time.time()
     if int(record.get("repeat_remaining", 0)) > 0:
         record["repeat_remaining"] = int(record["repeat_remaining"]) - 1
+    if s.repo:
+        s.repo.update_campaign(
+            str(record["id"]),
+            status=str(record["status"]),
+            run_ids=[str(run_id) for run_id in record["run_ids"]],
+            scenario_names=[str(name) for name in record["scenario_names"]],
+            repeat_remaining=int(record.get("repeat_remaining", 0)),
+        )
     s.audit.append("campaign.launch", {"campaign_id": record["id"], "runs": len(launched)})
     return launched
 
@@ -383,6 +396,16 @@ def run_campaign(req: CampaignRunRequest, _claims=require_role("operator")) -> C
     else:
         _launch_campaign_runs(record)
         s.audit.append("campaign.start", {"campaign_id": campaign_id, "runs": len(record["run_ids"])})
+    if s.repo:
+        s.repo.create_campaign(
+            campaign_id,
+            str(record["status"]),
+            [str(name) for name in record["scenario_names"]],
+            [str(run_id) for run_id in record["run_ids"]],
+            scheduled_at=_datetime_from_ts(scheduled_at),
+            repeat_interval_seconds=req.repeat_interval_seconds,
+            repeat_remaining=int(record.get("repeat_remaining", 0)),
+        )
     return _campaign_summary(record)
 
 
@@ -405,6 +428,8 @@ def pause_campaign(campaign_id: str, _claims=require_role("operator")) -> Campai
     s.planner.pause_runs(list(record["run_ids"]))
     record["status"] = "paused"
     record["updated_at"] = time.time()
+    if s.repo:
+        s.repo.update_campaign(campaign_id, status="paused")
     s.audit.append("campaign.pause", {"campaign_id": campaign_id})
     return _campaign_summary(record)
 
@@ -416,6 +441,8 @@ def resume_campaign(campaign_id: str, _claims=require_role("operator")) -> Campa
     s.planner.resume_runs(list(record["run_ids"]))
     record["status"] = "scheduled" if record.get("scheduled_at") else "running"
     record["updated_at"] = time.time()
+    if s.repo:
+        s.repo.update_campaign(campaign_id, status=str(record["status"]))
     s.audit.append("campaign.resume", {"campaign_id": campaign_id})
     return _campaign_summary(record)
 
@@ -434,6 +461,13 @@ def retry_failed_campaign(campaign_id: str, _claims=require_role("operator")) ->
     record["run_ids"].extend(added)
     record["status"] = "running" if added else record["status"]
     record["updated_at"] = time.time()
+    if s.repo:
+        s.repo.update_campaign(
+            campaign_id,
+            status=str(record["status"]),
+            run_ids=[str(run_id) for run_id in record["run_ids"]],
+            scenario_names=[str(name) for name in record["scenario_names"]],
+        )
     s.audit.append("campaign.retry_failed", {"campaign_id": campaign_id, "added_runs": len(added)})
     return _campaign_summary(record)
 
@@ -481,10 +515,154 @@ def get_run_steps(run_id: str, _claims=require_role("viewer")) -> RunDetail:
 
 @router.get("/reports/runs/{run_id}.json")
 def run_report_json(run_id: str, _claims=require_role("viewer")) -> dict[str, object]:
-    run = get_state().planner.get_run(run_id)
+    s = get_state()
+    run = s.planner.get_run(run_id)
+    if run:
+        return _run_report(run)
+    if s.repo and s.repo.get_run(run_id):
+        return _stored_run_report(run_id)
+    raise HTTPException(404, "run not found")
+
+
+@router.get("/reports/runs/{run_id}.zip")
+def run_report_zip(run_id: str, _claims=require_role("viewer")) -> Response:
+    report = run_report_json(run_id)
+    bundle = io.BytesIO()
+    with zipfile.ZipFile(bundle, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("report.json", json.dumps(report, indent=2, sort_keys=True))
+        archive.writestr("report.html", _report_html(report, f"Run {run_id}"))
+        archive.writestr("cleanup.json", json.dumps(cleanup_plan(run_id), indent=2, sort_keys=True))
+        if get_state().repo:
+            archive.writestr("history.json", json.dumps(run_history_detail(run_id), indent=2, sort_keys=True))
+    return Response(
+        bundle.getvalue(),
+        media_type="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="{run_id}-artifacts.zip"'},
+    )
+
+
+@router.get("/history/runs")
+def run_history(_claims=require_role("viewer")) -> dict[str, object]:
+    s = get_state()
+    if not s.repo:
+        return {"total": 0, "items": []}
+    items = []
+    for run in s.repo.list_runs():
+        steps = s.repo.steps_for_run(run.id)
+        artifacts = s.repo.artifacts_for_run(run.id)
+        logs = s.repo.logs_for_run(run.id)
+        items.append(
+            {
+                "id": run.id,
+                "scenario": run.scenario_name,
+                "status": run.status,
+                "started_at": _timestamp(run.started_at),
+                "finished_at": _timestamp(run.finished_at),
+                "step_count": len(steps),
+                "artifact_count": len(artifacts),
+                "log_count": len(logs),
+            }
+        )
+    return {"total": len(items), "items": items}
+
+
+@router.get("/history/runs/{run_id}")
+def run_history_detail(run_id: str, _claims=require_role("viewer")) -> dict[str, object]:
+    s = get_state()
+    if not s.repo:
+        raise HTTPException(404, "history store unavailable")
+    run = s.repo.get_run(run_id)
     if not run:
         raise HTTPException(404, "run not found")
-    return _run_report(run)
+    steps = [
+        {
+            "step_id": step.step_id,
+            "attack_id": step.attack_id,
+            "agent_id": step.agent_id,
+            "status": step.status,
+            "created_at": _timestamp(step.created_at),
+            "started_at": _timestamp(step.started_at),
+            "finished_at": _timestamp(step.finished_at),
+            "output": step.output,
+            "error": step.error,
+        }
+        for step in s.repo.steps_for_run(run_id)
+    ]
+    logs = [
+        {
+            "id": log.id,
+            "step_id": log.step_id,
+            "level": log.level,
+            "event": log.event,
+            "message": log.message,
+            "created_at": _timestamp(log.created_at),
+        }
+        for log in s.repo.logs_for_run(run_id)
+    ]
+    artifacts = [
+        {
+            "kind": artifact.kind,
+            "name": artifact.name,
+            "path": artifact.path,
+            "metadata": json.loads(artifact.metadata_json or "{}"),
+            "created_at": _timestamp(artifact.created_at),
+        }
+        for artifact in s.repo.artifacts_for_run(run_id)
+    ]
+    queue = [_queue_entry(item) for item in s.repo.queue_entries(run_id)]
+    return {
+        "id": run.id,
+        "scenario": run.scenario_name,
+        "status": run.status,
+        "started_at": _timestamp(run.started_at),
+        "finished_at": _timestamp(run.finished_at),
+        "steps": steps,
+        "queue": queue,
+        "logs": logs,
+        "artifacts": artifacts,
+    }
+
+
+@router.get("/execution/queue")
+def execution_queue(run_id: str | None = None, _claims=require_role("viewer")) -> dict[str, object]:
+    s = get_state()
+    if not s.repo:
+        return {"total": 0, "items": []}
+    items = [_queue_entry(item) for item in s.repo.queue_entries(run_id)]
+    return {"total": len(items), "items": items}
+
+
+@router.get("/execution/artifacts/{run_id}.zip")
+def execution_artifact_zip(run_id: str, _claims=require_role("viewer")) -> Response:
+    return run_report_zip(run_id)
+
+
+@router.get("/runs/{run_id}/cleanup-plan")
+def cleanup_plan(run_id: str, _claims=require_role("viewer")) -> dict[str, object]:
+    s = get_state()
+    if not s.repo or not s.repo.get_run(run_id):
+        if not s.planner.get_run(run_id):
+            raise HTTPException(404, "run not found")
+        return {"run_id": run_id, "policy": "memory-run", "items": []}
+    items = [
+        {
+            "step_id": item.step_id,
+            "attack_id": item.attack_id,
+            "cleanup_required": item.cleanup_required,
+            "cleanup_status": item.cleanup_status,
+            "status": item.status,
+            "attempt": item.attempt,
+        }
+        for item in s.repo.queue_entries(run_id)
+    ]
+    pending = [item for item in items if item["cleanup_required"] and item["cleanup_status"] == "pending"]
+    return {
+        "run_id": run_id,
+        "policy": "record-and-close-terminal-steps",
+        "status": "pending" if pending else "complete",
+        "pending_count": len(pending),
+        "items": items,
+    }
 
 
 @router.get("/reports/runs/{run_id}.html", response_class=HTMLResponse)
@@ -571,6 +749,47 @@ def _campaign_summary(record: dict[str, Any]) -> CampaignSummary:
     )
 
 
+def _stored_run_report(run_id: str) -> dict[str, object]:
+    s = get_state()
+    if not s.repo:
+        raise HTTPException(404, "history store unavailable")
+    run = s.repo.get_run(run_id)
+    if not run:
+        raise HTTPException(404, "run not found")
+    steps = s.repo.steps_for_run(run_id)
+    covered = sorted({step.attack_id for step in steps})
+    touched = []
+    gaps = []
+    import ttps  # noqa: F401
+    from ttps.base import registry
+
+    for attack_id in covered:
+        ttp = registry.get(attack_id) or registry.get(attack_id.split(":", 1)[0])
+        if ttp and ttp.sigma_rule() is not None:
+            touched.append(attack_id)
+        else:
+            gaps.append(attack_id)
+    step_statuses: dict[str, int] = {}
+    for step in steps:
+        step_statuses[step.status] = step_statuses.get(step.status, 0) + 1
+    return {
+        "run_id": run.id,
+        "scenario": run.scenario_name,
+        "status": run.status,
+        "started_at": _timestamp(run.started_at),
+        "finished_at": _timestamp(run.finished_at),
+        "step_statuses": step_statuses,
+        "steps_total": len(steps),
+        "ttps_covered_count": len(covered),
+        "ttps_covered": covered,
+        "detections_touched_count": len(touched),
+        "detections_touched": touched,
+        "detection_gaps": gaps,
+        "artifacts": [artifact.path for artifact in s.repo.artifacts_for_run(run_id)],
+        "cleanup": cleanup_plan(run_id),
+    }
+
+
 def _run_report(run) -> dict[str, object]:
     import ttps  # noqa: F401
     from ttps.base import registry
@@ -600,6 +819,7 @@ def _run_report(run) -> dict[str, object]:
         "detections_touched_count": len(touched),
         "detections_touched": touched,
         "detection_gaps": gaps,
+        "cleanup": cleanup_plan(run.id),
     }
 
 
@@ -631,3 +851,34 @@ def _summarize(run) -> RunSummary:
         finished_at=run.finished_at,
         step_summary={sid: st.status for sid, st in run.steps.items()},
     )
+
+
+def _timestamp(value: datetime | None) -> float | None:
+    if value is None:
+        return None
+    return value.timestamp()
+
+
+def _datetime_from_ts(value: float | None) -> datetime | None:
+    if value is None:
+        return None
+    return datetime.fromtimestamp(value, tz=timezone.utc)
+
+
+def _queue_entry(item) -> dict[str, object]:
+    return {
+        "run_id": item.run_id,
+        "step_id": item.step_id,
+        "attack_id": item.attack_id,
+        "status": item.status,
+        "assigned_agent": item.assigned_agent,
+        "target_platforms": json.loads(item.target_platforms_json or "[]"),
+        "attempt": item.attempt,
+        "max_attempts": item.max_attempts,
+        "cleanup_required": item.cleanup_required,
+        "cleanup_status": item.cleanup_status,
+        "created_at": _timestamp(item.created_at),
+        "updated_at": _timestamp(item.updated_at),
+        "next_attempt_at": _timestamp(item.next_attempt_at),
+        "last_error": item.last_error,
+    }

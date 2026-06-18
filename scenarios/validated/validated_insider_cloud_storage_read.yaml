@@ -1,0 +1,100 @@
+name: validated_insider_cloud_storage_read
+description: Fixture-backed Insider realistic actor-chain covering cloud storage telemetry
+  with dry-run markers.
+target_platforms:
+- windows
+- linux
+actor: Insider
+tags:
+- validated
+- actor_chain
+- realistic
+- insider
+- cloud
+- storage
+- exfiltration
+steps:
+- id: s01_console_login
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+- id: s02_service_discovery
+  ttp: T1526:AWS_SERVICE_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+  depends_on:
+  - s01_console_login
+- id: s03_storage_discovery
+  ttp: T1619:CLOUD_STORAGE_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+  depends_on:
+  - s02_service_discovery
+- id: s04_cloud_infra
+  ttp: T1580:CLOUD_INFRA_DISCOVERY
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+  depends_on:
+  - s03_storage_discovery
+- id: s05_s3_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+  depends_on:
+  - s04_cloud_infra
+- id: s06_s3_collection
+  ttp: T1530:AWS_S3_OBJECT_COLLECTION_ADV
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+  depends_on:
+  - s05_s3_burst
+- id: s07_cloud_transfer
+  ttp: T1537:CLOUD_ACCOUNT_DATA_TRANSFER
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    principal: lab.validated_insider_cloud_storage_read
+    resource: lab-resource
+  depends_on:
+  - s06_s3_collection
+- id: s08_archive
+  ttp: T1560
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+  depends_on:
+  - s07_cloud_transfer
+- id: s09_alt_exfil
+  ttp: T1048
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+    protocol: dns-txt
+    payload_bytes: 512
+  depends_on:
+  - s08_archive
+- id: s10_cleanup
+  ttp: T1070.004
+  params:
+    dry_run: true
+    scenario: validated_insider_cloud_storage_read
+  depends_on:
+  - s09_alt_exfil

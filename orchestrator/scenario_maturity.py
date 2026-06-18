@@ -125,6 +125,12 @@ def _score_scenario(
             score += 5
         if evidence.get("success_criteria"):
             score += 5
+        if evidence.get("sigma_matches"):
+            score += 3
+        if evidence.get("siem_fields"):
+            score += 3
+        if evidence.get("detection_latency_seconds"):
+            score += 2
     if len(scenario.target_platforms) > 1:
         score += 6
 
@@ -167,6 +173,7 @@ def scenario_maturity_item(
         detection_percent=detection_percent,
     )
     telemetry_sources = sorted(set(evidence.get("telemetry_sources", []))) if evidence else []
+    events_field_count = len({field for event in golden_events for field in event})
     return {
         "name": name,
         "actor": scenario.actor or "",
@@ -186,7 +193,17 @@ def scenario_maturity_item(
         "evidence_status": evidence.get("validation_status", "missing") if evidence else "missing",
         "evidence_confidence": evidence.get("confidence", "") if evidence else "",
         "telemetry_sources": telemetry_sources,
+        "expected_detection_count": evidence.get("expected_detection_count", 0) if evidence else 0,
+        "sigma_match_count": len(evidence.get("sigma_matches", [])) if evidence else 0,
+        "ecs_field_count": len(evidence.get("ecs_fields", [])) if evidence else 0,
+        "ocsf_category_count": len(evidence.get("ocsf_categories", [])) if evidence else 0,
+        "siem_field_count": len(evidence.get("siem_fields", [])) if evidence else 0,
+        "detection_latency_target_seconds": (
+            evidence.get("detection_latency_seconds", {}).get("target", 0) if evidence else 0
+        ),
+        "report_expectation_count": len(evidence.get("report_expectations", [])) if evidence else 0,
         "golden_event_count": len(golden_events),
+        "golden_event_field_count": events_field_count,
         "runbook_steps": len(evidence.get("runbook", [])) if evidence else 0,
         "success_criteria": len(evidence.get("success_criteria", [])) if evidence else 0,
         "tags": list(scenario.tags),
@@ -208,12 +225,32 @@ def build_scenario_maturity(
     counts_by_kind: dict[str, int] = {}
     counts_by_maturity: dict[str, int] = {}
     telemetry_sources: dict[str, int] = {}
+    evidence_quality = {
+        "with_sigma_matches": 0,
+        "with_ecs_fields": 0,
+        "with_ocsf_categories": 0,
+        "with_siem_fields": 0,
+        "with_detection_latency": 0,
+        "with_report_expectations": 0,
+    }
     missing_evidence: list[str] = []
     for item in items:
         counts_by_kind[item["kind"]] = counts_by_kind.get(item["kind"], 0) + 1
         counts_by_maturity[item["maturity"]] = counts_by_maturity.get(item["maturity"], 0) + 1
         if item["evidence_status"] == "missing" and item["kind"] != "generated variant":
             missing_evidence.append(str(item["name"]))
+        if int(item["sigma_match_count"]) > 0:
+            evidence_quality["with_sigma_matches"] += 1
+        if int(item["ecs_field_count"]) > 0:
+            evidence_quality["with_ecs_fields"] += 1
+        if int(item["ocsf_category_count"]) > 0:
+            evidence_quality["with_ocsf_categories"] += 1
+        if int(item["siem_field_count"]) > 0:
+            evidence_quality["with_siem_fields"] += 1
+        if int(item["detection_latency_target_seconds"]) > 0:
+            evidence_quality["with_detection_latency"] += 1
+        if int(item["report_expectation_count"]) > 0:
+            evidence_quality["with_report_expectations"] += 1
         for source in item["telemetry_sources"]:
             telemetry_sources[source] = telemetry_sources.get(source, 0) + 1
     average = round(sum(int(item["score"]) for item in items) / len(items), 2) if items else 0.0
@@ -226,6 +263,7 @@ def build_scenario_maturity(
         "counts_by_kind": counts_by_kind,
         "counts_by_maturity": counts_by_maturity,
         "telemetry_sources": telemetry_sources,
+        "evidence_quality": evidence_quality,
         "missing_evidence": missing_evidence,
         "items": visible,
     }

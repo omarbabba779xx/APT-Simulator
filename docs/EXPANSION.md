@@ -87,5 +87,7 @@ apt-emulation-plan-import convert <path-to-emulation-library> --out-dir scenario
 ```
 
 Generated scenarios use DAG dependencies and dry-run parameters by default.
-Validated actor-chain scenarios live under `scenarios/validated/` and have
-fixture-backed evidence contracts under `evidence/`.
+The 50 validated actor-chain scenarios live under `scenarios/validated/` and
+have fixture-backed evidence contracts under `evidence/`, including ECS fields,
+OCSF categories, SIEM fields, latency targets, report expectations, and 100 SOC
+golden events.
