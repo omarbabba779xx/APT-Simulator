@@ -61,6 +61,7 @@ apt-emulation-plan-import = "orchestrator.emulation_plan_import:app"
 apt-campaign = "orchestrator.campaign:app"
 apt-detection-workbench = "orchestrator.detection_workbench:app"
 apt-exposure-graph = "orchestrator.exposure_graph:app"
+apt-scenario-maturity = "orchestrator.scenario_maturity:app"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
@@ -75,6 +76,13 @@ ttps = ["catalog/*.yaml"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+
+[[tool.mypy.overrides]]
+module = ["yaml", "yaml.*", "psutil"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

@@ -1,0 +1,58 @@
+name: validated_insider_saas_data_access
+description: >
+  Fixture-backed insider scenario covering risky sign-in, group discovery,
+  OAuth token creation, private repository collection, SaaS exports, external
+  sharing, and cloud storage transfer markers.
+target_platforms: [windows, linux, darwin]
+actor: Insider
+tags: [validated, actor_chain, realistic, insider, saas, identity, cloud]
+
+steps:
+  - id: s01_risky_signin
+    ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+    params: {dry_run: true}
+
+  - id: s02_group_enum
+    ttp: T1087.004:M365_GROUP_ENUMERATION
+    params: {dry_run: true}
+    depends_on: [s01_risky_signin]
+
+  - id: s03_oauth_token
+    ttp: T1098.005:SAAS_TOKEN_CREATED
+    params: {dry_run: true}
+    depends_on: [s02_group_enum]
+
+  - id: s04_repo_clone
+    ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+    params: {dry_run: true}
+    depends_on: [s03_oauth_token]
+
+  - id: s05_drive_download
+    ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+    params: {dry_run: true}
+    depends_on: [s03_oauth_token]
+
+  - id: s06_slack_export
+    ttp: T1213:SLACK_CHANNEL_EXPORT
+    params: {dry_run: true}
+    depends_on: [s03_oauth_token]
+
+  - id: s07_cloud_console
+    ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+    params: {dry_run: true, user: lab-insider}
+    depends_on: [s01_risky_signin]
+
+  - id: s08_s3_read_burst
+    ttp: T1530:AWS_S3_OBJECT_BURST
+    params: {dry_run: true, bucket: legal-export-lab}
+    depends_on: [s07_cloud_console]
+
+  - id: s09_cloud_transfer
+    ttp: T1537:CLOUD_ACCOUNT_DATA_TRANSFER
+    params: {dry_run: true, principal: lab-insider}
+    depends_on: [s08_s3_read_burst]
+
+  - id: s10_external_share
+    ttp: T1567.002:SAAS_EXTERNAL_SHARE
+    params: {dry_run: true}
+    depends_on: [s04_repo_clone, s05_drive_download, s06_slack_export, s09_cloud_transfer]

@@ -1,0 +1,58 @@
+name: validated_sandworm_disruptive_lab
+description: >
+  Fixture-backed Sandworm-style disruptive lab scenario using only markers for
+  discovery, credential pressure, policy modification, account access removal,
+  encryption signal, and cleanup.
+target_platforms: [windows, linux]
+actor: Sandworm
+tags: [validated, actor_chain, noisy, sandworm, disruption, impact]
+
+steps:
+  - id: s01_system_info
+    ttp: T1082
+    params: {dry_run: true}
+
+  - id: s02_network_config
+    ttp: T1016
+    params: {dry_run: true}
+    depends_on: [s01_system_info]
+
+  - id: s03_domain_login
+    ttp: T1078.002:AD_DOMAIN_ACCOUNT_LOGIN
+    params: {dry_run: true, principal: lab.sandworm}
+    depends_on: [s02_network_config]
+
+  - id: s04_domain_trusts
+    ttp: T1482:AD_DOMAIN_TRUST_DISCOVERY
+    params: {dry_run: true, principal: lab.sandworm}
+    depends_on: [s03_domain_login]
+
+  - id: s05_credential_targets
+    ttp: T1003
+    params: {dry_run: true}
+    depends_on: [s04_domain_trusts]
+
+  - id: s06_gpo_change
+    ttp: T1484.001:AD_GROUP_POLICY_MODIFICATION
+    params: {dry_run: true, principal: lab.sandworm}
+    depends_on: [s05_credential_targets]
+
+  - id: s07_service_create
+    ttp: T1543.003:AD_WINDOWS_SERVICE_CREATE
+    params: {dry_run: true, principal: lab.sandworm}
+    depends_on: [s06_gpo_change]
+
+  - id: s08_account_access_removal
+    ttp: T1531:AD_ACCOUNT_ACCESS_REMOVAL
+    params: {dry_run: true, principal: lab.sandworm}
+    depends_on: [s07_service_create]
+
+  - id: s09_encryption_signal
+    ttp: T1486
+    params: {dry_run: true}
+    depends_on: [s08_account_access_removal]
+
+  - id: s10_log_clear
+    ttp: T1070.004:LINUX_LOG_CLEAR
+    params: {dry_run: true}
+    depends_on: [s09_encryption_signal]

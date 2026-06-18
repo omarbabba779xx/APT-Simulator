@@ -1,4 +1,4 @@
-"""Orchestrator entrypoint — FastAPI app + Typer CLI."""
+"""Orchestrator entrypoint - FastAPI app and Typer CLI."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -21,11 +21,11 @@ from .api import ttps as ttps_api
 from .api import ws as ws_api
 from .api.state import AppState, set_state
 from .core.audit import AuditLog
+from .core.auth import load_or_generate_secret
 from .core.bus import EventBus
 from .core.config import load_config
 from .core.killswitch import KillSwitch
 from .core.planner import Planner
-from .core.auth import load_or_generate_secret
 from .core.signer import load_private
 from .dsl.loader import load_scenarios_from_dir
 from .storage.db import Repository, init_engine
@@ -109,6 +109,7 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
     def coverage_navigator(pretty: bool = False) -> dict[str, object]:
         """ATT&CK Navigator v4 layer JSON for all registered TTPs."""
         from .navigator_export import build_layer
+
         db = str(cfg.orchestrator.db_path)
         return build_layer(db_path=db)
 
@@ -116,12 +117,14 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
     def coverage_matrix() -> dict[str, object]:
         """Dynamic coverage matrix grouped by tactic, pack, and safety tier."""
         from .detection_matrix import build_matrix
+
         return build_matrix()
 
     @app.get("/attack/sync/status")
     def attack_sync_status() -> dict[str, object]:
         """Local ATT&CK snapshot status and registry drift."""
         from .attack_sync import drift_status
+
         return drift_status()
 
     @app.get("/detections/score")
@@ -129,6 +132,7 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         """Rule-to-synthetic-event score for every registered TTP with events."""
         import ttps  # noqa: F401
         from ttps.base import registry
+
         from .detection_diff import score_detection
 
         out: dict[str, object] = {}
@@ -144,39 +148,60 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
     def detection_workbench() -> dict[str, object]:
         """Sigma rule quality, field coverage, and SIEM target status."""
         from .detection_workbench import build_workbench
+
         return build_workbench(limit_items=300)
 
     @app.get("/exposure/graph")
     def exposure_graph() -> dict[str, object]:
         """Controlled exposure graph across identity, endpoint, cloud, SaaS, and container domains."""
         from .exposure_graph import build_exposure_graph
+
         return build_exposure_graph(state.scenarios)
+
+    @app.get("/scenario-maturity")
+    def scenario_maturity() -> dict[str, object]:
+        """Scenario depth, evidence, and SOC usability scoring."""
+        from .scenario_maturity import build_scenario_maturity
+
+        return build_scenario_maturity(state.scenarios, limit_items=500)
+
+    @app.get("/scenario-evidence/{scenario_name}")
+    def scenario_evidence_detail(scenario_name: str) -> dict[str, object]:
+        """Evidence contract and golden events for one scenario."""
+        from .scenario_maturity import scenario_evidence
+
+        return scenario_evidence(scenario_name)
 
     @app.get("/runs/{run_id}/timeline")
     def run_timeline(run_id: str) -> dict[str, object]:
         """Timeline view for one in-memory run."""
         from .api.state import get_state as _gs
+
         run = _gs().planner.get_run(run_id)
         if not run:
             return {"run_id": run_id, "events": []}
         events = []
         for state in run.steps.values():
-            events.append({
-                "step_id": state.step.id,
-                "attack_id": state.step.ttp,
-                "status": state.status,
-                "agent_id": state.assigned_agent,
-                "started_at": state.started_at,
-                "finished_at": state.finished_at,
-                "duration_seconds": round(state.finished_at - state.started_at, 3)
-                if state.finished_at and state.started_at else None,
-            })
+            events.append(
+                {
+                    "step_id": state.step.id,
+                    "attack_id": state.step.ttp,
+                    "status": state.status,
+                    "agent_id": state.assigned_agent,
+                    "started_at": state.started_at,
+                    "finished_at": state.finished_at,
+                    "duration_seconds": round(state.finished_at - state.started_at, 3)
+                    if state.finished_at and state.started_at
+                    else None,
+                }
+            )
         return {"run_id": run_id, "scenario": run.scenario.name, "events": events}
 
     @app.get("/runs/compare")
     def compare_runs(ids: str) -> dict[str, object]:
         """Compare high-level status and step counts for comma-separated run IDs."""
         from .api.state import get_state as _gs
+
         planner = _gs().planner
         rows = []
         for run_id in [item.strip() for item in ids.split(",") if item.strip()]:
@@ -187,18 +212,21 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
             counts: dict[str, int] = {}
             for step in run.steps.values():
                 counts[step.status] = counts.get(step.status, 0) + 1
-            rows.append({
-                "run_id": run_id,
-                "scenario": run.scenario.name,
-                "status": run.status,
-                "step_counts": counts,
-            })
+            rows.append(
+                {
+                    "run_id": run_id,
+                    "scenario": run.scenario.name,
+                    "status": run.status,
+                    "step_counts": counts,
+                }
+            )
         return {"runs": rows}
 
     @app.get("/metrics")
     def metrics() -> dict[str, object]:
         """Operational statistics: run counts, TTP success rates, agent breakdown."""
         from .api.state import get_state as _gs
+
         s = _gs()
         runs = s.planner.list_runs()
         total = len(runs)
@@ -206,7 +234,6 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         failed = sum(1 for r in runs if r.status == "failed")
         aborted = sum(1 for r in runs if r.status == "aborted")
         running = sum(1 for r in runs if r.status == "running")
-        # Per-TTP stats
         ttp_stats: dict[str, dict[str, int]] = {}
         for run in runs:
             for sid, st in run.steps.items():
@@ -217,7 +244,6 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
                     entry["success"] += 1
                 elif st.status == "failed":
                     entry["failed"] += 1
-        # Average step duration (seconds)
         durations = [
             st.finished_at - st.started_at
             for run in runs
@@ -226,8 +252,13 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         ]
         avg_step_s = round(sum(durations) / len(durations), 3) if durations else None
         return {
-            "runs": {"total": total, "completed": completed, "failed": failed,
-                     "aborted": aborted, "running": running},
+            "runs": {
+                "total": total,
+                "completed": completed,
+                "failed": failed,
+                "aborted": aborted,
+                "running": running,
+            },
             "agents": {
                 "total": len(s.agents),
                 "by_platform": _count_by_platform(s.agents),

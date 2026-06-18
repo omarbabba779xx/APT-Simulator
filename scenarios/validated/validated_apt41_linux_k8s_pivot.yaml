@@ -1,0 +1,63 @@
+name: validated_apt41_linux_k8s_pivot
+description: >
+  Fixture-backed APT41-style Linux and Kubernetes path from shell activity
+  through cron persistence, cluster discovery, API execution, role binding,
+  deployment, and container escape markers.
+target_platforms: [linux]
+actor: APT41
+tags: [validated, actor_chain, stealthy, apt41, linux, kubernetes, cloud]
+
+steps:
+  - id: s01_linux_account_discovery
+    ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+    params: {dry_run: true}
+
+  - id: s02_disable_history
+    ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+    params: {dry_run: true}
+    depends_on: [s01_linux_account_discovery]
+
+  - id: s03_cron_persistence
+    ttp: T1053.003:LINUX_CRON_MARKER
+    params: {dry_run: true}
+    depends_on: [s02_disable_history]
+
+  - id: s04_tool_transfer
+    ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+    params: {dry_run: true, url: "http://127.0.0.1/tool.sh"}
+    depends_on: [s03_cron_persistence]
+
+  - id: s05_k8s_resource_discovery
+    ttp: T1613:K8S_RESOURCE_DISCOVERY_ADV
+    params: {dry_run: true, principal: lab.apt41}
+    depends_on: [s04_tool_transfer]
+
+  - id: s06_k8s_api_exec
+    ttp: T1059.013:K8S_API_EXEC
+    params: {dry_run: true, principal: lab.apt41}
+    depends_on: [s05_k8s_resource_discovery]
+
+  - id: s07_cluster_role_binding
+    ttp: T1098.006:K8S_CLUSTER_ROLE_BINDING
+    params: {dry_run: true, principal: lab.apt41}
+    depends_on: [s06_k8s_api_exec]
+
+  - id: s08_deployment_created
+    ttp: T1610:K8S_DEPLOYMENT_CREATED
+    params: {dry_run: true, principal: lab.apt41}
+    depends_on: [s07_cluster_role_binding]
+
+  - id: s09_secret_read
+    ttp: T1552.007:K8S_SECRET_READ
+    params: {dry_run: true, principal: lab.apt41}
+    depends_on: [s08_deployment_created]
+
+  - id: s10_host_escape_signal
+    ttp: T1611:K8S_HOST_ESCAPE_SIGNAL
+    params: {dry_run: true, principal: lab.apt41}
+    depends_on: [s09_secret_read]
+
+  - id: s11_log_clear
+    ttp: T1070.004:LINUX_LOG_CLEAR
+    params: {dry_run: true}
+    depends_on: [s10_host_escape_signal]

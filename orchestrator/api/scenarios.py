@@ -34,7 +34,10 @@ router = APIRouter(tags=["scenarios"])
 def _scenario_library_entry(name: str, scenario: Scenario) -> dict[str, object]:
     tags = list(scenario.tags or [])
     tag_set = set(tags)
-    if "variant" in tag_set:
+    if "validated" in tag_set:
+        kind = "validated actor-chain"
+        source = "validated YAML"
+    elif "variant" in tag_set:
         kind = "generated variant"
         source = "generated YAML"
     elif "ael_import" in tag_set or "source_ael" in tag_set:
@@ -90,6 +93,9 @@ def _matches_filter(
         item_kind = str(item["kind"]).lower()
         if selected in {"generated", "generated variant"}:
             if item["kind"] != "generated variant":
+                return False
+        elif selected in {"validated", "validated actor-chain"}:
+            if item["kind"] != "validated actor-chain":
                 return False
         elif selected not in {item_source, item_kind}:
             return False
@@ -242,6 +248,38 @@ def scenario_library(
         "counts": _library_counts(items),
         "items": filtered,
     }
+
+
+@router.get("/reports/scenarios/{scenario_name}.json")
+def scenario_report_json(scenario_name: str, _claims=require_role("viewer")) -> dict[str, object]:
+    s = get_state()
+    scenario = s.scenarios.get(scenario_name)
+    if not scenario:
+        raise HTTPException(404, "scenario not found")
+    from ..scenario_maturity import (
+        load_evidence,
+        load_golden_events,
+        scenario_evidence,
+        scenario_maturity_item,
+    )
+
+    evidence_by_name = load_evidence()
+    golden_events_by_name = load_golden_events()
+    return {
+        "scenario": scenario.model_dump(),
+        "maturity": scenario_maturity_item(
+            scenario_name,
+            scenario,
+            evidence_by_name=evidence_by_name,
+            golden_events_by_name=golden_events_by_name,
+        ),
+        "evidence": scenario_evidence(scenario_name),
+    }
+
+
+@router.get("/reports/scenarios/{scenario_name}.html", response_class=HTMLResponse)
+def scenario_report_html(scenario_name: str, _claims=require_role("viewer")) -> HTMLResponse:
+    return HTMLResponse(_report_html(scenario_report_json(scenario_name), f"Scenario {scenario_name}"))
 
 
 @router.get("/scenario-builder/preview")

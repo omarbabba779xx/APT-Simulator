@@ -59,6 +59,7 @@ apt-detection-matrix fixtures --out-dir detection/fixtures
 apt-detection-matrix queries --out-dir detection/queries
 apt-detection-workbench score
 apt-exposure-graph graph --out exposure-graph.json
+apt-scenario-maturity summary
 ```
 
 Fixtures are emitted as:
@@ -86,3 +87,5 @@ apt-emulation-plan-import convert <path-to-emulation-library> --out-dir scenario
 ```
 
 Generated scenarios use DAG dependencies and dry-run parameters by default.
+Validated actor-chain scenarios live under `scenarios/validated/` and have
+fixture-backed evidence contracts under `evidence/`.

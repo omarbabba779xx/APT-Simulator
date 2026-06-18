@@ -31,6 +31,7 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "ATT&CK Sync" in r.text
     assert "Detection Workbench" in r.text
     assert "Exposure Graph" in r.text
+    assert "Scenario Maturity" in r.text
 
 
 def test_coverage_endpoint(tmp_path) -> None:
@@ -44,11 +45,12 @@ def test_coverage_endpoint(tmp_path) -> None:
 def test_loaded_scenarios_include_generated_yaml_variants(tmp_path) -> None:
     client = _client(tmp_path)
     health = client.get("/healthz").json()
-    assert health["scenarios_loaded"] == 2522
+    assert health["scenarios_loaded"] == 2534
     scenarios = client.get("/scenarios").json()
-    assert len(scenarios) == 2522
+    assert len(scenarios) == 2534
     assert any(name.startswith("apt29_beginner_") for name in scenarios)
     assert "ael_apt29" in scenarios
+    assert "validated_apt29_identity_cloud_chain" in scenarios
 
 
 def test_scenario_library_filters(tmp_path) -> None:
@@ -56,7 +58,7 @@ def test_scenario_library_filters(tmp_path) -> None:
     r = client.get("/scenario-library", params={"source": "generated variant", "platform": "windows"})
     assert r.status_code == 200
     body = r.json()
-    assert body["total"] == 2522
+    assert body["total"] == 2534
     assert body["filtered"] > 0
     first = body["items"][0]
     assert first["kind"] == "generated variant"
@@ -66,6 +68,10 @@ def test_scenario_library_filters(tmp_path) -> None:
     ael = client.get("/scenario-library", params={"source": "emulation plan"}).json()
     assert ael["filtered"] == 11
     assert ael["items"][0]["kind"] == "emulation plan"
+
+    validated = client.get("/scenario-library", params={"source": "validated actor-chain"}).json()
+    assert validated["filtered"] == 12
+    assert validated["items"][0]["kind"] == "validated actor-chain"
 
 
 def test_ttps_listing(tmp_path) -> None:
@@ -90,9 +96,18 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert set(workbench["targets"]) == {"splunk", "elastic", "sentinel", "chronicle"}
 
     graph = client.get("/exposure/graph").json()
-    assert graph["scenario_count"] == 2522
+    assert graph["scenario_count"] == 2534
     assert graph["domain_counts"]["cloud"] > 0
     assert graph["domain_counts"]["container"] > 0
+
+    maturity = client.get("/scenario-maturity").json()
+    assert maturity["total_scenarios"] == 2534
+    assert maturity["validated_scenarios"] == 12
+    assert maturity["fixture_backed_scenarios"] == 12
+
+    evidence = client.get("/scenario-evidence/validated_apt29_identity_cloud_chain").json()
+    assert evidence["found"] is True
+    assert len(evidence["golden_events"]) == 2
 
 
 def test_scenario_builder_preview(tmp_path) -> None:

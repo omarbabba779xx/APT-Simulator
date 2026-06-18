@@ -1,0 +1,71 @@
+name: validated_fin7_pos_lateral_collection
+description: >
+  Fixture-backed FIN7-style intrusion chain focused on Windows execution,
+  persistence, credential pressure, lateral movement, collection, and
+  controlled exfiltration markers.
+target_platforms: [windows]
+actor: FIN7
+tags: [validated, actor_chain, realistic, fin7, windows, lateral_movement, collection]
+
+steps:
+  - id: s01_powershell_execution
+    ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+    params: {dry_run: true, command: Get-Process}
+
+  - id: s02_wmi_process_create
+    ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+    params: {dry_run: true, target: localhost}
+    depends_on: [s01_powershell_execution]
+
+  - id: s03_scheduled_task
+    ttp: T1053.005
+    params: {dry_run: true}
+    depends_on: [s02_wmi_process_create]
+
+  - id: s04_service_create
+    ttp: T1543.003:WINDOWS_SERVICE_CREATE
+    params: {dry_run: true}
+    depends_on: [s02_wmi_process_create]
+
+  - id: s05_process_discovery
+    ttp: T1057
+    params: {dry_run: true}
+    depends_on: [s01_powershell_execution]
+
+  - id: s06_credential_targeting
+    ttp: T1003
+    params: {dry_run: true}
+    depends_on: [s05_process_discovery]
+
+  - id: s07_bruteforce_marker
+    ttp: T1110
+    params:
+      dry_run: true
+      attempts: 24
+      usernames: [possvc, helpdesk, backup]
+    depends_on: [s06_credential_targeting]
+
+  - id: s08_smb_admin_share
+    ttp: T1021.002
+    params: {dry_run: true, hosts: [127.0.0.1]}
+    depends_on: [s07_bruteforce_marker]
+
+  - id: s09_local_collection
+    ttp: T1005
+    params: {dry_run: true, max_depth: 1, max_entries: 20}
+    depends_on: [s08_smb_admin_share]
+
+  - id: s10_archive_data
+    ttp: T1560
+    params: {dry_run: true}
+    depends_on: [s09_local_collection]
+
+  - id: s11_c2_transfer
+    ttp: T1105
+    params: {dry_run: true, url: "http://127.0.0.1/tool.bin"}
+    depends_on: [s10_archive_data]
+
+  - id: s12_exfil_over_c2
+    ttp: T1041
+    params: {dry_run: true, url: "http://127.0.0.1:8765/exfil", max_bytes: 512}
+    depends_on: [s11_c2_transfer]

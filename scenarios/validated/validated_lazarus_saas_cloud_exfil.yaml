@@ -1,0 +1,68 @@
+name: validated_lazarus_saas_cloud_exfil
+description: >
+  Fixture-backed Lazarus-style hybrid intrusion that pivots from endpoint
+  execution into SaaS token creation, repository collection, cloud storage
+  collection, and external sharing markers.
+target_platforms: [windows, linux]
+actor: Lazarus
+tags: [validated, actor_chain, stealthy, lazarus, saas, cloud, exfiltration]
+
+steps:
+  - id: s01_command_execution
+    ttp: T1059
+    params: {dry_run: true, command: whoami}
+
+  - id: s02_user_discovery
+    ttp: T1033
+    params: {dry_run: true}
+    depends_on: [s01_command_execution]
+
+  - id: s03_obfuscation
+    ttp: T1027
+    params: {dry_run: true, size_bytes: 1024}
+    depends_on: [s01_command_execution]
+
+  - id: s04_saas_token
+    ttp: T1098.005:SAAS_TOKEN_CREATED
+    params: {dry_run: true}
+    depends_on: [s02_user_discovery]
+
+  - id: s05_repo_clone
+    ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+    params: {dry_run: true}
+    depends_on: [s04_saas_token]
+
+  - id: s06_drive_download
+    ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+    params: {dry_run: true}
+    depends_on: [s04_saas_token]
+
+  - id: s07_cloud_login
+    ttp: T1078.004:AWS_IAM_CONSOLE_RISK
+    params: {dry_run: true, principal: lab.lazarus}
+    depends_on: [s02_user_discovery]
+
+  - id: s08_cloud_discovery
+    ttp: T1580:CLOUD_INFRA_DISCOVERY
+    params: {dry_run: true, principal: lab.lazarus}
+    depends_on: [s07_cloud_login]
+
+  - id: s09_cloud_storage
+    ttp: T1530:GCS_BUCKET_COLLECTION
+    params: {dry_run: true, principal: lab.lazarus}
+    depends_on: [s08_cloud_discovery]
+
+  - id: s10_external_share
+    ttp: T1567.002:SAAS_EXTERNAL_SHARE
+    params: {dry_run: true}
+    depends_on: [s05_repo_clone, s06_drive_download, s09_cloud_storage]
+
+  - id: s11_c2_beacon
+    ttp: T1071.001
+    params: {dry_run: true, url: "http://127.0.0.1:8765/healthz", beacons: 2}
+    depends_on: [s03_obfuscation]
+
+  - id: s12_cleanup
+    ttp: T1070.004
+    params: {dry_run: true}
+    depends_on: [s10_external_share, s11_c2_beacon]

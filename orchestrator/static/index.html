@@ -18,6 +18,7 @@
     <nav class="tabs" aria-label="Dashboard views">
       <button class="tab is-active" data-view="overview">Overview</button>
       <button class="tab" data-view="library">Scenario Library</button>
+      <button class="tab" data-view="maturity">Maturity</button>
       <button class="tab" data-view="matrix">Matrix</button>
       <button class="tab" data-view="sync">Sync</button>
       <button class="tab" data-view="catalog">Catalog</button>
@@ -137,6 +138,38 @@
           </thead>
           <tbody id="library-table"></tbody>
         </table>
+      </div>
+    </section>
+
+    <section id="view-maturity" class="view">
+      <div class="split-grid">
+        <div class="table-shell">
+          <div class="table-title">
+            <h2>Scenario Maturity</h2>
+            <span id="maturity-count" class="pill neutral">0 scenarios</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Actor</th>
+                <th>Score</th>
+                <th>Maturity</th>
+                <th>Tactics</th>
+                <th>Detection</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody id="maturity-table"></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Evidence Coverage</h2>
+            <span id="maturity-score" class="pill neutral">0 avg</span>
+          </div>
+          <div id="maturity-bars" class="bar-list"></div>
+        </div>
       </div>
     </section>
 

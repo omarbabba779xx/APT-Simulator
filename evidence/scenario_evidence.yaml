@@ -1,0 +1,171 @@
+version: 1
+description: Fixture-backed evidence contracts for validated actor-chain scenarios.
+scenarios:
+  - scenario: validated_apt29_identity_cloud_chain
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [identity, windows_process, cloud_api, storage, dns, http]
+    expected_detection_count: 12
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the scenario in dry-run mode.
+      - Confirm identity sign-in, endpoint discovery, cloud discovery, collection, C2, and exfiltration markers.
+      - Compare Sigma matches against the golden event contract.
+    success_criteria:
+      - All scenario steps are queued without DAG errors.
+      - At least one detection event exists for each major phase.
+      - No non-lab network or cloud provider call is required.
+  - scenario: validated_fin7_pos_lateral_collection
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [windows_process, windows_security, file_event, http]
+    expected_detection_count: 12
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the Windows scenario in dry-run mode.
+      - Confirm execution, persistence, credential pressure, lateral path, collection, and exfiltration markers.
+      - Validate that high-risk persistence detections remain visible in the report.
+    success_criteria:
+      - Service and scheduled task markers are present.
+      - SMB and credential markers are ordered after discovery.
+      - Exfiltration is loopback or synthetic only.
+  - scenario: validated_lazarus_saas_cloud_exfil
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [process, saas, identity, cloud_api, storage, http]
+    expected_detection_count: 12
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the hybrid scenario in dry-run mode.
+      - Confirm SaaS token, repository clone, drive download, cloud storage, external share, and C2 markers.
+      - Compare SaaS and cloud detections against exported Sigma metadata.
+    success_criteria:
+      - SaaS collection and cloud collection both appear.
+      - External share follows collection.
+      - Cleanup is terminal and marker-only.
+  - scenario: validated_apt41_linux_k8s_pivot
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [linux_process, file_event, kubernetes_audit, container_runtime]
+    expected_detection_count: 11
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the Linux/Kubernetes scenario in dry-run mode.
+      - Confirm shell history, cron, tool transfer, Kubernetes discovery, API execution, role binding, and escape markers.
+      - Review Kubernetes audit coverage in the detection workbench.
+    success_criteria:
+      - Kubernetes steps remain marker-only.
+      - Secret read and role binding are represented as high-risk detections.
+      - Log clear occurs only after the simulated cluster path.
+  - scenario: validated_ransomware_ad_preimpact
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [windows_security, directory_service, windows_process, file_event]
+    expected_detection_count: 12
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the AD ransomware pre-impact scenario in dry-run mode.
+      - Confirm domain discovery, credential access, lateral path, GPO change, service creation, staging, and impact markers.
+      - Validate impact markers are synthetic and reversible.
+    success_criteria:
+      - Credential access precedes lateral movement.
+      - GPO and service changes are represented by markers only.
+      - Impact steps do not modify real business data.
+  - scenario: validated_insider_saas_data_access
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [identity, m365, github, google_workspace, slack, cloudtrail, saas]
+    expected_detection_count: 10
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the insider scenario in dry-run mode.
+      - Confirm risky sign-in, token creation, repository clone, drive download, Slack export, cloud read, and external share.
+      - Review false-positive risk on common collaboration events.
+    success_criteria:
+      - SaaS and cloud access are correlated to one principal.
+      - External share appears after collection.
+      - The scenario contains no destructive step.
+  - scenario: validated_turla_stealthy_endpoint_c2
+    validation_status: fixture-backed
+    confidence: medium
+    telemetry_sources: [windows_process, linux_process, registry, http, file_event]
+    expected_detection_count: 11
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the stealth scenario in dry-run mode.
+      - Confirm discovery, history suppression, persistence, proxy execution, obfuscation, C2, collection, and cleanup markers.
+      - Review low-noise event ordering in the run timeline.
+    success_criteria:
+      - C2 occurs after obfuscation.
+      - Collection occurs after C2 setup.
+      - Cleanup is terminal and synthetic.
+  - scenario: validated_scattered_spider_identity_cloud
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [m365, okta, azure_signin, azure_audit, saas, google_workspace]
+    expected_detection_count: 10
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the identity/cloud scenario in dry-run mode.
+      - Confirm spray, MFA policy change, risky sign-in, role assignment, SaaS token, and external share markers.
+      - Review detection latency expectations for identity-heavy chains.
+    success_criteria:
+      - Identity pressure precedes privileged changes.
+      - Cloud role assignment is represented.
+      - Collection and external share are tied to the same chain.
+  - scenario: validated_sandworm_disruptive_lab
+    validation_status: fixture-backed
+    confidence: medium
+    telemetry_sources: [windows_process, windows_security, directory_service, linux_process, file_event]
+    expected_detection_count: 10
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the disruptive lab scenario in dry-run mode.
+      - Confirm discovery, domain access, GPO change, service marker, account access removal, encryption signal, and cleanup markers.
+      - Verify all impact indicators are synthetic.
+    success_criteria:
+      - Impact stages are marker-only.
+      - Account removal is a detection marker, not a real directory change.
+      - Cleanup follows the synthetic impact signal.
+  - scenario: validated_cloud_k8s_takeover_path
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [cloudtrail, cloud_api, metadata, kubernetes_audit, container_runtime]
+    expected_detection_count: 10
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the cloud/Kubernetes path in dry-run mode.
+      - Confirm cloud login, service discovery, metadata marker, admin command, Kubernetes discovery, role binding, service creation, and host escape signal.
+      - Review cloud and Kubernetes detections together.
+    success_criteria:
+      - Cloud access precedes Kubernetes activity.
+      - Role binding is high-risk and marker-only.
+      - Escape signal has no host-level side effect.
+  - scenario: validated_windows_ad_kerberos_lateral
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [windows_security, directory_service, windows_process, windows_registry]
+    expected_detection_count: 11
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the Windows AD lateral scenario in dry-run mode.
+      - Confirm domain login, account/group discovery, password policy discovery, credential marker, RDP, SMB, WinRM, registry, and service markers.
+      - Compare lateral movement coverage by protocol.
+    success_criteria:
+      - RDP, SMB, and WinRM paths are represented separately.
+      - Registry and service markers occur after lateral movement.
+      - All steps are authorized lab markers.
+  - scenario: validated_cross_platform_hybrid_intrusion
+    validation_status: fixture-backed
+    confidence: high
+    telemetry_sources: [windows_process, linux_process, cloud_api, github, kubernetes_audit, http, saas]
+    expected_detection_count: 12
+    fixture: evidence/soc_golden_events.jsonl
+    runbook:
+      - Start the cross-platform scenario in dry-run mode.
+      - Confirm endpoint, Linux persistence, Windows WMI, cloud, SaaS, Kubernetes, C2, external share, and cleanup markers.
+      - Review cross-domain exposure graph paths after load.
+    success_criteria:
+      - Endpoint, cloud, SaaS, and Kubernetes domains are all represented.
+      - External share follows repository collection.
+      - Cleanup is terminal and safe.

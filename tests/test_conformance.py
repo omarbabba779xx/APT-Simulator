@@ -10,7 +10,7 @@ from ttps.base import registry
 
 ROOT = Path(__file__).resolve().parents[1]
 TEXT_SUFFIXES = {".md", ".py", ".js", ".css", ".html", ".yaml", ".yml", ".toml", ".txt"}
-SKIP_PARTS = {".git", ".mypy_cache", ".pytest_cache", ".ruff_cache", "__pycache__"}
+SKIP_PARTS = {".git", ".mypy_cache", ".pytest_cache", ".ruff_cache", ".tmp", "__pycache__"}
 FORBIDDEN_MARKERS = [
     "co" + "dex",
     "open" + "ai",
@@ -25,19 +25,21 @@ def test_exact_public_counts() -> None:
     cfg = load_config("config/default.yaml")
     scenarios = load_scenarios_from_dir(cfg.orchestrator.scenarios_dir)
     assert len(registry.all()) == 5064
-    assert len(scenarios) == 2522
+    assert len(scenarios) == 2534
     assert len(list((ROOT / "scenarios" / "generated").glob("*.yaml"))) == 2500
     assert len(list((ROOT / "scenarios" / "ael").glob("*.yaml"))) == 11
+    assert len(list((ROOT / "scenarios" / "validated").glob("*.yaml"))) == 12
 
 
 def test_readme_states_exact_counts() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for expected in [
         "5,064 TTPs",
-        "2,522 loaded scenarios",
+        "2,534 loaded scenarios",
         "11 classic YAML scenarios",
         "2,500 generated YAML scenarios",
         "11 emulation-plan YAML scenarios",
+        "12 validated actor-chain YAML scenarios",
         "15,680,015,680 generable scenario variants",
         "5,064 Sigma rules",
         "15/15 current ATT&CK Enterprise tactics covered",

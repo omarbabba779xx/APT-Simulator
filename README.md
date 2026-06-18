@@ -9,8 +9,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Area | Current state |
 | --- | --- |
 | Coverage catalog | 5,064 TTPs mapped to ATT&CK Enterprise techniques and controlled variants |
-| Scenario library | 2,522 loaded YAML scenarios available to the API and dashboard |
-| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, and 11 emulation-plan scenarios |
+| Scenario library | 2,534 loaded YAML scenarios available to the API and dashboard |
+| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 12 validated actor-chain scenarios |
+| Scenario maturity | 12 fixture-backed validated actor-chain scenarios with evidence contracts |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -19,6 +20,7 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 ```mermaid
 flowchart LR
     Dashboard["Browser dashboard"] --> Library["Scenario Library"]
+    Dashboard --> Maturity["Scenario Maturity"]
     Dashboard --> Matrix["ATT&CK Matrix"]
     Dashboard --> Sync["ATT&CK Sync"]
     Dashboard --> Campaigns["Campaign Runner"]
@@ -26,6 +28,7 @@ flowchart LR
     Dashboard --> Exposure["Exposure Graph"]
     Dashboard --> Reports["Run and campaign reports"]
     Library --> API["FastAPI orchestrator"]
+    Maturity --> API
     Matrix --> API
     Campaigns --> API
     Reports --> API
@@ -34,10 +37,11 @@ flowchart LR
 ## Exact Current Counts
 
 - 5,064 TTPs
-- 2,522 loaded scenarios
+- 2,534 loaded scenarios
 - 11 classic YAML scenarios
 - 2,500 generated YAML scenarios
 - 11 emulation-plan YAML scenarios
+- 12 validated actor-chain YAML scenarios
 - 15,680,015,680 generable scenario variants
 - 5,064 Sigma rules
 - 15/15 current ATT&CK Enterprise tactics covered
@@ -47,7 +51,9 @@ flowchart LR
 - 36 Cloud/Kubernetes lab TTPs in the `cloud_k8s_lab` pack
 - 28 Active Directory/Windows enterprise lab TTPs in the `ad_enterprise_lab` pack
 
-The 2,522 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+The 2,534 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+
+The 12 validated actor-chain scenarios are manually authored scenario DAGs with fixture-backed evidence contracts under `evidence/`. They are not counted as generated variants and are exposed separately in the Scenario Library and Scenario Maturity views.
 
 The ATT&CK sync layer uses a bundled Enterprise STIX snapshot, detects missing, extra, deprecated, and revoked local technique IDs, and keeps the dashboard aligned to the current 15 tactic Enterprise model.
 
@@ -73,6 +79,7 @@ pie title Loaded scenario library
     "Classic YAML scenarios" : 11
     "Generated YAML scenarios" : 2500
     "Emulation-plan scenarios" : 11
+    "Validated actor-chain scenarios" : 12
 ```
 
 ```mermaid
@@ -80,7 +87,8 @@ flowchart LR
     Actors["Actor profiles"] --> Variants["Deterministic variant builder"]
     Difficulty["Difficulty levels"] --> Variants
     Platforms["Windows, Linux, macOS, cloud, identity, SaaS"] --> Variants
-    AEL["Emulation-plan imports"] --> Loaded["2,522 loaded YAML scenarios"]
+    AEL["Emulation-plan imports"] --> Loaded["2,534 loaded YAML scenarios"]
+    Validated["Fixture-backed actor-chain scenarios"] --> Loaded
     Variants --> Loaded
     Variants --> Space["15,680,015,680 generable variants"]
 ```
@@ -94,7 +102,9 @@ flowchart TD
     Sigma --> Workbench["Rule quality scoring"]
     Events --> Workbench
     Workbench --> Targets["Splunk, Elastic, Sentinel, Chronicle export readiness"]
-    Scenarios["2,522 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
+    Scenarios["2,534 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
+    Scenarios --> Maturity["Scenario maturity and evidence scoring"]
+    Evidence["Golden event contracts"] --> Maturity
 ```
 
 ## What This Project Does
@@ -107,12 +117,14 @@ flowchart TD
 - Produces JSON and HTML reports for runs and campaigns.
 - Tracks ATT&CK snapshot drift and detection-rule quality.
 - Builds a controlled exposure graph from loaded scenarios and catalog domains.
+- Scores scenario maturity using actor depth, DAG structure, tactic coverage, detection coverage, and evidence fixtures.
 
 ## What This Project Does Not Do
 
 - It is not an offensive framework.
 - It is not intended for systems without written authorization.
-- It stores the complete 2,522-scenario loaded library; larger variant batches are generated on demand.
+- It stores the complete 2,534-scenario loaded library; larger variant batches are generated on demand.
+- Fixture-backed scenarios include expected telemetry contracts; they are not claims of external SIEM certification.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
 
@@ -131,7 +143,8 @@ flowchart TD
 orchestrator/   FastAPI app, planner, dashboard API, reports, scenario loader
 agent/          Beacon agent and local runner
 ttps/           TTP registry, Python TTPs, catalog-backed TTP packs
-scenarios/      11 classic, 2,500 generated, and 11 emulation-plan YAML scenarios
+scenarios/      11 classic, 2,500 generated, 11 emulation-plan, and 12 validated YAML scenarios
+evidence/       Scenario evidence contracts and SOC golden event fixtures
 detection/      Sigma rules, coverage metadata, fixture/query export targets
 profiles/       Actor profile inputs
 config/         Default runtime and safety configuration
@@ -173,6 +186,7 @@ The dashboard includes:
 | --- | --- |
 | Overview | Counts, coverage, detection score, and recent run state. |
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
+| Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
 | TTP Catalog | Search and filter registered TTPs and safety tiers. |
@@ -195,6 +209,15 @@ Scenario library:
 ```bash
 curl http://127.0.0.1:8000/scenario-library
 curl "http://127.0.0.1:8000/scenario-library?source=generated%20variant&platform=windows"
+curl "http://127.0.0.1:8000/scenario-library?source=validated%20actor-chain"
+```
+
+Scenario maturity and evidence:
+
+```bash
+curl http://127.0.0.1:8000/scenario-maturity
+curl http://127.0.0.1:8000/scenario-evidence/validated_apt29_identity_cloud_chain
+curl http://127.0.0.1:8000/reports/scenarios/validated_apt29_identity_cloud_chain.json
 ```
 
 Variant-space count:
@@ -333,6 +356,7 @@ Score local detection content:
 ```bash
 python -m orchestrator.detection_workbench score
 python -m orchestrator.exposure_graph graph --out exposure-graph.json
+python -m orchestrator.scenario_maturity summary
 ```
 
 Run a local dry-run style scenario without the orchestrator:
@@ -370,7 +394,8 @@ node --check orchestrator/static/app.js
 Conformance tests verify:
 
 - TTP count is exactly 5,064.
-- Loaded scenario count is exactly 2,522.
+- Loaded scenario count is exactly 2,534.
+- Validated actor-chain scenario count is exactly 12.
 - README count statements match the current implementation.
 - ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
 - Public text files do not include forbidden public tooling markers.
@@ -382,8 +407,9 @@ The repository stores the complete loaded scenario library:
 - `scenarios/*.yaml` contains 11 classic scenario files.
 - `scenarios/generated/*.yaml` contains 2,500 generated scenario files.
 - `scenarios/ael/*.yaml` contains 11 emulation-plan scenario files.
+- `scenarios/validated/*.yaml` contains 12 fixture-backed validated actor-chain scenario files.
 - Each generated file is a complete scenario DAG with actor, target platforms, tags, steps, TTP IDs, parameters, and dependencies.
-- The loader reads the full directory tree and loads all 2,522 scenarios directly.
+- The loader reads the full directory tree and loads all 2,534 scenarios directly.
 
 ## License
 

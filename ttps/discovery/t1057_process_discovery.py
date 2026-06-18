@@ -1,4 +1,4 @@
-"""T1057 — Process Discovery.
+"""T1057 - Process Discovery.
 
 Read-only enumeration of running processes. Equivalent telemetry to
 `tasklist` / `ps -ef`. Returns counts and a small sample. Does not touch
@@ -11,7 +11,22 @@ import subprocess
 import time
 from typing import Any
 
+import psutil
+
 from ..base import TTP, TTPResult, registry
+
+
+def _psutil_rows(limit: int = 200) -> list[str]:
+    rows: list[str] = []
+    for proc in psutil.process_iter(["pid", "name"]):
+        try:
+            info = proc.info
+            rows.append(f"{info.get('pid', '?')} {info.get('name') or '?'}")
+        except (psutil.AccessDenied, psutil.NoSuchProcess):
+            continue
+        if len(rows) >= limit:
+            break
+    return rows
 
 
 class T1057ProcessDiscovery(TTP):
@@ -33,6 +48,23 @@ class T1057ProcessDiscovery(TTP):
                 check=False,
             )
             lines = proc.stdout.splitlines()
+            if proc.returncode != 0:
+                fallback = _psutil_rows()
+                if fallback:
+                    return TTPResult(
+                        ok=True,
+                        output=f"enumerated {len(fallback)} process rows",
+                        error=None,
+                        started_at=started,
+                        finished_at=time.time(),
+                        extra={
+                            "argv": argv,
+                            "fallback": "psutil",
+                            "original_error": proc.stderr[:1000] or None,
+                            "row_count": len(fallback),
+                            "sample": fallback[:20],
+                        },
+                    )
             return TTPResult(
                 ok=proc.returncode == 0,
                 output=f"enumerated {len(lines)} process rows",
@@ -44,6 +76,22 @@ class T1057ProcessDiscovery(TTP):
         except subprocess.TimeoutExpired:
             return TTPResult(ok=False, error="timeout", started_at=started, finished_at=time.time())
         except FileNotFoundError as exc:
+            fallback = _psutil_rows()
+            if fallback:
+                return TTPResult(
+                    ok=True,
+                    output=f"enumerated {len(fallback)} process rows",
+                    error=None,
+                    started_at=started,
+                    finished_at=time.time(),
+                    extra={
+                        "argv": argv,
+                        "fallback": "psutil",
+                        "original_error": f"binary not found: {exc}",
+                        "row_count": len(fallback),
+                        "sample": fallback[:20],
+                    },
+                )
             return TTPResult(ok=False, error=f"binary not found: {exc}", started_at=started, finished_at=time.time())
 
     def sigma_rule(self) -> dict[str, Any]:

@@ -1,0 +1,68 @@
+name: validated_ransomware_ad_preimpact
+description: >
+  Fixture-backed ransomware pre-impact chain for Active Directory discovery,
+  credential access markers, lateral movement, policy modification, service
+  creation, staging, and encryption marker validation.
+target_platforms: [windows]
+actor: Ransomware
+tags: [validated, actor_chain, noisy, ransomware, active_directory, windows, impact]
+
+steps:
+  - id: s01_domain_login
+    ttp: T1078.002:AD_DOMAIN_ACCOUNT_LOGIN
+    params: {dry_run: true, principal: lab.ransom}
+
+  - id: s02_domain_account_enum
+    ttp: T1087.002:AD_DOMAIN_ACCOUNT_ENUM
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s01_domain_login]
+
+  - id: s03_domain_group_enum
+    ttp: T1069.002:AD_DOMAIN_GROUP_ENUM
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s02_domain_account_enum]
+
+  - id: s04_remote_systems
+    ttp: T1018:AD_REMOTE_SYSTEM_DISCOVERY
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s03_domain_group_enum]
+
+  - id: s05_sam_marker
+    ttp: T1003.002:AD_SAM_ACCESS_MARKER
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s04_remote_systems]
+
+  - id: s06_ntds_marker
+    ttp: T1003.003:AD_NTDS_ACCESS_MARKER
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s05_sam_marker]
+
+  - id: s07_winrm_path
+    ttp: T1021.006:AD_WINRM_LATERAL_PATH
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s06_ntds_marker]
+
+  - id: s08_gpo_change
+    ttp: T1484.001:AD_GROUP_POLICY_MODIFICATION
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s07_winrm_path]
+
+  - id: s09_service_create
+    ttp: T1543.003:AD_WINDOWS_SERVICE_CREATE
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s08_gpo_change]
+
+  - id: s10_archive_staging
+    ttp: T1560
+    params: {dry_run: true}
+    depends_on: [s09_service_create]
+
+  - id: s11_encryption_marker
+    ttp: T1486
+    params: {dry_run: true}
+    depends_on: [s10_archive_staging]
+
+  - id: s12_account_access_removal
+    ttp: T1531:AD_ACCOUNT_ACCESS_REMOVAL
+    params: {dry_run: true, principal: lab.ransom}
+    depends_on: [s11_encryption_marker]

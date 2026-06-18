@@ -1,0 +1,63 @@
+name: validated_turla_stealthy_endpoint_c2
+description: >
+  Fixture-backed Turla-style stealth chain for endpoint discovery, shell
+  history suppression, persistence, proxy execution, C2, collection, and
+  cleanup markers.
+target_platforms: [windows, linux]
+actor: Turla
+tags: [validated, actor_chain, stealthy, turla, endpoint, c2]
+
+steps:
+  - id: s01_system_info
+    ttp: T1082
+    params: {dry_run: true}
+
+  - id: s02_process_discovery
+    ttp: T1057
+    params: {dry_run: true}
+    depends_on: [s01_system_info]
+
+  - id: s03_history_disable
+    ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+    params: {dry_run: true}
+    depends_on: [s01_system_info]
+
+  - id: s04_runkey_marker
+    ttp: T1547.001
+    params: {dry_run: true}
+    depends_on: [s02_process_discovery]
+
+  - id: s05_rundll32_proxy
+    ttp: T1218.011:WINDOWS_RUNDLL32_PROXY
+    params: {dry_run: true}
+    depends_on: [s04_runkey_marker]
+
+  - id: s06_obfuscation
+    ttp: T1027
+    params: {dry_run: true}
+    depends_on: [s05_rundll32_proxy]
+
+  - id: s07_http_c2
+    ttp: T1071.001
+    params: {dry_run: true, url: "http://127.0.0.1:8765/healthz", beacons: 3}
+    depends_on: [s06_obfuscation]
+
+  - id: s08_local_collection
+    ttp: T1005
+    params: {dry_run: true, max_depth: 1, max_entries: 15}
+    depends_on: [s07_http_c2]
+
+  - id: s09_archive
+    ttp: T1560
+    params: {dry_run: true}
+    depends_on: [s08_local_collection]
+
+  - id: s10_alt_exfil
+    ttp: T1048
+    params: {dry_run: true, protocol: https, payload_bytes: 256}
+    depends_on: [s09_archive]
+
+  - id: s11_log_cleanup
+    ttp: T1070.004:LINUX_LOG_CLEAR
+    params: {dry_run: true}
+    depends_on: [s10_alt_exfil]

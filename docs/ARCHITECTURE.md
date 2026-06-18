@@ -4,33 +4,34 @@
 
 ### Orchestrator (`orchestrator/`)
 
-FastAPI server. Holds the in-memory `Planner` (active runs + step states), an
-`AuditLog` (hash-chained JSONL), a `KillSwitch`, and the loaded `Scenario`
-catalog. Issues signed task descriptors to agents on beacon.
+FastAPI server. Holds the in-memory `Planner` for active runs and step states,
+an `AuditLog` with a hash-chained JSONL stream, a `KillSwitch`, and the loaded
+scenario catalog. It issues signed task descriptors to agents on beacon.
 
 Modules:
 
-- `core/config.py` — pydantic config models, YAML loader.
-- `core/killswitch.py` — checks env var `APT_SIM_STOP` and a flag file.
-- `core/audit.py` — append-only JSONL with sha256 chain (`prev` → `hash`).
-- `core/signer.py` — Ed25519 keygen, sign, verify (CLI: `python -m orchestrator.core.signer init`).
-- `core/planner.py` — Run / StepState; DAG-aware task dispatch.
-- `dsl/schema.py` — pydantic models for scenarios + DAG validation.
-- `dsl/loader.py` — YAML loader.
-- `api/` — FastAPI routers (`agents`, `scenarios`, `ttps`, `killswitch`).
-- `main.py` — Typer CLI: `serve`, `verify-audit`.
+- `core/config.py` - pydantic config models and YAML loader.
+- `core/killswitch.py` - checks env var `APT_SIM_STOP` and a flag file.
+- `core/audit.py` - append-only JSONL with sha256 chain (`prev` to `hash`).
+- `core/signer.py` - Ed25519 keygen, sign, verify.
+- `core/planner.py` - Run / StepState and DAG-aware task dispatch.
+- `dsl/schema.py` - pydantic models for scenarios and DAG validation.
+- `dsl/loader.py` - YAML scenario loader.
+- `api/` - FastAPI routers (`agents`, `scenarios`, `ttps`, `killswitch`).
+- `scenario_maturity.py` - scenario depth, evidence, detection coverage, and SOC usability scoring.
+- `main.py` - Typer CLI: `serve`, `verify-audit`.
 
 ### Agent (`agent/`)
 
-- `safety.py` — pre-flight: killswitch + lab whitelist.
-- `runtime.py` — TTP loader + signature verifier.
-- `beacon.py` — register → poll → execute → report. TTL self-terminate.
-- `main.py` — CLI: `apt-agent run --server URL`.
+- `safety.py` - pre-flight killswitch and lab whitelist checks.
+- `runtime.py` - TTP loader and signature verifier.
+- `beacon.py` - register, poll, execute, report, and TTL self-terminate.
+- `main.py` - CLI: `apt-agent run --server URL`.
 
 ### TTPs (`ttps/`)
 
-Plugin library, each Python module or catalog item self-registers on import.
-The current registry loads 5,064 TTPs/variants:
+Plugin library where each Python module or catalog item self-registers on
+import. The current registry loads 5,064 TTPs/variants:
 
 | Surface | Purpose |
 | --- | --- |
@@ -50,31 +51,32 @@ flowchart LR
     Registry --> Fixtures["Telemetry fixtures"]
 ```
 
-## Data flow
+## Data Flow
 
-1. Operator `POST /scenarios/run` (by name or inline).
-2. Planner instantiates a `Run`, expands steps into `StepState` dict.
-3. Each agent on beacon calls `next_task_for_agent` → planner returns a step
-   whose dependencies are all `success`.
-4. Task is signed (Ed25519 over canonical JSON) before transmission.
-5. Agent verifies signature → runs the registered TTP → POSTs result.
-6. Planner cascades `abort_on_fail`. When all steps terminal → run completes.
-7. Every state transition is audit-logged (hash-chained JSONL).
+1. Operator calls `POST /scenarios/run` by name or inline scenario body.
+2. Planner instantiates a `Run` and expands steps into `StepState` records.
+3. Each agent beacon calls `next_task_for_agent`; the planner returns a ready step whose dependencies are all `success`.
+4. Task is signed with Ed25519 over canonical JSON before transmission.
+5. Agent verifies signature, runs the registered TTP, then posts the result.
+6. Planner cascades `abort_on_fail`; when all steps are terminal, the run completes.
+7. Every state transition is audit-logged in the hash-chained JSONL stream.
+8. Scenario maturity reports correlate the loaded DAG, evidence contract, golden events, tactics, and detection coverage.
 
-## Safety guardrails (recap)
+## Safety Guardrails
 
-- Killswitch (env or file) — orchestrator aborts runs, agents exit on next beacon or local check.
-- Lab whitelist — agent refuses to start outside allowed hostnames/CIDRs.
-- Signed payloads — agent rejects unsigned tasks when key is configured.
-- TTL — agent self-terminates after `--ttl-seconds` (default 4 h).
-- Allowlisted commands — T1059 cannot run arbitrary shell.
-- Isolated registry path — T1547 cannot touch real Run keys.
-- Hash-chained audit — tamper with any past line breaks `verify-audit`.
+- Killswitch: env or file flag causes the orchestrator to abort runs and agents to exit on next check.
+- Lab whitelist: agent refuses to start outside allowed hostnames/CIDRs.
+- Signed payloads: agent rejects unsigned tasks when key enforcement is configured.
+- TTL: agent self-terminates after `--ttl-seconds` (default 4 h).
+- Allowlisted commands: T1059 cannot run arbitrary shell commands.
+- Isolated registry path: T1547 cannot touch real Run keys.
+- Hash-chained audit: tampering with any past audit line breaks `verify-audit`.
 
 ## Current Scale
 
 - 5,064 registered TTPs/variants.
-- 2,522 loaded YAML scenarios.
+- 2,534 loaded YAML scenarios.
+- 12 fixture-backed validated actor-chain scenarios.
 - 5,064 Sigma rules.
 - 15/15 current ATT&CK Enterprise tactics covered.
-- Dashboard, campaign runner, reports, coverage matrix, scenario library, sync status, detection workbench, and exposure graph are implemented.
+- Dashboard, campaign runner, reports, coverage matrix, scenario library, scenario maturity, sync status, detection workbench, and exposure graph are implemented.

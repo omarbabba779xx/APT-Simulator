@@ -1,0 +1,68 @@
+name: validated_cross_platform_hybrid_intrusion
+description: >
+  Fixture-backed hybrid intrusion chain spanning endpoint discovery, Linux
+  persistence, Windows execution, cloud discovery, SaaS collection, Kubernetes
+  discovery, C2, exfiltration, and cleanup markers.
+target_platforms: [windows, linux, darwin]
+actor: Hybrid Intrusion
+tags: [validated, actor_chain, realistic, cross_platform, cloud, saas, kubernetes]
+
+steps:
+  - id: s01_system_info
+    ttp: T1082
+    params: {dry_run: true}
+
+  - id: s02_user_discovery
+    ttp: T1033
+    params: {dry_run: true}
+    depends_on: [s01_system_info]
+
+  - id: s03_linux_cron
+    ttp: T1053.003:LINUX_CRON_MARKER
+    params: {dry_run: true}
+    depends_on: [s02_user_discovery]
+
+  - id: s04_windows_wmi
+    ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+    params: {dry_run: true, target: localhost}
+    depends_on: [s02_user_discovery]
+
+  - id: s05_cloud_login
+    ttp: T1078.004:GCP_CONSOLE_SESSION
+    params: {dry_run: true, principal: lab.hybrid}
+    depends_on: [s02_user_discovery]
+
+  - id: s06_cloud_discovery
+    ttp: T1580:GCP_PROJECT_ENUMERATION
+    params: {dry_run: true}
+    depends_on: [s05_cloud_login]
+
+  - id: s07_saas_token
+    ttp: T1098.005:SAAS_TOKEN_CREATED
+    params: {dry_run: true}
+    depends_on: [s02_user_discovery]
+
+  - id: s08_repo_collection
+    ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+    params: {dry_run: true}
+    depends_on: [s07_saas_token]
+
+  - id: s09_k8s_discovery
+    ttp: T1613:K8S_RESOURCE_DISCOVERY_ADV
+    params: {dry_run: true, principal: lab.hybrid}
+    depends_on: [s06_cloud_discovery]
+
+  - id: s10_c2
+    ttp: T1071.001
+    params: {dry_run: true, url: "http://127.0.0.1:8765/healthz", beacons: 2}
+    depends_on: [s03_linux_cron, s04_windows_wmi]
+
+  - id: s11_external_share
+    ttp: T1567.002:SAAS_EXTERNAL_SHARE
+    params: {dry_run: true}
+    depends_on: [s08_repo_collection, s09_k8s_discovery]
+
+  - id: s12_cleanup
+    ttp: T1070.004
+    params: {dry_run: true}
+    depends_on: [s10_c2, s11_external_share]

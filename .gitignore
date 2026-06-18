@@ -37,6 +37,7 @@ keys/*.key
 
 # Test artifacts
 .pytest_cache/
+.tmp/
 .coverage
 htmlcov/
 .mypy_cache/

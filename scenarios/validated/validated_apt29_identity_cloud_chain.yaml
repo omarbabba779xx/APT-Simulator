@@ -1,0 +1,68 @@
+name: validated_apt29_identity_cloud_chain
+description: >
+  Fixture-backed APT29-style chain from identity access through endpoint
+  discovery, credential targeting, cloud discovery, storage collection, C2,
+  and exfiltration markers.
+target_platforms: [windows, linux]
+actor: APT29
+tags: [validated, actor_chain, realistic, apt29, identity, cloud, windows, linux]
+
+steps:
+  - id: s01_risky_signin
+    ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+    params: {dry_run: true}
+
+  - id: s02_m365_group_enum
+    ttp: T1087.004:M365_GROUP_ENUMERATION
+    params: {dry_run: true}
+    depends_on: [s01_risky_signin]
+
+  - id: s03_system_info
+    ttp: T1082
+    params: {dry_run: true}
+    depends_on: [s01_risky_signin]
+
+  - id: s04_process_discovery
+    ttp: T1057
+    params: {dry_run: true}
+    depends_on: [s03_system_info]
+
+  - id: s05_credential_targets
+    ttp: T1003
+    params: {dry_run: true}
+    depends_on: [s04_process_discovery]
+
+  - id: s06_obfuscation_marker
+    ttp: T1027
+    params: {dry_run: true, size_bytes: 2048}
+    depends_on: [s05_credential_targets]
+
+  - id: s07_cloud_infra_discovery
+    ttp: T1580:CLOUD_INFRA_DISCOVERY
+    params: {dry_run: true, principal: lab.apt29}
+    depends_on: [s02_m365_group_enum]
+
+  - id: s08_s3_object_collection
+    ttp: T1530:AWS_S3_OBJECT_COLLECTION_ADV
+    params: {dry_run: true, principal: lab.apt29, resource: finance-bucket}
+    depends_on: [s07_cloud_infra_discovery]
+
+  - id: s09_archive_collection
+    ttp: T1560
+    params: {dry_run: true}
+    depends_on: [s08_s3_object_collection]
+
+  - id: s10_http_c2
+    ttp: T1071.001
+    params: {dry_run: true, url: "http://127.0.0.1:8765/healthz", beacons: 2}
+    depends_on: [s06_obfuscation_marker, s09_archive_collection]
+
+  - id: s11_exfil_alt_protocol
+    ttp: T1048
+    params: {dry_run: true, protocol: dns-txt, payload_bytes: 512}
+    depends_on: [s10_http_c2]
+
+  - id: s12_indicator_cleanup
+    ttp: T1070.004
+    params: {dry_run: true}
+    depends_on: [s11_exfil_alt_protocol]

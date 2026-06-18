@@ -17,6 +17,7 @@ const state = {
   attackSync: null,
   workbench: null,
   exposure: null,
+  maturity: null,
   space: null,
   library: { items: [], counts: {}, total: 0, filtered: 0 },
   campaigns: [],
@@ -139,6 +140,7 @@ async function refreshStatic() {
     api("/attack/sync/status").then((data) => { state.attackSync = data; }),
     api("/detections/workbench").then((data) => { state.workbench = data; }),
     api("/exposure/graph").then((data) => { state.exposure = data; }),
+    api("/scenario-maturity").then((data) => { state.maturity = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
     api("/scenario-library").then((data) => { state.library = data; }),
   ];
@@ -153,6 +155,7 @@ async function refreshStatic() {
   renderAttackSync();
   renderWorkbench();
   renderExposure();
+  renderMaturity();
   renderVariantSpace();
   renderOverview();
 }
@@ -192,6 +195,7 @@ function renderMetrics() {
   const agents = Object.keys(state.agents || {}).length;
   const scored = Object.keys(state.scores || {}).length;
   const sync = state.attackSync || state.matrix?.attack_sync || {};
+  const maturity = state.maturity || {};
   const metrics = [
     ["TTPs", matrix.total ?? state.ttps.length, "Coverage catalog"],
     ["Sigma", matrix.with_rules ?? scored, "Rules linked"],
@@ -199,6 +203,7 @@ function renderMetrics() {
     ["Rule Fit", `${matrix.rule_coverage_percent ?? 0}%`, "Rule coverage"],
     ["Variants", fmtInt(state.space?.total_variants), "Generable"],
     ["Scenarios", Object.keys(state.scenarios || {}).length, "Loaded"],
+    ["Validated", maturity.validated_scenarios ?? 0, "Actor-chain"],
     ["Runs", runs.length, "In memory"],
     ["Agents", agents, "Registered"],
   ];
@@ -376,6 +381,40 @@ function renderScenarioLibrary() {
   if (!filtered.length) tbody.appendChild(emptyRow(8, "No scenarios"));
   const shown = Math.min(filtered.length, MAX_LIBRARY_ROWS);
   byId("library-count").textContent = `${shown}/${filtered.length} scenarios`;
+}
+
+function renderMaturity() {
+  const tbody = byId("maturity-table");
+  if (!tbody) return;
+  const maturity = state.maturity || {};
+  const items = maturity.items || [];
+  clear(tbody);
+  for (const item of items.slice(0, 160)) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", { class: "mono", title: (item.tags || []).join(", ") }, item.name),
+      node("td", {}, item.actor || "-"),
+      node("td", {}, `${item.score}%`),
+      node("td", {}, maturityPill(item.maturity)),
+      node("td", {}, `${item.tactic_count} (${(item.tactics || []).slice(0, 3).join(", ")})`),
+      node("td", {}, `${item.detection_coverage_percent}%`),
+      node("td", {}, [
+        node("span", { class: item.evidence_status === "fixture-backed" ? "pill ok" : "pill warn" }, item.evidence_status || "missing"),
+        node("a", {
+          href: `/reports/scenarios/${item.name}.json`,
+          target: "_blank",
+          rel: "noreferrer",
+          class: "inline-report",
+        }, "JSON"),
+      ]),
+    ]));
+  }
+  if (!items.length) tbody.appendChild(emptyRow(7, "No maturity data"));
+  byId("maturity-count").textContent = `${fmtInt(maturity.validated_scenarios)} validated / ${fmtInt(maturity.total_scenarios)} scenarios`;
+  byId("maturity-score").textContent = `${maturity.average_score || 0}% avg`;
+  const bars = Object.entries(maturity.counts_by_maturity || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+  renderBars("maturity-bars", bars);
 }
 
 function renderCatalogFilters() {
@@ -638,6 +677,13 @@ function riskPill(risk) {
   const value = optionValue(risk);
   const kind = value === "low" ? "ok" : value === "medium" ? "warn" : "bad";
   return node("span", { class: `pill ${kind}` }, value);
+}
+
+function maturityPill(value) {
+  const label = optionValue(value);
+  const kind = label === "fixture-backed" || label === "operational" ? "ok"
+    : label === "coverage" || label === "variant" ? "warn" : "bad";
+  return node("span", { class: `pill ${kind}` }, label);
 }
 
 function stepDots(summary) {

@@ -54,6 +54,7 @@
 - [x] Scheduled and recurring campaign runs
 - [x] Detection-as-code workbench for Sigma quality, fields, risk, and target readiness
 - [x] Controlled exposure graph across identity, endpoint, cloud, SaaS, and container domains
+- [x] Fixture-backed validated actor-chain scenarios with maturity scoring and SOC evidence contracts
 - [x] Azure / Entra ID privilege escalation simulation
 - [x] GCP resource manager discovery expansion
 - [ ] gRPC C2 channel option (alternative to HTTP)
