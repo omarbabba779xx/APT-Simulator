@@ -24,8 +24,9 @@ If `APT_SIM_SAFETY_TOKEN` is set, the run params must include the same
 ## Scaling ATT&CK Coverage
 
 The repository includes `ttps/catalog/attack_enterprise.yaml`, generated from
-ATT&CK Enterprise STIX, so the registry currently loads more than 625 safe
-TTPs/variants.
+ATT&CK Enterprise STIX, plus controlled marker-only variants in
+`ttps/catalog/attack_variants.yaml`. The registry currently loads 851 safe
+TTPs/variants across Python modules and catalog-backed entries.
 
 Refresh marker-only stubs from ATT&CK Enterprise STIX:
 
@@ -39,7 +40,7 @@ Use `--limit` for partial imports during review:
 apt-attack-import import-stix --limit 50 --out ttps/catalog/attack_enterprise_sample.yaml
 ```
 
-This is how the project can approach full ATT&CK coverage without handwritten
+This is how the project maintains broad ATT&CK coverage without handwritten
 Python modules for every technique.
 
 ## Detection Exports

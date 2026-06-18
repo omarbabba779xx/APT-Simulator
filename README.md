@@ -4,6 +4,30 @@ APT Simulator is a defensive ATT&CK emulation and detection-engineering lab proj
 
 It does not run destructive malware. The catalog-scale coverage added in this repository is marker-only and dry-run oriented by default.
 
+## Project Snapshot
+
+| Area | Current state |
+| --- | --- |
+| Coverage catalog | 851 TTPs mapped to ATT&CK Enterprise techniques and variants |
+| Scenario library | 2,511 loaded scenarios available to the API and dashboard |
+| Scenario sources | 11 classic YAML scenarios plus 2,500 generated YAML scenarios |
+| Variant space | 15,680,015,680 generable scenario variants |
+| Detection content | 851 Sigma rules with coverage metadata |
+| ATT&CK scope | 14 ATT&CK Enterprise tactics covered |
+| Safety default | Dry-run and marker-only behavior for generated scale coverage |
+
+```mermaid
+flowchart LR
+    Dashboard["Browser dashboard"] --> Library["Scenario Library"]
+    Dashboard --> Matrix["ATT&CK Matrix"]
+    Dashboard --> Campaigns["Campaign Runner"]
+    Dashboard --> Reports["Run and campaign reports"]
+    Library --> API["FastAPI orchestrator"]
+    Matrix --> API
+    Campaigns --> API
+    Reports --> API
+```
+
 ## Exact Current Counts
 
 - 851 TTPs
@@ -16,6 +40,38 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
 
 The 2,511 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+
+## Runtime Graph
+
+```mermaid
+flowchart TD
+    Scenario["Scenario YAML or generated variant"] --> Loader["Scenario loader"]
+    Loader --> Planner["DAG-aware planner"]
+    Planner --> Signer["Signed task descriptor"]
+    Signer --> Agent["Beacon agent or local runner"]
+    Agent --> TTP["Registered TTP simulation"]
+    TTP --> Telemetry["Synthetic telemetry and markers"]
+    Telemetry --> Detection["Sigma, ECS, OCSF, query exports"]
+    Planner --> Audit["Hash-chained audit log"]
+    Planner --> Reports["JSON and HTML reports"]
+```
+
+## Scenario Library Graph
+
+```mermaid
+pie title Loaded scenario library
+    "Classic YAML scenarios" : 11
+    "Generated YAML scenarios" : 2500
+```
+
+```mermaid
+flowchart LR
+    Actors["Actor profiles"] --> Variants["Deterministic variant builder"]
+    Difficulty["Difficulty levels"] --> Variants
+    Platforms["Windows, Linux, macOS, cloud, identity, SaaS"] --> Variants
+    Variants --> Loaded["2,511 loaded scenarios"]
+    Variants --> Space["15,680,015,680 generable variants"]
+```
 
 ## What This Project Does
 
@@ -87,16 +143,15 @@ http://127.0.0.1:8000/dashboard/
 
 The dashboard includes:
 
-- Overview metrics.
-- Scenario Library with actor, difficulty, platform, source, and kind filters.
-- Clickable ATT&CK matrix.
-- TTP catalog filters.
-- Scenario preview and batch preview.
-- Campaign Runner for 10, 50, or 100 selected scenarios.
-- Campaign pause, resume, and retry-failed actions.
-- Run and campaign JSON/HTML report links.
-- Detection score view.
-- Live event feed.
+| View | Purpose |
+| --- | --- |
+| Overview | Counts, coverage, detection score, and recent run state. |
+| Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
+| ATT&CK Matrix | Browse tactic coverage and technique gaps. |
+| TTP Catalog | Search and filter registered TTPs and safety tiers. |
+| Campaigns | Select 10, 50, or 100 scenarios, then pause, resume, or retry failed work. |
+| Reports | Open JSON and HTML reports for runs and campaigns. |
+| Event Feed | Watch recent orchestrator and simulation activity. |
 
 ## API Checks
 

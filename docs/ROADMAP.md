@@ -42,7 +42,7 @@
 
 - [x] AWS Stratus-style simulated TTPs: T1078.004 (Cloud Account abuse), T1530 (Data from Storage)
 - [x] Catalog-driven TTP packs for Windows, Linux, cloud, identity, and SaaS marker-only variants
-- [x] ATT&CK STIX importer and full Enterprise marker-only catalog (625+ TTPs/variants)
+- [x] ATT&CK STIX importer and full Enterprise marker-only catalog with 851 registered TTPs/variants
 - [x] ECS / OCSF golden telemetry fixture export
 - [x] Detection scoring with coverage percentage, missing fields, and false-positive risk
 - [x] Graph-based scenario builder with actor and difficulty profiles

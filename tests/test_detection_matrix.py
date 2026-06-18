@@ -9,10 +9,10 @@ from orchestrator.dsl.schema import Scenario
 
 def test_detection_matrix_includes_packs() -> None:
     matrix = build_matrix()
-    assert matrix["total"] >= 625
+    assert matrix["total"] == 851
     assert matrix["packs"]["cloud"] >= 5
-    assert matrix["safety_tiers"]["marker-only"] >= 625
-    assert matrix["rule_coverage_percent"] > 90
+    assert matrix["safety_tiers"]["marker-only"] == 819
+    assert matrix["rule_coverage_percent"] == 100.0
 
 
 def test_export_fixtures_and_queries(tmp_path: Path) -> None:

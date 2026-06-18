@@ -29,14 +29,24 @@ Modules:
 
 ### TTPs (`ttps/`)
 
-Plugin library, each module self-registers on import. Phase 1 set:
+Plugin library, each Python module or catalog item self-registers on import.
+The current registry loads 851 TTPs/variants:
 
-| ATT&CK ID | Tactic      | Module                                  | Notes                                                 |
-|-----------|-------------|-----------------------------------------|-------------------------------------------------------|
-| T1033     | Discovery   | `discovery/t1033_user_discovery.py`     | Read-only system queries.                             |
-| T1083     | Discovery   | `discovery/t1083_file_discovery.py`     | Bounded directory walk, no exfil.                     |
-| T1059     | Execution   | `execution/t1059_command_sim.py`        | Fixed allowlist; never executes user-supplied shell.  |
-| T1547.001 | Persistence | `persistence/t1547_registry_runkey.py`  | Writes only under `HKCU\Software\AptSimulator\Test`.  |
+| Surface | Purpose |
+| --- | --- |
+| Python modules | Simulations that need custom local logic, bounded reads, lab writes, or protocol behavior. |
+| Catalog YAML | Marker-only scale coverage with metadata, params, Sigma, telemetry, and cleanup fields. |
+| ATT&CK enterprise pack | Broad ATT&CK Enterprise technique coverage from catalog entries. |
+| Controlled variant pack | Additional ATT&CK-mapped marker-only variants for OS, telemetry, and scenario diversity. |
+
+```mermaid
+flowchart LR
+    Python["Python TTP modules"] --> Registry["TTP registry"]
+    Catalog["Catalog YAML packs"] --> Registry
+    Registry --> Planner["Scenario planner"]
+    Registry --> Sigma["Sigma export"]
+    Registry --> Fixtures["Telemetry fixtures"]
+```
 
 ## Data flow
 
@@ -59,9 +69,10 @@ Plugin library, each module self-registers on import. Phase 1 set:
 - Isolated registry path — T1547 cannot touch real Run keys.
 - Hash-chained audit — tamper with any past line breaks `verify-audit`.
 
-## Roadmap (phases)
+## Current Scale
 
-- **Phase 2** — chained APT scenarios (APT29, FIN7), C2 traffic patterns,
-  Sigma rule generation, dashboard.
-- **Phase 3** — cloud TTPs (AWS/Azure/GCP), Atomic Red Team integration,
-  purple-team coverage matrix.
+- 851 registered TTPs/variants.
+- 2,511 loaded scenarios.
+- 851 Sigma rules.
+- 14 ATT&CK Enterprise tactics covered.
+- Dashboard, campaign runner, reports, coverage matrix, and scenario library are implemented.
