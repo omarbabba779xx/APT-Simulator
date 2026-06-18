@@ -1,0 +1,21 @@
+title: Drive-by Target Scale Variant 4116 Marker
+id: 6825bcac-7b5c-57c7-97d6-fd8ca14880a7
+status: experimental
+description: Detects simulator telemetry for Drive-by Target scale variant 4116.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.004
+    apt_sim.variant: attack_scale_variant_4116
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/004/
+tags:
+- attack.t1608.004

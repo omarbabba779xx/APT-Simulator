@@ -1,0 +1,22 @@
+title: Exfiltration to Cloud Storage Scale Variant 0499 Marker
+id: f42fd31e-55c3-5e09-9923-765ac01b57d7
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Cloud Storage scale variant
+  0499.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.002
+    apt_sim.variant: attack_scale_variant_0499
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/002/
+tags:
+- attack.t1567.002

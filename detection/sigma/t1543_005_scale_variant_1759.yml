@@ -1,0 +1,21 @@
+title: Container Service Scale Variant 1759 Marker
+id: a845ad9d-03cf-5efe-9b71-482cf48cddac
+status: experimental
+description: Detects simulator telemetry for Container Service scale variant 1759.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.005
+    apt_sim.variant: attack_scale_variant_1759
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/005/
+tags:
+- attack.t1543.005

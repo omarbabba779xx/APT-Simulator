@@ -1,0 +1,21 @@
+title: Cloud Account Scale Variant 3647 Marker
+id: 07fe03f6-aa06-59db-aac4-0c49de6bad67
+status: experimental
+description: Detects simulator telemetry for Cloud Account scale variant 3647.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1087.004
+    apt_sim.variant: attack_scale_variant_3647
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1087/004/
+tags:
+- attack.t1087.004

@@ -1,0 +1,21 @@
+title: Selective Exclusion Scale Variant 1368 Marker
+id: 602cbc00-35f0-5d02-9e81-a3d370802ce6
+status: experimental
+description: Detects simulator telemetry for Selective Exclusion scale variant 1368.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1679
+    apt_sim.variant: attack_scale_variant_1368
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1679/
+tags:
+- attack.t1679

@@ -1,0 +1,22 @@
+title: Purchase Technical Data Scale Variant 0612 Marker
+id: 6fe3687d-2766-5b09-95e6-939fe47cad3e
+status: experimental
+description: Detects simulator telemetry for Purchase Technical Data scale variant
+  0612.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.002
+    apt_sim.variant: attack_scale_variant_0612
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/002/
+tags:
+- attack.t1597.002

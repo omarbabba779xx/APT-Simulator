@@ -1,0 +1,22 @@
+title: Dynamic-link Library Injection Scale Variant 0099 Marker
+id: 2a9f8479-bd88-5698-ae54-8718d6a875d1
+status: experimental
+description: Detects simulator telemetry for Dynamic-link Library Injection scale
+  variant 0099.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.001
+    apt_sim.variant: attack_scale_variant_0099
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/001/
+tags:
+- attack.t1055.001

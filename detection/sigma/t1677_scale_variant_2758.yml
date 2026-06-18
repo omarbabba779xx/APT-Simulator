@@ -1,0 +1,22 @@
+title: Poisoned Pipeline Execution Scale Variant 2758 Marker
+id: 16460858-5b0e-50a3-8320-23edaf5c4df4
+status: experimental
+description: Detects simulator telemetry for Poisoned Pipeline Execution scale variant
+  2758.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1677
+    apt_sim.variant: attack_scale_variant_2758
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1677/
+tags:
+- attack.t1677

@@ -1,0 +1,21 @@
+title: Steganography Scale Variant 3483 Marker
+id: 3980ef24-4da5-53f4-ad8e-4b2bddc11102
+status: experimental
+description: Detects simulator telemetry for Steganography scale variant 3483.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.002
+    apt_sim.variant: attack_scale_variant_3483
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/002/
+tags:
+- attack.t1001.002

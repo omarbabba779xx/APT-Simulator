@@ -1,0 +1,21 @@
+title: ROMMONkit Scale Variant 3840 Marker
+id: 8d0c3d9d-581b-5c90-a7bf-ef14ce1b478d
+status: experimental
+description: Detects simulator telemetry for ROMMONkit scale variant 3840.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.004
+    apt_sim.variant: attack_scale_variant_3840
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/004/
+tags:
+- attack.t1542.004

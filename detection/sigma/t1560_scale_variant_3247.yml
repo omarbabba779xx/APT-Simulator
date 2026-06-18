@@ -1,0 +1,22 @@
+title: Archive Collected Data Scale Variant 3247 Marker
+id: 49d5978e-70bb-571c-b8d2-d9d60d2ab8f9
+status: experimental
+description: Detects simulator telemetry for Archive Collected Data scale variant
+  3247.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560
+    apt_sim.variant: attack_scale_variant_3247
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/
+tags:
+- attack.t1560

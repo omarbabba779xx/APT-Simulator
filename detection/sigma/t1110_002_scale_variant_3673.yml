@@ -1,0 +1,21 @@
+title: Password Cracking Scale Variant 3673 Marker
+id: 4bb58f57-6851-56e0-931b-5a3f0e1b9916
+status: experimental
+description: Detects simulator telemetry for Password Cracking scale variant 3673.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.002
+    apt_sim.variant: attack_scale_variant_3673
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/002/
+tags:
+- attack.t1110.002

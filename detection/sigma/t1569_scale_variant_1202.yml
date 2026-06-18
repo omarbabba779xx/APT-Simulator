@@ -1,0 +1,21 @@
+title: System Services Scale Variant 1202 Marker
+id: e3f38aa6-4229-54b5-ab02-7e5dbe1df1af
+status: experimental
+description: Detects simulator telemetry for System Services scale variant 1202.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569
+    apt_sim.variant: attack_scale_variant_1202
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/
+tags:
+- attack.t1569

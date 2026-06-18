@@ -1,0 +1,21 @@
+title: Digital Certificates Scale Variant 1999 Marker
+id: d1d09323-f2e6-5f94-b1c9-8c2b19a5a276
+status: experimental
+description: Detects simulator telemetry for Digital Certificates scale variant 1999.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.003
+    apt_sim.variant: attack_scale_variant_1999
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/003/
+tags:
+- attack.t1596.003

@@ -1,0 +1,22 @@
+title: Group Policy Preferences Scale Variant 3204 Marker
+id: 1b950218-0db0-510f-962b-86fd427d5f8d
+status: experimental
+description: Detects simulator telemetry for Group Policy Preferences scale variant
+  3204.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.006
+    apt_sim.variant: attack_scale_variant_3204
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/006/
+tags:
+- attack.t1552.006

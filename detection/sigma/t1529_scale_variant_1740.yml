@@ -1,0 +1,22 @@
+title: System Shutdown/Reboot Scale Variant 1740 Marker
+id: 1c9fb70d-a06c-527a-bc0e-8c70180f84bf
+status: experimental
+description: Detects simulator telemetry for System Shutdown/Reboot scale variant
+  1740.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1529
+    apt_sim.variant: attack_scale_variant_1740
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1529/
+tags:
+- attack.t1529

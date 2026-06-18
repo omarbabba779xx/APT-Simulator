@@ -1,0 +1,21 @@
+title: Chat Messages Scale Variant 1814 Marker
+id: bf8317d9-2678-5360-807a-d8ad742c9977
+status: experimental
+description: Detects simulator telemetry for Chat Messages scale variant 1814.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.008
+    apt_sim.variant: attack_scale_variant_1814
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/008/
+tags:
+- attack.t1552.008

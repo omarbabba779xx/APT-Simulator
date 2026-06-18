@@ -1,0 +1,22 @@
+title: Obfuscated Files or Information Scale Variant 3519 Marker
+id: 7bff9d65-2d3c-5623-a4c5-ba49487ed746
+status: experimental
+description: Detects simulator telemetry for Obfuscated Files or Information scale
+  variant 3519.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027
+    apt_sim.variant: attack_scale_variant_3519
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/
+tags:
+- attack.t1027

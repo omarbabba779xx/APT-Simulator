@@ -1,0 +1,21 @@
+title: Downgrade Attack Scale Variant 3479 Marker
+id: 468a2a29-fa8f-50b5-b4a1-780917e9cd97
+status: experimental
+description: Detects simulator telemetry for Downgrade Attack scale variant 3479.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1689
+    apt_sim.variant: attack_scale_variant_3479
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1689/
+tags:
+- attack.t1689

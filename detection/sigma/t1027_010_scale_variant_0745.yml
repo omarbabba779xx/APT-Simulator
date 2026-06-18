@@ -1,0 +1,21 @@
+title: Command Obfuscation Scale Variant 0745 Marker
+id: 47b90b2c-fc7d-50db-9b60-6cd142cc5571
+status: experimental
+description: Detects simulator telemetry for Command Obfuscation scale variant 0745.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.010
+    apt_sim.variant: attack_scale_variant_0745
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/010/
+tags:
+- attack.t1027.010

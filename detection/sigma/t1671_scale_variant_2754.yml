@@ -1,0 +1,22 @@
+title: Cloud Application Integration Scale Variant 2754 Marker
+id: ed8c13d5-7f2e-54f5-b6ce-c9f833bef62a
+status: experimental
+description: Detects simulator telemetry for Cloud Application Integration scale variant
+  2754.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1671
+    apt_sim.variant: attack_scale_variant_2754
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1671/
+tags:
+- attack.t1671

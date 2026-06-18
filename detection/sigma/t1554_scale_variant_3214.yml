@@ -1,0 +1,22 @@
+title: Compromise Host Software Binary Scale Variant 3214 Marker
+id: 4f7e4264-892c-5862-ba3f-2db8dadbdb13
+status: experimental
+description: Detects simulator telemetry for Compromise Host Software Binary scale
+  variant 3214.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1554
+    apt_sim.variant: attack_scale_variant_3214
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1554/
+tags:
+- attack.t1554

@@ -1,0 +1,22 @@
+title: Virtual Private Server Scale Variant 1244 Marker
+id: 28d78165-3d12-5847-975b-2de5e62aa5f7
+status: experimental
+description: Detects simulator telemetry for Virtual Private Server scale variant
+  1244.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.003
+    apt_sim.variant: attack_scale_variant_1244
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/003/
+tags:
+- attack.t1584.003

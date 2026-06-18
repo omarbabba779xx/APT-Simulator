@@ -1,0 +1,21 @@
+title: BITS Jobs Scale Variant 1640 Marker
+id: 873b86e2-e15b-598e-acf7-ffae71c18f08
+status: experimental
+description: Detects simulator telemetry for BITS Jobs scale variant 1640.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1197
+    apt_sim.variant: attack_scale_variant_1640
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1197/
+tags:
+- attack.t1197

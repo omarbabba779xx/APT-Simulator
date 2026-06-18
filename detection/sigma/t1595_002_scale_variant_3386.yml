@@ -1,0 +1,22 @@
+title: Vulnerability Scanning Scale Variant 3386 Marker
+id: 7846c8a4-9c60-5d3e-ab5e-b94797c8f1db
+status: experimental
+description: Detects simulator telemetry for Vulnerability Scanning scale variant
+  3386.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.002
+    apt_sim.variant: attack_scale_variant_3386
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/002/
+tags:
+- attack.t1595.002

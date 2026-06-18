@@ -1,0 +1,21 @@
+title: Defacement Scale Variant 1010 Marker
+id: 5f359673-e2e6-56ab-ad34-31a8197e50aa
+status: experimental
+description: Detects simulator telemetry for Defacement scale variant 1010.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491
+    apt_sim.variant: attack_scale_variant_1010
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/
+tags:
+- attack.t1491

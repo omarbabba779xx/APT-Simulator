@@ -1,0 +1,22 @@
+title: Group Policy Preferences Scale Variant 0420 Marker
+id: e7185385-fc80-52c5-8495-d149092ece80
+status: experimental
+description: Detects simulator telemetry for Group Policy Preferences scale variant
+  0420.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.006
+    apt_sim.variant: attack_scale_variant_0420
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/006/
+tags:
+- attack.t1552.006

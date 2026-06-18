@@ -1,0 +1,21 @@
+title: SEO Poisoning Scale Variant 1334 Marker
+id: 99cd5455-cb56-5d78-b36d-ea961dc6a48b
+status: experimental
+description: Detects simulator telemetry for SEO Poisoning scale variant 1334.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.006
+    apt_sim.variant: attack_scale_variant_1334
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/006/
+tags:
+- attack.t1608.006

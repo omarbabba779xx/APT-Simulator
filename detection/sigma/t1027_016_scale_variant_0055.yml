@@ -1,0 +1,21 @@
+title: Junk Code Insertion Scale Variant 0055 Marker
+id: 2c6e8d65-be1b-58ef-88a0-5199f850d3f0
+status: experimental
+description: Detects simulator telemetry for Junk Code Insertion scale variant 0055.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.016
+    apt_sim.variant: attack_scale_variant_0055
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/016/
+tags:
+- attack.t1027.016

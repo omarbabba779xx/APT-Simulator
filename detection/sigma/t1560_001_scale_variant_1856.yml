@@ -1,0 +1,21 @@
+title: Archive via Utility Scale Variant 1856 Marker
+id: 04edbb5e-3b03-56c0-92b3-47e5c3a09b62
+status: experimental
+description: Detects simulator telemetry for Archive via Utility scale variant 1856.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560.001
+    apt_sim.variant: attack_scale_variant_1856
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/001/
+tags:
+- attack.t1560.001

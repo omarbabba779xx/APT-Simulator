@@ -1,0 +1,21 @@
+title: VBA Stomping Scale Variant 3960 Marker
+id: e5ef4877-c8b5-53ec-b446-b10cbbd66c54
+status: experimental
+description: Detects simulator telemetry for VBA Stomping scale variant 3960.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.007
+    apt_sim.variant: attack_scale_variant_3960
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/007/
+tags:
+- attack.t1564.007

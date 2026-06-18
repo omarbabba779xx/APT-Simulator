@@ -1,0 +1,21 @@
+title: Web Session Cookie Scale Variant 3197 Marker
+id: 778321e1-bd03-5b6b-9af4-4470f2e51aed
+status: experimental
+description: Detects simulator telemetry for Web Session Cookie scale variant 3197.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550.004
+    apt_sim.variant: attack_scale_variant_3197
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/004/
+tags:
+- attack.t1550.004

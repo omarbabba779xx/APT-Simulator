@@ -1,0 +1,21 @@
+title: Cloud API Scale Variant 1518 Marker
+id: fd5bb1c1-ae0f-5663-9db7-c172e4d1490e
+status: experimental
+description: Detects simulator telemetry for Cloud API scale variant 1518.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.009
+    apt_sim.variant: attack_scale_variant_1518
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/009/
+tags:
+- attack.t1059.009

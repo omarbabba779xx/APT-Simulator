@@ -65,7 +65,7 @@ def test_ttps_listing(tmp_path) -> None:
     r = client.get("/ttps")
     assert r.status_code == 200
     ttps = r.json()
-    assert len(ttps) == 851
+    assert len(ttps) == 5000
     ids = {t["attack_id"] for t in ttps}
     assert {"T1033", "T1083", "T1059", "T1547.001", "T1057", "T1071.001", "T1003", "T1027", "T1112", "T1070.004", "T1580"} <= ids
 

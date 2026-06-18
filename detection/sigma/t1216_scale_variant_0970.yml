@@ -1,0 +1,22 @@
+title: System Script Proxy Execution Scale Variant 0970 Marker
+id: a22e1772-f0e5-5657-9e21-c08e2fd9bd86
+status: experimental
+description: Detects simulator telemetry for System Script Proxy Execution scale variant
+  0970.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216
+    apt_sim.variant: attack_scale_variant_0970
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/
+tags:
+- attack.t1216

@@ -1,0 +1,21 @@
+title: Hybrid Identity Scale Variant 0445 Marker
+id: 66225c2e-774b-5e14-a36c-8a2290966bfe
+status: experimental
+description: Detects simulator telemetry for Hybrid Identity scale variant 0445.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.007
+    apt_sim.variant: attack_scale_variant_0445
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/007/
+tags:
+- attack.t1556.007

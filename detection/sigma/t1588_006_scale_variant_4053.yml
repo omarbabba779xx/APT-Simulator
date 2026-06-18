@@ -1,0 +1,21 @@
+title: Vulnerabilities Scale Variant 4053 Marker
+id: c312d878-dbd6-5ca4-8f50-a8dcec37ea58
+status: experimental
+description: Detects simulator telemetry for Vulnerabilities scale variant 4053.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.006
+    apt_sim.variant: attack_scale_variant_4053
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/006/
+tags:
+- attack.t1588.006

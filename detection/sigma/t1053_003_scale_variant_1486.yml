@@ -1,0 +1,21 @@
+title: Cron Scale Variant 1486 Marker
+id: ae794669-7313-56ee-9f41-672aab3a8350
+status: experimental
+description: Detects simulator telemetry for Cron scale variant 1486.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.003
+    apt_sim.variant: attack_scale_variant_1486
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/003/
+tags:
+- attack.t1053.003

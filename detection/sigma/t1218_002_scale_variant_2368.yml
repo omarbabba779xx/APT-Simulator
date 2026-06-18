@@ -1,0 +1,21 @@
+title: Control Panel Scale Variant 2368 Marker
+id: 6c0c3737-881c-5908-baac-c0dadd4e6cd2
+status: experimental
+description: Detects simulator telemetry for Control Panel scale variant 2368.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.002
+    apt_sim.variant: attack_scale_variant_2368
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/002/
+tags:
+- attack.t1218.002

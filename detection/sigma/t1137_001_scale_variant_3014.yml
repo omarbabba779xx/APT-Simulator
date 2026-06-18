@@ -1,0 +1,22 @@
+title: Office Template Macros Scale Variant 3014 Marker
+id: 79b92fc6-0385-58bc-b6fc-d60c822cbc20
+status: experimental
+description: Detects simulator telemetry for Office Template Macros scale variant
+  3014.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.001
+    apt_sim.variant: attack_scale_variant_3014
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/001/
+tags:
+- attack.t1137.001

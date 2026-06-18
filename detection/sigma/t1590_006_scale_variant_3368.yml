@@ -1,0 +1,22 @@
+title: Network Security Appliances Scale Variant 3368 Marker
+id: 2af83369-6436-501b-b566-2979039fa459
+status: experimental
+description: Detects simulator telemetry for Network Security Appliances scale variant
+  3368.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.006
+    apt_sim.variant: attack_scale_variant_3368
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/006/
+tags:
+- attack.t1590.006

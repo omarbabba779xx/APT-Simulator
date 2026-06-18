@@ -1,0 +1,21 @@
+title: Dynamic Data Exchange Scale Variant 0461 Marker
+id: a9e210ce-07f4-5956-8465-896687660886
+status: experimental
+description: Detects simulator telemetry for Dynamic Data Exchange scale variant 0461.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.002
+    apt_sim.variant: attack_scale_variant_0461
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/002/
+tags:
+- attack.t1559.002

@@ -1,0 +1,22 @@
+title: Exfiltration Over Symmetric Encrypted Non-C2 Protocol Scale Variant 0782 Marker
+id: ce8f22c8-fc7b-5644-9d68-c13cd776653d
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Symmetric Encrypted
+  Non-C2 Protocol scale variant 0782.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.001
+    apt_sim.variant: attack_scale_variant_0782
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/001/
+tags:
+- attack.t1048.001

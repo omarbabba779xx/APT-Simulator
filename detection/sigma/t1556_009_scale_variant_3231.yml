@@ -1,0 +1,22 @@
+title: Conditional Access Policies Scale Variant 3231 Marker
+id: 97e2b46e-d3f4-518c-9ffe-af5a518414e2
+status: experimental
+description: Detects simulator telemetry for Conditional Access Policies scale variant
+  3231.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.009
+    apt_sim.variant: attack_scale_variant_3231
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/009/
+tags:
+- attack.t1556.009

@@ -1,0 +1,22 @@
+title: Compromise Infrastructure Scale Variant 0545 Marker
+id: 87ecaabf-a9dc-5ce8-a3a7-13e5817f0b22
+status: experimental
+description: Detects simulator telemetry for Compromise Infrastructure scale variant
+  0545.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584
+    apt_sim.variant: attack_scale_variant_0545
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/
+tags:
+- attack.t1584

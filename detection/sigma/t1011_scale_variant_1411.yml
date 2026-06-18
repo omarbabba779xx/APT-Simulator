@@ -1,0 +1,22 @@
+title: Exfiltration Over Other Network Medium Scale Variant 1411 Marker
+id: fb9d4563-159c-569a-8335-efb23780e2e1
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Other Network Medium
+  scale variant 1411.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1011
+    apt_sim.variant: attack_scale_variant_1411
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1011/
+tags:
+- attack.t1011

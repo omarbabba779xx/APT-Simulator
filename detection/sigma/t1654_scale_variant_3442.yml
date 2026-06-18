@@ -1,0 +1,21 @@
+title: Log Enumeration Scale Variant 3442 Marker
+id: 6c34f7d1-c6d6-5d1a-b958-c817791df1f2
+status: experimental
+description: Detects simulator telemetry for Log Enumeration scale variant 3442.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1654
+    apt_sim.variant: attack_scale_variant_3442
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1654/
+tags:
+- attack.t1654

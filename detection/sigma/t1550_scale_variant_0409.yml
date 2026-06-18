@@ -1,0 +1,22 @@
+title: Use Alternate Authentication Material Scale Variant 0409 Marker
+id: b49a8a40-377e-5b11-984f-ab0ba3d4339b
+status: experimental
+description: Detects simulator telemetry for Use Alternate Authentication Material
+  scale variant 0409.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550
+    apt_sim.variant: attack_scale_variant_0409
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/
+tags:
+- attack.t1550

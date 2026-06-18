@@ -1,0 +1,21 @@
+title: Ptrace System Calls Scale Variant 2192 Marker
+id: f20205db-36cc-5d8d-8ba9-7b728415a2ec
+status: experimental
+description: Detects simulator telemetry for Ptrace System Calls scale variant 2192.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.008
+    apt_sim.variant: attack_scale_variant_2192
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/008/
+tags:
+- attack.t1055.008

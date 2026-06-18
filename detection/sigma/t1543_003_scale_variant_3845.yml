@@ -1,0 +1,21 @@
+title: Windows Service Scale Variant 3845 Marker
+id: ac685bb5-a0bb-5a16-b933-653d524a1ff1
+status: experimental
+description: Detects simulator telemetry for Windows Service scale variant 3845.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.003
+    apt_sim.variant: attack_scale_variant_3845
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/003/
+tags:
+- attack.t1543.003

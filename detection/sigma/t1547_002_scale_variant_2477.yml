@@ -1,0 +1,22 @@
+title: Authentication Package Scale Variant 2477 Marker
+id: fa7d15cd-781a-5493-b165-732dffba8099
+status: experimental
+description: Detects simulator telemetry for Authentication Package scale variant
+  2477.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.002
+    apt_sim.variant: attack_scale_variant_2477
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/002/
+tags:
+- attack.t1547.002

@@ -1,0 +1,21 @@
+title: AppDomainManager Scale Variant 1920 Marker
+id: 0e1d0b91-07fa-55c8-872d-f03e8be3cf61
+status: experimental
+description: Detects simulator telemetry for AppDomainManager scale variant 1920.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.014
+    apt_sim.variant: attack_scale_variant_1920
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/014/
+tags:
+- attack.t1574.014

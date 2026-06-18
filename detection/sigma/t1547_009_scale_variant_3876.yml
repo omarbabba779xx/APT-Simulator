@@ -1,0 +1,21 @@
+title: Shortcut Modification Scale Variant 3876 Marker
+id: dbdfffd8-20ea-599d-9a9f-da31e2150844
+status: experimental
+description: Detects simulator telemetry for Shortcut Modification scale variant 3876.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.009
+    apt_sim.variant: attack_scale_variant_3876
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/009/
+tags:
+- attack.t1547.009

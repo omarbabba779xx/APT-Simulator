@@ -1,0 +1,21 @@
+title: PowerShell Scale Variant 2902 Marker
+id: 85897b61-202a-5e1d-bef4-148b6d9072b1
+status: experimental
+description: Detects simulator telemetry for PowerShell scale variant 2902.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.001
+    apt_sim.variant: attack_scale_variant_2902
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/001/
+tags:
+- attack.t1059.001

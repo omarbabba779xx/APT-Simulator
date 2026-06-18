@@ -1,0 +1,22 @@
+title: Exfiltration Over C2 Channel Scale Variant 1474 Marker
+id: 330b4f29-536a-597d-8af3-5c2bdaf32bb0
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over C2 Channel scale variant
+  1474.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1041
+    apt_sim.variant: attack_scale_variant_1474
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1041/
+tags:
+- attack.t1041

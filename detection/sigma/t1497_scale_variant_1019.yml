@@ -1,0 +1,22 @@
+title: Virtualization/Sandbox Evasion Scale Variant 1019 Marker
+id: 0a9e9517-f406-5ec0-8eb5-80c81d5296f1
+status: experimental
+description: Detects simulator telemetry for Virtualization/Sandbox Evasion scale
+  variant 1019.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497
+    apt_sim.variant: attack_scale_variant_1019
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/
+tags:
+- attack.t1497

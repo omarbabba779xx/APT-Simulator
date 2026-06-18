@@ -1,0 +1,21 @@
+title: Create Snapshot Scale Variant 3314 Marker
+id: 28ede7c2-2be0-5cc9-a999-6befc0f5cfed
+status: experimental
+description: Detects simulator telemetry for Create Snapshot scale variant 3314.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.001
+    apt_sim.variant: attack_scale_variant_3314
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/001/
+tags:
+- attack.t1578.001

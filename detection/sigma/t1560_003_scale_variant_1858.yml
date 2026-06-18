@@ -1,0 +1,22 @@
+title: Archive via Custom Method Scale Variant 1858 Marker
+id: c07392b1-fdf3-5df1-8c02-57f6670e8917
+status: experimental
+description: Detects simulator telemetry for Archive via Custom Method scale variant
+  1858.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560.003
+    apt_sim.variant: attack_scale_variant_1858
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/003/
+tags:
+- attack.t1560.003

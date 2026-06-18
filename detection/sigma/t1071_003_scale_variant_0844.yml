@@ -1,0 +1,21 @@
+title: Mail Protocols Scale Variant 0844 Marker
+id: 71fc0bc0-58f1-5d43-8c7e-d686719a2177
+status: experimental
+description: Detects simulator telemetry for Mail Protocols scale variant 0844.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.003
+    apt_sim.variant: attack_scale_variant_0844
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/003/
+tags:
+- attack.t1071.003

@@ -1,0 +1,21 @@
+title: Hidden File System Scale Variant 1870 Marker
+id: d8154033-04bd-50a9-ba3e-09bed974ce64
+status: experimental
+description: Detects simulator telemetry for Hidden File System scale variant 1870.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.005
+    apt_sim.variant: attack_scale_variant_1870
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/005/
+tags:
+- attack.t1564.005

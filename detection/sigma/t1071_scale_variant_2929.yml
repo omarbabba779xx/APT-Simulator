@@ -1,0 +1,22 @@
+title: Application Layer Protocol Scale Variant 2929 Marker
+id: 1f337245-3aca-514f-b829-a39219a011e1
+status: experimental
+description: Detects simulator telemetry for Application Layer Protocol scale variant
+  2929.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071
+    apt_sim.variant: attack_scale_variant_2929
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/
+tags:
+- attack.t1071

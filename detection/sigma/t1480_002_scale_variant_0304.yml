@@ -1,0 +1,21 @@
+title: Mutual Exclusion Scale Variant 0304 Marker
+id: 6a918bd0-4fe0-5da9-80df-b87a8a23fa8e
+status: experimental
+description: Detects simulator telemetry for Mutual Exclusion scale variant 0304.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.002
+    apt_sim.variant: attack_scale_variant_0304
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/002/
+tags:
+- attack.t1480.002

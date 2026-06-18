@@ -1,0 +1,21 @@
+title: Web Portal Capture Scale Variant 0810 Marker
+id: cb772a8a-a0cc-5c88-b077-b4356bcb0b25
+status: experimental
+description: Detects simulator telemetry for Web Portal Capture scale variant 0810.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.003
+    apt_sim.variant: attack_scale_variant_0810
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/003/
+tags:
+- attack.t1056.003

@@ -1,0 +1,21 @@
+title: Unix Shell Scale Variant 0817 Marker
+id: 17b766fe-f998-5b3e-86b6-ebc77199b5f8
+status: experimental
+description: Detects simulator telemetry for Unix Shell scale variant 0817.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.004
+    apt_sim.variant: attack_scale_variant_0817
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/004/
+tags:
+- attack.t1059.004

@@ -1,0 +1,21 @@
+title: Direct Network Flood Scale Variant 1720 Marker
+id: 66fbc979-4f35-5a2b-acc9-bed4ba021275
+status: experimental
+description: Detects simulator telemetry for Direct Network Flood scale variant 1720.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1498.001
+    apt_sim.variant: attack_scale_variant_1720
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1498/001/
+tags:
+- attack.t1498.001

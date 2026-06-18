@@ -1,0 +1,21 @@
+title: Office Test Scale Variant 0231 Marker
+id: f502dd71-5788-56a9-921d-f5f5f5150d92
+status: experimental
+description: Detects simulator telemetry for Office Test scale variant 0231.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.002
+    apt_sim.variant: attack_scale_variant_0231
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/002/
+tags:
+- attack.t1137.002

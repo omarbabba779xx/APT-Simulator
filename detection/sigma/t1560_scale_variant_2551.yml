@@ -1,0 +1,22 @@
+title: Archive Collected Data Scale Variant 2551 Marker
+id: 75742354-98d0-5dbf-bee1-411c0bab04eb
+status: experimental
+description: Detects simulator telemetry for Archive Collected Data scale variant
+  2551.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560
+    apt_sim.variant: attack_scale_variant_2551
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/
+tags:
+- attack.t1560

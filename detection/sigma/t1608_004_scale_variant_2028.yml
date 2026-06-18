@@ -1,0 +1,21 @@
+title: Drive-by Target Scale Variant 2028 Marker
+id: bf60be0f-33a0-53b6-ad10-12e8f1850070
+status: experimental
+description: Detects simulator telemetry for Drive-by Target scale variant 2028.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.004
+    apt_sim.variant: attack_scale_variant_2028
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/004/
+tags:
+- attack.t1608.004

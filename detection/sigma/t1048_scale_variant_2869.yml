@@ -1,0 +1,22 @@
+title: Exfiltration Over Alternative Protocol Scale Variant 2869 Marker
+id: 306ef0aa-6f94-5e02-9504-d552bc0e7872
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Alternative Protocol
+  scale variant 2869.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048
+    apt_sim.variant: attack_scale_variant_2869
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/
+tags:
+- attack.t1048

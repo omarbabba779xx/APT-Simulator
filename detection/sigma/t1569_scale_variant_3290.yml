@@ -1,0 +1,21 @@
+title: System Services Scale Variant 3290 Marker
+id: bbf79019-d938-5cec-8e8f-46d399157c15
+status: experimental
+description: Detects simulator telemetry for System Services scale variant 3290.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569
+    apt_sim.variant: attack_scale_variant_3290
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/
+tags:
+- attack.t1569

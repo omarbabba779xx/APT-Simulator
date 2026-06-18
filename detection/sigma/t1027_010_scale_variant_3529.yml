@@ -1,0 +1,21 @@
+title: Command Obfuscation Scale Variant 3529 Marker
+id: bba0d760-e507-5208-badb-d4786642b4d3
+status: experimental
+description: Detects simulator telemetry for Command Obfuscation scale variant 3529.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.010
+    apt_sim.variant: attack_scale_variant_3529
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/010/
+tags:
+- attack.t1027.010

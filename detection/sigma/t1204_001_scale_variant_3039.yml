@@ -1,0 +1,21 @@
+title: Malicious Link Scale Variant 3039 Marker
+id: 6027d3a3-e21a-59ce-a645-31423a00a8b7
+status: experimental
+description: Detects simulator telemetry for Malicious Link scale variant 3039.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.001
+    apt_sim.variant: attack_scale_variant_3039
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/001/
+tags:
+- attack.t1204.001

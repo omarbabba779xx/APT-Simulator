@@ -1,0 +1,21 @@
+title: Launch Agent Scale Variant 2451 Marker
+id: ac41c5fd-35dd-5822-856c-c17d428176c7
+status: experimental
+description: Detects simulator telemetry for Launch Agent scale variant 2451.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.001
+    apt_sim.variant: attack_scale_variant_2451
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/001/
+tags:
+- attack.t1543.001

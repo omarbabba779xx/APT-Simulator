@@ -1,0 +1,22 @@
+title: Messaging Applications Scale Variant 3752 Marker
+id: 912e7f62-cc56-50e1-9490-772d4fef657a
+status: experimental
+description: Detects simulator telemetry for Messaging Applications scale variant
+  3752.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.005
+    apt_sim.variant: attack_scale_variant_3752
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/005/
+tags:
+- attack.t1213.005

@@ -1,0 +1,21 @@
+title: Cloud API Scale Variant 3606 Marker
+id: a124d5e7-2b1d-5673-8b64-a3792c6c1761
+status: experimental
+description: Detects simulator telemetry for Cloud API scale variant 3606.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.009
+    apt_sim.variant: attack_scale_variant_3606
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/009/
+tags:
+- attack.t1059.009

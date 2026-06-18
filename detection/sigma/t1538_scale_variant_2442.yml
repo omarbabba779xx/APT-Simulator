@@ -1,0 +1,22 @@
+title: Cloud Service Dashboard Scale Variant 2442 Marker
+id: da578561-f50b-5c44-81b1-efdfcf1948ea
+status: experimental
+description: Detects simulator telemetry for Cloud Service Dashboard scale variant
+  2442.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1538
+    apt_sim.variant: attack_scale_variant_2442
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1538/
+tags:
+- attack.t1538

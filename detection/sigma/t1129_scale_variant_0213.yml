@@ -1,0 +1,21 @@
+title: Shared Modules Scale Variant 0213 Marker
+id: 21790e43-9653-5f28-9979-e7b3c994106d
+status: experimental
+description: Detects simulator telemetry for Shared Modules scale variant 0213.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1129
+    apt_sim.variant: attack_scale_variant_0213
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1129/
+tags:
+- attack.t1129

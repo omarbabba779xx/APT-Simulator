@@ -1,0 +1,22 @@
+title: Cloud Service Discovery Scale Variant 3826 Marker
+id: 91462439-2138-534e-afc5-f8bdef492011
+status: experimental
+description: Detects simulator telemetry for Cloud Service Discovery scale variant
+  3826.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1526
+    apt_sim.variant: attack_scale_variant_3826
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1526/
+tags:
+- attack.t1526

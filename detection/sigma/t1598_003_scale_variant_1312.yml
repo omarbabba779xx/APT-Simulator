@@ -1,0 +1,21 @@
+title: Spearphishing Link Scale Variant 1312 Marker
+id: fd9e2b0d-60bd-5705-b470-1db65c0d770d
+status: experimental
+description: Detects simulator telemetry for Spearphishing Link scale variant 1312.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.003
+    apt_sim.variant: attack_scale_variant_1312
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/003/
+tags:
+- attack.t1598.003

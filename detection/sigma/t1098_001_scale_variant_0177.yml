@@ -1,0 +1,22 @@
+title: Additional Cloud Credentials Scale Variant 0177 Marker
+id: cb52514f-0b3c-5a4b-8fcf-878457ec0b3d
+status: experimental
+description: Detects simulator telemetry for Additional Cloud Credentials scale variant
+  0177.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.001
+    apt_sim.variant: attack_scale_variant_0177
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/001/
+tags:
+- attack.t1098.001

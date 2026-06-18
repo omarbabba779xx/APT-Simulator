@@ -1,0 +1,22 @@
+title: Cloud Instance Metadata API Scale Variant 3899 Marker
+id: 3de8c2cd-3e2c-5ed2-99b7-eefdb7ece802
+status: experimental
+description: Detects simulator telemetry for Cloud Instance Metadata API scale variant
+  3899.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.005
+    apt_sim.variant: attack_scale_variant_3899
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/005/
+tags:
+- attack.t1552.005

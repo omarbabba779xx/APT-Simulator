@@ -1,0 +1,22 @@
+title: Remote Email Collection Scale Variant 2985 Marker
+id: 60fb5496-0e71-5a0b-a089-bc1db3ecfecd
+status: experimental
+description: Detects simulator telemetry for Remote Email Collection scale variant
+  2985.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.002
+    apt_sim.variant: attack_scale_variant_2985
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/002/
+tags:
+- attack.t1114.002

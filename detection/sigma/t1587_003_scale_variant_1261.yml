@@ -1,0 +1,21 @@
+title: Digital Certificates Scale Variant 1261 Marker
+id: 3833143d-6059-515b-b885-ac4a7db720a4
+status: experimental
+description: Detects simulator telemetry for Digital Certificates scale variant 1261.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.003
+    apt_sim.variant: attack_scale_variant_1261
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/003/
+tags:
+- attack.t1587.003

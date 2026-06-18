@@ -1,0 +1,21 @@
+title: Malicious Image Scale Variant 0953 Marker
+id: f47735bb-690b-5e41-aad9-f88a2a8e6a8a
+status: experimental
+description: Detects simulator telemetry for Malicious Image scale variant 0953.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.003
+    apt_sim.variant: attack_scale_variant_0953
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/003/
+tags:
+- attack.t1204.003

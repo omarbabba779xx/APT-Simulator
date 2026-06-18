@@ -1,0 +1,21 @@
+title: Relocate Malware Scale Variant 2232 Marker
+id: 4900cb57-8121-5d48-9c75-49309d0d5d01
+status: experimental
+description: Detects simulator telemetry for Relocate Malware scale variant 2232.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.010
+    apt_sim.variant: attack_scale_variant_2232
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/010/
+tags:
+- attack.t1070.010

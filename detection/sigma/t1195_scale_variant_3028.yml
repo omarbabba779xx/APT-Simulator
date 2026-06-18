@@ -1,0 +1,22 @@
+title: Supply Chain Compromise Scale Variant 3028 Marker
+id: 788b25c7-04bf-5a80-b6c1-e2146ef9d74d
+status: experimental
+description: Detects simulator telemetry for Supply Chain Compromise scale variant
+  3028.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195
+    apt_sim.variant: attack_scale_variant_3028
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/
+tags:
+- attack.t1195

@@ -1,0 +1,22 @@
+title: Compromise Host Software Binary Scale Variant 2518 Marker
+id: 56452d4b-5099-59cf-b5b7-886cf2d64983
+status: experimental
+description: Detects simulator telemetry for Compromise Host Software Binary scale
+  variant 2518.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1554
+    apt_sim.variant: attack_scale_variant_2518
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1554/
+tags:
+- attack.t1554

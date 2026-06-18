@@ -1,0 +1,21 @@
+title: Mshta Scale Variant 0283 Marker
+id: 1ae70ccb-4082-53b3-a4cc-d8ff24bdd6fe
+status: experimental
+description: Detects simulator telemetry for Mshta scale variant 0283.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.005
+    apt_sim.variant: attack_scale_variant_0283
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/005/
+tags:
+- attack.t1218.005

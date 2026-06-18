@@ -1,0 +1,21 @@
+title: Code Signing Scale Variant 0425 Marker
+id: 46fc7942-3fa3-5985-8056-a9d4a915fa58
+status: experimental
+description: Detects simulator telemetry for Code Signing scale variant 0425.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.002
+    apt_sim.variant: attack_scale_variant_0425
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/002/
+tags:
+- attack.t1553.002

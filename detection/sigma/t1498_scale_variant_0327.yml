@@ -1,0 +1,22 @@
+title: Network Denial of Service Scale Variant 0327 Marker
+id: 8789e3f9-13c9-5208-b52d-6bca3209651f
+status: experimental
+description: Detects simulator telemetry for Network Denial of Service scale variant
+  0327.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1498
+    apt_sim.variant: attack_scale_variant_0327
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1498/
+tags:
+- attack.t1498

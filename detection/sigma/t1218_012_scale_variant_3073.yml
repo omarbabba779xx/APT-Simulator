@@ -1,0 +1,21 @@
+title: Verclsid Scale Variant 3073 Marker
+id: 37ed4a67-7ae1-58c8-9e0d-17dff9119cf9
+status: experimental
+description: Detects simulator telemetry for Verclsid scale variant 3073.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.012
+    apt_sim.variant: attack_scale_variant_3073
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/012/
+tags:
+- attack.t1218.012

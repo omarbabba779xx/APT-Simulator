@@ -1,0 +1,22 @@
+title: Network Trust Dependencies Scale Variant 4061 Marker
+id: e2a4f124-9e04-59f0-a4fb-3d444c92171a
+status: experimental
+description: Detects simulator telemetry for Network Trust Dependencies scale variant
+  4061.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.003
+    apt_sim.variant: attack_scale_variant_4061
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/003/
+tags:
+- attack.t1590.003

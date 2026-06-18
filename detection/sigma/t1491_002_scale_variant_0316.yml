@@ -1,0 +1,21 @@
+title: External Defacement Scale Variant 0316 Marker
+id: 5a8145d8-4955-5750-a884-92dafb594e0c
+status: experimental
+description: Detects simulator telemetry for External Defacement scale variant 0316.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.002
+    apt_sim.variant: attack_scale_variant_0316
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/002/
+tags:
+- attack.t1491.002

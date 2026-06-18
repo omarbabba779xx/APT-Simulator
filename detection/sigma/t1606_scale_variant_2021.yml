@@ -1,0 +1,21 @@
+title: Forge Web Credentials Scale Variant 2021 Marker
+id: b50c872c-7975-567e-bef6-9914c65423c3
+status: experimental
+description: Detects simulator telemetry for Forge Web Credentials scale variant 2021.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606
+    apt_sim.variant: attack_scale_variant_2021
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/
+tags:
+- attack.t1606

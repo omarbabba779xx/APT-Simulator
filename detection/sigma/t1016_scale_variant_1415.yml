@@ -1,0 +1,22 @@
+title: System Network Configuration Discovery Scale Variant 1415 Marker
+id: 19a50225-6641-5eae-a922-4dc15840d2bf
+status: experimental
+description: Detects simulator telemetry for System Network Configuration Discovery
+  scale variant 1415.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016
+    apt_sim.variant: attack_scale_variant_1415
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/
+tags:
+- attack.t1016

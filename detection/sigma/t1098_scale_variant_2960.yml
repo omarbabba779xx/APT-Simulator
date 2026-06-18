@@ -1,0 +1,21 @@
+title: Account Manipulation Scale Variant 2960 Marker
+id: 83ceb752-5407-5687-941f-1265d6453e42
+status: experimental
+description: Detects simulator telemetry for Account Manipulation scale variant 2960.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098
+    apt_sim.variant: attack_scale_variant_2960
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/
+tags:
+- attack.t1098

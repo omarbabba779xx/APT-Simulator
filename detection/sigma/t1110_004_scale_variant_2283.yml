@@ -1,0 +1,21 @@
+title: Credential Stuffing Scale Variant 2283 Marker
+id: 08ea1103-0461-5031-be06-dd665e1689fe
+status: experimental
+description: Detects simulator telemetry for Credential Stuffing scale variant 2283.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.004
+    apt_sim.variant: attack_scale_variant_2283
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/004/
+tags:
+- attack.t1110.004

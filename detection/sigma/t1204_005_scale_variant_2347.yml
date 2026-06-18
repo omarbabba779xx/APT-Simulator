@@ -1,0 +1,21 @@
+title: Malicious Library Scale Variant 2347 Marker
+id: f40a8d4d-7e16-52c0-b3ef-cbf2d2e3034d
+status: experimental
+description: Detects simulator telemetry for Malicious Library scale variant 2347.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.005
+    apt_sim.variant: attack_scale_variant_2347
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/005/
+tags:
+- attack.t1204.005

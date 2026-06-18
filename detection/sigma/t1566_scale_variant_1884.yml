@@ -1,0 +1,21 @@
+title: Phishing Scale Variant 1884 Marker
+id: 053eee3d-73ea-5c04-a49b-af58fc90da53
+status: experimental
+description: Detects simulator telemetry for Phishing scale variant 1884.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_scale_variant_1884
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

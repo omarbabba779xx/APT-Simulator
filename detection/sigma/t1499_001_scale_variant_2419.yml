@@ -1,0 +1,21 @@
+title: OS Exhaustion Flood Scale Variant 2419 Marker
+id: 3f53b839-48a9-5b70-a026-54f4f5807a0a
+status: experimental
+description: Detects simulator telemetry for OS Exhaustion Flood scale variant 2419.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.001
+    apt_sim.variant: attack_scale_variant_2419
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/001/
+tags:
+- attack.t1499.001

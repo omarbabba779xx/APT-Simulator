@@ -1,0 +1,21 @@
+title: Reduce Key Space Scale Variant 4101 Marker
+id: 14e4366a-4b01-5f0c-88e7-5539807348c2
+status: experimental
+description: Detects simulator telemetry for Reduce Key Space scale variant 4101.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600.001
+    apt_sim.variant: attack_scale_variant_4101
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/001/
+tags:
+- attack.t1600.001

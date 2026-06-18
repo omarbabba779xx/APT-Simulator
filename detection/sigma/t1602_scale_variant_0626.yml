@@ -1,0 +1,22 @@
+title: Data from Configuration Repository Scale Variant 0626 Marker
+id: 71c88a8a-b930-57b7-9239-849f052c0bcd
+status: experimental
+description: Detects simulator telemetry for Data from Configuration Repository scale
+  variant 0626.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602
+    apt_sim.variant: attack_scale_variant_0626
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/
+tags:
+- attack.t1602

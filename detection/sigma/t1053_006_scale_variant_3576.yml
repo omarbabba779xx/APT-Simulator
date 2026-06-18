@@ -1,0 +1,21 @@
+title: Systemd Timers Scale Variant 3576 Marker
+id: a85c80f9-d08d-5ff3-a60b-fbce98974ac6
+status: experimental
+description: Detects simulator telemetry for Systemd Timers scale variant 3576.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.006
+    apt_sim.variant: attack_scale_variant_3576
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/006/
+tags:
+- attack.t1053.006

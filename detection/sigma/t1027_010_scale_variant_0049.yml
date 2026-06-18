@@ -1,0 +1,21 @@
+title: Command Obfuscation Scale Variant 0049 Marker
+id: 4a5c29d6-d36b-54ad-8f10-2a2076d8df27
+status: experimental
+description: Detects simulator telemetry for Command Obfuscation scale variant 0049.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.010
+    apt_sim.variant: attack_scale_variant_0049
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/010/
+tags:
+- attack.t1027.010

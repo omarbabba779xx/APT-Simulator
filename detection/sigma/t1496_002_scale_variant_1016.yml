@@ -1,0 +1,21 @@
+title: Bandwidth Hijacking Scale Variant 1016 Marker
+id: 60531e37-2c06-589a-bf5c-a7c92fc17f00
+status: experimental
+description: Detects simulator telemetry for Bandwidth Hijacking scale variant 1016.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1496.002
+    apt_sim.variant: attack_scale_variant_1016
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1496/002/
+tags:
+- attack.t1496.002

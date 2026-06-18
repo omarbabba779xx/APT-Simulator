@@ -1,0 +1,22 @@
+title: Exploitation for Privilege Escalation Scale Variant 2915 Marker
+id: 2f3f1a37-0571-5716-9c05-018cfc6c986c
+status: experimental
+description: Detects simulator telemetry for Exploitation for Privilege Escalation
+  scale variant 2915.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1068
+    apt_sim.variant: attack_scale_variant_2915
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1068/
+tags:
+- attack.t1068

@@ -1,0 +1,21 @@
+title: Clipboard Data Scale Variant 0899 Marker
+id: fea9d146-e396-5e9d-b6ce-a50db8a6b492
+status: experimental
+description: Detects simulator telemetry for Clipboard Data scale variant 0899.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1115
+    apt_sim.variant: attack_scale_variant_0899
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1115/
+tags:
+- attack.t1115

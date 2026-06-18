@@ -1,0 +1,22 @@
+title: Office Application Startup Scale Variant 3013 Marker
+id: 73649cf2-16c0-52c4-b057-d53713a73f1c
+status: experimental
+description: Detects simulator telemetry for Office Application Startup scale variant
+  3013.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137
+    apt_sim.variant: attack_scale_variant_3013
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/
+tags:
+- attack.t1137

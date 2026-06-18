@@ -1,0 +1,22 @@
+title: Bidirectional Communication Scale Variant 2970 Marker
+id: 3cfeba58-f2ec-526b-98f9-d63d41ff2bad
+status: experimental
+description: Detects simulator telemetry for Bidirectional Communication scale variant
+  2970.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102.002
+    apt_sim.variant: attack_scale_variant_2970
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/002/
+tags:
+- attack.t1102.002

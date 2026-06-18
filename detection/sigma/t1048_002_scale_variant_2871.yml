@@ -1,0 +1,22 @@
+title: Exfiltration Over Asymmetric Encrypted Non-C2 Protocol Scale Variant 2871 Marker
+id: e3032ce7-5238-57c4-a9ef-a644627a0345
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Asymmetric Encrypted
+  Non-C2 Protocol scale variant 2871.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.002
+    apt_sim.variant: attack_scale_variant_2871
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/002/
+tags:
+- attack.t1048.002

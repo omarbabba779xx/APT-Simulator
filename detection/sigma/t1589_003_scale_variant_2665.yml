@@ -1,0 +1,21 @@
+title: Employee Names Scale Variant 2665 Marker
+id: 0c65f11b-0221-53b3-abaa-85ba063e185d
+status: experimental
+description: Detects simulator telemetry for Employee Names scale variant 2665.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.003
+    apt_sim.variant: attack_scale_variant_2665
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/003/
+tags:
+- attack.t1589.003

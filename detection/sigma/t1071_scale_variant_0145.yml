@@ -1,0 +1,22 @@
+title: Application Layer Protocol Scale Variant 0145 Marker
+id: a8cd5725-0d34-5394-951f-0f951010a1a2
+status: experimental
+description: Detects simulator telemetry for Application Layer Protocol scale variant
+  0145.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071
+    apt_sim.variant: attack_scale_variant_0145
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/
+tags:
+- attack.t1071

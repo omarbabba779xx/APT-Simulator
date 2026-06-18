@@ -1,0 +1,21 @@
+title: VNC Scale Variant 0730 Marker
+id: 9b1f5735-18a9-57f8-aad2-7fc3ef8d6874
+status: experimental
+description: Detects simulator telemetry for VNC scale variant 0730.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.005
+    apt_sim.variant: attack_scale_variant_0730
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/005/
+tags:
+- attack.t1021.005

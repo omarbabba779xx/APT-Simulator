@@ -1,0 +1,22 @@
+title: Exploitation for Defense Impairment Scale Variant 2085 Marker
+id: 812824e1-63b0-5bee-8c2f-da203488d77f
+status: experimental
+description: Detects simulator telemetry for Exploitation for Defense Impairment scale
+  variant 2085.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1687
+    apt_sim.variant: attack_scale_variant_2085
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1687/
+tags:
+- attack.t1687

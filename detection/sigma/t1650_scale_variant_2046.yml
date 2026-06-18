@@ -1,0 +1,21 @@
+title: Acquire Access Scale Variant 2046 Marker
+id: b5a03af4-46ee-5ddb-97c2-65a7a71f706a
+status: experimental
+description: Detects simulator telemetry for Acquire Access scale variant 2046.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1650
+    apt_sim.variant: attack_scale_variant_2046
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1650/
+tags:
+- attack.t1650

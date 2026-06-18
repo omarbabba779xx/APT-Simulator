@@ -1,0 +1,21 @@
+title: Malware Scale Variant 0568 Marker
+id: 842f829c-3760-58b4-ab04-faaa2ae48b29
+status: experimental
+description: Detects simulator telemetry for Malware scale variant 0568.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.001
+    apt_sim.variant: attack_scale_variant_0568
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/001/
+tags:
+- attack.t1588.001

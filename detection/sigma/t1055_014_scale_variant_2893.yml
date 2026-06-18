@@ -1,0 +1,21 @@
+title: VDSO Hijacking Scale Variant 2893 Marker
+id: 40b6ae03-0816-5d33-aadc-c6c5f91a9d36
+status: experimental
+description: Detects simulator telemetry for VDSO Hijacking scale variant 2893.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.014
+    apt_sim.variant: attack_scale_variant_2893
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/014/
+tags:
+- attack.t1055.014

@@ -1,0 +1,22 @@
+title: Cloud Application Integration Scale Variant 3450 Marker
+id: 6d9a3be6-b8e3-5faa-a951-3009a6d483ec
+status: experimental
+description: Detects simulator telemetry for Cloud Application Integration scale variant
+  3450.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1671
+    apt_sim.variant: attack_scale_variant_3450
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1671/
+tags:
+- attack.t1671

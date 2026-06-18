@@ -1,0 +1,21 @@
+title: Unsecured Credentials Scale Variant 2502 Marker
+id: 224543db-f7dc-5a55-acdb-538b5ad80787
+status: experimental
+description: Detects simulator telemetry for Unsecured Credentials scale variant 2502.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552
+    apt_sim.variant: attack_scale_variant_2502
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/
+tags:
+- attack.t1552

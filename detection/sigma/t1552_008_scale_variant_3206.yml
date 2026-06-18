@@ -1,0 +1,21 @@
+title: Chat Messages Scale Variant 3206 Marker
+id: d52b8401-2ac7-5b7b-b2f6-18b255e07330
+status: experimental
+description: Detects simulator telemetry for Chat Messages scale variant 3206.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.008
+    apt_sim.variant: attack_scale_variant_3206
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/008/
+tags:
+- attack.t1552.008

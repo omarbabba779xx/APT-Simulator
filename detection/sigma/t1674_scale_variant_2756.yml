@@ -1,0 +1,21 @@
+title: Input Injection Scale Variant 2756 Marker
+id: 71c2966f-51b7-5ffa-8d3b-a17d3ed50d03
+status: experimental
+description: Detects simulator telemetry for Input Injection scale variant 2756.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1674
+    apt_sim.variant: attack_scale_variant_2756
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1674/
+tags:
+- attack.t1674

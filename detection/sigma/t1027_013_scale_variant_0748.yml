@@ -1,0 +1,22 @@
+title: Encrypted/Encoded File Scale Variant 0748 Marker
+id: 2dd6ad7d-40ab-5d7e-8c3d-b24eb4e6f462
+status: experimental
+description: Detects simulator telemetry for Encrypted/Encoded File scale variant
+  0748.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.013
+    apt_sim.variant: attack_scale_variant_0748
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/013/
+tags:
+- attack.t1027.013

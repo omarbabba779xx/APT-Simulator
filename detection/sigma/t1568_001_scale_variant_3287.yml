@@ -1,0 +1,21 @@
+title: Fast Flux DNS Scale Variant 3287 Marker
+id: 6dc2ba05-6e5a-53a2-8ca4-cee2a06c267f
+status: experimental
+description: Detects simulator telemetry for Fast Flux DNS scale variant 3287.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.001
+    apt_sim.variant: attack_scale_variant_3287
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/001/
+tags:
+- attack.t1568.001

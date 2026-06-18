@@ -1,0 +1,21 @@
+title: Query Registry Scale Variant 2805 Marker
+id: 636bb428-8268-5901-9473-a27c39d938b1
+status: experimental
+description: Detects simulator telemetry for Query Registry scale variant 2805.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1012
+    apt_sim.variant: attack_scale_variant_2805
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1012/
+tags:
+- attack.t1012

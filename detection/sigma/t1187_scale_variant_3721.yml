@@ -1,0 +1,21 @@
+title: Forced Authentication Scale Variant 3721 Marker
+id: b0701908-d81d-5af7-a931-c151f2d3baa0
+status: experimental
+description: Detects simulator telemetry for Forced Authentication scale variant 3721.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1187
+    apt_sim.variant: attack_scale_variant_3721
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1187/
+tags:
+- attack.t1187

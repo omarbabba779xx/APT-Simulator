@@ -1,0 +1,21 @@
+title: RC Scripts Scale Variant 1470 Marker
+id: e59e6f73-ec06-541f-9041-04b4c12a60a9
+status: experimental
+description: Detects simulator telemetry for RC Scripts scale variant 1470.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.004
+    apt_sim.variant: attack_scale_variant_1470
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/004/
+tags:
+- attack.t1037.004

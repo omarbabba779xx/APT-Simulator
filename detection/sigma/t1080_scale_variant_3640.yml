@@ -1,0 +1,21 @@
+title: Taint Shared Content Scale Variant 3640 Marker
+id: 17f96de8-9901-50bd-972b-e8a3e222483c
+status: experimental
+description: Detects simulator telemetry for Taint Shared Content scale variant 3640.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1080
+    apt_sim.variant: attack_scale_variant_3640
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1080/
+tags:
+- attack.t1080

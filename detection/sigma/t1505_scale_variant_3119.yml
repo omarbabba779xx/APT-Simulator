@@ -1,0 +1,22 @@
+title: Server Software Component Scale Variant 3119 Marker
+id: 62ed1442-7f2f-5886-93f0-332b53121e8e
+status: experimental
+description: Detects simulator telemetry for Server Software Component scale variant
+  3119.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505
+    apt_sim.variant: attack_scale_variant_3119
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/
+tags:
+- attack.t1505

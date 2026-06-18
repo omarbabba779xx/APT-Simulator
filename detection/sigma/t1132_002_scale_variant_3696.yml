@@ -1,0 +1,21 @@
+title: Non-Standard Encoding Scale Variant 3696 Marker
+id: f08b9ca6-b0a1-5fd6-8504-238697e2306b
+status: experimental
+description: Detects simulator telemetry for Non-Standard Encoding scale variant 3696.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1132.002
+    apt_sim.variant: attack_scale_variant_3696
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1132/002/
+tags:
+- attack.t1132.002

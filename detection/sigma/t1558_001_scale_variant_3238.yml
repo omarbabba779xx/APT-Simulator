@@ -1,0 +1,21 @@
+title: Golden Ticket Scale Variant 3238 Marker
+id: 4ccd026b-ab1b-563d-b3d3-4f279801d662
+status: experimental
+description: Detects simulator telemetry for Golden Ticket scale variant 3238.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.001
+    apt_sim.variant: attack_scale_variant_3238
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/001/
+tags:
+- attack.t1558.001

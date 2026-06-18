@@ -1,0 +1,21 @@
+title: Python Scale Variant 2907 Marker
+id: 349afbaa-05e4-5f83-b443-b111798db318
+status: experimental
+description: Detects simulator telemetry for Python scale variant 2907.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.006
+    apt_sim.variant: attack_scale_variant_2907
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/006/
+tags:
+- attack.t1059.006

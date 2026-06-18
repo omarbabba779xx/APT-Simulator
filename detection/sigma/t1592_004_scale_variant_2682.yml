@@ -1,0 +1,21 @@
+title: Client Configurations Scale Variant 2682 Marker
+id: a7d86970-8fa3-58e5-a314-7cf5f05e5f2a
+status: experimental
+description: Detects simulator telemetry for Client Configurations scale variant 2682.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.004
+    apt_sim.variant: attack_scale_variant_2682
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/004/
+tags:
+- attack.t1592.004

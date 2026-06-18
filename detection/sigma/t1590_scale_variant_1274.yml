@@ -1,0 +1,22 @@
+title: Gather Victim Network Information Scale Variant 1274 Marker
+id: 91e3fe0c-1767-5ddc-9959-9ce58b40eaba
+status: experimental
+description: Detects simulator telemetry for Gather Victim Network Information scale
+  variant 1274.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590
+    apt_sim.variant: attack_scale_variant_1274
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/
+tags:
+- attack.t1590

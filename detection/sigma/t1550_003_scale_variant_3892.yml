@@ -1,0 +1,21 @@
+title: Pass the Ticket Scale Variant 3892 Marker
+id: 14e83b4d-689e-5284-b956-d298de17233d
+status: experimental
+description: Detects simulator telemetry for Pass the Ticket scale variant 3892.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550.003
+    apt_sim.variant: attack_scale_variant_3892
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/003/
+tags:
+- attack.t1550.003

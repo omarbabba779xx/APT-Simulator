@@ -1,0 +1,22 @@
+title: Transmitted Data Manipulation Scale Variant 1882 Marker
+id: 4a6427eb-aa3c-53a4-9064-b3fe631a6b47
+status: experimental
+description: Detects simulator telemetry for Transmitted Data Manipulation scale variant
+  1882.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.002
+    apt_sim.variant: attack_scale_variant_1882
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/002/
+tags:
+- attack.t1565.002

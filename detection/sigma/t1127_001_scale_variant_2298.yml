@@ -1,0 +1,21 @@
+title: MSBuild Scale Variant 2298 Marker
+id: 664829e5-a1a1-52c1-81c9-cc6cf62b1984
+status: experimental
+description: Detects simulator telemetry for MSBuild scale variant 2298.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.001
+    apt_sim.variant: attack_scale_variant_2298
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/001/
+tags:
+- attack.t1127.001

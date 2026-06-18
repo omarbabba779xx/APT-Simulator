@@ -1,0 +1,22 @@
+title: Symmetric Cryptography Scale Variant 1210 Marker
+id: b52af0d1-9a38-5abe-8514-139550c31474
+status: experimental
+description: Detects simulator telemetry for Symmetric Cryptography scale variant
+  1210.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1573.001
+    apt_sim.variant: attack_scale_variant_1210
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1573/001/
+tags:
+- attack.t1573.001

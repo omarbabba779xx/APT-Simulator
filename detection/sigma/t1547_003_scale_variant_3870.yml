@@ -1,0 +1,21 @@
+title: Time Providers Scale Variant 3870 Marker
+id: f5d58519-ddf5-5b10-a82c-5deec2ff7a64
+status: experimental
+description: Detects simulator telemetry for Time Providers scale variant 3870.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.003
+    apt_sim.variant: attack_scale_variant_3870
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/003/
+tags:
+- attack.t1547.003

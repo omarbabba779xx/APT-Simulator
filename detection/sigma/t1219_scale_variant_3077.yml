@@ -1,0 +1,21 @@
+title: Remote Access Tools Scale Variant 3077 Marker
+id: 84cd6119-98e4-5761-980d-17cef119d1a1
+status: experimental
+description: Detects simulator telemetry for Remote Access Tools scale variant 3077.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219
+    apt_sim.variant: attack_scale_variant_3077
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/
+tags:
+- attack.t1219

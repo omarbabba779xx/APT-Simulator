@@ -1,0 +1,21 @@
+title: Clipboard Data Scale Variant 2987 Marker
+id: acdb0c5c-8989-5ee4-8f2c-1cbcbeb11996
+status: experimental
+description: Detects simulator telemetry for Clipboard Data scale variant 2987.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1115
+    apt_sim.variant: attack_scale_variant_2987
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1115/
+tags:
+- attack.t1115

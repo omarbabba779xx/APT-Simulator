@@ -1,0 +1,21 @@
+title: Scanning IP Blocks Scale Variant 1297 Marker
+id: dbd3081e-d85e-52b6-993f-a1250a8e437a
+status: experimental
+description: Detects simulator telemetry for Scanning IP Blocks scale variant 1297.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.001
+    apt_sim.variant: attack_scale_variant_1297
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/001/
+tags:
+- attack.t1595.001

@@ -1,0 +1,21 @@
+title: LSASS Driver Scale Variant 0395 Marker
+id: e88bb3ee-dd37-5dde-9e47-2fd1142db1d7
+status: experimental
+description: Detects simulator telemetry for LSASS Driver scale variant 0395.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.008
+    apt_sim.variant: attack_scale_variant_0395
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/008/
+tags:
+- attack.t1547.008

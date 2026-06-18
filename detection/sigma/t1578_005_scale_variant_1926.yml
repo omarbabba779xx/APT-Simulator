@@ -1,0 +1,22 @@
+title: Modify Cloud Compute Configurations Scale Variant 1926 Marker
+id: 70c1cc1f-93af-51fa-a4a9-31967b082741
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Compute Configurations scale
+  variant 1926.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.005
+    apt_sim.variant: attack_scale_variant_1926
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/005/
+tags:
+- attack.t1578.005

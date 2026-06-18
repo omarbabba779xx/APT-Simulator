@@ -1,0 +1,21 @@
+title: Device Registration Scale Variant 2965 Marker
+id: db79a991-bbf8-5c6d-9fb7-254efc4eda22
+status: experimental
+description: Detects simulator telemetry for Device Registration scale variant 2965.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.005
+    apt_sim.variant: attack_scale_variant_2965
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/005/
+tags:
+- attack.t1098.005

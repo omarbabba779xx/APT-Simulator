@@ -1,0 +1,21 @@
+title: Email Hiding Rules Scale Variant 3961 Marker
+id: 05645722-f8eb-51cd-a663-8442dd38eb84
+status: experimental
+description: Detects simulator telemetry for Email Hiding Rules scale variant 3961.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.008
+    apt_sim.variant: attack_scale_variant_3961
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/008/
+tags:
+- attack.t1564.008

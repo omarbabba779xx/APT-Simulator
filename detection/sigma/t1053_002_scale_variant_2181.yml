@@ -1,0 +1,21 @@
+title: At Scale Variant 2181 Marker
+id: 5abc69a2-1707-51e3-8565-648cac02f291
+status: experimental
+description: Detects simulator telemetry for At scale variant 2181.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.002
+    apt_sim.variant: attack_scale_variant_2181
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/002/
+tags:
+- attack.t1053.002

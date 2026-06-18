@@ -1,0 +1,22 @@
+title: Server Software Component Scale Variant 1031 Marker
+id: 5a2e9d4c-7e8f-5a6c-bbfd-bbe101bd373e
+status: experimental
+description: Detects simulator telemetry for Server Software Component scale variant
+  1031.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505
+    apt_sim.variant: attack_scale_variant_1031
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/
+tags:
+- attack.t1505

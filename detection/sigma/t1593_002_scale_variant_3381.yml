@@ -1,0 +1,21 @@
+title: Search Engines Scale Variant 3381 Marker
+id: fc681c7f-4bc5-5675-8e8a-02e57a79711c
+status: experimental
+description: Detects simulator telemetry for Search Engines scale variant 3381.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.002
+    apt_sim.variant: attack_scale_variant_3381
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/002/
+tags:
+- attack.t1593.002

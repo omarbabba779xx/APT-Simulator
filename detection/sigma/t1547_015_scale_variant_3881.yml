@@ -1,0 +1,21 @@
+title: Login Items Scale Variant 3881 Marker
+id: 172fb933-9855-5290-9891-b91671c3dbeb
+status: experimental
+description: Detects simulator telemetry for Login Items scale variant 3881.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.015
+    apt_sim.variant: attack_scale_variant_3881
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/015/
+tags:
+- attack.t1547.015

@@ -1,0 +1,21 @@
+title: Launch Agent Scale Variant 3147 Marker
+id: 58de30d7-3443-5227-a80c-7964ca1af71c
+status: experimental
+description: Detects simulator telemetry for Launch Agent scale variant 3147.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.001
+    apt_sim.variant: attack_scale_variant_3147
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/001/
+tags:
+- attack.t1543.001

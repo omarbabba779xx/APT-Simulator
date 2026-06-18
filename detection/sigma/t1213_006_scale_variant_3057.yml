@@ -1,0 +1,21 @@
+title: Databases Scale Variant 3057 Marker
+id: e6b1511d-0e8f-5918-8f96-5f9383121fcb
+status: experimental
+description: Detects simulator telemetry for Databases scale variant 3057.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.006
+    apt_sim.variant: attack_scale_variant_3057
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/006/
+tags:
+- attack.t1213.006

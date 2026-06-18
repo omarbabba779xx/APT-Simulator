@@ -1,0 +1,22 @@
+title: Rogue Domain Controller Scale Variant 3047 Marker
+id: 9fd6a015-959d-5a84-8d9e-05c61e485194
+status: experimental
+description: Detects simulator telemetry for Rogue Domain Controller scale variant
+  3047.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1207
+    apt_sim.variant: attack_scale_variant_3047
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1207/
+tags:
+- attack.t1207

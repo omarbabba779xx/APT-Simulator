@@ -1,0 +1,21 @@
+title: Disk Structure Wipe Scale Variant 1165 Marker
+id: 05dbefb0-f60e-56cf-9445-8d9815a9333c
+status: experimental
+description: Detects simulator telemetry for Disk Structure Wipe scale variant 1165.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.002
+    apt_sim.variant: attack_scale_variant_1165
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/002/
+tags:
+- attack.t1561.002

@@ -1,0 +1,22 @@
+title: Elevated Execution with Prompt Scale Variant 3190 Marker
+id: 6f5adf26-0d8d-59ac-bdfc-1e5e7c4a241a
+status: experimental
+description: Detects simulator telemetry for Elevated Execution with Prompt scale
+  variant 3190.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.004
+    apt_sim.variant: attack_scale_variant_3190
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/004/
+tags:
+- attack.t1548.004

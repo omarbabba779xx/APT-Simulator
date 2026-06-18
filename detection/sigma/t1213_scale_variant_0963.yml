@@ -1,0 +1,22 @@
+title: Data from Information Repositories Scale Variant 0963 Marker
+id: 7b919b54-df22-533a-9ff7-1179efbd5f63
+status: experimental
+description: Detects simulator telemetry for Data from Information Repositories scale
+  variant 0963.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213
+    apt_sim.variant: attack_scale_variant_0963
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/
+tags:
+- attack.t1213

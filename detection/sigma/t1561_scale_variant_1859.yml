@@ -1,0 +1,21 @@
+title: Disk Wipe Scale Variant 1859 Marker
+id: 499e0cea-d844-5d10-816c-57c9704e7e36
+status: experimental
+description: Detects simulator telemetry for Disk Wipe scale variant 1859.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561
+    apt_sim.variant: attack_scale_variant_1859
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/
+tags:
+- attack.t1561

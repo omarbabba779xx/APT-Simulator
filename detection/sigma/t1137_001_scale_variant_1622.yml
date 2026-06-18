@@ -1,0 +1,22 @@
+title: Office Template Macros Scale Variant 1622 Marker
+id: b0b73fa3-7e84-5ca2-aa90-12d95e6279dc
+status: experimental
+description: Detects simulator telemetry for Office Template Macros scale variant
+  1622.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.001
+    apt_sim.variant: attack_scale_variant_1622
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/001/
+tags:
+- attack.t1137.001

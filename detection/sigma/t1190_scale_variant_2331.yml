@@ -1,0 +1,22 @@
+title: Exploit Public-Facing Application Scale Variant 2331 Marker
+id: 0f769b08-0b5b-51f2-956a-944b217a2273
+status: experimental
+description: Detects simulator telemetry for Exploit Public-Facing Application scale
+  variant 2331.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1190
+    apt_sim.variant: attack_scale_variant_2331
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1190/
+tags:
+- attack.t1190

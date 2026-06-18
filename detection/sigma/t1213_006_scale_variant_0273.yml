@@ -1,0 +1,21 @@
+title: Databases Scale Variant 0273 Marker
+id: 703b3be0-7e5c-5f71-ad25-5ea98c1e7b14
+status: experimental
+description: Detects simulator telemetry for Databases scale variant 0273.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.006
+    apt_sim.variant: attack_scale_variant_0273
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/006/
+tags:
+- attack.t1213.006

@@ -1,0 +1,21 @@
+title: Threat Intel Vendors Scale Variant 1307 Marker
+id: 3eeb0366-ba94-5fa5-8a01-55976d0c8ca5
+status: experimental
+description: Detects simulator telemetry for Threat Intel Vendors scale variant 1307.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.001
+    apt_sim.variant: attack_scale_variant_1307
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/001/
+tags:
+- attack.t1597.001

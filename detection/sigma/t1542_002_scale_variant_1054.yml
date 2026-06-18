@@ -1,0 +1,21 @@
+title: Component Firmware Scale Variant 1054 Marker
+id: 59ce4d0a-20ec-5408-822e-4e9bb3f104aa
+status: experimental
+description: Detects simulator telemetry for Component Firmware scale variant 1054.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.002
+    apt_sim.variant: attack_scale_variant_1054
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/002/
+tags:
+- attack.t1542.002

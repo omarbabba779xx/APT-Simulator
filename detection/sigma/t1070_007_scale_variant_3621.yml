@@ -1,0 +1,22 @@
+title: Clear Network Connection History and Configurations Scale Variant 3621 Marker
+id: 540f4dc7-97e4-57df-affb-b0a81b2f219a
+status: experimental
+description: Detects simulator telemetry for Clear Network Connection History and
+  Configurations scale variant 3621.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.007
+    apt_sim.variant: attack_scale_variant_3621
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/007/
+tags:
+- attack.t1070.007

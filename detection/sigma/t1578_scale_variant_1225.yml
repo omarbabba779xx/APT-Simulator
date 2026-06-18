@@ -1,0 +1,22 @@
+title: Modify Cloud Compute Infrastructure Scale Variant 1225 Marker
+id: 0dc0609d-82f7-5cc8-92bb-ff1fc2aebaf3
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Compute Infrastructure scale
+  variant 1225.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578
+    apt_sim.variant: attack_scale_variant_1225
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/
+tags:
+- attack.t1578

@@ -1,0 +1,21 @@
+title: Disk Content Wipe Scale Variant 3948 Marker
+id: 27a1f1c7-74b0-5a81-99f8-0f2a74b6616c
+status: experimental
+description: Detects simulator telemetry for Disk Content Wipe scale variant 3948.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.001
+    apt_sim.variant: attack_scale_variant_3948
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/001/
+tags:
+- attack.t1561.001

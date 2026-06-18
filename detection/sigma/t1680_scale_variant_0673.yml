@@ -1,0 +1,22 @@
+title: Local Storage Discovery Scale Variant 0673 Marker
+id: 60fe1b6f-1f66-5e4b-a8f1-098f7691e431
+status: experimental
+description: Detects simulator telemetry for Local Storage Discovery scale variant
+  0673.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1680
+    apt_sim.variant: attack_scale_variant_0673
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1680/
+tags:
+- attack.t1680

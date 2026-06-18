@@ -1,0 +1,22 @@
+title: Use Alternate Authentication Material Scale Variant 1105 Marker
+id: 32d75437-0698-5a97-9793-6ab5600070d6
+status: experimental
+description: Detects simulator telemetry for Use Alternate Authentication Material
+  scale variant 1105.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550
+    apt_sim.variant: attack_scale_variant_1105
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/
+tags:
+- attack.t1550

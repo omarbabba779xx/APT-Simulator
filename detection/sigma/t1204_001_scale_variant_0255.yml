@@ -1,0 +1,21 @@
+title: Malicious Link Scale Variant 0255 Marker
+id: c29f8e11-7779-5816-aab1-f5d941e99a15
+status: experimental
+description: Detects simulator telemetry for Malicious Link scale variant 0255.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.001
+    apt_sim.variant: attack_scale_variant_0255
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/001/
+tags:
+- attack.t1204.001

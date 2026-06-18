@@ -1,0 +1,21 @@
+title: Acquire Access Scale Variant 1350 Marker
+id: 313d30d9-5c9e-5488-8e15-e3da2e14427f
+status: experimental
+description: Detects simulator telemetry for Acquire Access scale variant 1350.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1650
+    apt_sim.variant: attack_scale_variant_1350
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1650/
+tags:
+- attack.t1650

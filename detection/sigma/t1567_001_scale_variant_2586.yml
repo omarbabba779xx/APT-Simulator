@@ -1,0 +1,22 @@
+title: Exfiltration to Code Repository Scale Variant 2586 Marker
+id: 4339f852-9342-5035-a0ff-0a7c0a411280
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Code Repository scale
+  variant 2586.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.001
+    apt_sim.variant: attack_scale_variant_2586
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/001/
+tags:
+- attack.t1567.001

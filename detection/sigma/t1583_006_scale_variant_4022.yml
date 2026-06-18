@@ -1,0 +1,21 @@
+title: Web Services Scale Variant 4022 Marker
+id: 689c5b79-cd32-5cdc-8bed-9208da58ac2f
+status: experimental
+description: Detects simulator telemetry for Web Services scale variant 4022.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.006
+    apt_sim.variant: attack_scale_variant_4022
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/006/
+tags:
+- attack.t1583.006

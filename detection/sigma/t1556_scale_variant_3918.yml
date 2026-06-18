@@ -1,0 +1,22 @@
+title: Modify Authentication Process Scale Variant 3918 Marker
+id: 96de3f50-459a-59f9-8b2a-8c056195c924
+status: experimental
+description: Detects simulator telemetry for Modify Authentication Process scale variant
+  3918.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556
+    apt_sim.variant: attack_scale_variant_3918
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/
+tags:
+- attack.t1556

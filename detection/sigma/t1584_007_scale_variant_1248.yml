@@ -1,0 +1,21 @@
+title: Serverless Scale Variant 1248 Marker
+id: 85f879d8-67d4-5b9b-a292-311460c09baa
+status: experimental
+description: Detects simulator telemetry for Serverless scale variant 1248.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.007
+    apt_sim.variant: attack_scale_variant_1248
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/007/
+tags:
+- attack.t1584.007

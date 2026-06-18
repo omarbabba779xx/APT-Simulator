@@ -1,0 +1,21 @@
+title: Social Engineering Scale Variant 2767 Marker
+id: 5ae04676-bfbf-5815-b1d1-b6dc85810d03
+status: experimental
+description: Detects simulator telemetry for Social Engineering scale variant 2767.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684
+    apt_sim.variant: attack_scale_variant_2767
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/
+tags:
+- attack.t1684

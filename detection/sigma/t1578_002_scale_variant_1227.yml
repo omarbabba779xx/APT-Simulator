@@ -1,0 +1,21 @@
+title: Create Cloud Instance Scale Variant 1227 Marker
+id: 4f6a4fa2-4863-5093-b9f1-404621773432
+status: experimental
+description: Detects simulator telemetry for Create Cloud Instance scale variant 1227.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.002
+    apt_sim.variant: attack_scale_variant_1227
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/002/
+tags:
+- attack.t1578.002

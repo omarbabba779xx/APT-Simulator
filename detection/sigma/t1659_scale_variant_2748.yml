@@ -1,0 +1,21 @@
+title: Content Injection Scale Variant 2748 Marker
+id: c8e44039-6c01-5b06-8968-5a09bb91a5b0
+status: experimental
+description: Detects simulator telemetry for Content Injection scale variant 2748.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1659
+    apt_sim.variant: attack_scale_variant_2748
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1659/
+tags:
+- attack.t1659

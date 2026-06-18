@@ -1,0 +1,21 @@
+title: Query Registry Scale Variant 3501 Marker
+id: fc310ee5-2c21-5e10-aa61-d6c5e464c334
+status: experimental
+description: Detects simulator telemetry for Query Registry scale variant 3501.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1012
+    apt_sim.variant: attack_scale_variant_3501
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1012/
+tags:
+- attack.t1012

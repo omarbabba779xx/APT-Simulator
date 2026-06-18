@@ -1,0 +1,21 @@
+title: OS Exhaustion Flood Scale Variant 3115 Marker
+id: dd91014a-8d70-5c25-b4df-86200f0b0aee
+status: experimental
+description: Detects simulator telemetry for OS Exhaustion Flood scale variant 3115.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.001
+    apt_sim.variant: attack_scale_variant_3115
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/001/
+tags:
+- attack.t1499.001

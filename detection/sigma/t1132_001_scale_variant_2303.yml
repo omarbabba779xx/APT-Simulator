@@ -1,0 +1,21 @@
+title: Standard Encoding Scale Variant 2303 Marker
+id: f26b3d34-3ea2-5a40-bffe-ecb087e3e039
+status: experimental
+description: Detects simulator telemetry for Standard Encoding scale variant 2303.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1132.001
+    apt_sim.variant: attack_scale_variant_2303
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1132/001/
+tags:
+- attack.t1132.001

@@ -1,0 +1,22 @@
+title: Data from Configuration Repository Scale Variant 2714 Marker
+id: bbce50de-5eaf-5c08-8b3e-15dcb8412bb9
+status: experimental
+description: Detects simulator telemetry for Data from Configuration Repository scale
+  variant 2714.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602
+    apt_sim.variant: attack_scale_variant_2714
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/
+tags:
+- attack.t1602

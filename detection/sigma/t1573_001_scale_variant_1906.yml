@@ -1,0 +1,22 @@
+title: Symmetric Cryptography Scale Variant 1906 Marker
+id: 34180fb5-70bb-5262-a5d1-6e46abb7fb3d
+status: experimental
+description: Detects simulator telemetry for Symmetric Cryptography scale variant
+  1906.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1573.001
+    apt_sim.variant: attack_scale_variant_1906
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1573/001/
+tags:
+- attack.t1573.001

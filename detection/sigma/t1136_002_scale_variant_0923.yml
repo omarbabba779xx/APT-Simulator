@@ -1,0 +1,21 @@
+title: Domain Account Scale Variant 0923 Marker
+id: 00a515cf-b711-5ef7-8001-67aa4efd7ef4
+status: experimental
+description: Detects simulator telemetry for Domain Account scale variant 0923.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.002
+    apt_sim.variant: attack_scale_variant_0923
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/002/
+tags:
+- attack.t1136.002

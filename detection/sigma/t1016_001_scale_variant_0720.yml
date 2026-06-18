@@ -1,0 +1,22 @@
+title: Internet Connection Discovery Scale Variant 0720 Marker
+id: 01f4facb-e651-5bc4-845a-7e360626d8b4
+status: experimental
+description: Detects simulator telemetry for Internet Connection Discovery scale variant
+  0720.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.001
+    apt_sim.variant: attack_scale_variant_0720
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/001/
+tags:
+- attack.t1016.001

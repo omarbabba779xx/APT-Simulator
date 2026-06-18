@@ -1,0 +1,21 @@
+title: Installer Packages Scale Variant 1080 Marker
+id: 08101008-4732-5bd2-9d18-3b4681b902da
+status: experimental
+description: Detects simulator telemetry for Installer Packages scale variant 1080.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.016
+    apt_sim.variant: attack_scale_variant_1080
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/016/
+tags:
+- attack.t1546.016

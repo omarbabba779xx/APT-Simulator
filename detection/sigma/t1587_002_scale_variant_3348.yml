@@ -1,0 +1,22 @@
+title: Code Signing Certificates Scale Variant 3348 Marker
+id: 39e495e4-93f4-578c-9643-71cf12b321a3
+status: experimental
+description: Detects simulator telemetry for Code Signing Certificates scale variant
+  3348.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.002
+    apt_sim.variant: attack_scale_variant_3348
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/002/
+tags:
+- attack.t1587.002

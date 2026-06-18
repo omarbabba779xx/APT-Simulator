@@ -1,0 +1,21 @@
+title: Trusted Relationship Scale Variant 1641 Marker
+id: c75eeb36-0637-5494-8e1b-3bf11aecc485
+status: experimental
+description: Detects simulator telemetry for Trusted Relationship scale variant 1641.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1199
+    apt_sim.variant: attack_scale_variant_1641
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1199/
+tags:
+- attack.t1199

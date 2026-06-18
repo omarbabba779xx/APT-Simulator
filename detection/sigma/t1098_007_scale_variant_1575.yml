@@ -1,0 +1,22 @@
+title: Additional Local or Domain Groups Scale Variant 1575 Marker
+id: de129bc4-e671-5aa2-9ce0-15db8df3511c
+status: experimental
+description: Detects simulator telemetry for Additional Local or Domain Groups scale
+  variant 1575.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.007
+    apt_sim.variant: attack_scale_variant_1575
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/007/
+tags:
+- attack.t1098.007

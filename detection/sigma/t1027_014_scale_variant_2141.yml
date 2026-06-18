@@ -1,0 +1,21 @@
+title: Polymorphic Code Scale Variant 2141 Marker
+id: 817d0932-29ce-5f8e-9412-31706228e8cd
+status: experimental
+description: Detects simulator telemetry for Polymorphic Code scale variant 2141.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.014
+    apt_sim.variant: attack_scale_variant_2141
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/014/
+tags:
+- attack.t1027.014

@@ -1,0 +1,21 @@
+title: Bind Mounts Scale Variant 3270 Marker
+id: 7c96af2a-0f1d-57c4-b6df-0805509d32a2
+status: experimental
+description: Detects simulator telemetry for Bind Mounts scale variant 3270.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.013
+    apt_sim.variant: attack_scale_variant_3270
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/013/
+tags:
+- attack.t1564.013

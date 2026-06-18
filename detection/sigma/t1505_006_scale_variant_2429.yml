@@ -1,0 +1,22 @@
+title: vSphere Installation Bundles Scale Variant 2429 Marker
+id: a51b8b72-15a0-56f3-84fa-2d6f005abb01
+status: experimental
+description: Detects simulator telemetry for vSphere Installation Bundles scale variant
+  2429.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.006
+    apt_sim.variant: attack_scale_variant_2429
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/006/
+tags:
+- attack.t1505.006

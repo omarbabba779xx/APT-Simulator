@@ -1,0 +1,22 @@
+title: Additional Cloud Roles Scale Variant 0179 Marker
+id: 605923e0-5cf2-5d36-8968-80e13e430913
+status: experimental
+description: Detects simulator telemetry for Additional Cloud Roles scale variant
+  0179.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.003
+    apt_sim.variant: attack_scale_variant_0179
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/003/
+tags:
+- attack.t1098.003

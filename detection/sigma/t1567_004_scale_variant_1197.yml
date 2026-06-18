@@ -1,0 +1,22 @@
+title: Exfiltration Over Webhook Scale Variant 1197 Marker
+id: 620f14c7-41ee-5916-928d-7ef686d98c93
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Webhook scale variant
+  1197.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.004
+    apt_sim.variant: attack_scale_variant_1197
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/004/
+tags:
+- attack.t1567.004

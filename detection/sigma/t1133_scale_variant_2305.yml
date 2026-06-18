@@ -1,0 +1,22 @@
+title: External Remote Services Scale Variant 2305 Marker
+id: b110e1c1-e89a-5c3a-bd33-71d6ee48f885
+status: experimental
+description: Detects simulator telemetry for External Remote Services scale variant
+  2305.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1133
+    apt_sim.variant: attack_scale_variant_2305
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1133/
+tags:
+- attack.t1133

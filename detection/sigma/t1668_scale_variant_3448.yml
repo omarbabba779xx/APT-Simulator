@@ -1,0 +1,21 @@
+title: Exclusive Control Scale Variant 3448 Marker
+id: 6c3db8a1-af28-5140-8abf-7183ecf104ac
+status: experimental
+description: Detects simulator telemetry for Exclusive Control scale variant 3448.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1668
+    apt_sim.variant: attack_scale_variant_3448
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1668/
+tags:
+- attack.t1668

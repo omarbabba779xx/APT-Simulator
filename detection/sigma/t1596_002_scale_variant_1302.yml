@@ -1,0 +1,21 @@
+title: WHOIS Scale Variant 1302 Marker
+id: 05d489e7-9d9c-5551-8d86-ab11b567ec6d
+status: experimental
+description: Detects simulator telemetry for WHOIS scale variant 1302.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.002
+    apt_sim.variant: attack_scale_variant_1302
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/002/
+tags:
+- attack.t1596.002

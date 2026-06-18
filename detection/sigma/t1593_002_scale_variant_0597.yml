@@ -1,0 +1,21 @@
+title: Search Engines Scale Variant 0597 Marker
+id: 79cbf6d4-1049-59bf-89d6-bf6b7f5a4eae
+status: experimental
+description: Detects simulator telemetry for Search Engines scale variant 0597.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.002
+    apt_sim.variant: attack_scale_variant_0597
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/002/
+tags:
+- attack.t1593.002

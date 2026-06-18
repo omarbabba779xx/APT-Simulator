@@ -1,0 +1,22 @@
+title: Mark-of-the-Web Bypass Scale Variant 3212 Marker
+id: 52e5556a-089c-5d0b-b555-1610c09fecd5
+status: experimental
+description: Detects simulator telemetry for Mark-of-the-Web Bypass scale variant
+  3212.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.005
+    apt_sim.variant: attack_scale_variant_3212
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/005/
+tags:
+- attack.t1553.005

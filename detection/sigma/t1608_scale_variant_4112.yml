@@ -1,0 +1,21 @@
+title: Stage Capabilities Scale Variant 4112 Marker
+id: 962c3152-73b4-5957-a12e-c23503476006
+status: experimental
+description: Detects simulator telemetry for Stage Capabilities scale variant 4112.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608
+    apt_sim.variant: attack_scale_variant_4112
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/
+tags:
+- attack.t1608

@@ -1,0 +1,21 @@
+title: Command Obfuscation Scale Variant 2137 Marker
+id: 4108bfb3-74b2-5348-890a-14c8f2000566
+status: experimental
+description: Detects simulator telemetry for Command Obfuscation scale variant 2137.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.010
+    apt_sim.variant: attack_scale_variant_2137
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/010/
+tags:
+- attack.t1027.010

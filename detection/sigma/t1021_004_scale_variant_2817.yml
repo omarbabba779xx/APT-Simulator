@@ -1,0 +1,21 @@
+title: SSH Scale Variant 2817 Marker
+id: f3140eb8-a654-553e-9827-ecdac44344bf
+status: experimental
+description: Detects simulator telemetry for SSH scale variant 2817.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.004
+    apt_sim.variant: attack_scale_variant_2817
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/004/
+tags:
+- attack.t1021.004

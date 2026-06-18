@@ -1,0 +1,21 @@
+title: Hidden Window Scale Variant 2564 Marker
+id: c7ca8f37-cccf-50f5-bf8a-68847a2b8f8e
+status: experimental
+description: Detects simulator telemetry for Hidden Window scale variant 2564.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.003
+    apt_sim.variant: attack_scale_variant_2564
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/003/
+tags:
+- attack.t1564.003

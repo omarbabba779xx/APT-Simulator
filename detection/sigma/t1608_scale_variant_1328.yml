@@ -1,0 +1,21 @@
+title: Stage Capabilities Scale Variant 1328 Marker
+id: 98c28185-b6d4-52f7-bce8-dd3c1271a4ea
+status: experimental
+description: Detects simulator telemetry for Stage Capabilities scale variant 1328.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608
+    apt_sim.variant: attack_scale_variant_1328
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/
+tags:
+- attack.t1608

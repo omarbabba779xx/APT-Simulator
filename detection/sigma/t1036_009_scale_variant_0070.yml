@@ -1,0 +1,21 @@
+title: Break Process Trees Scale Variant 0070 Marker
+id: c38c7cfe-8866-57ce-aa39-7f08fe44a939
+status: experimental
+description: Detects simulator telemetry for Break Process Trees scale variant 0070.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.009
+    apt_sim.variant: attack_scale_variant_0070
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/009/
+tags:
+- attack.t1036.009

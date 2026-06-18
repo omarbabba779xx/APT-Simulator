@@ -1,0 +1,22 @@
+title: Process Argument Spoofing Scale Variant 3267 Marker
+id: afcf882f-ed1c-5e85-988f-c4a60b034592
+status: experimental
+description: Detects simulator telemetry for Process Argument Spoofing scale variant
+  3267.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.010
+    apt_sim.variant: attack_scale_variant_3267
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/010/
+tags:
+- attack.t1564.010

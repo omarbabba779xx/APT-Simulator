@@ -1,0 +1,22 @@
+title: Transmitted Data Manipulation Scale Variant 3274 Marker
+id: 76c7aa13-1bf5-54bc-9d22-5e68058a7c6d
+status: experimental
+description: Detects simulator telemetry for Transmitted Data Manipulation scale variant
+  3274.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.002
+    apt_sim.variant: attack_scale_variant_3274
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/002/
+tags:
+- attack.t1565.002

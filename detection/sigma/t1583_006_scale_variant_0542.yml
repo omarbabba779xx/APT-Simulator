@@ -1,0 +1,21 @@
+title: Web Services Scale Variant 0542 Marker
+id: 15aaf01e-fe6f-5bf4-bc09-368ce5864711
+status: experimental
+description: Detects simulator telemetry for Web Services scale variant 0542.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.006
+    apt_sim.variant: attack_scale_variant_0542
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/006/
+tags:
+- attack.t1583.006

@@ -1,0 +1,21 @@
+title: SAML Tokens Scale Variant 1327 Marker
+id: 4a279cae-6eff-5999-b275-aecd3bcc8ccf
+status: experimental
+description: Detects simulator telemetry for SAML Tokens scale variant 1327.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.002
+    apt_sim.variant: attack_scale_variant_1327
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/002/
+tags:
+- attack.t1606.002

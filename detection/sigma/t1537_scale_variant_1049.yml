@@ -1,0 +1,22 @@
+title: Transfer Data to Cloud Account Scale Variant 1049 Marker
+id: 5ab59ba1-b6f1-51bd-bc3d-ed1014443cc2
+status: experimental
+description: Detects simulator telemetry for Transfer Data to Cloud Account scale
+  variant 1049.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1537
+    apt_sim.variant: attack_scale_variant_1049
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1537/
+tags:
+- attack.t1537

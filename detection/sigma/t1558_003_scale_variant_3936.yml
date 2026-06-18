@@ -1,0 +1,21 @@
+title: Kerberoasting Scale Variant 3936 Marker
+id: 07567f15-a1c2-5e74-b78c-523227a211e0
+status: experimental
+description: Detects simulator telemetry for Kerberoasting scale variant 3936.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.003
+    apt_sim.variant: attack_scale_variant_3936
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/003/
+tags:
+- attack.t1558.003

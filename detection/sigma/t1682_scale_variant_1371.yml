@@ -1,0 +1,22 @@
+title: Query Public AI Services Scale Variant 1371 Marker
+id: b50c7a4a-1a99-5b76-85f5-b8479d330bfa
+status: experimental
+description: Detects simulator telemetry for Query Public AI Services scale variant
+  1371.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1682
+    apt_sim.variant: attack_scale_variant_1371
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1682/
+tags:
+- attack.t1682

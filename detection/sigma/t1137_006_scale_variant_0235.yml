@@ -1,0 +1,21 @@
+title: Add-ins Scale Variant 0235 Marker
+id: 36a1878d-4b31-5681-b584-329abe9262c2
+status: experimental
+description: Detects simulator telemetry for Add-ins scale variant 0235.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.006
+    apt_sim.variant: attack_scale_variant_0235
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/006/
+tags:
+- attack.t1137.006

@@ -1,0 +1,22 @@
+title: Compromise Host Software Binary Scale Variant 0430 Marker
+id: 15617ecd-07b7-576d-99d3-397c5af436fc
+status: experimental
+description: Detects simulator telemetry for Compromise Host Software Binary scale
+  variant 0430.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1554
+    apt_sim.variant: attack_scale_variant_0430
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1554/
+tags:
+- attack.t1554

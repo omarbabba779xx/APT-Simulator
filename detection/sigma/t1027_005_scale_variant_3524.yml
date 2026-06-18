@@ -1,0 +1,22 @@
+title: Indicator Removal from Tools Scale Variant 3524 Marker
+id: b87894c6-9024-5648-b4f3-0c04c1ffcffc
+status: experimental
+description: Detects simulator telemetry for Indicator Removal from Tools scale variant
+  3524.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.005
+    apt_sim.variant: attack_scale_variant_3524
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/005/
+tags:
+- attack.t1027.005

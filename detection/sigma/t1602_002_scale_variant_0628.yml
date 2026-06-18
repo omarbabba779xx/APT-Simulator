@@ -1,0 +1,22 @@
+title: Network Device Configuration Dump Scale Variant 0628 Marker
+id: 1aa846f4-d797-5334-b0e5-ac1246d95cb3
+status: experimental
+description: Detects simulator telemetry for Network Device Configuration Dump scale
+  variant 0628.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.002
+    apt_sim.variant: attack_scale_variant_0628
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/002/
+tags:
+- attack.t1602.002

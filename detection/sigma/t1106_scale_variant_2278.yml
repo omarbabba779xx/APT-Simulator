@@ -1,0 +1,21 @@
+title: Native API Scale Variant 2278 Marker
+id: b71c12d1-e287-5bd9-9744-b3f4c1c00e1e
+status: experimental
+description: Detects simulator telemetry for Native API scale variant 2278.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1106
+    apt_sim.variant: attack_scale_variant_2278
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1106/
+tags:
+- attack.t1106

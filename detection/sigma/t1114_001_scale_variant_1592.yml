@@ -1,0 +1,22 @@
+title: Local Email Collection Scale Variant 1592 Marker
+id: b2d721eb-f85e-561d-9001-e6a8d9d3de2b
+status: experimental
+description: Detects simulator telemetry for Local Email Collection scale variant
+  1592.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.001
+    apt_sim.variant: attack_scale_variant_1592
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/001/
+tags:
+- attack.t1114.001

@@ -1,0 +1,21 @@
+title: AppleScript Scale Variant 1511 Marker
+id: 4ae67c40-602b-53ab-b42f-00bb8b48ad75
+status: experimental
+description: Detects simulator telemetry for AppleScript scale variant 1511.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.002
+    apt_sim.variant: attack_scale_variant_1511
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/002/
+tags:
+- attack.t1059.002

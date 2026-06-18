@@ -1,0 +1,21 @@
+title: Native API Scale Variant 3670 Marker
+id: e354587b-f7bf-53f7-b2fd-ed75d446528b
+status: experimental
+description: Detects simulator telemetry for Native API scale variant 3670.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1106
+    apt_sim.variant: attack_scale_variant_3670
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1106/
+tags:
+- attack.t1106

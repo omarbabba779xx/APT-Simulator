@@ -1,0 +1,21 @@
+title: Sudo and Sudo Caching Scale Variant 0405 Marker
+id: c4bb66c7-84c9-548c-9e0b-bdf447fe0898
+status: experimental
+description: Detects simulator telemetry for Sudo and Sudo Caching scale variant 0405.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.003
+    apt_sim.variant: attack_scale_variant_0405
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/003/
+tags:
+- attack.t1548.003

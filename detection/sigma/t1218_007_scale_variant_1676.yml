@@ -1,0 +1,21 @@
+title: Msiexec Scale Variant 1676 Marker
+id: 09badde4-3d5b-558a-aa57-69cf636fd440
+status: experimental
+description: Detects simulator telemetry for Msiexec scale variant 1676.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.007
+    apt_sim.variant: attack_scale_variant_1676
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/007/
+tags:
+- attack.t1218.007

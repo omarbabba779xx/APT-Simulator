@@ -1,0 +1,22 @@
+title: Exploitation for Defense Impairment Scale Variant 2781 Marker
+id: 15500419-9d23-59ed-b7bc-0e1061a21a52
+status: experimental
+description: Detects simulator telemetry for Exploitation for Defense Impairment scale
+  variant 2781.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1687
+    apt_sim.variant: attack_scale_variant_2781
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1687/
+tags:
+- attack.t1687

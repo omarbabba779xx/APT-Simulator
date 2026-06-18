@@ -1,0 +1,21 @@
+title: Delete Cloud Instance Scale Variant 1228 Marker
+id: 5f63a650-c84c-5ca1-a04d-96e8e35dcad6
+status: experimental
+description: Detects simulator telemetry for Delete Cloud Instance scale variant 1228.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.003
+    apt_sim.variant: attack_scale_variant_1228
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/003/
+tags:
+- attack.t1578.003

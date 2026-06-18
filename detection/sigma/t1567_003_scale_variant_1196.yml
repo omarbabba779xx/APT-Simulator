@@ -1,0 +1,22 @@
+title: Exfiltration to Text Storage Sites Scale Variant 1196 Marker
+id: f27f7570-04ad-5713-af4d-4d116a2336a5
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Text Storage Sites scale
+  variant 1196.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.003
+    apt_sim.variant: attack_scale_variant_1196
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/003/
+tags:
+- attack.t1567.003

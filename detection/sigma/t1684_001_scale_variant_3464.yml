@@ -1,0 +1,21 @@
+title: Impersonation Scale Variant 3464 Marker
+id: c2e7a529-85bb-5a1e-9a75-ddcfa4542615
+status: experimental
+description: Detects simulator telemetry for Impersonation scale variant 3464.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684.001
+    apt_sim.variant: attack_scale_variant_3464
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/001/
+tags:
+- attack.t1684.001

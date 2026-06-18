@@ -1,0 +1,22 @@
+title: Cloud Infrastructure Discovery Scale Variant 1231 Marker
+id: a7187bf5-befe-5f51-904b-b05e5b543486
+status: experimental
+description: Detects simulator telemetry for Cloud Infrastructure Discovery scale
+  variant 1231.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1580
+    apt_sim.variant: attack_scale_variant_1231
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1580/
+tags:
+- attack.t1580

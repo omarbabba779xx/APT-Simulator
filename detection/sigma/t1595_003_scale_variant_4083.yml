@@ -1,0 +1,21 @@
+title: Wordlist Scanning Scale Variant 4083 Marker
+id: 5b07a186-39a4-57dd-90c1-fb4b760bd8fc
+status: experimental
+description: Detects simulator telemetry for Wordlist Scanning scale variant 4083.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.003
+    apt_sim.variant: attack_scale_variant_4083
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/003/
+tags:
+- attack.t1595.003

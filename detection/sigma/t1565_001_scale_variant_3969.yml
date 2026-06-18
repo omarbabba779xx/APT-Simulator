@@ -1,0 +1,22 @@
+title: Stored Data Manipulation Scale Variant 3969 Marker
+id: 1af6e51b-5b5f-55bf-844b-710b9947ef36
+status: experimental
+description: Detects simulator telemetry for Stored Data Manipulation scale variant
+  3969.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.001
+    apt_sim.variant: attack_scale_variant_3969
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/001/
+tags:
+- attack.t1565.001

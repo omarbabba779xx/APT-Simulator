@@ -1,0 +1,22 @@
+title: Unix Shell Configuration Modification Scale Variant 3852 Marker
+id: 077d741d-2c11-5e18-b662-2ac06fce0efd
+status: experimental
+description: Detects simulator telemetry for Unix Shell Configuration Modification
+  scale variant 3852.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.004
+    apt_sim.variant: attack_scale_variant_3852
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/004/
+tags:
+- attack.t1546.004

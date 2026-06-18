@@ -1,0 +1,21 @@
+title: Power Settings Scale Variant 2049 Marker
+id: 38be8dfc-b0ec-54f2-b0c3-c5883e95ea8a
+status: experimental
+description: Detects simulator telemetry for Power Settings scale variant 2049.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1653
+    apt_sim.variant: attack_scale_variant_2049
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1653/
+tags:
+- attack.t1653

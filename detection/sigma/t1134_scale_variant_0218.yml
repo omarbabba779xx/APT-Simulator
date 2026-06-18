@@ -1,0 +1,22 @@
+title: Access Token Manipulation Scale Variant 0218 Marker
+id: 28da53d4-f2d5-567d-87ad-500b40ded1c4
+status: experimental
+description: Detects simulator telemetry for Access Token Manipulation scale variant
+  0218.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134
+    apt_sim.variant: attack_scale_variant_0218
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/
+tags:
+- attack.t1134

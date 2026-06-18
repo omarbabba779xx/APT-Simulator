@@ -1,0 +1,21 @@
+title: Serverless Scale Variant 2631 Marker
+id: 4773a9dd-ab8f-5e63-8d7f-db8efb449bd7
+status: experimental
+description: Detects simulator telemetry for Serverless scale variant 2631.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.007
+    apt_sim.variant: attack_scale_variant_2631
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/007/
+tags:
+- attack.t1583.007

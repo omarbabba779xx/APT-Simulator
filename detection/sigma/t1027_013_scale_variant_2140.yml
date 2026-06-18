@@ -1,0 +1,22 @@
+title: Encrypted/Encoded File Scale Variant 2140 Marker
+id: 5eea349c-e087-5a46-af8d-eb3a60a5f0ff
+status: experimental
+description: Detects simulator telemetry for Encrypted/Encoded File scale variant
+  2140.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.013
+    apt_sim.variant: attack_scale_variant_2140
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/013/
+tags:
+- attack.t1027.013

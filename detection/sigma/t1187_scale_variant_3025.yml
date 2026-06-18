@@ -1,0 +1,21 @@
+title: Forced Authentication Scale Variant 3025 Marker
+id: 413b2b6e-c565-54e7-aafa-5c493148db97
+status: experimental
+description: Detects simulator telemetry for Forced Authentication scale variant 3025.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1187
+    apt_sim.variant: attack_scale_variant_3025
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1187/
+tags:
+- attack.t1187

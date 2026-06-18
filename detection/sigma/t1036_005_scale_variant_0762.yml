@@ -1,0 +1,22 @@
+title: Match Legitimate Resource Name or Location Scale Variant 0762 Marker
+id: 55c23807-9144-5d6f-a974-a3d8760b8085
+status: experimental
+description: Detects simulator telemetry for Match Legitimate Resource Name or Location
+  scale variant 0762.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.005
+    apt_sim.variant: attack_scale_variant_0762
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/005/
+tags:
+- attack.t1036.005

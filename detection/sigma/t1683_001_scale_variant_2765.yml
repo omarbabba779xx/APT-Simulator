@@ -1,0 +1,21 @@
+title: Written Content Scale Variant 2765 Marker
+id: 37c4f50a-49bd-5847-a624-1aa203a9fa6f
+status: experimental
+description: Detects simulator telemetry for Written Content scale variant 2765.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683.001
+    apt_sim.variant: attack_scale_variant_2765
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/001/
+tags:
+- attack.t1683.001

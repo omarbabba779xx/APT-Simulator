@@ -1,0 +1,21 @@
+title: Email Addresses Scale Variant 1968 Marker
+id: 0b4be7c2-4caa-54af-ab8d-715e96d468d4
+status: experimental
+description: Detects simulator telemetry for Email Addresses scale variant 1968.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.002
+    apt_sim.variant: attack_scale_variant_1968
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/002/
+tags:
+- attack.t1589.002

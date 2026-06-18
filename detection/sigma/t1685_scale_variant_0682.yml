@@ -1,0 +1,22 @@
+title: Disable or Modify Tools Scale Variant 0682 Marker
+id: 94851618-8c8f-58f5-9c4e-cf2d260bcfff
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Tools scale variant
+  0682.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685
+    apt_sim.variant: attack_scale_variant_0682
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/
+tags:
+- attack.t1685

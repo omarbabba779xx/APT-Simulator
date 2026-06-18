@@ -1,0 +1,21 @@
+title: Protocol Tunneling Scale Variant 3992 Marker
+id: cba4ef2b-7178-52a6-a9d6-0b0f82e375aa
+status: experimental
+description: Detects simulator telemetry for Protocol Tunneling scale variant 3992.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1572
+    apt_sim.variant: attack_scale_variant_3992
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1572/
+tags:
+- attack.t1572

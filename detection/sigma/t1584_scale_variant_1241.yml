@@ -1,0 +1,22 @@
+title: Compromise Infrastructure Scale Variant 1241 Marker
+id: 048180ab-28fd-59d9-9e9d-a7c26a489953
+status: experimental
+description: Detects simulator telemetry for Compromise Infrastructure scale variant
+  1241.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584
+    apt_sim.variant: attack_scale_variant_1241
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/
+tags:
+- attack.t1584

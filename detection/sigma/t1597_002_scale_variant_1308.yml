@@ -1,0 +1,22 @@
+title: Purchase Technical Data Scale Variant 1308 Marker
+id: 57d4616f-75c3-5a55-bb2d-684bd13131d5
+status: experimental
+description: Detects simulator telemetry for Purchase Technical Data scale variant
+  1308.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.002
+    apt_sim.variant: attack_scale_variant_1308
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/002/
+tags:
+- attack.t1597.002

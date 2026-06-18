@@ -1,0 +1,22 @@
+title: Remote System Discovery Scale Variant 3506 Marker
+id: 92e35846-242d-5439-92d0-a868a7332069
+status: experimental
+description: Detects simulator telemetry for Remote System Discovery scale variant
+  3506.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1018
+    apt_sim.variant: attack_scale_variant_3506
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1018/
+tags:
+- attack.t1018

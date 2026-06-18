@@ -1,0 +1,21 @@
+title: Hardware Scale Variant 2679 Marker
+id: a3eb92fa-702c-5818-8e97-15d1c41e9e39
+status: experimental
+description: Detects simulator telemetry for Hardware scale variant 2679.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.001
+    apt_sim.variant: attack_scale_variant_2679
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/001/
+tags:
+- attack.t1592.001

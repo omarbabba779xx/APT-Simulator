@@ -1,0 +1,22 @@
+title: Steal Web Session Cookie Scale Variant 3835 Marker
+id: 6b38eeb8-2492-5078-a8e3-dbe93382f96f
+status: experimental
+description: Detects simulator telemetry for Steal Web Session Cookie scale variant
+  3835.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1539
+    apt_sim.variant: attack_scale_variant_3835
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1539/
+tags:
+- attack.t1539

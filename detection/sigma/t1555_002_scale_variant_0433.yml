@@ -1,0 +1,21 @@
+title: Securityd Memory Scale Variant 0433 Marker
+id: d94849a3-6bca-5c18-acc7-47504facbf40
+status: experimental
+description: Detects simulator telemetry for Securityd Memory scale variant 0433.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.002
+    apt_sim.variant: attack_scale_variant_0433
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/002/
+tags:
+- attack.t1555.002

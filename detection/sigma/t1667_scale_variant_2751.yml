@@ -1,0 +1,21 @@
+title: Email Bombing Scale Variant 2751 Marker
+id: 5aa8e528-844a-518c-ba41-1159331df063
+status: experimental
+description: Detects simulator telemetry for Email Bombing scale variant 2751.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1667
+    apt_sim.variant: attack_scale_variant_2751
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1667/
+tags:
+- attack.t1667

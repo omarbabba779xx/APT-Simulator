@@ -1,0 +1,22 @@
+title: Unused/Unsupported Cloud Regions Scale Variant 2440 Marker
+id: aee00850-d187-56f1-a6bb-32e83f0c59e3
+status: experimental
+description: Detects simulator telemetry for Unused/Unsupported Cloud Regions scale
+  variant 2440.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1535
+    apt_sim.variant: attack_scale_variant_2440
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1535/
+tags:
+- attack.t1535

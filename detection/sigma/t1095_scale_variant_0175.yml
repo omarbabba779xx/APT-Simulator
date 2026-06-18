@@ -1,0 +1,22 @@
+title: Non-Application Layer Protocol Scale Variant 0175 Marker
+id: 4eb87d2e-18e9-5232-8487-cb849c122242
+status: experimental
+description: Detects simulator telemetry for Non-Application Layer Protocol scale
+  variant 0175.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1095
+    apt_sim.variant: attack_scale_variant_0175
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1095/
+tags:
+- attack.t1095

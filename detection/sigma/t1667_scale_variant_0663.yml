@@ -1,0 +1,21 @@
+title: Email Bombing Scale Variant 0663 Marker
+id: f5e1ef6c-b922-5ddc-824d-3cdfab9d03a5
+status: experimental
+description: Detects simulator telemetry for Email Bombing scale variant 0663.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1667
+    apt_sim.variant: attack_scale_variant_0663
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1667/
+tags:
+- attack.t1667

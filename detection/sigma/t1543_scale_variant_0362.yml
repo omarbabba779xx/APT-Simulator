@@ -1,0 +1,22 @@
+title: Create or Modify System Process Scale Variant 0362 Marker
+id: 442f263d-a1cb-55d1-ad5d-250acbc3a335
+status: experimental
+description: Detects simulator telemetry for Create or Modify System Process scale
+  variant 0362.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543
+    apt_sim.variant: attack_scale_variant_0362
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/
+tags:
+- attack.t1543

@@ -1,0 +1,22 @@
+title: Automated Exfiltration Scale Variant 1419 Marker
+id: 3ea2bb61-f73f-51fa-a10c-55e7d70b9f71
+status: experimental
+description: Detects simulator telemetry for Automated Exfiltration scale variant
+  1419.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1020
+    apt_sim.variant: attack_scale_variant_1419
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1020/
+tags:
+- attack.t1020

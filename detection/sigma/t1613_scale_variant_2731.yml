@@ -1,0 +1,22 @@
+title: Container and Resource Discovery Scale Variant 2731 Marker
+id: 28adea55-554f-5a9b-82ee-799ae1f83b36
+status: experimental
+description: Detects simulator telemetry for Container and Resource Discovery scale
+  variant 2731.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1613
+    apt_sim.variant: attack_scale_variant_2731
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1613/
+tags:
+- attack.t1613

@@ -1,0 +1,21 @@
+title: Malware Scale Variant 2651 Marker
+id: 54198610-7aa0-58b2-9ffc-37ff2f2091fb
+status: experimental
+description: Detects simulator telemetry for Malware scale variant 2651.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.001
+    apt_sim.variant: attack_scale_variant_2651
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/001/
+tags:
+- attack.t1587.001

@@ -1,0 +1,22 @@
+title: Account Access Removal Scale Variant 3830 Marker
+id: 9682b4c7-be6a-5a63-bc5a-b4c7c2587947
+status: experimental
+description: Detects simulator telemetry for Account Access Removal scale variant
+  3830.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1531
+    apt_sim.variant: attack_scale_variant_3830
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

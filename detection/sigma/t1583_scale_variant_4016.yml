@@ -1,0 +1,22 @@
+title: Acquire Infrastructure Scale Variant 4016 Marker
+id: d5f4f7e6-1bf7-58f1-883b-a57e3beb3b05
+status: experimental
+description: Detects simulator telemetry for Acquire Infrastructure scale variant
+  4016.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583
+    apt_sim.variant: attack_scale_variant_4016
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/
+tags:
+- attack.t1583

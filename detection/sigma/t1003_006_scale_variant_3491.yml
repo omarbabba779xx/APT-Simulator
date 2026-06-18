@@ -1,0 +1,21 @@
+title: DCSync Scale Variant 3491 Marker
+id: 2616f980-c2f5-5d47-b093-a8dfcb099ace
+status: experimental
+description: Detects simulator telemetry for DCSync scale variant 3491.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1003.006
+    apt_sim.variant: attack_scale_variant_3491
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1003/006/
+tags:
+- attack.t1003.006

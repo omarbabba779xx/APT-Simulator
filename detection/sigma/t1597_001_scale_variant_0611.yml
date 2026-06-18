@@ -1,0 +1,21 @@
+title: Threat Intel Vendors Scale Variant 0611 Marker
+id: 84c80be5-b0ec-52b6-9bec-2e0e671cf73c
+status: experimental
+description: Detects simulator telemetry for Threat Intel Vendors scale variant 0611.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.001
+    apt_sim.variant: attack_scale_variant_0611
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/001/
+tags:
+- attack.t1597.001

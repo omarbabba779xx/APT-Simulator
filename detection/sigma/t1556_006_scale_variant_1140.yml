@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Scale Variant 1140 Marker
+id: ba4694da-03dd-50f4-9b58-8db11484a9b5
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication scale variant
+  1140.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.006
+    apt_sim.variant: attack_scale_variant_1140
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/006/
+tags:
+- attack.t1556.006

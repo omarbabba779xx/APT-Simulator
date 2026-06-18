@@ -1,0 +1,22 @@
+title: Dynamic API Resolution Scale Variant 2830 Marker
+id: f6ae4fc5-ff86-58d6-bd04-167ce07d3f7a
+status: experimental
+description: Detects simulator telemetry for Dynamic API Resolution scale variant
+  2830.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.007
+    apt_sim.variant: attack_scale_variant_2830
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/007/
+tags:
+- attack.t1027.007

@@ -1,0 +1,21 @@
+title: MSBuild Scale Variant 1602 Marker
+id: e0f256e8-18b6-5bb6-9fc8-58dc7a1168b2
+status: experimental
+description: Detects simulator telemetry for MSBuild scale variant 1602.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.001
+    apt_sim.variant: attack_scale_variant_1602
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/001/
+tags:
+- attack.t1127.001

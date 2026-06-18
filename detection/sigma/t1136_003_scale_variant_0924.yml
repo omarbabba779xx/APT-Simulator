@@ -1,0 +1,21 @@
+title: Cloud Account Scale Variant 0924 Marker
+id: 7334d52e-e6dd-59e6-82bd-4e8cca23ae26
+status: experimental
+description: Detects simulator telemetry for Cloud Account scale variant 0924.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.003
+    apt_sim.variant: attack_scale_variant_0924
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/003/
+tags:
+- attack.t1136.003

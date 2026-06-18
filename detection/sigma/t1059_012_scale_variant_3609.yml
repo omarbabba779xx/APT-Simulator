@@ -1,0 +1,21 @@
+title: Hypervisor CLI Scale Variant 3609 Marker
+id: d5a46a35-1821-5125-8fe2-56a3f825b592
+status: experimental
+description: Detects simulator telemetry for Hypervisor CLI scale variant 3609.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.012
+    apt_sim.variant: attack_scale_variant_3609
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/012/
+tags:
+- attack.t1059.012

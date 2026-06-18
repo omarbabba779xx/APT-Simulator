@@ -1,0 +1,21 @@
+title: System Time Discovery Scale Variant 0207 Marker
+id: f3e56a2c-4ea8-5910-be4e-8f4072314478
+status: experimental
+description: Detects simulator telemetry for System Time Discovery scale variant 0207.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1124
+    apt_sim.variant: attack_scale_variant_0207
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1124/
+tags:
+- attack.t1124

@@ -1,0 +1,21 @@
+title: Steganography Scale Variant 0042 Marker
+id: f5064fe8-9071-5e7f-bcf6-c36176539692
+status: experimental
+description: Detects simulator telemetry for Steganography scale variant 0042.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.003
+    apt_sim.variant: attack_scale_variant_0042
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/003/
+tags:
+- attack.t1027.003

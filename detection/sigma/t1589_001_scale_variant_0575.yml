@@ -1,0 +1,21 @@
+title: Credentials Scale Variant 0575 Marker
+id: d0adb1ef-dabf-545c-b760-d484bce997e1
+status: experimental
+description: Detects simulator telemetry for Credentials scale variant 0575.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.001
+    apt_sim.variant: attack_scale_variant_0575
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/001/
+tags:
+- attack.t1589.001

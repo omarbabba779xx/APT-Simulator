@@ -1,0 +1,21 @@
+title: Domain Fronting Scale Variant 0172 Marker
+id: 53db6820-782d-570c-bc8f-df284c2d3c45
+status: experimental
+description: Detects simulator telemetry for Domain Fronting scale variant 0172.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.004
+    apt_sim.variant: attack_scale_variant_0172
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/004/
+tags:
+- attack.t1090.004

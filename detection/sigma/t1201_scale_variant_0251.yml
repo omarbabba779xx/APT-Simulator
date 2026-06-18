@@ -1,0 +1,22 @@
+title: Password Policy Discovery Scale Variant 0251 Marker
+id: 4a8ea94b-1ced-5194-b37d-97b82239dc62
+status: experimental
+description: Detects simulator telemetry for Password Policy Discovery scale variant
+  0251.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1201
+    apt_sim.variant: attack_scale_variant_0251
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1201/
+tags:
+- attack.t1201

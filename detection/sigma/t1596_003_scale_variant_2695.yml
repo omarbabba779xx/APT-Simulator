@@ -1,0 +1,21 @@
+title: Digital Certificates Scale Variant 2695 Marker
+id: 3fbafbb6-0491-5c8a-8360-45af2a723435
+status: experimental
+description: Detects simulator telemetry for Digital Certificates scale variant 2695.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.003
+    apt_sim.variant: attack_scale_variant_2695
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/003/
+tags:
+- attack.t1596.003

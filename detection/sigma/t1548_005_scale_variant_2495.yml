@@ -1,0 +1,22 @@
+title: Temporary Elevated Cloud Access Scale Variant 2495 Marker
+id: 69181ad7-1805-54ac-9c40-f0f51f507318
+status: experimental
+description: Detects simulator telemetry for Temporary Elevated Cloud Access scale
+  variant 2495.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.005
+    apt_sim.variant: attack_scale_variant_2495
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/005/
+tags:
+- attack.t1548.005

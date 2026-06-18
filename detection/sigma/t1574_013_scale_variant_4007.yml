@@ -1,0 +1,21 @@
+title: KernelCallbackTable Scale Variant 4007 Marker
+id: 44102c71-e673-5264-bba2-c12f183d3c8d
+status: experimental
+description: Detects simulator telemetry for KernelCallbackTable scale variant 4007.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.013
+    apt_sim.variant: attack_scale_variant_4007
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/013/
+tags:
+- attack.t1574.013

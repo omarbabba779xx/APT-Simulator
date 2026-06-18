@@ -1,0 +1,21 @@
+title: Private Keys Scale Variant 2506 Marker
+id: 9532cdd4-7b12-51b1-a982-50b42add46a3
+status: experimental
+description: Detects simulator telemetry for Private Keys scale variant 2506.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.004
+    apt_sim.variant: attack_scale_variant_2506
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/004/
+tags:
+- attack.t1552.004

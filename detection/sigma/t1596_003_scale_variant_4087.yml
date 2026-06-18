@@ -1,0 +1,21 @@
+title: Digital Certificates Scale Variant 4087 Marker
+id: 8eb7a8ff-8ca6-569c-b699-6c1d6062d4a2
+status: experimental
+description: Detects simulator telemetry for Digital Certificates scale variant 4087.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.003
+    apt_sim.variant: attack_scale_variant_4087
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/003/
+tags:
+- attack.t1596.003

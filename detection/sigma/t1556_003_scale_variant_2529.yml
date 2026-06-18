@@ -1,0 +1,22 @@
+title: Pluggable Authentication Modules Scale Variant 2529 Marker
+id: ed881786-fcde-5ed7-bc6c-37c22c09ddeb
+status: experimental
+description: Detects simulator telemetry for Pluggable Authentication Modules scale
+  variant 2529.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.003
+    apt_sim.variant: attack_scale_variant_2529
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/003/
+tags:
+- attack.t1556.003

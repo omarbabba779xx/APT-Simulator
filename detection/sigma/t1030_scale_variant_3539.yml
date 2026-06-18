@@ -1,0 +1,22 @@
+title: Data Transfer Size Limits Scale Variant 3539 Marker
+id: 9140c6ee-c220-5e13-8355-45c85bc4b00f
+status: experimental
+description: Detects simulator telemetry for Data Transfer Size Limits scale variant
+  3539.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1030
+    apt_sim.variant: attack_scale_variant_3539
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1030/
+tags:
+- attack.t1030

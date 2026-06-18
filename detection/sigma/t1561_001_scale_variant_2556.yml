@@ -1,0 +1,21 @@
+title: Disk Content Wipe Scale Variant 2556 Marker
+id: ca5c1730-1391-50fd-84a3-d3f5cfd9a351
+status: experimental
+description: Detects simulator telemetry for Disk Content Wipe scale variant 2556.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.001
+    apt_sim.variant: attack_scale_variant_2556
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/001/
+tags:
+- attack.t1561.001

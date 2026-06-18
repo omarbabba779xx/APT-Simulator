@@ -1,0 +1,21 @@
+title: Bootkit Scale Variant 1055 Marker
+id: 72303d2d-90bd-5ea0-9875-c7dbdb93c89d
+status: experimental
+description: Detects simulator telemetry for Bootkit scale variant 1055.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.003
+    apt_sim.variant: attack_scale_variant_1055
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/003/
+tags:
+- attack.t1542.003

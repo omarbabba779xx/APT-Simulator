@@ -1,0 +1,22 @@
+title: Non-Application Layer Protocol Scale Variant 0871 Marker
+id: a6d651b8-7512-5903-99fd-d7f9443471ae
+status: experimental
+description: Detects simulator telemetry for Non-Application Layer Protocol scale
+  variant 0871.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1095
+    apt_sim.variant: attack_scale_variant_0871
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1095/
+tags:
+- attack.t1095

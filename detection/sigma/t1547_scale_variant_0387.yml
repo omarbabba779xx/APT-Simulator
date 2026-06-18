@@ -1,0 +1,22 @@
+title: Boot or Logon Autostart Execution Scale Variant 0387 Marker
+id: 05eecd9c-e3d0-5218-b896-13e6b833dae1
+status: experimental
+description: Detects simulator telemetry for Boot or Logon Autostart Execution scale
+  variant 0387.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547
+    apt_sim.variant: attack_scale_variant_0387
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/
+tags:
+- attack.t1547

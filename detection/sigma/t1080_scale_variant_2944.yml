@@ -1,0 +1,21 @@
+title: Taint Shared Content Scale Variant 2944 Marker
+id: bbd3bb59-f875-549b-9da0-e09058c230ce
+status: experimental
+description: Detects simulator telemetry for Taint Shared Content scale variant 2944.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1080
+    apt_sim.variant: attack_scale_variant_2944
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1080/
+tags:
+- attack.t1080

@@ -1,0 +1,21 @@
+title: Client Configurations Scale Variant 0594 Marker
+id: de06333b-7840-5a7b-a49d-fd197649afd9
+status: experimental
+description: Detects simulator telemetry for Client Configurations scale variant 0594.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.004
+    apt_sim.variant: attack_scale_variant_0594
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/004/
+tags:
+- attack.t1592.004

@@ -1,0 +1,21 @@
+title: Automated Collection Scale Variant 2292 Marker
+id: 6b07ce50-2b14-5b2e-b314-fafb89e66d72
+status: experimental
+description: Detects simulator telemetry for Automated Collection scale variant 2292.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1119
+    apt_sim.variant: attack_scale_variant_2292
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1119/
+tags:
+- attack.t1119

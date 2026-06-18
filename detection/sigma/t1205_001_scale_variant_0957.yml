@@ -1,0 +1,21 @@
+title: Port Knocking Scale Variant 0957 Marker
+id: 87af6486-34eb-5934-b217-a3de3ecd6d8b
+status: experimental
+description: Detects simulator telemetry for Port Knocking scale variant 0957.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1205.001
+    apt_sim.variant: attack_scale_variant_0957
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1205/001/
+tags:
+- attack.t1205.001

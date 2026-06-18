@@ -1,0 +1,21 @@
+title: Server Scale Variant 2637 Marker
+id: 6d4add52-801a-5755-8837-b6dfbaafe3b4
+status: experimental
+description: Detects simulator telemetry for Server scale variant 2637.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.004
+    apt_sim.variant: attack_scale_variant_2637
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/004/
+tags:
+- attack.t1584.004

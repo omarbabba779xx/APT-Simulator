@@ -1,0 +1,21 @@
+title: Deploy Container Scale Variant 2032 Marker
+id: 990d4442-ddae-5e11-87d8-f166ebead584
+status: experimental
+description: Detects simulator telemetry for Deploy Container scale variant 2032.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1610
+    apt_sim.variant: attack_scale_variant_2032
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1610/
+tags:
+- attack.t1610

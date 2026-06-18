@@ -1,0 +1,21 @@
+title: Defacement Scale Variant 3794 Marker
+id: 79687bd8-11a5-5f60-b246-85f7704864d0
+status: experimental
+description: Detects simulator telemetry for Defacement scale variant 3794.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491
+    apt_sim.variant: attack_scale_variant_3794
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/
+tags:
+- attack.t1491

@@ -1,0 +1,22 @@
+title: Non-Application Layer Protocol Scale Variant 2959 Marker
+id: 831e6148-ba3b-59b6-84df-3582e719b9a1
+status: experimental
+description: Detects simulator telemetry for Non-Application Layer Protocol scale
+  variant 2959.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1095
+    apt_sim.variant: attack_scale_variant_2959
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1095/
+tags:
+- attack.t1095

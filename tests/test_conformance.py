@@ -24,7 +24,7 @@ FORBIDDEN_MARKERS = [
 def test_exact_public_counts() -> None:
     cfg = load_config("config/default.yaml")
     scenarios = load_scenarios_from_dir(cfg.orchestrator.scenarios_dir)
-    assert len(registry.all()) == 851
+    assert len(registry.all()) == 5000
     assert len(scenarios) == 2511
     assert len(list((ROOT / "scenarios" / "generated").glob("*.yaml"))) == 2500
 
@@ -32,14 +32,15 @@ def test_exact_public_counts() -> None:
 def test_readme_states_exact_counts() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for expected in [
-        "851 TTPs",
+        "5,000 TTPs",
         "2,511 loaded scenarios",
         "11 classic YAML scenarios",
         "2,500 generated YAML scenarios",
         "15,680,015,680 generable scenario variants",
-        "851 Sigma rules",
-        "14 ATT&CK Enterprise tactics covered",
+        "5,000 Sigma rules",
+        "14/14 ATT&CK Enterprise tactics covered",
         "100 ATT&CK-mapped marker-only variants",
+        "4,149 ATT&CK scale variants",
     ]:
         assert expected in readme
 

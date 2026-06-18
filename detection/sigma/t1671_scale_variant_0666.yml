@@ -1,0 +1,22 @@
+title: Cloud Application Integration Scale Variant 0666 Marker
+id: 2a69fa0c-1e08-5884-84c9-48e6659e7d75
+status: experimental
+description: Detects simulator telemetry for Cloud Application Integration scale variant
+  0666.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1671
+    apt_sim.variant: attack_scale_variant_0666
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1671/
+tags:
+- attack.t1671

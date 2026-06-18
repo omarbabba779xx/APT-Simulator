@@ -1,0 +1,22 @@
+title: ESXi Administration Command Scale Variant 2757 Marker
+id: 1f9c3596-3a14-589e-9b09-610bfffdd665
+status: experimental
+description: Detects simulator telemetry for ESXi Administration Command scale variant
+  2757.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1675
+    apt_sim.variant: attack_scale_variant_2757
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1675/
+tags:
+- attack.t1675

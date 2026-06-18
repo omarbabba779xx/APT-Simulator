@@ -1,0 +1,21 @@
+title: Drive-by Compromise Scale Variant 0938 Marker
+id: f9d8fda6-7e69-5d3f-8d36-f0d34cee9552
+status: experimental
+description: Detects simulator telemetry for Drive-by Compromise scale variant 0938.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1189
+    apt_sim.variant: attack_scale_variant_0938
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1189/
+tags:
+- attack.t1189

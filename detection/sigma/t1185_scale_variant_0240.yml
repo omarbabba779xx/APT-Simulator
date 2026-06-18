@@ -1,0 +1,22 @@
+title: Browser Session Hijacking Scale Variant 0240 Marker
+id: 0cc02098-69f8-5315-af2a-77b07949671a
+status: experimental
+description: Detects simulator telemetry for Browser Session Hijacking scale variant
+  0240.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1185
+    apt_sim.variant: attack_scale_variant_0240
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1185/
+tags:
+- attack.t1185

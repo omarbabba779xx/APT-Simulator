@@ -1,0 +1,22 @@
+title: Group Policy Discovery Scale Variant 0646 Marker
+id: c9c884e2-fcad-595e-9dba-0a172a807d47
+status: experimental
+description: Detects simulator telemetry for Group Policy Discovery scale variant
+  0646.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1615
+    apt_sim.variant: attack_scale_variant_0646
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1615/
+tags:
+- attack.t1615

@@ -1,0 +1,21 @@
+title: Software Discovery Scale Variant 3126 Marker
+id: 6395f70a-156e-5560-86ba-8acdccdc85c8
+status: experimental
+description: Detects simulator telemetry for Software Discovery scale variant 3126.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518
+    apt_sim.variant: attack_scale_variant_3126
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/
+tags:
+- attack.t1518

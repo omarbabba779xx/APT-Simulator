@@ -1,0 +1,22 @@
+title: Search Open Technical Databases Scale Variant 1300 Marker
+id: c717482d-6157-5e3a-b3c4-c3dce25d4fe8
+status: experimental
+description: Detects simulator telemetry for Search Open Technical Databases scale
+  variant 1300.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596
+    apt_sim.variant: attack_scale_variant_1300
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/
+tags:
+- attack.t1596

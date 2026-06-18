@@ -1,0 +1,21 @@
+title: Web Services Scale Variant 1238 Marker
+id: 3452d468-0fab-5564-8617-b4ca74df9cd6
+status: experimental
+description: Detects simulator telemetry for Web Services scale variant 1238.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.006
+    apt_sim.variant: attack_scale_variant_1238
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/006/
+tags:
+- attack.t1583.006

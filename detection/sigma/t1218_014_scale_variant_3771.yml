@@ -1,0 +1,21 @@
+title: MMC Scale Variant 3771 Marker
+id: 9c39f028-bc75-57a7-891d-b0ac14d29d1b
+status: experimental
+description: Detects simulator telemetry for MMC scale variant 3771.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.014
+    apt_sim.variant: attack_scale_variant_3771
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/014/
+tags:
+- attack.t1218.014

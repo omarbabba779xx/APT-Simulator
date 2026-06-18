@@ -1,0 +1,22 @@
+title: Network Trust Dependencies Scale Variant 3365 Marker
+id: 3f85a629-d3ba-5c56-954e-8cce1e3c604e
+status: experimental
+description: Detects simulator telemetry for Network Trust Dependencies scale variant
+  3365.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.003
+    apt_sim.variant: attack_scale_variant_3365
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/003/
+tags:
+- attack.t1590.003

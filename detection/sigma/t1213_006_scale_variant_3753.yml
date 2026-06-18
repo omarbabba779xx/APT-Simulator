@@ -1,0 +1,21 @@
+title: Databases Scale Variant 3753 Marker
+id: 82a488cd-b4f1-57ff-894b-ec34aacd5aad
+status: experimental
+description: Detects simulator telemetry for Databases scale variant 3753.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.006
+    apt_sim.variant: attack_scale_variant_3753
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/006/
+tags:
+- attack.t1213.006

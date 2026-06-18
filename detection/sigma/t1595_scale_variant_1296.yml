@@ -1,0 +1,21 @@
+title: Active Scanning Scale Variant 1296 Marker
+id: f00a8004-6e99-5ae2-899c-40706c2f5e55
+status: experimental
+description: Detects simulator telemetry for Active Scanning scale variant 1296.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595
+    apt_sim.variant: attack_scale_variant_1296
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/
+tags:
+- attack.t1595

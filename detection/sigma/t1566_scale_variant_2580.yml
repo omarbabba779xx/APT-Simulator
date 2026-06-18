@@ -1,0 +1,21 @@
+title: Phishing Scale Variant 2580 Marker
+id: 548a272a-92f8-56ff-b5ad-78ac61269c52
+status: experimental
+description: Detects simulator telemetry for Phishing scale variant 2580.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_scale_variant_2580
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

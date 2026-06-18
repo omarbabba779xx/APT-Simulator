@@ -1,0 +1,21 @@
+title: Outlook Forms Scale Variant 2320 Marker
+id: a47b2df6-e0aa-5ad6-89f9-5450f1139460
+status: experimental
+description: Detects simulator telemetry for Outlook Forms scale variant 2320.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.003
+    apt_sim.variant: attack_scale_variant_2320
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/003/
+tags:
+- attack.t1137.003

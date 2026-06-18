@@ -1,0 +1,22 @@
+title: User Activity Based Checks Scale Variant 3805 Marker
+id: 8e0db454-f1b1-53b9-a6e6-713c45fc2cc2
+status: experimental
+description: Detects simulator telemetry for User Activity Based Checks scale variant
+  3805.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.002
+    apt_sim.variant: attack_scale_variant_3805
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/002/
+tags:
+- attack.t1497.002

@@ -1,0 +1,22 @@
+title: Data from Network Shared Drive Scale Variant 2864 Marker
+id: 6fd3c0bf-5182-5813-9413-f2684119c7cf
+status: experimental
+description: Detects simulator telemetry for Data from Network Shared Drive scale
+  variant 2864.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1039
+    apt_sim.variant: attack_scale_variant_2864
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1039/
+tags:
+- attack.t1039

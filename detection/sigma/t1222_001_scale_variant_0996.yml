@@ -1,0 +1,21 @@
+title: Windows Permissions Scale Variant 0996 Marker
+id: 13d66ec3-24e7-5b39-986c-6cc306fdb23a
+status: experimental
+description: Detects simulator telemetry for Windows Permissions scale variant 0996.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1222.001
+    apt_sim.variant: attack_scale_variant_0996
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1222/001/
+tags:
+- attack.t1222.001

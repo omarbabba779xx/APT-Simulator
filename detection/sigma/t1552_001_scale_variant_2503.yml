@@ -1,0 +1,21 @@
+title: Credentials In Files Scale Variant 2503 Marker
+id: ab71515b-6783-52dd-971c-78e31d9757cd
+status: experimental
+description: Detects simulator telemetry for Credentials In Files scale variant 2503.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.001
+    apt_sim.variant: attack_scale_variant_2503
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/001/
+tags:
+- attack.t1552.001

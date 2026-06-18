@@ -1,0 +1,21 @@
+title: Software Scale Variant 2680 Marker
+id: 88033c30-6341-5a22-9364-9c25ae658f13
+status: experimental
+description: Detects simulator telemetry for Software scale variant 2680.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.002
+    apt_sim.variant: attack_scale_variant_2680
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/002/
+tags:
+- attack.t1592.002

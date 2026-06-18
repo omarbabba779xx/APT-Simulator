@@ -1,0 +1,21 @@
+title: IP Addresses Scale Variant 2671 Marker
+id: 5dcf6d77-867c-5b07-9ad2-d168932ac52e
+status: experimental
+description: Detects simulator telemetry for IP Addresses scale variant 2671.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.005
+    apt_sim.variant: attack_scale_variant_2671
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/005/
+tags:
+- attack.t1590.005

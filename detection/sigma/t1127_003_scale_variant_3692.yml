@@ -1,0 +1,21 @@
+title: JamPlus Scale Variant 3692 Marker
+id: e395433d-bae2-5574-ae2f-545ea6610d41
+status: experimental
+description: Detects simulator telemetry for JamPlus scale variant 3692.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.003
+    apt_sim.variant: attack_scale_variant_3692
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/003/
+tags:
+- attack.t1127.003

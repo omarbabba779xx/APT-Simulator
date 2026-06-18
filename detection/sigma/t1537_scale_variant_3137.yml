@@ -1,0 +1,22 @@
+title: Transfer Data to Cloud Account Scale Variant 3137 Marker
+id: 2a363367-7df4-54d4-b86c-59a75f27b71a
+status: experimental
+description: Detects simulator telemetry for Transfer Data to Cloud Account scale
+  variant 3137.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1537
+    apt_sim.variant: attack_scale_variant_3137
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1537/
+tags:
+- attack.t1537

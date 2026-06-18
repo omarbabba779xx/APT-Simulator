@@ -1,0 +1,22 @@
+title: Office Template Macros Scale Variant 2318 Marker
+id: f4770fe2-0784-57a6-a7cf-0dd4499b6f14
+status: experimental
+description: Detects simulator telemetry for Office Template Macros scale variant
+  2318.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.001
+    apt_sim.variant: attack_scale_variant_2318
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/001/
+tags:
+- attack.t1137.001

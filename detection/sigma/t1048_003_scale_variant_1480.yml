@@ -1,0 +1,22 @@
+title: Exfiltration Over Unencrypted Non-C2 Protocol Scale Variant 1480 Marker
+id: c9cf2492-c20b-58c8-acf5-0a34b2e7d317
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Unencrypted Non-C2
+  Protocol scale variant 1480.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.003
+    apt_sim.variant: attack_scale_variant_1480
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/003/
+tags:
+- attack.t1048.003

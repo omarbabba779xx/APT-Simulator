@@ -1,0 +1,22 @@
+title: Gather Victim Org Information Scale Variant 2673 Marker
+id: a158157c-d8b4-5260-8360-d6ba5d932382
+status: experimental
+description: Detects simulator telemetry for Gather Victim Org Information scale variant
+  2673.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591
+    apt_sim.variant: attack_scale_variant_2673
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/
+tags:
+- attack.t1591

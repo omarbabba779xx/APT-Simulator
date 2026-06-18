@@ -1,0 +1,21 @@
+title: Component Firmware Scale Variant 3142 Marker
+id: 23646872-7490-55da-834e-6aaa58ac5217
+status: experimental
+description: Detects simulator telemetry for Component Firmware scale variant 3142.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.002
+    apt_sim.variant: attack_scale_variant_3142
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/002/
+tags:
+- attack.t1542.002

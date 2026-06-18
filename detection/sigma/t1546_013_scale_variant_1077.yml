@@ -1,0 +1,21 @@
+title: PowerShell Profile Scale Variant 1077 Marker
+id: b96feec0-82e3-5942-bc9d-0e971c5c4db7
+status: experimental
+description: Detects simulator telemetry for PowerShell Profile scale variant 1077.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.013
+    apt_sim.variant: attack_scale_variant_1077
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/013/
+tags:
+- attack.t1546.013

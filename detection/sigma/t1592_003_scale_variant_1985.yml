@@ -1,0 +1,21 @@
+title: Firmware Scale Variant 1985 Marker
+id: 040665a2-6798-529f-bfc8-dfbef70f15d8
+status: experimental
+description: Detects simulator telemetry for Firmware scale variant 1985.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.003
+    apt_sim.variant: attack_scale_variant_1985
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/003/
+tags:
+- attack.t1592.003

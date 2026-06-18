@@ -1,0 +1,22 @@
+title: Modify Cloud Compute Infrastructure Scale Variant 1921 Marker
+id: bfe6eb2b-55f6-5879-b45e-7abfb8e56211
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Compute Infrastructure scale
+  variant 1921.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578
+    apt_sim.variant: attack_scale_variant_1921
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/
+tags:
+- attack.t1578

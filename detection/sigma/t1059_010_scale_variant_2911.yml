@@ -1,0 +1,21 @@
+title: AutoHotKey & AutoIT Scale Variant 2911 Marker
+id: 282eaaf0-f4ea-5e16-a216-a6ef63ac1273
+status: experimental
+description: Detects simulator telemetry for AutoHotKey & AutoIT scale variant 2911.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.010
+    apt_sim.variant: attack_scale_variant_2911
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/010/
+tags:
+- attack.t1059.010

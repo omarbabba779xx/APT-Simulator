@@ -1,0 +1,22 @@
+title: Device Driver Discovery Scale Variant 1352 Marker
+id: c528584a-5359-5c02-9fde-aebc47fad385
+status: experimental
+description: Detects simulator telemetry for Device Driver Discovery scale variant
+  1352.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1652
+    apt_sim.variant: attack_scale_variant_1352
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1652/
+tags:
+- attack.t1652

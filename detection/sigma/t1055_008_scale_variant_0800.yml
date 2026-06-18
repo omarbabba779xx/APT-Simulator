@@ -1,0 +1,21 @@
+title: Ptrace System Calls Scale Variant 0800 Marker
+id: c47c0063-db7b-5eb6-a468-4e2127025115
+status: experimental
+description: Detects simulator telemetry for Ptrace System Calls scale variant 0800.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.008
+    apt_sim.variant: attack_scale_variant_0800
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/008/
+tags:
+- attack.t1055.008

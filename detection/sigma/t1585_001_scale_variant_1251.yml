@@ -1,0 +1,21 @@
+title: Social Media Accounts Scale Variant 1251 Marker
+id: e7659572-1377-597d-852e-a2b9180ddcde
+status: experimental
+description: Detects simulator telemetry for Social Media Accounts scale variant 1251.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.001
+    apt_sim.variant: attack_scale_variant_1251
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/001/
+tags:
+- attack.t1585.001

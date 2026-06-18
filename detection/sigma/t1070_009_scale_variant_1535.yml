@@ -1,0 +1,21 @@
+title: Clear Persistence Scale Variant 1535 Marker
+id: c0cfa157-dc38-51a8-82a6-8ba36d6e8f15
+status: experimental
+description: Detects simulator telemetry for Clear Persistence scale variant 1535.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.009
+    apt_sim.variant: attack_scale_variant_1535
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/009/
+tags:
+- attack.t1070.009

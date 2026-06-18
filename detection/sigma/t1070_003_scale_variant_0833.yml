@@ -1,0 +1,21 @@
+title: Clear Command History Scale Variant 0833 Marker
+id: b6523202-c5cd-5e6a-bdbc-d9b2f577dc6f
+status: experimental
+description: Detects simulator telemetry for Clear Command History scale variant 0833.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.003
+    apt_sim.variant: attack_scale_variant_0833
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/003/
+tags:
+- attack.t1070.003

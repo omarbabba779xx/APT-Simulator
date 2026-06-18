@@ -1,0 +1,22 @@
+title: Kernel Modules and Extensions Scale Variant 1089 Marker
+id: 74d9ba56-0c6a-5fc3-84a9-f8a0c25b52f3
+status: experimental
+description: Detects simulator telemetry for Kernel Modules and Extensions scale variant
+  1089.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.006
+    apt_sim.variant: attack_scale_variant_1089
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/006/
+tags:
+- attack.t1547.006

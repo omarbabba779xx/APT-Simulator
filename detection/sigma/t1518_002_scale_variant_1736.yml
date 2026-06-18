@@ -1,0 +1,22 @@
+title: Backup Software Discovery Scale Variant 1736 Marker
+id: 32b266d8-d72b-51ec-89d9-9523fc9a870f
+status: experimental
+description: Detects simulator telemetry for Backup Software Discovery scale variant
+  1736.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518.002
+    apt_sim.variant: attack_scale_variant_1736
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/002/
+tags:
+- attack.t1518.002

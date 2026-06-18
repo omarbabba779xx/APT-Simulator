@@ -1,0 +1,21 @@
+title: Archive via Utility Scale Variant 3944 Marker
+id: 112be365-3674-5d2e-b3c3-8196a08cd24d
+status: experimental
+description: Detects simulator telemetry for Archive via Utility scale variant 3944.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560.001
+    apt_sim.variant: attack_scale_variant_3944
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/001/
+tags:
+- attack.t1560.001

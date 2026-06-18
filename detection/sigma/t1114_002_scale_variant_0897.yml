@@ -1,0 +1,22 @@
+title: Remote Email Collection Scale Variant 0897 Marker
+id: ee0c8bb0-3128-566b-88ed-227d3d6f7a1a
+status: experimental
+description: Detects simulator telemetry for Remote Email Collection scale variant
+  0897.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.002
+    apt_sim.variant: attack_scale_variant_0897
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/002/
+tags:
+- attack.t1114.002

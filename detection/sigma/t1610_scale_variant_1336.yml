@@ -1,0 +1,21 @@
+title: Deploy Container Scale Variant 1336 Marker
+id: 9ea765ba-f1ff-5555-995d-94bcfbf142b5
+status: experimental
+description: Detects simulator telemetry for Deploy Container scale variant 1336.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1610
+    apt_sim.variant: attack_scale_variant_1336
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1610/
+tags:
+- attack.t1610

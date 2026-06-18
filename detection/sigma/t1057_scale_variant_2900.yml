@@ -1,0 +1,21 @@
+title: Process Discovery Scale Variant 2900 Marker
+id: a071f01e-d493-5feb-8164-32a7385f8964
+status: experimental
+description: Detects simulator telemetry for Process Discovery scale variant 2900.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1057
+    apt_sim.variant: attack_scale_variant_2900
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1057/
+tags:
+- attack.t1057

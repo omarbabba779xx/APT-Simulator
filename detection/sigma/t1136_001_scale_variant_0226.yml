@@ -1,0 +1,21 @@
+title: Local Account Scale Variant 0226 Marker
+id: 8a537ee4-70ca-5b40-9c2b-c113b2730d95
+status: experimental
+description: Detects simulator telemetry for Local Account scale variant 0226.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.001
+    apt_sim.variant: attack_scale_variant_0226
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/001/
+tags:
+- attack.t1136.001

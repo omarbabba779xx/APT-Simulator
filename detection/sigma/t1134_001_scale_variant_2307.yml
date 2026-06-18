@@ -1,0 +1,22 @@
+title: Token Impersonation/Theft Scale Variant 2307 Marker
+id: 871562da-3478-5494-8758-735a76280e72
+status: experimental
+description: Detects simulator telemetry for Token Impersonation/Theft scale variant
+  2307.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.001
+    apt_sim.variant: attack_scale_variant_2307
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/001/
+tags:
+- attack.t1134.001

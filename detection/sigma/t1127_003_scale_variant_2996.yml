@@ -1,0 +1,21 @@
+title: JamPlus Scale Variant 2996 Marker
+id: 16d85f44-4eaa-500c-a461-54a08ee05cf5
+status: experimental
+description: Detects simulator telemetry for JamPlus scale variant 2996.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.003
+    apt_sim.variant: attack_scale_variant_2996
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/003/
+tags:
+- attack.t1127.003

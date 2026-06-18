@@ -1,0 +1,22 @@
+title: Backup Software Discovery Scale Variant 1040 Marker
+id: d60f213f-c9cb-5ab7-a432-ce0afb6f449c
+status: experimental
+description: Detects simulator telemetry for Backup Software Discovery scale variant
+  1040.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518.002
+    apt_sim.variant: attack_scale_variant_1040
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/002/
+tags:
+- attack.t1518.002

@@ -1,0 +1,21 @@
+title: TFTP Boot Scale Variant 0361 Marker
+id: 8272b448-f574-58a7-bbc1-4d48f4927d05
+status: experimental
+description: Detects simulator telemetry for TFTP Boot scale variant 0361.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.005
+    apt_sim.variant: attack_scale_variant_0361
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/005/
+tags:
+- attack.t1542.005

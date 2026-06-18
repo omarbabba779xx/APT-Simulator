@@ -1,0 +1,21 @@
+title: CDNs Scale Variant 2000 Marker
+id: b67052e3-a0f2-5b23-852b-a18d04ddaca7
+status: experimental
+description: Detects simulator telemetry for CDNs scale variant 2000.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.004
+    apt_sim.variant: attack_scale_variant_2000
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/004/
+tags:
+- attack.t1596.004

@@ -1,0 +1,21 @@
+title: Fallback Channels Scale Variant 0017 Marker
+id: 20565166-5d6c-5658-8375-23cd84670866
+status: experimental
+description: Detects simulator telemetry for Fallback Channels scale variant 0017.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1008
+    apt_sim.variant: attack_scale_variant_0017
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1008/
+tags:
+- attack.t1008

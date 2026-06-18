@@ -1,0 +1,21 @@
+title: Hidden Users Scale Variant 3259 Marker
+id: e25d368e-bebd-5940-ace5-f31bdb2ae907
+status: experimental
+description: Detects simulator telemetry for Hidden Users scale variant 3259.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.002
+    apt_sim.variant: attack_scale_variant_3259
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/002/
+tags:
+- attack.t1564.002

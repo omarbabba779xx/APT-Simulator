@@ -1,0 +1,21 @@
+title: Social Engineering Scale Variant 3463 Marker
+id: 95f8ef7c-22a1-5372-af81-defbd26b6139
+status: experimental
+description: Detects simulator telemetry for Social Engineering scale variant 3463.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684
+    apt_sim.variant: attack_scale_variant_3463
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/
+tags:
+- attack.t1684

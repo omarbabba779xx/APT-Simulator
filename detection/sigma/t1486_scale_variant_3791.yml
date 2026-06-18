@@ -1,0 +1,22 @@
+title: Data Encrypted for Impact Scale Variant 3791 Marker
+id: a43dee1b-1fee-59c3-869a-7eec7a54f133
+status: experimental
+description: Detects simulator telemetry for Data Encrypted for Impact scale variant
+  3791.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1486
+    apt_sim.variant: attack_scale_variant_3791
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1486/
+tags:
+- attack.t1486

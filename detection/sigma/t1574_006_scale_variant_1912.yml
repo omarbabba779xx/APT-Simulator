@@ -1,0 +1,22 @@
+title: Dynamic Linker Hijacking Scale Variant 1912 Marker
+id: 038024ba-02b9-54e8-825f-01ec6476e567
+status: experimental
+description: Detects simulator telemetry for Dynamic Linker Hijacking scale variant
+  1912.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.006
+    apt_sim.variant: attack_scale_variant_1912
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/006/
+tags:
+- attack.t1574.006

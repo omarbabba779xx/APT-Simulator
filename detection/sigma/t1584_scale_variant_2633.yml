@@ -1,0 +1,22 @@
+title: Compromise Infrastructure Scale Variant 2633 Marker
+id: 609bf830-e411-5fb4-9762-3c8d4630306d
+status: experimental
+description: Detects simulator telemetry for Compromise Infrastructure scale variant
+  2633.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584
+    apt_sim.variant: attack_scale_variant_2633
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/
+tags:
+- attack.t1584

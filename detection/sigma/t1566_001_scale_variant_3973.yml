@@ -1,0 +1,22 @@
+title: Spearphishing Attachment Scale Variant 3973 Marker
+id: 7ed69759-e860-54d0-8f21-0782aa9ba773
+status: experimental
+description: Detects simulator telemetry for Spearphishing Attachment scale variant
+  3973.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.001
+    apt_sim.variant: attack_scale_variant_3973
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/001/
+tags:
+- attack.t1566.001

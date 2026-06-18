@@ -1,0 +1,21 @@
+title: Unsecured Credentials Scale Variant 3894 Marker
+id: 2756dda7-b8fe-5fc1-ab9b-e89754b9d6ff
+status: experimental
+description: Detects simulator telemetry for Unsecured Credentials scale variant 3894.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552
+    apt_sim.variant: attack_scale_variant_3894
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/
+tags:
+- attack.t1552

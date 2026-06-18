@@ -1,0 +1,21 @@
+title: Forced Authentication Scale Variant 0241 Marker
+id: ce5d3455-9683-5589-9a67-706d338a99f5
+status: experimental
+description: Detects simulator telemetry for Forced Authentication scale variant 0241.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1187
+    apt_sim.variant: attack_scale_variant_0241
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1187/
+tags:
+- attack.t1187

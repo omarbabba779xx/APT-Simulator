@@ -1,0 +1,21 @@
+title: Outlook Forms Scale Variant 0232 Marker
+id: aa1ba97f-26e4-57bb-a94b-76c72285bf23
+status: experimental
+description: Detects simulator telemetry for Outlook Forms scale variant 0232.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.003
+    apt_sim.variant: attack_scale_variant_0232
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/003/
+tags:
+- attack.t1137.003

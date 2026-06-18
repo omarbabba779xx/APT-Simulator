@@ -1,0 +1,21 @@
+title: Hybrid Identity Scale Variant 3229 Marker
+id: 01127577-acd7-597f-8714-d486fe245272
+status: experimental
+description: Detects simulator telemetry for Hybrid Identity scale variant 3229.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.007
+    apt_sim.variant: attack_scale_variant_3229
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/007/
+tags:
+- attack.t1556.007

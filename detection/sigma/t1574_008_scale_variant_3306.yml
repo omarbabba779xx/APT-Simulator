@@ -1,0 +1,22 @@
+title: Path Interception by Search Order Hijacking Scale Variant 3306 Marker
+id: e213f781-3424-53a7-9ef7-d685a28718c0
+status: experimental
+description: Detects simulator telemetry for Path Interception by Search Order Hijacking
+  scale variant 3306.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.008
+    apt_sim.variant: attack_scale_variant_3306
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/008/
+tags:
+- attack.t1574.008

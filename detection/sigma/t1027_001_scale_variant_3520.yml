@@ -1,0 +1,21 @@
+title: Binary Padding Scale Variant 3520 Marker
+id: 6ca3cf11-cedc-5db4-b44e-2ef44ad3a1b0
+status: experimental
+description: Detects simulator telemetry for Binary Padding scale variant 3520.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.001
+    apt_sim.variant: attack_scale_variant_3520
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/001/
+tags:
+- attack.t1027.001

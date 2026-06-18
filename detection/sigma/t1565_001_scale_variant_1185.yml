@@ -1,0 +1,22 @@
+title: Stored Data Manipulation Scale Variant 1185 Marker
+id: 07cb81e7-8ad3-54f5-90ff-000be6c2e46e
+status: experimental
+description: Detects simulator telemetry for Stored Data Manipulation scale variant
+  1185.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.001
+    apt_sim.variant: attack_scale_variant_1185
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/001/
+tags:
+- attack.t1565.001

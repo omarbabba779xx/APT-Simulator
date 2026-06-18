@@ -1,0 +1,22 @@
+title: Search Victim-Owned Websites Scale Variant 1991 Marker
+id: 0d6fbe19-322c-57a8-9a65-cd29f660239a
+status: experimental
+description: Detects simulator telemetry for Search Victim-Owned Websites scale variant
+  1991.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1594
+    apt_sim.variant: attack_scale_variant_1991
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1594/
+tags:
+- attack.t1594

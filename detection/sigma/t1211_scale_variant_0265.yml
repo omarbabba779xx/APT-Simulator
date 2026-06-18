@@ -1,0 +1,22 @@
+title: Exploitation for Stealth Scale Variant 0265 Marker
+id: 1e5ffaf1-349d-5b73-ad44-bb89d3af556e
+status: experimental
+description: Detects simulator telemetry for Exploitation for Stealth scale variant
+  0265.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1211
+    apt_sim.variant: attack_scale_variant_0265
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1211/
+tags:
+- attack.t1211

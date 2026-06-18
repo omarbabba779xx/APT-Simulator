@@ -1,0 +1,21 @@
+title: Acquire Access Scale Variant 0654 Marker
+id: 58948ea3-bade-581d-8994-f7dc79e18323
+status: experimental
+description: Detects simulator telemetry for Acquire Access scale variant 0654.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1650
+    apt_sim.variant: attack_scale_variant_0654
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1650/
+tags:
+- attack.t1650

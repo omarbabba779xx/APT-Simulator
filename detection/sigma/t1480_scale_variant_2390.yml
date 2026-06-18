@@ -1,0 +1,21 @@
+title: Execution Guardrails Scale Variant 2390 Marker
+id: 54cd7983-9491-55b9-8389-062b56f1a2f8
+status: experimental
+description: Detects simulator telemetry for Execution Guardrails scale variant 2390.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480
+    apt_sim.variant: attack_scale_variant_2390
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/
+tags:
+- attack.t1480

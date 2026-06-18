@@ -1,0 +1,22 @@
+title: Code Signing Certificates Scale Variant 2658 Marker
+id: 97767b76-2ce5-57b0-b4de-ae26673d872b
+status: experimental
+description: Detects simulator telemetry for Code Signing Certificates scale variant
+  2658.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.003
+    apt_sim.variant: attack_scale_variant_2658
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/003/
+tags:
+- attack.t1588.003

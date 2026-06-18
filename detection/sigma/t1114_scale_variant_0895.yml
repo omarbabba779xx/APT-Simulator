@@ -1,0 +1,21 @@
+title: Email Collection Scale Variant 0895 Marker
+id: 9c7e8399-84fe-56e9-acec-85ffb89236de
+status: experimental
+description: Detects simulator telemetry for Email Collection scale variant 0895.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114
+    apt_sim.variant: attack_scale_variant_0895
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/
+tags:
+- attack.t1114

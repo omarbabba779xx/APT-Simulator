@@ -1,0 +1,21 @@
+title: Visual Basic Scale Variant 0122 Marker
+id: 0cf2c613-8e0b-5e90-89b0-5d01ca4a7e0a
+status: experimental
+description: Detects simulator telemetry for Visual Basic scale variant 0122.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.005
+    apt_sim.variant: attack_scale_variant_0122
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/005/
+tags:
+- attack.t1059.005

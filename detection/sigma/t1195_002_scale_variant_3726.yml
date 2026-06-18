@@ -1,0 +1,22 @@
+title: Compromise Software Supply Chain Scale Variant 3726 Marker
+id: 6e4c3ad2-fd6e-57dc-b818-2f326d38ec27
+status: experimental
+description: Detects simulator telemetry for Compromise Software Supply Chain scale
+  variant 3726.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195.002
+    apt_sim.variant: attack_scale_variant_3726
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/002/
+tags:
+- attack.t1195.002

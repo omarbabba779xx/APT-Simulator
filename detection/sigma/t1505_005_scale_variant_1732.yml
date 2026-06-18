@@ -1,0 +1,21 @@
+title: Terminal Services DLL Scale Variant 1732 Marker
+id: 3bf5d7d2-9449-5b26-9e7d-4530e6550781
+status: experimental
+description: Detects simulator telemetry for Terminal Services DLL scale variant 1732.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.005
+    apt_sim.variant: attack_scale_variant_1732
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/005/
+tags:
+- attack.t1505.005

@@ -1,0 +1,21 @@
+title: CMSTP Scale Variant 3761 Marker
+id: 51ae3ce7-1ffb-57f7-bff4-f1d7ddf4119c
+status: experimental
+description: Detects simulator telemetry for CMSTP scale variant 3761.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.003
+    apt_sim.variant: attack_scale_variant_3761
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/003/
+tags:
+- attack.t1218.003

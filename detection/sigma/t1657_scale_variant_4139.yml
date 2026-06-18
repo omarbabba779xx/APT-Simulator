@@ -1,0 +1,21 @@
+title: Financial Theft Scale Variant 4139 Marker
+id: d3c08d16-5c24-5d0d-9b34-2e1bf2a32eb5
+status: experimental
+description: Detects simulator telemetry for Financial Theft scale variant 4139.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1657
+    apt_sim.variant: attack_scale_variant_4139
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1657/
+tags:
+- attack.t1657

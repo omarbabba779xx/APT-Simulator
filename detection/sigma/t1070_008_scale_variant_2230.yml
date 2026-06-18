@@ -1,0 +1,21 @@
+title: Clear Mailbox Data Scale Variant 2230 Marker
+id: 013d8054-3997-5ce1-938a-a4b407420050
+status: experimental
+description: Detects simulator telemetry for Clear Mailbox Data scale variant 2230.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.008
+    apt_sim.variant: attack_scale_variant_2230
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/008/
+tags:
+- attack.t1070.008

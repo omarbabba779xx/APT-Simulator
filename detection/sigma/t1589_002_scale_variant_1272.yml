@@ -1,0 +1,21 @@
+title: Email Addresses Scale Variant 1272 Marker
+id: ba149e5f-323f-534a-adf0-3e27a3034965
+status: experimental
+description: Detects simulator telemetry for Email Addresses scale variant 1272.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.002
+    apt_sim.variant: attack_scale_variant_1272
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/002/
+tags:
+- attack.t1589.002

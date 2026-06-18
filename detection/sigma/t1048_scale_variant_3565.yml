@@ -1,0 +1,22 @@
+title: Exfiltration Over Alternative Protocol Scale Variant 3565 Marker
+id: cb0c04be-867d-5309-ad03-3aea58d6e825
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Alternative Protocol
+  scale variant 3565.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048
+    apt_sim.variant: attack_scale_variant_3565
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/
+tags:
+- attack.t1048

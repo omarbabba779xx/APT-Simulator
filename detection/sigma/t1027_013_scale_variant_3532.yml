@@ -1,0 +1,22 @@
+title: Encrypted/Encoded File Scale Variant 3532 Marker
+id: 8ef5a451-8cc6-5731-9b1d-3d5ab5afdb3c
+status: experimental
+description: Detects simulator telemetry for Encrypted/Encoded File scale variant
+  3532.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.013
+    apt_sim.variant: attack_scale_variant_3532
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/013/
+tags:
+- attack.t1027.013

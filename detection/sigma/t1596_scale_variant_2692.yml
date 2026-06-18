@@ -1,0 +1,22 @@
+title: Search Open Technical Databases Scale Variant 2692 Marker
+id: e1877804-6f27-5b26-aedd-30df12b6e715
+status: experimental
+description: Detects simulator telemetry for Search Open Technical Databases scale
+  variant 2692.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596
+    apt_sim.variant: attack_scale_variant_2692
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/
+tags:
+- attack.t1596

@@ -1,0 +1,22 @@
+title: Cloud Service Hijacking Scale Variant 3802 Marker
+id: 39528c24-11d5-58ab-9912-af7dc3d05f14
+status: experimental
+description: Detects simulator telemetry for Cloud Service Hijacking scale variant
+  3802.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1496.004
+    apt_sim.variant: attack_scale_variant_3802
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1496/004/
+tags:
+- attack.t1496.004

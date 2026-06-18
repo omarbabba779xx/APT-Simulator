@@ -1,0 +1,21 @@
+title: Rundll32 Scale Variant 0984 Marker
+id: bae90f8b-5d38-5376-b59a-c7e606826f13
+status: experimental
+description: Detects simulator telemetry for Rundll32 scale variant 0984.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.011
+    apt_sim.variant: attack_scale_variant_0984
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/011/
+tags:
+- attack.t1218.011

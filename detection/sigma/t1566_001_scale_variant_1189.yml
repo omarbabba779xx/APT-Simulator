@@ -1,0 +1,22 @@
+title: Spearphishing Attachment Scale Variant 1189 Marker
+id: d52cef66-c668-5e7f-9161-f4b8e58a226c
+status: experimental
+description: Detects simulator telemetry for Spearphishing Attachment scale variant
+  1189.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.001
+    apt_sim.variant: attack_scale_variant_1189
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/001/
+tags:
+- attack.t1566.001

@@ -1,0 +1,22 @@
+title: Compromise Software Dependencies and Development Tools Scale Variant 2333 Marker
+id: a3192ac4-982e-5f2e-8275-e32d3a1b573f
+status: experimental
+description: Detects simulator telemetry for Compromise Software Dependencies and
+  Development Tools scale variant 2333.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195.001
+    apt_sim.variant: attack_scale_variant_2333
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/001/
+tags:
+- attack.t1195.001

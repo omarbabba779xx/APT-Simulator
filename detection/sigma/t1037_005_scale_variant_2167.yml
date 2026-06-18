@@ -1,0 +1,21 @@
+title: Startup Items Scale Variant 2167 Marker
+id: 9945f1d6-663f-5dd4-9581-91feba908b95
+status: experimental
+description: Detects simulator telemetry for Startup Items scale variant 2167.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.005
+    apt_sim.variant: attack_scale_variant_2167
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/005/
+tags:
+- attack.t1037.005

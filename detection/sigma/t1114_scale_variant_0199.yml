@@ -1,0 +1,21 @@
+title: Email Collection Scale Variant 0199 Marker
+id: 6a282c36-0e3e-520f-98d1-e539240edd6d
+status: experimental
+description: Detects simulator telemetry for Email Collection scale variant 0199.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114
+    apt_sim.variant: attack_scale_variant_0199
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/
+tags:
+- attack.t1114

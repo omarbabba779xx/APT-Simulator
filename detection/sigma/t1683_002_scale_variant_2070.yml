@@ -1,0 +1,21 @@
+title: Audio-Visual Content Scale Variant 2070 Marker
+id: 9b7b9069-50b2-5613-a96b-a3f751e165b6
+status: experimental
+description: Detects simulator telemetry for Audio-Visual Content scale variant 2070.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683.002
+    apt_sim.variant: attack_scale_variant_2070
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/002/
+tags:
+- attack.t1683.002

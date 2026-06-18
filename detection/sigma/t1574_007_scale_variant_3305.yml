@@ -1,0 +1,22 @@
+title: Path Interception by PATH Environment Variable Scale Variant 3305 Marker
+id: 31409174-2b05-5f0b-b9be-33cb7f5cac59
+status: experimental
+description: Detects simulator telemetry for Path Interception by PATH Environment
+  Variable scale variant 3305.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.007
+    apt_sim.variant: attack_scale_variant_3305
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/007/
+tags:
+- attack.t1574.007

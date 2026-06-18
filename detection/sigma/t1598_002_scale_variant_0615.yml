@@ -1,0 +1,22 @@
+title: Spearphishing Attachment Scale Variant 0615 Marker
+id: 27de5aca-29c2-58fc-9408-e80718eddc19
+status: experimental
+description: Detects simulator telemetry for Spearphishing Attachment scale variant
+  0615.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.002
+    apt_sim.variant: attack_scale_variant_0615
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/002/
+tags:
+- attack.t1598.002

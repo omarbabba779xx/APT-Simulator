@@ -1,0 +1,22 @@
+title: Replication Through Removable Media Scale Variant 1565 Marker
+id: 4e68b68c-c15e-5646-a525-05791525307d
+status: experimental
+description: Detects simulator telemetry for Replication Through Removable Media scale
+  variant 1565.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1091
+    apt_sim.variant: attack_scale_variant_1565
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1091/
+tags:
+- attack.t1091

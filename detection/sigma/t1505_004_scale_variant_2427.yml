@@ -1,0 +1,21 @@
+title: IIS Components Scale Variant 2427 Marker
+id: 2c78790f-8810-5501-a59f-a7bf788d9ed8
+status: experimental
+description: Detects simulator telemetry for IIS Components scale variant 2427.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.004
+    apt_sim.variant: attack_scale_variant_2427
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/004/
+tags:
+- attack.t1505.004

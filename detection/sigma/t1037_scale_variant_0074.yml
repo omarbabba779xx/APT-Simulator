@@ -1,0 +1,22 @@
+title: Boot or Logon Initialization Scripts Scale Variant 0074 Marker
+id: af26abf6-c765-5ef9-b502-f4742bd96819
+status: experimental
+description: Detects simulator telemetry for Boot or Logon Initialization Scripts
+  scale variant 0074.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037
+    apt_sim.variant: attack_scale_variant_0074
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/
+tags:
+- attack.t1037

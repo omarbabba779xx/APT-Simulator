@@ -1,0 +1,21 @@
+title: Phishing Scale Variant 3972 Marker
+id: b758287e-f4a6-5fc6-972d-e825f1edae58
+status: experimental
+description: Detects simulator telemetry for Phishing scale variant 3972.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_scale_variant_3972
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

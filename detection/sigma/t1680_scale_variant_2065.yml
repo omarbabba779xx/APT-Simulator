@@ -1,0 +1,22 @@
+title: Local Storage Discovery Scale Variant 2065 Marker
+id: b3960661-1ca0-5afe-a5e6-8cb42ba4dd52
+status: experimental
+description: Detects simulator telemetry for Local Storage Discovery scale variant
+  2065.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1680
+    apt_sim.variant: attack_scale_variant_2065
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1680/
+tags:
+- attack.t1680

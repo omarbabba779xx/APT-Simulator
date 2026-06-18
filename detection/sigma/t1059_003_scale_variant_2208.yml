@@ -1,0 +1,21 @@
+title: Windows Command Shell Scale Variant 2208 Marker
+id: ba5e778a-c7e4-569d-9eaa-66ce0b2d4ab3
+status: experimental
+description: Detects simulator telemetry for Windows Command Shell scale variant 2208.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.003
+    apt_sim.variant: attack_scale_variant_2208
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/003/
+tags:
+- attack.t1059.003

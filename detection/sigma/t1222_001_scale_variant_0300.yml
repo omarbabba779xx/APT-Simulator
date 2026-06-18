@@ -1,0 +1,21 @@
+title: Windows Permissions Scale Variant 0300 Marker
+id: c003cebf-588b-5108-b85f-a33783cf19fc
+status: experimental
+description: Detects simulator telemetry for Windows Permissions scale variant 0300.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1222.001
+    apt_sim.variant: attack_scale_variant_0300
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1222/001/
+tags:
+- attack.t1222.001

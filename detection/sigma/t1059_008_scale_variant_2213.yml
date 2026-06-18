@@ -1,0 +1,21 @@
+title: Network Device CLI Scale Variant 2213 Marker
+id: 76faddc5-86e3-5a61-964d-ca2ee8330708
+status: experimental
+description: Detects simulator telemetry for Network Device CLI scale variant 2213.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.008
+    apt_sim.variant: attack_scale_variant_2213
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/008/
+tags:
+- attack.t1059.008

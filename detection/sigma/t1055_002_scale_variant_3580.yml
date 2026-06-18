@@ -1,0 +1,22 @@
+title: Portable Executable Injection Scale Variant 3580 Marker
+id: 3df9961e-1b3f-5b03-89b7-1d725f303a73
+status: experimental
+description: Detects simulator telemetry for Portable Executable Injection scale variant
+  3580.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.002
+    apt_sim.variant: attack_scale_variant_3580
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/002/
+tags:
+- attack.t1055.002

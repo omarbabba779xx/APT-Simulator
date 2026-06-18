@@ -1,0 +1,22 @@
+title: Network Security Appliances Scale Variant 2672 Marker
+id: 3d8b3ba9-7ecc-5831-a6ac-371ead3b97db
+status: experimental
+description: Detects simulator telemetry for Network Security Appliances scale variant
+  2672.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.006
+    apt_sim.variant: attack_scale_variant_2672
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/006/
+tags:
+- attack.t1590.006

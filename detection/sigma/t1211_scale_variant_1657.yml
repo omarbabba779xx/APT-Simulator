@@ -1,0 +1,22 @@
+title: Exploitation for Stealth Scale Variant 1657 Marker
+id: d866feed-c9b4-56d3-9909-6829e948375c
+status: experimental
+description: Detects simulator telemetry for Exploitation for Stealth scale variant
+  1657.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1211
+    apt_sim.variant: attack_scale_variant_1657
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1211/
+tags:
+- attack.t1211

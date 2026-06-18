@@ -1,0 +1,21 @@
+title: Dynamic Data Exchange Scale Variant 1853 Marker
+id: 0c742865-ea13-5eb9-b416-9bdcb5a29ac7
+status: experimental
+description: Detects simulator telemetry for Dynamic Data Exchange scale variant 1853.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.002
+    apt_sim.variant: attack_scale_variant_1853
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/002/
+tags:
+- attack.t1559.002

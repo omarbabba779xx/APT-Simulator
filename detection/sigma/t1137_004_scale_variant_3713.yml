@@ -1,0 +1,21 @@
+title: Outlook Home Page Scale Variant 3713 Marker
+id: 78210fa3-02d7-56d2-ba2b-859fe946b580
+status: experimental
+description: Detects simulator telemetry for Outlook Home Page scale variant 3713.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.004
+    apt_sim.variant: attack_scale_variant_3713
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/004/
+tags:
+- attack.t1137.004

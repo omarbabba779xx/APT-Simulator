@@ -1,0 +1,21 @@
+title: Dynamic Resolution Scale Variant 1198 Marker
+id: e6f036e1-319d-59b4-a624-a6b0d32a85e2
+status: experimental
+description: Detects simulator telemetry for Dynamic Resolution scale variant 1198.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568
+    apt_sim.variant: attack_scale_variant_1198
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/
+tags:
+- attack.t1568

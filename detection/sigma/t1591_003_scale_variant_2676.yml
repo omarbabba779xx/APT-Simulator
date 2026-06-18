@@ -1,0 +1,22 @@
+title: Identify Business Tempo Scale Variant 2676 Marker
+id: cfe9f90f-063c-58f8-8416-710b33bddbf6
+status: experimental
+description: Detects simulator telemetry for Identify Business Tempo scale variant
+  2676.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.003
+    apt_sim.variant: attack_scale_variant_2676
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/003/
+tags:
+- attack.t1591.003

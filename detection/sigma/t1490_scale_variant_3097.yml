@@ -1,0 +1,22 @@
+title: Inhibit System Recovery Scale Variant 3097 Marker
+id: ee9cd3ef-2bd0-5966-8686-7268b4f189a8
+status: experimental
+description: Detects simulator telemetry for Inhibit System Recovery scale variant
+  3097.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1490
+    apt_sim.variant: attack_scale_variant_3097
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1490/
+tags:
+- attack.t1490

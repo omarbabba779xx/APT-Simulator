@@ -1,0 +1,22 @@
+title: Bypass User Account Control Scale Variant 1100 Marker
+id: 0f332f93-8866-5546-b3c4-5ffd476e1cbc
+status: experimental
+description: Detects simulator telemetry for Bypass User Account Control scale variant
+  1100.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.002
+    apt_sim.variant: attack_scale_variant_1100
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/002/
+tags:
+- attack.t1548.002

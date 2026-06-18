@@ -1,0 +1,22 @@
+title: Data Transfer Size Limits Scale Variant 2843 Marker
+id: 5720fdfe-6579-5165-92d4-2894e9bce948
+status: experimental
+description: Detects simulator telemetry for Data Transfer Size Limits scale variant
+  2843.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1030
+    apt_sim.variant: attack_scale_variant_2843
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1030/
+tags:
+- attack.t1030

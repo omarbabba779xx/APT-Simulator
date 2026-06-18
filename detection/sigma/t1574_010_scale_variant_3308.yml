@@ -1,0 +1,22 @@
+title: Services File Permissions Weakness Scale Variant 3308 Marker
+id: df4a6f09-5b7b-5435-992a-7b036497b171
+status: experimental
+description: Detects simulator telemetry for Services File Permissions Weakness scale
+  variant 3308.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.010
+    apt_sim.variant: attack_scale_variant_3308
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/010/
+tags:
+- attack.t1574.010

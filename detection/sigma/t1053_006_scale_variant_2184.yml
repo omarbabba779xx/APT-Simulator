@@ -1,0 +1,21 @@
+title: Systemd Timers Scale Variant 2184 Marker
+id: c66235a6-8814-52e3-a966-e1dd4d0d8514
+status: experimental
+description: Detects simulator telemetry for Systemd Timers scale variant 2184.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.006
+    apt_sim.variant: attack_scale_variant_2184
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/006/
+tags:
+- attack.t1053.006

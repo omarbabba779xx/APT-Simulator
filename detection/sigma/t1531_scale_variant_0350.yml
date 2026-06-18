@@ -1,0 +1,22 @@
+title: Account Access Removal Scale Variant 0350 Marker
+id: d3b5332b-d52f-5a66-965b-451f19abe47d
+status: experimental
+description: Detects simulator telemetry for Account Access Removal scale variant
+  0350.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1531
+    apt_sim.variant: attack_scale_variant_0350
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

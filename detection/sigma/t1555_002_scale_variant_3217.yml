@@ -1,0 +1,21 @@
+title: Securityd Memory Scale Variant 3217 Marker
+id: b408d5aa-ab60-53fd-a2fb-8fa37f714278
+status: experimental
+description: Detects simulator telemetry for Securityd Memory scale variant 3217.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.002
+    apt_sim.variant: attack_scale_variant_3217
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/002/
+tags:
+- attack.t1555.002

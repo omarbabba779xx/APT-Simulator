@@ -1,0 +1,22 @@
+title: Inhibit System Recovery Scale Variant 3793 Marker
+id: 6e97f0c2-5883-547d-a292-82b23b83d56b
+status: experimental
+description: Detects simulator telemetry for Inhibit System Recovery scale variant
+  3793.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1490
+    apt_sim.variant: attack_scale_variant_3793
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1490/
+tags:
+- attack.t1490

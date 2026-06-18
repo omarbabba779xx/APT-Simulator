@@ -1,0 +1,21 @@
+title: Screen Capture Scale Variant 1590 Marker
+id: 620aa9e4-6b80-50c4-8db4-ed35d2804eef
+status: experimental
+description: Detects simulator telemetry for Screen Capture scale variant 1590.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1113
+    apt_sim.variant: attack_scale_variant_1590
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1113/
+tags:
+- attack.t1113

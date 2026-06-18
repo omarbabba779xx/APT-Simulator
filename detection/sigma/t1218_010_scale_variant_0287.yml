@@ -1,0 +1,21 @@
+title: Regsvr32 Scale Variant 0287 Marker
+id: 2b3bb522-ec8a-5318-9116-5b2fb484bf13
+status: experimental
+description: Detects simulator telemetry for Regsvr32 scale variant 0287.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.010
+    apt_sim.variant: attack_scale_variant_0287
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/010/
+tags:
+- attack.t1218.010

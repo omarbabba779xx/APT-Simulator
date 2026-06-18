@@ -1,0 +1,21 @@
+title: External Defacement Scale Variant 3100 Marker
+id: fffc21cb-7b0d-5689-9701-500af853f7ba
+status: experimental
+description: Detects simulator telemetry for External Defacement scale variant 3100.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.002
+    apt_sim.variant: attack_scale_variant_3100
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/002/
+tags:
+- attack.t1491.002

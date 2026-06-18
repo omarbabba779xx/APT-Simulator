@@ -1,0 +1,21 @@
+title: User Execution Scale Variant 1646 Marker
+id: a962a0ba-f3c0-51c0-b070-21df8ca63d83
+status: experimental
+description: Detects simulator telemetry for User Execution scale variant 1646.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204
+    apt_sim.variant: attack_scale_variant_1646
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/
+tags:
+- attack.t1204

@@ -1,0 +1,22 @@
+title: Exfiltration Over Web Service Scale Variant 3281 Marker
+id: 552d80e7-25bf-5e69-b6af-e4e5bf1d5258
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Web Service scale variant
+  3281.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567
+    apt_sim.variant: attack_scale_variant_3281
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/
+tags:
+- attack.t1567

@@ -1,0 +1,22 @@
+title: Remote Service Session Hijacking Scale Variant 3950 Marker
+id: 36129611-5123-59d9-9326-5c64d0358340
+status: experimental
+description: Detects simulator telemetry for Remote Service Session Hijacking scale
+  variant 3950.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563
+    apt_sim.variant: attack_scale_variant_3950
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/
+tags:
+- attack.t1563

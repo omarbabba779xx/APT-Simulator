@@ -1,0 +1,22 @@
+title: Bidirectional Communication Scale Variant 3666 Marker
+id: ef7ffb5d-c464-57f8-9bfe-f21fdfde49b3
+status: experimental
+description: Detects simulator telemetry for Bidirectional Communication scale variant
+  3666.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102.002
+    apt_sim.variant: attack_scale_variant_3666
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/002/
+tags:
+- attack.t1102.002

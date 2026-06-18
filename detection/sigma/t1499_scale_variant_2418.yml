@@ -1,0 +1,22 @@
+title: Endpoint Denial of Service Scale Variant 2418 Marker
+id: f85d05b8-a811-51f0-883e-99e3094f2460
+status: experimental
+description: Detects simulator telemetry for Endpoint Denial of Service scale variant
+  2418.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499
+    apt_sim.variant: attack_scale_variant_2418
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/
+tags:
+- attack.t1499

@@ -1,0 +1,22 @@
+title: Security Support Provider Scale Variant 2480 Marker
+id: 0bd8841c-614d-5da9-a0b1-5737ba5328ef
+status: experimental
+description: Detects simulator telemetry for Security Support Provider scale variant
+  2480.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.005
+    apt_sim.variant: attack_scale_variant_2480
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/005/
+tags:
+- attack.t1547.005

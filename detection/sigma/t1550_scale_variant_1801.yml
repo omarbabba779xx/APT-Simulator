@@ -1,0 +1,22 @@
+title: Use Alternate Authentication Material Scale Variant 1801 Marker
+id: 9abb578a-7fad-5efb-aca9-b93a55aefbe1
+status: experimental
+description: Detects simulator telemetry for Use Alternate Authentication Material
+  scale variant 1801.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550
+    apt_sim.variant: attack_scale_variant_1801
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/
+tags:
+- attack.t1550

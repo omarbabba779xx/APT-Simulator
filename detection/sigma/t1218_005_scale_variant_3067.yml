@@ -1,0 +1,21 @@
+title: Mshta Scale Variant 3067 Marker
+id: 8a7fc2e1-939c-5448-88d3-e15d1e0e29cf
+status: experimental
+description: Detects simulator telemetry for Mshta scale variant 3067.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.005
+    apt_sim.variant: attack_scale_variant_3067
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/005/
+tags:
+- attack.t1218.005

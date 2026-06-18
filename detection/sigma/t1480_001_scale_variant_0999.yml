@@ -1,0 +1,21 @@
+title: Environmental Keying Scale Variant 0999 Marker
+id: 887ac97e-8e84-5aa2-8964-a2a044856b96
+status: experimental
+description: Detects simulator telemetry for Environmental Keying scale variant 0999.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.001
+    apt_sim.variant: attack_scale_variant_0999
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/001/
+tags:
+- attack.t1480.001

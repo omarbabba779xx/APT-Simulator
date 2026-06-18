@@ -1,0 +1,21 @@
+title: Build Image on Host Scale Variant 2034 Marker
+id: e0d5cfbb-e4a1-5415-b725-5d15fa76a7dd
+status: experimental
+description: Detects simulator telemetry for Build Image on Host scale variant 2034.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1612
+    apt_sim.variant: attack_scale_variant_2034
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1612/
+tags:
+- attack.t1612

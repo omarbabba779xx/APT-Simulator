@@ -1,0 +1,21 @@
+title: Port Monitors Scale Variant 3877 Marker
+id: 47be2fb9-0936-5de4-b9dd-d2084399b9d0
+status: experimental
+description: Detects simulator telemetry for Port Monitors scale variant 3877.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.010
+    apt_sim.variant: attack_scale_variant_3877
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/010/
+tags:
+- attack.t1547.010

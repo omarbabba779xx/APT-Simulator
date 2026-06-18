@@ -1,0 +1,21 @@
+title: Safe Mode Boot Scale Variant 2782 Marker
+id: f3751069-304a-5f87-a5f3-292e0021576c
+status: experimental
+description: Detects simulator telemetry for Safe Mode Boot scale variant 2782.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1688
+    apt_sim.variant: attack_scale_variant_2782
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1688/
+tags:
+- attack.t1688

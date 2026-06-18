@@ -1,0 +1,21 @@
+title: Multi-Stage Channels Scale Variant 1580 Marker
+id: f2b194d2-90e1-55e9-92e7-79c201559468
+status: experimental
+description: Detects simulator telemetry for Multi-Stage Channels scale variant 1580.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1104
+    apt_sim.variant: attack_scale_variant_1580
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1104/
+tags:
+- attack.t1104

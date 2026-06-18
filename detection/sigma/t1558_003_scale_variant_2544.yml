@@ -1,0 +1,21 @@
+title: Kerberoasting Scale Variant 2544 Marker
+id: fdb6ea48-35e8-5c76-8618-bf34817bb73d
+status: experimental
+description: Detects simulator telemetry for Kerberoasting scale variant 2544.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.003
+    apt_sim.variant: attack_scale_variant_2544
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/003/
+tags:
+- attack.t1558.003

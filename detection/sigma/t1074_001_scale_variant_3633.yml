@@ -1,0 +1,21 @@
+title: Local Data Staging Scale Variant 3633 Marker
+id: c2dead69-0636-5ce7-a62a-3193aba34003
+status: experimental
+description: Detects simulator telemetry for Local Data Staging scale variant 3633.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1074.001
+    apt_sim.variant: attack_scale_variant_3633
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1074/001/
+tags:
+- attack.t1074.001

@@ -1,0 +1,21 @@
+title: LSASS Driver Scale Variant 3179 Marker
+id: ed11c5b5-4e1a-5576-8b87-7f30b048f384
+status: experimental
+description: Detects simulator telemetry for LSASS Driver scale variant 3179.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.008
+    apt_sim.variant: attack_scale_variant_3179
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/008/
+tags:
+- attack.t1547.008

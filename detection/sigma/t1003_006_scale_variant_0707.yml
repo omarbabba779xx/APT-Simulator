@@ -1,0 +1,21 @@
+title: DCSync Scale Variant 0707 Marker
+id: db4bcae8-79fb-5976-8dc3-a6b3b7b1f003
+status: experimental
+description: Detects simulator telemetry for DCSync scale variant 0707.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1003.006
+    apt_sim.variant: attack_scale_variant_0707
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1003/006/
+tags:
+- attack.t1003.006

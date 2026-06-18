@@ -1,0 +1,21 @@
+title: Compression Scale Variant 1446 Marker
+id: 6ae95ef0-11cd-56d7-b67f-ffd5c33942b7
+status: experimental
+description: Detects simulator telemetry for Compression scale variant 1446.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.015
+    apt_sim.variant: attack_scale_variant_1446
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/015/
+tags:
+- attack.t1027.015

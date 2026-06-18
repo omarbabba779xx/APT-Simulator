@@ -1,0 +1,22 @@
+title: Re-opened Applications Scale Variant 1090 Marker
+id: 6272ba18-82da-53af-aa5b-59e51484d3ed
+status: experimental
+description: Detects simulator telemetry for Re-opened Applications scale variant
+  1090.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.007
+    apt_sim.variant: attack_scale_variant_1090
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/007/
+tags:
+- attack.t1547.007

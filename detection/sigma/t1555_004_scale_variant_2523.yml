@@ -1,0 +1,22 @@
+title: Windows Credential Manager Scale Variant 2523 Marker
+id: 013ede33-8ce3-5057-a142-0a0425e6d0e3
+status: experimental
+description: Detects simulator telemetry for Windows Credential Manager scale variant
+  2523.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.004
+    apt_sim.variant: attack_scale_variant_2523
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/004/
+tags:
+- attack.t1555.004

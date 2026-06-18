@@ -1,0 +1,22 @@
+title: Modify Cloud Compute Configurations Scale Variant 0534 Marker
+id: 8d473498-f116-55f8-9795-2710a392397a
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Compute Configurations scale
+  variant 0534.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.005
+    apt_sim.variant: attack_scale_variant_0534
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/005/
+tags:
+- attack.t1578.005

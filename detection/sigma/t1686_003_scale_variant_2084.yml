@@ -1,0 +1,21 @@
+title: Windows Host Firewall Scale Variant 2084 Marker
+id: 971d40b5-ea89-58e1-b914-e5e93fb4b67d
+status: experimental
+description: Detects simulator telemetry for Windows Host Firewall scale variant 2084.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.003
+    apt_sim.variant: attack_scale_variant_2084
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/003/
+tags:
+- attack.t1686.003

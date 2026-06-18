@@ -1,0 +1,21 @@
+title: Client Configurations Scale Variant 1986 Marker
+id: 7a53c42b-4b38-5b74-947b-5f29c7bdb553
+status: experimental
+description: Detects simulator telemetry for Client Configurations scale variant 1986.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.004
+    apt_sim.variant: attack_scale_variant_1986
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/004/
+tags:
+- attack.t1592.004

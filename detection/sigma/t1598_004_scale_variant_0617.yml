@@ -1,0 +1,21 @@
+title: Spearphishing Voice Scale Variant 0617 Marker
+id: d273e92e-c0a7-5e05-bdf6-d215f10f2fb1
+status: experimental
+description: Detects simulator telemetry for Spearphishing Voice scale variant 0617.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.004
+    apt_sim.variant: attack_scale_variant_0617
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/004/
+tags:
+- attack.t1598.004

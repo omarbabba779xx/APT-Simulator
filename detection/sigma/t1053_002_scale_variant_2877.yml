@@ -1,0 +1,21 @@
+title: At Scale Variant 2877 Marker
+id: 21c099c0-dca1-5405-8261-ab7717cdb715
+status: experimental
+description: Detects simulator telemetry for At scale variant 2877.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.002
+    apt_sim.variant: attack_scale_variant_2877
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/002/
+tags:
+- attack.t1053.002

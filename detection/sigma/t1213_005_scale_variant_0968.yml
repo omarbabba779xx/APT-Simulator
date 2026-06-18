@@ -1,0 +1,22 @@
+title: Messaging Applications Scale Variant 0968 Marker
+id: 73ce9225-81c1-537a-b615-b8e68d41d115
+status: experimental
+description: Detects simulator telemetry for Messaging Applications scale variant
+  0968.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.005
+    apt_sim.variant: attack_scale_variant_0968
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/005/
+tags:
+- attack.t1213.005

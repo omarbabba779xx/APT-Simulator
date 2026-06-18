@@ -1,0 +1,22 @@
+title: System Network Configuration Discovery Scale Variant 0023 Marker
+id: 184a4b5b-f041-5f15-a969-bb626235e39b
+status: experimental
+description: Detects simulator telemetry for System Network Configuration Discovery
+  scale variant 0023.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016
+    apt_sim.variant: attack_scale_variant_0023
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/
+tags:
+- attack.t1016

@@ -1,0 +1,22 @@
+title: System Information Discovery Scale Variant 0161 Marker
+id: 2309569f-b250-57bf-a254-4614ea6c65e4
+status: experimental
+description: Detects simulator telemetry for System Information Discovery scale variant
+  0161.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1082
+    apt_sim.variant: attack_scale_variant_0161
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1082/
+tags:
+- attack.t1082

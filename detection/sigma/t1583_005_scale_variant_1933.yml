@@ -1,0 +1,21 @@
+title: Botnet Scale Variant 1933 Marker
+id: 9d587d9c-5dee-53cd-aa7e-9e1bcfece0e9
+status: experimental
+description: Detects simulator telemetry for Botnet scale variant 1933.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.005
+    apt_sim.variant: attack_scale_variant_1933
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/005/
+tags:
+- attack.t1583.005

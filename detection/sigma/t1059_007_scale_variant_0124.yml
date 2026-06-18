@@ -1,0 +1,21 @@
+title: JavaScript Scale Variant 0124 Marker
+id: 69bbd775-b157-5c5a-9226-2a12b402bb04
+status: experimental
+description: Detects simulator telemetry for JavaScript scale variant 0124.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.007
+    apt_sim.variant: attack_scale_variant_0124
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/007/
+tags:
+- attack.t1059.007

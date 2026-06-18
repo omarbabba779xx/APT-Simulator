@@ -1,0 +1,22 @@
+title: Compile After Delivery Scale Variant 1435 Marker
+id: 1a50e884-99b1-5811-accc-ca80cebed372
+status: experimental
+description: Detects simulator telemetry for Compile After Delivery scale variant
+  1435.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.004
+    apt_sim.variant: attack_scale_variant_1435
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/004/
+tags:
+- attack.t1027.004

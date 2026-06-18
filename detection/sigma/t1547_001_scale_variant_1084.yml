@@ -1,0 +1,22 @@
+title: Registry Run Keys / Startup Folder Scale Variant 1084 Marker
+id: 2499f630-f297-5ca5-80f5-4e0e4a2da735
+status: experimental
+description: Detects simulator telemetry for Registry Run Keys / Startup Folder scale
+  variant 1084.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.001
+    apt_sim.variant: attack_scale_variant_1084
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/001/
+tags:
+- attack.t1547.001

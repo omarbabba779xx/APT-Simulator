@@ -1,0 +1,22 @@
+title: Services Registry Permissions Weakness Scale Variant 0525 Marker
+id: da6f7a8e-5a20-596c-9fc9-c203c3ee0b84
+status: experimental
+description: Detects simulator telemetry for Services Registry Permissions Weakness
+  scale variant 0525.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.011
+    apt_sim.variant: attack_scale_variant_0525
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/011/
+tags:
+- attack.t1574.011

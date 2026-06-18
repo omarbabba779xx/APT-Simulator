@@ -1,0 +1,22 @@
+title: Network Share Discovery Scale Variant 1616 Marker
+id: 64df490d-9d8f-5dfa-bbee-6017af5234fe
+status: experimental
+description: Detects simulator telemetry for Network Share Discovery scale variant
+  1616.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1135
+    apt_sim.variant: attack_scale_variant_1616
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1135/
+tags:
+- attack.t1135

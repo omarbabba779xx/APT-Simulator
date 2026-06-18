@@ -1,0 +1,21 @@
+title: Hidden Users Scale Variant 0475 Marker
+id: 59a64285-9c18-5b3c-9e5e-634f651ed12b
+status: experimental
+description: Detects simulator telemetry for Hidden Users scale variant 0475.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.002
+    apt_sim.variant: attack_scale_variant_0475
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/002/
+tags:
+- attack.t1564.002

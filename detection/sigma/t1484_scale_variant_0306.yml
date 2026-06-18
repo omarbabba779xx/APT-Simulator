@@ -1,0 +1,22 @@
+title: Domain or Tenant Policy Modification Scale Variant 0306 Marker
+id: 97344e35-fdfc-5da1-9c51-987deedc0cb5
+status: experimental
+description: Detects simulator telemetry for Domain or Tenant Policy Modification
+  scale variant 0306.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484
+    apt_sim.variant: attack_scale_variant_0306
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/
+tags:
+- attack.t1484

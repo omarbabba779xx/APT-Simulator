@@ -1,0 +1,22 @@
+title: Domain or Tenant Policy Modification Scale Variant 1002 Marker
+id: 2ecae711-8ba1-54ac-95db-d2f6ebed4e3a
+status: experimental
+description: Detects simulator telemetry for Domain or Tenant Policy Modification
+  scale variant 1002.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484
+    apt_sim.variant: attack_scale_variant_1002
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/
+tags:
+- attack.t1484

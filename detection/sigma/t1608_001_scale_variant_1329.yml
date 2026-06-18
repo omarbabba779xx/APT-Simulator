@@ -1,0 +1,21 @@
+title: Upload Malware Scale Variant 1329 Marker
+id: 7a7d53c5-b98b-58ce-9a1e-f7aa49cd1da6
+status: experimental
+description: Detects simulator telemetry for Upload Malware scale variant 1329.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.001
+    apt_sim.variant: attack_scale_variant_1329
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/001/
+tags:
+- attack.t1608.001

@@ -1,0 +1,21 @@
+title: Domains Scale Variant 1938 Marker
+id: b8d31978-eb70-5097-be36-51513d713224
+status: experimental
+description: Detects simulator telemetry for Domains scale variant 1938.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.001
+    apt_sim.variant: attack_scale_variant_1938
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/001/
+tags:
+- attack.t1584.001

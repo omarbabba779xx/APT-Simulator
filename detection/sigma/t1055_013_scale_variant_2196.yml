@@ -1,0 +1,22 @@
+title: "Process Doppelg\xE4nging Scale Variant 2196 Marker"
+id: dab48ed8-0eef-56ff-aaae-2a53c36ef322
+status: experimental
+description: "Detects simulator telemetry for Process Doppelg\xE4nging scale variant\
+  \ 2196."
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.013
+    apt_sim.variant: attack_scale_variant_2196
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/013/
+tags:
+- attack.t1055.013

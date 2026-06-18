@@ -1,0 +1,21 @@
+title: Taint Shared Content Scale Variant 2248 Marker
+id: ad37dd1c-ba70-53d2-86bc-03167bf3d8bb
+status: experimental
+description: Detects simulator telemetry for Taint Shared Content scale variant 2248.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1080
+    apt_sim.variant: attack_scale_variant_2248
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1080/
+tags:
+- attack.t1080

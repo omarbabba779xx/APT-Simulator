@@ -1,0 +1,22 @@
+title: Supply Chain Compromise Scale Variant 1636 Marker
+id: f809c7ca-6b80-5800-9744-05f8a805fdf8
+status: experimental
+description: Detects simulator telemetry for Supply Chain Compromise scale variant
+  1636.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195
+    apt_sim.variant: attack_scale_variant_1636
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/
+tags:
+- attack.t1195

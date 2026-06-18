@@ -1,0 +1,22 @@
+title: System Service Discovery Scale Variant 2104 Marker
+id: 5b12728c-ce97-5807-a0fb-1876a447b6c3
+status: experimental
+description: Detects simulator telemetry for System Service Discovery scale variant
+  2104.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1007
+    apt_sim.variant: attack_scale_variant_2104
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1007/
+tags:
+- attack.t1007

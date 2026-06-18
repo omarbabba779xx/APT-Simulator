@@ -1,0 +1,22 @@
+title: Component Object Model Hijacking Scale Variant 3167 Marker
+id: 16768476-81af-5269-9bf7-0154fd6fbaa9
+status: experimental
+description: Detects simulator telemetry for Component Object Model Hijacking scale
+  variant 3167.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.015
+    apt_sim.variant: attack_scale_variant_3167
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/015/
+tags:
+- attack.t1546.015

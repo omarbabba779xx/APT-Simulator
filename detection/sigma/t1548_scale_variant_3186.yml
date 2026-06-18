@@ -1,0 +1,22 @@
+title: Abuse Elevation Control Mechanism Scale Variant 3186 Marker
+id: 758fb472-96dc-550f-b62f-395869c230e1
+status: experimental
+description: Detects simulator telemetry for Abuse Elevation Control Mechanism scale
+  variant 3186.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548
+    apt_sim.variant: attack_scale_variant_3186
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/
+tags:
+- attack.t1548

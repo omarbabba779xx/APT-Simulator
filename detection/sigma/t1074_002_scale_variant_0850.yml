@@ -1,0 +1,21 @@
+title: Remote Data Staging Scale Variant 0850 Marker
+id: 8296d4ac-5212-5bed-9012-30b86ab20248
+status: experimental
+description: Detects simulator telemetry for Remote Data Staging scale variant 0850.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1074.002
+    apt_sim.variant: attack_scale_variant_0850
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1074/002/
+tags:
+- attack.t1074.002

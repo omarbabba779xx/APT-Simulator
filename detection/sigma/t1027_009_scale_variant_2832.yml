@@ -1,0 +1,21 @@
+title: Embedded Payloads Scale Variant 2832 Marker
+id: 38741cea-82af-5631-9477-d635045558ee
+status: experimental
+description: Detects simulator telemetry for Embedded Payloads scale variant 2832.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.009
+    apt_sim.variant: attack_scale_variant_2832
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/009/
+tags:
+- attack.t1027.009

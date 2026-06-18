@@ -1,0 +1,21 @@
+title: Cloud Accounts Scale Variant 2649 Marker
+id: 01c9204f-390e-58a4-acfe-da9b4887ecde
+status: experimental
+description: Detects simulator telemetry for Cloud Accounts scale variant 2649.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1586.003
+    apt_sim.variant: attack_scale_variant_2649
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1586/003/
+tags:
+- attack.t1586.003

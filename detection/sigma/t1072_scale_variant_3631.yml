@@ -1,0 +1,22 @@
+title: Software Deployment Tools Scale Variant 3631 Marker
+id: 1c17e04e-04e0-5a3f-9381-3bac1bf62d3a
+status: experimental
+description: Detects simulator telemetry for Software Deployment Tools scale variant
+  3631.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1072
+    apt_sim.variant: attack_scale_variant_3631
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1072/
+tags:
+- attack.t1072

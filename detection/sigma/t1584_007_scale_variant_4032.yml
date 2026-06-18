@@ -1,0 +1,21 @@
+title: Serverless Scale Variant 4032 Marker
+id: aa998257-aefc-5992-a776-e839068d9024
+status: experimental
+description: Detects simulator telemetry for Serverless scale variant 4032.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.007
+    apt_sim.variant: attack_scale_variant_4032
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/007/
+tags:
+- attack.t1584.007

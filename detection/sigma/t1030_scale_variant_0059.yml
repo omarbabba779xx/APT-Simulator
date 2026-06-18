@@ -1,0 +1,22 @@
+title: Data Transfer Size Limits Scale Variant 0059 Marker
+id: a9f75888-1e9e-5cd4-84a6-9a0f8db1f341
+status: experimental
+description: Detects simulator telemetry for Data Transfer Size Limits scale variant
+  0059.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1030
+    apt_sim.variant: attack_scale_variant_0059
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1030/
+tags:
+- attack.t1030

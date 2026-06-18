@@ -1,0 +1,21 @@
+title: AppInit DLLs Scale Variant 2466 Marker
+id: 86da4c92-0ed0-5b11-b3ad-bb224704c198
+status: experimental
+description: Detects simulator telemetry for AppInit DLLs scale variant 2466.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.010
+    apt_sim.variant: attack_scale_variant_2466
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/010/
+tags:
+- attack.t1546.010

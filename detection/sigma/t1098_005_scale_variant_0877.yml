@@ -1,0 +1,21 @@
+title: Device Registration Scale Variant 0877 Marker
+id: 739b0f67-1232-5c77-92a1-f29ccc7b7d0c
+status: experimental
+description: Detects simulator telemetry for Device Registration scale variant 0877.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.005
+    apt_sim.variant: attack_scale_variant_0877
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/005/
+tags:
+- attack.t1098.005

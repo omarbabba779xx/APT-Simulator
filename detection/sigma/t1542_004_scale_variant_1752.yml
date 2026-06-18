@@ -1,0 +1,21 @@
+title: ROMMONkit Scale Variant 1752 Marker
+id: c92a630c-c974-56b9-b3b8-0d134d69c499
+status: experimental
+description: Detects simulator telemetry for ROMMONkit scale variant 1752.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.004
+    apt_sim.variant: attack_scale_variant_1752
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/004/
+tags:
+- attack.t1542.004

@@ -1,0 +1,22 @@
+title: Plist File Modification Scale Variant 1347 Marker
+id: 1be06fd7-f485-5e60-b80e-a298cf38936a
+status: experimental
+description: Detects simulator telemetry for Plist File Modification scale variant
+  1347.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1647
+    apt_sim.variant: attack_scale_variant_1347
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1647/
+tags:
+- attack.t1647

@@ -1,0 +1,22 @@
+title: Steal or Forge Kerberos Tickets Scale Variant 0453 Marker
+id: ea9fc55f-cf1a-50ce-aa54-eea5374b8e9a
+status: experimental
+description: Detects simulator telemetry for Steal or Forge Kerberos Tickets scale
+  variant 0453.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558
+    apt_sim.variant: attack_scale_variant_0453
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/
+tags:
+- attack.t1558

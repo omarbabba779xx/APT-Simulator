@@ -1,0 +1,21 @@
+title: Software Extensions Scale Variant 3021 Marker
+id: f688dfa2-bc65-5e47-8c4b-7aefe1afb06a
+status: experimental
+description: Detects simulator telemetry for Software Extensions scale variant 3021.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1176
+    apt_sim.variant: attack_scale_variant_3021
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1176/
+tags:
+- attack.t1176

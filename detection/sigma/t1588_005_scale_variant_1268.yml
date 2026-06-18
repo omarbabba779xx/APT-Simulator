@@ -1,0 +1,21 @@
+title: Exploits Scale Variant 1268 Marker
+id: 15cfa94b-e1b7-55b0-bf0c-66ad20988ef8
+status: experimental
+description: Detects simulator telemetry for Exploits scale variant 1268.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.005
+    apt_sim.variant: attack_scale_variant_1268
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/005/
+tags:
+- attack.t1588.005

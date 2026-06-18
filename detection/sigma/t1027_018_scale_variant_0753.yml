@@ -1,0 +1,21 @@
+title: Invisible Unicode Scale Variant 0753 Marker
+id: 6fb95494-8538-52bb-9fed-8320af34e0e1
+status: experimental
+description: Detects simulator telemetry for Invisible Unicode scale variant 0753.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.018
+    apt_sim.variant: attack_scale_variant_0753
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/018/
+tags:
+- attack.t1027.018

@@ -1,0 +1,21 @@
+title: Python Scale Variant 1515 Marker
+id: 7df8a197-d337-5859-acf7-7b63f1272970
+status: experimental
+description: Detects simulator telemetry for Python scale variant 1515.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.006
+    apt_sim.variant: attack_scale_variant_1515
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/006/
+tags:
+- attack.t1059.006

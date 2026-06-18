@@ -1,0 +1,21 @@
+title: Service Execution Scale Variant 3292 Marker
+id: 84d38095-6b86-5b8c-af70-220d35160b7f
+status: experimental
+description: Detects simulator telemetry for Service Execution scale variant 3292.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569.002
+    apt_sim.variant: attack_scale_variant_3292
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/002/
+tags:
+- attack.t1569.002

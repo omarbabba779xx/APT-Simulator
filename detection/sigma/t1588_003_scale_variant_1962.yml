@@ -1,0 +1,22 @@
+title: Code Signing Certificates Scale Variant 1962 Marker
+id: 31ac21f7-d7a1-5d65-9036-a76938fe1ee6
+status: experimental
+description: Detects simulator telemetry for Code Signing Certificates scale variant
+  1962.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.003
+    apt_sim.variant: attack_scale_variant_1962
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/003/
+tags:
+- attack.t1588.003

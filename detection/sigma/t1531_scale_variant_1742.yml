@@ -1,0 +1,22 @@
+title: Account Access Removal Scale Variant 1742 Marker
+id: f1c317d7-a313-5955-837f-d5e6e3b359bb
+status: experimental
+description: Detects simulator telemetry for Account Access Removal scale variant
+  1742.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1531
+    apt_sim.variant: attack_scale_variant_1742
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

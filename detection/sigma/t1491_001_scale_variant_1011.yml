@@ -1,0 +1,21 @@
+title: Internal Defacement Scale Variant 1011 Marker
+id: 4ccabe63-d174-5d0d-8cc0-b7c1552cdd28
+status: experimental
+description: Detects simulator telemetry for Internal Defacement scale variant 1011.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.001
+    apt_sim.variant: attack_scale_variant_1011
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/001/
+tags:
+- attack.t1491.001

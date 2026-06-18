@@ -1,0 +1,22 @@
+title: Poisoned Pipeline Execution Scale Variant 1366 Marker
+id: a4e9a4c5-a895-51dd-9cd2-7a4843d29bd6
+status: experimental
+description: Detects simulator telemetry for Poisoned Pipeline Execution scale variant
+  1366.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1677
+    apt_sim.variant: attack_scale_variant_1366
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1677/
+tags:
+- attack.t1677

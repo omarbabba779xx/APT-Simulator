@@ -1,0 +1,21 @@
+title: MSBuild Scale Variant 2994 Marker
+id: 41d51281-de5a-5c79-8599-10561cff8c76
+status: experimental
+description: Detects simulator telemetry for MSBuild scale variant 2994.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.001
+    apt_sim.variant: attack_scale_variant_2994
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/001/
+tags:
+- attack.t1127.001

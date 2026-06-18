@@ -1,0 +1,21 @@
+title: Drive-by Compromise Scale Variant 1634 Marker
+id: cafb0980-457e-5d05-86e5-e5b056d7b78c
+status: experimental
+description: Detects simulator telemetry for Drive-by Compromise scale variant 1634.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1189
+    apt_sim.variant: attack_scale_variant_1634
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1189/
+tags:
+- attack.t1189

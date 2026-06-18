@@ -1,0 +1,22 @@
+title: System Language Discovery Scale Variant 4125 Marker
+id: 938a1dc9-7bdf-531f-bb8a-6039e51326ef
+status: experimental
+description: Detects simulator telemetry for System Language Discovery scale variant
+  4125.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1614.001
+    apt_sim.variant: attack_scale_variant_4125
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1614/001/
+tags:
+- attack.t1614.001

@@ -1,0 +1,21 @@
+title: Odbcconf Scale Variant 3765 Marker
+id: 390f1d8f-795f-5f13-8176-397ffaed7dfc
+status: experimental
+description: Detects simulator telemetry for Odbcconf scale variant 3765.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.008
+    apt_sim.variant: attack_scale_variant_3765
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/008/
+tags:
+- attack.t1218.008

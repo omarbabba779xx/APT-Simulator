@@ -1,0 +1,22 @@
+title: Vulnerability Scanning Scale Variant 2690 Marker
+id: 2afd9d9f-8fd0-5f76-869a-11c72be8f8c4
+status: experimental
+description: Detects simulator telemetry for Vulnerability Scanning scale variant
+  2690.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.002
+    apt_sim.variant: attack_scale_variant_2690
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/002/
+tags:
+- attack.t1595.002

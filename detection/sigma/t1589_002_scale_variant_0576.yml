@@ -1,0 +1,21 @@
+title: Email Addresses Scale Variant 0576 Marker
+id: afb76fce-f177-51e6-b91b-39f1b0389d0b
+status: experimental
+description: Detects simulator telemetry for Email Addresses scale variant 0576.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.002
+    apt_sim.variant: attack_scale_variant_0576
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/002/
+tags:
+- attack.t1589.002

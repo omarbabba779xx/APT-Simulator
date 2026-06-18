@@ -1,0 +1,22 @@
+title: Event Triggered Execution Scale Variant 1064 Marker
+id: a9b71928-30f7-5824-8017-571393c91e28
+status: experimental
+description: Detects simulator telemetry for Event Triggered Execution scale variant
+  1064.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546
+    apt_sim.variant: attack_scale_variant_1064
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/
+tags:
+- attack.t1546

@@ -1,0 +1,22 @@
+title: Compromise Host Software Binary Scale Variant 1126 Marker
+id: ea2a28e2-5613-5b13-9572-0cdff6f046b2
+status: experimental
+description: Detects simulator telemetry for Compromise Host Software Binary scale
+  variant 1126.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1554
+    apt_sim.variant: attack_scale_variant_1126
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1554/
+tags:
+- attack.t1554

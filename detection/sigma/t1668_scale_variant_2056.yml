@@ -1,0 +1,21 @@
+title: Exclusive Control Scale Variant 2056 Marker
+id: 18fbf091-5c2b-545e-90f1-73fbb6420cef
+status: experimental
+description: Detects simulator telemetry for Exclusive Control scale variant 2056.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1668
+    apt_sim.variant: attack_scale_variant_2056
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1668/
+tags:
+- attack.t1668

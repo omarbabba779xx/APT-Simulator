@@ -1,0 +1,21 @@
+title: Unsecured Credentials Scale Variant 3198 Marker
+id: bbbe97c7-60cb-5244-a009-1c573ab17565
+status: experimental
+description: Detects simulator telemetry for Unsecured Credentials scale variant 3198.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552
+    apt_sim.variant: attack_scale_variant_3198
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/
+tags:
+- attack.t1552

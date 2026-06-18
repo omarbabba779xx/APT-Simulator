@@ -1,0 +1,21 @@
+title: Software Discovery Scale Variant 1734 Marker
+id: 9eaf6949-3138-5606-8b92-6e3849d00e39
+status: experimental
+description: Detects simulator telemetry for Software Discovery scale variant 1734.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518
+    apt_sim.variant: attack_scale_variant_1734
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/
+tags:
+- attack.t1518

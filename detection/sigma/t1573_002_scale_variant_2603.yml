@@ -1,0 +1,22 @@
+title: Asymmetric Cryptography Scale Variant 2603 Marker
+id: 2db8c5b9-827f-5768-912e-18832bfaa56d
+status: experimental
+description: Detects simulator telemetry for Asymmetric Cryptography scale variant
+  2603.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1573.002
+    apt_sim.variant: attack_scale_variant_2603
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1573/002/
+tags:
+- attack.t1573.002

@@ -1,0 +1,22 @@
+title: Cloud Application Integration Scale Variant 1362 Marker
+id: e56b54d9-6950-5a33-afd3-23202931a7bc
+status: experimental
+description: Detects simulator telemetry for Cloud Application Integration scale variant
+  1362.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1671
+    apt_sim.variant: attack_scale_variant_1362
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1671/
+tags:
+- attack.t1671

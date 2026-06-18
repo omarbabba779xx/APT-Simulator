@@ -1,0 +1,21 @@
+title: File/Path Exclusions Scale Variant 2573 Marker
+id: e39bff9f-5f0e-5c4b-8cb6-f9afb1795309
+status: experimental
+description: Detects simulator telemetry for File/Path Exclusions scale variant 2573.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.012
+    apt_sim.variant: attack_scale_variant_2573
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/012/
+tags:
+- attack.t1564.012

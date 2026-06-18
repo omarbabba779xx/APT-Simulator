@@ -1,0 +1,22 @@
+title: Stored Data Manipulation Scale Variant 3273 Marker
+id: 480e426a-e4e3-57b5-ab43-24eab0e04f3c
+status: experimental
+description: Detects simulator telemetry for Stored Data Manipulation scale variant
+  3273.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.001
+    apt_sim.variant: attack_scale_variant_3273
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/001/
+tags:
+- attack.t1565.001

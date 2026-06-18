@@ -1,0 +1,21 @@
+title: System Checks Scale Variant 2412 Marker
+id: 3a4d9cae-f3d3-568f-8cad-3da867d6c94b
+status: experimental
+description: Detects simulator telemetry for System Checks scale variant 2412.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.001
+    apt_sim.variant: attack_scale_variant_2412
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/001/
+tags:
+- attack.t1497.001

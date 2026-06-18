@@ -1,0 +1,21 @@
+title: Web Services Scale Variant 2639 Marker
+id: e60ce0da-9b28-5687-a9b9-e3a07f712250
+status: experimental
+description: Detects simulator telemetry for Web Services scale variant 2639.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.006
+    apt_sim.variant: attack_scale_variant_2639
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/006/
+tags:
+- attack.t1584.006

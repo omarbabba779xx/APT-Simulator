@@ -1,0 +1,22 @@
+title: Group Policy Modification Scale Variant 1003 Marker
+id: 1a6ff04f-f499-57ee-b9a5-4d77d45491bd
+status: experimental
+description: Detects simulator telemetry for Group Policy Modification scale variant
+  1003.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484.001
+    apt_sim.variant: attack_scale_variant_1003
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/001/
+tags:
+- attack.t1484.001

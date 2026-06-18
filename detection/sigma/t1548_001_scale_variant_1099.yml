@@ -1,0 +1,21 @@
+title: Setuid and Setgid Scale Variant 1099 Marker
+id: 72405c08-194e-548e-9856-60c427d6ea19
+status: experimental
+description: Detects simulator telemetry for Setuid and Setgid scale variant 1099.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.001
+    apt_sim.variant: attack_scale_variant_1099
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/001/
+tags:
+- attack.t1548.001

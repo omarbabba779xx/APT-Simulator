@@ -1,0 +1,22 @@
+title: Search Open Websites/Domains Scale Variant 3379 Marker
+id: 485bddcd-4664-52ce-bb0a-9fc59143341b
+status: experimental
+description: Detects simulator telemetry for Search Open Websites/Domains scale variant
+  3379.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593
+    apt_sim.variant: attack_scale_variant_3379
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/
+tags:
+- attack.t1593

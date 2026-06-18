@@ -1,0 +1,21 @@
+title: Rootkit Scale Variant 2110 Marker
+id: 962a59ca-a9fe-5780-8906-9912251acb5c
+status: experimental
+description: Detects simulator telemetry for Rootkit scale variant 2110.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1014
+    apt_sim.variant: attack_scale_variant_2110
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1014/
+tags:
+- attack.t1014

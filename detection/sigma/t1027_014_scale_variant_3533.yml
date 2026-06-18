@@ -1,0 +1,21 @@
+title: Polymorphic Code Scale Variant 3533 Marker
+id: 35410215-dcca-58ba-a63d-ab5ff916a747
+status: experimental
+description: Detects simulator telemetry for Polymorphic Code scale variant 3533.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.014
+    apt_sim.variant: attack_scale_variant_3533
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/014/
+tags:
+- attack.t1027.014

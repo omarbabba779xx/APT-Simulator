@@ -1,0 +1,21 @@
+title: Search Closed Sources Scale Variant 3394 Marker
+id: 9bd3411f-9f2f-5eca-8a3d-1cb6fbd3c10b
+status: experimental
+description: Detects simulator telemetry for Search Closed Sources scale variant 3394.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597
+    apt_sim.variant: attack_scale_variant_3394
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/
+tags:
+- attack.t1597

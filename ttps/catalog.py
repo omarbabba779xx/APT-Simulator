@@ -10,6 +10,8 @@ import copy
 import json
 import re
 import time
+import uuid
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -47,6 +49,130 @@ def _param_defaults(schema: dict[str, Any]) -> dict[str, Any]:
         if isinstance(spec, dict) and "default" in spec:
             defaults[key] = spec["default"]
     return defaults
+
+
+def _expand_variant_generator(
+    pack: str,
+    generator: dict[str, Any],
+    base_items: list[dict[str, Any]],
+    source_file: str,
+) -> list[dict[str, Any]]:
+    """Expand a compact scale-pack declaration into marker-only catalog items."""
+    if not base_items:
+        return []
+
+    count = int(generator["count"])
+    id_prefix = str(generator.get("id_prefix", "SCALE_VARIANT"))
+    variant_slug = str(generator.get("variant_slug", "attack_scale_variant"))
+    event_dataset = str(generator.get("event_dataset", f"apt_sim.{variant_slug}"))
+    category = str(generator.get("category", variant_slug))
+    uuid_namespace = str(generator.get("uuid_namespace", f"apt-simulator:{pack}"))
+    telemetry_sources = list(generator["telemetry_sources"])
+    fidelities = list(generator["fidelities"])
+    siem_formats = list(generator["siem_formats"])
+    platform_scopes = list(generator["platform_scopes"])
+
+    items: list[dict[str, Any]] = []
+    for idx in range(1, count + 1):
+        base = base_items[(idx - 1) % len(base_items)]
+        attack_id = str(base["attack_id"]).upper()
+        technique_name = str(base["name"]).removesuffix(" Marker")
+        tactic = str(base.get("tactic", "discovery"))
+        telemetry = str(telemetry_sources[(idx - 1) % len(telemetry_sources)])
+        fidelity = str(fidelities[((idx - 1) // len(telemetry_sources)) % len(fidelities)])
+        siem = str(
+            siem_formats[
+                ((idx - 1) // (len(telemetry_sources) * len(fidelities))) % len(siem_formats)
+            ]
+        )
+        scope = str(
+            platform_scopes[
+                (
+                    (idx - 1)
+                    // (len(telemetry_sources) * len(fidelities) * len(siem_formats))
+                )
+                % len(platform_scopes)
+            ]
+        )
+        variant = f"{variant_slug}_{idx:04d}"
+        catalog_id = f"{attack_id}:{id_prefix}_{idx:04d}"
+        title = f"{technique_name} Scale Variant {idx:04d} Marker"
+        items.append(
+            {
+                "id": catalog_id,
+                "attack_id": attack_id,
+                "pack": pack,
+                "name": title,
+                "description": (
+                    f"Marker-only ATT&CK scale variant for {technique_name}; emits "
+                    f"deterministic {telemetry} telemetry shaped for {siem} validation "
+                    f"at {fidelity} fidelity."
+                ),
+                "tactic": tactic,
+                "platforms": list(base.get("platforms", ["windows", "linux", "darwin"])),
+                "safety_tier": "marker-only",
+                "metadata": {
+                    "telemetry_source": telemetry,
+                    "fidelity": fidelity,
+                    "siem_format": siem,
+                    "platform_scope": scope,
+                    "variant_family": pack,
+                },
+                "params_schema": {
+                    "principal": {"type": "string", "default": f"lab-user-{idx:04d}"},
+                    "asset": {"type": "string", "default": f"lab-asset-{idx:04d}"},
+                    "telemetry_source": {"type": "string", "default": telemetry},
+                    "siem_format": {"type": "string", "default": siem},
+                    "fidelity": {"type": "string", "default": fidelity},
+                },
+                "artifact": f"{variant}.json",
+                "sigma": {
+                    "title": title,
+                    "id": str(
+                        uuid.uuid5(
+                            uuid.NAMESPACE_URL,
+                            f"{uuid_namespace}:{idx}:{catalog_id}",
+                        )
+                    ),
+                    "status": "experimental",
+                    "description": (
+                        f"Detects simulator telemetry for {technique_name} "
+                        f"scale variant {idx:04d}."
+                    ),
+                    "logsource": {"product": "apt_simulator", "category": category},
+                    "detection": {
+                        "selection": {
+                            "event.dataset": event_dataset,
+                            "attack.technique.id": attack_id,
+                            "apt_sim.variant": variant,
+                            "apt_sim.telemetry_source": telemetry,
+                        },
+                        "condition": "selection",
+                    },
+                    "falsepositives": ["authorized simulator replay"],
+                    "level": "low",
+                },
+                "synthetic_events": [
+                    {
+                        "category": category,
+                        "event.dataset": event_dataset,
+                        "event.action": variant,
+                        "attack.tactic": tactic,
+                        "attack.technique.id": attack_id,
+                        "attack.technique.name": technique_name,
+                        "apt_sim.variant": variant,
+                        "apt_sim.variant_family": pack,
+                        "apt_sim.telemetry_source": "{telemetry_source}",
+                        "apt_sim.siem_format": "{siem_format}",
+                        "apt_sim.fidelity": "{fidelity}",
+                        "user.name": "{principal}",
+                        "host.name": "{asset}",
+                    }
+                ],
+                "_source_file": source_file,
+            }
+        )
+    return items
 
 
 class CatalogTTP(TTP):
@@ -152,19 +278,44 @@ class CatalogTTP(TTP):
         return events
 
 
-def load_catalog_items(catalog_dir: Path = CATALOG_DIR) -> list[dict[str, Any]]:
+@lru_cache(maxsize=8)
+def _load_catalog_items_cached(catalog_dir: str) -> tuple[dict[str, Any], ...]:
     items: list[dict[str, Any]] = []
-    if not catalog_dir.exists():
-        return items
-    for path in sorted(catalog_dir.glob("*.yaml")):
+    root = Path(catalog_dir)
+    if not root.exists():
+        return tuple(items)
+
+    catalogs: list[tuple[Path, dict[str, Any]]] = []
+    items_by_pack: dict[str, list[dict[str, Any]]] = {}
+    for path in sorted(root.glob("*.yaml")):
         raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        pack = str(raw.get("pack", path.stem))
+        catalogs.append((path, raw))
+        items_by_pack[pack] = list(raw.get("ttps", []))
+
+    for path, raw in catalogs:
         pack = str(raw.get("pack", path.stem))
         for item in raw.get("ttps", []):
             item = dict(item)
             item.setdefault("pack", pack)
             item["_source_file"] = str(path)
             items.append(item)
-    return items
+        generator = raw.get("variant_generator")
+        if isinstance(generator, dict):
+            base_pack = str(generator.get("base_pack", "attack_enterprise"))
+            items.extend(
+                _expand_variant_generator(
+                    pack=pack,
+                    generator=generator,
+                    base_items=items_by_pack.get(base_pack, []),
+                    source_file=str(path),
+                )
+            )
+    return tuple(items)
+
+
+def load_catalog_items(catalog_dir: Path = CATALOG_DIR) -> list[dict[str, Any]]:
+    return list(_load_catalog_items_cached(str(catalog_dir.resolve())))
 
 
 def register_catalog_ttps(catalog_dir: Path = CATALOG_DIR) -> int:

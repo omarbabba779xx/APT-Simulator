@@ -1,0 +1,22 @@
+title: Data from Cloud Storage Scale Variant 2437 Marker
+id: 71ea943b-05e5-5f6c-afb6-e71bb0413ef7
+status: experimental
+description: Detects simulator telemetry for Data from Cloud Storage scale variant
+  2437.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1530
+    apt_sim.variant: attack_scale_variant_2437
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530

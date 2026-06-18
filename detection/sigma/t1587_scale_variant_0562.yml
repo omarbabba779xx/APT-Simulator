@@ -1,0 +1,21 @@
+title: Develop Capabilities Scale Variant 0562 Marker
+id: 1b26c358-cfd2-561b-a51d-2f2bd59b1dcb
+status: experimental
+description: Detects simulator telemetry for Develop Capabilities scale variant 0562.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587
+    apt_sim.variant: attack_scale_variant_0562
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/
+tags:
+- attack.t1587

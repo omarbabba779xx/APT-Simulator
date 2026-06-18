@@ -1,0 +1,21 @@
+title: Regsvr32 Scale Variant 3071 Marker
+id: 899e280f-aa27-5a8f-b115-3bf251d984d8
+status: experimental
+description: Detects simulator telemetry for Regsvr32 scale variant 3071.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.010
+    apt_sim.variant: attack_scale_variant_3071
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/010/
+tags:
+- attack.t1218.010

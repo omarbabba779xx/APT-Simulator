@@ -1,0 +1,22 @@
+title: Asymmetric Cryptography Scale Variant 0515 Marker
+id: 331fd827-ffb3-5f52-9fde-4874443cb825
+status: experimental
+description: Detects simulator telemetry for Asymmetric Cryptography scale variant
+  0515.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1573.002
+    apt_sim.variant: attack_scale_variant_0515
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1573/002/
+tags:
+- attack.t1573.002

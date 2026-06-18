@@ -1,0 +1,22 @@
+title: Access Token Manipulation Scale Variant 0914 Marker
+id: 7be31ec5-0745-537f-b070-d58030356cc6
+status: experimental
+description: Detects simulator telemetry for Access Token Manipulation scale variant
+  0914.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134
+    apt_sim.variant: attack_scale_variant_0914
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/
+tags:
+- attack.t1134

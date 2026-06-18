@@ -1,0 +1,21 @@
+title: Drive-by Target Scale Variant 1332 Marker
+id: 1bb152c0-0346-5bc5-820e-9df2752c43e6
+status: experimental
+description: Detects simulator telemetry for Drive-by Target scale variant 1332.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.004
+    apt_sim.variant: attack_scale_variant_1332
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/004/
+tags:
+- attack.t1608.004

@@ -1,0 +1,21 @@
+title: External Proxy Scale Variant 3650 Marker
+id: 7fd73401-2ac5-565a-a381-424b2c787416
+status: experimental
+description: Detects simulator telemetry for External Proxy scale variant 3650.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.002
+    apt_sim.variant: attack_scale_variant_3650
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/002/
+tags:
+- attack.t1090.002

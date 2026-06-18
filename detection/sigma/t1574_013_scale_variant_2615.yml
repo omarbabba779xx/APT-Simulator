@@ -1,0 +1,21 @@
+title: KernelCallbackTable Scale Variant 2615 Marker
+id: 9ac0c353-b9c4-55f4-bbf2-f6d40ac23435
+status: experimental
+description: Detects simulator telemetry for KernelCallbackTable scale variant 2615.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.013
+    apt_sim.variant: attack_scale_variant_2615
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/013/
+tags:
+- attack.t1574.013

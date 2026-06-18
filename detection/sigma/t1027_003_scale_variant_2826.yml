@@ -1,0 +1,21 @@
+title: Steganography Scale Variant 2826 Marker
+id: a1bc7867-0188-509d-9ec7-1c5b5fb1ced7
+status: experimental
+description: Detects simulator telemetry for Steganography scale variant 2826.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.003
+    apt_sim.variant: attack_scale_variant_2826
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/003/
+tags:
+- attack.t1027.003

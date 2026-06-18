@@ -1,0 +1,21 @@
+title: Netsh Helper DLL Scale Variant 1767 Marker
+id: 4584f9f5-d810-51e9-9489-3010cb104947
+status: experimental
+description: Detects simulator telemetry for Netsh Helper DLL scale variant 1767.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.007
+    apt_sim.variant: attack_scale_variant_1767
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/007/
+tags:
+- attack.t1546.007

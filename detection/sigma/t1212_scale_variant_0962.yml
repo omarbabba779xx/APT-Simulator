@@ -1,0 +1,22 @@
+title: Exploitation for Credential Access Scale Variant 0962 Marker
+id: 74bfa9d9-54d5-5778-8049-05f5eac45d7d
+status: experimental
+description: Detects simulator telemetry for Exploitation for Credential Access scale
+  variant 0962.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1212
+    apt_sim.variant: attack_scale_variant_0962
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1212/
+tags:
+- attack.t1212

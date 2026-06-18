@@ -1,0 +1,21 @@
+title: Indicator Removal Scale Variant 0136 Marker
+id: 2c027e96-8960-5cf5-a3b2-d61bc966b729
+status: experimental
+description: Detects simulator telemetry for Indicator Removal scale variant 0136.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070
+    apt_sim.variant: attack_scale_variant_0136
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/
+tags:
+- attack.t1070

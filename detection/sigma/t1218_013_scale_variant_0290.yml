@@ -1,0 +1,21 @@
+title: Mavinject Scale Variant 0290 Marker
+id: b88f8662-b5cd-51ef-88b2-8d191eb7c0dd
+status: experimental
+description: Detects simulator telemetry for Mavinject scale variant 0290.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.013
+    apt_sim.variant: attack_scale_variant_0290
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/013/
+tags:
+- attack.t1218.013

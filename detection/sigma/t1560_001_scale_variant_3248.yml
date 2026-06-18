@@ -1,0 +1,21 @@
+title: Archive via Utility Scale Variant 3248 Marker
+id: e423f1fe-5494-5c5b-af02-e91e4833479d
+status: experimental
+description: Detects simulator telemetry for Archive via Utility scale variant 3248.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560.001
+    apt_sim.variant: attack_scale_variant_3248
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/001/
+tags:
+- attack.t1560.001

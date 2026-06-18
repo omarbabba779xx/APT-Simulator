@@ -1,0 +1,21 @@
+title: COR_PROFILER Scale Variant 3310 Marker
+id: 2b22c501-98b9-5791-a722-3fb1b9969012
+status: experimental
+description: Detects simulator telemetry for COR_PROFILER scale variant 3310.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.012
+    apt_sim.variant: attack_scale_variant_3310
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/012/
+tags:
+- attack.t1574.012

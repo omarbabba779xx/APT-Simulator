@@ -1,0 +1,21 @@
+title: Login Items Scale Variant 3185 Marker
+id: b0052872-30c1-5298-964d-6d3dfb95e7b9
+status: experimental
+description: Detects simulator telemetry for Login Items scale variant 3185.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.015
+    apt_sim.variant: attack_scale_variant_3185
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/015/
+tags:
+- attack.t1547.015

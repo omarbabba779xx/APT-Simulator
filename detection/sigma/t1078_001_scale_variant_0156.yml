@@ -1,0 +1,21 @@
+title: Default Accounts Scale Variant 0156 Marker
+id: d65716f8-8e41-5e73-94ad-041158b166e1
+status: experimental
+description: Detects simulator telemetry for Default Accounts scale variant 0156.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.001
+    apt_sim.variant: attack_scale_variant_0156
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/001/
+tags:
+- attack.t1078.001

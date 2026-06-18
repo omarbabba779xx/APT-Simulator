@@ -1,0 +1,22 @@
+title: Determine Physical Locations Scale Variant 1978 Marker
+id: 24312575-c9a8-55a4-b88e-4dbb497438e0
+status: experimental
+description: Detects simulator telemetry for Determine Physical Locations scale variant
+  1978.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.001
+    apt_sim.variant: attack_scale_variant_1978
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/001/
+tags:
+- attack.t1591.001

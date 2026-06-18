@@ -1,0 +1,22 @@
+title: Runtime Data Manipulation Scale Variant 1883 Marker
+id: c5c50026-1d01-54cb-ad17-57f025febc1c
+status: experimental
+description: Detects simulator telemetry for Runtime Data Manipulation scale variant
+  1883.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.003
+    apt_sim.variant: attack_scale_variant_1883
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/003/
+tags:
+- attack.t1565.003

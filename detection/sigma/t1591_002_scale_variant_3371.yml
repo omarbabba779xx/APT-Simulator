@@ -1,0 +1,22 @@
+title: Business Relationships Scale Variant 3371 Marker
+id: 13b2223b-8b3c-5f1d-86d8-d82521cd8e5c
+status: experimental
+description: Detects simulator telemetry for Business Relationships scale variant
+  3371.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.002
+    apt_sim.variant: attack_scale_variant_3371
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/002/
+tags:
+- attack.t1591.002

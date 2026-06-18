@@ -1,0 +1,21 @@
+title: Written Content Scale Variant 1373 Marker
+id: d838b65a-a81d-50c4-83ce-d842a1662954
+status: experimental
+description: Detects simulator telemetry for Written Content scale variant 1373.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683.001
+    apt_sim.variant: attack_scale_variant_1373
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/001/
+tags:
+- attack.t1683.001

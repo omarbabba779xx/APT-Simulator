@@ -1,0 +1,21 @@
+title: File Deletion Scale Variant 2226 Marker
+id: 19140cd7-6605-59d9-8cde-6a6b09e78ce1
+status: experimental
+description: Detects simulator telemetry for File Deletion scale variant 2226.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.004
+    apt_sim.variant: attack_scale_variant_2226
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/004/
+tags:
+- attack.t1070.004

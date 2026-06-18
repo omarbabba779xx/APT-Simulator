@@ -1,0 +1,21 @@
+title: Deploy Container Scale Variant 4120 Marker
+id: a705d5d8-10a9-5781-afa2-eb13ab1e91ad
+status: experimental
+description: Detects simulator telemetry for Deploy Container scale variant 4120.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1610
+    apt_sim.variant: attack_scale_variant_4120
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1610/
+tags:
+- attack.t1610

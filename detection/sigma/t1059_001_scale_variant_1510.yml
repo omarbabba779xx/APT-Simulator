@@ -1,0 +1,21 @@
+title: PowerShell Scale Variant 1510 Marker
+id: 945b935e-7129-566e-8cf3-1c711100d3ca
+status: experimental
+description: Detects simulator telemetry for PowerShell scale variant 1510.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.001
+    apt_sim.variant: attack_scale_variant_1510
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/001/
+tags:
+- attack.t1059.001

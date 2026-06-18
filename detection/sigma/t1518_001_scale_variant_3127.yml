@@ -1,0 +1,22 @@
+title: Security Software Discovery Scale Variant 3127 Marker
+id: 07f798ed-3815-5f27-acf0-2910daf968a6
+status: experimental
+description: Detects simulator telemetry for Security Software Discovery scale variant
+  3127.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518.001
+    apt_sim.variant: attack_scale_variant_3127
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/001/
+tags:
+- attack.t1518.001

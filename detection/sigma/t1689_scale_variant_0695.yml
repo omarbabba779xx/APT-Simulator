@@ -1,0 +1,21 @@
+title: Downgrade Attack Scale Variant 0695 Marker
+id: d7919047-b334-58b0-b0ad-1fa30664d6db
+status: experimental
+description: Detects simulator telemetry for Downgrade Attack scale variant 0695.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1689
+    apt_sim.variant: attack_scale_variant_0695
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1689/
+tags:
+- attack.t1689

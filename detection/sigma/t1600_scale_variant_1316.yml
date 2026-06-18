@@ -1,0 +1,21 @@
+title: Weaken Encryption Scale Variant 1316 Marker
+id: 3b952a4c-1ec2-5a53-85ba-fed4a206211c
+status: experimental
+description: Detects simulator telemetry for Weaken Encryption scale variant 1316.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600
+    apt_sim.variant: attack_scale_variant_1316
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/
+tags:
+- attack.t1600

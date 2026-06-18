@@ -1,0 +1,21 @@
+title: WHOIS Scale Variant 4086 Marker
+id: 9dd72cf6-babd-5073-b7c1-b82c8112b43f
+status: experimental
+description: Detects simulator telemetry for WHOIS scale variant 4086.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.002
+    apt_sim.variant: attack_scale_variant_4086
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/002/
+tags:
+- attack.t1596.002

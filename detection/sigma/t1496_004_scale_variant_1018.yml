@@ -1,0 +1,22 @@
+title: Cloud Service Hijacking Scale Variant 1018 Marker
+id: 4655cc43-b810-5c8f-9112-715d0942d039
+status: experimental
+description: Detects simulator telemetry for Cloud Service Hijacking scale variant
+  1018.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1496.004
+    apt_sim.variant: attack_scale_variant_1018
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1496/004/
+tags:
+- attack.t1496.004

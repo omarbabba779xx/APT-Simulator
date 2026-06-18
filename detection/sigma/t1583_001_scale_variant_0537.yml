@@ -1,0 +1,21 @@
+title: Domains Scale Variant 0537 Marker
+id: 31ece74a-7988-5f91-b931-186d5715e9f7
+status: experimental
+description: Detects simulator telemetry for Domains scale variant 0537.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.001
+    apt_sim.variant: attack_scale_variant_0537
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/001/
+tags:
+- attack.t1583.001

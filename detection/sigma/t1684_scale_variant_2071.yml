@@ -1,0 +1,21 @@
+title: Social Engineering Scale Variant 2071 Marker
+id: 544b5104-4d87-5bf6-9305-27bf75bcbb1a
+status: experimental
+description: Detects simulator telemetry for Social Engineering scale variant 2071.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684
+    apt_sim.variant: attack_scale_variant_2071
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/
+tags:
+- attack.t1684

@@ -1,0 +1,21 @@
+title: Systemd Timers Scale Variant 2880 Marker
+id: 9bf7ee12-cff5-58f8-8543-913875669381
+status: experimental
+description: Detects simulator telemetry for Systemd Timers scale variant 2880.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.006
+    apt_sim.variant: attack_scale_variant_2880
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/006/
+tags:
+- attack.t1053.006

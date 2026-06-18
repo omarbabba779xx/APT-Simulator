@@ -1,0 +1,22 @@
+title: Application Window Discovery Scale Variant 0714 Marker
+id: f7e1c482-7dbc-5211-b5ef-085bbf030c0a
+status: experimental
+description: Detects simulator telemetry for Application Window Discovery scale variant
+  0714.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1010
+    apt_sim.variant: attack_scale_variant_0714
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1010/
+tags:
+- attack.t1010

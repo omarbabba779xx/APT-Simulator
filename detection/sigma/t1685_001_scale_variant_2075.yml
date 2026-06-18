@@ -1,0 +1,22 @@
+title: Disable or Modify Windows Event Log Scale Variant 2075 Marker
+id: 5bc250b5-65e9-5a26-ab72-53ab02294326
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Windows Event Log scale
+  variant 2075.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685.001
+    apt_sim.variant: attack_scale_variant_2075
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/001/
+tags:
+- attack.t1685.001

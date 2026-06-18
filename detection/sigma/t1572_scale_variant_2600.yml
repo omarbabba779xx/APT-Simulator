@@ -1,0 +1,21 @@
+title: Protocol Tunneling Scale Variant 2600 Marker
+id: 36baebe3-68e9-5396-92e3-f590f9505671
+status: experimental
+description: Detects simulator telemetry for Protocol Tunneling scale variant 2600.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1572
+    apt_sim.variant: attack_scale_variant_2600
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1572/
+tags:
+- attack.t1572

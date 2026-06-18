@@ -1,0 +1,22 @@
+title: Publish/Subscribe Protocols Scale Variant 2238 Marker
+id: 62b04d5e-f6c6-5d0b-a76a-5baf69f72060
+status: experimental
+description: Detects simulator telemetry for Publish/Subscribe Protocols scale variant
+  2238.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.005
+    apt_sim.variant: attack_scale_variant_2238
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/005/
+tags:
+- attack.t1071.005

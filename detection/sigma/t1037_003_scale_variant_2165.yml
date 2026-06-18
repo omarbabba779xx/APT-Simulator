@@ -1,0 +1,21 @@
+title: Network Logon Script Scale Variant 2165 Marker
+id: 94da56ac-2dc5-50b0-9fff-77f4a5374a1d
+status: experimental
+description: Detects simulator telemetry for Network Logon Script scale variant 2165.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.003
+    apt_sim.variant: attack_scale_variant_2165
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/003/
+tags:
+- attack.t1037.003

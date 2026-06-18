@@ -1,0 +1,22 @@
+title: Cloud Storage Object Discovery Scale Variant 3431 Marker
+id: 9bb49b37-fa1d-5b65-89fd-6140e8f498ae
+status: experimental
+description: Detects simulator telemetry for Cloud Storage Object Discovery scale
+  variant 3431.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1619
+    apt_sim.variant: attack_scale_variant_3431
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1619/
+tags:
+- attack.t1619

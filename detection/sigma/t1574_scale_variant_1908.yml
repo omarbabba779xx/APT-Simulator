@@ -1,0 +1,21 @@
+title: Hijack Execution Flow Scale Variant 1908 Marker
+id: 1e017ed5-1cf2-58f8-bf2d-3ae5c4343332
+status: experimental
+description: Detects simulator telemetry for Hijack Execution Flow scale variant 1908.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574
+    apt_sim.variant: attack_scale_variant_1908
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/
+tags:
+- attack.t1574

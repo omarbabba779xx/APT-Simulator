@@ -1,0 +1,21 @@
+title: SNMP (MIB Dump) Scale Variant 3411 Marker
+id: f34c1b30-e773-585f-a5cb-c3f767a573af
+status: experimental
+description: Detects simulator telemetry for SNMP (MIB Dump) scale variant 3411.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.001
+    apt_sim.variant: attack_scale_variant_3411
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/001/
+tags:
+- attack.t1602.001

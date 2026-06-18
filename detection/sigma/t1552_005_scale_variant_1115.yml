@@ -1,0 +1,22 @@
+title: Cloud Instance Metadata API Scale Variant 1115 Marker
+id: f3063d97-e9bd-5cb6-ab9e-3a73a04d7cbd
+status: experimental
+description: Detects simulator telemetry for Cloud Instance Metadata API scale variant
+  1115.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.005
+    apt_sim.variant: attack_scale_variant_1115
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/005/
+tags:
+- attack.t1552.005

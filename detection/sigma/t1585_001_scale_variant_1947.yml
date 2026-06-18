@@ -1,0 +1,21 @@
+title: Social Media Accounts Scale Variant 1947 Marker
+id: 5904d8ac-9b09-5d54-90fe-7915650dcb79
+status: experimental
+description: Detects simulator telemetry for Social Media Accounts scale variant 1947.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.001
+    apt_sim.variant: attack_scale_variant_1947
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/001/
+tags:
+- attack.t1585.001

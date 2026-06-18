@@ -1,0 +1,22 @@
+title: Cloud Storage Object Discovery Scale Variant 2039 Marker
+id: dfdf4e70-dab3-5ab9-b8ac-87231185283e
+status: experimental
+description: Detects simulator telemetry for Cloud Storage Object Discovery scale
+  variant 2039.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1619
+    apt_sim.variant: attack_scale_variant_2039
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1619/
+tags:
+- attack.t1619

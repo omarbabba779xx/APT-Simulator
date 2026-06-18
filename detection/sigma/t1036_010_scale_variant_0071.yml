@@ -1,0 +1,22 @@
+title: Masquerade Account Name Scale Variant 0071 Marker
+id: 66fa8b13-4054-508f-a957-75bdfcef0e9d
+status: experimental
+description: Detects simulator telemetry for Masquerade Account Name scale variant
+  0071.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.010
+    apt_sim.variant: attack_scale_variant_0071
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/010/
+tags:
+- attack.t1036.010

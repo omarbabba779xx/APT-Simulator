@@ -1,0 +1,22 @@
+title: Messaging Applications Scale Variant 3056 Marker
+id: ac22a53b-0d8d-58c4-aa8f-6a8e56f37b5a
+status: experimental
+description: Detects simulator telemetry for Messaging Applications scale variant
+  3056.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.005
+    apt_sim.variant: attack_scale_variant_3056
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/005/
+tags:
+- attack.t1213.005

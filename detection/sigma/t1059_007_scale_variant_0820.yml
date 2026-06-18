@@ -1,0 +1,21 @@
+title: JavaScript Scale Variant 0820 Marker
+id: 0d18d809-96e7-5f02-bff7-26c57f833e80
+status: experimental
+description: Detects simulator telemetry for JavaScript scale variant 0820.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.007
+    apt_sim.variant: attack_scale_variant_0820
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/007/
+tags:
+- attack.t1059.007

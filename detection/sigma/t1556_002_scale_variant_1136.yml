@@ -1,0 +1,21 @@
+title: Password Filter DLL Scale Variant 1136 Marker
+id: d584a107-d02d-5c36-a3e5-88eb9bfcbc86
+status: experimental
+description: Detects simulator telemetry for Password Filter DLL scale variant 1136.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.002
+    apt_sim.variant: attack_scale_variant_1136
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/002/
+tags:
+- attack.t1556.002

@@ -1,0 +1,22 @@
+title: Logon Script (Windows) Scale Variant 2163 Marker
+id: 1e233698-2eac-59fa-98a9-02c2f6b4f28d
+status: experimental
+description: Detects simulator telemetry for Logon Script (Windows) scale variant
+  2163.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.001
+    apt_sim.variant: attack_scale_variant_2163
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/001/
+tags:
+- attack.t1037.001

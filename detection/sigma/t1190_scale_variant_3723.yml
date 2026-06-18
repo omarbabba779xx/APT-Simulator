@@ -1,0 +1,22 @@
+title: Exploit Public-Facing Application Scale Variant 3723 Marker
+id: 54f70e76-bb94-5cf2-b512-c870b4529bbe
+status: experimental
+description: Detects simulator telemetry for Exploit Public-Facing Application scale
+  variant 3723.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1190
+    apt_sim.variant: attack_scale_variant_3723
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1190/
+tags:
+- attack.t1190

@@ -1,0 +1,22 @@
+title: Messaging Applications Scale Variant 1664 Marker
+id: 17f3ceb8-f1a9-534a-96e9-84838485b29c
+status: experimental
+description: Detects simulator telemetry for Messaging Applications scale variant
+  1664.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.005
+    apt_sim.variant: attack_scale_variant_1664
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/005/
+tags:
+- attack.t1213.005

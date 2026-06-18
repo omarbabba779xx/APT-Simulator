@@ -1,0 +1,21 @@
+title: Windows Host Firewall Scale Variant 3476 Marker
+id: f891efd3-a92d-5711-a917-8ab4b11fddbe
+status: experimental
+description: Detects simulator telemetry for Windows Host Firewall scale variant 3476.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.003
+    apt_sim.variant: attack_scale_variant_3476
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/003/
+tags:
+- attack.t1686.003

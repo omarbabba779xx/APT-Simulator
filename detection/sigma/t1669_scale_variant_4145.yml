@@ -1,0 +1,21 @@
+title: Wi-Fi Networks Scale Variant 4145 Marker
+id: 37c854e9-44ea-57e9-9de1-51f06e94f8e4
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Networks scale variant 4145.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1669
+    apt_sim.variant: attack_scale_variant_4145
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1669/
+tags:
+- attack.t1669

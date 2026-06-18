@@ -1,0 +1,21 @@
+title: Ingress Tool Transfer Scale Variant 2973 Marker
+id: a1797b72-d964-5105-aa63-ff0748da595e
+status: experimental
+description: Detects simulator telemetry for Ingress Tool Transfer scale variant 2973.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1105
+    apt_sim.variant: attack_scale_variant_2973
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105

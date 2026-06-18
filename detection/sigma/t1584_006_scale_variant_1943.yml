@@ -1,0 +1,21 @@
+title: Web Services Scale Variant 1943 Marker
+id: 6a457785-e7f8-5935-b728-93ac57a06d95
+status: experimental
+description: Detects simulator telemetry for Web Services scale variant 1943.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.006
+    apt_sim.variant: attack_scale_variant_1943
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/006/
+tags:
+- attack.t1584.006

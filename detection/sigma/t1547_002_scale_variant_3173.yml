@@ -1,0 +1,22 @@
+title: Authentication Package Scale Variant 3173 Marker
+id: 2efadc6f-4266-5e84-bf69-719e3af2565e
+status: experimental
+description: Detects simulator telemetry for Authentication Package scale variant
+  3173.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.002
+    apt_sim.variant: attack_scale_variant_3173
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/002/
+tags:
+- attack.t1547.002

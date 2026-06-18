@@ -1,0 +1,22 @@
+title: Cloud Application Integration Scale Variant 2058 Marker
+id: 4f87a94f-57c3-5ade-a92f-c553f564950f
+status: experimental
+description: Detects simulator telemetry for Cloud Application Integration scale variant
+  2058.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1671
+    apt_sim.variant: attack_scale_variant_2058
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1671/
+tags:
+- attack.t1671

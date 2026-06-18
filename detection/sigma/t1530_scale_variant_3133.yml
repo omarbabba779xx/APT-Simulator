@@ -1,0 +1,22 @@
+title: Data from Cloud Storage Scale Variant 3133 Marker
+id: 21cd2cf1-5b31-5927-a362-020f3a9280fc
+status: experimental
+description: Detects simulator telemetry for Data from Cloud Storage scale variant
+  3133.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1530
+    apt_sim.variant: attack_scale_variant_3133
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530

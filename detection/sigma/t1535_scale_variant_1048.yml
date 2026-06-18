@@ -1,0 +1,22 @@
+title: Unused/Unsupported Cloud Regions Scale Variant 1048 Marker
+id: 09b8c41f-1cae-5966-a873-6f684da2f026
+status: experimental
+description: Detects simulator telemetry for Unused/Unsupported Cloud Regions scale
+  variant 1048.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1535
+    apt_sim.variant: attack_scale_variant_1048
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1535/
+tags:
+- attack.t1535

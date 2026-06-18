@@ -1,0 +1,22 @@
+title: Overwrite Process Arguments Scale Variant 0072 Marker
+id: 2b498c1c-89e2-547f-b78c-ba045a141df3
+status: experimental
+description: Detects simulator telemetry for Overwrite Process Arguments scale variant
+  0072.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.011
+    apt_sim.variant: attack_scale_variant_0072
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/011/
+tags:
+- attack.t1036.011

@@ -1,0 +1,22 @@
+title: Exfiltration Over Symmetric Encrypted Non-C2 Protocol Scale Variant 2174 Marker
+id: 2ac4ce3b-bef0-5238-8877-ea60f9397630
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Symmetric Encrypted
+  Non-C2 Protocol scale variant 2174.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.001
+    apt_sim.variant: attack_scale_variant_2174
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/001/
+tags:
+- attack.t1048.001

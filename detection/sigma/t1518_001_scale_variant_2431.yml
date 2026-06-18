@@ -1,0 +1,22 @@
+title: Security Software Discovery Scale Variant 2431 Marker
+id: 6a92b8ab-36f8-52e9-bf11-670bdfa642b5
+status: experimental
+description: Detects simulator telemetry for Security Software Discovery scale variant
+  2431.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518.001
+    apt_sim.variant: attack_scale_variant_2431
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/001/
+tags:
+- attack.t1518.001

@@ -1,0 +1,21 @@
+title: TCC Manipulation Scale Variant 0408 Marker
+id: fa119a27-86a7-52e1-9c7d-50856ce9b2fd
+status: experimental
+description: Detects simulator telemetry for TCC Manipulation scale variant 0408.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.006
+    apt_sim.variant: attack_scale_variant_0408
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/006/
+tags:
+- attack.t1548.006

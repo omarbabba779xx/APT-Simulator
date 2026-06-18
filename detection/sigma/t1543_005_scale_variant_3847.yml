@@ -1,0 +1,21 @@
+title: Container Service Scale Variant 3847 Marker
+id: 319a072e-e543-5ec4-a7fc-98e446e0eb18
+status: experimental
+description: Detects simulator telemetry for Container Service scale variant 3847.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.005
+    apt_sim.variant: attack_scale_variant_3847
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/005/
+tags:
+- attack.t1543.005

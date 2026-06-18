@@ -1,0 +1,21 @@
+title: Modify System Image Scale Variant 2015 Marker
+id: f2d81d91-fd00-5f59-97c6-c5a5f8081c25
+status: experimental
+description: Detects simulator telemetry for Modify System Image scale variant 2015.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601
+    apt_sim.variant: attack_scale_variant_2015
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/
+tags:
+- attack.t1601

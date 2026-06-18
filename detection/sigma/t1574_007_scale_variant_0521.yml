@@ -1,0 +1,22 @@
+title: Path Interception by PATH Environment Variable Scale Variant 0521 Marker
+id: bcaa5d37-6eca-5212-8b8b-8e9c9035dd38
+status: experimental
+description: Detects simulator telemetry for Path Interception by PATH Environment
+  Variable scale variant 0521.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.007
+    apt_sim.variant: attack_scale_variant_0521
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/007/
+tags:
+- attack.t1574.007

@@ -1,0 +1,21 @@
+title: COR_PROFILER Scale Variant 1222 Marker
+id: a83417c2-5771-5fe7-95ae-0b499ccaa44e
+status: experimental
+description: Detects simulator telemetry for COR_PROFILER scale variant 1222.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.012
+    apt_sim.variant: attack_scale_variant_1222
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/012/
+tags:
+- attack.t1574.012

@@ -1,0 +1,21 @@
+title: Execution Guardrails Scale Variant 3782 Marker
+id: 194653a8-6a21-5a5a-82af-0980668db754
+status: experimental
+description: Detects simulator telemetry for Execution Guardrails scale variant 3782.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480
+    apt_sim.variant: attack_scale_variant_3782
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/
+tags:
+- attack.t1480

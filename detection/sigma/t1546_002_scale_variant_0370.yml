@@ -1,0 +1,21 @@
+title: Screensaver Scale Variant 0370 Marker
+id: 76d8df4f-e981-55dc-a479-2c3fc1a8673a
+status: experimental
+description: Detects simulator telemetry for Screensaver scale variant 0370.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.002
+    apt_sim.variant: attack_scale_variant_0370
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/002/
+tags:
+- attack.t1546.002

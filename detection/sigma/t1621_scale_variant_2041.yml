@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Request Generation Scale Variant 2041 Marker
+id: 6abfbf87-a90c-51f2-b410-116402af584e
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication Request Generation
+  scale variant 2041.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1621
+    apt_sim.variant: attack_scale_variant_2041
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1621/
+tags:
+- attack.t1621

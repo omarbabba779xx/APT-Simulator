@@ -1,0 +1,22 @@
+title: Remote Desktop Software Scale Variant 0295 Marker
+id: dd590d4b-185b-531e-b7a8-f3398a92e0ae
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Software scale variant
+  0295.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219.002
+    apt_sim.variant: attack_scale_variant_0295
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/002/
+tags:
+- attack.t1219.002

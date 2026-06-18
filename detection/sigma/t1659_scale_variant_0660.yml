@@ -1,0 +1,21 @@
+title: Content Injection Scale Variant 0660 Marker
+id: bde820e5-9f04-584d-8d09-e7fb0e9b93a8
+status: experimental
+description: Detects simulator telemetry for Content Injection scale variant 0660.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1659
+    apt_sim.variant: attack_scale_variant_0660
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1659/
+tags:
+- attack.t1659

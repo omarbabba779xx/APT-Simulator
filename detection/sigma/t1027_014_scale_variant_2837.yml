@@ -1,0 +1,21 @@
+title: Polymorphic Code Scale Variant 2837 Marker
+id: 77dbef5a-ee93-5942-bb88-7861c42adee4
+status: experimental
+description: Detects simulator telemetry for Polymorphic Code scale variant 2837.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.014
+    apt_sim.variant: attack_scale_variant_2837
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/014/
+tags:
+- attack.t1027.014

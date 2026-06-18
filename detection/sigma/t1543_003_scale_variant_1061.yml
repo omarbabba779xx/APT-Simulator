@@ -1,0 +1,21 @@
+title: Windows Service Scale Variant 1061 Marker
+id: 5e6e08f9-a2c9-5344-8a45-9ccbad834d85
+status: experimental
+description: Detects simulator telemetry for Windows Service scale variant 1061.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.003
+    apt_sim.variant: attack_scale_variant_1061
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/003/
+tags:
+- attack.t1543.003

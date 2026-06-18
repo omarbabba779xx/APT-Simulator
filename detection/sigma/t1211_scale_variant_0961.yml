@@ -1,0 +1,22 @@
+title: Exploitation for Stealth Scale Variant 0961 Marker
+id: fd498bd8-ad1a-56da-81a6-fbacf25886d0
+status: experimental
+description: Detects simulator telemetry for Exploitation for Stealth scale variant
+  0961.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1211
+    apt_sim.variant: attack_scale_variant_0961
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1211/
+tags:
+- attack.t1211

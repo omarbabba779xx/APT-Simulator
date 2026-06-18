@@ -1,0 +1,22 @@
+title: Network Security Appliances Scale Variant 0584 Marker
+id: a480cbce-6158-50e8-9865-161f0fe983b6
+status: experimental
+description: Detects simulator telemetry for Network Security Appliances scale variant
+  0584.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.006
+    apt_sim.variant: attack_scale_variant_0584
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/006/
+tags:
+- attack.t1590.006

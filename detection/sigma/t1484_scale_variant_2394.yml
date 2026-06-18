@@ -1,0 +1,22 @@
+title: Domain or Tenant Policy Modification Scale Variant 2394 Marker
+id: f946ce92-182e-5067-8780-fe8dcd4619cb
+status: experimental
+description: Detects simulator telemetry for Domain or Tenant Policy Modification
+  scale variant 2394.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484
+    apt_sim.variant: attack_scale_variant_2394
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/
+tags:
+- attack.t1484

@@ -1,0 +1,21 @@
+title: Clear Mailbox Data Scale Variant 1534 Marker
+id: 83d881a2-5eb6-58e8-9b57-8ec443ef4a3f
+status: experimental
+description: Detects simulator telemetry for Clear Mailbox Data scale variant 1534.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.008
+    apt_sim.variant: attack_scale_variant_1534
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/008/
+tags:
+- attack.t1070.008

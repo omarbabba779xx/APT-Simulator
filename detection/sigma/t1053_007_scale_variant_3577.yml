@@ -1,0 +1,22 @@
+title: Container Orchestration Job Scale Variant 3577 Marker
+id: 9bb68d4b-cd86-592f-8995-6abc470b399c
+status: experimental
+description: Detects simulator telemetry for Container Orchestration Job scale variant
+  3577.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.007
+    apt_sim.variant: attack_scale_variant_3577
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/007/
+tags:
+- attack.t1053.007

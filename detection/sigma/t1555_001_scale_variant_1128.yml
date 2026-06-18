@@ -1,0 +1,21 @@
+title: Keychain Scale Variant 1128 Marker
+id: f2229fa3-7861-569e-aed0-26a42057cd61
+status: experimental
+description: Detects simulator telemetry for Keychain scale variant 1128.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.001
+    apt_sim.variant: attack_scale_variant_1128
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/001/
+tags:
+- attack.t1555.001

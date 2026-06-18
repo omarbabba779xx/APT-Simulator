@@ -1,0 +1,22 @@
+title: Compromise Software Dependencies and Development Tools Scale Variant 1637 Marker
+id: 603dcf25-fa48-506a-a7b8-849238ec01d9
+status: experimental
+description: Detects simulator telemetry for Compromise Software Dependencies and
+  Development Tools scale variant 1637.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195.001
+    apt_sim.variant: attack_scale_variant_1637
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/001/
+tags:
+- attack.t1195.001

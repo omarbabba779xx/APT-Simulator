@@ -1,0 +1,22 @@
+title: Re-opened Applications Scale Variant 1786 Marker
+id: ae0375a2-9c11-5997-bf0f-fbfab451cd0e
+status: experimental
+description: Detects simulator telemetry for Re-opened Applications scale variant
+  1786.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.007
+    apt_sim.variant: attack_scale_variant_1786
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/007/
+tags:
+- attack.t1547.007

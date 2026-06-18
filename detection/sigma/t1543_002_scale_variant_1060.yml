@@ -1,0 +1,21 @@
+title: Systemd Service Scale Variant 1060 Marker
+id: 7a66983f-8593-5af3-ba4a-00e608b3e43c
+status: experimental
+description: Detects simulator telemetry for Systemd Service scale variant 1060.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.002
+    apt_sim.variant: attack_scale_variant_1060
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/002/
+tags:
+- attack.t1543.002

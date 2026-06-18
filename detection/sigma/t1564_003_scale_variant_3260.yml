@@ -1,0 +1,21 @@
+title: Hidden Window Scale Variant 3260 Marker
+id: c9d8e812-55c0-5486-96ae-7d32926a8c8c
+status: experimental
+description: Detects simulator telemetry for Hidden Window scale variant 3260.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.003
+    apt_sim.variant: attack_scale_variant_3260
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/003/
+tags:
+- attack.t1564.003

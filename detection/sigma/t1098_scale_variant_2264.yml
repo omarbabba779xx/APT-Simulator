@@ -1,0 +1,21 @@
+title: Account Manipulation Scale Variant 2264 Marker
+id: 88f303cb-c2ee-520b-8511-6cb7442fcae3
+status: experimental
+description: Detects simulator telemetry for Account Manipulation scale variant 2264.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098
+    apt_sim.variant: attack_scale_variant_2264
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/
+tags:
+- attack.t1098

@@ -1,0 +1,21 @@
+title: Parent PID Spoofing Scale Variant 1614 Marker
+id: 98130f38-8352-5b27-b4f9-51f66539bcd7
+status: experimental
+description: Detects simulator telemetry for Parent PID Spoofing scale variant 1614.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.004
+    apt_sim.variant: attack_scale_variant_1614
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/004/
+tags:
+- attack.t1134.004

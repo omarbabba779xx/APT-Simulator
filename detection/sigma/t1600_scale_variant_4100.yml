@@ -1,0 +1,21 @@
+title: Weaken Encryption Scale Variant 4100 Marker
+id: 25a84285-c6b3-516c-858b-e0d6d9522ced
+status: experimental
+description: Detects simulator telemetry for Weaken Encryption scale variant 4100.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600
+    apt_sim.variant: attack_scale_variant_4100
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/
+tags:
+- attack.t1600

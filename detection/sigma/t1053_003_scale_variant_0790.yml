@@ -1,0 +1,21 @@
+title: Cron Scale Variant 0790 Marker
+id: 32eafcec-4330-506d-b489-ff03750d76d1
+status: experimental
+description: Detects simulator telemetry for Cron scale variant 0790.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.003
+    apt_sim.variant: attack_scale_variant_0790
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/003/
+tags:
+- attack.t1053.003

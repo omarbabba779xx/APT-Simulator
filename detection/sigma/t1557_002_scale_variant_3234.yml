@@ -1,0 +1,21 @@
+title: ARP Cache Poisoning Scale Variant 3234 Marker
+id: 3a9846ad-af16-5fbe-b1f0-38146a0304f1
+status: experimental
+description: Detects simulator telemetry for ARP Cache Poisoning scale variant 3234.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.002
+    apt_sim.variant: attack_scale_variant_3234
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/002/
+tags:
+- attack.t1557.002

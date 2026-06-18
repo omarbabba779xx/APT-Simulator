@@ -1,0 +1,21 @@
+title: Patch System Image Scale Variant 4104 Marker
+id: fc2287ee-545c-5b0b-addb-6b9c532c5ec0
+status: experimental
+description: Detects simulator telemetry for Patch System Image scale variant 4104.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601.001
+    apt_sim.variant: attack_scale_variant_4104
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/001/
+tags:
+- attack.t1601.001

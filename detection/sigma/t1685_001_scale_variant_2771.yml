@@ -1,0 +1,22 @@
+title: Disable or Modify Windows Event Log Scale Variant 2771 Marker
+id: 97932a98-5231-5670-afd8-75e1a36c4518
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Windows Event Log scale
+  variant 2771.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685.001
+    apt_sim.variant: attack_scale_variant_2771
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/001/
+tags:
+- attack.t1685.001

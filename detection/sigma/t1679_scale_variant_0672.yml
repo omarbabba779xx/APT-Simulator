@@ -1,0 +1,21 @@
+title: Selective Exclusion Scale Variant 0672 Marker
+id: fac426f6-6e9f-5323-9d6b-522614d76a89
+status: experimental
+description: Detects simulator telemetry for Selective Exclusion scale variant 0672.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1679
+    apt_sim.variant: attack_scale_variant_0672
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1679/
+tags:
+- attack.t1679

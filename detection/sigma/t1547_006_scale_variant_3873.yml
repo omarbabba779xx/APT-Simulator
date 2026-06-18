@@ -1,0 +1,22 @@
+title: Kernel Modules and Extensions Scale Variant 3873 Marker
+id: 89083a30-89d7-5531-a243-060982defec2
+status: experimental
+description: Detects simulator telemetry for Kernel Modules and Extensions scale variant
+  3873.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.006
+    apt_sim.variant: attack_scale_variant_3873
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/006/
+tags:
+- attack.t1547.006

@@ -1,0 +1,21 @@
+title: Local Accounts Scale Variant 3638 Marker
+id: d4eefa44-1a16-56ad-980b-16c797fe42ae
+status: experimental
+description: Detects simulator telemetry for Local Accounts scale variant 3638.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.003
+    apt_sim.variant: attack_scale_variant_3638
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/003/
+tags:
+- attack.t1078.003

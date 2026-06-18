@@ -1,0 +1,21 @@
+title: InstallUtil Scale Variant 3066 Marker
+id: 4636c70e-e79a-56f0-b5e0-d0fbdfd277be
+status: experimental
+description: Detects simulator telemetry for InstallUtil scale variant 3066.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.004
+    apt_sim.variant: attack_scale_variant_3066
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/004/
+tags:
+- attack.t1218.004

@@ -1,0 +1,21 @@
+title: TCC Manipulation Scale Variant 3888 Marker
+id: 46318701-578a-5933-95a4-ff1c9cf32cb2
+status: experimental
+description: Detects simulator telemetry for TCC Manipulation scale variant 3888.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.006
+    apt_sim.variant: attack_scale_variant_3888
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/006/
+tags:
+- attack.t1548.006

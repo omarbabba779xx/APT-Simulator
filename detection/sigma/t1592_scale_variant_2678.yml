@@ -1,0 +1,22 @@
+title: Gather Victim Host Information Scale Variant 2678 Marker
+id: 69452f1d-f646-592d-9b01-99310f1a3c1e
+status: experimental
+description: Detects simulator telemetry for Gather Victim Host Information scale
+  variant 2678.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592
+    apt_sim.variant: attack_scale_variant_2678
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/
+tags:
+- attack.t1592

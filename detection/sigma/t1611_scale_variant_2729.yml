@@ -1,0 +1,21 @@
+title: Escape to Host Scale Variant 2729 Marker
+id: af2375ac-99d8-5a9d-ad9d-b02545f7d673
+status: experimental
+description: Detects simulator telemetry for Escape to Host scale variant 2729.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1611
+    apt_sim.variant: attack_scale_variant_2729
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1611/
+tags:
+- attack.t1611

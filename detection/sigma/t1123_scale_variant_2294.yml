@@ -1,0 +1,21 @@
+title: Audio Capture Scale Variant 2294 Marker
+id: c5cf7227-9a37-5a80-b765-5a168347cfff
+status: experimental
+description: Detects simulator telemetry for Audio Capture scale variant 2294.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1123
+    apt_sim.variant: attack_scale_variant_2294
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1123/
+tags:
+- attack.t1123

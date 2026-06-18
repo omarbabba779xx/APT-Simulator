@@ -1,0 +1,22 @@
+title: Steal or Forge Authentication Certificates Scale Variant 1349 Marker
+id: c121ddfa-0cb8-54fa-a1b8-8137091951ff
+status: experimental
+description: Detects simulator telemetry for Steal or Forge Authentication Certificates
+  scale variant 1349.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1649
+    apt_sim.variant: attack_scale_variant_1349
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1649/
+tags:
+- attack.t1649

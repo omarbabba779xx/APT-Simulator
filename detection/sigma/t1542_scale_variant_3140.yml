@@ -1,0 +1,21 @@
+title: Pre-OS Boot Scale Variant 3140 Marker
+id: a38425dd-e2a3-5457-89e2-55a016cddcad
+status: experimental
+description: Detects simulator telemetry for Pre-OS Boot scale variant 3140.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542
+    apt_sim.variant: attack_scale_variant_3140
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/
+tags:
+- attack.t1542

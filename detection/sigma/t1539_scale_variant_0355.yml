@@ -1,0 +1,22 @@
+title: Steal Web Session Cookie Scale Variant 0355 Marker
+id: 90ead86b-61b4-5682-b3bb-9789409d2029
+status: experimental
+description: Detects simulator telemetry for Steal Web Session Cookie scale variant
+  0355.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1539
+    apt_sim.variant: attack_scale_variant_0355
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1539/
+tags:
+- attack.t1539

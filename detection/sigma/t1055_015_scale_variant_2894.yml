@@ -1,0 +1,21 @@
+title: ListPlanting Scale Variant 2894 Marker
+id: 6716d4e0-d352-5a87-a199-b358dedce5f5
+status: experimental
+description: Detects simulator telemetry for ListPlanting scale variant 2894.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.015
+    apt_sim.variant: attack_scale_variant_2894
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/015/
+tags:
+- attack.t1055.015

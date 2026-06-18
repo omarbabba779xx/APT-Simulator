@@ -1,0 +1,21 @@
+title: Spearphishing Voice Scale Variant 0496 Marker
+id: fdcee91a-4361-54b4-af58-890cc70298d0
+status: experimental
+description: Detects simulator telemetry for Spearphishing Voice scale variant 0496.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.004
+    apt_sim.variant: attack_scale_variant_0496
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/004/
+tags:
+- attack.t1566.004

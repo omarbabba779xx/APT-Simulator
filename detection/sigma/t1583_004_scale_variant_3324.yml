@@ -1,0 +1,21 @@
+title: Server Scale Variant 3324 Marker
+id: c0bc0ff0-a6de-57b2-8688-65119d889658
+status: experimental
+description: Detects simulator telemetry for Server scale variant 3324.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.004
+    apt_sim.variant: attack_scale_variant_3324
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/004/
+tags:
+- attack.t1583.004

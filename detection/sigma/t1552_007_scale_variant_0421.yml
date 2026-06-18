@@ -1,0 +1,21 @@
+title: Container API Scale Variant 0421 Marker
+id: b09ec136-58f7-56dc-9454-acab7b44b890
+status: experimental
+description: Detects simulator telemetry for Container API scale variant 0421.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.007
+    apt_sim.variant: attack_scale_variant_0421
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/007/
+tags:
+- attack.t1552.007

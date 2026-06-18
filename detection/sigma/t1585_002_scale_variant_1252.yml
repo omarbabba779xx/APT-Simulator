@@ -1,0 +1,21 @@
+title: Email Accounts Scale Variant 1252 Marker
+id: 2f45974b-1f4e-5696-99ea-917aa37a5ffd
+status: experimental
+description: Detects simulator telemetry for Email Accounts scale variant 1252.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.002
+    apt_sim.variant: attack_scale_variant_1252
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/002/
+tags:
+- attack.t1585.002

@@ -1,0 +1,21 @@
+title: Port Knocking Scale Variant 3045 Marker
+id: 26e1d628-b117-5e9c-bbd7-7d9e50e6efa3
+status: experimental
+description: Detects simulator telemetry for Port Knocking scale variant 3045.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1205.001
+    apt_sim.variant: attack_scale_variant_3045
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1205/001/
+tags:
+- attack.t1205.001

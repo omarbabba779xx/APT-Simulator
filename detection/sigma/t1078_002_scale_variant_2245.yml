@@ -1,0 +1,21 @@
+title: Domain Accounts Scale Variant 2245 Marker
+id: a0e56157-ae25-5440-93e3-05a3861b87c7
+status: experimental
+description: Detects simulator telemetry for Domain Accounts scale variant 2245.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.002
+    apt_sim.variant: attack_scale_variant_2245
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/002/
+tags:
+- attack.t1078.002

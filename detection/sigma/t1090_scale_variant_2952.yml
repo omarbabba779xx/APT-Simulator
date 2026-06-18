@@ -1,0 +1,21 @@
+title: Proxy Scale Variant 2952 Marker
+id: 28d02d83-1454-5098-b816-3ba11a26865f
+status: experimental
+description: Detects simulator telemetry for Proxy scale variant 2952.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090
+    apt_sim.variant: attack_scale_variant_2952
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/
+tags:
+- attack.t1090

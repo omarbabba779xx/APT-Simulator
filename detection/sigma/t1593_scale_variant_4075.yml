@@ -1,0 +1,22 @@
+title: Search Open Websites/Domains Scale Variant 4075 Marker
+id: ddf28078-9eb4-5974-8e17-2d467113c184
+status: experimental
+description: Detects simulator telemetry for Search Open Websites/Domains scale variant
+  4075.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593
+    apt_sim.variant: attack_scale_variant_4075
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/
+tags:
+- attack.t1593

@@ -1,0 +1,22 @@
+title: Downgrade System Image Scale Variant 2713 Marker
+id: e34c46e8-4ac1-5092-a2b9-6c1c969dc9f1
+status: experimental
+description: Detects simulator telemetry for Downgrade System Image scale variant
+  2713.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601.002
+    apt_sim.variant: attack_scale_variant_2713
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/002/
+tags:
+- attack.t1601.002

@@ -1,0 +1,21 @@
+title: Dynamic Data Exchange Scale Variant 1157 Marker
+id: 50b09072-06fa-5ec5-ac01-3323b88b84a7
+status: experimental
+description: Detects simulator telemetry for Dynamic Data Exchange scale variant 1157.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.002
+    apt_sim.variant: attack_scale_variant_1157
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/002/
+tags:
+- attack.t1559.002

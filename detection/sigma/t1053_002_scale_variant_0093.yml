@@ -1,0 +1,21 @@
+title: At Scale Variant 0093 Marker
+id: 7f919952-0564-5186-934f-19a83ee6e194
+status: experimental
+description: Detects simulator telemetry for At scale variant 0093.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.002
+    apt_sim.variant: attack_scale_variant_0093
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/002/
+tags:
+- attack.t1053.002

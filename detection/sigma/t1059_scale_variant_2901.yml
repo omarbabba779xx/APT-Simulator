@@ -1,0 +1,22 @@
+title: Command and Scripting Interpreter Scale Variant 2901 Marker
+id: 09da3447-eae4-5d85-80d6-767c8ca7205a
+status: experimental
+description: Detects simulator telemetry for Command and Scripting Interpreter scale
+  variant 2901.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059
+    apt_sim.variant: attack_scale_variant_2901
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/
+tags:
+- attack.t1059

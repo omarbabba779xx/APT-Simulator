@@ -1,0 +1,21 @@
+title: Lua Scale Variant 2216 Marker
+id: 9f621bf6-2a93-5f72-b0bd-066052445772
+status: experimental
+description: Detects simulator telemetry for Lua scale variant 2216.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.011
+    apt_sim.variant: attack_scale_variant_2216
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/011/
+tags:
+- attack.t1059.011

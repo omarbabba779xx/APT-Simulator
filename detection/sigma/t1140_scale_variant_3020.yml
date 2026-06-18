@@ -1,0 +1,22 @@
+title: Deobfuscate/Decode Files or Information Scale Variant 3020 Marker
+id: e93c71ad-a5c9-594f-9f48-24fa70a3ec0d
+status: experimental
+description: Detects simulator telemetry for Deobfuscate/Decode Files or Information
+  scale variant 3020.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1140
+    apt_sim.variant: attack_scale_variant_3020
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1140/
+tags:
+- attack.t1140

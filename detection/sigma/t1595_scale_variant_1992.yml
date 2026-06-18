@@ -1,0 +1,21 @@
+title: Active Scanning Scale Variant 1992 Marker
+id: 267e00ae-76bd-54ca-a2bf-88393a5e2f30
+status: experimental
+description: Detects simulator telemetry for Active Scanning scale variant 1992.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595
+    apt_sim.variant: attack_scale_variant_1992
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/
+tags:
+- attack.t1595

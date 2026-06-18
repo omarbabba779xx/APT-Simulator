@@ -1,0 +1,21 @@
+title: Time Based Checks Scale Variant 0326 Marker
+id: 23cd26b3-7447-5539-b630-4d9510fde641
+status: experimental
+description: Detects simulator telemetry for Time Based Checks scale variant 0326.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.003
+    apt_sim.variant: attack_scale_variant_0326
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/003/
+tags:
+- attack.t1497.003

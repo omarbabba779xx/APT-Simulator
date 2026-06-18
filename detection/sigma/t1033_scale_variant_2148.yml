@@ -1,0 +1,22 @@
+title: System Owner/User Discovery Scale Variant 2148 Marker
+id: fbdafc15-f75b-576a-bf1e-f4703146dee2
+status: experimental
+description: Detects simulator telemetry for System Owner/User Discovery scale variant
+  2148.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1033
+    apt_sim.variant: attack_scale_variant_2148
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1033/
+tags:
+- attack.t1033

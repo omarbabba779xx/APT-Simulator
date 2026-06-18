@@ -1,0 +1,22 @@
+title: Windows Management Instrumentation Event Subscription Scale Variant 3155 Marker
+id: f697daed-54ee-5276-9673-b0fa5a4b502d
+status: experimental
+description: Detects simulator telemetry for Windows Management Instrumentation Event
+  Subscription scale variant 3155.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.003
+    apt_sim.variant: attack_scale_variant_3155
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/003/
+tags:
+- attack.t1546.003

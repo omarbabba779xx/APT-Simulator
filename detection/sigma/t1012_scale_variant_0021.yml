@@ -1,0 +1,21 @@
+title: Query Registry Scale Variant 0021 Marker
+id: 2eeae4af-ef83-51b4-9ab6-05a072e92006
+status: experimental
+description: Detects simulator telemetry for Query Registry scale variant 0021.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1012
+    apt_sim.variant: attack_scale_variant_0021
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1012/
+tags:
+- attack.t1012

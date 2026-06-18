@@ -1,0 +1,22 @@
+title: Gather Victim Identity Information Scale Variant 0574 Marker
+id: f80202e6-0948-5e7f-b72c-06333683a5f0
+status: experimental
+description: Detects simulator telemetry for Gather Victim Identity Information scale
+  variant 0574.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589
+    apt_sim.variant: attack_scale_variant_0574
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/
+tags:
+- attack.t1589

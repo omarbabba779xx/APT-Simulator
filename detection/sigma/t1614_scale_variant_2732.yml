@@ -1,0 +1,22 @@
+title: System Location Discovery Scale Variant 2732 Marker
+id: a20346f3-0e3e-5b35-abbc-41a44c034065
+status: experimental
+description: Detects simulator telemetry for System Location Discovery scale variant
+  2732.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1614
+    apt_sim.variant: attack_scale_variant_2732
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1614/
+tags:
+- attack.t1614

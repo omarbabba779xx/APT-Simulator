@@ -1,0 +1,21 @@
+title: Employee Names Scale Variant 0577 Marker
+id: 0fb8e735-d00b-5dd9-85e5-d01644616b8c
+status: experimental
+description: Detects simulator telemetry for Employee Names scale variant 0577.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.003
+    apt_sim.variant: attack_scale_variant_0577
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/003/
+tags:
+- attack.t1589.003

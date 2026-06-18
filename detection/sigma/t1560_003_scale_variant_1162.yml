@@ -1,0 +1,22 @@
+title: Archive via Custom Method Scale Variant 1162 Marker
+id: 42c8347a-10bb-55c9-91da-8b6518a9f703
+status: experimental
+description: Detects simulator telemetry for Archive via Custom Method scale variant
+  1162.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560.003
+    apt_sim.variant: attack_scale_variant_1162
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/003/
+tags:
+- attack.t1560.003

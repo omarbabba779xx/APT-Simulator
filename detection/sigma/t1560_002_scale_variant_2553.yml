@@ -1,0 +1,21 @@
+title: Archive via Library Scale Variant 2553 Marker
+id: 481f0481-3d4e-5cf2-b67c-e7bba57f6618
+status: experimental
+description: Detects simulator telemetry for Archive via Library scale variant 2553.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560.002
+    apt_sim.variant: attack_scale_variant_2553
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/002/
+tags:
+- attack.t1560.002

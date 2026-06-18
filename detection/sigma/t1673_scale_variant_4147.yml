@@ -1,0 +1,22 @@
+title: Virtual Machine Discovery Scale Variant 4147 Marker
+id: b92dd006-78c0-5057-ad80-ea9cb12872f2
+status: experimental
+description: Detects simulator telemetry for Virtual Machine Discovery scale variant
+  4147.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1673
+    apt_sim.variant: attack_scale_variant_4147
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1673/
+tags:
+- attack.t1673

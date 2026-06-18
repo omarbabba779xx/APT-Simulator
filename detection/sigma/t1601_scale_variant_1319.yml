@@ -1,0 +1,21 @@
+title: Modify System Image Scale Variant 1319 Marker
+id: 40f0ec96-0a56-5843-ad1e-eaf80b605d67
+status: experimental
+description: Detects simulator telemetry for Modify System Image scale variant 1319.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601
+    apt_sim.variant: attack_scale_variant_1319
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/
+tags:
+- attack.t1601

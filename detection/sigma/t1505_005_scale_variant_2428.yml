@@ -1,0 +1,21 @@
+title: Terminal Services DLL Scale Variant 2428 Marker
+id: 6aea00c4-ed21-523a-b954-d094a62f6eb1
+status: experimental
+description: Detects simulator telemetry for Terminal Services DLL scale variant 2428.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.005
+    apt_sim.variant: attack_scale_variant_2428
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/005/
+tags:
+- attack.t1505.005

@@ -1,0 +1,22 @@
+title: System Information Discovery Scale Variant 2945 Marker
+id: a4a8307f-c366-5a9b-aace-044e23f9c09e
+status: experimental
+description: Detects simulator telemetry for System Information Discovery scale variant
+  2945.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1082
+    apt_sim.variant: attack_scale_variant_2945
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1082/
+tags:
+- attack.t1082

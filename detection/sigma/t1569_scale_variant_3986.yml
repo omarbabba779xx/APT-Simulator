@@ -1,0 +1,21 @@
+title: System Services Scale Variant 3986 Marker
+id: 47f95926-fbdb-5909-90f0-fc648d8e298a
+status: experimental
+description: Detects simulator telemetry for System Services scale variant 3986.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569
+    apt_sim.variant: attack_scale_variant_3986
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/
+tags:
+- attack.t1569

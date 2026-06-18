@@ -1,0 +1,21 @@
+title: Forced Authentication Scale Variant 0937 Marker
+id: 115baf1d-d0ac-5e91-818c-95e6cc975399
+status: experimental
+description: Detects simulator telemetry for Forced Authentication scale variant 0937.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1187
+    apt_sim.variant: attack_scale_variant_0937
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1187/
+tags:
+- attack.t1187

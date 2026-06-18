@@ -1,0 +1,21 @@
+title: Tool Scale Variant 4049 Marker
+id: 081297e6-db74-55fa-b2e7-03fd9cf3a5dd
+status: experimental
+description: Detects simulator telemetry for Tool scale variant 4049.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.002
+    apt_sim.variant: attack_scale_variant_4049
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/002/
+tags:
+- attack.t1588.002

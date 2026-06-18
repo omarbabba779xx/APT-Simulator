@@ -1,0 +1,21 @@
+title: Hardware Scale Variant 0591 Marker
+id: 7894b5b9-851b-5747-801d-c33386e85dba
+status: experimental
+description: Detects simulator telemetry for Hardware scale variant 0591.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.001
+    apt_sim.variant: attack_scale_variant_0591
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/001/
+tags:
+- attack.t1592.001

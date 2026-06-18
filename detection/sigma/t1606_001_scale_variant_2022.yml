@@ -1,0 +1,21 @@
+title: Web Cookies Scale Variant 2022 Marker
+id: de207960-6ea9-57c7-994d-ce1ded471157
+status: experimental
+description: Detects simulator telemetry for Web Cookies scale variant 2022.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.001
+    apt_sim.variant: attack_scale_variant_2022
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/001/
+tags:
+- attack.t1606.001

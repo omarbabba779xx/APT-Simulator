@@ -1,0 +1,22 @@
+title: Pluggable Authentication Modules Scale Variant 0441 Marker
+id: 5cf59699-1008-5336-8b35-96e98608a37a
+status: experimental
+description: Detects simulator telemetry for Pluggable Authentication Modules scale
+  variant 0441.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.003
+    apt_sim.variant: attack_scale_variant_0441
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/003/
+tags:
+- attack.t1556.003

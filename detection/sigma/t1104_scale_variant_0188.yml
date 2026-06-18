@@ -1,0 +1,21 @@
+title: Multi-Stage Channels Scale Variant 0188 Marker
+id: 3f3b994a-fdbd-530f-a77a-8c6217612ac7
+status: experimental
+description: Detects simulator telemetry for Multi-Stage Channels scale variant 0188.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1104
+    apt_sim.variant: attack_scale_variant_0188
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1104/
+tags:
+- attack.t1104

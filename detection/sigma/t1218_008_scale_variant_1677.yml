@@ -1,0 +1,21 @@
+title: Odbcconf Scale Variant 1677 Marker
+id: 4684df03-8073-5bca-af07-77660b9f4a11
+status: experimental
+description: Detects simulator telemetry for Odbcconf scale variant 1677.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.008
+    apt_sim.variant: attack_scale_variant_1677
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/008/
+tags:
+- attack.t1218.008

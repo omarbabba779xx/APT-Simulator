@@ -1,0 +1,21 @@
+title: Command Obfuscation Scale Variant 1441 Marker
+id: 05e0b9c3-308f-5f74-ab76-0d79aae1d846
+status: experimental
+description: Detects simulator telemetry for Command Obfuscation scale variant 1441.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.010
+    apt_sim.variant: attack_scale_variant_1441
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/010/
+tags:
+- attack.t1027.010

@@ -1,0 +1,22 @@
+title: Path Interception by Unquoted Path Scale Variant 2611 Marker
+id: 5ce9941f-3d6f-531d-b111-0d383498aacf
+status: experimental
+description: Detects simulator telemetry for Path Interception by Unquoted Path scale
+  variant 2611.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.009
+    apt_sim.variant: attack_scale_variant_2611
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/009/
+tags:
+- attack.t1574.009

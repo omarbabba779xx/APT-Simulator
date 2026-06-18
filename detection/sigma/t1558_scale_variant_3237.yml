@@ -1,0 +1,22 @@
+title: Steal or Forge Kerberos Tickets Scale Variant 3237 Marker
+id: 30e6863b-566b-5e95-8da7-79e2e4408571
+status: experimental
+description: Detects simulator telemetry for Steal or Forge Kerberos Tickets scale
+  variant 3237.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558
+    apt_sim.variant: attack_scale_variant_3237
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/
+tags:
+- attack.t1558

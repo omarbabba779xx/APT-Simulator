@@ -1,0 +1,21 @@
+title: Domain Properties Scale Variant 1971 Marker
+id: 7bc83d21-6406-5b68-8654-f1afb01c6d64
+status: experimental
+description: Detects simulator telemetry for Domain Properties scale variant 1971.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.001
+    apt_sim.variant: attack_scale_variant_1971
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/001/
+tags:
+- attack.t1590.001

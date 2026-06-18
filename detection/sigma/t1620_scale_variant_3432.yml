@@ -1,0 +1,22 @@
+title: Reflective Code Loading Scale Variant 3432 Marker
+id: 58d519a3-9890-54e0-9448-23a0e7ee2c00
+status: experimental
+description: Detects simulator telemetry for Reflective Code Loading scale variant
+  3432.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1620
+    apt_sim.variant: attack_scale_variant_3432
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1620/
+tags:
+- attack.t1620

@@ -1,0 +1,21 @@
+title: Network Sniffing Scale Variant 2865 Marker
+id: 576d1d60-c74a-5baa-a993-1817f93fbead
+status: experimental
+description: Detects simulator telemetry for Network Sniffing scale variant 2865.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1040
+    apt_sim.variant: attack_scale_variant_2865
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1040/
+tags:
+- attack.t1040

@@ -1,0 +1,22 @@
+title: Credential API Hooking Scale Variant 1507 Marker
+id: cc3909e6-3d9a-5990-b85e-b56c8ba851ac
+status: experimental
+description: Detects simulator telemetry for Credential API Hooking scale variant
+  1507.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.004
+    apt_sim.variant: attack_scale_variant_1507
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/004/
+tags:
+- attack.t1056.004

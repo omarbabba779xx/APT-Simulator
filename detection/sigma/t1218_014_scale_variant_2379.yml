@@ -1,0 +1,21 @@
+title: MMC Scale Variant 2379 Marker
+id: 362058b1-d433-552c-a533-5496c0e6640c
+status: experimental
+description: Detects simulator telemetry for MMC scale variant 2379.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.014
+    apt_sim.variant: attack_scale_variant_2379
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/014/
+tags:
+- attack.t1218.014

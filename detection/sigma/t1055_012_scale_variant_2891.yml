@@ -1,0 +1,21 @@
+title: Process Hollowing Scale Variant 2891 Marker
+id: 720bb71a-d4b8-5097-9851-368ff107e4a4
+status: experimental
+description: Detects simulator telemetry for Process Hollowing scale variant 2891.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.012
+    apt_sim.variant: attack_scale_variant_2891
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/012/
+tags:
+- attack.t1055.012

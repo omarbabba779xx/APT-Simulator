@@ -1,0 +1,22 @@
+title: Virtual Private Server Scale Variant 2627 Marker
+id: aaf2025f-0748-50b9-9d08-9db272869f02
+status: experimental
+description: Detects simulator telemetry for Virtual Private Server scale variant
+  2627.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.003
+    apt_sim.variant: attack_scale_variant_2627
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/003/
+tags:
+- attack.t1583.003

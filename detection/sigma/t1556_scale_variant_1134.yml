@@ -1,0 +1,22 @@
+title: Modify Authentication Process Scale Variant 1134 Marker
+id: 179e6c15-2887-5683-8e6b-a8bafd30c40f
+status: experimental
+description: Detects simulator telemetry for Modify Authentication Process scale variant
+  1134.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556
+    apt_sim.variant: attack_scale_variant_1134
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/
+tags:
+- attack.t1556

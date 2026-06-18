@@ -1,0 +1,21 @@
+title: Video Capture Scale Variant 2992 Marker
+id: 30f08cb3-6507-55a5-bf86-6f50bab7cae8
+status: experimental
+description: Detects simulator telemetry for Video Capture scale variant 2992.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1125
+    apt_sim.variant: attack_scale_variant_2992
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1125/
+tags:
+- attack.t1125

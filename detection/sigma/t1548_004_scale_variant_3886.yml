@@ -1,0 +1,22 @@
+title: Elevated Execution with Prompt Scale Variant 3886 Marker
+id: 71ca65ab-08a8-570f-97b2-a78d55b95aa3
+status: experimental
+description: Detects simulator telemetry for Elevated Execution with Prompt scale
+  variant 3886.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.004
+    apt_sim.variant: attack_scale_variant_3886
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/004/
+tags:
+- attack.t1548.004

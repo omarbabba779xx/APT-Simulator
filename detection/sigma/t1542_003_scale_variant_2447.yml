@@ -1,0 +1,21 @@
+title: Bootkit Scale Variant 2447 Marker
+id: 262723df-128a-523a-8c16-6a3b3b392c13
+status: experimental
+description: Detects simulator telemetry for Bootkit scale variant 2447.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.003
+    apt_sim.variant: attack_scale_variant_2447
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/003/
+tags:
+- attack.t1542.003

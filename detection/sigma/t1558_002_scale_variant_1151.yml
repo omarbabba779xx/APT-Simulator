@@ -1,0 +1,21 @@
+title: Silver Ticket Scale Variant 1151 Marker
+id: 999fac72-e283-54de-a155-754f4b69b5a7
+status: experimental
+description: Detects simulator telemetry for Silver Ticket scale variant 1151.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.002
+    apt_sim.variant: attack_scale_variant_1151
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/002/
+tags:
+- attack.t1558.002

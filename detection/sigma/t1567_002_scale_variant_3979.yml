@@ -1,0 +1,22 @@
+title: Exfiltration to Cloud Storage Scale Variant 3979 Marker
+id: b54a9fe3-a21f-50d4-bde5-7e86d964921c
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Cloud Storage scale variant
+  3979.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.002
+    apt_sim.variant: attack_scale_variant_3979
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/002/
+tags:
+- attack.t1567.002

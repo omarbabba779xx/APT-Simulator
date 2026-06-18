@@ -1,0 +1,21 @@
+title: SQL Stored Procedures Scale Variant 2424 Marker
+id: c7d75d25-377a-5c73-a33a-bbabbdae10ea
+status: experimental
+description: Detects simulator telemetry for SQL Stored Procedures scale variant 2424.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.001
+    apt_sim.variant: attack_scale_variant_2424
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/001/
+tags:
+- attack.t1505.001

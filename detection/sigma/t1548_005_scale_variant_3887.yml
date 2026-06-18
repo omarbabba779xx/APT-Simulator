@@ -1,0 +1,22 @@
+title: Temporary Elevated Cloud Access Scale Variant 3887 Marker
+id: 2df7c7c7-da18-599f-b6c8-562cdacd68a2
+status: experimental
+description: Detects simulator telemetry for Temporary Elevated Cloud Access scale
+  variant 3887.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.005
+    apt_sim.variant: attack_scale_variant_3887
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/005/
+tags:
+- attack.t1548.005

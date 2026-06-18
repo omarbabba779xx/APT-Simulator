@@ -1,0 +1,22 @@
+title: Windows Remote Management Scale Variant 2819 Marker
+id: 6ab7749a-0ab4-58da-9f54-c5ba3f8ccc59
+status: experimental
+description: Detects simulator telemetry for Windows Remote Management scale variant
+  2819.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.006
+    apt_sim.variant: attack_scale_variant_2819
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/006/
+tags:
+- attack.t1021.006

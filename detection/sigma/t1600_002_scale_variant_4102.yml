@@ -1,0 +1,22 @@
+title: Disable Crypto Hardware Scale Variant 4102 Marker
+id: 29c03a00-94b7-55c2-8185-6d5631581b2f
+status: experimental
+description: Detects simulator telemetry for Disable Crypto Hardware scale variant
+  4102.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600.002
+    apt_sim.variant: attack_scale_variant_4102
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/002/
+tags:
+- attack.t1600.002

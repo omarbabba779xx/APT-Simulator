@@ -1,0 +1,21 @@
+title: Debugger Evasion Scale Variant 1346 Marker
+id: 9a89d6a4-dd07-56ca-a945-4fcb6cc1ea98
+status: experimental
+description: Detects simulator telemetry for Debugger Evasion scale variant 1346.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1622
+    apt_sim.variant: attack_scale_variant_1346
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1622/
+tags:
+- attack.t1622

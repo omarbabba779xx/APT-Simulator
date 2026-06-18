@@ -1,0 +1,21 @@
+title: Email Hiding Rules Scale Variant 1873 Marker
+id: da177b9c-577d-5467-a37b-591be48350c7
+status: experimental
+description: Detects simulator telemetry for Email Hiding Rules scale variant 1873.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.008
+    apt_sim.variant: attack_scale_variant_1873
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/008/
+tags:
+- attack.t1564.008

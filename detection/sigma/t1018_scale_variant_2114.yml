@@ -1,0 +1,22 @@
+title: Remote System Discovery Scale Variant 2114 Marker
+id: 9e639452-42e5-52f6-a342-e635a04cb205
+status: experimental
+description: Detects simulator telemetry for Remote System Discovery scale variant
+  2114.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1018
+    apt_sim.variant: attack_scale_variant_2114
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1018/
+tags:
+- attack.t1018

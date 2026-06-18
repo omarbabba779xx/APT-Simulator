@@ -1,0 +1,21 @@
+title: Email Collection Scale Variant 3679 Marker
+id: 0858b193-db7d-5dc4-b667-808a16315691
+status: experimental
+description: Detects simulator telemetry for Email Collection scale variant 3679.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114
+    apt_sim.variant: attack_scale_variant_3679
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/
+tags:
+- attack.t1114

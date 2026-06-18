@@ -1,0 +1,22 @@
+title: Application Window Discovery Scale Variant 3498 Marker
+id: 81159ed6-340a-5e1c-b59d-517b70cdefcc
+status: experimental
+description: Detects simulator telemetry for Application Window Discovery scale variant
+  3498.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1010
+    apt_sim.variant: attack_scale_variant_3498
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1010/
+tags:
+- attack.t1010

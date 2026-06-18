@@ -1,0 +1,22 @@
+title: Component Object Model Scale Variant 1156 Marker
+id: 14d11c04-6247-5f5c-8a99-41f299f2d960
+status: experimental
+description: Detects simulator telemetry for Component Object Model scale variant
+  1156.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.001
+    apt_sim.variant: attack_scale_variant_1156
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/001/
+tags:
+- attack.t1559.001

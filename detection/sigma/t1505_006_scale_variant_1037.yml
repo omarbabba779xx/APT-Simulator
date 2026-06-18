@@ -1,0 +1,22 @@
+title: vSphere Installation Bundles Scale Variant 1037 Marker
+id: ecedbd8c-7fee-55ce-b661-d88721399430
+status: experimental
+description: Detects simulator telemetry for vSphere Installation Bundles scale variant
+  1037.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.006
+    apt_sim.variant: attack_scale_variant_1037
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/006/
+tags:
+- attack.t1505.006

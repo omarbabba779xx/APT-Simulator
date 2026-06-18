@@ -1,0 +1,21 @@
+title: DHCP Spoofing Scale Variant 2539 Marker
+id: be0777f4-8f08-5e73-8307-8347e2117495
+status: experimental
+description: Detects simulator telemetry for DHCP Spoofing scale variant 2539.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.003
+    apt_sim.variant: attack_scale_variant_2539
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/003/
+tags:
+- attack.t1557.003

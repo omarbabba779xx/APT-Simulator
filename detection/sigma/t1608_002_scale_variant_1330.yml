@@ -1,0 +1,21 @@
+title: Upload Tool Scale Variant 1330 Marker
+id: cbfd56a2-abbd-5364-97f0-aaaefe5f04b7
+status: experimental
+description: Detects simulator telemetry for Upload Tool scale variant 1330.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.002
+    apt_sim.variant: attack_scale_variant_1330
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/002/
+tags:
+- attack.t1608.002

@@ -1,0 +1,21 @@
+title: Gatekeeper Bypass Scale Variant 3904 Marker
+id: 6a7ac11f-c26b-5fee-9963-ccdb3fbd1dff
+status: experimental
+description: Detects simulator telemetry for Gatekeeper Bypass scale variant 3904.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.001
+    apt_sim.variant: attack_scale_variant_3904
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/001/
+tags:
+- attack.t1553.001

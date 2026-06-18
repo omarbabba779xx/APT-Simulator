@@ -1,0 +1,21 @@
+title: Browser Extensions Scale Variant 1630 Marker
+id: 9650ec22-dc5b-512a-b063-66f385113446
+status: experimental
+description: Detects simulator telemetry for Browser Extensions scale variant 1630.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1176.001
+    apt_sim.variant: attack_scale_variant_1630
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1176/001/
+tags:
+- attack.t1176.001

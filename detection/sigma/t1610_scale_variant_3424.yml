@@ -1,0 +1,21 @@
+title: Deploy Container Scale Variant 3424 Marker
+id: 0b8c9eef-e1cd-5101-b0cb-93979d3a6be5
+status: experimental
+description: Detects simulator telemetry for Deploy Container scale variant 3424.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1610
+    apt_sim.variant: attack_scale_variant_3424
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1610/
+tags:
+- attack.t1610

@@ -1,0 +1,22 @@
+title: Exfiltration Over Web Service Scale Variant 0497 Marker
+id: 499da834-2517-52a0-9e2e-3a869146a8ff
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Web Service scale variant
+  0497.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567
+    apt_sim.variant: attack_scale_variant_0497
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/
+tags:
+- attack.t1567

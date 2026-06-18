@@ -1,0 +1,21 @@
+title: ROMMONkit Scale Variant 2448 Marker
+id: 32fc9895-ecaf-51e0-8447-0bea79e4eb40
+status: experimental
+description: Detects simulator telemetry for ROMMONkit scale variant 2448.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.004
+    apt_sim.variant: attack_scale_variant_2448
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/004/
+tags:
+- attack.t1542.004

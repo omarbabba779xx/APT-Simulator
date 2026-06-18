@@ -1,0 +1,22 @@
+title: System Location Discovery Scale Variant 3428 Marker
+id: b159a7d3-1c67-5ade-8fff-84f4a8fda95d
+status: experimental
+description: Detects simulator telemetry for System Location Discovery scale variant
+  3428.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1614
+    apt_sim.variant: attack_scale_variant_3428
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1614/
+tags:
+- attack.t1614

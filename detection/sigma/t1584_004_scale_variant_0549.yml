@@ -1,0 +1,21 @@
+title: Server Scale Variant 0549 Marker
+id: 29cb29e7-f6ff-5bcb-b006-5f326e7343a7
+status: experimental
+description: Detects simulator telemetry for Server scale variant 0549.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.004
+    apt_sim.variant: attack_scale_variant_0549
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/004/
+tags:
+- attack.t1584.004

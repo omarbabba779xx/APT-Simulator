@@ -1,0 +1,21 @@
+title: SSH Hijacking Scale Variant 1167 Marker
+id: dcffaa6d-bf8a-5778-9370-f340c2ac269a
+status: experimental
+description: Detects simulator telemetry for SSH Hijacking scale variant 1167.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563.001
+    apt_sim.variant: attack_scale_variant_1167
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/001/
+tags:
+- attack.t1563.001

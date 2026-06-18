@@ -1,0 +1,21 @@
+title: Tool Scale Variant 2657 Marker
+id: 7f29e02b-fe82-5225-9c35-4ca3718eaa09
+status: experimental
+description: Detects simulator telemetry for Tool scale variant 2657.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.002
+    apt_sim.variant: attack_scale_variant_2657
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/002/
+tags:
+- attack.t1588.002

@@ -8,12 +8,12 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 
 | Area | Current state |
 | --- | --- |
-| Coverage catalog | 851 TTPs mapped to ATT&CK Enterprise techniques and variants |
+| Coverage catalog | 5,000 TTPs mapped to ATT&CK Enterprise techniques and variants |
 | Scenario library | 2,511 loaded scenarios available to the API and dashboard |
 | Scenario sources | 11 classic YAML scenarios plus 2,500 generated YAML scenarios |
 | Variant space | 15,680,015,680 generable scenario variants |
-| Detection content | 851 Sigma rules with coverage metadata |
-| ATT&CK scope | 14 ATT&CK Enterprise tactics covered |
+| Detection content | 5,000 Sigma rules with coverage metadata |
+| ATT&CK scope | 14/14 ATT&CK Enterprise tactics covered, with scale at TTP and rule level |
 | Safety default | Dry-run and marker-only behavior for generated scale coverage |
 
 ```mermaid
@@ -30,16 +30,19 @@ flowchart LR
 
 ## Exact Current Counts
 
-- 851 TTPs
+- 5,000 TTPs
 - 2,511 loaded scenarios
 - 11 classic YAML scenarios
 - 2,500 generated YAML scenarios
 - 15,680,015,680 generable scenario variants
-- 851 Sigma rules
-- 14 ATT&CK Enterprise tactics covered
+- 5,000 Sigma rules
+- 14/14 ATT&CK Enterprise tactics covered
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
+- 4,149 ATT&CK scale variants in the `attack_scale_variants` pack
 
 The 2,511 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+
+The ATT&CK Enterprise tactic layer has 14 tactics in this project model, so the advanced scale is expressed through TTP-level coverage: techniques, sub-techniques, platform variants, telemetry-source variants, SIEM-format variants, and fidelity variants.
 
 ## Runtime Graph
 
@@ -303,7 +306,7 @@ node --check orchestrator/static/app.js
 
 Conformance tests verify:
 
-- TTP count is exactly 851.
+- TTP count is exactly 5,000.
 - Loaded scenario count is exactly 2,511.
 - README count statements match the current implementation.
 - Public text files do not include forbidden public tooling markers.

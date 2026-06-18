@@ -1,0 +1,21 @@
+title: Fallback Channels Scale Variant 3497 Marker
+id: 98aac38f-8cfe-5dbc-b520-51e39ee68cdc
+status: experimental
+description: Detects simulator telemetry for Fallback Channels scale variant 3497.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1008
+    apt_sim.variant: attack_scale_variant_3497
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1008/
+tags:
+- attack.t1008

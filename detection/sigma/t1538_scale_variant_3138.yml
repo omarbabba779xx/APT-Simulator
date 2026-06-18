@@ -1,0 +1,22 @@
+title: Cloud Service Dashboard Scale Variant 3138 Marker
+id: f808f11e-a6e5-5a13-8379-c3745d3e1605
+status: experimental
+description: Detects simulator telemetry for Cloud Service Dashboard scale variant
+  3138.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1538
+    apt_sim.variant: attack_scale_variant_3138
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1538/
+tags:
+- attack.t1538

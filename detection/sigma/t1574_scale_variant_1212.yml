@@ -1,0 +1,21 @@
+title: Hijack Execution Flow Scale Variant 1212 Marker
+id: 2d73c1cb-f59b-5785-a098-7741202bb77f
+status: experimental
+description: Detects simulator telemetry for Hijack Execution Flow scale variant 1212.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574
+    apt_sim.variant: attack_scale_variant_1212
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/
+tags:
+- attack.t1574

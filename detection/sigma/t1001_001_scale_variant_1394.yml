@@ -1,0 +1,21 @@
+title: Junk Data Scale Variant 1394 Marker
+id: 32a42513-df8e-5859-af27-7530bc7fc4ac
+status: experimental
+description: Detects simulator telemetry for Junk Data scale variant 1394.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.001
+    apt_sim.variant: attack_scale_variant_1394
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/001/
+tags:
+- attack.t1001.001

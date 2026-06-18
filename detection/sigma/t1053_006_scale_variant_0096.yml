@@ -1,0 +1,21 @@
+title: Systemd Timers Scale Variant 0096 Marker
+id: d801c362-b4a1-5641-83ab-bd580e347ad4
+status: experimental
+description: Detects simulator telemetry for Systemd Timers scale variant 0096.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.006
+    apt_sim.variant: attack_scale_variant_0096
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/006/
+tags:
+- attack.t1053.006

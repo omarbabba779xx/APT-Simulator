@@ -1,0 +1,21 @@
+title: Scheduled Task Scale Variant 0791 Marker
+id: a8aadac6-eb88-55dc-a89f-d0d4389ca38c
+status: experimental
+description: Detects simulator telemetry for Scheduled Task scale variant 0791.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.005
+    apt_sim.variant: attack_scale_variant_0791
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/005/
+tags:
+- attack.t1053.005

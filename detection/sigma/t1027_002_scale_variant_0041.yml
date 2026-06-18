@@ -1,0 +1,21 @@
+title: Software Packing Scale Variant 0041 Marker
+id: 88d96dde-193d-5155-8991-a925af9e8974
+status: experimental
+description: Detects simulator telemetry for Software Packing scale variant 0041.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.002
+    apt_sim.variant: attack_scale_variant_0041
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/002/
+tags:
+- attack.t1027.002

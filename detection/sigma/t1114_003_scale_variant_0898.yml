@@ -1,0 +1,21 @@
+title: Email Forwarding Rule Scale Variant 0898 Marker
+id: f6b1076f-e2d3-579b-a2ec-0df925e05a9e
+status: experimental
+description: Detects simulator telemetry for Email Forwarding Rule scale variant 0898.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.003
+    apt_sim.variant: attack_scale_variant_0898
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/003/
+tags:
+- attack.t1114.003

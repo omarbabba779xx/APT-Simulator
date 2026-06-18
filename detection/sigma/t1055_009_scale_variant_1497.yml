@@ -1,0 +1,21 @@
+title: Proc Memory Scale Variant 1497 Marker
+id: 2b76ac34-f179-5bbf-8a7e-37491f555f91
+status: experimental
+description: Detects simulator telemetry for Proc Memory scale variant 1497.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.009
+    apt_sim.variant: attack_scale_variant_1497
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/009/
+tags:
+- attack.t1055.009

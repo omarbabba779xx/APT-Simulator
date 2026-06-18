@@ -1,0 +1,21 @@
+title: Selective Exclusion Scale Variant 2760 Marker
+id: 37df887f-2b91-59d2-88a6-c18d019c62f6
+status: experimental
+description: Detects simulator telemetry for Selective Exclusion scale variant 2760.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1679
+    apt_sim.variant: attack_scale_variant_2760
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1679/
+tags:
+- attack.t1679

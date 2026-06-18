@@ -1,0 +1,21 @@
+title: Email Hiding Rules Scale Variant 3265 Marker
+id: 70f87e8a-d5de-596b-8188-a61f7e5e3d33
+status: experimental
+description: Detects simulator telemetry for Email Hiding Rules scale variant 3265.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.008
+    apt_sim.variant: attack_scale_variant_3265
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/008/
+tags:
+- attack.t1564.008

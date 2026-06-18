@@ -1,0 +1,21 @@
+title: Transport Agent Scale Variant 1033 Marker
+id: 43d5c73a-dc2d-56b5-9fd3-9773c6d0a144
+status: experimental
+description: Detects simulator telemetry for Transport Agent scale variant 1033.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.002
+    apt_sim.variant: attack_scale_variant_1033
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/002/
+tags:
+- attack.t1505.002

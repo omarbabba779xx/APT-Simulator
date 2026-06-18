@@ -1,0 +1,21 @@
+title: Network Device CLI Scale Variant 3605 Marker
+id: 0484995e-c7f8-5574-8ca7-b713d76b601a
+status: experimental
+description: Detects simulator telemetry for Network Device CLI scale variant 3605.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.008
+    apt_sim.variant: attack_scale_variant_3605
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/008/
+tags:
+- attack.t1059.008

@@ -1,0 +1,21 @@
+title: Login Hook Scale Variant 2164 Marker
+id: 347a422a-5927-56bf-97b7-04a79486fd80
+status: experimental
+description: Detects simulator telemetry for Login Hook scale variant 2164.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.002
+    apt_sim.variant: attack_scale_variant_2164
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/002/
+tags:
+- attack.t1037.002

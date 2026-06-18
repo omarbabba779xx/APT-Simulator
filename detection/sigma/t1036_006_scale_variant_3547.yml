@@ -1,0 +1,21 @@
+title: Space after Filename Scale Variant 3547 Marker
+id: c0322f90-7ef2-5885-bbef-65a18a8cb8b8
+status: experimental
+description: Detects simulator telemetry for Space after Filename scale variant 3547.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.006
+    apt_sim.variant: attack_scale_variant_3547
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/006/
+tags:
+- attack.t1036.006

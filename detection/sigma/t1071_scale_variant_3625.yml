@@ -1,0 +1,22 @@
+title: Application Layer Protocol Scale Variant 3625 Marker
+id: 3d882c7d-8dae-5ab0-9425-ee263817b39d
+status: experimental
+description: Detects simulator telemetry for Application Layer Protocol scale variant
+  3625.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071
+    apt_sim.variant: attack_scale_variant_3625
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/
+tags:
+- attack.t1071

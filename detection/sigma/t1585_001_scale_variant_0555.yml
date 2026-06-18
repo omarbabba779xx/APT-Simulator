@@ -1,0 +1,21 @@
+title: Social Media Accounts Scale Variant 0555 Marker
+id: dfd65e72-70ba-5efe-a99c-fac6b9b3cf03
+status: experimental
+description: Detects simulator telemetry for Social Media Accounts scale variant 0555.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.001
+    apt_sim.variant: attack_scale_variant_0555
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/001/
+tags:
+- attack.t1585.001

@@ -1,0 +1,22 @@
+title: Protocol or Service Impersonation Scale Variant 1396 Marker
+id: a9cddd71-f40f-50c4-a11e-fa9f532a1407
+status: experimental
+description: Detects simulator telemetry for Protocol or Service Impersonation scale
+  variant 1396.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.003
+    apt_sim.variant: attack_scale_variant_1396
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/003/
+tags:
+- attack.t1001.003

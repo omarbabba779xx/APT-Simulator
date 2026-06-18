@@ -1,0 +1,22 @@
+title: Exfiltration Over Bluetooth Scale Variant 2804 Marker
+id: b9e67a42-9056-5819-873c-9c97f3779de9
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Bluetooth scale variant
+  2804.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1011.001
+    apt_sim.variant: attack_scale_variant_2804
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1011/001/
+tags:
+- attack.t1011.001

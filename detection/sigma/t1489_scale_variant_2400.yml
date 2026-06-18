@@ -1,0 +1,21 @@
+title: Service Stop Scale Variant 2400 Marker
+id: 8cc8c0c5-d960-5d09-865b-8bae27ea32ac
+status: experimental
+description: Detects simulator telemetry for Service Stop scale variant 2400.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1489
+    apt_sim.variant: attack_scale_variant_2400
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1489/
+tags:
+- attack.t1489

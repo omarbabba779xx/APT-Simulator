@@ -1,0 +1,22 @@
+title: Cloud Secrets Management Stores Scale Variant 1829 Marker
+id: 52010f98-9ce4-5ef9-b968-1eaee70eb0b7
+status: experimental
+description: Detects simulator telemetry for Cloud Secrets Management Stores scale
+  variant 1829.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.006
+    apt_sim.variant: attack_scale_variant_1829
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/006/
+tags:
+- attack.t1555.006

@@ -1,0 +1,21 @@
+title: Tool Scale Variant 1961 Marker
+id: cac3cee6-ab91-5701-a358-dc3d557c4f4c
+status: experimental
+description: Detects simulator telemetry for Tool scale variant 1961.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.002
+    apt_sim.variant: attack_scale_variant_1961
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/002/
+tags:
+- attack.t1588.002

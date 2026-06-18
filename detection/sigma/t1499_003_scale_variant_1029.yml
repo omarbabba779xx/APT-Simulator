@@ -1,0 +1,22 @@
+title: Application Exhaustion Flood Scale Variant 1029 Marker
+id: 397dd420-80d4-5f5f-841b-2383f817c2c1
+status: experimental
+description: Detects simulator telemetry for Application Exhaustion Flood scale variant
+  1029.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.003
+    apt_sim.variant: attack_scale_variant_1029
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/003/
+tags:
+- attack.t1499.003

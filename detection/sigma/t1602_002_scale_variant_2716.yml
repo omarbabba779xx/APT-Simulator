@@ -1,0 +1,22 @@
+title: Network Device Configuration Dump Scale Variant 2716 Marker
+id: 3df581c5-cb5d-5ac5-9344-04fb536294b0
+status: experimental
+description: Detects simulator telemetry for Network Device Configuration Dump scale
+  variant 2716.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.002
+    apt_sim.variant: attack_scale_variant_2716
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/002/
+tags:
+- attack.t1602.002

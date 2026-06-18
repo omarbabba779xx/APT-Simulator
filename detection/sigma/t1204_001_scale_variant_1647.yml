@@ -1,0 +1,21 @@
+title: Malicious Link Scale Variant 1647 Marker
+id: a79e53a6-60c5-5a25-b28a-4b78dd973f9c
+status: experimental
+description: Detects simulator telemetry for Malicious Link scale variant 1647.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.001
+    apt_sim.variant: attack_scale_variant_1647
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/001/
+tags:
+- attack.t1204.001

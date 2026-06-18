@@ -1,0 +1,21 @@
+title: Screen Capture Scale Variant 0198 Marker
+id: 6a537a11-6c86-5f24-9a6d-484126119228
+status: experimental
+description: Detects simulator telemetry for Screen Capture scale variant 0198.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1113
+    apt_sim.variant: attack_scale_variant_0198
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1113/
+tags:
+- attack.t1113

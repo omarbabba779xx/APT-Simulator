@@ -1,0 +1,21 @@
+title: ListPlanting Scale Variant 0110 Marker
+id: e49d8e59-f8a3-5bfd-b6b7-d0926f310b6d
+status: experimental
+description: Detects simulator telemetry for ListPlanting scale variant 0110.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.015
+    apt_sim.variant: attack_scale_variant_0110
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/015/
+tags:
+- attack.t1055.015

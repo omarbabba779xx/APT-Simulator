@@ -1,0 +1,21 @@
+title: User Execution Scale Variant 3734 Marker
+id: cb842df1-00de-5b50-b968-0d6d03890cdb
+status: experimental
+description: Detects simulator telemetry for User Execution scale variant 3734.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204
+    apt_sim.variant: attack_scale_variant_3734
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/
+tags:
+- attack.t1204

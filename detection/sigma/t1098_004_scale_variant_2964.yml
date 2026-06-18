@@ -1,0 +1,21 @@
+title: SSH Authorized Keys Scale Variant 2964 Marker
+id: 5e9065ed-4f0f-5c01-9cbc-46933746cbe0
+status: experimental
+description: Detects simulator telemetry for SSH Authorized Keys scale variant 2964.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.004
+    apt_sim.variant: attack_scale_variant_2964
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/004/
+tags:
+- attack.t1098.004

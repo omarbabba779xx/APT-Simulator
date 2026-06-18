@@ -1,0 +1,21 @@
+title: VNC Scale Variant 3514 Marker
+id: d7bfce12-b869-59a7-87db-964d1804a625
+status: experimental
+description: Detects simulator telemetry for VNC scale variant 3514.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.005
+    apt_sim.variant: attack_scale_variant_3514
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/005/
+tags:
+- attack.t1021.005

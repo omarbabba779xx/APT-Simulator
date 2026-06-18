@@ -1,0 +1,21 @@
+title: Dylib Hijacking Scale Variant 3302 Marker
+id: 7e86e5b8-aabb-5e05-8282-5c51eb7f23e3
+status: experimental
+description: Detects simulator telemetry for Dylib Hijacking scale variant 3302.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.004
+    apt_sim.variant: attack_scale_variant_3302
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/004/
+tags:
+- attack.t1574.004

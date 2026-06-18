@@ -1,0 +1,22 @@
+title: Masquerade Account Name Scale Variant 1463 Marker
+id: 3edfc042-9f2a-5f88-acfa-a51a09e6348c
+status: experimental
+description: Detects simulator telemetry for Masquerade Account Name scale variant
+  1463.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.010
+    apt_sim.variant: attack_scale_variant_1463
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/010/
+tags:
+- attack.t1036.010

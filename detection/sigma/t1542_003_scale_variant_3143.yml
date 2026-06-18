@@ -1,0 +1,21 @@
+title: Bootkit Scale Variant 3143 Marker
+id: c784b637-ffac-5f12-b916-7cdb0232c52f
+status: experimental
+description: Detects simulator telemetry for Bootkit scale variant 3143.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.003
+    apt_sim.variant: attack_scale_variant_3143
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/003/
+tags:
+- attack.t1542.003

@@ -1,0 +1,21 @@
+title: Service Stop Scale Variant 3096 Marker
+id: ac9f9127-e458-5c67-8fd5-16cda4ce337a
+status: experimental
+description: Detects simulator telemetry for Service Stop scale variant 3096.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1489
+    apt_sim.variant: attack_scale_variant_3096
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1489/
+tags:
+- attack.t1489

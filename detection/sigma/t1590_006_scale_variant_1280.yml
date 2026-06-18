@@ -1,0 +1,22 @@
+title: Network Security Appliances Scale Variant 1280 Marker
+id: 3299a8b5-d5d0-55c1-bff7-e4cddf0e2af2
+status: experimental
+description: Detects simulator telemetry for Network Security Appliances scale variant
+  1280.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.006
+    apt_sim.variant: attack_scale_variant_1280
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/006/
+tags:
+- attack.t1590.006

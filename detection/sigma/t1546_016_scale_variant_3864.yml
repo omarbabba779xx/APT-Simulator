@@ -1,0 +1,21 @@
+title: Installer Packages Scale Variant 3864 Marker
+id: 2d73e775-d1ac-5ab6-8c24-ce7efecc667f
+status: experimental
+description: Detects simulator telemetry for Installer Packages scale variant 3864.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.016
+    apt_sim.variant: attack_scale_variant_3864
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/016/
+tags:
+- attack.t1546.016

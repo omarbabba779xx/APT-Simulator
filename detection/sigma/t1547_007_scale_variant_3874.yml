@@ -1,0 +1,22 @@
+title: Re-opened Applications Scale Variant 3874 Marker
+id: b8bae6a2-6a83-535b-b365-566ce2c358db
+status: experimental
+description: Detects simulator telemetry for Re-opened Applications scale variant
+  3874.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.007
+    apt_sim.variant: attack_scale_variant_3874
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/007/
+tags:
+- attack.t1547.007

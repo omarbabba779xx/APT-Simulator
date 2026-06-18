@@ -1,0 +1,21 @@
+title: DNS Scale Variant 2237 Marker
+id: 5a853cda-5fe4-5182-b686-243846ab0070
+status: experimental
+description: Detects simulator telemetry for DNS scale variant 2237.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.004
+    apt_sim.variant: attack_scale_variant_2237
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/004/
+tags:
+- attack.t1071.004

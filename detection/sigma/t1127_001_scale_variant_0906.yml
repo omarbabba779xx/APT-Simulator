@@ -1,0 +1,21 @@
+title: MSBuild Scale Variant 0906 Marker
+id: caaef733-10c6-5015-96b6-a71fcd894564
+status: experimental
+description: Detects simulator telemetry for MSBuild scale variant 0906.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.001
+    apt_sim.variant: attack_scale_variant_0906
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/001/
+tags:
+- attack.t1127.001

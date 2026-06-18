@@ -1,0 +1,22 @@
+title: Domain Trust Discovery Scale Variant 1001 Marker
+id: 620f136b-238a-5728-b3ff-31c765b5a177
+status: experimental
+description: Detects simulator telemetry for Domain Trust Discovery scale variant
+  1001.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1482
+    apt_sim.variant: attack_scale_variant_1001
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1482/
+tags:
+- attack.t1482

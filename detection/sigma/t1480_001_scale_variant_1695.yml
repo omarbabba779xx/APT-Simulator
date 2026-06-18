@@ -1,0 +1,21 @@
+title: Environmental Keying Scale Variant 1695 Marker
+id: 1e92720e-eccb-5bd8-9ad9-e32380a9e38b
+status: experimental
+description: Detects simulator telemetry for Environmental Keying scale variant 1695.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.001
+    apt_sim.variant: attack_scale_variant_1695
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/001/
+tags:
+- attack.t1480.001

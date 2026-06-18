@@ -1,0 +1,22 @@
+title: Obfuscated Files or Information Scale Variant 1431 Marker
+id: 420fe36b-70c6-5b3a-a11b-0841d16a5149
+status: experimental
+description: Detects simulator telemetry for Obfuscated Files or Information scale
+  variant 1431.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027
+    apt_sim.variant: attack_scale_variant_1431
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/
+tags:
+- attack.t1027

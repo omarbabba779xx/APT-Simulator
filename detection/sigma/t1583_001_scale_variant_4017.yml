@@ -1,0 +1,21 @@
+title: Domains Scale Variant 4017 Marker
+id: 37d941a7-df51-5016-bf18-14c54de8b636
+status: experimental
+description: Detects simulator telemetry for Domains scale variant 4017.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.001
+    apt_sim.variant: attack_scale_variant_4017
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/001/
+tags:
+- attack.t1583.001

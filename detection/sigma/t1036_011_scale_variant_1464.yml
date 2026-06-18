@@ -1,0 +1,22 @@
+title: Overwrite Process Arguments Scale Variant 1464 Marker
+id: 5a0aeb3a-2876-500c-8d48-5444f039a48a
+status: experimental
+description: Detects simulator telemetry for Overwrite Process Arguments scale variant
+  1464.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.011
+    apt_sim.variant: attack_scale_variant_1464
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/011/
+tags:
+- attack.t1036.011

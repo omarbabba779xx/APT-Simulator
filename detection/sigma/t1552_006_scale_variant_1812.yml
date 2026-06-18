@@ -1,0 +1,22 @@
+title: Group Policy Preferences Scale Variant 1812 Marker
+id: 9cb2dfac-2c07-50ca-8850-4151a79c7a54
+status: experimental
+description: Detects simulator telemetry for Group Policy Preferences scale variant
+  1812.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.006
+    apt_sim.variant: attack_scale_variant_1812
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/006/
+tags:
+- attack.t1552.006

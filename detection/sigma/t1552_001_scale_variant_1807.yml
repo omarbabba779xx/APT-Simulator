@@ -1,0 +1,21 @@
+title: Credentials In Files Scale Variant 1807 Marker
+id: 9a06aeb3-3797-5163-91c0-b4ae2444fc67
+status: experimental
+description: Detects simulator telemetry for Credentials In Files scale variant 1807.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.001
+    apt_sim.variant: attack_scale_variant_1807
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/001/
+tags:
+- attack.t1552.001

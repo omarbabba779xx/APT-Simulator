@@ -1,0 +1,22 @@
+title: Hidden Files and Directories Scale Variant 3258 Marker
+id: 3b87260a-fcd7-5241-94af-738c1a5ef9fa
+status: experimental
+description: Detects simulator telemetry for Hidden Files and Directories scale variant
+  3258.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.001
+    apt_sim.variant: attack_scale_variant_3258
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/001/
+tags:
+- attack.t1564.001

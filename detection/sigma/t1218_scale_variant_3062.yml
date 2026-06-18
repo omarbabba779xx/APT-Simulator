@@ -1,0 +1,22 @@
+title: System Binary Proxy Execution Scale Variant 3062 Marker
+id: 9ac462c8-c9a5-5012-a159-f568f7a7b670
+status: experimental
+description: Detects simulator telemetry for System Binary Proxy Execution scale variant
+  3062.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218
+    apt_sim.variant: attack_scale_variant_3062
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/
+tags:
+- attack.t1218

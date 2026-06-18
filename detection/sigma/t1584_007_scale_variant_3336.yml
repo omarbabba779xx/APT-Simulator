@@ -1,0 +1,21 @@
+title: Serverless Scale Variant 3336 Marker
+id: d1746bd2-a1fa-5f8d-847c-daf4c1f2836a
+status: experimental
+description: Detects simulator telemetry for Serverless scale variant 3336.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.007
+    apt_sim.variant: attack_scale_variant_3336
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/007/
+tags:
+- attack.t1584.007

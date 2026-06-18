@@ -1,0 +1,21 @@
+title: CMSTP Scale Variant 0281 Marker
+id: 5e20bdb4-075c-5a7c-a30a-93a4c7f311b5
+status: experimental
+description: Detects simulator telemetry for CMSTP scale variant 0281.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.003
+    apt_sim.variant: attack_scale_variant_0281
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/003/
+tags:
+- attack.t1218.003

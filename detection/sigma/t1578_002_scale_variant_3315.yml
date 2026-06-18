@@ -1,0 +1,21 @@
+title: Create Cloud Instance Scale Variant 3315 Marker
+id: 0be4f199-c4bf-5a3f-beea-486506f1fe6c
+status: experimental
+description: Detects simulator telemetry for Create Cloud Instance scale variant 3315.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.002
+    apt_sim.variant: attack_scale_variant_3315
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/002/
+tags:
+- attack.t1578.002

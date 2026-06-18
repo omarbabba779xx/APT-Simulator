@@ -1,0 +1,21 @@
+title: Spearphishing Link Scale Variant 3400 Marker
+id: 972b01a4-188c-54f2-896d-52e865f17be5
+status: experimental
+description: Detects simulator telemetry for Spearphishing Link scale variant 3400.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.003
+    apt_sim.variant: attack_scale_variant_3400
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/003/
+tags:
+- attack.t1598.003

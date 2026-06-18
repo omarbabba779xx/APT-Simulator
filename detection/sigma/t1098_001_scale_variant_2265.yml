@@ -1,0 +1,22 @@
+title: Additional Cloud Credentials Scale Variant 2265 Marker
+id: a856966c-bd5b-523f-b566-18cf209cd655
+status: experimental
+description: Detects simulator telemetry for Additional Cloud Credentials scale variant
+  2265.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.001
+    apt_sim.variant: attack_scale_variant_2265
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/001/
+tags:
+- attack.t1098.001

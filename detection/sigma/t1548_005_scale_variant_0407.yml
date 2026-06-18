@@ -1,0 +1,22 @@
+title: Temporary Elevated Cloud Access Scale Variant 0407 Marker
+id: 164743b1-fa47-5acd-9e00-db83f2aab829
+status: experimental
+description: Detects simulator telemetry for Temporary Elevated Cloud Access scale
+  variant 0407.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.005
+    apt_sim.variant: attack_scale_variant_0407
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/005/
+tags:
+- attack.t1548.005

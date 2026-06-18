@@ -1,0 +1,22 @@
+title: Virtual Private Server Scale Variant 3323 Marker
+id: b0d74fc6-2ab1-5183-863a-4b4c893623a7
+status: experimental
+description: Detects simulator telemetry for Virtual Private Server scale variant
+  3323.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.003
+    apt_sim.variant: attack_scale_variant_3323
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/003/
+tags:
+- attack.t1583.003

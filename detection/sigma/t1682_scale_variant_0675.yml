@@ -1,0 +1,22 @@
+title: Query Public AI Services Scale Variant 0675 Marker
+id: 3505e6a9-1aa8-5113-a551-508f6fec2ec3
+status: experimental
+description: Detects simulator telemetry for Query Public AI Services scale variant
+  0675.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1682
+    apt_sim.variant: attack_scale_variant_0675
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1682/
+tags:
+- attack.t1682

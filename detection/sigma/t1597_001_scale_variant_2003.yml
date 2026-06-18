@@ -1,0 +1,21 @@
+title: Threat Intel Vendors Scale Variant 2003 Marker
+id: 418b9623-fa8d-5c17-abeb-739e47df07a2
+status: experimental
+description: Detects simulator telemetry for Threat Intel Vendors scale variant 2003.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.001
+    apt_sim.variant: attack_scale_variant_2003
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/001/
+tags:
+- attack.t1597.001

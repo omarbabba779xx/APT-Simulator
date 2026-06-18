@@ -1,0 +1,22 @@
+title: Re-opened Applications Scale Variant 3178 Marker
+id: 6eef565b-5220-5172-9116-3b6d4d8d8753
+status: experimental
+description: Detects simulator telemetry for Re-opened Applications scale variant
+  3178.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.007
+    apt_sim.variant: attack_scale_variant_3178
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/007/
+tags:
+- attack.t1547.007

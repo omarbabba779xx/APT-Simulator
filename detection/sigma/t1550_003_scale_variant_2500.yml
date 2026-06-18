@@ -1,0 +1,21 @@
+title: Pass the Ticket Scale Variant 2500 Marker
+id: 2a979d36-9695-5bc1-bb77-7a5e00bd71fd
+status: experimental
+description: Detects simulator telemetry for Pass the Ticket scale variant 2500.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550.003
+    apt_sim.variant: attack_scale_variant_2500
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/003/
+tags:
+- attack.t1550.003

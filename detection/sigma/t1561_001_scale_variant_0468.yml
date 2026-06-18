@@ -1,0 +1,21 @@
+title: Disk Content Wipe Scale Variant 0468 Marker
+id: 002c0bd5-f23a-5604-b097-9a54e9c9d993
+status: experimental
+description: Detects simulator telemetry for Disk Content Wipe scale variant 0468.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.001
+    apt_sim.variant: attack_scale_variant_0468
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/001/
+tags:
+- attack.t1561.001

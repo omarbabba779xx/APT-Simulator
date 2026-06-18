@@ -1,0 +1,22 @@
+title: Create or Modify System Process Scale Variant 1058 Marker
+id: 5c222c1b-0620-5b7a-99d3-f3ed71530f7e
+status: experimental
+description: Detects simulator telemetry for Create or Modify System Process scale
+  variant 1058.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543
+    apt_sim.variant: attack_scale_variant_1058
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/
+tags:
+- attack.t1543

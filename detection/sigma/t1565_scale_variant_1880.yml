@@ -1,0 +1,21 @@
+title: Data Manipulation Scale Variant 1880 Marker
+id: afc76c7d-63c1-52a3-812d-710aaea6e80d
+status: experimental
+description: Detects simulator telemetry for Data Manipulation scale variant 1880.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565
+    apt_sim.variant: attack_scale_variant_1880
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/
+tags:
+- attack.t1565

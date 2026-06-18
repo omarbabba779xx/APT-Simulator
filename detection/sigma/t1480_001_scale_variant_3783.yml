@@ -1,0 +1,21 @@
+title: Environmental Keying Scale Variant 3783 Marker
+id: 9edfce0c-4719-51fe-9445-7a8b29b6c6ea
+status: experimental
+description: Detects simulator telemetry for Environmental Keying scale variant 3783.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.001
+    apt_sim.variant: attack_scale_variant_3783
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/001/
+tags:
+- attack.t1480.001

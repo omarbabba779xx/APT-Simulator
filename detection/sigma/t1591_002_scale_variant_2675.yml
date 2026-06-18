@@ -1,0 +1,22 @@
+title: Business Relationships Scale Variant 2675 Marker
+id: 33f2fd7f-e2d4-5b76-92bb-24a03f4ff710
+status: experimental
+description: Detects simulator telemetry for Business Relationships scale variant
+  2675.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.002
+    apt_sim.variant: attack_scale_variant_2675
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/002/
+tags:
+- attack.t1591.002

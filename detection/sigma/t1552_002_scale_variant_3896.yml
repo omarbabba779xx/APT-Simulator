@@ -1,0 +1,22 @@
+title: Credentials in Registry Scale Variant 3896 Marker
+id: 9d482bd2-347a-55ab-8d4f-25b9f09e96cd
+status: experimental
+description: Detects simulator telemetry for Credentials in Registry scale variant
+  3896.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.002
+    apt_sim.variant: attack_scale_variant_3896
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/002/
+tags:
+- attack.t1552.002

@@ -1,0 +1,21 @@
+title: Golden Ticket Scale Variant 0454 Marker
+id: 6979795f-0e2b-51d4-8ba3-ac2bca3f28f9
+status: experimental
+description: Detects simulator telemetry for Golden Ticket scale variant 0454.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.001
+    apt_sim.variant: attack_scale_variant_0454
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/001/
+tags:
+- attack.t1558.001

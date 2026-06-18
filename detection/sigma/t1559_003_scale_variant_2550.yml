@@ -1,0 +1,21 @@
+title: XPC Services Scale Variant 2550 Marker
+id: a89ddb5e-4f8f-5798-9b19-cb97297170d3
+status: experimental
+description: Detects simulator telemetry for XPC Services scale variant 2550.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.003
+    apt_sim.variant: attack_scale_variant_2550
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/003/
+tags:
+- attack.t1559.003

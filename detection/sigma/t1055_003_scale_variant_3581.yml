@@ -1,0 +1,22 @@
+title: Thread Execution Hijacking Scale Variant 3581 Marker
+id: 996af2ab-a74b-5d17-b152-d73afd703490
+status: experimental
+description: Detects simulator telemetry for Thread Execution Hijacking scale variant
+  3581.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.003
+    apt_sim.variant: attack_scale_variant_3581
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/003/
+tags:
+- attack.t1055.003

@@ -1,0 +1,21 @@
+title: Password Managers Scale Variant 2524 Marker
+id: 6d8d0b0e-7a23-52e0-ac57-58b4a3fd596f
+status: experimental
+description: Detects simulator telemetry for Password Managers scale variant 2524.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.005
+    apt_sim.variant: attack_scale_variant_2524
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/005/
+tags:
+- attack.t1555.005

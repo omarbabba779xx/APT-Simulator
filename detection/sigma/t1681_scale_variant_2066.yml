@@ -1,0 +1,22 @@
+title: Search Threat Vendor Data Scale Variant 2066 Marker
+id: 265951eb-b1ec-53b0-8346-9d84f8a8f1a2
+status: experimental
+description: Detects simulator telemetry for Search Threat Vendor Data scale variant
+  2066.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1681
+    apt_sim.variant: attack_scale_variant_2066
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1681/
+tags:
+- attack.t1681

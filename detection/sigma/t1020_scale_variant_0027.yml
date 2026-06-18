@@ -1,0 +1,22 @@
+title: Automated Exfiltration Scale Variant 0027 Marker
+id: 502dd704-291e-55e9-88f7-ef1e2039fc65
+status: experimental
+description: Detects simulator telemetry for Automated Exfiltration scale variant
+  0027.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1020
+    apt_sim.variant: attack_scale_variant_0027
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1020/
+tags:
+- attack.t1020

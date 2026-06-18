@@ -1,0 +1,22 @@
+title: Match Legitimate Resource Name or Location Scale Variant 1458 Marker
+id: 61283e18-3d0d-54af-9914-8220eda9d30d
+status: experimental
+description: Detects simulator telemetry for Match Legitimate Resource Name or Location
+  scale variant 1458.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.005
+    apt_sim.variant: attack_scale_variant_1458
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/005/
+tags:
+- attack.t1036.005

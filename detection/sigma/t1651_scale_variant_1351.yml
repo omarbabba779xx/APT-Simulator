@@ -1,0 +1,22 @@
+title: Cloud Administration Command Scale Variant 1351 Marker
+id: 94eb92c9-06a4-56d1-bd1e-519c85197f8c
+status: experimental
+description: Detects simulator telemetry for Cloud Administration Command scale variant
+  1351.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1651
+    apt_sim.variant: attack_scale_variant_1351
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1651/
+tags:
+- attack.t1651

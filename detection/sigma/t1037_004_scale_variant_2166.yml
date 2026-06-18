@@ -1,0 +1,21 @@
+title: RC Scripts Scale Variant 2166 Marker
+id: bc15c0c6-52d5-5309-952d-52192ade71a7
+status: experimental
+description: Detects simulator telemetry for RC Scripts scale variant 2166.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.004
+    apt_sim.variant: attack_scale_variant_2166
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/004/
+tags:
+- attack.t1037.004

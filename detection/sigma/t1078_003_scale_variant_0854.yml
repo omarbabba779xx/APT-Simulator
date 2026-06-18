@@ -1,0 +1,21 @@
+title: Local Accounts Scale Variant 0854 Marker
+id: 886c0d72-8386-54c6-96a4-47415c2fa597
+status: experimental
+description: Detects simulator telemetry for Local Accounts scale variant 0854.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.003
+    apt_sim.variant: attack_scale_variant_0854
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/003/
+tags:
+- attack.t1078.003

@@ -1,0 +1,22 @@
+title: Compromise Infrastructure Scale Variant 1937 Marker
+id: a1e464dc-4bea-5fd6-9136-246c6498c04f
+status: experimental
+description: Detects simulator telemetry for Compromise Infrastructure scale variant
+  1937.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584
+    apt_sim.variant: attack_scale_variant_1937
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/
+tags:
+- attack.t1584

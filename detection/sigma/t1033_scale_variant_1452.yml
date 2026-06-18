@@ -1,0 +1,22 @@
+title: System Owner/User Discovery Scale Variant 1452 Marker
+id: 491b57c1-0316-5585-bf17-4c121e18f849
+status: experimental
+description: Detects simulator telemetry for System Owner/User Discovery scale variant
+  1452.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1033
+    apt_sim.variant: attack_scale_variant_1452
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1033/
+tags:
+- attack.t1033

@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Scale Variant 2532 Marker
+id: 03f7dded-ad52-58bd-9530-d5a1512d4c32
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication scale variant
+  2532.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.006
+    apt_sim.variant: attack_scale_variant_2532
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/006/
+tags:
+- attack.t1556.006

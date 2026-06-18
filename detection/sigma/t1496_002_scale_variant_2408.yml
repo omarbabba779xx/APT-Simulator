@@ -1,0 +1,21 @@
+title: Bandwidth Hijacking Scale Variant 2408 Marker
+id: ca03fd03-9a39-5206-bdef-2dcc955064d0
+status: experimental
+description: Detects simulator telemetry for Bandwidth Hijacking scale variant 2408.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1496.002
+    apt_sim.variant: attack_scale_variant_2408
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1496/002/
+tags:
+- attack.t1496.002

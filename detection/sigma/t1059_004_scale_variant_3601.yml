@@ -1,0 +1,21 @@
+title: Unix Shell Scale Variant 3601 Marker
+id: 32de1a6c-e3de-515f-94d6-4069f644304a
+status: experimental
+description: Detects simulator telemetry for Unix Shell scale variant 3601.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.004
+    apt_sim.variant: attack_scale_variant_3601
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/004/
+tags:
+- attack.t1059.004

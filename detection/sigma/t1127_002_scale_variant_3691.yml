@@ -1,0 +1,21 @@
+title: ClickOnce Scale Variant 3691 Marker
+id: 5eae3a68-c7bb-5ada-a707-eea231728267
+status: experimental
+description: Detects simulator telemetry for ClickOnce scale variant 3691.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.002
+    apt_sim.variant: attack_scale_variant_3691
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/002/
+tags:
+- attack.t1127.002

@@ -1,0 +1,21 @@
+title: Non-Standard Port Scale Variant 3295 Marker
+id: b165602d-e925-5dfb-b696-04cc14d85570
+status: experimental
+description: Detects simulator telemetry for Non-Standard Port scale variant 3295.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1571
+    apt_sim.variant: attack_scale_variant_3295
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1571/
+tags:
+- attack.t1571

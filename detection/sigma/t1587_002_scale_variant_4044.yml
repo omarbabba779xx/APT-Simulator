@@ -1,0 +1,22 @@
+title: Code Signing Certificates Scale Variant 4044 Marker
+id: b44d16c1-96a6-51f5-99e7-8895a4210226
+status: experimental
+description: Detects simulator telemetry for Code Signing Certificates scale variant
+  4044.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.002
+    apt_sim.variant: attack_scale_variant_4044
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/002/
+tags:
+- attack.t1587.002

@@ -1,0 +1,21 @@
+title: Serverless Execution Scale Variant 3436 Marker
+id: 830618ce-1a97-5918-bcd7-2f37ce897bb0
+status: experimental
+description: Detects simulator telemetry for Serverless Execution scale variant 3436.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1648
+    apt_sim.variant: attack_scale_variant_3436
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1648/
+tags:
+- attack.t1648

@@ -1,0 +1,21 @@
+title: Upload Malware Scale Variant 2721 Marker
+id: bb6f9885-caa3-55fa-a1a4-e6a59914e221
+status: experimental
+description: Detects simulator telemetry for Upload Malware scale variant 2721.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.001
+    apt_sim.variant: attack_scale_variant_2721
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/001/
+tags:
+- attack.t1608.001

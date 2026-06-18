@@ -1,0 +1,21 @@
+title: Resource Forking Scale Variant 3962 Marker
+id: 7db3ab71-c617-57f2-91cc-434c06408714
+status: experimental
+description: Detects simulator telemetry for Resource Forking scale variant 3962.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.009
+    apt_sim.variant: attack_scale_variant_3962
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/009/
+tags:
+- attack.t1564.009

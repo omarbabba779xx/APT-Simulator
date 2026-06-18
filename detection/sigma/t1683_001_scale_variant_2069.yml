@@ -1,0 +1,21 @@
+title: Written Content Scale Variant 2069 Marker
+id: e588a32b-72bd-52d7-aaf0-48b9971291d7
+status: experimental
+description: Detects simulator telemetry for Written Content scale variant 2069.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683.001
+    apt_sim.variant: attack_scale_variant_2069
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/001/
+tags:
+- attack.t1683.001

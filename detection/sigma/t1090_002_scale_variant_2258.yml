@@ -1,0 +1,21 @@
+title: External Proxy Scale Variant 2258 Marker
+id: 074ebf9f-acc1-5e81-8f46-f8ee5f4841ff
+status: experimental
+description: Detects simulator telemetry for External Proxy scale variant 2258.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.002
+    apt_sim.variant: attack_scale_variant_2258
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/002/
+tags:
+- attack.t1090.002

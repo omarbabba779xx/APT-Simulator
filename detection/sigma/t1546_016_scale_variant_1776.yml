@@ -1,0 +1,21 @@
+title: Installer Packages Scale Variant 1776 Marker
+id: bcfae54a-6fc7-5ca6-bc17-75ac1ad3ce23
+status: experimental
+description: Detects simulator telemetry for Installer Packages scale variant 1776.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.016
+    apt_sim.variant: attack_scale_variant_1776
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/016/
+tags:
+- attack.t1546.016

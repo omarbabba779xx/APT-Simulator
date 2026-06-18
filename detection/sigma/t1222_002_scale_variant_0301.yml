@@ -1,0 +1,22 @@
+title: Linux and Mac Permissions Scale Variant 0301 Marker
+id: 9bcfac09-3e90-5ea2-9d33-f959b6c55428
+status: experimental
+description: Detects simulator telemetry for Linux and Mac Permissions scale variant
+  0301.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1222.002
+    apt_sim.variant: attack_scale_variant_0301
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1222/002/
+tags:
+- attack.t1222.002

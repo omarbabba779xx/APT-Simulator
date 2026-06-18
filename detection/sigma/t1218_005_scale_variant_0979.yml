@@ -1,0 +1,21 @@
+title: Mshta Scale Variant 0979 Marker
+id: 88a2ba93-1276-53e0-81bb-03e8116c913f
+status: experimental
+description: Detects simulator telemetry for Mshta scale variant 0979.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.005
+    apt_sim.variant: attack_scale_variant_0979
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/005/
+tags:
+- attack.t1218.005

@@ -1,0 +1,21 @@
+title: Print Processors Scale Variant 2486 Marker
+id: 806d0033-24a7-5d3e-b7d4-0689f43d625c
+status: experimental
+description: Detects simulator telemetry for Print Processors scale variant 2486.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.012
+    apt_sim.variant: attack_scale_variant_2486
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/012/
+tags:
+- attack.t1547.012

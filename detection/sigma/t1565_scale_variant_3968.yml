@@ -1,0 +1,21 @@
+title: Data Manipulation Scale Variant 3968 Marker
+id: 7fc4737b-ebda-5d6f-837d-7190b2fcb7f5
+status: experimental
+description: Detects simulator telemetry for Data Manipulation scale variant 3968.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565
+    apt_sim.variant: attack_scale_variant_3968
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/
+tags:
+- attack.t1565

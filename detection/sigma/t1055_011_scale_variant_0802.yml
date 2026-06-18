@@ -1,0 +1,22 @@
+title: Extra Window Memory Injection Scale Variant 0802 Marker
+id: 5a448b79-ec10-559d-9c13-b8d683e1d3a3
+status: experimental
+description: Detects simulator telemetry for Extra Window Memory Injection scale variant
+  0802.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.011
+    apt_sim.variant: attack_scale_variant_0802
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/011/
+tags:
+- attack.t1055.011

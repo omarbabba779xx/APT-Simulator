@@ -1,0 +1,21 @@
+title: Drive-by Target Scale Variant 0636 Marker
+id: c2f8f706-5f43-584e-975c-e503a16fe0c7
+status: experimental
+description: Detects simulator telemetry for Drive-by Target scale variant 0636.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.004
+    apt_sim.variant: attack_scale_variant_0636
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/004/
+tags:
+- attack.t1608.004

@@ -1,0 +1,21 @@
+title: Golden Ticket Scale Variant 1150 Marker
+id: 6d8edbf2-c06a-5af4-b7a8-83469bb9537e
+status: experimental
+description: Detects simulator telemetry for Golden Ticket scale variant 1150.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.001
+    apt_sim.variant: attack_scale_variant_1150
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/001/
+tags:
+- attack.t1558.001

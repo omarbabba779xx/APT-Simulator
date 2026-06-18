@@ -1,0 +1,21 @@
+title: One-Way Communication Scale Variant 2275 Marker
+id: 79542093-6ecb-58bf-b2a0-da9300dfaae1
+status: experimental
+description: Detects simulator telemetry for One-Way Communication scale variant 2275.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102.003
+    apt_sim.variant: attack_scale_variant_2275
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/003/
+tags:
+- attack.t1102.003

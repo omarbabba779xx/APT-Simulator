@@ -1,0 +1,21 @@
+title: Forge Web Credentials Scale Variant 1325 Marker
+id: 0931f71d-49e6-54b0-8208-0fb38b5b66be
+status: experimental
+description: Detects simulator telemetry for Forge Web Credentials scale variant 1325.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606
+    apt_sim.variant: attack_scale_variant_1325
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/
+tags:
+- attack.t1606

@@ -1,0 +1,21 @@
+title: Social Media Accounts Scale Variant 3339 Marker
+id: d3ff41f1-2072-59bc-9153-f30d95dced30
+status: experimental
+description: Detects simulator telemetry for Social Media Accounts scale variant 3339.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.001
+    apt_sim.variant: attack_scale_variant_3339
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/001/
+tags:
+- attack.t1585.001

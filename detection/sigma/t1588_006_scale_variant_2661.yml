@@ -1,0 +1,21 @@
+title: Vulnerabilities Scale Variant 2661 Marker
+id: 8271c6b3-9a3e-55c4-8d78-97a77a7ecf3b
+status: experimental
+description: Detects simulator telemetry for Vulnerabilities scale variant 2661.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.006
+    apt_sim.variant: attack_scale_variant_2661
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/006/
+tags:
+- attack.t1588.006

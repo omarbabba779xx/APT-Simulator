@@ -1,0 +1,22 @@
+title: Exfiltration to Text Storage Sites Scale Variant 2588 Marker
+id: 351c6465-2e10-5cdb-811d-20d4b00f7246
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Text Storage Sites scale
+  variant 2588.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.003
+    apt_sim.variant: attack_scale_variant_2588
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/003/
+tags:
+- attack.t1567.003

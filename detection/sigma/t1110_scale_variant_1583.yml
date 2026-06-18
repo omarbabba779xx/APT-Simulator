@@ -1,0 +1,21 @@
+title: Brute Force Scale Variant 1583 Marker
+id: 3525bed6-190e-5275-8049-bde0b83e7381
+status: experimental
+description: Detects simulator telemetry for Brute Force scale variant 1583.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110
+    apt_sim.variant: attack_scale_variant_1583
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/
+tags:
+- attack.t1110

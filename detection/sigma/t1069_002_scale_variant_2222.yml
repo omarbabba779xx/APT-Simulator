@@ -1,0 +1,21 @@
+title: Domain Groups Scale Variant 2222 Marker
+id: 6156522e-96b2-58b5-be98-0b09e3330c14
+status: experimental
+description: Detects simulator telemetry for Domain Groups scale variant 2222.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1069.002
+    apt_sim.variant: attack_scale_variant_2222
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1069/002/
+tags:
+- attack.t1069.002

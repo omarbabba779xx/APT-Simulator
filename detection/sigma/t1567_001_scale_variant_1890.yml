@@ -1,0 +1,22 @@
+title: Exfiltration to Code Repository Scale Variant 1890 Marker
+id: a7ba7751-0d0c-5ce9-b5ee-1e9c3501500c
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Code Repository scale
+  variant 1890.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.001
+    apt_sim.variant: attack_scale_variant_1890
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/001/
+tags:
+- attack.t1567.001

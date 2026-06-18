@@ -1,0 +1,21 @@
+title: System Services Scale Variant 1898 Marker
+id: 480578cb-cabb-54c4-869c-d4377627acaf
+status: experimental
+description: Detects simulator telemetry for System Services scale variant 1898.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569
+    apt_sim.variant: attack_scale_variant_1898
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/
+tags:
+- attack.t1569

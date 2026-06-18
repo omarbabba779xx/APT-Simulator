@@ -1,0 +1,21 @@
+title: Social Media Scale Variant 2684 Marker
+id: 02b80ec7-5d32-59e0-b4b3-e7dd4010102b
+status: experimental
+description: Detects simulator telemetry for Social Media scale variant 2684.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.001
+    apt_sim.variant: attack_scale_variant_2684
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/001/
+tags:
+- attack.t1593.001

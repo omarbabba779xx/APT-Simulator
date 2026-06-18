@@ -1,0 +1,21 @@
+title: Cloud Firewall Scale Variant 2778 Marker
+id: 66fa71c7-176d-5b5a-8e83-e2371c963f00
+status: experimental
+description: Detects simulator telemetry for Cloud Firewall scale variant 2778.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.001
+    apt_sim.variant: attack_scale_variant_2778
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/001/
+tags:
+- attack.t1686.001

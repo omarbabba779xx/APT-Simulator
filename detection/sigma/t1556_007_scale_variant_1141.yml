@@ -1,0 +1,21 @@
+title: Hybrid Identity Scale Variant 1141 Marker
+id: 4f87ee31-c4f5-589e-aab0-b88a8f7d1569
+status: experimental
+description: Detects simulator telemetry for Hybrid Identity scale variant 1141.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.007
+    apt_sim.variant: attack_scale_variant_1141
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/007/
+tags:
+- attack.t1556.007

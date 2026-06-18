@@ -1,0 +1,22 @@
+title: Mark-of-the-Web Bypass Scale Variant 1124 Marker
+id: 7048e728-10e3-5e72-a47c-8af1979c4877
+status: experimental
+description: Detects simulator telemetry for Mark-of-the-Web Bypass scale variant
+  1124.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.005
+    apt_sim.variant: attack_scale_variant_1124
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/005/
+tags:
+- attack.t1553.005

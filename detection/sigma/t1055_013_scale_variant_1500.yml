@@ -1,0 +1,22 @@
+title: "Process Doppelg\xE4nging Scale Variant 1500 Marker"
+id: 2a2932d5-8f83-5ef1-90c5-7ed7ff81aabc
+status: experimental
+description: "Detects simulator telemetry for Process Doppelg\xE4nging scale variant\
+  \ 1500."
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.013
+    apt_sim.variant: attack_scale_variant_1500
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/013/
+tags:
+- attack.t1055.013

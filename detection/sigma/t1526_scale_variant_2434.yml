@@ -1,0 +1,22 @@
+title: Cloud Service Discovery Scale Variant 2434 Marker
+id: 55ff4063-5938-5226-bec9-716002538d0b
+status: experimental
+description: Detects simulator telemetry for Cloud Service Discovery scale variant
+  2434.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1526
+    apt_sim.variant: attack_scale_variant_2434
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1526/
+tags:
+- attack.t1526

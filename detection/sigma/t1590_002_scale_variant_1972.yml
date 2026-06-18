@@ -1,0 +1,21 @@
+title: DNS Scale Variant 1972 Marker
+id: 6752dee8-3730-5c13-800c-9c3d7ed79fe0
+status: experimental
+description: Detects simulator telemetry for DNS scale variant 1972.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.002
+    apt_sim.variant: attack_scale_variant_1972
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/002/
+tags:
+- attack.t1590.002

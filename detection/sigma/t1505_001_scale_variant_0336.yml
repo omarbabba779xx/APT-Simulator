@@ -1,0 +1,21 @@
+title: SQL Stored Procedures Scale Variant 0336 Marker
+id: a71e1854-e993-514f-bbe7-de7f7cb2d96a
+status: experimental
+description: Detects simulator telemetry for SQL Stored Procedures scale variant 0336.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.001
+    apt_sim.variant: attack_scale_variant_0336
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/001/
+tags:
+- attack.t1505.001

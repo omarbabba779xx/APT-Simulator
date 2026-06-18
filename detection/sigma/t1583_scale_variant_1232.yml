@@ -1,0 +1,22 @@
+title: Acquire Infrastructure Scale Variant 1232 Marker
+id: b28b42c9-d0c9-54f9-a69c-b70a82625f87
+status: experimental
+description: Detects simulator telemetry for Acquire Infrastructure scale variant
+  1232.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583
+    apt_sim.variant: attack_scale_variant_1232
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/
+tags:
+- attack.t1583

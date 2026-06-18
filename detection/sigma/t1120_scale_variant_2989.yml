@@ -1,0 +1,22 @@
+title: Peripheral Device Discovery Scale Variant 2989 Marker
+id: 29b11f34-9ed1-529c-a56a-043d3eb56243
+status: experimental
+description: Detects simulator telemetry for Peripheral Device Discovery scale variant
+  2989.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1120
+    apt_sim.variant: attack_scale_variant_2989
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1120/
+tags:
+- attack.t1120

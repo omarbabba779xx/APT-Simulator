@@ -1,0 +1,22 @@
+title: Protocol or Service Impersonation Scale Variant 3484 Marker
+id: 710b4703-3767-5c9f-ac0b-5665463896fd
+status: experimental
+description: Detects simulator telemetry for Protocol or Service Impersonation scale
+  variant 3484.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.003
+    apt_sim.variant: attack_scale_variant_3484
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/003/
+tags:
+- attack.t1001.003

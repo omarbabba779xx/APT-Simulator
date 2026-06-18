@@ -1,0 +1,22 @@
+title: Unix Shell Configuration Modification Scale Variant 2460 Marker
+id: b4e60fc4-c039-56e6-8314-44bcf5f01be2
+status: experimental
+description: Detects simulator telemetry for Unix Shell Configuration Modification
+  scale variant 2460.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.004
+    apt_sim.variant: attack_scale_variant_2460
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/004/
+tags:
+- attack.t1546.004

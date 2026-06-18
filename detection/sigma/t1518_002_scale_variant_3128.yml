@@ -1,0 +1,22 @@
+title: Backup Software Discovery Scale Variant 3128 Marker
+id: 396e2072-ccb0-5c86-9e46-4308d0f59784
+status: experimental
+description: Detects simulator telemetry for Backup Software Discovery scale variant
+  3128.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518.002
+    apt_sim.variant: attack_scale_variant_3128
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/002/
+tags:
+- attack.t1518.002

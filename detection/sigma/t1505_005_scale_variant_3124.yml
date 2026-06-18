@@ -1,0 +1,21 @@
+title: Terminal Services DLL Scale Variant 3124 Marker
+id: 96b9647c-3a2a-557e-be73-c453743b48b2
+status: experimental
+description: Detects simulator telemetry for Terminal Services DLL scale variant 3124.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.005
+    apt_sim.variant: attack_scale_variant_3124
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/005/
+tags:
+- attack.t1505.005

@@ -1,0 +1,22 @@
+title: Mark-of-the-Web Bypass Scale Variant 0428 Marker
+id: 6cfd3f6c-c952-5698-9028-b6cc980838c5
+status: experimental
+description: Detects simulator telemetry for Mark-of-the-Web Bypass scale variant
+  0428.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.005
+    apt_sim.variant: attack_scale_variant_0428
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/005/
+tags:
+- attack.t1553.005

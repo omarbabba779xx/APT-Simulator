@@ -1,0 +1,21 @@
+title: Hybrid Identity Scale Variant 2533 Marker
+id: a998f1d7-b247-56b3-906e-43b3469e13b5
+status: experimental
+description: Detects simulator telemetry for Hybrid Identity scale variant 2533.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.007
+    apt_sim.variant: attack_scale_variant_2533
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/007/
+tags:
+- attack.t1556.007

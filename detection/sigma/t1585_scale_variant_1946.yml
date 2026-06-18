@@ -1,0 +1,21 @@
+title: Establish Accounts Scale Variant 1946 Marker
+id: b10563e3-4253-5448-a6b3-f57cdc594442
+status: experimental
+description: Detects simulator telemetry for Establish Accounts scale variant 1946.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585
+    apt_sim.variant: attack_scale_variant_1946
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/
+tags:
+- attack.t1585

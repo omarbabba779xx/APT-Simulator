@@ -1,0 +1,22 @@
+title: Path Interception by Unquoted Path Scale Variant 4003 Marker
+id: b3f86207-dc5d-5409-938f-706eac606dc6
+status: experimental
+description: Detects simulator telemetry for Path Interception by Unquoted Path scale
+  variant 4003.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.009
+    apt_sim.variant: attack_scale_variant_4003
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/009/
+tags:
+- attack.t1574.009

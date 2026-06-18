@@ -1,0 +1,21 @@
+title: Domain Account Scale Variant 1619 Marker
+id: 8b303ea9-9d30-5fa1-8f0a-7e6fb9a65eff
+status: experimental
+description: Detects simulator telemetry for Domain Account scale variant 1619.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.002
+    apt_sim.variant: attack_scale_variant_1619
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/002/
+tags:
+- attack.t1136.002

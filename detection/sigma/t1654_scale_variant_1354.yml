@@ -1,0 +1,21 @@
+title: Log Enumeration Scale Variant 1354 Marker
+id: 6afb6d22-adc7-5702-819c-0ebcbc3f6262
+status: experimental
+description: Detects simulator telemetry for Log Enumeration scale variant 1354.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1654
+    apt_sim.variant: attack_scale_variant_1354
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1654/
+tags:
+- attack.t1654

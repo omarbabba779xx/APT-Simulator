@@ -1,0 +1,21 @@
+title: Escape to Host Scale Variant 3425 Marker
+id: 9a48740a-3692-5b60-a1ec-f99087751c12
+status: experimental
+description: Detects simulator telemetry for Escape to Host scale variant 3425.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1611
+    apt_sim.variant: attack_scale_variant_3425
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1611/
+tags:
+- attack.t1611

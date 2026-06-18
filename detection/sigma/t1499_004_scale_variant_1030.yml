@@ -1,0 +1,22 @@
+title: Application or System Exploitation Scale Variant 1030 Marker
+id: f674a12a-dacb-5e2c-8d45-7d467ac7b3f8
+status: experimental
+description: Detects simulator telemetry for Application or System Exploitation scale
+  variant 1030.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.004
+    apt_sim.variant: attack_scale_variant_1030
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/004/
+tags:
+- attack.t1499.004

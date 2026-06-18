@@ -1,0 +1,22 @@
+title: Access Token Manipulation Scale Variant 3002 Marker
+id: 01c9aa1d-758c-5d1b-aafe-643eca90dc29
+status: experimental
+description: Detects simulator telemetry for Access Token Manipulation scale variant
+  3002.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134
+    apt_sim.variant: attack_scale_variant_3002
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/
+tags:
+- attack.t1134

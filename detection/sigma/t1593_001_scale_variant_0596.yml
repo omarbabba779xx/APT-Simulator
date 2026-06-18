@@ -1,0 +1,21 @@
+title: Social Media Scale Variant 0596 Marker
+id: 55b7b644-3c34-5eb5-8ee2-2cf3fb288712
+status: experimental
+description: Detects simulator telemetry for Social Media scale variant 0596.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.001
+    apt_sim.variant: attack_scale_variant_0596
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/001/
+tags:
+- attack.t1593.001

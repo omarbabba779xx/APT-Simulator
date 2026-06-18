@@ -1,0 +1,22 @@
+title: Search Victim-Owned Websites Scale Variant 0599 Marker
+id: 9fae4b0a-c5a8-5acb-ab96-d7baf04d2470
+status: experimental
+description: Detects simulator telemetry for Search Victim-Owned Websites scale variant
+  0599.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1594
+    apt_sim.variant: attack_scale_variant_0599
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1594/
+tags:
+- attack.t1594

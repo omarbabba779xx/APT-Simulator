@@ -1,0 +1,22 @@
+title: Boot or Logon Autostart Execution Scale Variant 2475 Marker
+id: 1f750689-71a5-5b62-a5c6-54eb156ba8ad
+status: experimental
+description: Detects simulator telemetry for Boot or Logon Autostart Execution scale
+  variant 2475.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547
+    apt_sim.variant: attack_scale_variant_2475
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/
+tags:
+- attack.t1547

@@ -1,0 +1,21 @@
+title: Web Service Scale Variant 2272 Marker
+id: bc6121a1-3752-5f87-bce4-1923f87f24f9
+status: experimental
+description: Detects simulator telemetry for Web Service scale variant 2272.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102
+    apt_sim.variant: attack_scale_variant_2272
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/
+tags:
+- attack.t1102

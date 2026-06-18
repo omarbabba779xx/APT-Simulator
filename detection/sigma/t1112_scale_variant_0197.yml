@@ -1,0 +1,21 @@
+title: Modify Registry Scale Variant 0197 Marker
+id: 628ffd2e-87c0-5ef5-869e-71b560ad3f79
+status: experimental
+description: Detects simulator telemetry for Modify Registry scale variant 0197.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1112
+    apt_sim.variant: attack_scale_variant_0197
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1112/
+tags:
+- attack.t1112

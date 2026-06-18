@@ -1,0 +1,21 @@
+title: Emond Scale Variant 0382 Marker
+id: ee386f73-edf8-541d-aa35-f95b0c257efe
+status: experimental
+description: Detects simulator telemetry for Emond scale variant 0382.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.014
+    apt_sim.variant: attack_scale_variant_0382
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/014/
+tags:
+- attack.t1546.014

@@ -1,0 +1,22 @@
+title: Network Device Configuration Dump Scale Variant 4108 Marker
+id: 4f4a0e88-6c75-5933-a5a5-9580400ef0dd
+status: experimental
+description: Detects simulator telemetry for Network Device Configuration Dump scale
+  variant 4108.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.002
+    apt_sim.variant: attack_scale_variant_4108
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/002/
+tags:
+- attack.t1602.002

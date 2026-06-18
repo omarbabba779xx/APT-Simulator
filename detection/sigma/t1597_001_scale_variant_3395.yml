@@ -1,0 +1,21 @@
+title: Threat Intel Vendors Scale Variant 3395 Marker
+id: 148ec6f1-f887-5cae-8a5f-1579b48ba702
+status: experimental
+description: Detects simulator telemetry for Threat Intel Vendors scale variant 3395.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.001
+    apt_sim.variant: attack_scale_variant_3395
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/001/
+tags:
+- attack.t1597.001

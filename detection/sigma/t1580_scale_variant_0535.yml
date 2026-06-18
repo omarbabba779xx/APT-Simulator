@@ -1,0 +1,22 @@
+title: Cloud Infrastructure Discovery Scale Variant 0535 Marker
+id: bf640442-c043-505a-abb7-20dfa1836fe7
+status: experimental
+description: Detects simulator telemetry for Cloud Infrastructure Discovery scale
+  variant 0535.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1580
+    apt_sim.variant: attack_scale_variant_0535
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1580/
+tags:
+- attack.t1580

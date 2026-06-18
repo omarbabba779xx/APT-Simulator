@@ -1,0 +1,21 @@
+title: Databases Scale Variant 2361 Marker
+id: b27b8670-1243-5b8e-a37f-40e99fff029f
+status: experimental
+description: Detects simulator telemetry for Databases scale variant 2361.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.006
+    apt_sim.variant: attack_scale_variant_2361
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/006/
+tags:
+- attack.t1213.006

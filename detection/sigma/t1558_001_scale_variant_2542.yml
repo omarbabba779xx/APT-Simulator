@@ -1,0 +1,21 @@
+title: Golden Ticket Scale Variant 2542 Marker
+id: 2c4d18ac-739e-512a-be9f-21bee9efec39
+status: experimental
+description: Detects simulator telemetry for Golden Ticket scale variant 2542.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.001
+    apt_sim.variant: attack_scale_variant_2542
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/001/
+tags:
+- attack.t1558.001

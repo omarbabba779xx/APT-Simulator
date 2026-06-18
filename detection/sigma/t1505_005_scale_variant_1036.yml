@@ -1,0 +1,21 @@
+title: Terminal Services DLL Scale Variant 1036 Marker
+id: 38cf4634-b1e8-516b-bcb1-e0dcffdc9471
+status: experimental
+description: Detects simulator telemetry for Terminal Services DLL scale variant 1036.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.005
+    apt_sim.variant: attack_scale_variant_1036
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/005/
+tags:
+- attack.t1505.005

@@ -1,0 +1,21 @@
+title: Cloud Accounts Scale Variant 3639 Marker
+id: 696b24d9-42c1-5614-b551-44a031234fd0
+status: experimental
+description: Detects simulator telemetry for Cloud Accounts scale variant 3639.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.004
+    apt_sim.variant: attack_scale_variant_3639
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/004/
+tags:
+- attack.t1078.004

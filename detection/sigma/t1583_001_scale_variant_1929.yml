@@ -1,0 +1,21 @@
+title: Domains Scale Variant 1929 Marker
+id: 20607932-2436-56a0-b23c-8fde2b059d00
+status: experimental
+description: Detects simulator telemetry for Domains scale variant 1929.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.001
+    apt_sim.variant: attack_scale_variant_1929
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/001/
+tags:
+- attack.t1583.001

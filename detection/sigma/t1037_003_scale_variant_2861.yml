@@ -1,0 +1,21 @@
+title: Network Logon Script Scale Variant 2861 Marker
+id: f3d732f5-25d8-57a3-83dc-fc8751951713
+status: experimental
+description: Detects simulator telemetry for Network Logon Script scale variant 2861.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.003
+    apt_sim.variant: attack_scale_variant_2861
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/003/
+tags:
+- attack.t1037.003

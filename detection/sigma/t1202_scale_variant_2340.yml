@@ -1,0 +1,22 @@
+title: Indirect Command Execution Scale Variant 2340 Marker
+id: a76687d9-e61e-5c25-a2ca-4d88a12b010b
+status: experimental
+description: Detects simulator telemetry for Indirect Command Execution scale variant
+  2340.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1202
+    apt_sim.variant: attack_scale_variant_2340
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1202/
+tags:
+- attack.t1202

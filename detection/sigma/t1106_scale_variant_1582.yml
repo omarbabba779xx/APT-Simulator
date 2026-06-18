@@ -1,0 +1,21 @@
+title: Native API Scale Variant 1582 Marker
+id: 2afd4f69-63bc-5ab7-8e32-24981dbf7cc3
+status: experimental
+description: Detects simulator telemetry for Native API scale variant 1582.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1106
+    apt_sim.variant: attack_scale_variant_1582
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1106/
+tags:
+- attack.t1106

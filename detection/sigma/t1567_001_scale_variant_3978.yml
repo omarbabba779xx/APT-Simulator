@@ -1,0 +1,22 @@
+title: Exfiltration to Code Repository Scale Variant 3978 Marker
+id: 31e537c9-a795-5716-813b-da9b811a0ec6
+status: experimental
+description: Detects simulator telemetry for Exfiltration to Code Repository scale
+  variant 3978.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.001
+    apt_sim.variant: attack_scale_variant_3978
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/001/
+tags:
+- attack.t1567.001

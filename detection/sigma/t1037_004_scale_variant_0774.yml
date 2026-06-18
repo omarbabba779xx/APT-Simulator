@@ -1,0 +1,21 @@
+title: RC Scripts Scale Variant 0774 Marker
+id: 32583a34-d17c-5a72-bed4-1dfd0fcf5e78
+status: experimental
+description: Detects simulator telemetry for RC Scripts scale variant 0774.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.004
+    apt_sim.variant: attack_scale_variant_0774
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/004/
+tags:
+- attack.t1037.004

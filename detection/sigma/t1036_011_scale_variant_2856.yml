@@ -1,0 +1,22 @@
+title: Overwrite Process Arguments Scale Variant 2856 Marker
+id: e59a5036-1235-5cac-87ab-2718cbd61185
+status: experimental
+description: Detects simulator telemetry for Overwrite Process Arguments scale variant
+  2856.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.011
+    apt_sim.variant: attack_scale_variant_2856
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/011/
+tags:
+- attack.t1036.011

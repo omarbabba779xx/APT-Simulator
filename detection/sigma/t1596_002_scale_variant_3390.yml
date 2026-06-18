@@ -1,0 +1,21 @@
+title: WHOIS Scale Variant 3390 Marker
+id: 1e47bb11-28fb-5d3c-9d7d-504194ad7e26
+status: experimental
+description: Detects simulator telemetry for WHOIS scale variant 3390.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.002
+    apt_sim.variant: attack_scale_variant_3390
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/002/
+tags:
+- attack.t1596.002

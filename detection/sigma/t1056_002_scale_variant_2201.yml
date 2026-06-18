@@ -1,0 +1,21 @@
+title: GUI Input Capture Scale Variant 2201 Marker
+id: d90e2fb7-3526-56eb-91f8-9f3a31191a77
+status: experimental
+description: Detects simulator telemetry for GUI Input Capture scale variant 2201.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.002
+    apt_sim.variant: attack_scale_variant_2201
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/002/
+tags:
+- attack.t1056.002

@@ -1,0 +1,21 @@
+title: Software Scale Variant 0592 Marker
+id: 82551ab9-9b17-50ec-ba04-1a8720d6a05d
+status: experimental
+description: Detects simulator telemetry for Software scale variant 0592.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.002
+    apt_sim.variant: attack_scale_variant_0592
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/002/
+tags:
+- attack.t1592.002

@@ -1,0 +1,21 @@
+title: Create Snapshot Scale Variant 2618 Marker
+id: 58038bd5-9a82-5ab9-9d06-4540c0f393e5
+status: experimental
+description: Detects simulator telemetry for Create Snapshot scale variant 2618.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.001
+    apt_sim.variant: attack_scale_variant_2618
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/001/
+tags:
+- attack.t1578.001

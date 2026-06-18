@@ -1,0 +1,21 @@
+title: SEO Poisoning Scale Variant 2030 Marker
+id: 4d831a39-23e9-5265-b87e-586a0a1a7ddf
+status: experimental
+description: Detects simulator telemetry for SEO Poisoning scale variant 2030.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.006
+    apt_sim.variant: attack_scale_variant_2030
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/006/
+tags:
+- attack.t1608.006

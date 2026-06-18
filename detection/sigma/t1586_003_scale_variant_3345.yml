@@ -1,0 +1,21 @@
+title: Cloud Accounts Scale Variant 3345 Marker
+id: 2d6c6954-7d48-57db-bf95-27a0ac432355
+status: experimental
+description: Detects simulator telemetry for Cloud Accounts scale variant 3345.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1586.003
+    apt_sim.variant: attack_scale_variant_3345
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1586/003/
+tags:
+- attack.t1586.003

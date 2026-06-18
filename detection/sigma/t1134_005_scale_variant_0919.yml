@@ -1,0 +1,21 @@
+title: SID-History Injection Scale Variant 0919 Marker
+id: 973cd12a-63e5-5698-b63f-802376c68b61
+status: experimental
+description: Detects simulator telemetry for SID-History Injection scale variant 0919.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.005
+    apt_sim.variant: attack_scale_variant_0919
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/005/
+tags:
+- attack.t1134.005

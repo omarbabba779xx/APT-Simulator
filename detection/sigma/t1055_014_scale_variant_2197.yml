@@ -1,0 +1,21 @@
+title: VDSO Hijacking Scale Variant 2197 Marker
+id: 4f7394da-43d0-570d-ac94-4ede35093d53
+status: experimental
+description: Detects simulator telemetry for VDSO Hijacking scale variant 2197.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.014
+    apt_sim.variant: attack_scale_variant_2197
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/014/
+tags:
+- attack.t1055.014

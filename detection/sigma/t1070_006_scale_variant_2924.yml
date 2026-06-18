@@ -1,0 +1,21 @@
+title: Timestomp Scale Variant 2924 Marker
+id: 7976f2d6-45fa-5b29-a21e-9119a5f80706
+status: experimental
+description: Detects simulator telemetry for Timestomp scale variant 2924.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.006
+    apt_sim.variant: attack_scale_variant_2924
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/006/
+tags:
+- attack.t1070.006

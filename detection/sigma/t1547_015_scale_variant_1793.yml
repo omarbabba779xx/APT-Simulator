@@ -1,0 +1,21 @@
+title: Login Items Scale Variant 1793 Marker
+id: bffce537-8ba8-5b7b-b2ea-e83d867aae95
+status: experimental
+description: Detects simulator telemetry for Login Items scale variant 1793.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.015
+    apt_sim.variant: attack_scale_variant_1793
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/015/
+tags:
+- attack.t1547.015

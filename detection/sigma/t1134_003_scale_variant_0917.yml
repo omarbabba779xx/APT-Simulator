@@ -1,0 +1,22 @@
+title: Make and Impersonate Token Scale Variant 0917 Marker
+id: 6f5c0335-4e6b-543d-b4ff-2e1375cd7be1
+status: experimental
+description: Detects simulator telemetry for Make and Impersonate Token scale variant
+  0917.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.003
+    apt_sim.variant: attack_scale_variant_0917
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/003/
+tags:
+- attack.t1134.003

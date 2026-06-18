@@ -1,0 +1,21 @@
+title: SNMP (MIB Dump) Scale Variant 1323 Marker
+id: 0c623b2c-c395-5d7f-8091-43e880a3e406
+status: experimental
+description: Detects simulator telemetry for SNMP (MIB Dump) scale variant 1323.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.001
+    apt_sim.variant: attack_scale_variant_1323
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/001/
+tags:
+- attack.t1602.001

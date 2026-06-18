@@ -1,0 +1,21 @@
+title: Outlook Forms Scale Variant 0928 Marker
+id: f4a70ca5-de32-5d41-b051-b74330cac62b
+status: experimental
+description: Detects simulator telemetry for Outlook Forms scale variant 0928.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.003
+    apt_sim.variant: attack_scale_variant_0928
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/003/
+tags:
+- attack.t1137.003

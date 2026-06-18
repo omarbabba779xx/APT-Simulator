@@ -1,0 +1,22 @@
+title: Disable or Modify System Firewall Scale Variant 3473 Marker
+id: 2c9779a6-cb85-5b99-9ef3-df9250b1e017
+status: experimental
+description: Detects simulator telemetry for Disable or Modify System Firewall scale
+  variant 3473.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686
+    apt_sim.variant: attack_scale_variant_3473
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/
+tags:
+- attack.t1686

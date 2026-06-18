@@ -1,0 +1,22 @@
+title: Archive Collected Data Scale Variant 0463 Marker
+id: 56bd5111-919f-5ce4-8563-01e3f11e03de
+status: experimental
+description: Detects simulator telemetry for Archive Collected Data scale variant
+  0463.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1560
+    apt_sim.variant: attack_scale_variant_0463
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1560/
+tags:
+- attack.t1560

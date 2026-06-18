@@ -1,0 +1,21 @@
+title: Keychain Scale Variant 0432 Marker
+id: 6971c8d9-f463-597f-a1ec-14f93ae49498
+status: experimental
+description: Detects simulator telemetry for Keychain scale variant 0432.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.001
+    apt_sim.variant: attack_scale_variant_0432
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/001/
+tags:
+- attack.t1555.001

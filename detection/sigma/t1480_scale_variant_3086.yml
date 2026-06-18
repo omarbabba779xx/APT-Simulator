@@ -1,0 +1,21 @@
+title: Execution Guardrails Scale Variant 3086 Marker
+id: e5dad59c-63d3-5092-857c-4b878be7c003
+status: experimental
+description: Detects simulator telemetry for Execution Guardrails scale variant 3086.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480
+    apt_sim.variant: attack_scale_variant_3086
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/
+tags:
+- attack.t1480

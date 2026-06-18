@@ -1,0 +1,21 @@
+title: Sudo and Sudo Caching Scale Variant 3885 Marker
+id: 9ec406d7-e058-5ef6-b6a7-cbc56fa45cd9
+status: experimental
+description: Detects simulator telemetry for Sudo and Sudo Caching scale variant 3885.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.003
+    apt_sim.variant: attack_scale_variant_3885
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/003/
+tags:
+- attack.t1548.003

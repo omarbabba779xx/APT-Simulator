@@ -1,0 +1,21 @@
+title: Office Test Scale Variant 3015 Marker
+id: 975dedd6-9e80-5ac3-b720-19a085dfff6b
+status: experimental
+description: Detects simulator telemetry for Office Test scale variant 3015.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.002
+    apt_sim.variant: attack_scale_variant_3015
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/002/
+tags:
+- attack.t1137.002

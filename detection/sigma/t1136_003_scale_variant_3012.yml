@@ -1,0 +1,21 @@
+title: Cloud Account Scale Variant 3012 Marker
+id: 81425822-bf8d-523d-b568-97fb7dccd08b
+status: experimental
+description: Detects simulator telemetry for Cloud Account scale variant 3012.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.003
+    apt_sim.variant: attack_scale_variant_3012
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/003/
+tags:
+- attack.t1136.003

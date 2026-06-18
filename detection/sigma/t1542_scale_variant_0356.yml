@@ -1,0 +1,21 @@
+title: Pre-OS Boot Scale Variant 0356 Marker
+id: 6d22bcda-a403-5b68-9259-631b462e057b
+status: experimental
+description: Detects simulator telemetry for Pre-OS Boot scale variant 0356.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542
+    apt_sim.variant: attack_scale_variant_0356
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/
+tags:
+- attack.t1542

@@ -1,0 +1,21 @@
+title: Written Content Scale Variant 3461 Marker
+id: 70ec1ac9-4f42-534b-8544-b805fe007117
+status: experimental
+description: Detects simulator telemetry for Written Content scale variant 3461.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683.001
+    apt_sim.variant: attack_scale_variant_3461
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/001/
+tags:
+- attack.t1683.001

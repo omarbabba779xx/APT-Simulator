@@ -1,0 +1,21 @@
+title: Default Accounts Scale Variant 2244 Marker
+id: 22cdbac4-950d-5fe1-a931-b69ecfbb6378
+status: experimental
+description: Detects simulator telemetry for Default Accounts scale variant 2244.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.001
+    apt_sim.variant: attack_scale_variant_2244
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/001/
+tags:
+- attack.t1078.001

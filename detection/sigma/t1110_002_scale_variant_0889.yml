@@ -1,0 +1,21 @@
+title: Password Cracking Scale Variant 0889 Marker
+id: b0570e3f-53b5-5e32-b063-784484d75f8c
+status: experimental
+description: Detects simulator telemetry for Password Cracking scale variant 0889.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.002
+    apt_sim.variant: attack_scale_variant_0889
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/002/
+tags:
+- attack.t1110.002

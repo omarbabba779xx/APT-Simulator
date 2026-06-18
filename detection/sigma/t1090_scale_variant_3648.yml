@@ -1,0 +1,21 @@
+title: Proxy Scale Variant 3648 Marker
+id: 32bae5d9-2534-55e1-a735-7c6719665cc4
+status: experimental
+description: Detects simulator telemetry for Proxy scale variant 3648.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090
+    apt_sim.variant: attack_scale_variant_3648
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/
+tags:
+- attack.t1090

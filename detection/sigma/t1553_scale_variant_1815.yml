@@ -1,0 +1,22 @@
+title: Subvert Trust Controls Scale Variant 1815 Marker
+id: 1133940d-98a0-5650-a029-6561989d8810
+status: experimental
+description: Detects simulator telemetry for Subvert Trust Controls scale variant
+  1815.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553
+    apt_sim.variant: attack_scale_variant_1815
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/
+tags:
+- attack.t1553

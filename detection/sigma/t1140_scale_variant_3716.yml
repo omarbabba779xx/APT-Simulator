@@ -1,0 +1,22 @@
+title: Deobfuscate/Decode Files or Information Scale Variant 3716 Marker
+id: ca43fe59-7229-54ac-bc4f-882680502e55
+status: experimental
+description: Detects simulator telemetry for Deobfuscate/Decode Files or Information
+  scale variant 3716.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1140
+    apt_sim.variant: attack_scale_variant_3716
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1140/
+tags:
+- attack.t1140

@@ -1,0 +1,22 @@
+title: Endpoint Denial of Service Scale Variant 3114 Marker
+id: 6d62c4d3-b2ca-5e37-9d9b-00eda7e434dd
+status: experimental
+description: Detects simulator telemetry for Endpoint Denial of Service scale variant
+  3114.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499
+    apt_sim.variant: attack_scale_variant_3114
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/
+tags:
+- attack.t1499

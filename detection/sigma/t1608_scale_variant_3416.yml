@@ -1,0 +1,21 @@
+title: Stage Capabilities Scale Variant 3416 Marker
+id: b7fad67d-9e5e-541c-beb3-ac453bba1407
+status: experimental
+description: Detects simulator telemetry for Stage Capabilities scale variant 3416.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608
+    apt_sim.variant: attack_scale_variant_3416
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/
+tags:
+- attack.t1608

@@ -1,0 +1,22 @@
+title: Event Triggered Execution Scale Variant 2456 Marker
+id: 799b521a-3807-50f3-b42a-e9bc7d73e598
+status: experimental
+description: Detects simulator telemetry for Event Triggered Execution scale variant
+  2456.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546
+    apt_sim.variant: attack_scale_variant_2456
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/
+tags:
+- attack.t1546

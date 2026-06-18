@@ -1,0 +1,22 @@
+title: Customer Relationship Management Software Scale Variant 0271 Marker
+id: b26247e8-4a3f-532b-8b0f-aa5d39c332cc
+status: experimental
+description: Detects simulator telemetry for Customer Relationship Management Software
+  scale variant 0271.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.004
+    apt_sim.variant: attack_scale_variant_0271
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/004/
+tags:
+- attack.t1213.004

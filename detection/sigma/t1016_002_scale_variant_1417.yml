@@ -1,0 +1,21 @@
+title: Wi-Fi Discovery Scale Variant 1417 Marker
+id: 4ec3dc0b-cfe3-5c80-8160-980c09c93d28
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Discovery scale variant 1417.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.002
+    apt_sim.variant: attack_scale_variant_1417
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/002/
+tags:
+- attack.t1016.002

@@ -1,0 +1,22 @@
+title: Path Interception by Unquoted Path Scale Variant 0523 Marker
+id: 507f7e37-4cd2-5741-a2a0-a0e9b7f618eb
+status: experimental
+description: Detects simulator telemetry for Path Interception by Unquoted Path scale
+  variant 0523.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.009
+    apt_sim.variant: attack_scale_variant_0523
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/009/
+tags:
+- attack.t1574.009

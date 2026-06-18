@@ -1,0 +1,22 @@
+title: Exploitation of Remote Services Scale Variant 3048 Marker
+id: 4fee8cf9-3ba4-5cf6-af80-be8322efe617
+status: experimental
+description: Detects simulator telemetry for Exploitation of Remote Services scale
+  variant 3048.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1210
+    apt_sim.variant: attack_scale_variant_3048
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1210/
+tags:
+- attack.t1210

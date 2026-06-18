@@ -1,0 +1,21 @@
+title: MMC Scale Variant 3075 Marker
+id: 4107efdc-fa76-56a8-a4cc-dd65a2c0287b
+status: experimental
+description: Detects simulator telemetry for MMC scale variant 3075.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.014
+    apt_sim.variant: attack_scale_variant_3075
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/014/
+tags:
+- attack.t1218.014

@@ -1,0 +1,22 @@
+title: vSphere Installation Bundles Scale Variant 3821 Marker
+id: 2c07e03d-8fc2-505f-8935-4bed761e1ea7
+status: experimental
+description: Detects simulator telemetry for vSphere Installation Bundles scale variant
+  3821.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.006
+    apt_sim.variant: attack_scale_variant_3821
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/006/
+tags:
+- attack.t1505.006

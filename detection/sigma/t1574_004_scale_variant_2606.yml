@@ -1,0 +1,21 @@
+title: Dylib Hijacking Scale Variant 2606 Marker
+id: 6a84a1b7-9242-5d46-9faf-91c5fa472889
+status: experimental
+description: Detects simulator telemetry for Dylib Hijacking scale variant 2606.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.004
+    apt_sim.variant: attack_scale_variant_2606
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/004/
+tags:
+- attack.t1574.004

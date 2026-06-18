@@ -1,0 +1,21 @@
+title: JavaScript Scale Variant 2212 Marker
+id: c9da8089-f299-5126-b029-c2387b52b02e
+status: experimental
+description: Detects simulator telemetry for JavaScript scale variant 2212.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.007
+    apt_sim.variant: attack_scale_variant_2212
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/007/
+tags:
+- attack.t1059.007

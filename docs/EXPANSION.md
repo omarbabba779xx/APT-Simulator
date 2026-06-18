@@ -25,8 +25,9 @@ If `APT_SIM_SAFETY_TOKEN` is set, the run params must include the same
 
 The repository includes `ttps/catalog/attack_enterprise.yaml`, generated from
 ATT&CK Enterprise STIX, plus controlled marker-only variants in
-`ttps/catalog/attack_variants.yaml`. The registry currently loads 851 safe
-TTPs/variants across Python modules and catalog-backed entries.
+`ttps/catalog/attack_variants.yaml`, and the larger
+`ttps/catalog/attack_scale_variants.yaml` pack. The registry currently loads
+5,000 safe TTPs/variants across Python modules and catalog-backed entries.
 
 Refresh marker-only stubs from ATT&CK Enterprise STIX:
 

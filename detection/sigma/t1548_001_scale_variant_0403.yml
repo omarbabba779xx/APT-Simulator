@@ -1,0 +1,21 @@
+title: Setuid and Setgid Scale Variant 0403 Marker
+id: 04f3c22c-f04c-5414-94c9-1183e578a911
+status: experimental
+description: Detects simulator telemetry for Setuid and Setgid scale variant 0403.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.001
+    apt_sim.variant: attack_scale_variant_0403
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/001/
+tags:
+- attack.t1548.001

@@ -1,0 +1,21 @@
+title: Social Media Scale Variant 4076 Marker
+id: ebe32396-0b22-53fd-bc32-b648d4b09e90
+status: experimental
+description: Detects simulator telemetry for Social Media scale variant 4076.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.001
+    apt_sim.variant: attack_scale_variant_4076
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/001/
+tags:
+- attack.t1593.001

@@ -1,0 +1,22 @@
+title: Change Default File Association Scale Variant 2457 Marker
+id: 2295bf91-d4c1-53e7-85ea-6bb5fd1f0efa
+status: experimental
+description: Detects simulator telemetry for Change Default File Association scale
+  variant 2457.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.001
+    apt_sim.variant: attack_scale_variant_2457
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/001/
+tags:
+- attack.t1546.001

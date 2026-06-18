@@ -1,0 +1,21 @@
+title: Data Destruction Scale Variant 2397 Marker
+id: 924b5c8c-254d-5401-aad8-7e3d346bbf3b
+status: experimental
+description: Detects simulator telemetry for Data Destruction scale variant 2397.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1485
+    apt_sim.variant: attack_scale_variant_2397
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1485/
+tags:
+- attack.t1485

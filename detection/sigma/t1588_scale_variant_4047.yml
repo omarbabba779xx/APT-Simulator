@@ -1,0 +1,21 @@
+title: Obtain Capabilities Scale Variant 4047 Marker
+id: 122c5ef5-a7b6-54a8-872b-9c1e5cc424ba
+status: experimental
+description: Detects simulator telemetry for Obtain Capabilities scale variant 4047.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588
+    apt_sim.variant: attack_scale_variant_4047
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/
+tags:
+- attack.t1588

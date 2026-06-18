@@ -1,0 +1,21 @@
+title: Exploits Scale Variant 2654 Marker
+id: 1d26d4cf-b8ed-524b-b505-79e705ff0de2
+status: experimental
+description: Detects simulator telemetry for Exploits scale variant 2654.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.004
+    apt_sim.variant: attack_scale_variant_2654
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/004/
+tags:
+- attack.t1587.004

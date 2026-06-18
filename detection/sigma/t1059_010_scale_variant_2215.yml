@@ -1,0 +1,21 @@
+title: AutoHotKey & AutoIT Scale Variant 2215 Marker
+id: 010f77f3-408b-56af-83bf-cb2a0277c506
+status: experimental
+description: Detects simulator telemetry for AutoHotKey & AutoIT scale variant 2215.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.010
+    apt_sim.variant: attack_scale_variant_2215
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/010/
+tags:
+- attack.t1059.010

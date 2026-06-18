@@ -1,0 +1,22 @@
+title: Publish/Subscribe Protocols Scale Variant 2934 Marker
+id: 27f06e65-908b-5671-8930-4e4489dbc93a
+status: experimental
+description: Detects simulator telemetry for Publish/Subscribe Protocols scale variant
+  2934.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.005
+    apt_sim.variant: attack_scale_variant_2934
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/005/
+tags:
+- attack.t1071.005

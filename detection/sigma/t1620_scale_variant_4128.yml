@@ -1,0 +1,22 @@
+title: Reflective Code Loading Scale Variant 4128 Marker
+id: 4860e178-2e4b-5368-9dc4-450990adc66e
+status: experimental
+description: Detects simulator telemetry for Reflective Code Loading scale variant
+  4128.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1620
+    apt_sim.variant: attack_scale_variant_4128
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1620/
+tags:
+- attack.t1620

@@ -1,0 +1,21 @@
+title: Hijack Execution Flow Scale Variant 3996 Marker
+id: 50d8641a-4d81-5e91-af51-ee1bd365c5af
+status: experimental
+description: Detects simulator telemetry for Hijack Execution Flow scale variant 3996.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574
+    apt_sim.variant: attack_scale_variant_3996
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/
+tags:
+- attack.t1574

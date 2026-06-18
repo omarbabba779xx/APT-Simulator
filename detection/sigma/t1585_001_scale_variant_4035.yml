@@ -1,0 +1,21 @@
+title: Social Media Accounts Scale Variant 4035 Marker
+id: 818cae06-1097-56f9-a1f7-dc0121183475
+status: experimental
+description: Detects simulator telemetry for Social Media Accounts scale variant 4035.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.001
+    apt_sim.variant: attack_scale_variant_4035
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/001/
+tags:
+- attack.t1585.001

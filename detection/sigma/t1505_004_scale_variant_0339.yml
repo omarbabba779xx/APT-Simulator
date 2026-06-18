@@ -1,0 +1,21 @@
+title: IIS Components Scale Variant 0339 Marker
+id: de1c5398-b47a-582a-b0a8-79b15d463c49
+status: experimental
+description: Detects simulator telemetry for IIS Components scale variant 0339.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.004
+    apt_sim.variant: attack_scale_variant_0339
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/004/
+tags:
+- attack.t1505.004

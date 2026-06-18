@@ -1,0 +1,21 @@
+title: Keylogging Scale Variant 1504 Marker
+id: ab5919bc-0e56-5f1d-9afd-ea3d09b01bfa
+status: experimental
+description: Detects simulator telemetry for Keylogging scale variant 1504.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.001
+    apt_sim.variant: attack_scale_variant_1504
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/001/
+tags:
+- attack.t1056.001

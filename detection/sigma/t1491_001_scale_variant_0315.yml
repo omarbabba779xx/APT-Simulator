@@ -1,0 +1,21 @@
+title: Internal Defacement Scale Variant 0315 Marker
+id: 5340f0a5-0de3-587a-8ba3-521d29296248
+status: experimental
+description: Detects simulator telemetry for Internal Defacement scale variant 0315.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.001
+    apt_sim.variant: attack_scale_variant_0315
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/001/
+tags:
+- attack.t1491.001

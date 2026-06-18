@@ -1,0 +1,21 @@
+title: SAML Tokens Scale Variant 0631 Marker
+id: 67a69499-9d3f-503b-a226-8816d716083c
+status: experimental
+description: Detects simulator telemetry for SAML Tokens scale variant 0631.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.002
+    apt_sim.variant: attack_scale_variant_0631
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/002/
+tags:
+- attack.t1606.002

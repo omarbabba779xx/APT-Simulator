@@ -1,0 +1,22 @@
+title: Dynamic Linker Hijacking Scale Variant 4000 Marker
+id: 2afa4a9d-ea4c-5258-93fa-a71a0225adab
+status: experimental
+description: Detects simulator telemetry for Dynamic Linker Hijacking scale variant
+  4000.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.006
+    apt_sim.variant: attack_scale_variant_4000
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/006/
+tags:
+- attack.t1574.006

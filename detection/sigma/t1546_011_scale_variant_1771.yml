@@ -1,0 +1,21 @@
+title: Application Shimming Scale Variant 1771 Marker
+id: b53462d7-45e1-5c79-bfeb-3365e842aa59
+status: experimental
+description: Detects simulator telemetry for Application Shimming scale variant 1771.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.011
+    apt_sim.variant: attack_scale_variant_1771
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/011/
+tags:
+- attack.t1546.011

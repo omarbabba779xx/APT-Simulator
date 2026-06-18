@@ -1,0 +1,21 @@
+title: DNS Scale Variant 4060 Marker
+id: 9a226945-d505-54e6-bc8b-810a18a1e6fd
+status: experimental
+description: Detects simulator telemetry for DNS scale variant 4060.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.002
+    apt_sim.variant: attack_scale_variant_4060
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/002/
+tags:
+- attack.t1590.002

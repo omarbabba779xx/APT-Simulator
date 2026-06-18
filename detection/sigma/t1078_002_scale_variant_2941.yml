@@ -1,0 +1,21 @@
+title: Domain Accounts Scale Variant 2941 Marker
+id: 39767207-cd42-5648-a041-bc22dc5a5e9e
+status: experimental
+description: Detects simulator telemetry for Domain Accounts scale variant 2941.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.002
+    apt_sim.variant: attack_scale_variant_2941
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/002/
+tags:
+- attack.t1078.002

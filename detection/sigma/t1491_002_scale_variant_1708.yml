@@ -1,0 +1,21 @@
+title: External Defacement Scale Variant 1708 Marker
+id: de6da759-a5bc-5b4d-a52e-1353680e9d19
+status: experimental
+description: Detects simulator telemetry for External Defacement scale variant 1708.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.002
+    apt_sim.variant: attack_scale_variant_1708
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/002/
+tags:
+- attack.t1491.002

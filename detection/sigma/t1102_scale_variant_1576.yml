@@ -1,0 +1,21 @@
+title: Web Service Scale Variant 1576 Marker
+id: 3048447c-e3da-5984-b4bf-6edb73ff3e45
+status: experimental
+description: Detects simulator telemetry for Web Service scale variant 1576.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102
+    apt_sim.variant: attack_scale_variant_1576
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/
+tags:
+- attack.t1102

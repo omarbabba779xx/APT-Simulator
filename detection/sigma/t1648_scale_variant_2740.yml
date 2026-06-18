@@ -1,0 +1,21 @@
+title: Serverless Execution Scale Variant 2740 Marker
+id: 132db7bb-930e-5f73-93db-af96ecc091d5
+status: experimental
+description: Detects simulator telemetry for Serverless Execution scale variant 2740.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1648
+    apt_sim.variant: attack_scale_variant_2740
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1648/
+tags:
+- attack.t1648

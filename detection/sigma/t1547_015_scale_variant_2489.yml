@@ -1,0 +1,21 @@
+title: Login Items Scale Variant 2489 Marker
+id: 9b951b27-6657-53d1-aeac-7ecf41d7f8b9
+status: experimental
+description: Detects simulator telemetry for Login Items scale variant 2489.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.015
+    apt_sim.variant: attack_scale_variant_2489
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/015/
+tags:
+- attack.t1547.015

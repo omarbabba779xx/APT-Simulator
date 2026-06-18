@@ -1,0 +1,21 @@
+title: Hide Infrastructure Scale Variant 0661 Marker
+id: a6925204-91b0-5407-bd00-0633b5203006
+status: experimental
+description: Detects simulator telemetry for Hide Infrastructure scale variant 0661.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1665
+    apt_sim.variant: attack_scale_variant_0661
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1665/
+tags:
+- attack.t1665

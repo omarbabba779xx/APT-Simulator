@@ -1,0 +1,22 @@
+title: Install Root Certificate Scale Variant 0427 Marker
+id: 80b4865b-9c6e-5aca-81a1-db63a58b8892
+status: experimental
+description: Detects simulator telemetry for Install Root Certificate scale variant
+  0427.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.004
+    apt_sim.variant: attack_scale_variant_0427
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/004/
+tags:
+- attack.t1553.004

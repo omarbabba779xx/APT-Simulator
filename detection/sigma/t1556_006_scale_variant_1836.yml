@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Scale Variant 1836 Marker
+id: c45f96d3-563f-5525-a4c7-6c5c6d9bf617
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication scale variant
+  1836.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.006
+    apt_sim.variant: attack_scale_variant_1836
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/006/
+tags:
+- attack.t1556.006

@@ -1,0 +1,21 @@
+title: Code Repositories Scale Variant 2358 Marker
+id: 40344cd1-f12c-5a3a-8438-e53fc6403214
+status: experimental
+description: Detects simulator telemetry for Code Repositories scale variant 2358.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.003
+    apt_sim.variant: attack_scale_variant_2358
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/003/
+tags:
+- attack.t1213.003

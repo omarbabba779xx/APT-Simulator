@@ -1,0 +1,21 @@
+title: XSL Script Processing Scale Variant 2385 Marker
+id: 92f8051d-b737-51c5-b9db-774153705ef1
+status: experimental
+description: Detects simulator telemetry for XSL Script Processing scale variant 2385.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1220
+    apt_sim.variant: attack_scale_variant_2385
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1220/
+tags:
+- attack.t1220

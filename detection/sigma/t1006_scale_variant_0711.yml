@@ -1,0 +1,21 @@
+title: Direct Volume Access Scale Variant 0711 Marker
+id: a0aee204-5d10-54cb-af68-d40f7549fd74
+status: experimental
+description: Detects simulator telemetry for Direct Volume Access scale variant 0711.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1006
+    apt_sim.variant: attack_scale_variant_0711
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1006/
+tags:
+- attack.t1006

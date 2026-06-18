@@ -1,0 +1,21 @@
+title: Udev Rules Scale Variant 1081 Marker
+id: 24833316-713f-54b8-a4e2-3e92b8955ee9
+status: experimental
+description: Detects simulator telemetry for Udev Rules scale variant 1081.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.017
+    apt_sim.variant: attack_scale_variant_1081
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/017/
+tags:
+- attack.t1546.017

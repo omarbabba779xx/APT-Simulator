@@ -1,0 +1,21 @@
+title: Non-Standard Encoding Scale Variant 1608 Marker
+id: 96a10bd2-6f13-5996-a901-9cb8e69951d7
+status: experimental
+description: Detects simulator telemetry for Non-Standard Encoding scale variant 1608.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1132.002
+    apt_sim.variant: attack_scale_variant_1608
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1132/002/
+tags:
+- attack.t1132.002

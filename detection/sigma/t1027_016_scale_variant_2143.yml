@@ -1,0 +1,21 @@
+title: Junk Code Insertion Scale Variant 2143 Marker
+id: 33952377-6f8c-5b05-b59e-5f3b6ccc5d8e
+status: experimental
+description: Detects simulator telemetry for Junk Code Insertion scale variant 2143.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.016
+    apt_sim.variant: attack_scale_variant_2143
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/016/
+tags:
+- attack.t1027.016

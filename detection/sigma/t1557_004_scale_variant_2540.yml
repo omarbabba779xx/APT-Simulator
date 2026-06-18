@@ -1,0 +1,21 @@
+title: Evil Twin Scale Variant 2540 Marker
+id: 2fec5b99-aba7-5ab1-b446-9d52c7495229
+status: experimental
+description: Detects simulator telemetry for Evil Twin scale variant 2540.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.004
+    apt_sim.variant: attack_scale_variant_2540
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/004/
+tags:
+- attack.t1557.004

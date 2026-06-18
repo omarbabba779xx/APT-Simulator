@@ -1,0 +1,22 @@
+title: Application or System Exploitation Scale Variant 3814 Marker
+id: 8738a0de-2f1b-5114-b811-52138e44dfc7
+status: experimental
+description: Detects simulator telemetry for Application or System Exploitation scale
+  variant 3814.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.004
+    apt_sim.variant: attack_scale_variant_3814
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/004/
+tags:
+- attack.t1499.004

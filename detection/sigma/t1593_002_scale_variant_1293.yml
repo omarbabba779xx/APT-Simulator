@@ -1,0 +1,21 @@
+title: Search Engines Scale Variant 1293 Marker
+id: 822acdfe-68c3-5ce5-a3de-be83c2af9014
+status: experimental
+description: Detects simulator telemetry for Search Engines scale variant 1293.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.002
+    apt_sim.variant: attack_scale_variant_1293
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/002/
+tags:
+- attack.t1593.002

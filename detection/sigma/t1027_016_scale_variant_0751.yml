@@ -1,0 +1,21 @@
+title: Junk Code Insertion Scale Variant 0751 Marker
+id: 7b894d57-2130-5d1d-acd7-5c69d94625a2
+status: experimental
+description: Detects simulator telemetry for Junk Code Insertion scale variant 0751.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.016
+    apt_sim.variant: attack_scale_variant_0751
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/016/
+tags:
+- attack.t1027.016

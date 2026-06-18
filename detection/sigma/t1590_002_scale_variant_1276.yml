@@ -1,0 +1,21 @@
+title: DNS Scale Variant 1276 Marker
+id: 1cba8d35-8d93-5842-924b-f055945ecda4
+status: experimental
+description: Detects simulator telemetry for DNS scale variant 1276.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.002
+    apt_sim.variant: attack_scale_variant_1276
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/002/
+tags:
+- attack.t1590.002

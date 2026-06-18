@@ -1,0 +1,21 @@
+title: Generate Content Scale Variant 1372 Marker
+id: 9d092779-ac76-57bc-86d5-d542a0fcc551
+status: experimental
+description: Detects simulator telemetry for Generate Content scale variant 1372.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683
+    apt_sim.variant: attack_scale_variant_1372
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/
+tags:
+- attack.t1683

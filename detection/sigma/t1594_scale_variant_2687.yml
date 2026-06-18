@@ -1,0 +1,22 @@
+title: Search Victim-Owned Websites Scale Variant 2687 Marker
+id: 8721ea07-06ad-56cb-a0b0-9fc76e27402c
+status: experimental
+description: Detects simulator telemetry for Search Victim-Owned Websites scale variant
+  2687.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1594
+    apt_sim.variant: attack_scale_variant_2687
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1594/
+tags:
+- attack.t1594

@@ -1,0 +1,21 @@
+title: Credentials Scale Variant 3359 Marker
+id: 15019b3d-e8d2-53b0-a2d8-066177ceac7e
+status: experimental
+description: Detects simulator telemetry for Credentials scale variant 3359.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.001
+    apt_sim.variant: attack_scale_variant_3359
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/001/
+tags:
+- attack.t1589.001

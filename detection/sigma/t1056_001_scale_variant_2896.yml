@@ -1,0 +1,21 @@
+title: Keylogging Scale Variant 2896 Marker
+id: 57cbd4ab-9e72-5f1b-9179-a00ab25c1254
+status: experimental
+description: Detects simulator telemetry for Keylogging scale variant 2896.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.001
+    apt_sim.variant: attack_scale_variant_2896
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/001/
+tags:
+- attack.t1056.001

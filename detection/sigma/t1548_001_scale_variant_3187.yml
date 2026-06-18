@@ -1,0 +1,21 @@
+title: Setuid and Setgid Scale Variant 3187 Marker
+id: c09d84d3-e00c-5188-80e2-a2f96509f789
+status: experimental
+description: Detects simulator telemetry for Setuid and Setgid scale variant 3187.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.001
+    apt_sim.variant: attack_scale_variant_3187
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/001/
+tags:
+- attack.t1548.001

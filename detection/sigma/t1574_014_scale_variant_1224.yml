@@ -1,0 +1,21 @@
+title: AppDomainManager Scale Variant 1224 Marker
+id: 1761d52b-e40e-5a3a-af33-23eb03b1fd39
+status: experimental
+description: Detects simulator telemetry for AppDomainManager scale variant 1224.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.014
+    apt_sim.variant: attack_scale_variant_1224
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/014/
+tags:
+- attack.t1574.014

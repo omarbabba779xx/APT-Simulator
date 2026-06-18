@@ -1,0 +1,22 @@
+title: Component Object Model Hijacking Scale Variant 1079 Marker
+id: d547ebcf-970a-5c47-b18d-f03ee9c618f2
+status: experimental
+description: Detects simulator telemetry for Component Object Model Hijacking scale
+  variant 1079.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.015
+    apt_sim.variant: attack_scale_variant_1079
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/015/
+tags:
+- attack.t1546.015

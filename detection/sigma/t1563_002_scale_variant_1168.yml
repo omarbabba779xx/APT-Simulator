@@ -1,0 +1,21 @@
+title: RDP Hijacking Scale Variant 1168 Marker
+id: 225bff25-1397-50ea-a840-830d0b966686
+status: experimental
+description: Detects simulator telemetry for RDP Hijacking scale variant 1168.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563.002
+    apt_sim.variant: attack_scale_variant_1168
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/002/
+tags:
+- attack.t1563.002

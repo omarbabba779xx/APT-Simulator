@@ -1,0 +1,22 @@
+title: Code Signing Policy Modification Scale Variant 1821 Marker
+id: 9305bb26-e951-5e47-805b-eea0885d4d08
+status: experimental
+description: Detects simulator telemetry for Code Signing Policy Modification scale
+  variant 1821.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.006
+    apt_sim.variant: attack_scale_variant_1821
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/006/
+tags:
+- attack.t1553.006

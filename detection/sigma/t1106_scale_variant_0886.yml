@@ -1,0 +1,21 @@
+title: Native API Scale Variant 0886 Marker
+id: 73904702-439d-5789-b8e3-47e018237b07
+status: experimental
+description: Detects simulator telemetry for Native API scale variant 0886.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1106
+    apt_sim.variant: attack_scale_variant_0886
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1106/
+tags:
+- attack.t1106

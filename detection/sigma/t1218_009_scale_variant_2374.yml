@@ -1,0 +1,21 @@
+title: Regsvcs/Regasm Scale Variant 2374 Marker
+id: 5ceaf27c-31a8-54e6-907e-e8934c46bac0
+status: experimental
+description: Detects simulator telemetry for Regsvcs/Regasm scale variant 2374.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.009
+    apt_sim.variant: attack_scale_variant_2374
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/009/
+tags:
+- attack.t1218.009

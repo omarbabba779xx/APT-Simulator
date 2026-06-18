@@ -1,0 +1,21 @@
+title: Exfiltration over USB Scale Variant 2179 Marker
+id: c8c7f3a0-f1f2-56cd-b674-ee46a566c4d8
+status: experimental
+description: Detects simulator telemetry for Exfiltration over USB scale variant 2179.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1052.001
+    apt_sim.variant: attack_scale_variant_2179
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1052/001/
+tags:
+- attack.t1052.001

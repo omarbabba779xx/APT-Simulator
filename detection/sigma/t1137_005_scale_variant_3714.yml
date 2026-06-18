@@ -1,0 +1,21 @@
+title: Outlook Rules Scale Variant 3714 Marker
+id: 3d4d9c15-f881-5000-b97f-1f6352916ecb
+status: experimental
+description: Detects simulator telemetry for Outlook Rules scale variant 3714.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.005
+    apt_sim.variant: attack_scale_variant_3714
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/005/
+tags:
+- attack.t1137.005

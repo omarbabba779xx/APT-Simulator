@@ -1,0 +1,22 @@
+title: Re-opened Applications Scale Variant 0394 Marker
+id: 914b188d-01e1-573b-a3b8-c9b0d2cda90f
+status: experimental
+description: Detects simulator telemetry for Re-opened Applications scale variant
+  0394.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.007
+    apt_sim.variant: attack_scale_variant_0394
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/007/
+tags:
+- attack.t1547.007

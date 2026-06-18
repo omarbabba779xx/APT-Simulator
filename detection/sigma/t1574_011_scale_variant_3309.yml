@@ -1,0 +1,22 @@
+title: Services Registry Permissions Weakness Scale Variant 3309 Marker
+id: e4685903-6768-5f42-8821-c174f203d6cd
+status: experimental
+description: Detects simulator telemetry for Services Registry Permissions Weakness
+  scale variant 3309.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.011
+    apt_sim.variant: attack_scale_variant_3309
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/011/
+tags:
+- attack.t1574.011

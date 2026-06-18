@@ -1,0 +1,21 @@
+title: Gatekeeper Bypass Scale Variant 0424 Marker
+id: fb6b555a-3eff-5b3f-94b9-d67855bff692
+status: experimental
+description: Detects simulator telemetry for Gatekeeper Bypass scale variant 0424.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.001
+    apt_sim.variant: attack_scale_variant_0424
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/001/
+tags:
+- attack.t1553.001

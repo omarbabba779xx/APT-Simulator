@@ -1,0 +1,22 @@
+title: Data from Network Shared Drive Scale Variant 1472 Marker
+id: 9f54d6c4-ffb5-5f28-9bac-5d68a7b88825
+status: experimental
+description: Detects simulator telemetry for Data from Network Shared Drive scale
+  variant 1472.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1039
+    apt_sim.variant: attack_scale_variant_1472
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1039/
+tags:
+- attack.t1039

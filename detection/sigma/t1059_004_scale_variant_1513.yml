@@ -1,0 +1,21 @@
+title: Unix Shell Scale Variant 1513 Marker
+id: 10a9f8fa-1def-5f54-9eb3-c6659708b378
+status: experimental
+description: Detects simulator telemetry for Unix Shell scale variant 1513.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.004
+    apt_sim.variant: attack_scale_variant_1513
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/004/
+tags:
+- attack.t1059.004

@@ -1,0 +1,21 @@
+title: Scan Databases Scale Variant 3393 Marker
+id: 5d1d20d8-1311-5c32-ab39-2f95b9875d0d
+status: experimental
+description: Detects simulator telemetry for Scan Databases scale variant 3393.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.005
+    apt_sim.variant: attack_scale_variant_3393
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/005/
+tags:
+- attack.t1596.005

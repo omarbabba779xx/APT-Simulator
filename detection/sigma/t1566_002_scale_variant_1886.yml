@@ -1,0 +1,21 @@
+title: Spearphishing Link Scale Variant 1886 Marker
+id: 6e01f263-2830-5216-8d07-0a789948c2de
+status: experimental
+description: Detects simulator telemetry for Spearphishing Link scale variant 1886.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.002
+    apt_sim.variant: attack_scale_variant_1886
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/002/
+tags:
+- attack.t1566.002

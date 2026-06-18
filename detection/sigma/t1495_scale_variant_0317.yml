@@ -1,0 +1,21 @@
+title: Firmware Corruption Scale Variant 0317 Marker
+id: 590c217d-da2c-5658-9ee3-5509ea14a7b5
+status: experimental
+description: Detects simulator telemetry for Firmware Corruption scale variant 0317.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1495
+    apt_sim.variant: attack_scale_variant_0317
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1495/
+tags:
+- attack.t1495

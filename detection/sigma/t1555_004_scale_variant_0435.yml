@@ -1,0 +1,22 @@
+title: Windows Credential Manager Scale Variant 0435 Marker
+id: da926a12-8565-5d0f-9dd2-387edccffa78
+status: experimental
+description: Detects simulator telemetry for Windows Credential Manager scale variant
+  0435.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.004
+    apt_sim.variant: attack_scale_variant_0435
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/004/
+tags:
+- attack.t1555.004

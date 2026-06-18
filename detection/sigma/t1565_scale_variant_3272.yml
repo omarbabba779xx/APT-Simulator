@@ -1,0 +1,21 @@
+title: Data Manipulation Scale Variant 3272 Marker
+id: 60a98487-4f4f-5a5f-ac09-f8a1f6595297
+status: experimental
+description: Detects simulator telemetry for Data Manipulation scale variant 3272.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565
+    apt_sim.variant: attack_scale_variant_3272
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/
+tags:
+- attack.t1565

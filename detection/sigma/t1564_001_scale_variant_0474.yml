@@ -1,0 +1,22 @@
+title: Hidden Files and Directories Scale Variant 0474 Marker
+id: ce77e881-b48a-52ee-9b55-ad39feac1c99
+status: experimental
+description: Detects simulator telemetry for Hidden Files and Directories scale variant
+  0474.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.001
+    apt_sim.variant: attack_scale_variant_0474
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/001/
+tags:
+- attack.t1564.001

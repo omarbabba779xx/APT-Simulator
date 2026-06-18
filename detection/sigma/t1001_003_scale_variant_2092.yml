@@ -1,0 +1,22 @@
+title: Protocol or Service Impersonation Scale Variant 2092 Marker
+id: f404e4b3-6134-5437-bf71-e3beba248053
+status: experimental
+description: Detects simulator telemetry for Protocol or Service Impersonation scale
+  variant 2092.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.003
+    apt_sim.variant: attack_scale_variant_2092
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/003/
+tags:
+- attack.t1001.003

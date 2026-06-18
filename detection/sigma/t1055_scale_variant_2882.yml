@@ -1,0 +1,21 @@
+title: Process Injection Scale Variant 2882 Marker
+id: dad0ce16-3f43-5fbf-8d4b-b06ad88301dd
+status: experimental
+description: Detects simulator telemetry for Process Injection scale variant 2882.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055
+    apt_sim.variant: attack_scale_variant_2882
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/
+tags:
+- attack.t1055

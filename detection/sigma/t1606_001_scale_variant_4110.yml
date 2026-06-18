@@ -1,0 +1,21 @@
+title: Web Cookies Scale Variant 4110 Marker
+id: 19230b49-6ee6-56ed-9d5f-92a737d8e245
+status: experimental
+description: Detects simulator telemetry for Web Cookies scale variant 4110.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.001
+    apt_sim.variant: attack_scale_variant_4110
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/001/
+tags:
+- attack.t1606.001

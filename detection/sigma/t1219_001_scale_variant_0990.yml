@@ -1,0 +1,21 @@
+title: IDE Tunneling Scale Variant 0990 Marker
+id: bdae8abe-71a0-5191-815e-6c57377c058a
+status: experimental
+description: Detects simulator telemetry for IDE Tunneling scale variant 0990.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219.001
+    apt_sim.variant: attack_scale_variant_0990
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/001/
+tags:
+- attack.t1219.001

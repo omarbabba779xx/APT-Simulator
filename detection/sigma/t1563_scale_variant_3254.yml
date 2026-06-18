@@ -1,0 +1,22 @@
+title: Remote Service Session Hijacking Scale Variant 3254 Marker
+id: 502321fe-f31f-5cf7-858d-8735b6d289af
+status: experimental
+description: Detects simulator telemetry for Remote Service Session Hijacking scale
+  variant 3254.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563
+    apt_sim.variant: attack_scale_variant_3254
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/
+tags:
+- attack.t1563

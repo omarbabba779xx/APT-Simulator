@@ -1,0 +1,22 @@
+title: Credential API Hooking Scale Variant 0115 Marker
+id: 94d58b2a-53ba-5f67-9ca9-b1e4f10d1492
+status: experimental
+description: Detects simulator telemetry for Credential API Hooking scale variant
+  0115.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.004
+    apt_sim.variant: attack_scale_variant_0115
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/004/
+tags:
+- attack.t1056.004

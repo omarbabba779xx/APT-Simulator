@@ -1,0 +1,21 @@
+title: RC Scripts Scale Variant 3558 Marker
+id: d74146c9-a483-5a36-9d30-85a0e8fbd3d3
+status: experimental
+description: Detects simulator telemetry for RC Scripts scale variant 3558.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.004
+    apt_sim.variant: attack_scale_variant_3558
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/004/
+tags:
+- attack.t1037.004

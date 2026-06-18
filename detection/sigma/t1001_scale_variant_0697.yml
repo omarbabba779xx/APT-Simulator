@@ -1,0 +1,21 @@
+title: Data Obfuscation Scale Variant 0697 Marker
+id: a747c4f0-9e17-5c0f-95a1-d8bcdccd2358
+status: experimental
+description: Detects simulator telemetry for Data Obfuscation scale variant 0697.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001
+    apt_sim.variant: attack_scale_variant_0697
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/
+tags:
+- attack.t1001

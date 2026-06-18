@@ -1,0 +1,21 @@
+title: Clear Mailbox Data Scale Variant 2926 Marker
+id: 984af85f-f9e6-526b-a935-47cdac97f61d
+status: experimental
+description: Detects simulator telemetry for Clear Mailbox Data scale variant 2926.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.008
+    apt_sim.variant: attack_scale_variant_2926
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/008/
+tags:
+- attack.t1070.008

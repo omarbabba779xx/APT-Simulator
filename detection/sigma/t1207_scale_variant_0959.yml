@@ -1,0 +1,22 @@
+title: Rogue Domain Controller Scale Variant 0959 Marker
+id: ecb0895e-5754-583a-8697-772d55ac18e8
+status: experimental
+description: Detects simulator telemetry for Rogue Domain Controller scale variant
+  0959.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1207
+    apt_sim.variant: attack_scale_variant_0959
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1207/
+tags:
+- attack.t1207

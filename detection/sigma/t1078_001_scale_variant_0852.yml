@@ -1,0 +1,21 @@
+title: Default Accounts Scale Variant 0852 Marker
+id: 11f8b1b8-0d88-5782-8a11-f669adf882be
+status: experimental
+description: Detects simulator telemetry for Default Accounts scale variant 0852.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.001
+    apt_sim.variant: attack_scale_variant_0852
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/001/
+tags:
+- attack.t1078.001

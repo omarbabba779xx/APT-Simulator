@@ -1,0 +1,21 @@
+title: Input Capture Scale Variant 2895 Marker
+id: 121500bb-a9bd-51d5-a182-1b89ec4c5fe6
+status: experimental
+description: Detects simulator telemetry for Input Capture scale variant 2895.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056
+    apt_sim.variant: attack_scale_variant_2895
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/
+tags:
+- attack.t1056

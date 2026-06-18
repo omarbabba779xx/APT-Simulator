@@ -1,0 +1,22 @@
+title: Network Device Authentication Scale Variant 3922 Marker
+id: 54277f99-a500-50ae-a3ee-ae8a94cc1f06
+status: experimental
+description: Detects simulator telemetry for Network Device Authentication scale variant
+  3922.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.004
+    apt_sim.variant: attack_scale_variant_3922
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/004/
+tags:
+- attack.t1556.004

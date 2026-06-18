@@ -1,0 +1,21 @@
+title: Malware Scale Variant 4043 Marker
+id: 40a51ef9-92ca-5126-ab60-68ad8b634e3d
+status: experimental
+description: Detects simulator telemetry for Malware scale variant 4043.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.001
+    apt_sim.variant: attack_scale_variant_4043
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/001/
+tags:
+- attack.t1587.001

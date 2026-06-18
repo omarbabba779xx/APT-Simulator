@@ -1,0 +1,21 @@
+title: Modify Registry Scale Variant 3677 Marker
+id: c21171e7-0d8a-529d-bda0-04896254c46b
+status: experimental
+description: Detects simulator telemetry for Modify Registry scale variant 3677.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1112
+    apt_sim.variant: attack_scale_variant_3677
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1112/
+tags:
+- attack.t1112

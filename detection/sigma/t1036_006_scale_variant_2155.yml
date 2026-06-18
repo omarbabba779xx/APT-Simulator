@@ -1,0 +1,21 @@
+title: Space after Filename Scale Variant 2155 Marker
+id: a6599c35-c612-5b16-b85d-e2873184c689
+status: experimental
+description: Detects simulator telemetry for Space after Filename scale variant 2155.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.006
+    apt_sim.variant: attack_scale_variant_2155
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/006/
+tags:
+- attack.t1036.006

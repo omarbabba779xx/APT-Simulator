@@ -1,0 +1,21 @@
+title: Installer Packages Scale Variant 2472 Marker
+id: d1e26c01-29d0-5f9f-9799-26bb45a5e165
+status: experimental
+description: Detects simulator telemetry for Installer Packages scale variant 2472.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.016
+    apt_sim.variant: attack_scale_variant_2472
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/016/
+tags:
+- attack.t1546.016

@@ -1,0 +1,22 @@
+title: Data from Configuration Repository Scale Variant 4106 Marker
+id: 4e554cf6-9a24-5b56-b75e-cac041b49236
+status: experimental
+description: Detects simulator telemetry for Data from Configuration Repository scale
+  variant 4106.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602
+    apt_sim.variant: attack_scale_variant_4106
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/
+tags:
+- attack.t1602

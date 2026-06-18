@@ -1,0 +1,21 @@
+title: Outlook Home Page Scale Variant 0233 Marker
+id: 2ebe9b1b-198e-5222-9f3a-a8fac49f3919
+status: experimental
+description: Detects simulator telemetry for Outlook Home Page scale variant 0233.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.004
+    apt_sim.variant: attack_scale_variant_0233
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/004/
+tags:
+- attack.t1137.004

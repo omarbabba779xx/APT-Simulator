@@ -1,0 +1,22 @@
+title: Indirect Command Execution Scale Variant 0948 Marker
+id: 8131b905-f8cb-59e3-9d48-24152b0ccf5d
+status: experimental
+description: Detects simulator telemetry for Indirect Command Execution scale variant
+  0948.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1202
+    apt_sim.variant: attack_scale_variant_0948
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1202/
+tags:
+- attack.t1202

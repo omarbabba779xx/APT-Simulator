@@ -1,0 +1,21 @@
+title: Malicious File Scale Variant 3040 Marker
+id: 8f900db2-3f01-5131-884c-9b0ed8d5393a
+status: experimental
+description: Detects simulator telemetry for Malicious File scale variant 3040.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.002
+    apt_sim.variant: attack_scale_variant_3040
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/002/
+tags:
+- attack.t1204.002

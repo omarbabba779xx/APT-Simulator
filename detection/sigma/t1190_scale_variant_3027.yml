@@ -1,0 +1,22 @@
+title: Exploit Public-Facing Application Scale Variant 3027 Marker
+id: e718ecaa-b0a5-58ea-b0db-066f38882ca4
+status: experimental
+description: Detects simulator telemetry for Exploit Public-Facing Application scale
+  variant 3027.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1190
+    apt_sim.variant: attack_scale_variant_3027
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1190/
+tags:
+- attack.t1190

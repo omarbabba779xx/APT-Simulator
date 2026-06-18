@@ -1,0 +1,22 @@
+title: Replication Through Removable Media Scale Variant 2957 Marker
+id: 4451c23f-4811-5646-b3f0-ed35035f2044
+status: experimental
+description: Detects simulator telemetry for Replication Through Removable Media scale
+  variant 2957.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1091
+    apt_sim.variant: attack_scale_variant_2957
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1091/
+tags:
+- attack.t1091

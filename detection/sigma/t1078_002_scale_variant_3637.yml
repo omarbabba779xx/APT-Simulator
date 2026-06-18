@@ -1,0 +1,21 @@
+title: Domain Accounts Scale Variant 3637 Marker
+id: 81c79b65-a552-5855-988d-a5327f2d0c51
+status: experimental
+description: Detects simulator telemetry for Domain Accounts scale variant 3637.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.002
+    apt_sim.variant: attack_scale_variant_3637
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/002/
+tags:
+- attack.t1078.002

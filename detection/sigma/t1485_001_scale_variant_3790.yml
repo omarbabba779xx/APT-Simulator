@@ -1,0 +1,22 @@
+title: Lifecycle-Triggered Deletion Scale Variant 3790 Marker
+id: 421dbc80-db8a-5c36-b295-60b9f9f4cd55
+status: experimental
+description: Detects simulator telemetry for Lifecycle-Triggered Deletion scale variant
+  3790.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1485.001
+    apt_sim.variant: attack_scale_variant_3790
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1485/001/
+tags:
+- attack.t1485.001

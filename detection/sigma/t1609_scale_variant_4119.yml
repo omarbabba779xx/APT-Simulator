@@ -1,0 +1,22 @@
+title: Container Administration Command Scale Variant 4119 Marker
+id: ed5165ad-884a-508e-a51e-7a380b5c0f58
+status: experimental
+description: Detects simulator telemetry for Container Administration Command scale
+  variant 4119.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1609
+    apt_sim.variant: attack_scale_variant_4119
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1609/
+tags:
+- attack.t1609

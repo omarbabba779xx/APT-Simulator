@@ -1,0 +1,21 @@
+title: AppDomainManager Scale Variant 0528 Marker
+id: b2fa8e69-dced-5af8-aca3-80ff72896c52
+status: experimental
+description: Detects simulator telemetry for AppDomainManager scale variant 0528.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.014
+    apt_sim.variant: attack_scale_variant_0528
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/014/
+tags:
+- attack.t1574.014

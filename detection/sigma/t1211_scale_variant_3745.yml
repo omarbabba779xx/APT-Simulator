@@ -1,0 +1,22 @@
+title: Exploitation for Stealth Scale Variant 3745 Marker
+id: fcec1188-6bb6-5399-b127-1eed0b62220c
+status: experimental
+description: Detects simulator telemetry for Exploitation for Stealth scale variant
+  3745.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1211
+    apt_sim.variant: attack_scale_variant_3745
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1211/
+tags:
+- attack.t1211

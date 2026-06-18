@@ -1,0 +1,22 @@
+title: Abuse Elevation Control Mechanism Scale Variant 2490 Marker
+id: 8c27ae05-44cf-5d5a-98cd-88e6585c2a08
+status: experimental
+description: Detects simulator telemetry for Abuse Elevation Control Mechanism scale
+  variant 2490.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548
+    apt_sim.variant: attack_scale_variant_2490
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/
+tags:
+- attack.t1548

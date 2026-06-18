@@ -1,0 +1,22 @@
+title: Modify Cloud Compute Configurations Scale Variant 1230 Marker
+id: 83653a81-de8a-5b81-9897-a08fa36e3455
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Compute Configurations scale
+  variant 1230.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.005
+    apt_sim.variant: attack_scale_variant_1230
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/005/
+tags:
+- attack.t1578.005

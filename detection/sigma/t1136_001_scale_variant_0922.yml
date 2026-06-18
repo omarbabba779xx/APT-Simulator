@@ -1,0 +1,21 @@
+title: Local Account Scale Variant 0922 Marker
+id: 94d61bc9-dbf9-535c-b2b5-1167ba0bcb81
+status: experimental
+description: Detects simulator telemetry for Local Account scale variant 0922.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.001
+    apt_sim.variant: attack_scale_variant_0922
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/001/
+tags:
+- attack.t1136.001

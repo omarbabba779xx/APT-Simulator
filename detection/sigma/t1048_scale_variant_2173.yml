@@ -1,0 +1,22 @@
+title: Exfiltration Over Alternative Protocol Scale Variant 2173 Marker
+id: 6941a431-ff0c-53ae-b76e-aada6177321d
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Alternative Protocol
+  scale variant 2173.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048
+    apt_sim.variant: attack_scale_variant_2173
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/
+tags:
+- attack.t1048

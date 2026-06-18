@@ -1,0 +1,22 @@
+title: Windows Management Instrumentation Event Subscription Scale Variant 0371 Marker
+id: 6d2b36ae-01ed-5b9a-aa95-61303c58f23b
+status: experimental
+description: Detects simulator telemetry for Windows Management Instrumentation Event
+  Subscription scale variant 0371.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.003
+    apt_sim.variant: attack_scale_variant_0371
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/003/
+tags:
+- attack.t1546.003

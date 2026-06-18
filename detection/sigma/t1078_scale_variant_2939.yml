@@ -1,0 +1,21 @@
+title: Valid Accounts Scale Variant 2939 Marker
+id: 75a79bdb-6cb7-5f04-b129-c796709941a7
+status: experimental
+description: Detects simulator telemetry for Valid Accounts scale variant 2939.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078
+    apt_sim.variant: attack_scale_variant_2939
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/
+tags:
+- attack.t1078

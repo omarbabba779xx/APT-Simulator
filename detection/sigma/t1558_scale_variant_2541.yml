@@ -1,0 +1,22 @@
+title: Steal or Forge Kerberos Tickets Scale Variant 2541 Marker
+id: fdd60a26-b9d6-581b-bc39-73355d48ceae
+status: experimental
+description: Detects simulator telemetry for Steal or Forge Kerberos Tickets scale
+  variant 2541.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558
+    apt_sim.variant: attack_scale_variant_2541
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/
+tags:
+- attack.t1558

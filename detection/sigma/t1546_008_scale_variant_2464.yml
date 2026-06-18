@@ -1,0 +1,22 @@
+title: Accessibility Features Scale Variant 2464 Marker
+id: b0388edb-8b13-55b1-add2-0b3f95dae38d
+status: experimental
+description: Detects simulator telemetry for Accessibility Features scale variant
+  2464.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.008
+    apt_sim.variant: attack_scale_variant_2464
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/008/
+tags:
+- attack.t1546.008

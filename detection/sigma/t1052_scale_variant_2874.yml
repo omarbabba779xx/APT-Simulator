@@ -1,0 +1,22 @@
+title: Exfiltration Over Physical Medium Scale Variant 2874 Marker
+id: e8d391c4-6d06-5ff7-837d-efcac215e3a8
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Physical Medium scale
+  variant 2874.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1052
+    apt_sim.variant: attack_scale_variant_2874
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1052/
+tags:
+- attack.t1052

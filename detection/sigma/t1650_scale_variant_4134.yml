@@ -1,0 +1,21 @@
+title: Acquire Access Scale Variant 4134 Marker
+id: 30b637dd-1203-5159-b30d-51187cd2b048
+status: experimental
+description: Detects simulator telemetry for Acquire Access scale variant 4134.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1650
+    apt_sim.variant: attack_scale_variant_4134
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1650/
+tags:
+- attack.t1650

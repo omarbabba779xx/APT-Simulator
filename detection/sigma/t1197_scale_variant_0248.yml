@@ -1,0 +1,21 @@
+title: BITS Jobs Scale Variant 0248 Marker
+id: 31757921-e7ca-51f9-b66a-fa2c26581fbb
+status: experimental
+description: Detects simulator telemetry for BITS Jobs scale variant 0248.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1197
+    apt_sim.variant: attack_scale_variant_0248
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1197/
+tags:
+- attack.t1197

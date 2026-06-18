@@ -1,0 +1,22 @@
+title: Cloud Secrets Management Stores Scale Variant 1133 Marker
+id: a183dea7-9aa7-5476-91f4-d7da598c798c
+status: experimental
+description: Detects simulator telemetry for Cloud Secrets Management Stores scale
+  variant 1133.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.006
+    apt_sim.variant: attack_scale_variant_1133
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/006/
+tags:
+- attack.t1555.006

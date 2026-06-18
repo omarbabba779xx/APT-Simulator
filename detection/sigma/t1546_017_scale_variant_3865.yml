@@ -1,0 +1,21 @@
+title: Udev Rules Scale Variant 3865 Marker
+id: 437d38ad-5754-52d8-851b-e66fbee2f77c
+status: experimental
+description: Detects simulator telemetry for Udev Rules scale variant 3865.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.017
+    apt_sim.variant: attack_scale_variant_3865
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/017/
+tags:
+- attack.t1546.017

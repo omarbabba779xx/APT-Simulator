@@ -1,0 +1,21 @@
+title: Email Forwarding Rule Scale Variant 1594 Marker
+id: 21c3be0b-0482-52cd-b403-7bfead84c962
+status: experimental
+description: Detects simulator telemetry for Email Forwarding Rule scale variant 1594.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.003
+    apt_sim.variant: attack_scale_variant_1594
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/003/
+tags:
+- attack.t1114.003

@@ -1,0 +1,21 @@
+title: XPC Services Scale Variant 1158 Marker
+id: e16cc57c-2d4c-5aec-b106-01e6a3834104
+status: experimental
+description: Detects simulator telemetry for XPC Services scale variant 1158.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.003
+    apt_sim.variant: attack_scale_variant_1158
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/003/
+tags:
+- attack.t1559.003

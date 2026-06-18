@@ -1,0 +1,22 @@
+title: File and Directory Discovery Scale Variant 3642 Marker
+id: 5f42fc49-52b2-5730-8625-40e7571817d4
+status: experimental
+description: Detects simulator telemetry for File and Directory Discovery scale variant
+  3642.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1083
+    apt_sim.variant: attack_scale_variant_3642
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1083/
+tags:
+- attack.t1083

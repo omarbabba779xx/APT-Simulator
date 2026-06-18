@@ -1,0 +1,22 @@
+title: Gather Victim Identity Information Scale Variant 3358 Marker
+id: fb9a9106-cb60-5e45-a596-5407baa68380
+status: experimental
+description: Detects simulator telemetry for Gather Victim Identity Information scale
+  variant 3358.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589
+    apt_sim.variant: attack_scale_variant_3358
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/
+tags:
+- attack.t1589

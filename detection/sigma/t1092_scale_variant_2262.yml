@@ -1,0 +1,22 @@
+title: Communication Through Removable Media Scale Variant 2262 Marker
+id: f32a5840-2046-5e39-858c-1de7203a5e43
+status: experimental
+description: Detects simulator telemetry for Communication Through Removable Media
+  scale variant 2262.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1092
+    apt_sim.variant: attack_scale_variant_2262
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1092/
+tags:
+- attack.t1092

@@ -1,0 +1,22 @@
+title: Exfiltration Over Bluetooth Scale Variant 1412 Marker
+id: c617b55a-8d54-5e24-99c2-fa2e727607fd
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Bluetooth scale variant
+  1412.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1011.001
+    apt_sim.variant: attack_scale_variant_1412
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1011/001/
+tags:
+- attack.t1011.001

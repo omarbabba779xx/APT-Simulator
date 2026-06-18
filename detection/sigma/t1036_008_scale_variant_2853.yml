@@ -1,0 +1,21 @@
+title: Masquerade File Type Scale Variant 2853 Marker
+id: 756cae35-17c7-587a-a11a-fe22539423b7
+status: experimental
+description: Detects simulator telemetry for Masquerade File Type scale variant 2853.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.008
+    apt_sim.variant: attack_scale_variant_2853
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/008/
+tags:
+- attack.t1036.008

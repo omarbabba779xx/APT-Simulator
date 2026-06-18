@@ -1,0 +1,22 @@
+title: Network Address Translation Traversal Scale Variant 2707 Marker
+id: a9f4cc0f-2fdd-584b-9930-b814c172b7ed
+status: experimental
+description: Detects simulator telemetry for Network Address Translation Traversal
+  scale variant 2707.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1599.001
+    apt_sim.variant: attack_scale_variant_2707
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1599/001/
+tags:
+- attack.t1599.001

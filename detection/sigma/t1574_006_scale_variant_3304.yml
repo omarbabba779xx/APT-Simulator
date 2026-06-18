@@ -1,0 +1,22 @@
+title: Dynamic Linker Hijacking Scale Variant 3304 Marker
+id: 068910c6-81cb-5b8d-96e4-6362ab8f6403
+status: experimental
+description: Detects simulator telemetry for Dynamic Linker Hijacking scale variant
+  3304.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.006
+    apt_sim.variant: attack_scale_variant_3304
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/006/
+tags:
+- attack.t1574.006

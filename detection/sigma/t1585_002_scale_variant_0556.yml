@@ -1,0 +1,21 @@
+title: Email Accounts Scale Variant 0556 Marker
+id: a7ef0a6a-27e9-5aea-b812-5343dd31418e
+status: experimental
+description: Detects simulator telemetry for Email Accounts scale variant 0556.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.002
+    apt_sim.variant: attack_scale_variant_0556
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/002/
+tags:
+- attack.t1585.002

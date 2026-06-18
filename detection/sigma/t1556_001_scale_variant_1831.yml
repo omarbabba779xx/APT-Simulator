@@ -1,0 +1,22 @@
+title: Domain Controller Authentication Scale Variant 1831 Marker
+id: 52560f05-2720-5fc0-943d-6e1aefbb73f8
+status: experimental
+description: Detects simulator telemetry for Domain Controller Authentication scale
+  variant 1831.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.001
+    apt_sim.variant: attack_scale_variant_1831
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/001/
+tags:
+- attack.t1556.001

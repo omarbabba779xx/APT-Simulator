@@ -1,0 +1,21 @@
+title: Remote Data Staging Scale Variant 0154 Marker
+id: fc2fb127-2510-55f1-b3b2-09d0fad697e0
+status: experimental
+description: Detects simulator telemetry for Remote Data Staging scale variant 0154.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1074.002
+    apt_sim.variant: attack_scale_variant_0154
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1074/002/
+tags:
+- attack.t1074.002

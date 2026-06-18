@@ -1,0 +1,21 @@
+title: Credentials In Files Scale Variant 1111 Marker
+id: e76a9366-0ec3-581e-81e9-3f4cd6d290c0
+status: experimental
+description: Detects simulator telemetry for Credentials In Files scale variant 1111.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.001
+    apt_sim.variant: attack_scale_variant_1111
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/001/
+tags:
+- attack.t1552.001

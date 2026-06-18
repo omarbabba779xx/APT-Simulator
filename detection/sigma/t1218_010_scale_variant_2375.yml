@@ -1,0 +1,21 @@
+title: Regsvr32 Scale Variant 2375 Marker
+id: 09a46dca-a8ea-530c-a5f2-49c8a94f6401
+status: experimental
+description: Detects simulator telemetry for Regsvr32 scale variant 2375.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.010
+    apt_sim.variant: attack_scale_variant_2375
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/010/
+tags:
+- attack.t1218.010

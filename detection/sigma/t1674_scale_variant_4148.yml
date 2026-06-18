@@ -1,0 +1,21 @@
+title: Input Injection Scale Variant 4148 Marker
+id: 125e3cb4-1426-590a-a72f-4c578faec837
+status: experimental
+description: Detects simulator telemetry for Input Injection scale variant 4148.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1674
+    apt_sim.variant: attack_scale_variant_4148
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1674/
+tags:
+- attack.t1674

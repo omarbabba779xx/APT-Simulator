@@ -1,0 +1,22 @@
+title: Malicious Copy and Paste Scale Variant 1650 Marker
+id: e48087a9-98f8-5ec7-a9a1-c4fd4b9d156f
+status: experimental
+description: Detects simulator telemetry for Malicious Copy and Paste scale variant
+  1650.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.004
+    apt_sim.variant: attack_scale_variant_1650
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/004/
+tags:
+- attack.t1204.004

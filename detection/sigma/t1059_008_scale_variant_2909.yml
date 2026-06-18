@@ -1,0 +1,21 @@
+title: Network Device CLI Scale Variant 2909 Marker
+id: 31efd49a-cfa7-5fbc-ad29-1f382de59a7d
+status: experimental
+description: Detects simulator telemetry for Network Device CLI scale variant 2909.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.008
+    apt_sim.variant: attack_scale_variant_2909
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/008/
+tags:
+- attack.t1059.008

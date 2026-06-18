@@ -1,0 +1,22 @@
+title: Create or Modify System Process Scale Variant 1754 Marker
+id: 62245f96-dcdc-5acd-b4c5-1fcc84ebec1a
+status: experimental
+description: Detects simulator telemetry for Create or Modify System Process scale
+  variant 1754.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543
+    apt_sim.variant: attack_scale_variant_1754
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/
+tags:
+- attack.t1543

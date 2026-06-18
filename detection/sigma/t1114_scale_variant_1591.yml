@@ -1,0 +1,21 @@
+title: Email Collection Scale Variant 1591 Marker
+id: d0147937-adf4-5c11-b2e9-b834f4682d33
+status: experimental
+description: Detects simulator telemetry for Email Collection scale variant 1591.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114
+    apt_sim.variant: attack_scale_variant_1591
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/
+tags:
+- attack.t1114

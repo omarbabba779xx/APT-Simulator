@@ -1,0 +1,21 @@
+title: Cloud API Scale Variant 2910 Marker
+id: a29a9d03-9129-50a6-a499-bd4362cf5d31
+status: experimental
+description: Detects simulator telemetry for Cloud API scale variant 2910.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.009
+    apt_sim.variant: attack_scale_variant_2910
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/009/
+tags:
+- attack.t1059.009

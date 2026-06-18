@@ -1,0 +1,21 @@
+title: Traffic Duplication Scale Variant 1420 Marker
+id: bd5569c7-ba34-53f7-b195-148ee666743a
+status: experimental
+description: Detects simulator telemetry for Traffic Duplication scale variant 1420.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1020.001
+    apt_sim.variant: attack_scale_variant_1420
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1020/001/
+tags:
+- attack.t1020.001

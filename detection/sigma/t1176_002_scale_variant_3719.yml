@@ -1,0 +1,21 @@
+title: IDE Extensions Scale Variant 3719 Marker
+id: 7592e724-0e0e-550a-aefe-bc72880b021c
+status: experimental
+description: Detects simulator telemetry for IDE Extensions scale variant 3719.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1176.002
+    apt_sim.variant: attack_scale_variant_3719
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1176/002/
+tags:
+- attack.t1176.002

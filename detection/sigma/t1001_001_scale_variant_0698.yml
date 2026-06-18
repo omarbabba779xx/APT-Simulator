@@ -1,0 +1,21 @@
+title: Junk Data Scale Variant 0698 Marker
+id: 5dc5a40f-fe2e-5603-810c-de932afbbda2
+status: experimental
+description: Detects simulator telemetry for Junk Data scale variant 0698.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.001
+    apt_sim.variant: attack_scale_variant_0698
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/001/
+tags:
+- attack.t1001.001

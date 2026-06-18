@@ -1,0 +1,21 @@
+title: ListPlanting Scale Variant 2198 Marker
+id: 42639d40-8697-52b6-9dc8-1874d4d5a1c8
+status: experimental
+description: Detects simulator telemetry for ListPlanting scale variant 2198.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.015
+    apt_sim.variant: attack_scale_variant_2198
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/015/
+tags:
+- attack.t1055.015

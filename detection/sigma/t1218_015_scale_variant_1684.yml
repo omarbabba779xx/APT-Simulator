@@ -1,0 +1,21 @@
+title: Electron Applications Scale Variant 1684 Marker
+id: fb081d22-99c9-50fa-8fdf-152cc33bdd88
+status: experimental
+description: Detects simulator telemetry for Electron Applications scale variant 1684.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.015
+    apt_sim.variant: attack_scale_variant_1684
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/015/
+tags:
+- attack.t1218.015

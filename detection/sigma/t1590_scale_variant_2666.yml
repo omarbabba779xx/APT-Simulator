@@ -1,0 +1,22 @@
+title: Gather Victim Network Information Scale Variant 2666 Marker
+id: 58fb53f6-12a9-510c-b0f8-84c831114f98
+status: experimental
+description: Detects simulator telemetry for Gather Victim Network Information scale
+  variant 2666.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590
+    apt_sim.variant: attack_scale_variant_2666
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/
+tags:
+- attack.t1590

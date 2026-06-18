@@ -1,0 +1,22 @@
+title: Search Open Technical Databases Scale Variant 4084 Marker
+id: d31e7619-352a-50af-8503-8d377e5b80f6
+status: experimental
+description: Detects simulator telemetry for Search Open Technical Databases scale
+  variant 4084.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596
+    apt_sim.variant: attack_scale_variant_4084
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/
+tags:
+- attack.t1596

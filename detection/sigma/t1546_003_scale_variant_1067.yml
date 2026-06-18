@@ -1,0 +1,22 @@
+title: Windows Management Instrumentation Event Subscription Scale Variant 1067 Marker
+id: 1cccbcc3-a3f0-5730-8f11-e89c924079b5
+status: experimental
+description: Detects simulator telemetry for Windows Management Instrumentation Event
+  Subscription scale variant 1067.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.003
+    apt_sim.variant: attack_scale_variant_1067
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/003/
+tags:
+- attack.t1546.003

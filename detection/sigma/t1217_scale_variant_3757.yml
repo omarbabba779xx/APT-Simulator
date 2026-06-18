@@ -1,0 +1,22 @@
+title: Browser Information Discovery Scale Variant 3757 Marker
+id: 75fb6071-dfb3-5507-a6c3-e6c4f24511c6
+status: experimental
+description: Detects simulator telemetry for Browser Information Discovery scale variant
+  3757.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1217
+    apt_sim.variant: attack_scale_variant_3757
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1217/
+tags:
+- attack.t1217

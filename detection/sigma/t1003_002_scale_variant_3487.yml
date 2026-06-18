@@ -1,0 +1,22 @@
+title: Security Account Manager Scale Variant 3487 Marker
+id: bde44ee0-2a87-5347-9f7a-4323c4bb537d
+status: experimental
+description: Detects simulator telemetry for Security Account Manager scale variant
+  3487.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1003.002
+    apt_sim.variant: attack_scale_variant_3487
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1003/002/
+tags:
+- attack.t1003.002

@@ -1,0 +1,21 @@
+title: Data Obfuscation Scale Variant 2089 Marker
+id: 180622aa-69a3-5d96-8342-39e85a8ed9f3
+status: experimental
+description: Detects simulator telemetry for Data Obfuscation scale variant 2089.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001
+    apt_sim.variant: attack_scale_variant_2089
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/
+tags:
+- attack.t1001

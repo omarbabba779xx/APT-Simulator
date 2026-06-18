@@ -1,0 +1,22 @@
+title: Additional Email Delegate Permissions Scale Variant 0178 Marker
+id: 29be0188-286a-5812-bcd3-e69119dd221a
+status: experimental
+description: Detects simulator telemetry for Additional Email Delegate Permissions
+  scale variant 0178.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.002
+    apt_sim.variant: attack_scale_variant_0178
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/002/
+tags:
+- attack.t1098.002

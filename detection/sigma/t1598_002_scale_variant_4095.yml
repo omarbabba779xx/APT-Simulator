@@ -1,0 +1,22 @@
+title: Spearphishing Attachment Scale Variant 4095 Marker
+id: d5edbc90-2a41-51d2-b405-b029a18163a1
+status: experimental
+description: Detects simulator telemetry for Spearphishing Attachment scale variant
+  4095.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.002
+    apt_sim.variant: attack_scale_variant_4095
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/002/
+tags:
+- attack.t1598.002

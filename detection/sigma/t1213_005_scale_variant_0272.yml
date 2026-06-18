@@ -1,0 +1,22 @@
+title: Messaging Applications Scale Variant 0272 Marker
+id: 7b4075b0-68ac-5107-af1a-51d404fea4f7
+status: experimental
+description: Detects simulator telemetry for Messaging Applications scale variant
+  0272.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.005
+    apt_sim.variant: attack_scale_variant_0272
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/005/
+tags:
+- attack.t1213.005

@@ -1,0 +1,21 @@
+title: Hidden Window Scale Variant 0476 Marker
+id: 937cd517-fde0-5daf-8531-4888cb1bd581
+status: experimental
+description: Detects simulator telemetry for Hidden Window scale variant 0476.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.003
+    apt_sim.variant: attack_scale_variant_0476
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/003/
+tags:
+- attack.t1564.003

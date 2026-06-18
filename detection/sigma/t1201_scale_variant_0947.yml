@@ -1,0 +1,22 @@
+title: Password Policy Discovery Scale Variant 0947 Marker
+id: b837a8c6-b48f-5b1f-9eab-39b3a5989924
+status: experimental
+description: Detects simulator telemetry for Password Policy Discovery scale variant
+  0947.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1201
+    apt_sim.variant: attack_scale_variant_0947
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1201/
+tags:
+- attack.t1201

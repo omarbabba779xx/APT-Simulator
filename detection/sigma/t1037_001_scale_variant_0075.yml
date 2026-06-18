@@ -1,0 +1,22 @@
+title: Logon Script (Windows) Scale Variant 0075 Marker
+id: 7930aba5-777a-5ca5-a6c2-2b9e7ee1056b
+status: experimental
+description: Detects simulator telemetry for Logon Script (Windows) scale variant
+  0075.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.001
+    apt_sim.variant: attack_scale_variant_0075
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/001/
+tags:
+- attack.t1037.001

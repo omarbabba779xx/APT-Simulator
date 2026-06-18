@@ -1,0 +1,21 @@
+title: Scan Databases Scale Variant 0609 Marker
+id: 253bdbdc-bc1c-5d4f-aad9-a3de9e37e246
+status: experimental
+description: Detects simulator telemetry for Scan Databases scale variant 0609.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.005
+    apt_sim.variant: attack_scale_variant_0609
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/005/
+tags:
+- attack.t1596.005

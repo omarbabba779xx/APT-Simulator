@@ -1,0 +1,22 @@
+title: Lifecycle-Triggered Deletion Scale Variant 1006 Marker
+id: 3be89e99-3961-524b-afde-528a181d4809
+status: experimental
+description: Detects simulator telemetry for Lifecycle-Triggered Deletion scale variant
+  1006.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1485.001
+    apt_sim.variant: attack_scale_variant_1006
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1485/001/
+tags:
+- attack.t1485.001

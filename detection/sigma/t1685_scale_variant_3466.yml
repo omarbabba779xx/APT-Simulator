@@ -1,0 +1,22 @@
+title: Disable or Modify Tools Scale Variant 3466 Marker
+id: 9805b805-4207-5c1a-bbb5-7c8f9713cb45
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Tools scale variant
+  3466.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685
+    apt_sim.variant: attack_scale_variant_3466
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/
+tags:
+- attack.t1685

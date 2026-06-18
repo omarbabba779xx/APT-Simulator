@@ -55,38 +55,37 @@ _C_SIM_ONLY = "#d29922"   # amber  — sim, no rule
 _C_EXCLUDED = "#8b949e"   # grey   — platform mismatch
 
 
-def _last_run_status(attack_id: str, db_path: str | None) -> str | None:
-    """Return 'success' | 'failed' | None from the most recent run step."""
+def _last_run_statuses(db_path: str | None) -> dict[str, str]:
+    """Return last observed step status by TTP ID from run history."""
     if not db_path:
-        return None
+        return {}
     p = Path(db_path)
     if not p.exists():
-        return None
+        return {}
     try:
         from orchestrator.storage.db import Repository, init_engine  # local import to avoid circular
         repo = Repository(init_engine(db_path))
         runs = repo.list_runs()
-        best: str | None = None
+        statuses: dict[str, str] = {}
         for run in runs:
             for step in repo.steps_for_run(run.id):
-                if step.attack_id == attack_id:
-                    if step.status == "success":
-                        return "success"
-                    best = step.status
-        return best
+                if step.status == "success" or step.attack_id not in statuses:
+                    statuses[step.attack_id] = step.status
+        return statuses
     except Exception:
-        return None
+        return {}
 
 
 def build_layer(db_path: str | None = None) -> dict[str, Any]:
     """Build and return the Navigator layer dict."""
     techniques: list[dict[str, Any]] = []
     all_ttps = registry.all()
+    run_statuses = _last_run_statuses(db_path)
 
     for attack_id, ttp in sorted(all_ttps.items()):
         base_attack_id = str(getattr(ttp, "base_attack_id", attack_id))
         has_rule = ttp.sigma_rule() is not None
-        run_status = _last_run_status(attack_id, db_path)
+        run_status = run_statuses.get(attack_id)
         tactic_nav = _TACTIC_MAP.get(ttp.tactic, ttp.tactic.replace("_", "-"))
 
         if has_rule and run_status == "success":

@@ -1,0 +1,21 @@
+title: AutoHotKey & AutoIT Scale Variant 3607 Marker
+id: d91a91d3-015e-5c57-b2a8-02b8b75dfc43
+status: experimental
+description: Detects simulator telemetry for AutoHotKey & AutoIT scale variant 3607.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.010
+    apt_sim.variant: attack_scale_variant_3607
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/010/
+tags:
+- attack.t1059.010

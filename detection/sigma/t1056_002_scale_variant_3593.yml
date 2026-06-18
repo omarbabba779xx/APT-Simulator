@@ -1,0 +1,21 @@
+title: GUI Input Capture Scale Variant 3593 Marker
+id: d2d2a76a-6e2d-51b4-b61d-2d84cd984ebd
+status: experimental
+description: Detects simulator telemetry for GUI Input Capture scale variant 3593.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.002
+    apt_sim.variant: attack_scale_variant_3593
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/002/
+tags:
+- attack.t1056.002

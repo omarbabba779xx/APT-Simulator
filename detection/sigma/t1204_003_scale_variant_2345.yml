@@ -1,0 +1,21 @@
+title: Malicious Image Scale Variant 2345 Marker
+id: 50cad209-4f67-57c2-99a4-ca57bc514b1a
+status: experimental
+description: Detects simulator telemetry for Malicious Image scale variant 2345.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.003
+    apt_sim.variant: attack_scale_variant_2345
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/003/
+tags:
+- attack.t1204.003

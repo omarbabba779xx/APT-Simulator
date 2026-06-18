@@ -1,0 +1,21 @@
+title: Create Cloud Instance Scale Variant 2619 Marker
+id: d8b77128-e262-53ec-8bb0-bd982151a7c0
+status: experimental
+description: Detects simulator telemetry for Create Cloud Instance scale variant 2619.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.002
+    apt_sim.variant: attack_scale_variant_2619
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/002/
+tags:
+- attack.t1578.002

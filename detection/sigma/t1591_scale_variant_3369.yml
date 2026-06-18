@@ -1,0 +1,22 @@
+title: Gather Victim Org Information Scale Variant 3369 Marker
+id: 3e219285-cd5e-5d8b-807b-29a1f0b2cc4a
+status: experimental
+description: Detects simulator telemetry for Gather Victim Org Information scale variant
+  3369.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591
+    apt_sim.variant: attack_scale_variant_3369
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/
+tags:
+- attack.t1591

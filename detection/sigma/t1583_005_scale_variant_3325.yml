@@ -1,0 +1,21 @@
+title: Botnet Scale Variant 3325 Marker
+id: 4d65aece-05c5-56a1-b597-dc089ec2fedb
+status: experimental
+description: Detects simulator telemetry for Botnet scale variant 3325.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.005
+    apt_sim.variant: attack_scale_variant_3325
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/005/
+tags:
+- attack.t1583.005

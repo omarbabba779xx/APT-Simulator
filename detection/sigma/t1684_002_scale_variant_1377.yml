@@ -1,0 +1,21 @@
+title: Email Spoofing Scale Variant 1377 Marker
+id: 545f15e1-30d3-5f93-84e0-768f3ac9e32a
+status: experimental
+description: Detects simulator telemetry for Email Spoofing scale variant 1377.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684.002
+    apt_sim.variant: attack_scale_variant_1377
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/002/
+tags:
+- attack.t1684.002

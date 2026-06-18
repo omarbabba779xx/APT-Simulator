@@ -1,0 +1,21 @@
+title: Parent PID Spoofing Scale Variant 0918 Marker
+id: 64ecce4c-37be-5fc2-af8d-957f772fd183
+status: experimental
+description: Detects simulator telemetry for Parent PID Spoofing scale variant 0918.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.004
+    apt_sim.variant: attack_scale_variant_0918
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/004/
+tags:
+- attack.t1134.004

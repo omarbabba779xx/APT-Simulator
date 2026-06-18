@@ -1,0 +1,22 @@
+title: ESXi Administration Command Scale Variant 2061 Marker
+id: 500c20cd-855f-5cee-8ed7-5f4bf86ab018
+status: experimental
+description: Detects simulator telemetry for ESXi Administration Command scale variant
+  2061.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1675
+    apt_sim.variant: attack_scale_variant_2061
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1675/
+tags:
+- attack.t1675

@@ -1,0 +1,21 @@
+title: Search Closed Sources Scale Variant 2002 Marker
+id: 15679e3d-2042-54e2-a64d-60d0bfaa8a09
+status: experimental
+description: Detects simulator telemetry for Search Closed Sources scale variant 2002.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597
+    apt_sim.variant: attack_scale_variant_2002
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/
+tags:
+- attack.t1597

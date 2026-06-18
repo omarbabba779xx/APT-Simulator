@@ -1,0 +1,21 @@
+title: Cloud Services Scale Variant 1428 Marker
+id: abab4430-f55f-5951-a6b1-0518ba31ba97
+status: experimental
+description: Detects simulator telemetry for Cloud Services scale variant 1428.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.007
+    apt_sim.variant: attack_scale_variant_1428
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/007/
+tags:
+- attack.t1021.007

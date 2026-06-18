@@ -1,0 +1,21 @@
+title: Process Discovery Scale Variant 2204 Marker
+id: 667b5e21-c7ea-52f4-9193-b99a06b8d1a8
+status: experimental
+description: Detects simulator telemetry for Process Discovery scale variant 2204.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1057
+    apt_sim.variant: attack_scale_variant_2204
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1057/
+tags:
+- attack.t1057

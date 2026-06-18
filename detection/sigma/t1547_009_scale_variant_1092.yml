@@ -1,0 +1,21 @@
+title: Shortcut Modification Scale Variant 1092 Marker
+id: 898f9a3b-39e9-52f7-95de-0996465ee743
+status: experimental
+description: Detects simulator telemetry for Shortcut Modification scale variant 1092.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.009
+    apt_sim.variant: attack_scale_variant_1092
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/009/
+tags:
+- attack.t1547.009

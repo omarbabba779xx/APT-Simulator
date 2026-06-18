@@ -1,0 +1,21 @@
+title: Valid Accounts Scale Variant 0851 Marker
+id: b82c7933-ec12-512f-9837-cba8d636ebff
+status: experimental
+description: Detects simulator telemetry for Valid Accounts scale variant 0851.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078
+    apt_sim.variant: attack_scale_variant_0851
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/
+tags:
+- attack.t1078

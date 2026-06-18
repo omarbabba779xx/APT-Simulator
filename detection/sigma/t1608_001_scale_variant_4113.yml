@@ -1,0 +1,21 @@
+title: Upload Malware Scale Variant 4113 Marker
+id: 06eee6e6-0368-5331-b347-6d108c6cbdbd
+status: experimental
+description: Detects simulator telemetry for Upload Malware scale variant 4113.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.001
+    apt_sim.variant: attack_scale_variant_4113
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/001/
+tags:
+- attack.t1608.001

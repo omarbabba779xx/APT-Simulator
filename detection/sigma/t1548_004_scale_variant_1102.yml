@@ -1,0 +1,22 @@
+title: Elevated Execution with Prompt Scale Variant 1102 Marker
+id: 14d0b367-46d2-5c47-8120-3e31afc4c73c
+status: experimental
+description: Detects simulator telemetry for Elevated Execution with Prompt scale
+  variant 1102.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.004
+    apt_sim.variant: attack_scale_variant_1102
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/004/
+tags:
+- attack.t1548.004

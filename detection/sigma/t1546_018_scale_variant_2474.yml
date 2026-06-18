@@ -1,0 +1,21 @@
+title: Python Startup Hooks Scale Variant 2474 Marker
+id: 08111f83-017d-5ddb-8de9-743c6879c045
+status: experimental
+description: Detects simulator telemetry for Python Startup Hooks scale variant 2474.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.018
+    apt_sim.variant: attack_scale_variant_2474
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/018/
+tags:
+- attack.t1546.018

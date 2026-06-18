@@ -1,0 +1,21 @@
+title: Create Account Scale Variant 3705 Marker
+id: 3b5d76e6-1d1a-5adc-8b48-f4e557e13909
+status: experimental
+description: Detects simulator telemetry for Create Account scale variant 3705.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136
+    apt_sim.variant: attack_scale_variant_3705
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/
+tags:
+- attack.t1136

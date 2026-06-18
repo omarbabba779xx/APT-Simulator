@@ -1,0 +1,22 @@
+title: Asynchronous Procedure Call Scale Variant 2886 Marker
+id: 87048355-9730-5dad-8d57-5bea016169ea
+status: experimental
+description: Detects simulator telemetry for Asynchronous Procedure Call scale variant
+  2886.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.004
+    apt_sim.variant: attack_scale_variant_2886
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/004/
+tags:
+- attack.t1055.004

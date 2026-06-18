@@ -1,0 +1,22 @@
+title: Unix Shell Configuration Modification Scale Variant 1068 Marker
+id: 65503f66-56fe-5aa2-bf1a-e078bccd7d90
+status: experimental
+description: Detects simulator telemetry for Unix Shell Configuration Modification
+  scale variant 1068.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.004
+    apt_sim.variant: attack_scale_variant_1068
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/004/
+tags:
+- attack.t1546.004

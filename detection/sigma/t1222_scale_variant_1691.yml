@@ -1,0 +1,22 @@
+title: File and Directory Permissions Modification Scale Variant 1691 Marker
+id: 9d2fef6e-5959-5a95-b0ea-19e624f6ee9d
+status: experimental
+description: Detects simulator telemetry for File and Directory Permissions Modification
+  scale variant 1691.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1222
+    apt_sim.variant: attack_scale_variant_1691
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1222/
+tags:
+- attack.t1222

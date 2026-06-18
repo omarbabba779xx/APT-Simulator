@@ -1,0 +1,22 @@
+title: Browser Session Hijacking Scale Variant 3720 Marker
+id: 263ca34b-9612-5d4b-b1f0-a29013905042
+status: experimental
+description: Detects simulator telemetry for Browser Session Hijacking scale variant
+  3720.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1185
+    apt_sim.variant: attack_scale_variant_3720
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1185/
+tags:
+- attack.t1185

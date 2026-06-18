@@ -1,0 +1,22 @@
+title: Credentials from Password Stores Scale Variant 0431 Marker
+id: ddddf516-a03f-5877-ab05-1fe643cc1982
+status: experimental
+description: Detects simulator telemetry for Credentials from Password Stores scale
+  variant 0431.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555
+    apt_sim.variant: attack_scale_variant_0431
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/
+tags:
+- attack.t1555

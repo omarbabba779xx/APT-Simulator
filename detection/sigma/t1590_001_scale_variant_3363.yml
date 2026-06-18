@@ -1,0 +1,21 @@
+title: Domain Properties Scale Variant 3363 Marker
+id: 6e17fc1f-39a3-57eb-ae4d-535cc584e71f
+status: experimental
+description: Detects simulator telemetry for Domain Properties scale variant 3363.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.001
+    apt_sim.variant: attack_scale_variant_3363
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/001/
+tags:
+- attack.t1590.001

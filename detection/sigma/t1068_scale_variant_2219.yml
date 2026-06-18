@@ -1,0 +1,22 @@
+title: Exploitation for Privilege Escalation Scale Variant 2219 Marker
+id: 4674d5db-b0d0-5524-88b3-c63915d9b3a7
+status: experimental
+description: Detects simulator telemetry for Exploitation for Privilege Escalation
+  scale variant 2219.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1068
+    apt_sim.variant: attack_scale_variant_2219
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1068/
+tags:
+- attack.t1068

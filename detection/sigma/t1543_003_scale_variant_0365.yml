@@ -1,0 +1,21 @@
+title: Windows Service Scale Variant 0365 Marker
+id: f00c8d78-82e5-5b2b-9819-8d446502c1d2
+status: experimental
+description: Detects simulator telemetry for Windows Service scale variant 0365.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.003
+    apt_sim.variant: attack_scale_variant_0365
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/003/
+tags:
+- attack.t1543.003

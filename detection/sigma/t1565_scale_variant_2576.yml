@@ -1,0 +1,21 @@
+title: Data Manipulation Scale Variant 2576 Marker
+id: b083f04c-be18-53f0-8379-9cb57e1e3986
+status: experimental
+description: Detects simulator telemetry for Data Manipulation scale variant 2576.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565
+    apt_sim.variant: attack_scale_variant_2576
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/
+tags:
+- attack.t1565

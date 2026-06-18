@@ -1,0 +1,21 @@
+title: Domain Properties Scale Variant 0579 Marker
+id: 02897230-1fd9-5bd1-9e10-75bb5934f02e
+status: experimental
+description: Detects simulator telemetry for Domain Properties scale variant 0579.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.001
+    apt_sim.variant: attack_scale_variant_0579
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/001/
+tags:
+- attack.t1590.001

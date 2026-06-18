@@ -1,0 +1,21 @@
+title: Default Accounts Scale Variant 1548 Marker
+id: 99baf90b-1f51-574b-abeb-4f52531d27bd
+status: experimental
+description: Detects simulator telemetry for Default Accounts scale variant 1548.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.001
+    apt_sim.variant: attack_scale_variant_1548
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/001/
+tags:
+- attack.t1078.001

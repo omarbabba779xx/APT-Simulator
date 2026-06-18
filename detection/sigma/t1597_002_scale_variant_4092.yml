@@ -1,0 +1,22 @@
+title: Purchase Technical Data Scale Variant 4092 Marker
+id: 5e966347-06d8-5467-95cf-51dcc477eadd
+status: experimental
+description: Detects simulator telemetry for Purchase Technical Data scale variant
+  4092.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.002
+    apt_sim.variant: attack_scale_variant_4092
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/002/
+tags:
+- attack.t1597.002

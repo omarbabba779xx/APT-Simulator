@@ -1,0 +1,22 @@
+title: Security Support Provider Scale Variant 1784 Marker
+id: 4b207988-b0d8-58bd-a713-c4f015acd193
+status: experimental
+description: Detects simulator telemetry for Security Support Provider scale variant
+  1784.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.005
+    apt_sim.variant: attack_scale_variant_1784
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/005/
+tags:
+- attack.t1547.005

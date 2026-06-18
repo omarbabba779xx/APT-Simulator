@@ -1,0 +1,22 @@
+title: Exploitation for Credential Access Scale Variant 2354 Marker
+id: 36882db7-9fa0-50a8-bee8-6d3aebde67bd
+status: experimental
+description: Detects simulator telemetry for Exploitation for Credential Access scale
+  variant 2354.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1212
+    apt_sim.variant: attack_scale_variant_2354
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1212/
+tags:
+- attack.t1212

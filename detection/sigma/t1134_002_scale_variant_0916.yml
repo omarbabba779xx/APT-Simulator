@@ -1,0 +1,22 @@
+title: Create Process with Token Scale Variant 0916 Marker
+id: 2bf5751f-568a-5cd9-8826-2bd3b5257161
+status: experimental
+description: Detects simulator telemetry for Create Process with Token scale variant
+  0916.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.002
+    apt_sim.variant: attack_scale_variant_0916
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/002/
+tags:
+- attack.t1134.002

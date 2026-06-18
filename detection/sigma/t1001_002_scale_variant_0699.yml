@@ -1,0 +1,21 @@
+title: Steganography Scale Variant 0699 Marker
+id: 07112ad6-3540-510c-97c2-b6702b5fef92
+status: experimental
+description: Detects simulator telemetry for Steganography scale variant 0699.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.002
+    apt_sim.variant: attack_scale_variant_0699
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/002/
+tags:
+- attack.t1001.002

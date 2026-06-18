@@ -1,0 +1,22 @@
+title: Data from Removable Media Scale Variant 0734 Marker
+id: 02a37a4d-87a9-51ee-8097-eeefb21b798a
+status: experimental
+description: Detects simulator telemetry for Data from Removable Media scale variant
+  0734.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1025
+    apt_sim.variant: attack_scale_variant_0734
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1025/
+tags:
+- attack.t1025

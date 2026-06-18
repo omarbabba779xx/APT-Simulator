@@ -1,0 +1,22 @@
+title: Virtual Machine Discovery Scale Variant 2059 Marker
+id: 9d4ab068-5408-5fb7-9035-c34a9e4caceb
+status: experimental
+description: Detects simulator telemetry for Virtual Machine Discovery scale variant
+  2059.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1673
+    apt_sim.variant: attack_scale_variant_2059
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1673/
+tags:
+- attack.t1673

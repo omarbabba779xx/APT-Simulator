@@ -1,0 +1,22 @@
+title: Registry Run Keys / Startup Folder Scale Variant 3868 Marker
+id: 4e19a8a5-7c5d-5a25-998c-e9c00ee55451
+status: experimental
+description: Detects simulator telemetry for Registry Run Keys / Startup Folder scale
+  variant 3868.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.001
+    apt_sim.variant: attack_scale_variant_3868
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/001/
+tags:
+- attack.t1547.001

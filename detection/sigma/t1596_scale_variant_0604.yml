@@ -1,0 +1,22 @@
+title: Search Open Technical Databases Scale Variant 0604 Marker
+id: 3a701c87-e27d-57f9-9ad1-8ae174fc3d3f
+status: experimental
+description: Detects simulator telemetry for Search Open Technical Databases scale
+  variant 0604.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596
+    apt_sim.variant: attack_scale_variant_0604
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/
+tags:
+- attack.t1596

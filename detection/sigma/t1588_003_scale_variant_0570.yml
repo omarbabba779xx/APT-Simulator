@@ -1,0 +1,22 @@
+title: Code Signing Certificates Scale Variant 0570 Marker
+id: 53d0f4e4-c1ec-5a8a-8e5f-b46b6352d9b4
+status: experimental
+description: Detects simulator telemetry for Code Signing Certificates scale variant
+  0570.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.003
+    apt_sim.variant: attack_scale_variant_0570
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/003/
+tags:
+- attack.t1588.003

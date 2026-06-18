@@ -1,0 +1,22 @@
+title: Elevated Execution with Prompt Scale Variant 2494 Marker
+id: a453259e-e0b5-57d8-8337-6f022eda8a09
+status: experimental
+description: Detects simulator telemetry for Elevated Execution with Prompt scale
+  variant 2494.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.004
+    apt_sim.variant: attack_scale_variant_2494
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/004/
+tags:
+- attack.t1548.004

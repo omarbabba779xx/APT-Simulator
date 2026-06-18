@@ -1,0 +1,22 @@
+title: Virtual Machine Discovery Scale Variant 2755 Marker
+id: d56efb2a-696b-513a-a926-e117d7259daf
+status: experimental
+description: Detects simulator telemetry for Virtual Machine Discovery scale variant
+  2755.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1673
+    apt_sim.variant: attack_scale_variant_2755
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1673/
+tags:
+- attack.t1673

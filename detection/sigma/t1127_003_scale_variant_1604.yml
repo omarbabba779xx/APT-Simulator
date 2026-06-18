@@ -1,0 +1,21 @@
+title: JamPlus Scale Variant 1604 Marker
+id: 70edfbe4-0629-5dc9-ab89-55041303e732
+status: experimental
+description: Detects simulator telemetry for JamPlus scale variant 1604.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127.003
+    apt_sim.variant: attack_scale_variant_1604
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/003/
+tags:
+- attack.t1127.003

@@ -1,0 +1,22 @@
+title: Disable or Modify Tools Scale Variant 2074 Marker
+id: 95b8a58a-017a-5e15-a71e-09480a6cfb0c
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Tools scale variant
+  2074.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685
+    apt_sim.variant: attack_scale_variant_2074
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/
+tags:
+- attack.t1685

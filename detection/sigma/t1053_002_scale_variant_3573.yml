@@ -1,0 +1,21 @@
+title: At Scale Variant 3573 Marker
+id: 3d2ac53b-11a0-5d74-b27a-0f0acd47855c
+status: experimental
+description: Detects simulator telemetry for At scale variant 3573.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.002
+    apt_sim.variant: attack_scale_variant_3573
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/002/
+tags:
+- attack.t1053.002

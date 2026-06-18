@@ -1,0 +1,21 @@
+title: AppCert DLLs Scale Variant 2465 Marker
+id: d7e85348-2377-5021-a9cb-6a05b9516102
+status: experimental
+description: Detects simulator telemetry for AppCert DLLs scale variant 2465.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.009
+    apt_sim.variant: attack_scale_variant_2465
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/009/
+tags:
+- attack.t1546.009

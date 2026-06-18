@@ -1,0 +1,22 @@
+title: Spearphishing via Service Scale Variant 2583 Marker
+id: 51503948-faf0-58e5-a4bc-b26dc4463013
+status: experimental
+description: Detects simulator telemetry for Spearphishing via Service scale variant
+  2583.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.003
+    apt_sim.variant: attack_scale_variant_2583
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/003/
+tags:
+- attack.t1566.003

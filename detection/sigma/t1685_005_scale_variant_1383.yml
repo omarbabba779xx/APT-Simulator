@@ -1,0 +1,22 @@
+title: Clear Windows Event Logs Scale Variant 1383 Marker
+id: 8cd9f6fe-a373-5cc7-abd8-a683c1bb32f9
+status: experimental
+description: Detects simulator telemetry for Clear Windows Event Logs scale variant
+  1383.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685.005
+    apt_sim.variant: attack_scale_variant_1383
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/005/
+tags:
+- attack.t1685.005

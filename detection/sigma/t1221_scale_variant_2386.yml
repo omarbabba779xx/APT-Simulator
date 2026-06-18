@@ -1,0 +1,21 @@
+title: Template Injection Scale Variant 2386 Marker
+id: 355c3d1c-d816-5718-8a92-f8bac0c8c5f1
+status: experimental
+description: Detects simulator telemetry for Template Injection scale variant 2386.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1221
+    apt_sim.variant: attack_scale_variant_2386
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1221/
+tags:
+- attack.t1221

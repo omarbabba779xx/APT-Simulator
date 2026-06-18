@@ -1,0 +1,21 @@
+title: Startup Items Scale Variant 1471 Marker
+id: f1729e6b-f70f-50b7-aebb-7e4960cca9db
+status: experimental
+description: Detects simulator telemetry for Startup Items scale variant 1471.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.005
+    apt_sim.variant: attack_scale_variant_1471
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/005/
+tags:
+- attack.t1037.005

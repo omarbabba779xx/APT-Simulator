@@ -1,0 +1,21 @@
+title: Junk Data Scale Variant 2786 Marker
+id: 45594491-ccb2-5b91-974d-109e4c8ca833
+status: experimental
+description: Detects simulator telemetry for Junk Data scale variant 2786.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.001
+    apt_sim.variant: attack_scale_variant_2786
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/001/
+tags:
+- attack.t1001.001

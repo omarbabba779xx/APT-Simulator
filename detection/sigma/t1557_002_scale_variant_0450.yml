@@ -1,0 +1,21 @@
+title: ARP Cache Poisoning Scale Variant 0450 Marker
+id: 8d22e5ab-6315-55da-b4f4-c4e1bcc1a6d4
+status: experimental
+description: Detects simulator telemetry for ARP Cache Poisoning scale variant 0450.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.002
+    apt_sim.variant: attack_scale_variant_0450
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/002/
+tags:
+- attack.t1557.002

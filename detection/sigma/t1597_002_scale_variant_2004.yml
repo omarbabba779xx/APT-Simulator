@@ -1,0 +1,22 @@
+title: Purchase Technical Data Scale Variant 2004 Marker
+id: a5ff8a71-8524-598f-86d9-de61df0396e5
+status: experimental
+description: Detects simulator telemetry for Purchase Technical Data scale variant
+  2004.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.002
+    apt_sim.variant: attack_scale_variant_2004
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/002/
+tags:
+- attack.t1597.002

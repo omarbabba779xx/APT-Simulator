@@ -1,0 +1,21 @@
+title: File Deletion Scale Variant 1530 Marker
+id: 5ba276eb-f45e-5ed2-8ee2-e2e4665ee35a
+status: experimental
+description: Detects simulator telemetry for File Deletion scale variant 1530.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.004
+    apt_sim.variant: attack_scale_variant_1530
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/004/
+tags:
+- attack.t1070.004

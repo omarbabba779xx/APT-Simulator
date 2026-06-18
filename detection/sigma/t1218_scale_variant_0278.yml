@@ -1,0 +1,22 @@
+title: System Binary Proxy Execution Scale Variant 0278 Marker
+id: bf9ae8c3-da31-533a-b0cc-4a7b1e2cbebd
+status: experimental
+description: Detects simulator telemetry for System Binary Proxy Execution scale variant
+  0278.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218
+    apt_sim.variant: attack_scale_variant_0278
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/
+tags:
+- attack.t1218

@@ -1,0 +1,21 @@
+title: Password Spraying Scale Variant 1586 Marker
+id: 46a16a35-2e56-5907-8623-2228238e017c
+status: experimental
+description: Detects simulator telemetry for Password Spraying scale variant 1586.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.003
+    apt_sim.variant: attack_scale_variant_1586
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/003/
+tags:
+- attack.t1110.003

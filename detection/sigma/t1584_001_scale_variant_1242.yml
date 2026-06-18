@@ -1,0 +1,21 @@
+title: Domains Scale Variant 1242 Marker
+id: 9b1aca84-16f7-5f13-92a9-b91baa12357b
+status: experimental
+description: Detects simulator telemetry for Domains scale variant 1242.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.001
+    apt_sim.variant: attack_scale_variant_1242
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/001/
+tags:
+- attack.t1584.001

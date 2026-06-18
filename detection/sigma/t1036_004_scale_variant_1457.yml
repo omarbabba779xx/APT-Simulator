@@ -1,0 +1,22 @@
+title: Masquerade Task or Service Scale Variant 1457 Marker
+id: 6e28b82c-c7a4-5cbe-b97f-e771a92423a3
+status: experimental
+description: Detects simulator telemetry for Masquerade Task or Service scale variant
+  1457.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.004
+    apt_sim.variant: attack_scale_variant_1457
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/004/
+tags:
+- attack.t1036.004

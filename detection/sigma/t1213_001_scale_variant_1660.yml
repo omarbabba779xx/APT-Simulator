@@ -1,0 +1,21 @@
+title: Confluence Scale Variant 1660 Marker
+id: e9659b9e-6a10-5952-a464-4fb828baddae
+status: experimental
+description: Detects simulator telemetry for Confluence scale variant 1660.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.001
+    apt_sim.variant: attack_scale_variant_1660
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/001/
+tags:
+- attack.t1213.001

@@ -1,0 +1,21 @@
+title: Python Scale Variant 0819 Marker
+id: 73c4d317-1ee3-56d7-a89c-29b6359fea49
+status: experimental
+description: Detects simulator telemetry for Python scale variant 0819.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.006
+    apt_sim.variant: attack_scale_variant_0819
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/006/
+tags:
+- attack.t1059.006

@@ -1,0 +1,21 @@
+title: Chat Messages Scale Variant 2510 Marker
+id: 27168b34-412e-581b-b765-19b2baf21fd6
+status: experimental
+description: Detects simulator telemetry for Chat Messages scale variant 2510.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.008
+    apt_sim.variant: attack_scale_variant_2510
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/008/
+tags:
+- attack.t1552.008

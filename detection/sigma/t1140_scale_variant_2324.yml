@@ -1,0 +1,22 @@
+title: Deobfuscate/Decode Files or Information Scale Variant 2324 Marker
+id: 69e815c6-b538-5394-93ba-6dc94ae79ff3
+status: experimental
+description: Detects simulator telemetry for Deobfuscate/Decode Files or Information
+  scale variant 2324.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1140
+    apt_sim.variant: attack_scale_variant_2324
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1140/
+tags:
+- attack.t1140

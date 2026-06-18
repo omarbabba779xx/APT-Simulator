@@ -1,0 +1,21 @@
+title: Domain Accounts Scale Variant 0157 Marker
+id: 72454fb6-f3bd-51d3-9742-5f11700b8dc0
+status: experimental
+description: Detects simulator telemetry for Domain Accounts scale variant 0157.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.002
+    apt_sim.variant: attack_scale_variant_0157
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/002/
+tags:
+- attack.t1078.002

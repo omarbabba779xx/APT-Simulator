@@ -1,0 +1,21 @@
+title: AppInit DLLs Scale Variant 0378 Marker
+id: 32247ea9-570b-5941-bff6-e0741c67d419
+status: experimental
+description: Detects simulator telemetry for AppInit DLLs scale variant 0378.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.010
+    apt_sim.variant: attack_scale_variant_0378
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/010/
+tags:
+- attack.t1546.010

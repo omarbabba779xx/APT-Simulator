@@ -1,0 +1,22 @@
+title: SyncAppvPublishingServer Scale Variant 3060 Marker
+id: af9fedd4-1bef-5d0a-a6a4-bbc515db8797
+status: experimental
+description: Detects simulator telemetry for SyncAppvPublishingServer scale variant
+  3060.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216.002
+    apt_sim.variant: attack_scale_variant_3060
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/002/
+tags:
+- attack.t1216.002

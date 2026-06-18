@@ -1,0 +1,22 @@
+title: File Transfer Protocols Scale Variant 2931 Marker
+id: 8014dc47-5ba5-5bd1-b4b4-19a496b9306d
+status: experimental
+description: Detects simulator telemetry for File Transfer Protocols scale variant
+  2931.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.002
+    apt_sim.variant: attack_scale_variant_2931
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/002/
+tags:
+- attack.t1071.002

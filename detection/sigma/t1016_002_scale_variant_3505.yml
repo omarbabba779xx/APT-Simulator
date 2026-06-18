@@ -1,0 +1,21 @@
+title: Wi-Fi Discovery Scale Variant 3505 Marker
+id: da06bd9e-8b0b-5dff-a1c7-f783b55eac85
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Discovery scale variant 3505.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.002
+    apt_sim.variant: attack_scale_variant_3505
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/002/
+tags:
+- attack.t1016.002

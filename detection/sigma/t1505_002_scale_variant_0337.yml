@@ -1,0 +1,21 @@
+title: Transport Agent Scale Variant 0337 Marker
+id: 97207438-c095-5a61-90f8-769014b2af82
+status: experimental
+description: Detects simulator telemetry for Transport Agent scale variant 0337.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.002
+    apt_sim.variant: attack_scale_variant_0337
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/002/
+tags:
+- attack.t1505.002

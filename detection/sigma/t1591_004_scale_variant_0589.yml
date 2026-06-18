@@ -1,0 +1,21 @@
+title: Identify Roles Scale Variant 0589 Marker
+id: 15d99488-95e3-5e30-bca8-62518aa42b07
+status: experimental
+description: Detects simulator telemetry for Identify Roles scale variant 0589.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.004
+    apt_sim.variant: attack_scale_variant_0589
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/004/
+tags:
+- attack.t1591.004

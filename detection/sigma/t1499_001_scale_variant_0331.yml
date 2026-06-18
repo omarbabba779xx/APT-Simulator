@@ -1,0 +1,21 @@
+title: OS Exhaustion Flood Scale Variant 0331 Marker
+id: 393e2fe6-da91-5d18-bc46-7aa71a85c522
+status: experimental
+description: Detects simulator telemetry for OS Exhaustion Flood scale variant 0331.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.001
+    apt_sim.variant: attack_scale_variant_0331
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/001/
+tags:
+- attack.t1499.001

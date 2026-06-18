@@ -1,0 +1,21 @@
+title: Port Monitors Scale Variant 3181 Marker
+id: de9bc105-9b94-53cc-8aa9-f5c5fd346625
+status: experimental
+description: Detects simulator telemetry for Port Monitors scale variant 3181.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.010
+    apt_sim.variant: attack_scale_variant_3181
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/010/
+tags:
+- attack.t1547.010

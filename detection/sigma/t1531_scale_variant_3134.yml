@@ -1,0 +1,22 @@
+title: Account Access Removal Scale Variant 3134 Marker
+id: 9a17fc96-368c-5594-997a-59fd2ec193ce
+status: experimental
+description: Detects simulator telemetry for Account Access Removal scale variant
+  3134.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1531
+    apt_sim.variant: attack_scale_variant_3134
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

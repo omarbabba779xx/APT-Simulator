@@ -1,0 +1,21 @@
+title: Ccache Files Scale Variant 3242 Marker
+id: 8dacec4c-2e4a-595a-88fb-e5aef18574b7
+status: experimental
+description: Detects simulator telemetry for Ccache Files scale variant 3242.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.005
+    apt_sim.variant: attack_scale_variant_3242
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/005/
+tags:
+- attack.t1558.005

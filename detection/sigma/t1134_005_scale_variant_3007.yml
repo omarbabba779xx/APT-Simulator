@@ -1,0 +1,21 @@
+title: SID-History Injection Scale Variant 3007 Marker
+id: e5f47fda-bbf9-5845-8a2f-aff461dee4b1
+status: experimental
+description: Detects simulator telemetry for SID-History Injection scale variant 3007.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.005
+    apt_sim.variant: attack_scale_variant_3007
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/005/
+tags:
+- attack.t1134.005

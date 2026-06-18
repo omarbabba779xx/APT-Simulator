@@ -1,0 +1,21 @@
+title: Hardware Additions Scale Variant 0946 Marker
+id: 3e7d366f-c23f-5f9d-a4d5-20b67336cebb
+status: experimental
+description: Detects simulator telemetry for Hardware Additions scale variant 0946.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1200
+    apt_sim.variant: attack_scale_variant_0946
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1200/
+tags:
+- attack.t1200

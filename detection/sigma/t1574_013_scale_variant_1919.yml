@@ -1,0 +1,21 @@
+title: KernelCallbackTable Scale Variant 1919 Marker
+id: 22395eb6-c671-5e71-bbdb-72e5b31426fb
+status: experimental
+description: Detects simulator telemetry for KernelCallbackTable scale variant 1919.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.013
+    apt_sim.variant: attack_scale_variant_1919
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/013/
+tags:
+- attack.t1574.013

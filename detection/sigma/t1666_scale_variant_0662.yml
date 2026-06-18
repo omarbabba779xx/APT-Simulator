@@ -1,0 +1,22 @@
+title: Modify Cloud Resource Hierarchy Scale Variant 0662 Marker
+id: 4ff0a8a5-eea0-58aa-8089-1e2fad674d72
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Resource Hierarchy scale
+  variant 0662.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1666
+    apt_sim.variant: attack_scale_variant_0662
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1666/
+tags:
+- attack.t1666

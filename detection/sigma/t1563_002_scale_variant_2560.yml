@@ -1,0 +1,21 @@
+title: RDP Hijacking Scale Variant 2560 Marker
+id: f56e78af-ccd0-5656-9493-eb50e77c49c0
+status: experimental
+description: Detects simulator telemetry for RDP Hijacking scale variant 2560.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563.002
+    apt_sim.variant: attack_scale_variant_2560
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/002/
+tags:
+- attack.t1563.002

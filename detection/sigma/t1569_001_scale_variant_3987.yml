@@ -1,0 +1,21 @@
+title: Launchctl Scale Variant 3987 Marker
+id: 127a043c-9a39-5471-ae1a-a6f221625904
+status: experimental
+description: Detects simulator telemetry for Launchctl scale variant 3987.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569.001
+    apt_sim.variant: attack_scale_variant_3987
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/001/
+tags:
+- attack.t1569.001

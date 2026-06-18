@@ -1,0 +1,21 @@
+title: User Execution Scale Variant 0254 Marker
+id: 6cc922d0-4b16-5c21-91f2-09c5c032da35
+status: experimental
+description: Detects simulator telemetry for User Execution scale variant 0254.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204
+    apt_sim.variant: attack_scale_variant_0254
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/
+tags:
+- attack.t1204

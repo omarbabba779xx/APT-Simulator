@@ -1,0 +1,22 @@
+title: Spearphishing via Service Scale Variant 3975 Marker
+id: c12d1b33-228b-5556-a8c7-5ae2538c7435
+status: experimental
+description: Detects simulator telemetry for Spearphishing via Service scale variant
+  3975.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.003
+    apt_sim.variant: attack_scale_variant_3975
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/003/
+tags:
+- attack.t1566.003

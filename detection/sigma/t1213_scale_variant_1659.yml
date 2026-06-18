@@ -1,0 +1,22 @@
+title: Data from Information Repositories Scale Variant 1659 Marker
+id: 72d22624-d365-5294-ab52-1360e0b5862e
+status: experimental
+description: Detects simulator telemetry for Data from Information Repositories scale
+  variant 1659.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213
+    apt_sim.variant: attack_scale_variant_1659
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/
+tags:
+- attack.t1213

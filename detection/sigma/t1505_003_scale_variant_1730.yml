@@ -1,0 +1,21 @@
+title: Web Shell Scale Variant 1730 Marker
+id: 69c24914-86c7-5d67-a968-bee64150bbc1
+status: experimental
+description: Detects simulator telemetry for Web Shell scale variant 1730.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.003
+    apt_sim.variant: attack_scale_variant_1730
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/003/
+tags:
+- attack.t1505.003

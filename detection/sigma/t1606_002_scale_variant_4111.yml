@@ -1,0 +1,21 @@
+title: SAML Tokens Scale Variant 4111 Marker
+id: b3b97326-bbde-5284-8476-a7422d495214
+status: experimental
+description: Detects simulator telemetry for SAML Tokens scale variant 4111.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.002
+    apt_sim.variant: attack_scale_variant_4111
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/002/
+tags:
+- attack.t1606.002

@@ -1,0 +1,21 @@
+title: Direct Network Flood Scale Variant 1024 Marker
+id: 4c7ff0ac-f0d8-5a77-b82b-b33244c247d6
+status: experimental
+description: Detects simulator telemetry for Direct Network Flood scale variant 1024.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1498.001
+    apt_sim.variant: attack_scale_variant_1024
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1498/001/
+tags:
+- attack.t1498.001

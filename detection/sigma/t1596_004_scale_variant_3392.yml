@@ -1,0 +1,21 @@
+title: CDNs Scale Variant 3392 Marker
+id: 025380d5-e703-5777-aaa3-bef7678d3b4e
+status: experimental
+description: Detects simulator telemetry for CDNs scale variant 3392.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.004
+    apt_sim.variant: attack_scale_variant_3392
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/004/
+tags:
+- attack.t1596.004

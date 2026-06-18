@@ -1,0 +1,21 @@
+title: Standard Encoding Scale Variant 3695 Marker
+id: 1663d429-b3b4-51d1-9f4c-9fcf2adad531
+status: experimental
+description: Detects simulator telemetry for Standard Encoding scale variant 3695.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1132.001
+    apt_sim.variant: attack_scale_variant_3695
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1132/001/
+tags:
+- attack.t1132.001

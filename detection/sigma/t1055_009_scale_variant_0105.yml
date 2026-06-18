@@ -1,0 +1,21 @@
+title: Proc Memory Scale Variant 0105 Marker
+id: 02dc91fd-7819-59c2-a22c-14537136577f
+status: experimental
+description: Detects simulator telemetry for Proc Memory scale variant 0105.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.009
+    apt_sim.variant: attack_scale_variant_0105
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/009/
+tags:
+- attack.t1055.009

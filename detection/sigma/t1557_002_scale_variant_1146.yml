@@ -1,0 +1,21 @@
+title: ARP Cache Poisoning Scale Variant 1146 Marker
+id: 87d497cf-18cd-524c-ab2d-5cfd4773fe83
+status: experimental
+description: Detects simulator telemetry for ARP Cache Poisoning scale variant 1146.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.002
+    apt_sim.variant: attack_scale_variant_1146
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/002/
+tags:
+- attack.t1557.002

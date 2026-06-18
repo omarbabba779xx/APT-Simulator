@@ -1,0 +1,21 @@
+title: Thread Local Storage Scale Variant 2887 Marker
+id: b43a218d-1b97-5d80-a4f1-f5cf2816bd15
+status: experimental
+description: Detects simulator telemetry for Thread Local Storage scale variant 2887.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.005
+    apt_sim.variant: attack_scale_variant_2887
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/005/
+tags:
+- attack.t1055.005

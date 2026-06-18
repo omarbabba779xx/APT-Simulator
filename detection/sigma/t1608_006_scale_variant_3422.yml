@@ -1,0 +1,21 @@
+title: SEO Poisoning Scale Variant 3422 Marker
+id: 2bc706d3-e6ce-566a-be23-f9c04a600f1f
+status: experimental
+description: Detects simulator telemetry for SEO Poisoning scale variant 3422.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.006
+    apt_sim.variant: attack_scale_variant_3422
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/006/
+tags:
+- attack.t1608.006

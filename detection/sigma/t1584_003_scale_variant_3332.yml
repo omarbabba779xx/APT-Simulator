@@ -1,0 +1,22 @@
+title: Virtual Private Server Scale Variant 3332 Marker
+id: 7273018b-3d1b-50b0-94c4-a4ba02fe7d59
+status: experimental
+description: Detects simulator telemetry for Virtual Private Server scale variant
+  3332.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.003
+    apt_sim.variant: attack_scale_variant_3332
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/003/
+tags:
+- attack.t1584.003

@@ -1,0 +1,22 @@
+title: Bypass User Account Control Scale Variant 3188 Marker
+id: a6a640e4-1953-5e9c-9cc7-76bc75b11cc3
+status: experimental
+description: Detects simulator telemetry for Bypass User Account Control scale variant
+  3188.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.002
+    apt_sim.variant: attack_scale_variant_3188
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/002/
+tags:
+- attack.t1548.002

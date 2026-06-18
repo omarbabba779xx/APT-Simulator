@@ -1,0 +1,21 @@
+title: Domain Account Scale Variant 0227 Marker
+id: c8dc6fa0-d1be-5e7f-b9d8-f476afdf5776
+status: experimental
+description: Detects simulator telemetry for Domain Account scale variant 0227.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.002
+    apt_sim.variant: attack_scale_variant_0227
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/002/
+tags:
+- attack.t1136.002

@@ -1,0 +1,21 @@
+title: Drive-by Compromise Scale Variant 3026 Marker
+id: cbc6021b-941b-5285-9606-55c92803a193
+status: experimental
+description: Detects simulator telemetry for Drive-by Compromise scale variant 3026.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1189
+    apt_sim.variant: attack_scale_variant_3026
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1189/
+tags:
+- attack.t1189

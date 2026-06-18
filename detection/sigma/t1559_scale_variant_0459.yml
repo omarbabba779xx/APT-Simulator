@@ -1,0 +1,22 @@
+title: Inter-Process Communication Scale Variant 0459 Marker
+id: ee8c3706-0b9e-5adb-9f90-e3987d543e3e
+status: experimental
+description: Detects simulator telemetry for Inter-Process Communication scale variant
+  0459.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559
+    apt_sim.variant: attack_scale_variant_0459
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/
+tags:
+- attack.t1559

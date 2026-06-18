@@ -1,0 +1,21 @@
+title: Masquerade File Type Scale Variant 0069 Marker
+id: b7ab1186-992a-5020-88df-f2c5a4eb7a32
+status: experimental
+description: Detects simulator telemetry for Masquerade File Type scale variant 0069.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.008
+    apt_sim.variant: attack_scale_variant_0069
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/008/
+tags:
+- attack.t1036.008

@@ -1,0 +1,21 @@
+title: DNS Calculation Scale Variant 3985 Marker
+id: aae9da97-4e13-53ee-8770-12fd4796b160
+status: experimental
+description: Detects simulator telemetry for DNS Calculation scale variant 3985.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.003
+    apt_sim.variant: attack_scale_variant_3985
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/003/
+tags:
+- attack.t1568.003

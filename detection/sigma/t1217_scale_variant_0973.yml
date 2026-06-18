@@ -1,0 +1,22 @@
+title: Browser Information Discovery Scale Variant 0973 Marker
+id: 91d5e719-4af9-5e69-838a-8f761ba35c1b
+status: experimental
+description: Detects simulator telemetry for Browser Information Discovery scale variant
+  0973.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1217
+    apt_sim.variant: attack_scale_variant_0973
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1217/
+tags:
+- attack.t1217

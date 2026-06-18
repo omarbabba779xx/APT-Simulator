@@ -1,0 +1,22 @@
+title: Accessibility Features Scale Variant 1072 Marker
+id: 8950baf1-b4d4-5822-a727-aaaa1b5ccd10
+status: experimental
+description: Detects simulator telemetry for Accessibility Features scale variant
+  1072.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.008
+    apt_sim.variant: attack_scale_variant_1072
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/008/
+tags:
+- attack.t1546.008

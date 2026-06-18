@@ -1,0 +1,22 @@
+title: System Information Discovery Scale Variant 0857 Marker
+id: 8bba4fc4-bb0c-522e-b605-1f53ab55c1d4
+status: experimental
+description: Detects simulator telemetry for System Information Discovery scale variant
+  0857.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1082
+    apt_sim.variant: attack_scale_variant_0857
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1082/
+tags:
+- attack.t1082

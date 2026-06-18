@@ -1,0 +1,22 @@
+title: Compromise Hardware Supply Chain Scale Variant 3727 Marker
+id: 74f94a39-ae84-57bf-be19-365bba033282
+status: experimental
+description: Detects simulator telemetry for Compromise Hardware Supply Chain scale
+  variant 3727.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195.003
+    apt_sim.variant: attack_scale_variant_3727
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/003/
+tags:
+- attack.t1195.003

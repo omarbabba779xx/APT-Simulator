@@ -1,0 +1,21 @@
+title: Hide Artifacts Scale Variant 3257 Marker
+id: a1762345-5c39-58c4-a8d7-b0c75fcccff1
+status: experimental
+description: Detects simulator telemetry for Hide Artifacts scale variant 3257.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564
+    apt_sim.variant: attack_scale_variant_3257
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/
+tags:
+- attack.t1564

@@ -1,0 +1,21 @@
+title: Audio-Visual Content Scale Variant 3462 Marker
+id: f805493d-5e0d-508e-9826-9815d9a3495c
+status: experimental
+description: Detects simulator telemetry for Audio-Visual Content scale variant 3462.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1683.002
+    apt_sim.variant: attack_scale_variant_3462
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1683/002/
+tags:
+- attack.t1683.002

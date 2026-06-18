@@ -1,0 +1,21 @@
+title: Outlook Rules Scale Variant 2322 Marker
+id: ddd51ffe-1b39-5b14-b6b7-aa5c9e93779a
+status: experimental
+description: Detects simulator telemetry for Outlook Rules scale variant 2322.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.005
+    apt_sim.variant: attack_scale_variant_2322
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/005/
+tags:
+- attack.t1137.005

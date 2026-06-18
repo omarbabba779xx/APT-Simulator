@@ -1,0 +1,22 @@
+title: Use Alternate Authentication Material Scale Variant 3193 Marker
+id: 05705e06-8aef-56d1-87da-23b938a79c27
+status: experimental
+description: Detects simulator telemetry for Use Alternate Authentication Material
+  scale variant 3193.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550
+    apt_sim.variant: attack_scale_variant_3193
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/
+tags:
+- attack.t1550

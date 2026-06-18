@@ -1,0 +1,22 @@
+title: Modify Cloud Compute Infrastructure Scale Variant 2617 Marker
+id: 51f2b5da-0e08-5f20-8a02-bdd5f9879aae
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Compute Infrastructure scale
+  variant 2617.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578
+    apt_sim.variant: attack_scale_variant_2617
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/
+tags:
+- attack.t1578

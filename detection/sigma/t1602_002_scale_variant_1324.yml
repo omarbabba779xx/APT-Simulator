@@ -1,0 +1,22 @@
+title: Network Device Configuration Dump Scale Variant 1324 Marker
+id: 8d6c6516-8ed1-593b-b69a-1dd1638a85dc
+status: experimental
+description: Detects simulator telemetry for Network Device Configuration Dump scale
+  variant 1324.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.002
+    apt_sim.variant: attack_scale_variant_1324
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/002/
+tags:
+- attack.t1602.002

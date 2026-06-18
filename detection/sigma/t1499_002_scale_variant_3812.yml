@@ -1,0 +1,22 @@
+title: Service Exhaustion Flood Scale Variant 3812 Marker
+id: aaf157b8-2aa8-5bab-b9d7-f5bebd9d3ccb
+status: experimental
+description: Detects simulator telemetry for Service Exhaustion Flood scale variant
+  3812.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.002
+    apt_sim.variant: attack_scale_variant_3812
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/002/
+tags:
+- attack.t1499.002

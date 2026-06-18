@@ -1,0 +1,22 @@
+title: Exfiltration Over Physical Medium Scale Variant 0786 Marker
+id: c866a92a-4ce6-56e8-a7a1-91d17bac2331
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Physical Medium scale
+  variant 0786.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1052
+    apt_sim.variant: attack_scale_variant_0786
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1052/
+tags:
+- attack.t1052

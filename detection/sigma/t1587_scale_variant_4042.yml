@@ -1,0 +1,21 @@
+title: Develop Capabilities Scale Variant 4042 Marker
+id: 1c2a5dae-cd48-5790-b1c4-f53360dc0380
+status: experimental
+description: Detects simulator telemetry for Develop Capabilities scale variant 4042.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587
+    apt_sim.variant: attack_scale_variant_4042
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/
+tags:
+- attack.t1587

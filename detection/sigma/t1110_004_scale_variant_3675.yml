@@ -1,0 +1,21 @@
+title: Credential Stuffing Scale Variant 3675 Marker
+id: d76ec562-3203-5158-a4b6-8584095a75c8
+status: experimental
+description: Detects simulator telemetry for Credential Stuffing scale variant 3675.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.004
+    apt_sim.variant: attack_scale_variant_3675
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/004/
+tags:
+- attack.t1110.004

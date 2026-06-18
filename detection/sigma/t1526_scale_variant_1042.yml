@@ -1,0 +1,22 @@
+title: Cloud Service Discovery Scale Variant 1042 Marker
+id: 0eb0a54d-31e5-53bb-a237-d0b2565758b1
+status: experimental
+description: Detects simulator telemetry for Cloud Service Discovery scale variant
+  1042.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1526
+    apt_sim.variant: attack_scale_variant_1042
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1526/
+tags:
+- attack.t1526

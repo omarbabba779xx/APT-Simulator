@@ -1,0 +1,22 @@
+title: Phishing for Information Scale Variant 4093 Marker
+id: 812c6057-3574-520e-af18-07d3e8c5ac77
+status: experimental
+description: Detects simulator telemetry for Phishing for Information scale variant
+  4093.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598
+    apt_sim.variant: attack_scale_variant_4093
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/
+tags:
+- attack.t1598

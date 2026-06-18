@@ -1,0 +1,21 @@
+title: Shared Modules Scale Variant 3693 Marker
+id: eb177fc0-4dd1-5856-81c6-feb3af5f5fff
+status: experimental
+description: Detects simulator telemetry for Shared Modules scale variant 3693.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1129
+    apt_sim.variant: attack_scale_variant_3693
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1129/
+tags:
+- attack.t1129

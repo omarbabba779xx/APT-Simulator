@@ -1,0 +1,21 @@
+title: Dylib Hijacking Scale Variant 1214 Marker
+id: 201208ab-4259-539a-84e3-48e8a1e0358b
+status: experimental
+description: Detects simulator telemetry for Dylib Hijacking scale variant 1214.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.004
+    apt_sim.variant: attack_scale_variant_1214
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/004/
+tags:
+- attack.t1574.004

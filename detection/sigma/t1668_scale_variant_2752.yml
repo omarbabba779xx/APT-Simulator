@@ -1,0 +1,21 @@
+title: Exclusive Control Scale Variant 2752 Marker
+id: 1f8b82d3-bc9f-5664-a2f2-077fcdd0e496
+status: experimental
+description: Detects simulator telemetry for Exclusive Control scale variant 2752.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1668
+    apt_sim.variant: attack_scale_variant_2752
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1668/
+tags:
+- attack.t1668

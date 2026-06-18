@@ -1,0 +1,21 @@
+title: Firmware Scale Variant 4073 Marker
+id: 97ed8132-3d29-55aa-a4c4-5482c0d27273
+status: experimental
+description: Detects simulator telemetry for Firmware scale variant 4073.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.003
+    apt_sim.variant: attack_scale_variant_4073
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/003/
+tags:
+- attack.t1592.003

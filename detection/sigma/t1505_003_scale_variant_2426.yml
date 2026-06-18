@@ -1,0 +1,21 @@
+title: Web Shell Scale Variant 2426 Marker
+id: ed7f1214-2b59-5b3e-a304-14845469a354
+status: experimental
+description: Detects simulator telemetry for Web Shell scale variant 2426.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.003
+    apt_sim.variant: attack_scale_variant_2426
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/003/
+tags:
+- attack.t1505.003

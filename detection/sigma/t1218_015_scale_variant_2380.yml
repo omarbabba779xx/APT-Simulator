@@ -1,0 +1,21 @@
+title: Electron Applications Scale Variant 2380 Marker
+id: 0281ed1f-befc-5b3f-bdaa-22100c656450
+status: experimental
+description: Detects simulator telemetry for Electron Applications scale variant 2380.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.015
+    apt_sim.variant: attack_scale_variant_2380
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/015/
+tags:
+- attack.t1218.015

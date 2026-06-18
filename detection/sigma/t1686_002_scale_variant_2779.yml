@@ -1,0 +1,22 @@
+title: Network Device Firewall Scale Variant 2779 Marker
+id: 487c252f-e98b-5269-abbe-bc18cea99ce6
+status: experimental
+description: Detects simulator telemetry for Network Device Firewall scale variant
+  2779.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.002
+    apt_sim.variant: attack_scale_variant_2779
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/002/
+tags:
+- attack.t1686.002

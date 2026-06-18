@@ -1,0 +1,21 @@
+title: Mail Protocols Scale Variant 2932 Marker
+id: babd7d47-1892-5cb9-954b-b5b8cbd8ec0e
+status: experimental
+description: Detects simulator telemetry for Mail Protocols scale variant 2932.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.003
+    apt_sim.variant: attack_scale_variant_2932
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/003/
+tags:
+- attack.t1071.003

@@ -1,0 +1,22 @@
+title: File Transfer Protocols Scale Variant 1539 Marker
+id: df393537-60cf-5354-9a05-6be1961a308f
+status: experimental
+description: Detects simulator telemetry for File Transfer Protocols scale variant
+  1539.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.002
+    apt_sim.variant: attack_scale_variant_1539
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/002/
+tags:
+- attack.t1071.002

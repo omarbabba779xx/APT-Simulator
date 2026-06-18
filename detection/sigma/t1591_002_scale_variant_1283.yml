@@ -1,0 +1,22 @@
+title: Business Relationships Scale Variant 1283 Marker
+id: bc9c21c6-df40-5355-a602-1ed65219d881
+status: experimental
+description: Detects simulator telemetry for Business Relationships scale variant
+  1283.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.002
+    apt_sim.variant: attack_scale_variant_1283
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/002/
+tags:
+- attack.t1591.002

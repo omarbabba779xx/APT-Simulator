@@ -1,0 +1,21 @@
+title: Electron Applications Scale Variant 3076 Marker
+id: 6c55416c-3ebd-5235-b08f-fc9595a060a0
+status: experimental
+description: Detects simulator telemetry for Electron Applications scale variant 3076.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.015
+    apt_sim.variant: attack_scale_variant_3076
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/015/
+tags:
+- attack.t1218.015

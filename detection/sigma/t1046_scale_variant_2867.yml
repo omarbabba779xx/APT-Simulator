@@ -1,0 +1,22 @@
+title: Network Service Discovery Scale Variant 2867 Marker
+id: e1969127-bab0-580b-9cb6-d7f64be0649f
+status: experimental
+description: Detects simulator telemetry for Network Service Discovery scale variant
+  2867.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1046
+    apt_sim.variant: attack_scale_variant_2867
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1046/
+tags:
+- attack.t1046

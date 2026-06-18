@@ -1,0 +1,21 @@
+title: Port Knocking Scale Variant 1653 Marker
+id: 628bb5db-0377-5c31-8818-ecda39681d11
+status: experimental
+description: Detects simulator telemetry for Port Knocking scale variant 1653.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1205.001
+    apt_sim.variant: attack_scale_variant_1653
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1205/001/
+tags:
+- attack.t1205.001

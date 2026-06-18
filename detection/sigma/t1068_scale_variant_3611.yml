@@ -1,0 +1,22 @@
+title: Exploitation for Privilege Escalation Scale Variant 3611 Marker
+id: ab0bee93-815c-567e-97bc-a92f9911c794
+status: experimental
+description: Detects simulator telemetry for Exploitation for Privilege Escalation
+  scale variant 3611.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1068
+    apt_sim.variant: attack_scale_variant_3611
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1068/
+tags:
+- attack.t1068

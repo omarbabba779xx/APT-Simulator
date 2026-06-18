@@ -1,0 +1,21 @@
+title: Disk Wipe Scale Variant 3947 Marker
+id: 7c776b71-6e75-5b7f-8e9b-13658c5c74f8
+status: experimental
+description: Detects simulator telemetry for Disk Wipe scale variant 3947.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561
+    apt_sim.variant: attack_scale_variant_3947
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/
+tags:
+- attack.t1561

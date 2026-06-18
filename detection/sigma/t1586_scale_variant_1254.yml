@@ -1,0 +1,21 @@
+title: Compromise Accounts Scale Variant 1254 Marker
+id: 651a0470-ea4b-5d89-b2e0-492fd685e3b0
+status: experimental
+description: Detects simulator telemetry for Compromise Accounts scale variant 1254.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1586
+    apt_sim.variant: attack_scale_variant_1254
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1586/
+tags:
+- attack.t1586

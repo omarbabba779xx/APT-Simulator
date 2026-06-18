@@ -1,0 +1,21 @@
+title: Stage Capabilities Scale Variant 2720 Marker
+id: e448b57f-5759-5f10-9aa6-7245a956bb5c
+status: experimental
+description: Detects simulator telemetry for Stage Capabilities scale variant 2720.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608
+    apt_sim.variant: attack_scale_variant_2720
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/
+tags:
+- attack.t1608

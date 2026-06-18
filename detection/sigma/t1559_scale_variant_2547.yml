@@ -1,0 +1,22 @@
+title: Inter-Process Communication Scale Variant 2547 Marker
+id: 993a976f-49e7-5c5d-8236-534ac0d8178a
+status: experimental
+description: Detects simulator telemetry for Inter-Process Communication scale variant
+  2547.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559
+    apt_sim.variant: attack_scale_variant_2547
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/
+tags:
+- attack.t1559

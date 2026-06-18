@@ -1,0 +1,22 @@
+title: Purchase Technical Data Scale Variant 3396 Marker
+id: ec143d1b-1940-549d-9397-4c27d5a570e2
+status: experimental
+description: Detects simulator telemetry for Purchase Technical Data scale variant
+  3396.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1597.002
+    apt_sim.variant: attack_scale_variant_3396
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1597/002/
+tags:
+- attack.t1597.002

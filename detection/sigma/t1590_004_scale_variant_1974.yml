@@ -1,0 +1,21 @@
+title: Network Topology Scale Variant 1974 Marker
+id: ab4e1ac3-5e9b-5121-b0c3-9c63c0ff13ad
+status: experimental
+description: Detects simulator telemetry for Network Topology scale variant 1974.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.004
+    apt_sim.variant: attack_scale_variant_1974
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/004/
+tags:
+- attack.t1590.004

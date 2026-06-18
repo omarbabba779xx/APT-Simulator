@@ -1,0 +1,22 @@
+title: Additional Local or Domain Groups Scale Variant 2271 Marker
+id: 4201a8fc-7620-5440-afdc-4e12a971c31a
+status: experimental
+description: Detects simulator telemetry for Additional Local or Domain Groups scale
+  variant 2271.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.007
+    apt_sim.variant: attack_scale_variant_2271
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/007/
+tags:
+- attack.t1098.007

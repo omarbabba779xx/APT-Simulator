@@ -1,0 +1,21 @@
+title: Link Target Scale Variant 1333 Marker
+id: 6be2af50-472e-5840-b15c-d7724da1f271
+status: experimental
+description: Detects simulator telemetry for Link Target scale variant 1333.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.005
+    apt_sim.variant: attack_scale_variant_1333
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/005/
+tags:
+- attack.t1608.005

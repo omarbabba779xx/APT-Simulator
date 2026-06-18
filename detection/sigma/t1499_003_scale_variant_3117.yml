@@ -1,0 +1,22 @@
+title: Application Exhaustion Flood Scale Variant 3117 Marker
+id: ac2c71f5-0f3a-5901-8029-e224ee01471d
+status: experimental
+description: Detects simulator telemetry for Application Exhaustion Flood scale variant
+  3117.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.003
+    apt_sim.variant: attack_scale_variant_3117
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/003/
+tags:
+- attack.t1499.003

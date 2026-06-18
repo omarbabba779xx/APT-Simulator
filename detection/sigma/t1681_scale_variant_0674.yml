@@ -1,0 +1,22 @@
+title: Search Threat Vendor Data Scale Variant 0674 Marker
+id: 9f3bf0b1-f637-5b1e-b972-fbfc4c0e54da
+status: experimental
+description: Detects simulator telemetry for Search Threat Vendor Data scale variant
+  0674.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1681
+    apt_sim.variant: attack_scale_variant_0674
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1681/
+tags:
+- attack.t1681

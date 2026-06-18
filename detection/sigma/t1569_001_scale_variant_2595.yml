@@ -1,0 +1,21 @@
+title: Launchctl Scale Variant 2595 Marker
+id: da87153d-0b1c-56ef-8956-bf749b275579
+status: experimental
+description: Detects simulator telemetry for Launchctl scale variant 2595.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569.001
+    apt_sim.variant: attack_scale_variant_2595
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/001/
+tags:
+- attack.t1569.001

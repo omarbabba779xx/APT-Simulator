@@ -1,0 +1,22 @@
+title: Linux and Mac Permissions Scale Variant 3781 Marker
+id: 280391b9-68f9-5a49-9f03-7d072d46ea98
+status: experimental
+description: Detects simulator telemetry for Linux and Mac Permissions scale variant
+  3781.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1222.002
+    apt_sim.variant: attack_scale_variant_3781
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1222/002/
+tags:
+- attack.t1222.002

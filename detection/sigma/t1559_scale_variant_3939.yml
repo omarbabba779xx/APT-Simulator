@@ -1,0 +1,22 @@
+title: Inter-Process Communication Scale Variant 3939 Marker
+id: 33b24ea1-23cf-5a18-a0f6-9b4f0dada42f
+status: experimental
+description: Detects simulator telemetry for Inter-Process Communication scale variant
+  3939.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559
+    apt_sim.variant: attack_scale_variant_3939
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/
+tags:
+- attack.t1559

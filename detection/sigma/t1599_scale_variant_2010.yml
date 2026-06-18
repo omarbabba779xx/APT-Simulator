@@ -1,0 +1,22 @@
+title: Network Boundary Bridging Scale Variant 2010 Marker
+id: 62595630-4f37-5509-b4f0-4728dd4466e8
+status: experimental
+description: Detects simulator telemetry for Network Boundary Bridging scale variant
+  2010.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1599
+    apt_sim.variant: attack_scale_variant_2010
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1599/
+tags:
+- attack.t1599

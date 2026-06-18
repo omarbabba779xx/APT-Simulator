@@ -1,0 +1,22 @@
+title: Adversary-in-the-Middle Scale Variant 1144 Marker
+id: 15c8d98d-2882-5550-bbbf-059a436e1a95
+status: experimental
+description: Detects simulator telemetry for Adversary-in-the-Middle scale variant
+  1144.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557
+    apt_sim.variant: attack_scale_variant_1144
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/
+tags:
+- attack.t1557

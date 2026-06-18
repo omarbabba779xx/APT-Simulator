@@ -1,0 +1,21 @@
+title: Escape to Host Scale Variant 1337 Marker
+id: 83ab3099-5d04-508f-b9b3-69b4bf4f6be2
+status: experimental
+description: Detects simulator telemetry for Escape to Host scale variant 1337.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1611
+    apt_sim.variant: attack_scale_variant_1337
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1611/
+tags:
+- attack.t1611

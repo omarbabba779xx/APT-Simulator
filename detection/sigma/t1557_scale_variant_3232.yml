@@ -1,0 +1,22 @@
+title: Adversary-in-the-Middle Scale Variant 3232 Marker
+id: d5fd4d0c-41ca-5d67-a537-a28472b392f3
+status: experimental
+description: Detects simulator telemetry for Adversary-in-the-Middle scale variant
+  3232.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557
+    apt_sim.variant: attack_scale_variant_3232
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/
+tags:
+- attack.t1557

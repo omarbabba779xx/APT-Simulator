@@ -1,0 +1,21 @@
+title: SAML Tokens Scale Variant 3415 Marker
+id: 85e550e9-f97a-529c-ad27-57e0d5c01804
+status: experimental
+description: Detects simulator telemetry for SAML Tokens scale variant 3415.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.002
+    apt_sim.variant: attack_scale_variant_3415
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/002/
+tags:
+- attack.t1606.002

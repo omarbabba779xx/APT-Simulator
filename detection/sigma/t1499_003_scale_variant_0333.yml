@@ -1,0 +1,22 @@
+title: Application Exhaustion Flood Scale Variant 0333 Marker
+id: de17d92e-e48b-5074-aac2-00b7cab34b1e
+status: experimental
+description: Detects simulator telemetry for Application Exhaustion Flood scale variant
+  0333.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.003
+    apt_sim.variant: attack_scale_variant_0333
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/003/
+tags:
+- attack.t1499.003

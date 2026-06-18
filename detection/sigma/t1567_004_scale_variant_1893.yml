@@ -1,0 +1,22 @@
+title: Exfiltration Over Webhook Scale Variant 1893 Marker
+id: 07f097eb-ac9e-5b75-9bd4-aee8c6cfc2ad
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Webhook scale variant
+  1893.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567.004
+    apt_sim.variant: attack_scale_variant_1893
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/004/
+tags:
+- attack.t1567.004

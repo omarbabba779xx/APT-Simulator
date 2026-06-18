@@ -1,0 +1,22 @@
+title: Application Window Discovery Scale Variant 2106 Marker
+id: 01363545-f322-50fe-a43c-a5fae9edc684
+status: experimental
+description: Detects simulator telemetry for Application Window Discovery scale variant
+  2106.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1010
+    apt_sim.variant: attack_scale_variant_2106
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1010/
+tags:
+- attack.t1010

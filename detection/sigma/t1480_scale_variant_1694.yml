@@ -1,0 +1,21 @@
+title: Execution Guardrails Scale Variant 1694 Marker
+id: 5fe60da0-7393-5ab0-8407-61a17bc59761
+status: experimental
+description: Detects simulator telemetry for Execution Guardrails scale variant 1694.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480
+    apt_sim.variant: attack_scale_variant_1694
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/
+tags:
+- attack.t1480

@@ -1,0 +1,21 @@
+title: Shortcut Modification Scale Variant 2484 Marker
+id: feb05805-27d3-595c-adb3-c6656905a4d1
+status: experimental
+description: Detects simulator telemetry for Shortcut Modification scale variant 2484.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.009
+    apt_sim.variant: attack_scale_variant_2484
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/009/
+tags:
+- attack.t1547.009

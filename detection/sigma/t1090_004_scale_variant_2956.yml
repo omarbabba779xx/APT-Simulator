@@ -1,0 +1,21 @@
+title: Domain Fronting Scale Variant 2956 Marker
+id: 66e17e77-f8c6-5c0a-aa73-026b780e21b7
+status: experimental
+description: Detects simulator telemetry for Domain Fronting scale variant 2956.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.004
+    apt_sim.variant: attack_scale_variant_2956
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/004/
+tags:
+- attack.t1090.004

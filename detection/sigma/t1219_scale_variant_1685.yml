@@ -1,0 +1,21 @@
+title: Remote Access Tools Scale Variant 1685 Marker
+id: 4c24dd1c-c29a-5925-8786-11f47c270ff3
+status: experimental
+description: Detects simulator telemetry for Remote Access Tools scale variant 1685.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219
+    apt_sim.variant: attack_scale_variant_1685
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/
+tags:
+- attack.t1219

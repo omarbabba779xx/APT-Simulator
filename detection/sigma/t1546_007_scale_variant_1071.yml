@@ -1,0 +1,21 @@
+title: Netsh Helper DLL Scale Variant 1071 Marker
+id: 3ceec8df-b1eb-5554-8913-2219f0568a5c
+status: experimental
+description: Detects simulator telemetry for Netsh Helper DLL scale variant 1071.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.007
+    apt_sim.variant: attack_scale_variant_1071
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/007/
+tags:
+- attack.t1546.007

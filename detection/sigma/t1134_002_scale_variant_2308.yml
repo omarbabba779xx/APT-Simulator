@@ -1,0 +1,22 @@
+title: Create Process with Token Scale Variant 2308 Marker
+id: 144fed81-212c-5176-ab29-b079a8150875
+status: experimental
+description: Detects simulator telemetry for Create Process with Token scale variant
+  2308.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.002
+    apt_sim.variant: attack_scale_variant_2308
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/002/
+tags:
+- attack.t1134.002

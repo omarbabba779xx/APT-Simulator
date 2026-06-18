@@ -1,0 +1,22 @@
+title: Cloud Infrastructure Discovery Scale Variant 4015 Marker
+id: 989f08b1-2bec-5ad7-bbb2-bbd61ed28c8f
+status: experimental
+description: Detects simulator telemetry for Cloud Infrastructure Discovery scale
+  variant 4015.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1580
+    apt_sim.variant: attack_scale_variant_4015
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1580/
+tags:
+- attack.t1580

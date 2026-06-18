@@ -1,0 +1,22 @@
+title: File Transfer Protocols Scale Variant 2235 Marker
+id: 8c2e9fba-db8c-52a2-ad57-c2e471c42469
+status: experimental
+description: Detects simulator telemetry for File Transfer Protocols scale variant
+  2235.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.002
+    apt_sim.variant: attack_scale_variant_2235
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/002/
+tags:
+- attack.t1071.002

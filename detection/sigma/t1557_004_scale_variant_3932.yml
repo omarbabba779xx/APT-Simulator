@@ -1,0 +1,21 @@
+title: Evil Twin Scale Variant 3932 Marker
+id: a8a01609-bb67-5c0a-80f5-b2203c76a001
+status: experimental
+description: Detects simulator telemetry for Evil Twin scale variant 3932.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.004
+    apt_sim.variant: attack_scale_variant_3932
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/004/
+tags:
+- attack.t1557.004

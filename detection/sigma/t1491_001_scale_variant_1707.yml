@@ -1,0 +1,21 @@
+title: Internal Defacement Scale Variant 1707 Marker
+id: a6fb1c97-53aa-516f-9438-ad1f5a6ea023
+status: experimental
+description: Detects simulator telemetry for Internal Defacement scale variant 1707.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.001
+    apt_sim.variant: attack_scale_variant_1707
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/001/
+tags:
+- attack.t1491.001

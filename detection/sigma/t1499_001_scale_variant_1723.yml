@@ -1,0 +1,21 @@
+title: OS Exhaustion Flood Scale Variant 1723 Marker
+id: c5035e6a-1d0d-5842-821e-f7fc4fe3f37c
+status: experimental
+description: Detects simulator telemetry for OS Exhaustion Flood scale variant 1723.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.001
+    apt_sim.variant: attack_scale_variant_1723
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/001/
+tags:
+- attack.t1499.001

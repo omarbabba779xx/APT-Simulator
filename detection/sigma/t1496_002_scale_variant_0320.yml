@@ -1,0 +1,21 @@
+title: Bandwidth Hijacking Scale Variant 0320 Marker
+id: 5bc7f636-bd08-5e98-b702-5463c786f574
+status: experimental
+description: Detects simulator telemetry for Bandwidth Hijacking scale variant 0320.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1496.002
+    apt_sim.variant: attack_scale_variant_0320
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1496/002/
+tags:
+- attack.t1496.002

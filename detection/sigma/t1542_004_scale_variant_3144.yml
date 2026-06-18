@@ -1,0 +1,21 @@
+title: ROMMONkit Scale Variant 3144 Marker
+id: 16fe85fa-6cb6-5523-924d-71b7f6d2191e
+status: experimental
+description: Detects simulator telemetry for ROMMONkit scale variant 3144.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.004
+    apt_sim.variant: attack_scale_variant_3144
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/004/
+tags:
+- attack.t1542.004

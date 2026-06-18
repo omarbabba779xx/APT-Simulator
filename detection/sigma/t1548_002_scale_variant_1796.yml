@@ -1,0 +1,22 @@
+title: Bypass User Account Control Scale Variant 1796 Marker
+id: 9dbb37c6-391d-599d-bff9-edbff84217f0
+status: experimental
+description: Detects simulator telemetry for Bypass User Account Control scale variant
+  1796.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.002
+    apt_sim.variant: attack_scale_variant_1796
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/002/
+tags:
+- attack.t1548.002

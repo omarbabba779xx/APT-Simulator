@@ -1,0 +1,21 @@
+title: Local Accounts Scale Variant 2942 Marker
+id: d0097784-3bce-5e83-9fad-24699174791b
+status: experimental
+description: Detects simulator telemetry for Local Accounts scale variant 2942.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.003
+    apt_sim.variant: attack_scale_variant_2942
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/003/
+tags:
+- attack.t1078.003

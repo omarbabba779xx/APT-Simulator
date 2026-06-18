@@ -1,0 +1,21 @@
+title: Gatekeeper Bypass Scale Variant 1816 Marker
+id: b37e4e15-43f9-50e2-a4aa-97c6763052ec
+status: experimental
+description: Detects simulator telemetry for Gatekeeper Bypass scale variant 1816.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.001
+    apt_sim.variant: attack_scale_variant_1816
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/001/
+tags:
+- attack.t1553.001

@@ -1,0 +1,22 @@
+title: SIP and Trust Provider Hijacking Scale Variant 1818 Marker
+id: 6d1466f9-d204-5ac9-a789-59f8d86459c7
+status: experimental
+description: Detects simulator telemetry for SIP and Trust Provider Hijacking scale
+  variant 1818.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.003
+    apt_sim.variant: attack_scale_variant_1818
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/003/
+tags:
+- attack.t1553.003

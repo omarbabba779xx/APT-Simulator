@@ -1,0 +1,22 @@
+title: Group Policy Modification Scale Variant 3091 Marker
+id: 8863d243-f853-562c-a6ef-d6c5a09dea33
+status: experimental
+description: Detects simulator telemetry for Group Policy Modification scale variant
+  3091.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484.001
+    apt_sim.variant: attack_scale_variant_3091
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/001/
+tags:
+- attack.t1484.001

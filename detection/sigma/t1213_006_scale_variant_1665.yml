@@ -1,0 +1,21 @@
+title: Databases Scale Variant 1665 Marker
+id: 7d471099-9347-5efc-a957-dde4e0178053
+status: experimental
+description: Detects simulator telemetry for Databases scale variant 1665.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.006
+    apt_sim.variant: attack_scale_variant_1665
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/006/
+tags:
+- attack.t1213.006

@@ -1,0 +1,21 @@
+title: Create Account Scale Variant 2313 Marker
+id: 15310615-3f29-536f-83e9-35f1b0419974
+status: experimental
+description: Detects simulator telemetry for Create Account scale variant 2313.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136
+    apt_sim.variant: attack_scale_variant_2313
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/
+tags:
+- attack.t1136

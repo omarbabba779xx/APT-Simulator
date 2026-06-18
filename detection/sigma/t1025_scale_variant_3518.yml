@@ -1,0 +1,22 @@
+title: Data from Removable Media Scale Variant 3518 Marker
+id: 1574dd25-7e0b-55e0-87a5-01692e6c73a4
+status: experimental
+description: Detects simulator telemetry for Data from Removable Media scale variant
+  3518.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1025
+    apt_sim.variant: attack_scale_variant_3518
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1025/
+tags:
+- attack.t1025

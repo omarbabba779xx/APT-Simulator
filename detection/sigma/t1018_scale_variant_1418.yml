@@ -1,0 +1,22 @@
+title: Remote System Discovery Scale Variant 1418 Marker
+id: 16bce7a6-659b-50e2-95f2-5eec08682b7b
+status: experimental
+description: Detects simulator telemetry for Remote System Discovery scale variant
+  1418.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1018
+    apt_sim.variant: attack_scale_variant_1418
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1018/
+tags:
+- attack.t1018

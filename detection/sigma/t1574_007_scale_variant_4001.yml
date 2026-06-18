@@ -1,0 +1,22 @@
+title: Path Interception by PATH Environment Variable Scale Variant 4001 Marker
+id: 1e08ea01-fc06-5c97-9a50-d49fef45fd44
+status: experimental
+description: Detects simulator telemetry for Path Interception by PATH Environment
+  Variable scale variant 4001.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.007
+    apt_sim.variant: attack_scale_variant_4001
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/007/
+tags:
+- attack.t1574.007

@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Interception Scale Variant 2284 Marker
+id: 31f189df-6086-5f92-92bb-62262aa0e955
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication Interception
+  scale variant 2284.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1111
+    apt_sim.variant: attack_scale_variant_2284
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1111/
+tags:
+- attack.t1111

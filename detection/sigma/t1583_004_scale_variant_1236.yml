@@ -1,0 +1,21 @@
+title: Server Scale Variant 1236 Marker
+id: 1bf17a8c-95b9-55c3-b458-8f47ba25f901
+status: experimental
+description: Detects simulator telemetry for Server scale variant 1236.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.004
+    apt_sim.variant: attack_scale_variant_1236
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/004/
+tags:
+- attack.t1583.004

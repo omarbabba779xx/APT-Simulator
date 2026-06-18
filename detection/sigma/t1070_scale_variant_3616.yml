@@ -1,0 +1,21 @@
+title: Indicator Removal Scale Variant 3616 Marker
+id: 85afe945-285f-558f-91d0-ac542b594694
+status: experimental
+description: Detects simulator telemetry for Indicator Removal scale variant 3616.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070
+    apt_sim.variant: attack_scale_variant_3616
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/
+tags:
+- attack.t1070

@@ -1,0 +1,22 @@
+title: Domain Trust Discovery Scale Variant 3785 Marker
+id: 3f07dba2-0a2b-5c73-8067-2bba18bbc33d
+status: experimental
+description: Detects simulator telemetry for Domain Trust Discovery scale variant
+  3785.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1482
+    apt_sim.variant: attack_scale_variant_3785
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1482/
+tags:
+- attack.t1482

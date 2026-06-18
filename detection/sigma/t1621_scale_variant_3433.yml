@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Request Generation Scale Variant 3433 Marker
+id: dee5b1cb-a72f-522d-8081-4876a7425882
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication Request Generation
+  scale variant 3433.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1621
+    apt_sim.variant: attack_scale_variant_3433
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1621/
+tags:
+- attack.t1621

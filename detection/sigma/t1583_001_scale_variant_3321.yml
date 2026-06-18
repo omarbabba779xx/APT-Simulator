@@ -1,0 +1,21 @@
+title: Domains Scale Variant 3321 Marker
+id: f4327437-5267-5ee9-ac34-81d7c7875fc1
+status: experimental
+description: Detects simulator telemetry for Domains scale variant 3321.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.001
+    apt_sim.variant: attack_scale_variant_3321
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/001/
+tags:
+- attack.t1583.001

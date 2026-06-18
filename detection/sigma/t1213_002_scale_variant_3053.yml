@@ -1,0 +1,21 @@
+title: Sharepoint Scale Variant 3053 Marker
+id: e1cda90c-30bb-5d61-a794-abe3b9136e55
+status: experimental
+description: Detects simulator telemetry for Sharepoint scale variant 3053.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.002
+    apt_sim.variant: attack_scale_variant_3053
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/002/
+tags:
+- attack.t1213.002

@@ -1,0 +1,22 @@
+title: Install Digital Certificate Scale Variant 3419 Marker
+id: 0646db00-2100-5072-8240-ac95b91afcfa
+status: experimental
+description: Detects simulator telemetry for Install Digital Certificate scale variant
+  3419.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.003
+    apt_sim.variant: attack_scale_variant_3419
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/003/
+tags:
+- attack.t1608.003

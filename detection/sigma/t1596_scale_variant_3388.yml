@@ -1,0 +1,22 @@
+title: Search Open Technical Databases Scale Variant 3388 Marker
+id: 8419834e-940b-55ef-871e-ad46d218995a
+status: experimental
+description: Detects simulator telemetry for Search Open Technical Databases scale
+  variant 3388.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596
+    apt_sim.variant: attack_scale_variant_3388
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/
+tags:
+- attack.t1596

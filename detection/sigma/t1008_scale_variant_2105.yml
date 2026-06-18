@@ -1,0 +1,21 @@
+title: Fallback Channels Scale Variant 2105 Marker
+id: 01cc68d6-208d-5613-9cee-99dde0631127
+status: experimental
+description: Detects simulator telemetry for Fallback Channels scale variant 2105.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1008
+    apt_sim.variant: attack_scale_variant_2105
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1008/
+tags:
+- attack.t1008

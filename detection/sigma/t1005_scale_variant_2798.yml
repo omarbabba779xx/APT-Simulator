@@ -1,0 +1,22 @@
+title: Data from Local System Scale Variant 2798 Marker
+id: ef80d640-2d82-54cf-a9f9-6079cf7df8c9
+status: experimental
+description: Detects simulator telemetry for Data from Local System scale variant
+  2798.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1005
+    apt_sim.variant: attack_scale_variant_2798
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1005/
+tags:
+- attack.t1005

@@ -1,0 +1,22 @@
+title: Downgrade System Image Scale Variant 3409 Marker
+id: a4a5468d-0800-55fb-a211-897af1d1c360
+status: experimental
+description: Detects simulator telemetry for Downgrade System Image scale variant
+  3409.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601.002
+    apt_sim.variant: attack_scale_variant_3409
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/002/
+tags:
+- attack.t1601.002

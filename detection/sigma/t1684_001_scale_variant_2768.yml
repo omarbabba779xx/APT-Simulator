@@ -1,0 +1,21 @@
+title: Impersonation Scale Variant 2768 Marker
+id: 529d3064-f023-53f5-b61b-bf4f210af27e
+status: experimental
+description: Detects simulator telemetry for Impersonation scale variant 2768.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684.001
+    apt_sim.variant: attack_scale_variant_2768
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/001/
+tags:
+- attack.t1684.001

@@ -1,0 +1,22 @@
+title: Data from Removable Media Scale Variant 1430 Marker
+id: 1cc2baeb-029f-5828-9c7e-01a5da795380
+status: experimental
+description: Detects simulator telemetry for Data from Removable Media scale variant
+  1430.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1025
+    apt_sim.variant: attack_scale_variant_1430
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1025/
+tags:
+- attack.t1025

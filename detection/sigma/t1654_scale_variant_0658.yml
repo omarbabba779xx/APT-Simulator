@@ -1,0 +1,21 @@
+title: Log Enumeration Scale Variant 0658 Marker
+id: 33b18926-5a9d-5cc1-9ff6-ce8a96a48f5b
+status: experimental
+description: Detects simulator telemetry for Log Enumeration scale variant 0658.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1654
+    apt_sim.variant: attack_scale_variant_0658
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1654/
+tags:
+- attack.t1654

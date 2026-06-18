@@ -1,0 +1,21 @@
+title: Ingress Tool Transfer Scale Variant 2277 Marker
+id: 81b1c836-0528-57a0-b7ca-f1bd9349a2d6
+status: experimental
+description: Detects simulator telemetry for Ingress Tool Transfer scale variant 2277.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1105
+    apt_sim.variant: attack_scale_variant_2277
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105

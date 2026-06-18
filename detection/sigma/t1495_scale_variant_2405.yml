@@ -1,0 +1,21 @@
+title: Firmware Corruption Scale Variant 2405 Marker
+id: a5d876fb-9d8e-5be5-869c-52c5d9e34a03
+status: experimental
+description: Detects simulator telemetry for Firmware Corruption scale variant 2405.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1495
+    apt_sim.variant: attack_scale_variant_2405
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1495/
+tags:
+- attack.t1495

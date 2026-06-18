@@ -1,0 +1,21 @@
+title: Create Snapshot Scale Variant 4010 Marker
+id: 0c9243c3-708c-5e6d-ab08-3e1cb5e1768e
+status: experimental
+description: Detects simulator telemetry for Create Snapshot scale variant 4010.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.001
+    apt_sim.variant: attack_scale_variant_4010
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/001/
+tags:
+- attack.t1578.001

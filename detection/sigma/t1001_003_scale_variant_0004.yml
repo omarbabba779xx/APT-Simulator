@@ -1,0 +1,22 @@
+title: Protocol or Service Impersonation Scale Variant 0004 Marker
+id: 40947dce-9208-5395-a143-1dc00750fe39
+status: experimental
+description: Detects simulator telemetry for Protocol or Service Impersonation scale
+  variant 0004.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.003
+    apt_sim.variant: attack_scale_variant_0004
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/003/
+tags:
+- attack.t1001.003

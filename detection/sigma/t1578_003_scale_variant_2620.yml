@@ -1,0 +1,21 @@
+title: Delete Cloud Instance Scale Variant 2620 Marker
+id: 426552a6-10ba-5976-a5fb-4151a6624dc1
+status: experimental
+description: Detects simulator telemetry for Delete Cloud Instance scale variant 2620.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.003
+    apt_sim.variant: attack_scale_variant_2620
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/003/
+tags:
+- attack.t1578.003

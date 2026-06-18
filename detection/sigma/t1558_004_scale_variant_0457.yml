@@ -1,0 +1,21 @@
+title: AS-REP Roasting Scale Variant 0457 Marker
+id: 3c9adafa-3257-5594-a5d3-3a9816a7ff40
+status: experimental
+description: Detects simulator telemetry for AS-REP Roasting scale variant 0457.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.004
+    apt_sim.variant: attack_scale_variant_0457
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/004/
+tags:
+- attack.t1558.004

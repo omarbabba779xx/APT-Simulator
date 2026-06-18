@@ -1,0 +1,22 @@
+title: Cloud Instance Metadata API Scale Variant 2507 Marker
+id: 99e174ed-e728-5fed-971d-4c4b2d885309
+status: experimental
+description: Detects simulator telemetry for Cloud Instance Metadata API scale variant
+  2507.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.005
+    apt_sim.variant: attack_scale_variant_2507
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/005/
+tags:
+- attack.t1552.005

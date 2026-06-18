@@ -1,0 +1,21 @@
+title: Patch System Image Scale Variant 3408 Marker
+id: 1b8e45c6-c4fb-50e9-97a5-e12706c84ca1
+status: experimental
+description: Detects simulator telemetry for Patch System Image scale variant 3408.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601.001
+    apt_sim.variant: attack_scale_variant_3408
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/001/
+tags:
+- attack.t1601.001

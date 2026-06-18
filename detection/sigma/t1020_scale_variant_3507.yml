@@ -1,0 +1,22 @@
+title: Automated Exfiltration Scale Variant 3507 Marker
+id: 33993ebb-1d74-5d4a-803f-70f84a2cba9a
+status: experimental
+description: Detects simulator telemetry for Automated Exfiltration scale variant
+  3507.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1020
+    apt_sim.variant: attack_scale_variant_3507
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1020/
+tags:
+- attack.t1020

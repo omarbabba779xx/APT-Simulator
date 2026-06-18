@@ -1,0 +1,21 @@
+title: Serverless Scale Variant 0552 Marker
+id: aff163bb-484d-5575-a62a-1369d289b44d
+status: experimental
+description: Detects simulator telemetry for Serverless scale variant 0552.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.007
+    apt_sim.variant: attack_scale_variant_0552
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/007/
+tags:
+- attack.t1584.007

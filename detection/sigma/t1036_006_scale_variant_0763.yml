@@ -1,0 +1,21 @@
+title: Space after Filename Scale Variant 0763 Marker
+id: a4fd17ae-8cff-5295-9f1d-ea841eba52d9
+status: experimental
+description: Detects simulator telemetry for Space after Filename scale variant 0763.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.006
+    apt_sim.variant: attack_scale_variant_0763
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/006/
+tags:
+- attack.t1036.006

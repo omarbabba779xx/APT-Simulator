@@ -1,0 +1,21 @@
+title: Network Devices Scale Variant 0553 Marker
+id: 1f63499e-9612-516a-8392-87ea842b9f33
+status: experimental
+description: Detects simulator telemetry for Network Devices scale variant 0553.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.008
+    apt_sim.variant: attack_scale_variant_0553
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/008/
+tags:
+- attack.t1584.008

@@ -1,0 +1,21 @@
+title: Disk Wipe Scale Variant 2555 Marker
+id: 5630b0d1-e426-5d90-b31f-895414ca7022
+status: experimental
+description: Detects simulator telemetry for Disk Wipe scale variant 2555.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561
+    apt_sim.variant: attack_scale_variant_2555
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/
+tags:
+- attack.t1561

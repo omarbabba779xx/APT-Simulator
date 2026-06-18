@@ -1,0 +1,22 @@
+title: Unused/Unsupported Cloud Regions Scale Variant 0352 Marker
+id: 2438f410-7066-5b70-b307-d1c2b9d4ef59
+status: experimental
+description: Detects simulator telemetry for Unused/Unsupported Cloud Regions scale
+  variant 0352.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1535
+    apt_sim.variant: attack_scale_variant_0352
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1535/
+tags:
+- attack.t1535

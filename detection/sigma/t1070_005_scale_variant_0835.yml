@@ -1,0 +1,22 @@
+title: Network Share Connection Removal Scale Variant 0835 Marker
+id: f0313db5-6d08-5d7a-a1b2-3e340e87c6a8
+status: experimental
+description: Detects simulator telemetry for Network Share Connection Removal scale
+  variant 0835.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.005
+    apt_sim.variant: attack_scale_variant_0835
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/005/
+tags:
+- attack.t1070.005

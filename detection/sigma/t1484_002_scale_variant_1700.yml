@@ -1,0 +1,21 @@
+title: Trust Modification Scale Variant 1700 Marker
+id: 6471fc3c-c61f-5975-8f5c-abdbca615b5f
+status: experimental
+description: Detects simulator telemetry for Trust Modification scale variant 1700.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484.002
+    apt_sim.variant: attack_scale_variant_1700
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/002/
+tags:
+- attack.t1484.002

@@ -1,0 +1,21 @@
+title: Input Capture Scale Variant 0807 Marker
+id: 7063344b-8fd2-5cc0-9147-738e0324b94f
+status: experimental
+description: Detects simulator telemetry for Input Capture scale variant 0807.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056
+    apt_sim.variant: attack_scale_variant_0807
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/
+tags:
+- attack.t1056

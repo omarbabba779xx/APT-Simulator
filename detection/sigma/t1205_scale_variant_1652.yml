@@ -1,0 +1,21 @@
+title: Traffic Signaling Scale Variant 1652 Marker
+id: bc9e6f72-414b-5e91-bbeb-52da36645a6b
+status: experimental
+description: Detects simulator telemetry for Traffic Signaling scale variant 1652.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1205
+    apt_sim.variant: attack_scale_variant_1652
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1205/
+tags:
+- attack.t1205

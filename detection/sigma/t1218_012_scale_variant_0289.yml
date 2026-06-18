@@ -1,0 +1,21 @@
+title: Verclsid Scale Variant 0289 Marker
+id: fbbae5b8-7b97-55f0-860e-ebc08b60583d
+status: experimental
+description: Detects simulator telemetry for Verclsid scale variant 0289.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.012
+    apt_sim.variant: attack_scale_variant_0289
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/012/
+tags:
+- attack.t1218.012

@@ -1,0 +1,21 @@
+title: Power Settings Scale Variant 4137 Marker
+id: f51ecaeb-8ac1-5709-8e6c-50217f12863e
+status: experimental
+description: Detects simulator telemetry for Power Settings scale variant 4137.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1653
+    apt_sim.variant: attack_scale_variant_4137
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1653/
+tags:
+- attack.t1653

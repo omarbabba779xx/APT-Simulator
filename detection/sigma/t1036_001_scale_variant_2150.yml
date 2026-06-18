@@ -1,0 +1,22 @@
+title: Invalid Code Signature Scale Variant 2150 Marker
+id: 13a82d36-b059-504d-a91f-91e8959ad2bb
+status: experimental
+description: Detects simulator telemetry for Invalid Code Signature scale variant
+  2150.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.001
+    apt_sim.variant: attack_scale_variant_2150
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/001/
+tags:
+- attack.t1036.001

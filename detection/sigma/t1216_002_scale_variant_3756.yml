@@ -1,0 +1,22 @@
+title: SyncAppvPublishingServer Scale Variant 3756 Marker
+id: 2b7586fe-24f0-5b3e-8b0b-2b5cb9b1fdfd
+status: experimental
+description: Detects simulator telemetry for SyncAppvPublishingServer scale variant
+  3756.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216.002
+    apt_sim.variant: attack_scale_variant_3756
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/002/
+tags:
+- attack.t1216.002

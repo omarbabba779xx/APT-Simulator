@@ -1,0 +1,22 @@
+title: Application Layer Protocol Scale Variant 0841 Marker
+id: c6b90e03-becb-5dc1-b4f8-f18ea27a6960
+status: experimental
+description: Detects simulator telemetry for Application Layer Protocol scale variant
+  0841.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071
+    apt_sim.variant: attack_scale_variant_0841
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/
+tags:
+- attack.t1071

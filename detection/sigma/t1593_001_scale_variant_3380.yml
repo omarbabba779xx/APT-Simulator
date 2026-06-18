@@ -1,0 +1,21 @@
+title: Social Media Scale Variant 3380 Marker
+id: c71d6ff5-2093-5ab6-8bb4-78eb73d11dbc
+status: experimental
+description: Detects simulator telemetry for Social Media scale variant 3380.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.001
+    apt_sim.variant: attack_scale_variant_3380
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/001/
+tags:
+- attack.t1593.001

@@ -1,0 +1,21 @@
+title: Spearphishing Link Scale Variant 2008 Marker
+id: b0eee159-2ffa-5ae5-9f38-1f1e232f489a
+status: experimental
+description: Detects simulator telemetry for Spearphishing Link scale variant 2008.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.003
+    apt_sim.variant: attack_scale_variant_2008
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/003/
+tags:
+- attack.t1598.003

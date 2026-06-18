@@ -1,0 +1,21 @@
+title: Launch Daemon Scale Variant 1062 Marker
+id: 9b7c0ff7-0be6-5363-a0b9-05be33aad05c
+status: experimental
+description: Detects simulator telemetry for Launch Daemon scale variant 1062.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.004
+    apt_sim.variant: attack_scale_variant_1062
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/004/
+tags:
+- attack.t1543.004

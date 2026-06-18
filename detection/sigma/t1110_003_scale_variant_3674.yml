@@ -1,0 +1,21 @@
+title: Password Spraying Scale Variant 3674 Marker
+id: e798189a-df9f-51ed-b716-2a2f85a73513
+status: experimental
+description: Detects simulator telemetry for Password Spraying scale variant 3674.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.003
+    apt_sim.variant: attack_scale_variant_3674
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/003/
+tags:
+- attack.t1110.003

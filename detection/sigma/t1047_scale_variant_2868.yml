@@ -1,0 +1,22 @@
+title: Windows Management Instrumentation Scale Variant 2868 Marker
+id: 53714821-91c2-52ea-8cdf-d53b010c353d
+status: experimental
+description: Detects simulator telemetry for Windows Management Instrumentation scale
+  variant 2868.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1047
+    apt_sim.variant: attack_scale_variant_2868
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1047/
+tags:
+- attack.t1047

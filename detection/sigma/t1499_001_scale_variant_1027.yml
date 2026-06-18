@@ -1,0 +1,21 @@
+title: OS Exhaustion Flood Scale Variant 1027 Marker
+id: 384e45e2-3895-533f-b5ea-3ce4d45a6a47
+status: experimental
+description: Detects simulator telemetry for OS Exhaustion Flood scale variant 1027.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.001
+    apt_sim.variant: attack_scale_variant_1027
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/001/
+tags:
+- attack.t1499.001

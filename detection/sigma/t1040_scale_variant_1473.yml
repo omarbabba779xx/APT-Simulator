@@ -1,0 +1,21 @@
+title: Network Sniffing Scale Variant 1473 Marker
+id: 915fc3b7-7cdd-5e9e-ad92-73699499527c
+status: experimental
+description: Detects simulator telemetry for Network Sniffing scale variant 1473.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1040
+    apt_sim.variant: attack_scale_variant_1473
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1040/
+tags:
+- attack.t1040

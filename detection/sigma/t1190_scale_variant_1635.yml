@@ -1,0 +1,22 @@
+title: Exploit Public-Facing Application Scale Variant 1635 Marker
+id: 2bc2ff59-20ad-5fd2-9014-bc6a3ca12ade
+status: experimental
+description: Detects simulator telemetry for Exploit Public-Facing Application scale
+  variant 1635.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1190
+    apt_sim.variant: attack_scale_variant_1635
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1190/
+tags:
+- attack.t1190

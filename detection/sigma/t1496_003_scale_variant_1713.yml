@@ -1,0 +1,21 @@
+title: SMS Pumping Scale Variant 1713 Marker
+id: 887499aa-5534-50bf-841e-a7e41b9b1aea
+status: experimental
+description: Detects simulator telemetry for SMS Pumping scale variant 1713.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1496.003
+    apt_sim.variant: attack_scale_variant_1713
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1496/003/
+tags:
+- attack.t1496.003

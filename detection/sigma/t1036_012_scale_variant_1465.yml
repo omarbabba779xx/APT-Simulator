@@ -1,0 +1,21 @@
+title: Browser Fingerprint Scale Variant 1465 Marker
+id: 223fc8fe-984e-512d-9045-18d81326ce97
+status: experimental
+description: Detects simulator telemetry for Browser Fingerprint scale variant 1465.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.012
+    apt_sim.variant: attack_scale_variant_1465
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/012/
+tags:
+- attack.t1036.012

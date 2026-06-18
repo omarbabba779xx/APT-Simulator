@@ -1,0 +1,22 @@
+title: Protocol or Service Impersonation Scale Variant 0700 Marker
+id: ec93e104-64a4-59df-a732-2fba91b5c4a0
+status: experimental
+description: Detects simulator telemetry for Protocol or Service Impersonation scale
+  variant 0700.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.003
+    apt_sim.variant: attack_scale_variant_0700
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/003/
+tags:
+- attack.t1001.003

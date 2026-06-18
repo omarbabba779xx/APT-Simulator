@@ -1,0 +1,21 @@
+title: ListPlanting Scale Variant 1502 Marker
+id: 660abe59-3321-58d6-a67f-c655386b608a
+status: experimental
+description: Detects simulator telemetry for ListPlanting scale variant 1502.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.015
+    apt_sim.variant: attack_scale_variant_1502
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/015/
+tags:
+- attack.t1055.015

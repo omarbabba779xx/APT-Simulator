@@ -1,0 +1,22 @@
+title: Network Device Firewall Scale Variant 3475 Marker
+id: ecc053a7-5fb8-5b46-97ca-a80cde778f53
+status: experimental
+description: Detects simulator telemetry for Network Device Firewall scale variant
+  3475.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.002
+    apt_sim.variant: attack_scale_variant_3475
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/002/
+tags:
+- attack.t1686.002

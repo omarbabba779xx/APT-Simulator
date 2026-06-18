@@ -1,0 +1,22 @@
+title: Authentication Package Scale Variant 0389 Marker
+id: a6d1a952-29ca-5e6d-a3be-1d8ee29c3392
+status: experimental
+description: Detects simulator telemetry for Authentication Package scale variant
+  0389.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.002
+    apt_sim.variant: attack_scale_variant_0389
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/002/
+tags:
+- attack.t1547.002

@@ -1,0 +1,21 @@
+title: Screen Capture Scale Variant 0894 Marker
+id: 6c1cb698-5401-5aa6-9e99-b1a18e99072d
+status: experimental
+description: Detects simulator telemetry for Screen Capture scale variant 0894.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1113
+    apt_sim.variant: attack_scale_variant_0894
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1113/
+tags:
+- attack.t1113

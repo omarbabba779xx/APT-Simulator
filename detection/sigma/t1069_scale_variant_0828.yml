@@ -1,0 +1,22 @@
+title: Permission Groups Discovery Scale Variant 0828 Marker
+id: a986583e-448f-56a2-a256-ea5f05b17e4d
+status: experimental
+description: Detects simulator telemetry for Permission Groups Discovery scale variant
+  0828.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1069
+    apt_sim.variant: attack_scale_variant_0828
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1069/
+tags:
+- attack.t1069

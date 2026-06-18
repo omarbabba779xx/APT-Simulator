@@ -1,0 +1,22 @@
+title: Path Interception by PATH Environment Variable Scale Variant 1217 Marker
+id: d8bc84a1-e0d1-53a0-ae62-c6ec260295a7
+status: experimental
+description: Detects simulator telemetry for Path Interception by PATH Environment
+  Variable scale variant 1217.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.007
+    apt_sim.variant: attack_scale_variant_1217
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/007/
+tags:
+- attack.t1574.007

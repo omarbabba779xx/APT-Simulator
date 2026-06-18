@@ -1,0 +1,22 @@
+title: Dynamic-link Library Injection Scale Variant 0795 Marker
+id: 4fa77d5d-8aee-5f95-9f77-24f9a0530731
+status: experimental
+description: Detects simulator telemetry for Dynamic-link Library Injection scale
+  variant 0795.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.001
+    apt_sim.variant: attack_scale_variant_0795
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/001/
+tags:
+- attack.t1055.001

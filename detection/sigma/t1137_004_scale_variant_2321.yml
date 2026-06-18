@@ -1,0 +1,21 @@
+title: Outlook Home Page Scale Variant 2321 Marker
+id: 31578a16-3837-59a7-8b6a-b03bf5e19d3f
+status: experimental
+description: Detects simulator telemetry for Outlook Home Page scale variant 2321.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.004
+    apt_sim.variant: attack_scale_variant_2321
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/004/
+tags:
+- attack.t1137.004

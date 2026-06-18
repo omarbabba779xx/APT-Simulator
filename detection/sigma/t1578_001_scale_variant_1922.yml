@@ -1,0 +1,21 @@
+title: Create Snapshot Scale Variant 1922 Marker
+id: 6ec5b838-3600-5060-8690-04c65cd46548
+status: experimental
+description: Detects simulator telemetry for Create Snapshot scale variant 1922.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.001
+    apt_sim.variant: attack_scale_variant_1922
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/001/
+tags:
+- attack.t1578.001

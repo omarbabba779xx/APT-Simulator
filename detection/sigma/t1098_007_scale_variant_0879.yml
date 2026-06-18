@@ -1,0 +1,22 @@
+title: Additional Local or Domain Groups Scale Variant 0879 Marker
+id: 8ff337c8-6448-5c15-9cdd-e8d60281f450
+status: experimental
+description: Detects simulator telemetry for Additional Local or Domain Groups scale
+  variant 0879.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.007
+    apt_sim.variant: attack_scale_variant_0879
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/007/
+tags:
+- attack.t1098.007

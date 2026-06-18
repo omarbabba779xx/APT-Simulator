@@ -1,0 +1,21 @@
+title: Firmware Scale Variant 3377 Marker
+id: e367f8b3-94b6-5ec5-8872-6e19e373b318
+status: experimental
+description: Detects simulator telemetry for Firmware scale variant 3377.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.003
+    apt_sim.variant: attack_scale_variant_3377
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/003/
+tags:
+- attack.t1592.003

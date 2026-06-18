@@ -1,0 +1,21 @@
+title: Email Addresses Scale Variant 4056 Marker
+id: 86f4361b-5a8b-59cf-8f6d-69153bfffb73
+status: experimental
+description: Detects simulator telemetry for Email Addresses scale variant 4056.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.002
+    apt_sim.variant: attack_scale_variant_4056
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/002/
+tags:
+- attack.t1589.002

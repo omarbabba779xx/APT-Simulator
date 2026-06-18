@@ -1,0 +1,21 @@
+title: Hijack Execution Flow Scale Variant 3300 Marker
+id: a336497d-14c3-5731-abe6-be9e3a3aa250
+status: experimental
+description: Detects simulator telemetry for Hijack Execution Flow scale variant 3300.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574
+    apt_sim.variant: attack_scale_variant_3300
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/
+tags:
+- attack.t1574

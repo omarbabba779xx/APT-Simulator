@@ -1,0 +1,22 @@
+title: System Network Connections Discovery Scale Variant 1481 Marker
+id: 27ed0a15-4a75-524f-8d58-8356d21730ab
+status: experimental
+description: Detects simulator telemetry for System Network Connections Discovery
+  scale variant 1481.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1049
+    apt_sim.variant: attack_scale_variant_1481
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1049/
+tags:
+- attack.t1049

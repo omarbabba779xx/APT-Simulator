@@ -1,0 +1,21 @@
+title: Screensaver Scale Variant 1762 Marker
+id: 0abb596e-5e1d-571b-bd1a-26889fe957c9
+status: experimental
+description: Detects simulator telemetry for Screensaver scale variant 1762.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.002
+    apt_sim.variant: attack_scale_variant_1762
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/002/
+tags:
+- attack.t1546.002

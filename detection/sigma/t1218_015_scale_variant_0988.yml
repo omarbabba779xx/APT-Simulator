@@ -1,0 +1,21 @@
+title: Electron Applications Scale Variant 0988 Marker
+id: 8f1a416e-cc0c-55ab-a218-71fe24ea3995
+status: experimental
+description: Detects simulator telemetry for Electron Applications scale variant 0988.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.015
+    apt_sim.variant: attack_scale_variant_0988
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/015/
+tags:
+- attack.t1218.015

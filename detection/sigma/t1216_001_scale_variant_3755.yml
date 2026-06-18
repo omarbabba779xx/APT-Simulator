@@ -1,0 +1,21 @@
+title: PubPrn Scale Variant 3755 Marker
+id: 3097d265-db31-5ba4-b2c8-264fce031098
+status: experimental
+description: Detects simulator telemetry for PubPrn scale variant 3755.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216.001
+    apt_sim.variant: attack_scale_variant_3755
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/001/
+tags:
+- attack.t1216.001

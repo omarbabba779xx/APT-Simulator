@@ -1,0 +1,22 @@
+title: Internet Connection Discovery Scale Variant 1416 Marker
+id: 33dd8ef7-516d-5758-83b3-8a9b620039f3
+status: experimental
+description: Detects simulator telemetry for Internet Connection Discovery scale variant
+  1416.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.001
+    apt_sim.variant: attack_scale_variant_1416
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/001/
+tags:
+- attack.t1016.001

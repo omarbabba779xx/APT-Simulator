@@ -1,0 +1,21 @@
+title: Hardware Scale Variant 3375 Marker
+id: c672ff15-49bd-50d7-9b13-59cf0272d45c
+status: experimental
+description: Detects simulator telemetry for Hardware scale variant 3375.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.001
+    apt_sim.variant: attack_scale_variant_3375
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/001/
+tags:
+- attack.t1592.001

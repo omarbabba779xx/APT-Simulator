@@ -1,0 +1,21 @@
+title: Reduce Key Space Scale Variant 2013 Marker
+id: 942ced54-5931-58b2-a757-70087b09ac06
+status: experimental
+description: Detects simulator telemetry for Reduce Key Space scale variant 2013.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600.001
+    apt_sim.variant: attack_scale_variant_2013
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/001/
+tags:
+- attack.t1600.001

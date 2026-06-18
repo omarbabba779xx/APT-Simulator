@@ -1,0 +1,21 @@
+title: Gatekeeper Bypass Scale Variant 3208 Marker
+id: 1887e72e-fae4-5337-a2d0-de70e6b09cc1
+status: experimental
+description: Detects simulator telemetry for Gatekeeper Bypass scale variant 3208.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.001
+    apt_sim.variant: attack_scale_variant_3208
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/001/
+tags:
+- attack.t1553.001

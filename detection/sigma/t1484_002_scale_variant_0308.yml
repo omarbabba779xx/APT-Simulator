@@ -1,0 +1,21 @@
+title: Trust Modification Scale Variant 0308 Marker
+id: d6d45f35-18c6-5479-9869-3633812bac65
+status: experimental
+description: Detects simulator telemetry for Trust Modification scale variant 0308.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484.002
+    apt_sim.variant: attack_scale_variant_0308
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/002/
+tags:
+- attack.t1484.002

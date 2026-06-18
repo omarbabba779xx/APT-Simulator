@@ -1,0 +1,21 @@
+title: Patch System Image Scale Variant 2016 Marker
+id: 8ff07b7b-9995-5b98-9e6f-306e8c4eade0
+status: experimental
+description: Detects simulator telemetry for Patch System Image scale variant 2016.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601.001
+    apt_sim.variant: attack_scale_variant_2016
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/001/
+tags:
+- attack.t1601.001

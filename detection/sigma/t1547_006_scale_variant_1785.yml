@@ -1,0 +1,22 @@
+title: Kernel Modules and Extensions Scale Variant 1785 Marker
+id: f6d22769-0d9b-5ecf-bc70-7dd33da70576
+status: experimental
+description: Detects simulator telemetry for Kernel Modules and Extensions scale variant
+  1785.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.006
+    apt_sim.variant: attack_scale_variant_1785
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/006/
+tags:
+- attack.t1547.006

@@ -1,0 +1,22 @@
+title: Account Access Removal Scale Variant 1046 Marker
+id: e5c92123-c0de-5990-b890-b12c965ffd1e
+status: experimental
+description: Detects simulator telemetry for Account Access Removal scale variant
+  1046.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1531
+    apt_sim.variant: attack_scale_variant_1046
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1531/
+tags:
+- attack.t1531

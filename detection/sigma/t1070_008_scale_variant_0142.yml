@@ -1,0 +1,21 @@
+title: Clear Mailbox Data Scale Variant 0142 Marker
+id: ddcd15a3-6509-5b85-8617-642325bf086b
+status: experimental
+description: Detects simulator telemetry for Clear Mailbox Data scale variant 0142.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.008
+    apt_sim.variant: attack_scale_variant_0142
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/008/
+tags:
+- attack.t1070.008

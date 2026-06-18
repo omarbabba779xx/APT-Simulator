@@ -1,0 +1,21 @@
+title: Botnet Scale Variant 4021 Marker
+id: 3d454cd2-34f4-594f-8fe3-e0f4d0962e98
+status: experimental
+description: Detects simulator telemetry for Botnet scale variant 4021.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.005
+    apt_sim.variant: attack_scale_variant_4021
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/005/
+tags:
+- attack.t1583.005

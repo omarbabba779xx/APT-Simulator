@@ -1,0 +1,21 @@
+title: Botnet Scale Variant 2629 Marker
+id: 7e6167b1-6657-5b7e-b8c6-cc89303414cc
+status: experimental
+description: Detects simulator telemetry for Botnet scale variant 2629.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.005
+    apt_sim.variant: attack_scale_variant_2629
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/005/
+tags:
+- attack.t1583.005

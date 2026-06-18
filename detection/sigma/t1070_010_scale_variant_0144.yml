@@ -1,0 +1,21 @@
+title: Relocate Malware Scale Variant 0144 Marker
+id: ea661d35-794a-5294-ada8-bf959b4035b0
+status: experimental
+description: Detects simulator telemetry for Relocate Malware scale variant 0144.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.010
+    apt_sim.variant: attack_scale_variant_0144
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/010/
+tags:
+- attack.t1070.010

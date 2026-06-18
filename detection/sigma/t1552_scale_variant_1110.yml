@@ -1,0 +1,21 @@
+title: Unsecured Credentials Scale Variant 1110 Marker
+id: 9f1988d0-d98d-504a-a667-e76922030762
+status: experimental
+description: Detects simulator telemetry for Unsecured Credentials scale variant 1110.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552
+    apt_sim.variant: attack_scale_variant_1110
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/
+tags:
+- attack.t1552

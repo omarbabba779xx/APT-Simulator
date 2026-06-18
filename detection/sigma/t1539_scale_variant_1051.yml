@@ -1,0 +1,22 @@
+title: Steal Web Session Cookie Scale Variant 1051 Marker
+id: eabfc6da-32dc-5f11-a080-788116a3ab44
+status: experimental
+description: Detects simulator telemetry for Steal Web Session Cookie scale variant
+  1051.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1539
+    apt_sim.variant: attack_scale_variant_1051
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1539/
+tags:
+- attack.t1539

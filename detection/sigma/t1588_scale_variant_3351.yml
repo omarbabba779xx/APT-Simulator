@@ -1,0 +1,21 @@
+title: Obtain Capabilities Scale Variant 3351 Marker
+id: 0967abd8-b890-587a-9d1a-a181dad22433
+status: experimental
+description: Detects simulator telemetry for Obtain Capabilities scale variant 3351.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588
+    apt_sim.variant: attack_scale_variant_3351
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/
+tags:
+- attack.t1588

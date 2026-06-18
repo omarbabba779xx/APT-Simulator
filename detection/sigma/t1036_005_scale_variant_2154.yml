@@ -1,0 +1,22 @@
+title: Match Legitimate Resource Name or Location Scale Variant 2154 Marker
+id: 2986c31b-3c64-584d-8442-9c685f3cda7a
+status: experimental
+description: Detects simulator telemetry for Match Legitimate Resource Name or Location
+  scale variant 2154.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.005
+    apt_sim.variant: attack_scale_variant_2154
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/005/
+tags:
+- attack.t1036.005

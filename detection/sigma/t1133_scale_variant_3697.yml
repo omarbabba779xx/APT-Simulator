@@ -1,0 +1,22 @@
+title: External Remote Services Scale Variant 3697 Marker
+id: c28756c6-4421-597c-bfb0-7417380f9f5a
+status: experimental
+description: Detects simulator telemetry for External Remote Services scale variant
+  3697.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1133
+    apt_sim.variant: attack_scale_variant_3697
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1133/
+tags:
+- attack.t1133

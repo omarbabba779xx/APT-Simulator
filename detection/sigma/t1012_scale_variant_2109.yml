@@ -1,0 +1,21 @@
+title: Query Registry Scale Variant 2109 Marker
+id: 6bcfd464-23d4-51ea-a481-73a852d53d15
+status: experimental
+description: Detects simulator telemetry for Query Registry scale variant 2109.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1012
+    apt_sim.variant: attack_scale_variant_2109
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1012/
+tags:
+- attack.t1012

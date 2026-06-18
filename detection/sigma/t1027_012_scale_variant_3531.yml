@@ -1,0 +1,21 @@
+title: LNK Icon Smuggling Scale Variant 3531 Marker
+id: e7e193b2-8bf1-577e-957e-031b55d50d89
+status: experimental
+description: Detects simulator telemetry for LNK Icon Smuggling scale variant 3531.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.012
+    apt_sim.variant: attack_scale_variant_3531
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/012/
+tags:
+- attack.t1027.012

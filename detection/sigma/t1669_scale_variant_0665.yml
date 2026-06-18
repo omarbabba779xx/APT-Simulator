@@ -1,0 +1,21 @@
+title: Wi-Fi Networks Scale Variant 0665 Marker
+id: 51407232-980e-5013-b09b-bdc5a20a7192
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Networks scale variant 0665.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1669
+    apt_sim.variant: attack_scale_variant_0665
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1669/
+tags:
+- attack.t1669

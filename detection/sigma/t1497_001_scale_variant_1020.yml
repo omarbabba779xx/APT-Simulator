@@ -1,0 +1,21 @@
+title: System Checks Scale Variant 1020 Marker
+id: a92087ef-1fe8-591d-967f-f671a8aa1df0
+status: experimental
+description: Detects simulator telemetry for System Checks scale variant 1020.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.001
+    apt_sim.variant: attack_scale_variant_1020
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/001/
+tags:
+- attack.t1497.001

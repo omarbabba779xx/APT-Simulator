@@ -1,0 +1,21 @@
+title: Credentials In Files Scale Variant 3199 Marker
+id: a5a31fba-2fa5-51e6-9e5e-97f2361b4742
+status: experimental
+description: Detects simulator telemetry for Credentials In Files scale variant 3199.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.001
+    apt_sim.variant: attack_scale_variant_3199
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/001/
+tags:
+- attack.t1552.001

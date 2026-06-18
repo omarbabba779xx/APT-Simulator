@@ -1,0 +1,22 @@
+title: Remote Email Collection Scale Variant 1593 Marker
+id: c23a048a-17d3-5c91-b997-20c2ce3dbeed
+status: experimental
+description: Detects simulator telemetry for Remote Email Collection scale variant
+  1593.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.002
+    apt_sim.variant: attack_scale_variant_1593
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/002/
+tags:
+- attack.t1114.002

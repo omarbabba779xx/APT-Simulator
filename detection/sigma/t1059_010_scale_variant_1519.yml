@@ -1,0 +1,21 @@
+title: AutoHotKey & AutoIT Scale Variant 1519 Marker
+id: 2e17296c-1174-584b-8d61-e71aa12d5c0c
+status: experimental
+description: Detects simulator telemetry for AutoHotKey & AutoIT scale variant 1519.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.010
+    apt_sim.variant: attack_scale_variant_1519
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/010/
+tags:
+- attack.t1059.010

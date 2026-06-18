@@ -1,0 +1,21 @@
+title: Direct Volume Access Scale Variant 1407 Marker
+id: 5c4c73ae-f0ea-5a3d-85e4-130d2a957369
+status: experimental
+description: Detects simulator telemetry for Direct Volume Access scale variant 1407.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1006
+    apt_sim.variant: attack_scale_variant_1407
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1006/
+tags:
+- attack.t1006

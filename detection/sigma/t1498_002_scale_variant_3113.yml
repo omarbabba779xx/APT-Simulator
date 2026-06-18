@@ -1,0 +1,22 @@
+title: Reflection Amplification Scale Variant 3113 Marker
+id: a0729bf2-4735-5ac9-997e-8af7bfaa0f71
+status: experimental
+description: Detects simulator telemetry for Reflection Amplification scale variant
+  3113.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1498.002
+    apt_sim.variant: attack_scale_variant_3113
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1498/002/
+tags:
+- attack.t1498.002

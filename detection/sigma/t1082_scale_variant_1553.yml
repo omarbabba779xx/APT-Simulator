@@ -1,0 +1,22 @@
+title: System Information Discovery Scale Variant 1553 Marker
+id: 903f7743-a516-51a7-9e59-e9db6b269db6
+status: experimental
+description: Detects simulator telemetry for System Information Discovery scale variant
+  1553.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1082
+    apt_sim.variant: attack_scale_variant_1553
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1082/
+tags:
+- attack.t1082

@@ -1,0 +1,22 @@
+title: Data from Removable Media Scale Variant 2126 Marker
+id: 9638fad1-abd7-557f-b8a5-7dbb7a926ed4
+status: experimental
+description: Detects simulator telemetry for Data from Removable Media scale variant
+  2126.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1025
+    apt_sim.variant: attack_scale_variant_2126
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1025/
+tags:
+- attack.t1025

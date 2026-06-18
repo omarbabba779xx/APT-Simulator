@@ -1,0 +1,21 @@
+title: Fileless Storage Scale Variant 3530 Marker
+id: 31c13d8f-2a5e-5e43-b55a-0bdd7f0d7cdc
+status: experimental
+description: Detects simulator telemetry for Fileless Storage scale variant 3530.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.011
+    apt_sim.variant: attack_scale_variant_3530
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/011/
+tags:
+- attack.t1027.011

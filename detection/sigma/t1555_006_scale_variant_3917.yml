@@ -1,0 +1,22 @@
+title: Cloud Secrets Management Stores Scale Variant 3917 Marker
+id: 932b82c4-eeb2-5c02-bb48-2479f3162cfd
+status: experimental
+description: Detects simulator telemetry for Cloud Secrets Management Stores scale
+  variant 3917.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.006
+    apt_sim.variant: attack_scale_variant_3917
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/006/
+tags:
+- attack.t1555.006

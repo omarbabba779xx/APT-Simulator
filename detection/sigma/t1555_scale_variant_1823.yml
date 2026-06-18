@@ -1,0 +1,22 @@
+title: Credentials from Password Stores Scale Variant 1823 Marker
+id: 22082189-69c5-5ea6-a424-5428fab9a6c8
+status: experimental
+description: Detects simulator telemetry for Credentials from Password Stores scale
+  variant 1823.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555
+    apt_sim.variant: attack_scale_variant_1823
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/
+tags:
+- attack.t1555

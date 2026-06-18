@@ -1,0 +1,21 @@
+title: Hide Infrastructure Scale Variant 3445 Marker
+id: b78b837b-4656-57f5-aed7-61ca61d25610
+status: experimental
+description: Detects simulator telemetry for Hide Infrastructure scale variant 3445.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1665
+    apt_sim.variant: attack_scale_variant_3445
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1665/
+tags:
+- attack.t1665

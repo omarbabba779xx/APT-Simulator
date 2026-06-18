@@ -1,0 +1,22 @@
+title: System Script Proxy Execution Scale Variant 3058 Marker
+id: 9529ef42-cc5e-5e29-be13-6c4f65dbfb5c
+status: experimental
+description: Detects simulator telemetry for System Script Proxy Execution scale variant
+  3058.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216
+    apt_sim.variant: attack_scale_variant_3058
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/
+tags:
+- attack.t1216

@@ -1,0 +1,21 @@
+title: Compromise Accounts Scale Variant 4038 Marker
+id: fd78b92b-06ff-5069-9ffd-6ad7375040d2
+status: experimental
+description: Detects simulator telemetry for Compromise Accounts scale variant 4038.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1586
+    apt_sim.variant: attack_scale_variant_4038
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1586/
+tags:
+- attack.t1586

@@ -1,0 +1,21 @@
+title: Extended Attributes Scale Variant 3271 Marker
+id: 6d489e7c-0fe8-56dd-9d45-13881f2e9c4d
+status: experimental
+description: Detects simulator telemetry for Extended Attributes scale variant 3271.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.014
+    apt_sim.variant: attack_scale_variant_3271
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/014/
+tags:
+- attack.t1564.014

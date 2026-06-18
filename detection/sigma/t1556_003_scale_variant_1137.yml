@@ -1,0 +1,22 @@
+title: Pluggable Authentication Modules Scale Variant 1137 Marker
+id: 6661f04a-db09-5bfe-88cb-357b6bf9883f
+status: experimental
+description: Detects simulator telemetry for Pluggable Authentication Modules scale
+  variant 1137.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.003
+    apt_sim.variant: attack_scale_variant_1137
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/003/
+tags:
+- attack.t1556.003

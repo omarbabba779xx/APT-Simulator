@@ -1,0 +1,21 @@
+title: Web Services Scale Variant 3326 Marker
+id: 0f936206-20d8-54d0-a058-782e92a60cdc
+status: experimental
+description: Detects simulator telemetry for Web Services scale variant 3326.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.006
+    apt_sim.variant: attack_scale_variant_3326
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/006/
+tags:
+- attack.t1583.006

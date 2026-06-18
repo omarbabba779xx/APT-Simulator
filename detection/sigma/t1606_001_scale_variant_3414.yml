@@ -1,0 +1,21 @@
+title: Web Cookies Scale Variant 3414 Marker
+id: 3d6e0a4c-3473-59c5-8781-9b4c8cd238cf
+status: experimental
+description: Detects simulator telemetry for Web Cookies scale variant 3414.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.001
+    apt_sim.variant: attack_scale_variant_3414
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/001/
+tags:
+- attack.t1606.001

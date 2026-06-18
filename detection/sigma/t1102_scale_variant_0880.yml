@@ -1,0 +1,21 @@
+title: Web Service Scale Variant 0880 Marker
+id: 64ce26ce-ab69-593f-b080-de0fdf136a6b
+status: experimental
+description: Detects simulator telemetry for Web Service scale variant 0880.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102
+    apt_sim.variant: attack_scale_variant_0880
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/
+tags:
+- attack.t1102

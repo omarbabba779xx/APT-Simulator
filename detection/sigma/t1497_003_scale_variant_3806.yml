@@ -1,0 +1,21 @@
+title: Time Based Checks Scale Variant 3806 Marker
+id: 4fd47fe7-94eb-59cc-8749-3c676237bca5
+status: experimental
+description: Detects simulator telemetry for Time Based Checks scale variant 3806.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.003
+    apt_sim.variant: attack_scale_variant_3806
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/003/
+tags:
+- attack.t1497.003

@@ -1,0 +1,21 @@
+title: Credentials Scale Variant 1271 Marker
+id: e85c6c9e-3f99-5e0b-b45a-234b374ec98e
+status: experimental
+description: Detects simulator telemetry for Credentials scale variant 1271.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1589.001
+    apt_sim.variant: attack_scale_variant_1271
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1589/001/
+tags:
+- attack.t1589.001

@@ -1,0 +1,21 @@
+title: Domain Properties Scale Variant 2667 Marker
+id: 1ad41e5a-dbac-5610-9ecc-b60bab9ed533
+status: experimental
+description: Detects simulator telemetry for Domain Properties scale variant 2667.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.001
+    apt_sim.variant: attack_scale_variant_2667
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/001/
+tags:
+- attack.t1590.001

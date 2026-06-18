@@ -1,0 +1,22 @@
+title: Logon Script (Windows) Scale Variant 2859 Marker
+id: c54c71ef-8b2d-517e-b919-606251999cae
+status: experimental
+description: Detects simulator telemetry for Logon Script (Windows) scale variant
+  2859.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.001
+    apt_sim.variant: attack_scale_variant_2859
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/001/
+tags:
+- attack.t1037.001

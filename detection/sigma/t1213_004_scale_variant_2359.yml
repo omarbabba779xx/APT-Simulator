@@ -1,0 +1,22 @@
+title: Customer Relationship Management Software Scale Variant 2359 Marker
+id: 80db0084-4be9-5861-9fdb-ef1ccd9fd369
+status: experimental
+description: Detects simulator telemetry for Customer Relationship Management Software
+  scale variant 2359.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.004
+    apt_sim.variant: attack_scale_variant_2359
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/004/
+tags:
+- attack.t1213.004

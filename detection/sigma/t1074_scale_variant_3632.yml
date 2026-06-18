@@ -1,0 +1,21 @@
+title: Data Staged Scale Variant 3632 Marker
+id: 3e6af39c-da10-58c8-840d-6955f3ccff62
+status: experimental
+description: Detects simulator telemetry for Data Staged scale variant 3632.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1074
+    apt_sim.variant: attack_scale_variant_3632
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1074/
+tags:
+- attack.t1074

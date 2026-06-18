@@ -1,0 +1,22 @@
+title: Command and Scripting Interpreter Scale Variant 0117 Marker
+id: f619ab19-39a7-5828-8a59-b974b53a51a7
+status: experimental
+description: Detects simulator telemetry for Command and Scripting Interpreter scale
+  variant 0117.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059
+    apt_sim.variant: attack_scale_variant_0117
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/
+tags:
+- attack.t1059

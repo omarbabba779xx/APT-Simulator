@@ -1,0 +1,22 @@
+title: Supply Chain Compromise Scale Variant 0940 Marker
+id: 3f524674-4c55-5009-90e2-be85b99a5657
+status: experimental
+description: Detects simulator telemetry for Supply Chain Compromise scale variant
+  0940.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195
+    apt_sim.variant: attack_scale_variant_0940
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/
+tags:
+- attack.t1195

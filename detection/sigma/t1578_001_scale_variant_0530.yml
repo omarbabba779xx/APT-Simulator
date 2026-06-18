@@ -1,0 +1,21 @@
+title: Create Snapshot Scale Variant 0530 Marker
+id: e7e1744e-2e67-5c92-ac2d-715e855c604b
+status: experimental
+description: Detects simulator telemetry for Create Snapshot scale variant 0530.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.001
+    apt_sim.variant: attack_scale_variant_0530
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/001/
+tags:
+- attack.t1578.001

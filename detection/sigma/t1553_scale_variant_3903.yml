@@ -1,0 +1,22 @@
+title: Subvert Trust Controls Scale Variant 3903 Marker
+id: 23c0081f-a251-5cdf-95f7-a9133520853b
+status: experimental
+description: Detects simulator telemetry for Subvert Trust Controls scale variant
+  3903.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553
+    apt_sim.variant: attack_scale_variant_3903
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/
+tags:
+- attack.t1553

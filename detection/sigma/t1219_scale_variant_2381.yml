@@ -1,0 +1,21 @@
+title: Remote Access Tools Scale Variant 2381 Marker
+id: 2281f4b2-f11f-5875-9d48-d0f2a06e3e3c
+status: experimental
+description: Detects simulator telemetry for Remote Access Tools scale variant 2381.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219
+    apt_sim.variant: attack_scale_variant_2381
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/
+tags:
+- attack.t1219

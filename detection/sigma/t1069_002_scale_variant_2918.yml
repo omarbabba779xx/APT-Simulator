@@ -1,0 +1,21 @@
+title: Domain Groups Scale Variant 2918 Marker
+id: 87dc7882-e6cd-5e87-8f6a-a4273d86c165
+status: experimental
+description: Detects simulator telemetry for Domain Groups scale variant 2918.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1069.002
+    apt_sim.variant: attack_scale_variant_2918
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1069/002/
+tags:
+- attack.t1069.002

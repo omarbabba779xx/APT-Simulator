@@ -1,0 +1,22 @@
+title: Data from Local System Scale Variant 0014 Marker
+id: 807df3fe-3de2-55cc-b20b-2c8f2bddcb0c
+status: experimental
+description: Detects simulator telemetry for Data from Local System scale variant
+  0014.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1005
+    apt_sim.variant: attack_scale_variant_0014
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1005/
+tags:
+- attack.t1005

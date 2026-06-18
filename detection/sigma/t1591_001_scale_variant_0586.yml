@@ -1,0 +1,22 @@
+title: Determine Physical Locations Scale Variant 0586 Marker
+id: 9c7532eb-e5d2-56f3-a91e-f9b78d88e0ec
+status: experimental
+description: Detects simulator telemetry for Determine Physical Locations scale variant
+  0586.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1591.001
+    apt_sim.variant: attack_scale_variant_0586
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1591/001/
+tags:
+- attack.t1591.001

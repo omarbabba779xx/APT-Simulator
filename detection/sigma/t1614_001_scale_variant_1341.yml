@@ -1,0 +1,22 @@
+title: System Language Discovery Scale Variant 1341 Marker
+id: 3f76ef77-955c-5345-8b58-00941775fff9
+status: experimental
+description: Detects simulator telemetry for System Language Discovery scale variant
+  1341.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1614.001
+    apt_sim.variant: attack_scale_variant_1341
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1614/001/
+tags:
+- attack.t1614.001

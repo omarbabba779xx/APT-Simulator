@@ -1,0 +1,21 @@
+title: Cloud Services Scale Variant 3516 Marker
+id: 2fb290c1-2066-5e72-9e92-03585a6453ab
+status: experimental
+description: Detects simulator telemetry for Cloud Services scale variant 3516.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.007
+    apt_sim.variant: attack_scale_variant_3516
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/007/
+tags:
+- attack.t1021.007

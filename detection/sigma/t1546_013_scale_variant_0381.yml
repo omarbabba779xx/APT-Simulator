@@ -1,0 +1,21 @@
+title: PowerShell Profile Scale Variant 0381 Marker
+id: 4e1ecaca-3260-5c8f-a0d9-ae14e990d1ca
+status: experimental
+description: Detects simulator telemetry for PowerShell Profile scale variant 0381.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.013
+    apt_sim.variant: attack_scale_variant_0381
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/013/
+tags:
+- attack.t1546.013

@@ -1,0 +1,21 @@
+title: DNS/Passive DNS Scale Variant 4085 Marker
+id: 345c0541-ff33-52db-8c67-8b29ac56cab2
+status: experimental
+description: Detects simulator telemetry for DNS/Passive DNS scale variant 4085.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.001
+    apt_sim.variant: attack_scale_variant_4085
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/001/
+tags:
+- attack.t1596.001

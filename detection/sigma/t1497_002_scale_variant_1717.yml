@@ -1,0 +1,22 @@
+title: User Activity Based Checks Scale Variant 1717 Marker
+id: 43590bac-e35b-5149-8948-1044666c694f
+status: experimental
+description: Detects simulator telemetry for User Activity Based Checks scale variant
+  1717.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.002
+    apt_sim.variant: attack_scale_variant_1717
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/002/
+tags:
+- attack.t1497.002

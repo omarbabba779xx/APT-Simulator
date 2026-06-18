@@ -1,0 +1,21 @@
+title: External Proxy Scale Variant 1562 Marker
+id: 9d25ebb2-f05d-588f-9deb-a6047cdbf156
+status: experimental
+description: Detects simulator telemetry for External Proxy scale variant 1562.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.002
+    apt_sim.variant: attack_scale_variant_1562
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/002/
+tags:
+- attack.t1090.002

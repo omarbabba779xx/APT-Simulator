@@ -1,0 +1,22 @@
+title: Process Argument Spoofing Scale Variant 3963 Marker
+id: edd4c7be-0190-55a3-b202-a7d8b63acedb
+status: experimental
+description: Detects simulator telemetry for Process Argument Spoofing scale variant
+  3963.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.010
+    apt_sim.variant: attack_scale_variant_3963
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/010/
+tags:
+- attack.t1564.010

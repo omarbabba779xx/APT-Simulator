@@ -1,0 +1,21 @@
+title: Escape to Host Scale Variant 0641 Marker
+id: a660a050-057e-55ec-8b31-3f1b4ff52ec7
+status: experimental
+description: Detects simulator telemetry for Escape to Host scale variant 0641.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1611
+    apt_sim.variant: attack_scale_variant_0641
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1611/
+tags:
+- attack.t1611

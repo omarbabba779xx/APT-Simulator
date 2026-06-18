@@ -1,0 +1,21 @@
+title: Exclusive Control Scale Variant 0664 Marker
+id: a5351f21-5b70-58e7-aeb1-74cc4aa778f8
+status: experimental
+description: Detects simulator telemetry for Exclusive Control scale variant 0664.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1668
+    apt_sim.variant: attack_scale_variant_0664
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1668/
+tags:
+- attack.t1668

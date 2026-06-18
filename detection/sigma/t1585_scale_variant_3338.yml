@@ -1,0 +1,21 @@
+title: Establish Accounts Scale Variant 3338 Marker
+id: f3e8e180-95f4-5db5-9577-7863fbec4bb3
+status: experimental
+description: Detects simulator telemetry for Establish Accounts scale variant 3338.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585
+    apt_sim.variant: attack_scale_variant_3338
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/
+tags:
+- attack.t1585

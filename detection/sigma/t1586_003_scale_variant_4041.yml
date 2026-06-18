@@ -1,0 +1,21 @@
+title: Cloud Accounts Scale Variant 4041 Marker
+id: 78d92ea4-5e4a-5a38-9394-3a4c4285aaf4
+status: experimental
+description: Detects simulator telemetry for Cloud Accounts scale variant 4041.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1586.003
+    apt_sim.variant: attack_scale_variant_4041
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1586/003/
+tags:
+- attack.t1586.003

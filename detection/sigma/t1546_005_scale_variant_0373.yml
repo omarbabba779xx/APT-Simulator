@@ -1,0 +1,21 @@
+title: Trap Scale Variant 0373 Marker
+id: 75b345e5-0201-5d9c-8de6-19143e515d0e
+status: experimental
+description: Detects simulator telemetry for Trap scale variant 0373.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.005
+    apt_sim.variant: attack_scale_variant_0373
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/005/
+tags:
+- attack.t1546.005

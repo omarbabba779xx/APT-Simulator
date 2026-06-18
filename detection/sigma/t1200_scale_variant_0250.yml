@@ -1,0 +1,21 @@
+title: Hardware Additions Scale Variant 0250 Marker
+id: 513082a1-9a0c-5d5a-8c21-43e60f0f98e1
+status: experimental
+description: Detects simulator telemetry for Hardware Additions scale variant 0250.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1200
+    apt_sim.variant: attack_scale_variant_0250
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1200/
+tags:
+- attack.t1200

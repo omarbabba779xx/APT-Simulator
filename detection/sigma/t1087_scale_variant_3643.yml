@@ -1,0 +1,21 @@
+title: Account Discovery Scale Variant 3643 Marker
+id: a8862c37-ed95-5c7a-a6bb-fb583c55743a
+status: experimental
+description: Detects simulator telemetry for Account Discovery scale variant 3643.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1087
+    apt_sim.variant: attack_scale_variant_3643
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1087/
+tags:
+- attack.t1087

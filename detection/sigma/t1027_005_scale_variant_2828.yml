@@ -1,0 +1,22 @@
+title: Indicator Removal from Tools Scale Variant 2828 Marker
+id: 4d3353c4-7962-5845-a34a-6ceac8348458
+status: experimental
+description: Detects simulator telemetry for Indicator Removal from Tools scale variant
+  2828.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.005
+    apt_sim.variant: attack_scale_variant_2828
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/005/
+tags:
+- attack.t1027.005

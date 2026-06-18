@@ -1,0 +1,21 @@
+title: Windows Host Firewall Scale Variant 2780 Marker
+id: 0ae3c155-978a-5a6b-8edf-b76fbbdff905
+status: experimental
+description: Detects simulator telemetry for Windows Host Firewall scale variant 2780.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.003
+    apt_sim.variant: attack_scale_variant_2780
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/003/
+tags:
+- attack.t1686.003

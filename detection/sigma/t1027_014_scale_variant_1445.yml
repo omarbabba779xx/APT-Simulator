@@ -1,0 +1,21 @@
+title: Polymorphic Code Scale Variant 1445 Marker
+id: e16e4499-5194-578f-8e74-4ce735cca46a
+status: experimental
+description: Detects simulator telemetry for Polymorphic Code scale variant 1445.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.014
+    apt_sim.variant: attack_scale_variant_1445
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/014/
+tags:
+- attack.t1027.014

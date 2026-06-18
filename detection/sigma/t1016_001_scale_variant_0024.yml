@@ -1,0 +1,22 @@
+title: Internet Connection Discovery Scale Variant 0024 Marker
+id: 868a7e5d-f216-52ea-b80a-6e5308f82aca
+status: experimental
+description: Detects simulator telemetry for Internet Connection Discovery scale variant
+  0024.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.001
+    apt_sim.variant: attack_scale_variant_0024
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/001/
+tags:
+- attack.t1016.001

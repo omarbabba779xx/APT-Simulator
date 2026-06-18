@@ -1,0 +1,22 @@
+title: System Script Proxy Execution Scale Variant 1666 Marker
+id: 1c5c09bf-b669-5bfd-b4e8-8327065b820c
+status: experimental
+description: Detects simulator telemetry for System Script Proxy Execution scale variant
+  1666.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216
+    apt_sim.variant: attack_scale_variant_1666
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/
+tags:
+- attack.t1216

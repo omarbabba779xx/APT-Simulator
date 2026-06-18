@@ -1,0 +1,21 @@
+title: Private Keys Scale Variant 3202 Marker
+id: 57f8ad5d-5a07-558b-80da-42c3aec9d192
+status: experimental
+description: Detects simulator telemetry for Private Keys scale variant 3202.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.004
+    apt_sim.variant: attack_scale_variant_3202
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/004/
+tags:
+- attack.t1552.004

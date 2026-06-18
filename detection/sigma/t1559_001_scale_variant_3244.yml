@@ -1,0 +1,22 @@
+title: Component Object Model Scale Variant 3244 Marker
+id: 508d7d15-20d5-569b-885f-11e8cc4e9e83
+status: experimental
+description: Detects simulator telemetry for Component Object Model scale variant
+  3244.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.001
+    apt_sim.variant: attack_scale_variant_3244
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/001/
+tags:
+- attack.t1559.001

@@ -1,0 +1,21 @@
+title: Rundll32 Scale Variant 3072 Marker
+id: 5cff028f-a9e6-5cd2-bc4b-89d876f774e7
+status: experimental
+description: Detects simulator telemetry for Rundll32 scale variant 3072.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.011
+    apt_sim.variant: attack_scale_variant_3072
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/011/
+tags:
+- attack.t1218.011

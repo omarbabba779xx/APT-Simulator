@@ -1,0 +1,21 @@
+title: Domain Account Scale Variant 3707 Marker
+id: e8906bc1-4e9b-5cbf-8d42-0831a5f6bf32
+status: experimental
+description: Detects simulator telemetry for Domain Account scale variant 3707.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.002
+    apt_sim.variant: attack_scale_variant_3707
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/002/
+tags:
+- attack.t1136.002

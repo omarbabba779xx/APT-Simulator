@@ -1,0 +1,21 @@
+title: Delete Cloud Instance Scale Variant 0532 Marker
+id: 0a0dff8e-7c17-572e-9177-76a0d08aa434
+status: experimental
+description: Detects simulator telemetry for Delete Cloud Instance scale variant 0532.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.003
+    apt_sim.variant: attack_scale_variant_0532
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/003/
+tags:
+- attack.t1578.003

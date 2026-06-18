@@ -1,0 +1,21 @@
+title: Scheduled Task/Job Scale Variant 3572 Marker
+id: e8d4062e-59e1-5930-96d1-2cee9d0e62b8
+status: experimental
+description: Detects simulator telemetry for Scheduled Task/Job scale variant 3572.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053
+    apt_sim.variant: attack_scale_variant_3572
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/
+tags:
+- attack.t1053

@@ -1,0 +1,22 @@
+title: Inhibit System Recovery Scale Variant 1705 Marker
+id: b7d596ce-d809-5ccf-90fa-b30d983ee26e
+status: experimental
+description: Detects simulator telemetry for Inhibit System Recovery scale variant
+  1705.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1490
+    apt_sim.variant: attack_scale_variant_1705
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1490/
+tags:
+- attack.t1490

@@ -1,0 +1,21 @@
+title: XPC Services Scale Variant 1854 Marker
+id: c1a5456e-e1e7-5e37-9302-2bcf3156942e
+status: experimental
+description: Detects simulator telemetry for XPC Services scale variant 1854.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.003
+    apt_sim.variant: attack_scale_variant_1854
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/003/
+tags:
+- attack.t1559.003

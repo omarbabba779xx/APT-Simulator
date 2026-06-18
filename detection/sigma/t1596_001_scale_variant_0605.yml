@@ -1,0 +1,21 @@
+title: DNS/Passive DNS Scale Variant 0605 Marker
+id: 59b96fd9-77c0-546c-9978-a5938f52df2d
+status: experimental
+description: Detects simulator telemetry for DNS/Passive DNS scale variant 0605.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.001
+    apt_sim.variant: attack_scale_variant_0605
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/001/
+tags:
+- attack.t1596.001

@@ -1,0 +1,21 @@
+title: Add-ins Scale Variant 0931 Marker
+id: a85f816e-ca7c-5613-91b4-68b7f1cf9c42
+status: experimental
+description: Detects simulator telemetry for Add-ins scale variant 0931.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.006
+    apt_sim.variant: attack_scale_variant_0931
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/006/
+tags:
+- attack.t1137.006

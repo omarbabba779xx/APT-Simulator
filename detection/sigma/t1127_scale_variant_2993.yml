@@ -1,0 +1,22 @@
+title: Trusted Developer Utilities Proxy Execution Scale Variant 2993 Marker
+id: 11b1b8e8-b492-57a4-897d-470b1a6828bf
+status: experimental
+description: Detects simulator telemetry for Trusted Developer Utilities Proxy Execution
+  scale variant 2993.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127
+    apt_sim.variant: attack_scale_variant_2993
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/
+tags:
+- attack.t1127

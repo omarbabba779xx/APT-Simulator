@@ -1,0 +1,22 @@
+title: Domain Trust Discovery Scale Variant 2393 Marker
+id: 5786e97d-1b33-5185-8ce7-ce53f439b405
+status: experimental
+description: Detects simulator telemetry for Domain Trust Discovery scale variant
+  2393.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1482
+    apt_sim.variant: attack_scale_variant_2393
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1482/
+tags:
+- attack.t1482

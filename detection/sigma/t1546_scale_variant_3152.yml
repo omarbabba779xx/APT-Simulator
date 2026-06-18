@@ -1,0 +1,22 @@
+title: Event Triggered Execution Scale Variant 3152 Marker
+id: 0e2c4687-64ef-5f91-9240-da32540db688
+status: experimental
+description: Detects simulator telemetry for Event Triggered Execution scale variant
+  3152.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546
+    apt_sim.variant: attack_scale_variant_3152
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/
+tags:
+- attack.t1546

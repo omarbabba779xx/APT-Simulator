@@ -1,0 +1,21 @@
+title: HTML Smuggling Scale Variant 0741 Marker
+id: f7a8dd74-7b93-5df6-acda-023d4184759a
+status: experimental
+description: Detects simulator telemetry for HTML Smuggling scale variant 0741.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.006
+    apt_sim.variant: attack_scale_variant_0741
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/006/
+tags:
+- attack.t1027.006

@@ -1,0 +1,21 @@
+title: Screen Capture Scale Variant 3678 Marker
+id: a3056d77-370e-5443-b090-b5dbc8945539
+status: experimental
+description: Detects simulator telemetry for Screen Capture scale variant 3678.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1113
+    apt_sim.variant: attack_scale_variant_3678
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1113/
+tags:
+- attack.t1113

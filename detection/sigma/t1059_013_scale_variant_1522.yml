@@ -1,0 +1,21 @@
+title: Container CLI/API Scale Variant 1522 Marker
+id: b7f14895-18d0-5042-9cb7-a7c25f2b2926
+status: experimental
+description: Detects simulator telemetry for Container CLI/API scale variant 1522.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.013
+    apt_sim.variant: attack_scale_variant_1522
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/013/
+tags:
+- attack.t1059.013

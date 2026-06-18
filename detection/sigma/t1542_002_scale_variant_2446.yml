@@ -1,0 +1,21 @@
+title: Component Firmware Scale Variant 2446 Marker
+id: 97c7c710-6ea3-5d0a-987e-49b69c2ae2cc
+status: experimental
+description: Detects simulator telemetry for Component Firmware scale variant 2446.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.002
+    apt_sim.variant: attack_scale_variant_2446
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/002/
+tags:
+- attack.t1542.002

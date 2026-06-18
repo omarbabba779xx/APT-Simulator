@@ -1,0 +1,21 @@
+title: Data Obfuscation Scale Variant 0001 Marker
+id: 754df874-60f8-57f1-be31-ef800382d813
+status: experimental
+description: Detects simulator telemetry for Data Obfuscation scale variant 0001.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001
+    apt_sim.variant: attack_scale_variant_0001
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/
+tags:
+- attack.t1001

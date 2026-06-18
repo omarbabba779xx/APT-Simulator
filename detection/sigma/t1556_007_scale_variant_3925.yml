@@ -1,0 +1,21 @@
+title: Hybrid Identity Scale Variant 3925 Marker
+id: 179d115b-1a2b-5755-82c5-f43c6e9fc6b3
+status: experimental
+description: Detects simulator telemetry for Hybrid Identity scale variant 3925.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.007
+    apt_sim.variant: attack_scale_variant_3925
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/007/
+tags:
+- attack.t1556.007

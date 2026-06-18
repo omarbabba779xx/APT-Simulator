@@ -1,0 +1,21 @@
+title: AppleScript Scale Variant 0815 Marker
+id: 0e93e4c4-79da-5403-8e8e-a9f400ad6b86
+status: experimental
+description: Detects simulator telemetry for AppleScript scale variant 0815.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.002
+    apt_sim.variant: attack_scale_variant_0815
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/002/
+tags:
+- attack.t1059.002

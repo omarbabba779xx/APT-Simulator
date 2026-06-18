@@ -1,0 +1,21 @@
+title: Scanning IP Blocks Scale Variant 4081 Marker
+id: 377e11a8-7a79-595a-8af8-6fe9fc5553a5
+status: experimental
+description: Detects simulator telemetry for Scanning IP Blocks scale variant 4081.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.001
+    apt_sim.variant: attack_scale_variant_4081
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/001/
+tags:
+- attack.t1595.001

@@ -1,0 +1,21 @@
+title: Container API Scale Variant 1117 Marker
+id: a8757ff6-aa7e-5dac-b61f-b1fedb2ee493
+status: experimental
+description: Detects simulator telemetry for Container API scale variant 1117.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.007
+    apt_sim.variant: attack_scale_variant_1117
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/007/
+tags:
+- attack.t1552.007

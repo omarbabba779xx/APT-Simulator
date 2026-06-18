@@ -1,0 +1,22 @@
+title: Communication Through Removable Media Scale Variant 1566 Marker
+id: ff1282ab-34b4-575d-8882-1a7d707b3602
+status: experimental
+description: Detects simulator telemetry for Communication Through Removable Media
+  scale variant 1566.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1092
+    apt_sim.variant: attack_scale_variant_1566
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1092/
+tags:
+- attack.t1092

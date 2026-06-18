@@ -1,0 +1,21 @@
+title: Run Virtual Instance Scale Variant 1871 Marker
+id: 3ba913e8-564f-58ff-b3c0-e38ae90a6f3e
+status: experimental
+description: Detects simulator telemetry for Run Virtual Instance scale variant 1871.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.006
+    apt_sim.variant: attack_scale_variant_1871
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/006/
+tags:
+- attack.t1564.006

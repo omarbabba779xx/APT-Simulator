@@ -1,0 +1,22 @@
+title: Runtime Data Manipulation Scale Variant 3275 Marker
+id: 3a1d75bf-79e1-54f3-abeb-5cad1af5b1ad
+status: experimental
+description: Detects simulator telemetry for Runtime Data Manipulation scale variant
+  3275.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.003
+    apt_sim.variant: attack_scale_variant_3275
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/003/
+tags:
+- attack.t1565.003

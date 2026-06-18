@@ -1,0 +1,22 @@
+title: Services File Permissions Weakness Scale Variant 0524 Marker
+id: b84f0aa7-bf40-535e-9d74-6e0ae1e1dd5d
+status: experimental
+description: Detects simulator telemetry for Services File Permissions Weakness scale
+  variant 0524.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.010
+    apt_sim.variant: attack_scale_variant_0524
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/010/
+tags:
+- attack.t1574.010

@@ -1,0 +1,21 @@
+title: External Proxy Scale Variant 2954 Marker
+id: 1585074a-f1c8-5a03-964f-fd50e734f63a
+status: experimental
+description: Detects simulator telemetry for External Proxy scale variant 2954.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.002
+    apt_sim.variant: attack_scale_variant_2954
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/002/
+tags:
+- attack.t1090.002

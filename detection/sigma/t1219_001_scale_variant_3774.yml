@@ -1,0 +1,21 @@
+title: IDE Tunneling Scale Variant 3774 Marker
+id: a23449df-1302-585a-8951-7d46ecb4c916
+status: experimental
+description: Detects simulator telemetry for IDE Tunneling scale variant 3774.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219.001
+    apt_sim.variant: attack_scale_variant_3774
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/001/
+tags:
+- attack.t1219.001

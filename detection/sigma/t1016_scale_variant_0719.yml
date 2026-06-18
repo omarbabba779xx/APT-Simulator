@@ -1,0 +1,22 @@
+title: System Network Configuration Discovery Scale Variant 0719 Marker
+id: ff643079-e49b-5bce-a10c-6e4c4dfc8aa3
+status: experimental
+description: Detects simulator telemetry for System Network Configuration Discovery
+  scale variant 0719.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016
+    apt_sim.variant: attack_scale_variant_0719
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/
+tags:
+- attack.t1016

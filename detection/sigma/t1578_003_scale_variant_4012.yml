@@ -1,0 +1,21 @@
+title: Delete Cloud Instance Scale Variant 4012 Marker
+id: c6d7facd-20d6-58bb-907c-35601b5ecd66
+status: experimental
+description: Detects simulator telemetry for Delete Cloud Instance scale variant 4012.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.003
+    apt_sim.variant: attack_scale_variant_4012
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/003/
+tags:
+- attack.t1578.003

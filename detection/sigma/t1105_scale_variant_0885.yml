@@ -1,0 +1,21 @@
+title: Ingress Tool Transfer Scale Variant 0885 Marker
+id: 636c2487-9d3c-5b48-a7b3-92a0adaac0f7
+status: experimental
+description: Detects simulator telemetry for Ingress Tool Transfer scale variant 0885.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1105
+    apt_sim.variant: attack_scale_variant_0885
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1105/
+tags:
+- attack.t1105

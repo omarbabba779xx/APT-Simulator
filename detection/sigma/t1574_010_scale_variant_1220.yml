@@ -1,0 +1,22 @@
+title: Services File Permissions Weakness Scale Variant 1220 Marker
+id: ff7d177c-4044-5492-97c3-769b9912c47e
+status: experimental
+description: Detects simulator telemetry for Services File Permissions Weakness scale
+  variant 1220.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.010
+    apt_sim.variant: attack_scale_variant_1220
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/010/
+tags:
+- attack.t1574.010

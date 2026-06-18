@@ -1,0 +1,21 @@
+title: Stripped Payloads Scale Variant 1439 Marker
+id: aa187d9b-4e4e-533f-b8ac-c6ccb2dfbf96
+status: experimental
+description: Detects simulator telemetry for Stripped Payloads scale variant 1439.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.008
+    apt_sim.variant: attack_scale_variant_1439
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/008/
+tags:
+- attack.t1027.008

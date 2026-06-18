@@ -1,0 +1,21 @@
+title: Regsvcs/Regasm Scale Variant 3766 Marker
+id: 3bbb18cd-9000-55c9-8c5f-ba8e4382b6f9
+status: experimental
+description: Detects simulator telemetry for Regsvcs/Regasm scale variant 3766.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.009
+    apt_sim.variant: attack_scale_variant_3766
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/009/
+tags:
+- attack.t1218.009

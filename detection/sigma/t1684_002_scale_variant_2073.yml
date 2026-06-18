@@ -1,0 +1,21 @@
+title: Email Spoofing Scale Variant 2073 Marker
+id: 516478ff-8708-5d84-bb4e-023939b29f46
+status: experimental
+description: Detects simulator telemetry for Email Spoofing scale variant 2073.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1684.002
+    apt_sim.variant: attack_scale_variant_2073
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1684/002/
+tags:
+- attack.t1684.002

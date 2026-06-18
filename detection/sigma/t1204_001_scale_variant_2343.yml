@@ -1,0 +1,21 @@
+title: Malicious Link Scale Variant 2343 Marker
+id: f639950e-1e72-5116-9f7e-de5b1bd4e288
+status: experimental
+description: Detects simulator telemetry for Malicious Link scale variant 2343.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1204.001
+    apt_sim.variant: attack_scale_variant_2343
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1204/001/
+tags:
+- attack.t1204.001

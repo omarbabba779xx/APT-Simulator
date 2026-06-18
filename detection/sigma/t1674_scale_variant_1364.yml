@@ -1,0 +1,21 @@
+title: Input Injection Scale Variant 1364 Marker
+id: a15f5cbe-d618-5fc2-b1bc-e8b93a030651
+status: experimental
+description: Detects simulator telemetry for Input Injection scale variant 1364.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1674
+    apt_sim.variant: attack_scale_variant_1364
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1674/
+tags:
+- attack.t1674

@@ -1,0 +1,21 @@
+title: One-Way Communication Scale Variant 1579 Marker
+id: 8f0ceb2b-a981-550f-89df-13b6c7f8b233
+status: experimental
+description: Detects simulator telemetry for One-Way Communication scale variant 1579.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102.003
+    apt_sim.variant: attack_scale_variant_1579
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/003/
+tags:
+- attack.t1102.003

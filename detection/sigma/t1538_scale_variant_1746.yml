@@ -1,0 +1,22 @@
+title: Cloud Service Dashboard Scale Variant 1746 Marker
+id: f430050b-3587-5fbb-89be-8b10b1150884
+status: experimental
+description: Detects simulator telemetry for Cloud Service Dashboard scale variant
+  1746.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1538
+    apt_sim.variant: attack_scale_variant_1746
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1538/
+tags:
+- attack.t1538

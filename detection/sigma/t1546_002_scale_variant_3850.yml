@@ -1,0 +1,21 @@
+title: Screensaver Scale Variant 3850 Marker
+id: e9073ce5-2ab6-5640-b342-287210140946
+status: experimental
+description: Detects simulator telemetry for Screensaver scale variant 3850.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.002
+    apt_sim.variant: attack_scale_variant_3850
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/002/
+tags:
+- attack.t1546.002

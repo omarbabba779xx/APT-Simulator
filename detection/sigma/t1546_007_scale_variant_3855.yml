@@ -1,0 +1,21 @@
+title: Netsh Helper DLL Scale Variant 3855 Marker
+id: c5532839-449e-5a72-a9f2-84f1f82632c2
+status: experimental
+description: Detects simulator telemetry for Netsh Helper DLL scale variant 3855.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.007
+    apt_sim.variant: attack_scale_variant_3855
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/007/
+tags:
+- attack.t1546.007

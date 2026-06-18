@@ -1,0 +1,21 @@
+title: Visual Basic Scale Variant 3602 Marker
+id: 46a5f7a2-24c0-5bb8-a599-c2702ccba0c0
+status: experimental
+description: Detects simulator telemetry for Visual Basic scale variant 3602.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.005
+    apt_sim.variant: attack_scale_variant_3602
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/005/
+tags:
+- attack.t1059.005

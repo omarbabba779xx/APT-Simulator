@@ -1,0 +1,21 @@
+title: Process Injection Scale Variant 1490 Marker
+id: 3cdc06f8-c7a2-5b9b-be0a-21f904a75163
+status: experimental
+description: Detects simulator telemetry for Process Injection scale variant 1490.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055
+    apt_sim.variant: attack_scale_variant_1490
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/
+tags:
+- attack.t1055

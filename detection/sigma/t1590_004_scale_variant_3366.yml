@@ -1,0 +1,21 @@
+title: Network Topology Scale Variant 3366 Marker
+id: fb1d92fa-f5e9-5a36-859b-ecbb53c6d88e
+status: experimental
+description: Detects simulator telemetry for Network Topology scale variant 3366.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.004
+    apt_sim.variant: attack_scale_variant_3366
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/004/
+tags:
+- attack.t1590.004

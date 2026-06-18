@@ -1,0 +1,21 @@
+title: Digital Certificates Scale Variant 4045 Marker
+id: 6e7130ff-f3e6-5eb5-a60c-207631eceebc
+status: experimental
+description: Detects simulator telemetry for Digital Certificates scale variant 4045.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587.003
+    apt_sim.variant: attack_scale_variant_4045
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/003/
+tags:
+- attack.t1587.003

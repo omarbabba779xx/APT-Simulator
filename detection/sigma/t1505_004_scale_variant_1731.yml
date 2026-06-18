@@ -1,0 +1,21 @@
+title: IIS Components Scale Variant 1731 Marker
+id: a311952f-95ec-5017-aeb5-81a9b90eb6a9
+status: experimental
+description: Detects simulator telemetry for IIS Components scale variant 1731.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.004
+    apt_sim.variant: attack_scale_variant_1731
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/004/
+tags:
+- attack.t1505.004

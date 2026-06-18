@@ -1,0 +1,22 @@
+title: Acquire Infrastructure Scale Variant 1928 Marker
+id: 2117974d-cacb-58c9-bb74-358c812d4818
+status: experimental
+description: Detects simulator telemetry for Acquire Infrastructure scale variant
+  1928.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583
+    apt_sim.variant: attack_scale_variant_1928
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/
+tags:
+- attack.t1583

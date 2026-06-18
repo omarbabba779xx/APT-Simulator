@@ -1,0 +1,21 @@
+title: DHCP Spoofing Scale Variant 3235 Marker
+id: 295f216e-d386-5655-8377-e97232f56784
+status: experimental
+description: Detects simulator telemetry for DHCP Spoofing scale variant 3235.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.003
+    apt_sim.variant: attack_scale_variant_3235
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/003/
+tags:
+- attack.t1557.003

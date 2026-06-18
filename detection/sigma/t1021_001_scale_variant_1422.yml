@@ -1,0 +1,22 @@
+title: Remote Desktop Protocol Scale Variant 1422 Marker
+id: f3dbe599-5d09-5f6c-af60-7b238c5d75e6
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Protocol scale variant
+  1422.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.001
+    apt_sim.variant: attack_scale_variant_1422
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/001/
+tags:
+- attack.t1021.001

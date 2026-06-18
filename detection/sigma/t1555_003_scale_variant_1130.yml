@@ -1,0 +1,22 @@
+title: Credentials from Web Browsers Scale Variant 1130 Marker
+id: 2b50fbc1-270e-5449-b70e-cdf11eda2a8b
+status: experimental
+description: Detects simulator telemetry for Credentials from Web Browsers scale variant
+  1130.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.003
+    apt_sim.variant: attack_scale_variant_1130
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/003/
+tags:
+- attack.t1555.003

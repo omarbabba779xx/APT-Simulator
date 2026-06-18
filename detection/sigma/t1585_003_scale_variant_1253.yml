@@ -1,0 +1,21 @@
+title: Cloud Accounts Scale Variant 1253 Marker
+id: b3b1504a-207b-54ee-a1a8-ffb9ca2a7069
+status: experimental
+description: Detects simulator telemetry for Cloud Accounts scale variant 1253.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.003
+    apt_sim.variant: attack_scale_variant_1253
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/003/
+tags:
+- attack.t1585.003

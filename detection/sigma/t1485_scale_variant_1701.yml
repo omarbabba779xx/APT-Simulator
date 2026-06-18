@@ -1,0 +1,21 @@
+title: Data Destruction Scale Variant 1701 Marker
+id: e5733d2b-1d6e-529c-8953-add6bcf8f24d
+status: experimental
+description: Detects simulator telemetry for Data Destruction scale variant 1701.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1485
+    apt_sim.variant: attack_scale_variant_1701
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1485/
+tags:
+- attack.t1485

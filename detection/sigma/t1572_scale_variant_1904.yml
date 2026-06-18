@@ -1,0 +1,21 @@
+title: Protocol Tunneling Scale Variant 1904 Marker
+id: 5a174b78-847a-504d-b9bb-8cef915b5f28
+status: experimental
+description: Detects simulator telemetry for Protocol Tunneling scale variant 1904.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1572
+    apt_sim.variant: attack_scale_variant_1904
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1572/
+tags:
+- attack.t1572

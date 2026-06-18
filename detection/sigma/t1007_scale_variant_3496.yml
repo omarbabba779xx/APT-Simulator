@@ -1,0 +1,22 @@
+title: System Service Discovery Scale Variant 3496 Marker
+id: 8751724d-7812-56e0-a930-5ece8aa04c94
+status: experimental
+description: Detects simulator telemetry for System Service Discovery scale variant
+  3496.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1007
+    apt_sim.variant: attack_scale_variant_3496
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1007/
+tags:
+- attack.t1007

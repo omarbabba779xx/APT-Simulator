@@ -1,0 +1,21 @@
+title: Gatekeeper Bypass Scale Variant 1120 Marker
+id: f2d1f743-59eb-5ab9-bedc-3f50fb01f539
+status: experimental
+description: Detects simulator telemetry for Gatekeeper Bypass scale variant 1120.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.001
+    apt_sim.variant: attack_scale_variant_1120
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/001/
+tags:
+- attack.t1553.001

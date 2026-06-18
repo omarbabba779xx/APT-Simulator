@@ -1,0 +1,22 @@
+title: System Language Discovery Scale Variant 3429 Marker
+id: ca60d64b-8606-522f-a1d6-029d1f57aa01
+status: experimental
+description: Detects simulator telemetry for System Language Discovery scale variant
+  3429.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1614.001
+    apt_sim.variant: attack_scale_variant_3429
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1614/001/
+tags:
+- attack.t1614.001

@@ -1,0 +1,22 @@
+title: Group Policy Preferences Scale Variant 3900 Marker
+id: 0c62ec9a-4a8b-5c35-ab25-c05094c8769c
+status: experimental
+description: Detects simulator telemetry for Group Policy Preferences scale variant
+  3900.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.006
+    apt_sim.variant: attack_scale_variant_3900
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/006/
+tags:
+- attack.t1552.006

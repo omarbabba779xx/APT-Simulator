@@ -1,0 +1,21 @@
+title: Visual Basic Scale Variant 1514 Marker
+id: f2258e70-43c0-5cc5-b4db-c834ac071375
+status: experimental
+description: Detects simulator telemetry for Visual Basic scale variant 1514.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.005
+    apt_sim.variant: attack_scale_variant_1514
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/005/
+tags:
+- attack.t1059.005

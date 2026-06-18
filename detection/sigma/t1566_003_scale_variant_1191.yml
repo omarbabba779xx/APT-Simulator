@@ -1,0 +1,22 @@
+title: Spearphishing via Service Scale Variant 1191 Marker
+id: 52b80861-3e8d-519d-8986-23304011e597
+status: experimental
+description: Detects simulator telemetry for Spearphishing via Service scale variant
+  1191.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.003
+    apt_sim.variant: attack_scale_variant_1191
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/003/
+tags:
+- attack.t1566.003

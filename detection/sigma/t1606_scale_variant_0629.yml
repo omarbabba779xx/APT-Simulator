@@ -1,0 +1,21 @@
+title: Forge Web Credentials Scale Variant 0629 Marker
+id: a9e000a0-5c63-5374-9a17-a6602c2bf2ef
+status: experimental
+description: Detects simulator telemetry for Forge Web Credentials scale variant 0629.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606
+    apt_sim.variant: attack_scale_variant_0629
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/
+tags:
+- attack.t1606

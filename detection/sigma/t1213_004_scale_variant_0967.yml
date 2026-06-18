@@ -1,0 +1,22 @@
+title: Customer Relationship Management Software Scale Variant 0967 Marker
+id: c27a4644-b009-516d-b930-1720b5c395e5
+status: experimental
+description: Detects simulator telemetry for Customer Relationship Management Software
+  scale variant 0967.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.004
+    apt_sim.variant: attack_scale_variant_0967
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/004/
+tags:
+- attack.t1213.004

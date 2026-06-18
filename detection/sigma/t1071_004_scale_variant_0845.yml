@@ -1,0 +1,21 @@
+title: DNS Scale Variant 0845 Marker
+id: b4afc463-82d6-5d16-9cda-5b1293a5f314
+status: experimental
+description: Detects simulator telemetry for DNS scale variant 0845.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.004
+    apt_sim.variant: attack_scale_variant_0845
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/004/
+tags:
+- attack.t1071.004

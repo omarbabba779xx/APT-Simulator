@@ -1,0 +1,21 @@
+title: Evil Twin Scale Variant 1148 Marker
+id: d6895896-fb1d-566c-81cf-346ad2560692
+status: experimental
+description: Detects simulator telemetry for Evil Twin scale variant 1148.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1557.004
+    apt_sim.variant: attack_scale_variant_1148
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1557/004/
+tags:
+- attack.t1557.004

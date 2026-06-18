@@ -1,0 +1,22 @@
+title: Direct Cloud VM Connections Scale Variant 0733 Marker
+id: 8384c097-8ce1-5dfe-92c2-7e38da90d681
+status: experimental
+description: Detects simulator telemetry for Direct Cloud VM Connections scale variant
+  0733.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.008
+    apt_sim.variant: attack_scale_variant_0733
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/008/
+tags:
+- attack.t1021.008

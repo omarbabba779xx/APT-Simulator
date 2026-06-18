@@ -1,0 +1,21 @@
+title: Drive-by Target Scale Variant 2724 Marker
+id: 12bf060b-7495-575c-b4df-bd8b466308ed
+status: experimental
+description: Detects simulator telemetry for Drive-by Target scale variant 2724.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.004
+    apt_sim.variant: attack_scale_variant_2724
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/004/
+tags:
+- attack.t1608.004

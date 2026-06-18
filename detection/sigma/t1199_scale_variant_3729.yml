@@ -1,0 +1,21 @@
+title: Trusted Relationship Scale Variant 3729 Marker
+id: 84276719-577f-54bd-95bb-6b925e046cb6
+status: experimental
+description: Detects simulator telemetry for Trusted Relationship scale variant 3729.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1199
+    apt_sim.variant: attack_scale_variant_3729
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1199/
+tags:
+- attack.t1199

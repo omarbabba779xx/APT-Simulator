@@ -1,0 +1,21 @@
+title: Vulnerabilities Scale Variant 0573 Marker
+id: c86067dc-d875-5d5b-89c5-e707fd0adc23
+status: experimental
+description: Detects simulator telemetry for Vulnerabilities scale variant 0573.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.006
+    apt_sim.variant: attack_scale_variant_0573
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/006/
+tags:
+- attack.t1588.006

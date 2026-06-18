@@ -1,0 +1,21 @@
+title: Upload Malware Scale Variant 3417 Marker
+id: b1b205cc-9cfb-5344-9090-3a7460e6eb1d
+status: experimental
+description: Detects simulator telemetry for Upload Malware scale variant 3417.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.001
+    apt_sim.variant: attack_scale_variant_3417
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/001/
+tags:
+- attack.t1608.001

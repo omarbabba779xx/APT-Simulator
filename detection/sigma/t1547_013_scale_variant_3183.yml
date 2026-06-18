@@ -1,0 +1,21 @@
+title: XDG Autostart Entries Scale Variant 3183 Marker
+id: 20872bd6-885d-5d33-8d5c-6002dca58985
+status: experimental
+description: Detects simulator telemetry for XDG Autostart Entries scale variant 3183.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.013
+    apt_sim.variant: attack_scale_variant_3183
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/013/
+tags:
+- attack.t1547.013

@@ -1,0 +1,22 @@
+title: System Owner/User Discovery Scale Variant 0060 Marker
+id: ed680655-e924-57d2-ae64-c33eb93d1810
+status: experimental
+description: Detects simulator telemetry for System Owner/User Discovery scale variant
+  0060.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1033
+    apt_sim.variant: attack_scale_variant_0060
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1033/
+tags:
+- attack.t1033

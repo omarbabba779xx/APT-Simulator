@@ -1,0 +1,21 @@
+title: Domain Account Scale Variant 3011 Marker
+id: d3d91437-5f49-55d1-bb41-33b8fb71fa0b
+status: experimental
+description: Detects simulator telemetry for Domain Account scale variant 3011.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1136.002
+    apt_sim.variant: attack_scale_variant_3011
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1136/002/
+tags:
+- attack.t1136.002

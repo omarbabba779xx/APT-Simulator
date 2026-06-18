@@ -1,0 +1,21 @@
+title: Office Test Scale Variant 2319 Marker
+id: c09ee016-5066-514f-ad20-4ac44685d4ec
+status: experimental
+description: Detects simulator telemetry for Office Test scale variant 2319.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.002
+    apt_sim.variant: attack_scale_variant_2319
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/002/
+tags:
+- attack.t1137.002

@@ -1,0 +1,21 @@
+title: Spearphishing Service Scale Variant 3398 Marker
+id: 0ba1c454-0be3-5a85-a61b-a429fda9527f
+status: experimental
+description: Detects simulator telemetry for Spearphishing Service scale variant 3398.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.001
+    apt_sim.variant: attack_scale_variant_3398
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/001/
+tags:
+- attack.t1598.001

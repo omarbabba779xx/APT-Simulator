@@ -1,0 +1,22 @@
+title: Vulnerability Scanning Scale Variant 1994 Marker
+id: 121d7bb6-0000-5e3b-82c7-b89866dd7302
+status: experimental
+description: Detects simulator telemetry for Vulnerability Scanning scale variant
+  1994.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.002
+    apt_sim.variant: attack_scale_variant_1994
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/002/
+tags:
+- attack.t1595.002

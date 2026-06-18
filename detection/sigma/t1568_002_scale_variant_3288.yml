@@ -1,0 +1,22 @@
+title: Domain Generation Algorithms Scale Variant 3288 Marker
+id: 724e3f7f-b9b6-5a2d-8037-d488e014585d
+status: experimental
+description: Detects simulator telemetry for Domain Generation Algorithms scale variant
+  3288.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.002
+    apt_sim.variant: attack_scale_variant_3288
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/002/
+tags:
+- attack.t1568.002

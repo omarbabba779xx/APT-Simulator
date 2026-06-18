@@ -1,0 +1,21 @@
+title: Startup Items Scale Variant 0775 Marker
+id: fc3a75c3-3343-549e-9d37-204eb175af0f
+status: experimental
+description: Detects simulator telemetry for Startup Items scale variant 0775.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.005
+    apt_sim.variant: attack_scale_variant_0775
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/005/
+tags:
+- attack.t1037.005

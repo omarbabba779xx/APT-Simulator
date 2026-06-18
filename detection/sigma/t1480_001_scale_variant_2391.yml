@@ -1,0 +1,21 @@
+title: Environmental Keying Scale Variant 2391 Marker
+id: 83bfa215-3626-5074-a056-e96208ad67e6
+status: experimental
+description: Detects simulator telemetry for Environmental Keying scale variant 2391.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.001
+    apt_sim.variant: attack_scale_variant_2391
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/001/
+tags:
+- attack.t1480.001

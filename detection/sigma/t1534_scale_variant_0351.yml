@@ -1,0 +1,22 @@
+title: Internal Spearphishing Scale Variant 0351 Marker
+id: 39b0a2ee-b314-5d7f-81a3-e38dc1628282
+status: experimental
+description: Detects simulator telemetry for Internal Spearphishing scale variant
+  0351.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1534
+    apt_sim.variant: attack_scale_variant_0351
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1534/
+tags:
+- attack.t1534

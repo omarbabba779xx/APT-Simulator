@@ -1,0 +1,22 @@
+title: Search Open Websites/Domains Scale Variant 1291 Marker
+id: 731e14fd-d112-5d0c-96b7-71da5692b6bc
+status: experimental
+description: Detects simulator telemetry for Search Open Websites/Domains scale variant
+  1291.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593
+    apt_sim.variant: attack_scale_variant_1291
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/
+tags:
+- attack.t1593

@@ -1,0 +1,21 @@
+title: Local Groups Scale Variant 0829 Marker
+id: 6227719c-6c51-55e1-95e9-f003e9a0d51c
+status: experimental
+description: Detects simulator telemetry for Local Groups scale variant 0829.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1069.001
+    apt_sim.variant: attack_scale_variant_0829
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1069/001/
+tags:
+- attack.t1069.001

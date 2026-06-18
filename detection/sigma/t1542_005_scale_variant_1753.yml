@@ -1,0 +1,21 @@
+title: TFTP Boot Scale Variant 1753 Marker
+id: 8257aafd-d6f6-59a2-b379-bbbd8e1772fe
+status: experimental
+description: Detects simulator telemetry for TFTP Boot scale variant 1753.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.005
+    apt_sim.variant: attack_scale_variant_1753
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/005/
+tags:
+- attack.t1542.005

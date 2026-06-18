@@ -1,0 +1,21 @@
+title: Lateral Tool Transfer Scale Variant 3294 Marker
+id: d1f2d909-4b61-56b4-8235-18536bad6fe9
+status: experimental
+description: Detects simulator telemetry for Lateral Tool Transfer scale variant 3294.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1570
+    apt_sim.variant: attack_scale_variant_3294
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1570/
+tags:
+- attack.t1570

@@ -1,0 +1,21 @@
+title: Fast Flux DNS Scale Variant 0503 Marker
+id: 4158d180-0804-5448-8273-93cf8ab355ac
+status: experimental
+description: Detects simulator telemetry for Fast Flux DNS scale variant 0503.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.001
+    apt_sim.variant: attack_scale_variant_0503
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/001/
+tags:
+- attack.t1568.001

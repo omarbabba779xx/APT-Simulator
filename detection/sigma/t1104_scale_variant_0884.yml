@@ -1,0 +1,21 @@
+title: Multi-Stage Channels Scale Variant 0884 Marker
+id: a5fd81f8-1b00-560d-8e48-6e88fe800de1
+status: experimental
+description: Detects simulator telemetry for Multi-Stage Channels scale variant 0884.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1104
+    apt_sim.variant: attack_scale_variant_0884
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1104/
+tags:
+- attack.t1104

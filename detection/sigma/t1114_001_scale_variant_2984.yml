@@ -1,0 +1,22 @@
+title: Local Email Collection Scale Variant 2984 Marker
+id: 1d585943-792d-5eeb-94fc-d56ede02de0f
+status: experimental
+description: Detects simulator telemetry for Local Email Collection scale variant
+  2984.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.001
+    apt_sim.variant: attack_scale_variant_2984
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/001/
+tags:
+- attack.t1114.001

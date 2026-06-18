@@ -1,0 +1,21 @@
+title: Systemd Timers Scale Variant 1488 Marker
+id: 8b4ca21f-e320-5e3c-a07b-78e7604cd3b5
+status: experimental
+description: Detects simulator telemetry for Systemd Timers scale variant 1488.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.006
+    apt_sim.variant: attack_scale_variant_1488
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/006/
+tags:
+- attack.t1053.006

@@ -1,0 +1,22 @@
+title: Exploitation for Privilege Escalation Scale Variant 0827 Marker
+id: 1a88c21a-251a-5719-9646-4f0543cb0999
+status: experimental
+description: Detects simulator telemetry for Exploitation for Privilege Escalation
+  scale variant 0827.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1068
+    apt_sim.variant: attack_scale_variant_0827
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1068/
+tags:
+- attack.t1068

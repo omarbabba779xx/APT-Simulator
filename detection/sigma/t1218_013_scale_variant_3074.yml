@@ -1,0 +1,21 @@
+title: Mavinject Scale Variant 3074 Marker
+id: 81f2d8cc-beb6-5fbb-97a4-156118837b73
+status: experimental
+description: Detects simulator telemetry for Mavinject scale variant 3074.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.013
+    apt_sim.variant: attack_scale_variant_3074
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/013/
+tags:
+- attack.t1218.013

@@ -1,0 +1,21 @@
+title: Sudo and Sudo Caching Scale Variant 2493 Marker
+id: d45c4c00-850a-5fda-97dd-1303b1f081aa
+status: experimental
+description: Detects simulator telemetry for Sudo and Sudo Caching scale variant 2493.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.003
+    apt_sim.variant: attack_scale_variant_2493
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/003/
+tags:
+- attack.t1548.003

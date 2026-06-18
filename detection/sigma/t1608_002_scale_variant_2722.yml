@@ -1,0 +1,21 @@
+title: Upload Tool Scale Variant 2722 Marker
+id: 2ad7613d-8026-5b4f-ad39-06a1b80ebe84
+status: experimental
+description: Detects simulator telemetry for Upload Tool scale variant 2722.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.002
+    apt_sim.variant: attack_scale_variant_2722
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/002/
+tags:
+- attack.t1608.002

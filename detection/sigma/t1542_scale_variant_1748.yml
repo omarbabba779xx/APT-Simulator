@@ -1,0 +1,21 @@
+title: Pre-OS Boot Scale Variant 1748 Marker
+id: 44e7d1b3-7e13-5328-a603-09d4d3f4af72
+status: experimental
+description: Detects simulator telemetry for Pre-OS Boot scale variant 1748.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542
+    apt_sim.variant: attack_scale_variant_1748
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/
+tags:
+- attack.t1542

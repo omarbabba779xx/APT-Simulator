@@ -1,0 +1,22 @@
+title: Disable or Modify Linux Audit System Log Scale Variant 2774 Marker
+id: 5bbbb62e-0312-5a43-9729-26e89f230c81
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Linux Audit System
+  Log scale variant 2774.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685.004
+    apt_sim.variant: attack_scale_variant_2774
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/004/
+tags:
+- attack.t1685.004

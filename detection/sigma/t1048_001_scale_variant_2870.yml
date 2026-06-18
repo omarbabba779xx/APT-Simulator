@@ -1,0 +1,22 @@
+title: Exfiltration Over Symmetric Encrypted Non-C2 Protocol Scale Variant 2870 Marker
+id: 2897333d-09ea-5baa-b30c-aeedb5625f24
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Symmetric Encrypted
+  Non-C2 Protocol scale variant 2870.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.001
+    apt_sim.variant: attack_scale_variant_2870
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/001/
+tags:
+- attack.t1048.001

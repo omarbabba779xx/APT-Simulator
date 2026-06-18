@@ -1,0 +1,21 @@
+title: Serverless Scale Variant 1239 Marker
+id: 91ba407c-383a-5141-b9b5-0685155e97fc
+status: experimental
+description: Detects simulator telemetry for Serverless scale variant 1239.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1583.007
+    apt_sim.variant: attack_scale_variant_1239
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1583/007/
+tags:
+- attack.t1583.007

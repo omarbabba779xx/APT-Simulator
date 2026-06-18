@@ -1,0 +1,21 @@
+title: BITS Jobs Scale Variant 3728 Marker
+id: 7297075c-5c52-5616-9fb7-c30da799ee99
+status: experimental
+description: Detects simulator telemetry for BITS Jobs scale variant 3728.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1197
+    apt_sim.variant: attack_scale_variant_3728
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1197/
+tags:
+- attack.t1197

@@ -1,0 +1,21 @@
+title: Cloud Accounts Scale Variant 0557 Marker
+id: f5664c96-f0e1-55d1-800f-e938c4472156
+status: experimental
+description: Detects simulator telemetry for Cloud Accounts scale variant 0557.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1585.003
+    apt_sim.variant: attack_scale_variant_0557
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1585/003/
+tags:
+- attack.t1585.003

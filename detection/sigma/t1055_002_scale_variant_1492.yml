@@ -1,0 +1,22 @@
+title: Portable Executable Injection Scale Variant 1492 Marker
+id: a28ac550-084f-5e28-b816-015d5dc2bb2b
+status: experimental
+description: Detects simulator telemetry for Portable Executable Injection scale variant
+  1492.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.002
+    apt_sim.variant: attack_scale_variant_1492
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/002/
+tags:
+- attack.t1055.002

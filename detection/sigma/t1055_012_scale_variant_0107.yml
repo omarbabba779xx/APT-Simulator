@@ -1,0 +1,21 @@
+title: Process Hollowing Scale Variant 0107 Marker
+id: f5884902-3072-569d-b82d-67bd6e1fcf07
+status: experimental
+description: Detects simulator telemetry for Process Hollowing scale variant 0107.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.012
+    apt_sim.variant: attack_scale_variant_0107
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/012/
+tags:
+- attack.t1055.012

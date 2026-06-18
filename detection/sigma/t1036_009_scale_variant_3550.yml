@@ -1,0 +1,21 @@
+title: Break Process Trees Scale Variant 3550 Marker
+id: 9ac796ca-9f33-5a3b-b466-e491883eeffb
+status: experimental
+description: Detects simulator telemetry for Break Process Trees scale variant 3550.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.009
+    apt_sim.variant: attack_scale_variant_3550
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/009/
+tags:
+- attack.t1036.009

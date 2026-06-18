@@ -1,0 +1,22 @@
+title: Data from Local System Scale Variant 2102 Marker
+id: f0ac4177-cb44-5bba-b6ae-341ca817b82f
+status: experimental
+description: Detects simulator telemetry for Data from Local System scale variant
+  2102.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1005
+    apt_sim.variant: attack_scale_variant_2102
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1005/
+tags:
+- attack.t1005

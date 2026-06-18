@@ -1,0 +1,21 @@
+title: AutoHotKey & AutoIT Scale Variant 0823 Marker
+id: 49b03f4e-6758-557a-98a0-ece1ae98f605
+status: experimental
+description: Detects simulator telemetry for AutoHotKey & AutoIT scale variant 0823.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.010
+    apt_sim.variant: attack_scale_variant_0823
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/010/
+tags:
+- attack.t1059.010

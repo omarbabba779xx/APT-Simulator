@@ -1,0 +1,21 @@
+title: Financial Theft Scale Variant 2051 Marker
+id: 6231badc-76e8-5d30-8392-a9e240ae6200
+status: experimental
+description: Detects simulator telemetry for Financial Theft scale variant 2051.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1657
+    apt_sim.variant: attack_scale_variant_2051
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1657/
+tags:
+- attack.t1657

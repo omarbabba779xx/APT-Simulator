@@ -1,0 +1,21 @@
+title: Hardware Additions Scale Variant 3730 Marker
+id: 5cdc4bd7-4d41-5522-904d-9b53b235affc
+status: experimental
+description: Detects simulator telemetry for Hardware Additions scale variant 3730.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1200
+    apt_sim.variant: attack_scale_variant_3730
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1200/
+tags:
+- attack.t1200

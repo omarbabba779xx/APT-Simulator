@@ -1,0 +1,22 @@
+title: Publish/Subscribe Protocols Scale Variant 0846 Marker
+id: eb991b21-c097-592d-8286-3e78260cf75e
+status: experimental
+description: Detects simulator telemetry for Publish/Subscribe Protocols scale variant
+  0846.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.005
+    apt_sim.variant: attack_scale_variant_0846
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/005/
+tags:
+- attack.t1071.005

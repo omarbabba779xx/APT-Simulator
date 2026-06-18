@@ -1,0 +1,21 @@
+title: Default Accounts Scale Variant 3636 Marker
+id: 7596dc08-e2c6-5d82-8ea7-562434caa9b3
+status: experimental
+description: Detects simulator telemetry for Default Accounts scale variant 3636.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1078.001
+    apt_sim.variant: attack_scale_variant_3636
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1078/001/
+tags:
+- attack.t1078.001

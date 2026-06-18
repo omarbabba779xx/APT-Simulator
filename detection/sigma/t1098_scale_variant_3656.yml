@@ -1,0 +1,21 @@
+title: Account Manipulation Scale Variant 3656 Marker
+id: f00f837c-a66b-5c88-9644-e95a0d091505
+status: experimental
+description: Detects simulator telemetry for Account Manipulation scale variant 3656.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098
+    apt_sim.variant: attack_scale_variant_3656
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/
+tags:
+- attack.t1098

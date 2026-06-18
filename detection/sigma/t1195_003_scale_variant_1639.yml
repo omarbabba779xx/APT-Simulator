@@ -1,0 +1,22 @@
+title: Compromise Hardware Supply Chain Scale Variant 1639 Marker
+id: 23d22521-07b5-592b-8a9d-7df9fba9f354
+status: experimental
+description: Detects simulator telemetry for Compromise Hardware Supply Chain scale
+  variant 1639.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1195.003
+    apt_sim.variant: attack_scale_variant_1639
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1195/003/
+tags:
+- attack.t1195.003

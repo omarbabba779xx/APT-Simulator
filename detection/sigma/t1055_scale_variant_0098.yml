@@ -1,0 +1,21 @@
+title: Process Injection Scale Variant 0098 Marker
+id: 3064a094-7671-55f0-b3a3-73af148d5b46
+status: experimental
+description: Detects simulator telemetry for Process Injection scale variant 0098.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055
+    apt_sim.variant: attack_scale_variant_0098
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/
+tags:
+- attack.t1055

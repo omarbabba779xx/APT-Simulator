@@ -1,0 +1,22 @@
+title: Remote Desktop Protocol Scale Variant 2118 Marker
+id: bee3bf4c-7aae-560c-9634-cdda55c05b35
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Protocol scale variant
+  2118.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.001
+    apt_sim.variant: attack_scale_variant_2118
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/001/
+tags:
+- attack.t1021.001

@@ -1,0 +1,21 @@
+title: Process Injection Scale Variant 2186 Marker
+id: 01d89b90-72ba-512c-86ca-66db426244fc
+status: experimental
+description: Detects simulator telemetry for Process Injection scale variant 2186.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055
+    apt_sim.variant: attack_scale_variant_2186
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/
+tags:
+- attack.t1055

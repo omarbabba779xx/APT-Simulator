@@ -1,0 +1,21 @@
+title: Verclsid Scale Variant 0985 Marker
+id: 84b634f7-a5b3-5c2d-ac39-83c79b08ee9f
+status: experimental
+description: Detects simulator telemetry for Verclsid scale variant 0985.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.012
+    apt_sim.variant: attack_scale_variant_0985
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/012/
+tags:
+- attack.t1218.012

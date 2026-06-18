@@ -1,0 +1,22 @@
+title: Query Public AI Services Scale Variant 2763 Marker
+id: 0e4b3989-0d94-5fec-9ba6-eaaa4c4f6f93
+status: experimental
+description: Detects simulator telemetry for Query Public AI Services scale variant
+  2763.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1682
+    apt_sim.variant: attack_scale_variant_2763
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1682/
+tags:
+- attack.t1682

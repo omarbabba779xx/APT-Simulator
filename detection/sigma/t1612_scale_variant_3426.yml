@@ -1,0 +1,21 @@
+title: Build Image on Host Scale Variant 3426 Marker
+id: a487d4d6-5400-5a02-8543-08d5688c666c
+status: experimental
+description: Detects simulator telemetry for Build Image on Host scale variant 3426.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1612
+    apt_sim.variant: attack_scale_variant_3426
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1612/
+tags:
+- attack.t1612

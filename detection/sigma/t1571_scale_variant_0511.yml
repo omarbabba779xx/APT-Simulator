@@ -1,0 +1,21 @@
+title: Non-Standard Port Scale Variant 0511 Marker
+id: e4495641-35da-5756-9f8a-027e01f63848
+status: experimental
+description: Detects simulator telemetry for Non-Standard Port scale variant 0511.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1571
+    apt_sim.variant: attack_scale_variant_0511
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1571/
+tags:
+- attack.t1571

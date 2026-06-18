@@ -1,0 +1,21 @@
+title: Disk Structure Wipe Scale Variant 2557 Marker
+id: 37698b66-7cc3-595b-a23e-f1b9d696e603
+status: experimental
+description: Detects simulator telemetry for Disk Structure Wipe scale variant 2557.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.002
+    apt_sim.variant: attack_scale_variant_2557
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/002/
+tags:
+- attack.t1561.002

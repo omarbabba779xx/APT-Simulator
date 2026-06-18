@@ -1,0 +1,22 @@
+title: Create or Modify System Process Scale Variant 3146 Marker
+id: d96b295f-9516-5549-83f4-ad127159a044
+status: experimental
+description: Detects simulator telemetry for Create or Modify System Process scale
+  variant 3146.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543
+    apt_sim.variant: attack_scale_variant_3146
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/
+tags:
+- attack.t1543

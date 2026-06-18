@@ -1,0 +1,21 @@
+title: RC Scripts Scale Variant 2862 Marker
+id: 9534a816-43c2-5025-b52c-792ddfacb82a
+status: experimental
+description: Detects simulator telemetry for RC Scripts scale variant 2862.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.004
+    apt_sim.variant: attack_scale_variant_2862
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/004/
+tags:
+- attack.t1037.004

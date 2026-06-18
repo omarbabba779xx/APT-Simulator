@@ -1,0 +1,21 @@
+title: Mutual Exclusion Scale Variant 3088 Marker
+id: 9f5edfc6-2d71-569f-a103-d1ebcc7ad7be
+status: experimental
+description: Detects simulator telemetry for Mutual Exclusion scale variant 3088.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.002
+    apt_sim.variant: attack_scale_variant_3088
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/002/
+tags:
+- attack.t1480.002

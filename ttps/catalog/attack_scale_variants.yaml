@@ -1,0 +1,53 @@
+pack: attack_scale_variants
+variant_generator:
+  base_pack: attack_enterprise
+  count: 4149
+  id_prefix: SCALE_VARIANT
+  variant_slug: attack_scale_variant
+  uuid_namespace: apt-simulator:attack-scale
+  event_dataset: apt_sim.attack_scale_variant
+  category: attack_scale_variant
+  telemetry_sources:
+    - sysmon
+    - windows_security
+    - powershell
+    - auditd
+    - osquery
+    - edr_process
+    - file_integrity
+    - dns
+    - proxy
+    - netflow
+    - cloudtrail
+    - azure_activity
+    - gcp_audit
+    - kubernetes_audit
+    - entra_id
+    - okta_system
+    - m365_unified_audit
+    - github_audit
+    - slack_audit
+    - google_workspace_audit
+  fidelities:
+    - baseline
+    - noisy
+    - stealthy
+    - delayed
+    - burst
+    - chained
+    - low_noise
+  siem_formats:
+    - sigma
+    - splunk
+    - elastic
+    - sentinel
+    - chronicle
+    - ecs
+    - ocsf
+  platform_scopes:
+    - endpoint
+    - cloud
+    - identity
+    - saas
+    - container
+    - hybrid

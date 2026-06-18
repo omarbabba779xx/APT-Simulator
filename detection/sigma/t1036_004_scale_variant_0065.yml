@@ -1,0 +1,22 @@
+title: Masquerade Task or Service Scale Variant 0065 Marker
+id: 38b9d15a-3e03-5012-9f59-9b65b12d7515
+status: experimental
+description: Detects simulator telemetry for Masquerade Task or Service scale variant
+  0065.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.004
+    apt_sim.variant: attack_scale_variant_0065
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/004/
+tags:
+- attack.t1036.004

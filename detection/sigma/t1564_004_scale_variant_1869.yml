@@ -1,0 +1,21 @@
+title: NTFS File Attributes Scale Variant 1869 Marker
+id: 07e283af-9dcb-5edc-adc1-f786ef35edbd
+status: experimental
+description: Detects simulator telemetry for NTFS File Attributes scale variant 1869.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.004
+    apt_sim.variant: attack_scale_variant_1869
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/004/
+tags:
+- attack.t1564.004

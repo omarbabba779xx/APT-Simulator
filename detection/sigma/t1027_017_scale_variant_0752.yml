@@ -1,0 +1,21 @@
+title: SVG Smuggling Scale Variant 0752 Marker
+id: 4133b165-9f16-59e6-945d-3dbf810ce917
+status: experimental
+description: Detects simulator telemetry for SVG Smuggling scale variant 0752.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.017
+    apt_sim.variant: attack_scale_variant_0752
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/017/
+tags:
+- attack.t1027.017

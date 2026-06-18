@@ -1,0 +1,21 @@
+title: Debugger Evasion Scale Variant 2042 Marker
+id: 75f05e87-d964-53d9-9fc4-47fefba94975
+status: experimental
+description: Detects simulator telemetry for Debugger Evasion scale variant 2042.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1622
+    apt_sim.variant: attack_scale_variant_2042
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1622/
+tags:
+- attack.t1622

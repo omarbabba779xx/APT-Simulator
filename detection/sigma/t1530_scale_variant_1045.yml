@@ -1,0 +1,22 @@
+title: Data from Cloud Storage Scale Variant 1045 Marker
+id: c9ec4b64-da57-57a2-9004-96bc8370ed99
+status: experimental
+description: Detects simulator telemetry for Data from Cloud Storage scale variant
+  1045.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1530
+    apt_sim.variant: attack_scale_variant_1045
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1530/
+tags:
+- attack.t1530

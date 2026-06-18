@@ -1,0 +1,22 @@
+title: Remote Desktop Software Scale Variant 0991 Marker
+id: 28b3fde5-77b9-5882-a91b-c302922da601
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Software scale variant
+  0991.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219.002
+    apt_sim.variant: attack_scale_variant_0991
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/002/
+tags:
+- attack.t1219.002

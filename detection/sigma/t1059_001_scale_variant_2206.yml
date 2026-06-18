@@ -1,0 +1,21 @@
+title: PowerShell Scale Variant 2206 Marker
+id: 12b0d2f5-1e80-5ef1-982d-9cbfa58e202c
+status: experimental
+description: Detects simulator telemetry for PowerShell scale variant 2206.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.001
+    apt_sim.variant: attack_scale_variant_2206
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/001/
+tags:
+- attack.t1059.001

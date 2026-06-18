@@ -1,0 +1,22 @@
+title: SyncAppvPublishingServer Scale Variant 0972 Marker
+id: 5a76dbd1-0489-59f4-acd4-e35322373e4e
+status: experimental
+description: Detects simulator telemetry for SyncAppvPublishingServer scale variant
+  0972.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1216.002
+    apt_sim.variant: attack_scale_variant_0972
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1216/002/
+tags:
+- attack.t1216.002

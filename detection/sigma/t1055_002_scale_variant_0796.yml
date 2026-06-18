@@ -1,0 +1,22 @@
+title: Portable Executable Injection Scale Variant 0796 Marker
+id: 6f830be7-1467-59db-a4f8-e3b009b2d827
+status: experimental
+description: Detects simulator telemetry for Portable Executable Injection scale variant
+  0796.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.002
+    apt_sim.variant: attack_scale_variant_0796
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/002/
+tags:
+- attack.t1055.002

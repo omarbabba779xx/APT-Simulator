@@ -1,0 +1,22 @@
+title: Exploitation of Remote Services Scale Variant 0960 Marker
+id: fbd181b7-e217-5a71-bc0d-9291e4021261
+status: experimental
+description: Detects simulator telemetry for Exploitation of Remote Services scale
+  variant 0960.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1210
+    apt_sim.variant: attack_scale_variant_0960
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1210/
+tags:
+- attack.t1210

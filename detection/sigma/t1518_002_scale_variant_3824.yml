@@ -1,0 +1,22 @@
+title: Backup Software Discovery Scale Variant 3824 Marker
+id: 8d8b94c2-1983-5fea-ac45-0830c4043c52
+status: experimental
+description: Detects simulator telemetry for Backup Software Discovery scale variant
+  3824.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1518.002
+    apt_sim.variant: attack_scale_variant_3824
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1518/002/
+tags:
+- attack.t1518.002

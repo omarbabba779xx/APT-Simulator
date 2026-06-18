@@ -1,0 +1,22 @@
+title: Vulnerability Scanning Scale Variant 4082 Marker
+id: cb85eb71-07b5-5fcf-800b-210ca58f796e
+status: experimental
+description: Detects simulator telemetry for Vulnerability Scanning scale variant
+  4082.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.002
+    apt_sim.variant: attack_scale_variant_4082
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/002/
+tags:
+- attack.t1595.002

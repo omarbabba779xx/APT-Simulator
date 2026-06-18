@@ -1,0 +1,22 @@
+title: Domain Generation Algorithms Scale Variant 3984 Marker
+id: a3de7ad3-e1c2-53e4-b126-4c64871ebfa1
+status: experimental
+description: Detects simulator telemetry for Domain Generation Algorithms scale variant
+  3984.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.002
+    apt_sim.variant: attack_scale_variant_3984
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/002/
+tags:
+- attack.t1568.002

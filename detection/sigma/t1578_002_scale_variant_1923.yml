@@ -1,0 +1,21 @@
+title: Create Cloud Instance Scale Variant 1923 Marker
+id: 7a57fd05-9ecf-521f-a035-2ebd38d33979
+status: experimental
+description: Detects simulator telemetry for Create Cloud Instance scale variant 1923.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1578.002
+    apt_sim.variant: attack_scale_variant_1923
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1578/002/
+tags:
+- attack.t1578.002

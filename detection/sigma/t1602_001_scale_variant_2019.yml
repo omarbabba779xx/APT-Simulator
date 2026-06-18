@@ -1,0 +1,21 @@
+title: SNMP (MIB Dump) Scale Variant 2019 Marker
+id: ff457478-db94-5390-a50d-9eeb5c324f4e
+status: experimental
+description: Detects simulator telemetry for SNMP (MIB Dump) scale variant 2019.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1602.001
+    apt_sim.variant: attack_scale_variant_2019
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1602/001/
+tags:
+- attack.t1602.001

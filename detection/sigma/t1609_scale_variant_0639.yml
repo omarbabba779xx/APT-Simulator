@@ -1,0 +1,22 @@
+title: Container Administration Command Scale Variant 0639 Marker
+id: 5585515a-4b9a-5d77-9b0e-228d7a9730cc
+status: experimental
+description: Detects simulator telemetry for Container Administration Command scale
+  variant 0639.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1609
+    apt_sim.variant: attack_scale_variant_0639
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1609/
+tags:
+- attack.t1609

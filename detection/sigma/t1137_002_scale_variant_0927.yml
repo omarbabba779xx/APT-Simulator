@@ -1,0 +1,21 @@
+title: Office Test Scale Variant 0927 Marker
+id: 5c323ffa-4a48-5597-8b1a-2bd9470c5623
+status: experimental
+description: Detects simulator telemetry for Office Test scale variant 0927.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.002
+    apt_sim.variant: attack_scale_variant_0927
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/002/
+tags:
+- attack.t1137.002

@@ -1,0 +1,21 @@
+title: Develop Capabilities Scale Variant 3346 Marker
+id: bd96e2e9-6dc5-5528-9503-2e04b8e36cd3
+status: experimental
+description: Detects simulator telemetry for Develop Capabilities scale variant 3346.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587
+    apt_sim.variant: attack_scale_variant_3346
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/
+tags:
+- attack.t1587

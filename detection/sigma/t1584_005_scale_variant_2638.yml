@@ -1,0 +1,21 @@
+title: Botnet Scale Variant 2638 Marker
+id: a8ae594e-e1f3-5311-b6d8-d9fcf1e133e8
+status: experimental
+description: Detects simulator telemetry for Botnet scale variant 2638.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.005
+    apt_sim.variant: attack_scale_variant_2638
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/005/
+tags:
+- attack.t1584.005

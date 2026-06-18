@@ -1,0 +1,22 @@
+title: Remote Access Hardware Scale Variant 3080 Marker
+id: b7c0a98b-9762-5fe2-adec-d30cf305dadf
+status: experimental
+description: Detects simulator telemetry for Remote Access Hardware scale variant
+  3080.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219.003
+    apt_sim.variant: attack_scale_variant_3080
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/003/
+tags:
+- attack.t1219.003

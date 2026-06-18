@@ -1,0 +1,22 @@
+title: Exfiltration Over Other Network Medium Scale Variant 0019 Marker
+id: 1c76eabf-c380-5ffc-b2c4-a650b8959344
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Other Network Medium
+  scale variant 0019.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1011
+    apt_sim.variant: attack_scale_variant_0019
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1011/
+tags:
+- attack.t1011

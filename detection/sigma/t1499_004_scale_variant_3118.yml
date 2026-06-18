@@ -1,0 +1,22 @@
+title: Application or System Exploitation Scale Variant 3118 Marker
+id: 4ce883cc-b15c-5fd7-b6a2-d554ea2f5e4d
+status: experimental
+description: Detects simulator telemetry for Application or System Exploitation scale
+  variant 3118.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.004
+    apt_sim.variant: attack_scale_variant_3118
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/004/
+tags:
+- attack.t1499.004

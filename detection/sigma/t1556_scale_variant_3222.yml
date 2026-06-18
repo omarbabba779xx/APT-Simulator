@@ -1,0 +1,22 @@
+title: Modify Authentication Process Scale Variant 3222 Marker
+id: d4556b9e-b4f2-53c3-b57d-7e2c3a772f3c
+status: experimental
+description: Detects simulator telemetry for Modify Authentication Process scale variant
+  3222.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556
+    apt_sim.variant: attack_scale_variant_3222
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/
+tags:
+- attack.t1556

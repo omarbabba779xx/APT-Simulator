@@ -1,0 +1,22 @@
+title: Domain or Tenant Policy Modification Scale Variant 3090 Marker
+id: 63a62357-fef3-5e39-9b36-4efc5aed35e7
+status: experimental
+description: Detects simulator telemetry for Domain or Tenant Policy Modification
+  scale variant 3090.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1484
+    apt_sim.variant: attack_scale_variant_3090
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1484/
+tags:
+- attack.t1484

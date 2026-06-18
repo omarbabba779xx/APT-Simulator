@@ -1,0 +1,21 @@
+title: Transport Agent Scale Variant 2425 Marker
+id: 90cd7e70-35c9-5722-a2f5-3ad1b166de24
+status: experimental
+description: Detects simulator telemetry for Transport Agent scale variant 2425.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1505.002
+    apt_sim.variant: attack_scale_variant_2425
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1505/002/
+tags:
+- attack.t1505.002

@@ -1,0 +1,21 @@
+title: Dead Drop Resolver Scale Variant 3665 Marker
+id: 8f1ca901-51f2-5661-8333-7df0ccac9aa0
+status: experimental
+description: Detects simulator telemetry for Dead Drop Resolver scale variant 3665.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1102.001
+    apt_sim.variant: attack_scale_variant_3665
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1102/001/
+tags:
+- attack.t1102.001

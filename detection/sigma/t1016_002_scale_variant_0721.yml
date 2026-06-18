@@ -1,0 +1,21 @@
+title: Wi-Fi Discovery Scale Variant 0721 Marker
+id: 142ec05f-eec3-53d5-81a3-694767d34ce6
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Discovery scale variant 0721.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.002
+    apt_sim.variant: attack_scale_variant_0721
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/002/
+tags:
+- attack.t1016.002

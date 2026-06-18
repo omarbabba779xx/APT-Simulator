@@ -1,0 +1,22 @@
+title: Clear Linux or Mac System Logs Scale Variant 1384 Marker
+id: 5c9c9099-1e07-55c0-a13f-52c67aa98384
+status: experimental
+description: Detects simulator telemetry for Clear Linux or Mac System Logs scale
+  variant 1384.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685.006
+    apt_sim.variant: attack_scale_variant_1384
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/006/
+tags:
+- attack.t1685.006

@@ -1,0 +1,21 @@
+title: Password Guessing Scale Variant 0192 Marker
+id: 2494ca1f-eb9c-5eee-9be0-0f0fa83dc2ed
+status: experimental
+description: Detects simulator telemetry for Password Guessing scale variant 0192.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1110.001
+    apt_sim.variant: attack_scale_variant_0192
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1110/001/
+tags:
+- attack.t1110.001

@@ -1,0 +1,21 @@
+title: Junk Code Insertion Scale Variant 1447 Marker
+id: ca02d7aa-af3e-5a3a-ba4a-43681def9397
+status: experimental
+description: Detects simulator telemetry for Junk Code Insertion scale variant 1447.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.016
+    apt_sim.variant: attack_scale_variant_1447
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/016/
+tags:
+- attack.t1027.016

@@ -1,0 +1,21 @@
+title: Keylogging Scale Variant 0112 Marker
+id: c6262e44-a6b5-5dc0-97c5-6d0e7f0f498a
+status: experimental
+description: Detects simulator telemetry for Keylogging scale variant 0112.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.001
+    apt_sim.variant: attack_scale_variant_0112
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/001/
+tags:
+- attack.t1056.001

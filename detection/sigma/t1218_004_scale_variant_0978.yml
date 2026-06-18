@@ -1,0 +1,21 @@
+title: InstallUtil Scale Variant 0978 Marker
+id: c5223343-a6e9-5bfe-9a6a-75c5b9bab1d3
+status: experimental
+description: Detects simulator telemetry for InstallUtil scale variant 0978.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.004
+    apt_sim.variant: attack_scale_variant_0978
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/004/
+tags:
+- attack.t1218.004

@@ -1,0 +1,21 @@
+title: Clear Persistence Scale Variant 2927 Marker
+id: b80219b3-512c-5a46-a028-eaf13fc9a5a7
+status: experimental
+description: Detects simulator telemetry for Clear Persistence scale variant 2927.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.009
+    apt_sim.variant: attack_scale_variant_2927
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/009/
+tags:
+- attack.t1070.009

@@ -1,0 +1,22 @@
+title: Inter-Process Communication Scale Variant 1851 Marker
+id: c94c1c58-9c62-5cd2-8805-120cba474b21
+status: experimental
+description: Detects simulator telemetry for Inter-Process Communication scale variant
+  1851.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559
+    apt_sim.variant: attack_scale_variant_1851
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/
+tags:
+- attack.t1559

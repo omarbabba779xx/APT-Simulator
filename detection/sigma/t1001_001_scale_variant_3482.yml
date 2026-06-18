@@ -1,0 +1,21 @@
+title: Junk Data Scale Variant 3482 Marker
+id: 8504e522-bde4-5cc1-a6c4-a475ecfeca32
+status: experimental
+description: Detects simulator telemetry for Junk Data scale variant 3482.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1001.001
+    apt_sim.variant: attack_scale_variant_3482
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1001/001/
+tags:
+- attack.t1001.001

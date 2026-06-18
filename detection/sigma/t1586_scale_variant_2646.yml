@@ -1,0 +1,21 @@
+title: Compromise Accounts Scale Variant 2646 Marker
+id: e6eba734-8b10-5f4f-8b96-0363f0ee985f
+status: experimental
+description: Detects simulator telemetry for Compromise Accounts scale variant 2646.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1586
+    apt_sim.variant: attack_scale_variant_2646
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1586/
+tags:
+- attack.t1586

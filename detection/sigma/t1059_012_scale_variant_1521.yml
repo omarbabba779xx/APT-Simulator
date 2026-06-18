@@ -1,0 +1,21 @@
+title: Hypervisor CLI Scale Variant 1521 Marker
+id: 02dad97f-c8bf-5464-9e3b-71a7fe9ae93a
+status: experimental
+description: Detects simulator telemetry for Hypervisor CLI scale variant 1521.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1059.012
+    apt_sim.variant: attack_scale_variant_1521
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1059/012/
+tags:
+- attack.t1059.012

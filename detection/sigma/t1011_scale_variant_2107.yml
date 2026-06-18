@@ -1,0 +1,22 @@
+title: Exfiltration Over Other Network Medium Scale Variant 2107 Marker
+id: 82fde5fa-f2c2-5e64-b90b-47c8307fcb83
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Other Network Medium
+  scale variant 2107.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1011
+    apt_sim.variant: attack_scale_variant_2107
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1011/
+tags:
+- attack.t1011

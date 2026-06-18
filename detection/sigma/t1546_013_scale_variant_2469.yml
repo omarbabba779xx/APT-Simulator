@@ -1,0 +1,21 @@
+title: PowerShell Profile Scale Variant 2469 Marker
+id: 87cceddb-d3c8-56d4-856b-ee06a312eb95
+status: experimental
+description: Detects simulator telemetry for PowerShell Profile scale variant 2469.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.013
+    apt_sim.variant: attack_scale_variant_2469
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/013/
+tags:
+- attack.t1546.013

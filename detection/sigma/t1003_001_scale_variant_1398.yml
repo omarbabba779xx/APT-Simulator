@@ -1,0 +1,21 @@
+title: LSASS Memory Scale Variant 1398 Marker
+id: 5016862c-6f72-5891-bb01-c8a05134a3de
+status: experimental
+description: Detects simulator telemetry for LSASS Memory scale variant 1398.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1003.001
+    apt_sim.variant: attack_scale_variant_1398
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1003/001/
+tags:
+- attack.t1003.001

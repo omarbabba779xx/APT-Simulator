@@ -1,0 +1,22 @@
+title: Thread Execution Hijacking Scale Variant 1493 Marker
+id: f5de5d2b-cba4-5b7f-acaa-7884eb87f82b
+status: experimental
+description: Detects simulator telemetry for Thread Execution Hijacking scale variant
+  1493.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.003
+    apt_sim.variant: attack_scale_variant_1493
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/003/
+tags:
+- attack.t1055.003

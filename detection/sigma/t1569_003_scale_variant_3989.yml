@@ -1,0 +1,21 @@
+title: Systemctl Scale Variant 3989 Marker
+id: 9ae73b2b-0946-565d-aa4b-487d1034a943
+status: experimental
+description: Detects simulator telemetry for Systemctl scale variant 3989.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569.003
+    apt_sim.variant: attack_scale_variant_3989
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/003/
+tags:
+- attack.t1569.003

@@ -1,0 +1,21 @@
+title: SSH Hijacking Scale Variant 2559 Marker
+id: 103c98c8-0743-58bb-93bd-f3e26b0b331a
+status: experimental
+description: Detects simulator telemetry for SSH Hijacking scale variant 2559.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563.001
+    apt_sim.variant: attack_scale_variant_2559
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/001/
+tags:
+- attack.t1563.001

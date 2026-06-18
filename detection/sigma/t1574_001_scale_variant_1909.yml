@@ -1,0 +1,21 @@
+title: DLL Scale Variant 1909 Marker
+id: bd8a655e-1bf7-5a72-b9c7-e3efc0bcac8b
+status: experimental
+description: Detects simulator telemetry for DLL scale variant 1909.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.001
+    apt_sim.variant: attack_scale_variant_1909
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/001/
+tags:
+- attack.t1574.001

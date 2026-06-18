@@ -1,0 +1,21 @@
+title: Mutual Exclusion Scale Variant 1000 Marker
+id: 0e81962f-38e5-575f-929f-a6b8fbf2c725
+status: experimental
+description: Detects simulator telemetry for Mutual Exclusion scale variant 1000.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1480.002
+    apt_sim.variant: attack_scale_variant_1000
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1480/002/
+tags:
+- attack.t1480.002

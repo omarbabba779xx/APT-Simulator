@@ -1,0 +1,22 @@
+title: Trusted Developer Utilities Proxy Execution Scale Variant 0905 Marker
+id: e1d858a8-6f7d-53bc-8e2b-9298596daded
+status: experimental
+description: Detects simulator telemetry for Trusted Developer Utilities Proxy Execution
+  scale variant 0905.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1127
+    apt_sim.variant: attack_scale_variant_0905
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1127/
+tags:
+- attack.t1127

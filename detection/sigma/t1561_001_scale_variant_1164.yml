@@ -1,0 +1,21 @@
+title: Disk Content Wipe Scale Variant 1164 Marker
+id: fd9cc946-619c-56a3-ab8b-4e6e0e6d125f
+status: experimental
+description: Detects simulator telemetry for Disk Content Wipe scale variant 1164.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.001
+    apt_sim.variant: attack_scale_variant_1164
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/001/
+tags:
+- attack.t1561.001

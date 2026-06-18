@@ -1,0 +1,21 @@
+title: Add-ins Scale Variant 3715 Marker
+id: b8cf90f3-5d15-525d-8f8e-69158454a31a
+status: experimental
+description: Detects simulator telemetry for Add-ins scale variant 3715.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.006
+    apt_sim.variant: attack_scale_variant_3715
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/006/
+tags:
+- attack.t1137.006

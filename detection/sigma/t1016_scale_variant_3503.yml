@@ -1,0 +1,22 @@
+title: System Network Configuration Discovery Scale Variant 3503 Marker
+id: ffeecc69-5502-5510-9c70-8a310c948522
+status: experimental
+description: Detects simulator telemetry for System Network Configuration Discovery
+  scale variant 3503.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016
+    apt_sim.variant: attack_scale_variant_3503
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/
+tags:
+- attack.t1016

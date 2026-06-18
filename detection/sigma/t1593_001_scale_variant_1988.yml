@@ -1,0 +1,21 @@
+title: Social Media Scale Variant 1988 Marker
+id: 3414dc53-e72b-57e5-84c9-162652e94cb3
+status: experimental
+description: Detects simulator telemetry for Social Media scale variant 1988.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1593.001
+    apt_sim.variant: attack_scale_variant_1988
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1593/001/
+tags:
+- attack.t1593.001

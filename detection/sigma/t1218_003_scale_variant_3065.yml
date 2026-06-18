@@ -1,0 +1,21 @@
+title: CMSTP Scale Variant 3065 Marker
+id: e616a940-c9ea-5af8-9f3b-d7b10e562bb0
+status: experimental
+description: Detects simulator telemetry for CMSTP scale variant 3065.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.003
+    apt_sim.variant: attack_scale_variant_3065
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/003/
+tags:
+- attack.t1218.003

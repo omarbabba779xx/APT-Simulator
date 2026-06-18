@@ -1,0 +1,21 @@
+title: Outlook Home Page Scale Variant 1625 Marker
+id: 8a2a2e76-150f-542e-8362-58a50b6f323a
+status: experimental
+description: Detects simulator telemetry for Outlook Home Page scale variant 1625.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1137.004
+    apt_sim.variant: attack_scale_variant_1625
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1137/004/
+tags:
+- attack.t1137.004

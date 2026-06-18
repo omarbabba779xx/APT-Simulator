@@ -1,0 +1,22 @@
+title: Modify Cloud Resource Hierarchy Scale Variant 1358 Marker
+id: ac3a7a84-6472-52f8-a645-f278fb4dfcfc
+status: experimental
+description: Detects simulator telemetry for Modify Cloud Resource Hierarchy scale
+  variant 1358.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1666
+    apt_sim.variant: attack_scale_variant_1358
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1666/
+tags:
+- attack.t1666

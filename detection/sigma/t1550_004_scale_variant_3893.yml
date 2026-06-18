@@ -1,0 +1,21 @@
+title: Web Session Cookie Scale Variant 3893 Marker
+id: d592d6e7-9253-57cf-b436-d7908c59e542
+status: experimental
+description: Detects simulator telemetry for Web Session Cookie scale variant 3893.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1550.004
+    apt_sim.variant: attack_scale_variant_3893
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1550/004/
+tags:
+- attack.t1550.004

@@ -1,0 +1,21 @@
+title: Disk Structure Wipe Scale Variant 0469 Marker
+id: 0e27f66b-c8e7-5b9c-ad16-f478fca6294b
+status: experimental
+description: Detects simulator telemetry for Disk Structure Wipe scale variant 0469.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1561.002
+    apt_sim.variant: attack_scale_variant_0469
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1561/002/
+tags:
+- attack.t1561.002

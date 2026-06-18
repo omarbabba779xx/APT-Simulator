@@ -1,0 +1,21 @@
+title: XDG Autostart Entries Scale Variant 1791 Marker
+id: 1b4dfd11-f511-5b90-98fa-11915a96a942
+status: experimental
+description: Detects simulator telemetry for XDG Autostart Entries scale variant 1791.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.013
+    apt_sim.variant: attack_scale_variant_1791
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/013/
+tags:
+- attack.t1547.013

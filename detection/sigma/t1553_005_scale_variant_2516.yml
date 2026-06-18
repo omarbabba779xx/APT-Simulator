@@ -1,0 +1,22 @@
+title: Mark-of-the-Web Bypass Scale Variant 2516 Marker
+id: 4e985ccf-81b9-5524-9058-90a208da71b6
+status: experimental
+description: Detects simulator telemetry for Mark-of-the-Web Bypass scale variant
+  2516.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.005
+    apt_sim.variant: attack_scale_variant_2516
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/005/
+tags:
+- attack.t1553.005

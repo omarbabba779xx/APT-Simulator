@@ -1,0 +1,22 @@
+title: External Remote Services Scale Variant 3001 Marker
+id: b3769297-7b25-5879-b1ee-048c046ae93d
+status: experimental
+description: Detects simulator telemetry for External Remote Services scale variant
+  3001.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1133
+    apt_sim.variant: attack_scale_variant_3001
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1133/
+tags:
+- attack.t1133

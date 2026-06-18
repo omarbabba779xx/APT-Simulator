@@ -1,0 +1,21 @@
+title: Control Panel Scale Variant 0280 Marker
+id: 0ca39323-a610-52a7-a071-eb098e4ebf34
+status: experimental
+description: Detects simulator telemetry for Control Panel scale variant 0280.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.002
+    apt_sim.variant: attack_scale_variant_0280
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/002/
+tags:
+- attack.t1218.002

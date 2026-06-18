@@ -1,0 +1,21 @@
+title: Traffic Signaling Scale Variant 3740 Marker
+id: 1e5c7b5f-13c0-50dc-9196-f4a0411bbc31
+status: experimental
+description: Detects simulator telemetry for Traffic Signaling scale variant 3740.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1205
+    apt_sim.variant: attack_scale_variant_3740
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1205/
+tags:
+- attack.t1205

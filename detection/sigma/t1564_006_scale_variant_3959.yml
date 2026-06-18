@@ -1,0 +1,21 @@
+title: Run Virtual Instance Scale Variant 3959 Marker
+id: 293ed940-cc75-5763-9b69-dacb03769227
+status: experimental
+description: Detects simulator telemetry for Run Virtual Instance scale variant 3959.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.006
+    apt_sim.variant: attack_scale_variant_3959
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/006/
+tags:
+- attack.t1564.006

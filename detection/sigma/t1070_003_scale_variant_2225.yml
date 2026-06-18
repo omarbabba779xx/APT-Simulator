@@ -1,0 +1,21 @@
+title: Clear Command History Scale Variant 2225 Marker
+id: b115c1d7-b519-5157-a133-667810802d1e
+status: experimental
+description: Detects simulator telemetry for Clear Command History scale variant 2225.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.003
+    apt_sim.variant: attack_scale_variant_2225
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/003/
+tags:
+- attack.t1070.003

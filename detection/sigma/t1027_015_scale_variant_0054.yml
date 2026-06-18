@@ -1,0 +1,21 @@
+title: Compression Scale Variant 0054 Marker
+id: 0211155d-a3bf-5f59-b3f1-1c10b8da350e
+status: experimental
+description: Detects simulator telemetry for Compression scale variant 0054.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1027.015
+    apt_sim.variant: attack_scale_variant_0054
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1027/015/
+tags:
+- attack.t1027.015

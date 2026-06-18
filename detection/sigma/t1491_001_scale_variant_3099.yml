@@ -1,0 +1,21 @@
+title: Internal Defacement Scale Variant 3099 Marker
+id: 4b324c7e-d107-509e-a71e-6052d46207b2
+status: experimental
+description: Detects simulator telemetry for Internal Defacement scale variant 3099.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1491.001
+    apt_sim.variant: attack_scale_variant_3099
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1491/001/
+tags:
+- attack.t1491.001

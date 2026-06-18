@@ -1,0 +1,21 @@
+title: Native API Scale Variant 0190 Marker
+id: 4db90fed-745f-54f4-835f-7e092761ef4e
+status: experimental
+description: Detects simulator telemetry for Native API scale variant 0190.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1106
+    apt_sim.variant: attack_scale_variant_0190
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1106/
+tags:
+- attack.t1106

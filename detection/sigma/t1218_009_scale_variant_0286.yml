@@ -1,0 +1,21 @@
+title: Regsvcs/Regasm Scale Variant 0286 Marker
+id: e3e94d0c-ee0f-555b-a8d4-db140c3a3ecf
+status: experimental
+description: Detects simulator telemetry for Regsvcs/Regasm scale variant 0286.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.009
+    apt_sim.variant: attack_scale_variant_0286
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/009/
+tags:
+- attack.t1218.009

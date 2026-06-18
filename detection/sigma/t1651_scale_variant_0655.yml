@@ -1,0 +1,22 @@
+title: Cloud Administration Command Scale Variant 0655 Marker
+id: 67876023-1a0d-56fc-801c-0bb742abd7bc
+status: experimental
+description: Detects simulator telemetry for Cloud Administration Command scale variant
+  0655.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1651
+    apt_sim.variant: attack_scale_variant_0655
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1651/
+tags:
+- attack.t1651

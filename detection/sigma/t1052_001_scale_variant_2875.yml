@@ -1,0 +1,21 @@
+title: Exfiltration over USB Scale Variant 2875 Marker
+id: e6b0b926-cce1-5038-8780-51ea675f3225
+status: experimental
+description: Detects simulator telemetry for Exfiltration over USB scale variant 2875.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1052.001
+    apt_sim.variant: attack_scale_variant_2875
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1052/001/
+tags:
+- attack.t1052.001

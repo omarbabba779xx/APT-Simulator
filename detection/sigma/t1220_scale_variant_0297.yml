@@ -1,0 +1,21 @@
+title: XSL Script Processing Scale Variant 0297 Marker
+id: 4a51f31b-3c17-5d74-859a-00b7c06072c2
+status: experimental
+description: Detects simulator telemetry for XSL Script Processing scale variant 0297.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1220
+    apt_sim.variant: attack_scale_variant_0297
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1220/
+tags:
+- attack.t1220

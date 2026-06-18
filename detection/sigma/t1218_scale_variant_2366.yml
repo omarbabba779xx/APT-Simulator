@@ -1,0 +1,22 @@
+title: System Binary Proxy Execution Scale Variant 2366 Marker
+id: fdf48b43-f2f1-57c2-a7f6-b7147b930c1c
+status: experimental
+description: Detects simulator telemetry for System Binary Proxy Execution scale variant
+  2366.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218
+    apt_sim.variant: attack_scale_variant_2366
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/
+tags:
+- attack.t1218

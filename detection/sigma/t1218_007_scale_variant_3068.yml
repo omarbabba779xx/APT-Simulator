@@ -1,0 +1,21 @@
+title: Msiexec Scale Variant 3068 Marker
+id: 35eea499-341e-577e-bb41-b57ac15d8205
+status: experimental
+description: Detects simulator telemetry for Msiexec scale variant 3068.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.007
+    apt_sim.variant: attack_scale_variant_3068
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/007/
+tags:
+- attack.t1218.007

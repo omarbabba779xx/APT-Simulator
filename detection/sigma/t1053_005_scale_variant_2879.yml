@@ -1,0 +1,21 @@
+title: Scheduled Task Scale Variant 2879 Marker
+id: bb1b2009-aeab-5597-bb1c-eb57a0158cb3
+status: experimental
+description: Detects simulator telemetry for Scheduled Task scale variant 2879.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053.005
+    apt_sim.variant: attack_scale_variant_2879
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/005/
+tags:
+- attack.t1053.005

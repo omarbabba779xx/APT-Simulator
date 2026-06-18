@@ -1,0 +1,21 @@
+title: Scheduled Transfer Scale Variant 2146 Marker
+id: 37062052-b2af-558b-b82d-69f8ca9d45ba
+status: experimental
+description: Detects simulator telemetry for Scheduled Transfer scale variant 2146.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1029
+    apt_sim.variant: attack_scale_variant_2146
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1029/
+tags:
+- attack.t1029

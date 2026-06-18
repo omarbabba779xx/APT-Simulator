@@ -1,0 +1,21 @@
+title: Web Cookies Scale Variant 0630 Marker
+id: 40c233db-929e-5ff5-a63a-f9d395e42223
+status: experimental
+description: Detects simulator telemetry for Web Cookies scale variant 0630.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1606.001
+    apt_sim.variant: attack_scale_variant_0630
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1606/001/
+tags:
+- attack.t1606.001

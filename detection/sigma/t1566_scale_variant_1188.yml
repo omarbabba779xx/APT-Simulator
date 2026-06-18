@@ -1,0 +1,21 @@
+title: Phishing Scale Variant 1188 Marker
+id: 8296fff5-4785-589a-b3b4-0374bf6430d8
+status: experimental
+description: Detects simulator telemetry for Phishing scale variant 1188.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566
+    apt_sim.variant: attack_scale_variant_1188
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/
+tags:
+- attack.t1566

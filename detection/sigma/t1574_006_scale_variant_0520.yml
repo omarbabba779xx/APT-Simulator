@@ -1,0 +1,22 @@
+title: Dynamic Linker Hijacking Scale Variant 0520 Marker
+id: cd5148f3-319f-5178-9c32-433e61fc41d1
+status: experimental
+description: Detects simulator telemetry for Dynamic Linker Hijacking scale variant
+  0520.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.006
+    apt_sim.variant: attack_scale_variant_0520
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/006/
+tags:
+- attack.t1574.006

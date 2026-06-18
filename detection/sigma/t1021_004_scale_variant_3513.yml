@@ -1,0 +1,21 @@
+title: SSH Scale Variant 3513 Marker
+id: 3f3bdc12-ab86-5c21-9d17-92a743a3170f
+status: experimental
+description: Detects simulator telemetry for SSH scale variant 3513.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1021.004
+    apt_sim.variant: attack_scale_variant_3513
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1021/004/
+tags:
+- attack.t1021.004

@@ -1,0 +1,22 @@
+title: Exfiltration Over Unencrypted Non-C2 Protocol Scale Variant 2872 Marker
+id: 32f6e61e-0f99-5928-a2b4-741ae35e8466
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Unencrypted Non-C2
+  Protocol scale variant 2872.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.003
+    apt_sim.variant: attack_scale_variant_2872
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/003/
+tags:
+- attack.t1048.003

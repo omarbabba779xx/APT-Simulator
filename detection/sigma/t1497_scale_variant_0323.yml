@@ -1,0 +1,22 @@
+title: Virtualization/Sandbox Evasion Scale Variant 0323 Marker
+id: dc6978f7-7eeb-5bdd-85d4-cbe12e17c894
+status: experimental
+description: Detects simulator telemetry for Virtualization/Sandbox Evasion scale
+  variant 0323.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497
+    apt_sim.variant: attack_scale_variant_0323
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/
+tags:
+- attack.t1497

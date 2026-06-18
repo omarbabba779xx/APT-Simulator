@@ -1,0 +1,22 @@
+title: Asynchronous Procedure Call Scale Variant 3582 Marker
+id: f64e8041-358d-58cd-b1d5-76278be93cae
+status: experimental
+description: Detects simulator telemetry for Asynchronous Procedure Call scale variant
+  3582.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.004
+    apt_sim.variant: attack_scale_variant_3582
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/004/
+tags:
+- attack.t1055.004

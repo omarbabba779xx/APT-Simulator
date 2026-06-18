@@ -1,0 +1,21 @@
+title: Dynamic Data Exchange Scale Variant 3245 Marker
+id: ae0d78cd-12a3-5748-9cc6-72fb80e13138
+status: experimental
+description: Detects simulator telemetry for Dynamic Data Exchange scale variant 3245.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1559.002
+    apt_sim.variant: attack_scale_variant_3245
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1559/002/
+tags:
+- attack.t1559.002

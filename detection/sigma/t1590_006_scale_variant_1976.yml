@@ -1,0 +1,22 @@
+title: Network Security Appliances Scale Variant 1976 Marker
+id: dedf9a81-c56f-58f2-9477-fe32c492be65
+status: experimental
+description: Detects simulator telemetry for Network Security Appliances scale variant
+  1976.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.006
+    apt_sim.variant: attack_scale_variant_1976
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/006/
+tags:
+- attack.t1590.006

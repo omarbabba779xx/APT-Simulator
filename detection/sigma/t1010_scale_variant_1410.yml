@@ -1,0 +1,22 @@
+title: Application Window Discovery Scale Variant 1410 Marker
+id: 7b09e61b-b1fd-5037-b608-2269f8f78745
+status: experimental
+description: Detects simulator telemetry for Application Window Discovery scale variant
+  1410.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1010
+    apt_sim.variant: attack_scale_variant_1410
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1010/
+tags:
+- attack.t1010

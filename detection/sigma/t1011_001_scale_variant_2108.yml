@@ -1,0 +1,22 @@
+title: Exfiltration Over Bluetooth Scale Variant 2108 Marker
+id: 6f3e59e6-e136-5fb6-b644-57d56b507365
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Bluetooth scale variant
+  2108.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1011.001
+    apt_sim.variant: attack_scale_variant_2108
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1011/001/
+tags:
+- attack.t1011.001

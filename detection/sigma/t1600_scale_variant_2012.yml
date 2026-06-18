@@ -1,0 +1,21 @@
+title: Weaken Encryption Scale Variant 2012 Marker
+id: 8ea4a1c2-01ff-5b43-82a9-4cf0da1021d3
+status: experimental
+description: Detects simulator telemetry for Weaken Encryption scale variant 2012.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600
+    apt_sim.variant: attack_scale_variant_2012
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/
+tags:
+- attack.t1600

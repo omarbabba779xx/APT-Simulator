@@ -1,0 +1,21 @@
+title: Data Staged Scale Variant 0152 Marker
+id: 0fbe85a2-989c-5125-9c26-af0cfa0b29bf
+status: experimental
+description: Detects simulator telemetry for Data Staged scale variant 0152.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1074
+    apt_sim.variant: attack_scale_variant_0152
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1074/
+tags:
+- attack.t1074

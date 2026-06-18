@@ -1,0 +1,21 @@
+title: Content Injection Scale Variant 1356 Marker
+id: b19de0fa-b630-52eb-82c2-92117e72fb97
+status: experimental
+description: Detects simulator telemetry for Content Injection scale variant 1356.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1659
+    apt_sim.variant: attack_scale_variant_1356
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1659/
+tags:
+- attack.t1659

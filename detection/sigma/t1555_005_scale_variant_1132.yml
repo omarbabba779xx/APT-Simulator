@@ -1,0 +1,21 @@
+title: Password Managers Scale Variant 1132 Marker
+id: 307356a5-1cb1-5eb3-aa05-8620df7d3f72
+status: experimental
+description: Detects simulator telemetry for Password Managers scale variant 1132.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1555.005
+    apt_sim.variant: attack_scale_variant_1132
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1555/005/
+tags:
+- attack.t1555.005

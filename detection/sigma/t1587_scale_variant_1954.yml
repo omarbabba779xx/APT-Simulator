@@ -1,0 +1,21 @@
+title: Develop Capabilities Scale Variant 1954 Marker
+id: 7d0bbe0d-0112-538d-a0fc-15f1575e684d
+status: experimental
+description: Detects simulator telemetry for Develop Capabilities scale variant 1954.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1587
+    apt_sim.variant: attack_scale_variant_1954
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1587/
+tags:
+- attack.t1587

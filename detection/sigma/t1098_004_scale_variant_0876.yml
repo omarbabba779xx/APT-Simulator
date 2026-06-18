@@ -1,0 +1,21 @@
+title: SSH Authorized Keys Scale Variant 0876 Marker
+id: 196ee842-78a8-581d-9a07-9b38ed217a22
+status: experimental
+description: Detects simulator telemetry for SSH Authorized Keys scale variant 0876.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.004
+    apt_sim.variant: attack_scale_variant_0876
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/004/
+tags:
+- attack.t1098.004

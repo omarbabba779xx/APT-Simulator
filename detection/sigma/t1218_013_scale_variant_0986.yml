@@ -1,0 +1,21 @@
+title: Mavinject Scale Variant 0986 Marker
+id: c3902cb0-1b16-5576-b16e-b87d73b63538
+status: experimental
+description: Detects simulator telemetry for Mavinject scale variant 0986.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1218.013
+    apt_sim.variant: attack_scale_variant_0986
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1218/013/
+tags:
+- attack.t1218.013

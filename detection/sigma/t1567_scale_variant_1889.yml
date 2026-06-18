@@ -1,0 +1,22 @@
+title: Exfiltration Over Web Service Scale Variant 1889 Marker
+id: aefb3da3-8fea-5631-8635-0bd15ff53e5d
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Web Service scale variant
+  1889.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1567
+    apt_sim.variant: attack_scale_variant_1889
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1567/
+tags:
+- attack.t1567

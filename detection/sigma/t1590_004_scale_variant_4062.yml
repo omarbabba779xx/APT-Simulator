@@ -1,0 +1,21 @@
+title: Network Topology Scale Variant 4062 Marker
+id: 2c5d1c24-5822-53ac-9521-76b5b36bd459
+status: experimental
+description: Detects simulator telemetry for Network Topology scale variant 4062.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.004
+    apt_sim.variant: attack_scale_variant_4062
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/004/
+tags:
+- attack.t1590.004

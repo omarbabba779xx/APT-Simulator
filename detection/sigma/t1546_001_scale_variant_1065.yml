@@ -1,0 +1,22 @@
+title: Change Default File Association Scale Variant 1065 Marker
+id: 1d53ae5a-49db-5a06-bb18-5aa05903dfba
+status: experimental
+description: Detects simulator telemetry for Change Default File Association scale
+  variant 1065.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.001
+    apt_sim.variant: attack_scale_variant_1065
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/001/
+tags:
+- attack.t1546.001

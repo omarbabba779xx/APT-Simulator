@@ -1,0 +1,21 @@
+title: WHOIS Scale Variant 2694 Marker
+id: 08431c3f-8e9a-53da-acaf-f3e6518afb95
+status: experimental
+description: Detects simulator telemetry for WHOIS scale variant 2694.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.002
+    apt_sim.variant: attack_scale_variant_2694
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/002/
+tags:
+- attack.t1596.002

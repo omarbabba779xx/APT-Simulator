@@ -1,0 +1,22 @@
+title: Code Signing Certificates Scale Variant 1266 Marker
+id: 36ac9c87-4493-5b23-a6d4-e93c0ad869cb
+status: experimental
+description: Detects simulator telemetry for Code Signing Certificates scale variant
+  1266.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.003
+    apt_sim.variant: attack_scale_variant_1266
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/003/
+tags:
+- attack.t1588.003

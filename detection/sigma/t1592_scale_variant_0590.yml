@@ -1,0 +1,22 @@
+title: Gather Victim Host Information Scale Variant 0590 Marker
+id: 4febc439-1d50-5234-9499-a27daa10ca86
+status: experimental
+description: Detects simulator telemetry for Gather Victim Host Information scale
+  variant 0590.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592
+    apt_sim.variant: attack_scale_variant_0590
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/
+tags:
+- attack.t1592

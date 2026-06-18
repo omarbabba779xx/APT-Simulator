@@ -1,0 +1,21 @@
+title: XSL Script Processing Scale Variant 0993 Marker
+id: 86ae388e-05ee-5485-bfeb-4e6a1f6da1ba
+status: experimental
+description: Detects simulator telemetry for XSL Script Processing scale variant 0993.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1220
+    apt_sim.variant: attack_scale_variant_0993
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1220/
+tags:
+- attack.t1220

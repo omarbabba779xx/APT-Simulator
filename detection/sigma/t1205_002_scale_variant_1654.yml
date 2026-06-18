@@ -1,0 +1,21 @@
+title: Socket Filters Scale Variant 1654 Marker
+id: 288c180a-2c04-5d35-a51a-188e440c0f9f
+status: experimental
+description: Detects simulator telemetry for Socket Filters scale variant 1654.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1205.002
+    apt_sim.variant: attack_scale_variant_1654
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1205/002/
+tags:
+- attack.t1205.002

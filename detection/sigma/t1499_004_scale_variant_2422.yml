@@ -1,0 +1,22 @@
+title: Application or System Exploitation Scale Variant 2422 Marker
+id: 98f581be-27f8-58d1-a8ac-517d365cd21a
+status: experimental
+description: Detects simulator telemetry for Application or System Exploitation scale
+  variant 2422.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1499.004
+    apt_sim.variant: attack_scale_variant_2422
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1499/004/
+tags:
+- attack.t1499.004

@@ -1,0 +1,21 @@
+title: Email Bombing Scale Variant 1359 Marker
+id: ad5f5655-2041-56fc-aa88-8677f77ea97b
+status: experimental
+description: Detects simulator telemetry for Email Bombing scale variant 1359.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1667
+    apt_sim.variant: attack_scale_variant_1359
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1667/
+tags:
+- attack.t1667

@@ -1,0 +1,22 @@
+title: Token Impersonation/Theft Scale Variant 1611 Marker
+id: 23d801b0-c0aa-5a46-9c8f-6bd28a237eed
+status: experimental
+description: Detects simulator telemetry for Token Impersonation/Theft scale variant
+  1611.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.001
+    apt_sim.variant: attack_scale_variant_1611
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/001/
+tags:
+- attack.t1134.001

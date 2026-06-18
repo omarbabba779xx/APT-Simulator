@@ -1,0 +1,21 @@
+title: Non-Standard Encoding Scale Variant 2304 Marker
+id: 73f06c5e-f269-5ad4-939d-df3503f0ebba
+status: experimental
+description: Detects simulator telemetry for Non-Standard Encoding scale variant 2304.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1132.002
+    apt_sim.variant: attack_scale_variant_2304
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1132/002/
+tags:
+- attack.t1132.002

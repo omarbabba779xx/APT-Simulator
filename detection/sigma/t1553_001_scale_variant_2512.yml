@@ -1,0 +1,21 @@
+title: Gatekeeper Bypass Scale Variant 2512 Marker
+id: 51780507-7d83-53f7-a872-e3234ce9bf8f
+status: experimental
+description: Detects simulator telemetry for Gatekeeper Bypass scale variant 2512.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.001
+    apt_sim.variant: attack_scale_variant_2512
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/001/
+tags:
+- attack.t1553.001

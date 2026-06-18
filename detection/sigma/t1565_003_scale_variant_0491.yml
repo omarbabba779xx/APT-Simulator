@@ -1,0 +1,22 @@
+title: Runtime Data Manipulation Scale Variant 0491 Marker
+id: d5845ecc-ff5a-5516-a250-66de51260738
+status: experimental
+description: Detects simulator telemetry for Runtime Data Manipulation scale variant
+  0491.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1565.003
+    apt_sim.variant: attack_scale_variant_0491
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1565/003/
+tags:
+- attack.t1565.003

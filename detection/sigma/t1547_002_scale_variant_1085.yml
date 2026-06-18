@@ -1,0 +1,22 @@
+title: Authentication Package Scale Variant 1085 Marker
+id: 31ccb637-63a8-5ac3-8148-0328e46ea1ba
+status: experimental
+description: Detects simulator telemetry for Authentication Package scale variant
+  1085.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.002
+    apt_sim.variant: attack_scale_variant_1085
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/002/
+tags:
+- attack.t1547.002

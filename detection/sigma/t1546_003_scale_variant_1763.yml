@@ -1,0 +1,22 @@
+title: Windows Management Instrumentation Event Subscription Scale Variant 1763 Marker
+id: a742f5f8-54de-5269-bd9b-51fa94d53250
+status: experimental
+description: Detects simulator telemetry for Windows Management Instrumentation Event
+  Subscription scale variant 1763.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.003
+    apt_sim.variant: attack_scale_variant_1763
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/003/
+tags:
+- attack.t1546.003

@@ -1,0 +1,21 @@
+title: Template Injection Scale Variant 3778 Marker
+id: 03faaf69-782d-5f47-b548-d716aed6cd5d
+status: experimental
+description: Detects simulator telemetry for Template Injection scale variant 3778.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1221
+    apt_sim.variant: attack_scale_variant_3778
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1221/
+tags:
+- attack.t1221

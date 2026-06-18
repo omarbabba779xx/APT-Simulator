@@ -1,0 +1,21 @@
+title: SEO Poisoning Scale Variant 4118 Marker
+id: ad95eb73-68ec-5286-a9c1-ee0810de8f94
+status: experimental
+description: Detects simulator telemetry for SEO Poisoning scale variant 4118.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.006
+    apt_sim.variant: attack_scale_variant_4118
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/006/
+tags:
+- attack.t1608.006

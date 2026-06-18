@@ -1,0 +1,21 @@
+title: DNS Calculation Scale Variant 1201 Marker
+id: 7085bca7-204b-565c-81e9-b2bec4d8060d
+status: experimental
+description: Detects simulator telemetry for DNS Calculation scale variant 1201.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.003
+    apt_sim.variant: attack_scale_variant_1201
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/003/
+tags:
+- attack.t1568.003

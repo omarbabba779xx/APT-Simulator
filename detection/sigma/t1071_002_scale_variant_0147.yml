@@ -1,0 +1,22 @@
+title: File Transfer Protocols Scale Variant 0147 Marker
+id: f0488dc0-b026-5c71-a267-118dc5ab6747
+status: experimental
+description: Detects simulator telemetry for File Transfer Protocols scale variant
+  0147.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.002
+    apt_sim.variant: attack_scale_variant_0147
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/002/
+tags:
+- attack.t1071.002

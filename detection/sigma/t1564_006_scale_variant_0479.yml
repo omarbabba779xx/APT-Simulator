@@ -1,0 +1,21 @@
+title: Run Virtual Instance Scale Variant 0479 Marker
+id: db2f406f-2cdc-5611-b6ff-35edd8acff63
+status: experimental
+description: Detects simulator telemetry for Run Virtual Instance scale variant 0479.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.006
+    apt_sim.variant: attack_scale_variant_0479
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/006/
+tags:
+- attack.t1564.006

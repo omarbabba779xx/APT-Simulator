@@ -1,0 +1,22 @@
+title: Elevated Execution with Prompt Scale Variant 1798 Marker
+id: 6d8ea8a7-6bbb-5f37-b150-30a7fc25d1e7
+status: experimental
+description: Detects simulator telemetry for Elevated Execution with Prompt scale
+  variant 1798.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1548.004
+    apt_sim.variant: attack_scale_variant_1798
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1548/004/
+tags:
+- attack.t1548.004

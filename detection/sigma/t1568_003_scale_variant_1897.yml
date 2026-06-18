@@ -1,0 +1,21 @@
+title: DNS Calculation Scale Variant 1897 Marker
+id: a357d69d-8f01-57d3-b791-0d0e3e7b41bc
+status: experimental
+description: Detects simulator telemetry for DNS Calculation scale variant 1897.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.003
+    apt_sim.variant: attack_scale_variant_1897
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/003/
+tags:
+- attack.t1568.003

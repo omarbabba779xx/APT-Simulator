@@ -1,0 +1,22 @@
+title: Exfiltration Over Symmetric Encrypted Non-C2 Protocol Scale Variant 1478 Marker
+id: 507d9f4f-fa18-5293-af6d-e29d2a759e9d
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Symmetric Encrypted
+  Non-C2 Protocol scale variant 1478.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.001
+    apt_sim.variant: attack_scale_variant_1478
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/001/
+tags:
+- attack.t1048.001

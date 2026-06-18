@@ -1,0 +1,21 @@
+title: Code Signing Scale Variant 1817 Marker
+id: a8fc2da6-f433-5743-a48c-f56cee04b84e
+status: experimental
+description: Detects simulator telemetry for Code Signing scale variant 1817.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1553.002
+    apt_sim.variant: attack_scale_variant_1817
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1553/002/
+tags:
+- attack.t1553.002

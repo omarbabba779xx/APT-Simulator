@@ -1,0 +1,21 @@
+title: Systemd Service Scale Variant 3148 Marker
+id: bde263fe-84fc-5ffb-882d-1463a2e8a0c6
+status: experimental
+description: Detects simulator telemetry for Systemd Service scale variant 3148.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1543.002
+    apt_sim.variant: attack_scale_variant_3148
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1543/002/
+tags:
+- attack.t1543.002

@@ -1,0 +1,21 @@
+title: System Checks Scale Variant 1716 Marker
+id: 2990d2fd-6334-57a2-9517-6681814110b1
+status: experimental
+description: Detects simulator telemetry for System Checks scale variant 1716.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1497.001
+    apt_sim.variant: attack_scale_variant_1716
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1497/001/
+tags:
+- attack.t1497.001

@@ -1,0 +1,22 @@
+title: Remote Email Collection Scale Variant 3681 Marker
+id: 8f66f7a8-747c-5598-8230-1d6bd3dec53e
+status: experimental
+description: Detects simulator telemetry for Remote Email Collection scale variant
+  3681.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.002
+    apt_sim.variant: attack_scale_variant_3681
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/002/
+tags:
+- attack.t1114.002

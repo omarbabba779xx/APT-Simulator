@@ -1,0 +1,21 @@
+title: DNS Calculation Scale Variant 0505 Marker
+id: 22fd8f35-d9ba-5b38-88e9-d1ddeea64a0c
+status: experimental
+description: Detects simulator telemetry for DNS Calculation scale variant 0505.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1568.003
+    apt_sim.variant: attack_scale_variant_0505
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1568/003/
+tags:
+- attack.t1568.003

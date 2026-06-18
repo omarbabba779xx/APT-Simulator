@@ -1,0 +1,22 @@
+title: Extra Window Memory Injection Scale Variant 2194 Marker
+id: fe566c65-cc0f-5973-8bdf-f7952708269e
+status: experimental
+description: Detects simulator telemetry for Extra Window Memory Injection scale variant
+  2194.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.011
+    apt_sim.variant: attack_scale_variant_2194
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/011/
+tags:
+- attack.t1055.011

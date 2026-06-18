@@ -1,0 +1,21 @@
+title: Login Hook Scale Variant 0772 Marker
+id: 1e3a6322-3c67-50e4-95c2-28d000fe4db1
+status: experimental
+description: Detects simulator telemetry for Login Hook scale variant 0772.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1037.002
+    apt_sim.variant: attack_scale_variant_0772
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1037/002/
+tags:
+- attack.t1037.002

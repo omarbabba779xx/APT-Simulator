@@ -1,0 +1,21 @@
+title: System Time Discovery Scale Variant 1599 Marker
+id: dbd23318-ca83-5820-9858-12d887e56ef5
+status: experimental
+description: Detects simulator telemetry for System Time Discovery scale variant 1599.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1124
+    apt_sim.variant: attack_scale_variant_1599
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1124/
+tags:
+- attack.t1124

@@ -1,0 +1,22 @@
+title: Exfiltration Over Symmetric Encrypted Non-C2 Protocol Scale Variant 3566 Marker
+id: 8a627015-57e9-5d8f-b84d-82e6e47869db
+status: experimental
+description: Detects simulator telemetry for Exfiltration Over Symmetric Encrypted
+  Non-C2 Protocol scale variant 3566.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1048.001
+    apt_sim.variant: attack_scale_variant_3566
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1048/001/
+tags:
+- attack.t1048.001

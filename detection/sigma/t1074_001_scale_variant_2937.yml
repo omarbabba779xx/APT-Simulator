@@ -1,0 +1,21 @@
+title: Local Data Staging Scale Variant 2937 Marker
+id: 3db31b05-087a-5a5f-baba-1f161f2afead
+status: experimental
+description: Detects simulator telemetry for Local Data Staging scale variant 2937.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1074.001
+    apt_sim.variant: attack_scale_variant_2937
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1074/001/
+tags:
+- attack.t1074.001

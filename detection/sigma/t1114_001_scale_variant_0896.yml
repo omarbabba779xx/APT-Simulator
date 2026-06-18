@@ -1,0 +1,22 @@
+title: Local Email Collection Scale Variant 0896 Marker
+id: e3ca8de2-9da8-5d19-9b70-53a38dcabf42
+status: experimental
+description: Detects simulator telemetry for Local Email Collection scale variant
+  0896.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.001
+    apt_sim.variant: attack_scale_variant_0896
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/001/
+tags:
+- attack.t1114.001

@@ -1,0 +1,21 @@
+title: Spearphishing Service Scale Variant 4094 Marker
+id: 0c1abe0e-b77b-59e9-84d9-5f304f95e058
+status: experimental
+description: Detects simulator telemetry for Spearphishing Service scale variant 4094.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.001
+    apt_sim.variant: attack_scale_variant_4094
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/001/
+tags:
+- attack.t1598.001

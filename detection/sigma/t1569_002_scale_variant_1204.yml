@@ -1,0 +1,21 @@
+title: Service Execution Scale Variant 1204 Marker
+id: 46a1b30a-6649-5e98-b3f8-ecf9274a5ca4
+status: experimental
+description: Detects simulator telemetry for Service Execution scale variant 1204.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1569.002
+    apt_sim.variant: attack_scale_variant_1204
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1569/002/
+tags:
+- attack.t1569.002

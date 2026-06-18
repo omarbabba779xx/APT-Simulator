@@ -1,0 +1,22 @@
+title: System Shutdown/Reboot Scale Variant 1044 Marker
+id: bc5a222b-1058-56df-9d3d-e6412616e7d5
+status: experimental
+description: Detects simulator telemetry for System Shutdown/Reboot scale variant
+  1044.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1529
+    apt_sim.variant: attack_scale_variant_1044
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1529/
+tags:
+- attack.t1529

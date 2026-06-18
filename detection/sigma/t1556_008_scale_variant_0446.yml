@@ -1,0 +1,21 @@
+title: Network Provider DLL Scale Variant 0446 Marker
+id: 0742f3c5-2b61-571b-99a1-fc0ecd808821
+status: experimental
+description: Detects simulator telemetry for Network Provider DLL scale variant 0446.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.008
+    apt_sim.variant: attack_scale_variant_0446
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/008/
+tags:
+- attack.t1556.008

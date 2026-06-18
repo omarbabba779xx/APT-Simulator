@@ -1,0 +1,21 @@
+title: Debugger Evasion Scale Variant 2738 Marker
+id: fd8d33db-24ee-5fb4-a8db-536b12e7e56a
+status: experimental
+description: Detects simulator telemetry for Debugger Evasion scale variant 2738.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1622
+    apt_sim.variant: attack_scale_variant_2738
+    apt_sim.telemetry_source: github_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1622/
+tags:
+- attack.t1622

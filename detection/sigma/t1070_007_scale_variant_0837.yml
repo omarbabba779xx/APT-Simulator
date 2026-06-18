@@ -1,0 +1,22 @@
+title: Clear Network Connection History and Configurations Scale Variant 0837 Marker
+id: 574d04c5-7488-589f-9912-fbc8fb3dc5a4
+status: experimental
+description: Detects simulator telemetry for Clear Network Connection History and
+  Configurations scale variant 0837.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.007
+    apt_sim.variant: attack_scale_variant_0837
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/007/
+tags:
+- attack.t1070.007

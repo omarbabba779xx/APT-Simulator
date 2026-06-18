@@ -1,0 +1,21 @@
+title: Mail Protocols Scale Variant 3628 Marker
+id: 280d0150-fd68-521e-8b3e-10e99e2f707e
+status: experimental
+description: Detects simulator telemetry for Mail Protocols scale variant 3628.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.003
+    apt_sim.variant: attack_scale_variant_3628
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/003/
+tags:
+- attack.t1071.003

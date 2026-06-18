@@ -1,0 +1,21 @@
+title: Scan Databases Scale Variant 2001 Marker
+id: 104d2ac4-d8df-58d6-998e-63e39f3492fa
+status: experimental
+description: Detects simulator telemetry for Scan Databases scale variant 2001.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1596.005
+    apt_sim.variant: attack_scale_variant_2001
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1596/005/
+tags:
+- attack.t1596.005

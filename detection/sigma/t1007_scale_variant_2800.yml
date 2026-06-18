@@ -1,0 +1,22 @@
+title: System Service Discovery Scale Variant 2800 Marker
+id: bfeacd2f-4537-5e59-9ebf-61b4ec019924
+status: experimental
+description: Detects simulator telemetry for System Service Discovery scale variant
+  2800.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1007
+    apt_sim.variant: attack_scale_variant_2800
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1007/
+tags:
+- attack.t1007

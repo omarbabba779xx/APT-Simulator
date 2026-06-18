@@ -1,0 +1,21 @@
+title: Clear Persistence Scale Variant 2231 Marker
+id: 972eb754-f7bc-54ae-a574-2596da48f017
+status: experimental
+description: Detects simulator telemetry for Clear Persistence scale variant 2231.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.009
+    apt_sim.variant: attack_scale_variant_2231
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/009/
+tags:
+- attack.t1070.009

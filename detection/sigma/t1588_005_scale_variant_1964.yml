@@ -1,0 +1,21 @@
+title: Exploits Scale Variant 1964 Marker
+id: 138e1d57-837f-59e3-ae47-b52032b5019e
+status: experimental
+description: Detects simulator telemetry for Exploits scale variant 1964.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.005
+    apt_sim.variant: attack_scale_variant_1964
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/005/
+tags:
+- attack.t1588.005

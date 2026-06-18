@@ -1,0 +1,22 @@
+title: System Owner/User Discovery Scale Variant 0756 Marker
+id: 0f40d135-4e30-5bb4-a55f-ab6ee2f8710a
+status: experimental
+description: Detects simulator telemetry for System Owner/User Discovery scale variant
+  0756.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1033
+    apt_sim.variant: attack_scale_variant_0756
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1033/
+tags:
+- attack.t1033

@@ -1,0 +1,22 @@
+title: Spearphishing via Service Scale Variant 1887 Marker
+id: 3f941b77-c0be-52c8-afc3-d2d3a4e00819
+status: experimental
+description: Detects simulator telemetry for Spearphishing via Service scale variant
+  1887.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1566.003
+    apt_sim.variant: attack_scale_variant_1887
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1566/003/
+tags:
+- attack.t1566.003

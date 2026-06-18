@@ -1,0 +1,21 @@
+title: Spearphishing Link Scale Variant 0616 Marker
+id: 1818fa2f-4744-55a7-92f4-6a23bb3e1393
+status: experimental
+description: Detects simulator telemetry for Spearphishing Link scale variant 0616.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.003
+    apt_sim.variant: attack_scale_variant_0616
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/003/
+tags:
+- attack.t1598.003

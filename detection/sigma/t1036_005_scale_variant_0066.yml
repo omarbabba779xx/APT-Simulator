@@ -1,0 +1,22 @@
+title: Match Legitimate Resource Name or Location Scale Variant 0066 Marker
+id: 5ab366b9-a883-5f57-8b31-17c3b4f09baa
+status: experimental
+description: Detects simulator telemetry for Match Legitimate Resource Name or Location
+  scale variant 0066.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.005
+    apt_sim.variant: attack_scale_variant_0066
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/005/
+tags:
+- attack.t1036.005

@@ -1,0 +1,21 @@
+title: Proxy Scale Variant 1560 Marker
+id: 8f154f73-147f-5c50-b30d-a6f9232f884c
+status: experimental
+description: Detects simulator telemetry for Proxy scale variant 1560.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090
+    apt_sim.variant: attack_scale_variant_1560
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/
+tags:
+- attack.t1090

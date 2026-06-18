@@ -1,0 +1,21 @@
+title: RDP Hijacking Scale Variant 0472 Marker
+id: b274994e-2809-5fda-880c-499f1d7980ff
+status: experimental
+description: Detects simulator telemetry for RDP Hijacking scale variant 0472.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563.002
+    apt_sim.variant: attack_scale_variant_0472
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/002/
+tags:
+- attack.t1563.002

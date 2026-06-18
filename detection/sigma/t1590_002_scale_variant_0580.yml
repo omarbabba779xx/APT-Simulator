@@ -1,0 +1,21 @@
+title: DNS Scale Variant 0580 Marker
+id: bda3df75-4e72-5738-9895-e238a1a2d6fe
+status: experimental
+description: Detects simulator telemetry for DNS scale variant 0580.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1590.002
+    apt_sim.variant: attack_scale_variant_0580
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1590/002/
+tags:
+- attack.t1590.002

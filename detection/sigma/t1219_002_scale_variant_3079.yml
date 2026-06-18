@@ -1,0 +1,22 @@
+title: Remote Desktop Software Scale Variant 3079 Marker
+id: dad77b6a-5be8-5cc3-983c-2a8bb5b182e3
+status: experimental
+description: Detects simulator telemetry for Remote Desktop Software scale variant
+  3079.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1219.002
+    apt_sim.variant: attack_scale_variant_3079
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1219/002/
+tags:
+- attack.t1219.002

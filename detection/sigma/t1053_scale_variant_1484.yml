@@ -1,0 +1,21 @@
+title: Scheduled Task/Job Scale Variant 1484 Marker
+id: 68409984-a723-5fe3-9755-365f169c579b
+status: experimental
+description: Detects simulator telemetry for Scheduled Task/Job scale variant 1484.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1053
+    apt_sim.variant: attack_scale_variant_1484
+    apt_sim.telemetry_source: auditd
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1053/
+tags:
+- attack.t1053

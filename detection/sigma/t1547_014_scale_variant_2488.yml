@@ -1,0 +1,21 @@
+title: Active Setup Scale Variant 2488 Marker
+id: dd685b9b-aa8f-5dbb-ab44-0bff7fd8bd2a
+status: experimental
+description: Detects simulator telemetry for Active Setup scale variant 2488.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.014
+    apt_sim.variant: attack_scale_variant_2488
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/014/
+tags:
+- attack.t1547.014

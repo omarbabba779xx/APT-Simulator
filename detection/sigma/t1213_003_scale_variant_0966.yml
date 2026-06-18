@@ -1,0 +1,21 @@
+title: Code Repositories Scale Variant 0966 Marker
+id: 76287486-802e-531a-a016-688f5644ea3e
+status: experimental
+description: Detects simulator telemetry for Code Repositories scale variant 0966.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1213.003
+    apt_sim.variant: attack_scale_variant_0966
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1213/003/
+tags:
+- attack.t1213.003

@@ -1,0 +1,21 @@
+title: Ccache Files Scale Variant 2546 Marker
+id: 2a461fed-cd0c-5037-a3f0-fd2223af0c23
+status: experimental
+description: Detects simulator telemetry for Ccache Files scale variant 2546.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.005
+    apt_sim.variant: attack_scale_variant_2546
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/005/
+tags:
+- attack.t1558.005

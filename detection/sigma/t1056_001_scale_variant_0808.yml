@@ -1,0 +1,21 @@
+title: Keylogging Scale Variant 0808 Marker
+id: 69b264f0-830c-59ef-b85c-57bb1393ceed
+status: experimental
+description: Detects simulator telemetry for Keylogging scale variant 0808.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.001
+    apt_sim.variant: attack_scale_variant_0808
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/001/
+tags:
+- attack.t1056.001

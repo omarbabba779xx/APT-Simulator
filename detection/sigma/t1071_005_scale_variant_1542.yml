@@ -1,0 +1,22 @@
+title: Publish/Subscribe Protocols Scale Variant 1542 Marker
+id: edf107b0-5f92-5402-8673-036b342c2a18
+status: experimental
+description: Detects simulator telemetry for Publish/Subscribe Protocols scale variant
+  1542.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1071.005
+    apt_sim.variant: attack_scale_variant_1542
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1071/005/
+tags:
+- attack.t1071.005

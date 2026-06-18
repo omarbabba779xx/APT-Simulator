@@ -1,0 +1,22 @@
+title: Network Share Connection Removal Scale Variant 3619 Marker
+id: c82d0aba-b946-5a69-9881-cf70034eea84
+status: experimental
+description: Detects simulator telemetry for Network Share Connection Removal scale
+  variant 3619.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.005
+    apt_sim.variant: attack_scale_variant_3619
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/005/
+tags:
+- attack.t1070.005

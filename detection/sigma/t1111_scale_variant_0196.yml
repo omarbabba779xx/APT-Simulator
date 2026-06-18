@@ -1,0 +1,22 @@
+title: Multi-Factor Authentication Interception Scale Variant 0196 Marker
+id: 2d5b71da-d1c6-5834-9ed9-8476fed96f27
+status: experimental
+description: Detects simulator telemetry for Multi-Factor Authentication Interception
+  scale variant 0196.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1111
+    apt_sim.variant: attack_scale_variant_0196
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1111/
+tags:
+- attack.t1111

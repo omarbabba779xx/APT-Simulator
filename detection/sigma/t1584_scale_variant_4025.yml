@@ -1,0 +1,22 @@
+title: Compromise Infrastructure Scale Variant 4025 Marker
+id: dbb4d7d0-830c-5fc2-b249-dae33c08a158
+status: experimental
+description: Detects simulator telemetry for Compromise Infrastructure scale variant
+  4025.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584
+    apt_sim.variant: attack_scale_variant_4025
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/
+tags:
+- attack.t1584

@@ -1,0 +1,21 @@
+title: Time Providers Scale Variant 3174 Marker
+id: 81ce7630-ed1a-5c90-9e73-5d03fcce3d5c
+status: experimental
+description: Detects simulator telemetry for Time Providers scale variant 3174.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.003
+    apt_sim.variant: attack_scale_variant_3174
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/003/
+tags:
+- attack.t1547.003

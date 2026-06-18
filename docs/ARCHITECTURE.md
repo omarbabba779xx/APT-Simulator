@@ -30,7 +30,7 @@ Modules:
 ### TTPs (`ttps/`)
 
 Plugin library, each Python module or catalog item self-registers on import.
-The current registry loads 851 TTPs/variants:
+The current registry loads 5,000 TTPs/variants:
 
 | Surface | Purpose |
 | --- | --- |
@@ -38,6 +38,7 @@ The current registry loads 851 TTPs/variants:
 | Catalog YAML | Marker-only scale coverage with metadata, params, Sigma, telemetry, and cleanup fields. |
 | ATT&CK enterprise pack | Broad ATT&CK Enterprise technique coverage from catalog entries. |
 | Controlled variant pack | Additional ATT&CK-mapped marker-only variants for OS, telemetry, and scenario diversity. |
+| Scale variant pack | Thousands of deterministic marker-only variants across telemetry sources, SIEM formats, and fidelity profiles. |
 
 ```mermaid
 flowchart LR
@@ -71,8 +72,8 @@ flowchart LR
 
 ## Current Scale
 
-- 851 registered TTPs/variants.
+- 5,000 registered TTPs/variants.
 - 2,511 loaded scenarios.
-- 851 Sigma rules.
-- 14 ATT&CK Enterprise tactics covered.
+- 5,000 Sigma rules.
+- 14/14 ATT&CK Enterprise tactics covered.
 - Dashboard, campaign runner, reports, coverage matrix, and scenario library are implemented.

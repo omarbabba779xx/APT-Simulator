@@ -1,0 +1,21 @@
+title: Wi-Fi Networks Scale Variant 2753 Marker
+id: aee74c99-f283-59f6-baa5-00ee1190ca38
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Networks scale variant 2753.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1669
+    apt_sim.variant: attack_scale_variant_2753
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1669/
+tags:
+- attack.t1669

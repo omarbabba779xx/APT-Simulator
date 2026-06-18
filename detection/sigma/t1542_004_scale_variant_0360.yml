@@ -1,0 +1,21 @@
+title: ROMMONkit Scale Variant 0360 Marker
+id: 7fab1593-7d21-512d-b056-a1db65fdace8
+status: experimental
+description: Detects simulator telemetry for ROMMONkit scale variant 0360.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1542.004
+    apt_sim.variant: attack_scale_variant_0360
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1542/004/
+tags:
+- attack.t1542.004

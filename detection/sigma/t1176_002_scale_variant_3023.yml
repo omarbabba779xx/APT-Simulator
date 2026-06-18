@@ -1,0 +1,21 @@
+title: IDE Extensions Scale Variant 3023 Marker
+id: fb28d92f-9a28-598a-8bc4-8cb430367118
+status: experimental
+description: Detects simulator telemetry for IDE Extensions scale variant 3023.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1176.002
+    apt_sim.variant: attack_scale_variant_3023
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1176/002/
+tags:
+- attack.t1176.002

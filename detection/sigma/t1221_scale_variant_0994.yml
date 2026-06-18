@@ -1,0 +1,21 @@
+title: Template Injection Scale Variant 0994 Marker
+id: 0ae6b1cd-fc3e-52f6-9be7-93697c870708
+status: experimental
+description: Detects simulator telemetry for Template Injection scale variant 0994.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1221
+    apt_sim.variant: attack_scale_variant_0994
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1221/
+tags:
+- attack.t1221

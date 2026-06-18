@@ -1,0 +1,21 @@
+title: Internal Proxy Scale Variant 3649 Marker
+id: bbe674e4-a0a8-5602-8814-7108ab517888
+status: experimental
+description: Detects simulator telemetry for Internal Proxy scale variant 3649.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1090.001
+    apt_sim.variant: attack_scale_variant_3649
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1090/001/
+tags:
+- attack.t1090.001

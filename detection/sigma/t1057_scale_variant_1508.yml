@@ -1,0 +1,21 @@
+title: Process Discovery Scale Variant 1508 Marker
+id: 067f43f3-2a38-5288-ba8e-5c79542a6b79
+status: experimental
+description: Detects simulator telemetry for Process Discovery scale variant 1508.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1057
+    apt_sim.variant: attack_scale_variant_1508
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1057/
+tags:
+- attack.t1057

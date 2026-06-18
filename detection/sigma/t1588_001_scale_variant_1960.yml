@@ -1,0 +1,21 @@
+title: Malware Scale Variant 1960 Marker
+id: 37056665-ce3e-50bc-9220-de57d11b5fae
+status: experimental
+description: Detects simulator telemetry for Malware scale variant 1960.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1588.001
+    apt_sim.variant: attack_scale_variant_1960
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1588/001/
+tags:
+- attack.t1588.001

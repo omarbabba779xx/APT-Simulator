@@ -1,0 +1,22 @@
+title: Steal Application Access Token Scale Variant 1043 Marker
+id: bc42adf2-2112-5c80-897c-b9bfefa8cacc
+status: experimental
+description: Detects simulator telemetry for Steal Application Access Token scale
+  variant 1043.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1528
+    apt_sim.variant: attack_scale_variant_1043
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1528/
+tags:
+- attack.t1528

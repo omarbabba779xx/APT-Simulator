@@ -1,0 +1,21 @@
+title: Reduce Key Space Scale Variant 0621 Marker
+id: afecf35c-8e7e-5854-bc9e-d1a2376a9d87
+status: experimental
+description: Detects simulator telemetry for Reduce Key Space scale variant 0621.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1600.001
+    apt_sim.variant: attack_scale_variant_0621
+    apt_sim.telemetry_source: sysmon
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1600/001/
+tags:
+- attack.t1600.001

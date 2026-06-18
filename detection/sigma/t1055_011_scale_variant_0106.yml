@@ -1,0 +1,22 @@
+title: Extra Window Memory Injection Scale Variant 0106 Marker
+id: cb51c1b2-04a7-5edb-acfa-2947d7ba1019
+status: experimental
+description: Detects simulator telemetry for Extra Window Memory Injection scale variant
+  0106.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1055.011
+    apt_sim.variant: attack_scale_variant_0106
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1055/011/
+tags:
+- attack.t1055.011

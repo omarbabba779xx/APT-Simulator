@@ -1,0 +1,21 @@
+title: Spearphishing Service Scale Variant 2006 Marker
+id: 3cf9d5d5-dfb6-58a9-a7f1-656fce939ef3
+status: experimental
+description: Detects simulator telemetry for Spearphishing Service scale variant 2006.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1598.001
+    apt_sim.variant: attack_scale_variant_2006
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1598/001/
+tags:
+- attack.t1598.001

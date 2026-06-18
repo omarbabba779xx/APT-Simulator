@@ -1,0 +1,21 @@
+title: Wi-Fi Discovery Scale Variant 0025 Marker
+id: 317d718f-48ac-5473-891c-6de10b42bd89
+status: experimental
+description: Detects simulator telemetry for Wi-Fi Discovery scale variant 0025.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016.002
+    apt_sim.variant: attack_scale_variant_0025
+    apt_sim.telemetry_source: osquery
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/002/
+tags:
+- attack.t1016.002

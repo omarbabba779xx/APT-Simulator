@@ -1,0 +1,22 @@
+title: Credential API Hooking Scale Variant 2899 Marker
+id: 5a72b778-4510-55bf-b2e6-2f37df66d7b4
+status: experimental
+description: Detects simulator telemetry for Credential API Hooking scale variant
+  2899.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1056.004
+    apt_sim.variant: attack_scale_variant_2899
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1056/004/
+tags:
+- attack.t1056.004

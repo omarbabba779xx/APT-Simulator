@@ -1,0 +1,21 @@
+title: Audio Capture Scale Variant 2990 Marker
+id: ead1effe-34c0-551e-a6ca-1d0df23901c1
+status: experimental
+description: Detects simulator telemetry for Audio Capture scale variant 2990.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1123
+    apt_sim.variant: attack_scale_variant_2990
+    apt_sim.telemetry_source: netflow
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1123/
+tags:
+- attack.t1123

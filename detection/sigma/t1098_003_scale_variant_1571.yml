@@ -1,0 +1,22 @@
+title: Additional Cloud Roles Scale Variant 1571 Marker
+id: e85d645b-0500-5ad3-aaa1-cc9f9f5c2b09
+status: experimental
+description: Detects simulator telemetry for Additional Cloud Roles scale variant
+  1571.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1098.003
+    apt_sim.variant: attack_scale_variant_1571
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1098/003/
+tags:
+- attack.t1098.003

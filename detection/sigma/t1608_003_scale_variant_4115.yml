@@ -1,0 +1,22 @@
+title: Install Digital Certificate Scale Variant 4115 Marker
+id: 3be3a406-e63d-535c-9b2d-7b486cb4352e
+status: experimental
+description: Detects simulator telemetry for Install Digital Certificate scale variant
+  4115.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1608.003
+    apt_sim.variant: attack_scale_variant_4115
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1608/003/
+tags:
+- attack.t1608.003

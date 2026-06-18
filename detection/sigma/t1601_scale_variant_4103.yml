@@ -1,0 +1,21 @@
+title: Modify System Image Scale Variant 4103 Marker
+id: 6b769b4c-dbbb-51a3-8d3f-ebfd5484a1f8
+status: experimental
+description: Detects simulator telemetry for Modify System Image scale variant 4103.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1601
+    apt_sim.variant: attack_scale_variant_4103
+    apt_sim.telemetry_source: powershell
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1601/
+tags:
+- attack.t1601

@@ -1,0 +1,21 @@
+title: Browser Fingerprint Scale Variant 0769 Marker
+id: 092dc83e-8742-5da6-8999-522229f09807
+status: experimental
+description: Detects simulator telemetry for Browser Fingerprint scale variant 0769.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1036.012
+    apt_sim.variant: attack_scale_variant_0769
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1036/012/
+tags:
+- attack.t1036.012

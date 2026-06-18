@@ -1,0 +1,22 @@
+title: Local Email Collection Scale Variant 2288 Marker
+id: 8028c99e-6cb0-5bb5-8717-7ecfdd7088d2
+status: experimental
+description: Detects simulator telemetry for Local Email Collection scale variant
+  2288.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1114.001
+    apt_sim.variant: attack_scale_variant_2288
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1114/001/
+tags:
+- attack.t1114.001

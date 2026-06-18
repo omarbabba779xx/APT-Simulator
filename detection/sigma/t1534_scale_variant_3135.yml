@@ -1,0 +1,22 @@
+title: Internal Spearphishing Scale Variant 3135 Marker
+id: b8eaba37-08b4-5228-a07b-ab3e7a699971
+status: experimental
+description: Detects simulator telemetry for Internal Spearphishing scale variant
+  3135.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1534
+    apt_sim.variant: attack_scale_variant_3135
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1534/
+tags:
+- attack.t1534

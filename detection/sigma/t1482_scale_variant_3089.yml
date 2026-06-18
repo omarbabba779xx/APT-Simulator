@@ -1,0 +1,22 @@
+title: Domain Trust Discovery Scale Variant 3089 Marker
+id: 46f3f6ff-6b3f-56e5-83b5-5a55edcd48bb
+status: experimental
+description: Detects simulator telemetry for Domain Trust Discovery scale variant
+  3089.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1482
+    apt_sim.variant: attack_scale_variant_3089
+    apt_sim.telemetry_source: proxy
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1482/
+tags:
+- attack.t1482

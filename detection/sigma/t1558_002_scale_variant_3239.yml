@@ -1,0 +1,21 @@
+title: Silver Ticket Scale Variant 3239 Marker
+id: d31ef093-586d-566a-bf51-1253708e95a8
+status: experimental
+description: Detects simulator telemetry for Silver Ticket scale variant 3239.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1558.002
+    apt_sim.variant: attack_scale_variant_3239
+    apt_sim.telemetry_source: slack_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1558/002/
+tags:
+- attack.t1558.002

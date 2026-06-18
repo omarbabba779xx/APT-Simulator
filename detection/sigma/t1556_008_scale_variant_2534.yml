@@ -1,0 +1,21 @@
+title: Network Provider DLL Scale Variant 2534 Marker
+id: 2c446a7c-0ea1-5962-8485-4e8cef584cad
+status: experimental
+description: Detects simulator telemetry for Network Provider DLL scale variant 2534.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.008
+    apt_sim.variant: attack_scale_variant_2534
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/008/
+tags:
+- attack.t1556.008

@@ -1,0 +1,21 @@
+title: Process Discovery Scale Variant 0812 Marker
+id: 23754b4e-23f4-5e95-acbe-f0675df229a1
+status: experimental
+description: Detects simulator telemetry for Process Discovery scale variant 0812.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1057
+    apt_sim.variant: attack_scale_variant_0812
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1057/
+tags:
+- attack.t1057

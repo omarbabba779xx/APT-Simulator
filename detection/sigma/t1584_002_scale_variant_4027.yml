@@ -1,0 +1,21 @@
+title: DNS Server Scale Variant 4027 Marker
+id: ef76b661-8394-501a-946c-e97f63eb3c03
+status: experimental
+description: Detects simulator telemetry for DNS Server scale variant 4027.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1584.002
+    apt_sim.variant: attack_scale_variant_4027
+    apt_sim.telemetry_source: file_integrity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1584/002/
+tags:
+- attack.t1584.002

@@ -1,0 +1,21 @@
+title: AppInit DLLs Scale Variant 1074 Marker
+id: e914b8cf-64de-54e4-a303-a2e47f0f8ed2
+status: experimental
+description: Detects simulator telemetry for AppInit DLLs scale variant 1074.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1546.010
+    apt_sim.variant: attack_scale_variant_1074
+    apt_sim.telemetry_source: kubernetes_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1546/010/
+tags:
+- attack.t1546.010

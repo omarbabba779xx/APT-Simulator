@@ -1,0 +1,21 @@
+title: Software Scale Variant 1288 Marker
+id: b7b13462-fbdd-5641-b42e-1cabdf7ec9f4
+status: experimental
+description: Detects simulator telemetry for Software scale variant 1288.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1592.002
+    apt_sim.variant: attack_scale_variant_1288
+    apt_sim.telemetry_source: dns
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1592/002/
+tags:
+- attack.t1592.002

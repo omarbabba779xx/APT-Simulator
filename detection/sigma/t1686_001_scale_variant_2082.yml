@@ -1,0 +1,21 @@
+title: Cloud Firewall Scale Variant 2082 Marker
+id: 1c828976-bd4f-57a5-8233-622361e403dc
+status: experimental
+description: Detects simulator telemetry for Cloud Firewall scale variant 2082.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1686.001
+    apt_sim.variant: attack_scale_variant_2082
+    apt_sim.telemetry_source: windows_security
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1686/001/
+tags:
+- attack.t1686.001

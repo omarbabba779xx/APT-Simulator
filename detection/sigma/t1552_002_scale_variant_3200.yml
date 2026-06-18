@@ -1,0 +1,22 @@
+title: Credentials in Registry Scale Variant 3200 Marker
+id: 316d2249-7881-53cb-878a-cd88ff571c11
+status: experimental
+description: Detects simulator telemetry for Credentials in Registry scale variant
+  3200.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1552.002
+    apt_sim.variant: attack_scale_variant_3200
+    apt_sim.telemetry_source: google_workspace_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1552/002/
+tags:
+- attack.t1552.002

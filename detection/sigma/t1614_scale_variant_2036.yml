@@ -1,0 +1,22 @@
+title: System Location Discovery Scale Variant 2036 Marker
+id: 950fc379-f5b7-549e-a1ee-c48fee01ad50
+status: experimental
+description: Detects simulator telemetry for System Location Discovery scale variant
+  2036.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1614
+    apt_sim.variant: attack_scale_variant_2036
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1614/
+tags:
+- attack.t1614

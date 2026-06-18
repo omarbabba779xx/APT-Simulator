@@ -1,0 +1,22 @@
+title: Cached Domain Credentials Scale Variant 0706 Marker
+id: c7e68f78-b492-5cf3-9788-1d4ef66eab8b
+status: experimental
+description: Detects simulator telemetry for Cached Domain Credentials scale variant
+  0706.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1003.005
+    apt_sim.variant: attack_scale_variant_0706
+    apt_sim.telemetry_source: edr_process
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1003/005/
+tags:
+- attack.t1003.005

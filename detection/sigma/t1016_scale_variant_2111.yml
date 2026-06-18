@@ -1,0 +1,22 @@
+title: System Network Configuration Discovery Scale Variant 2111 Marker
+id: 694dfb57-5906-51ef-ae76-5b67ede45ac8
+status: experimental
+description: Detects simulator telemetry for System Network Configuration Discovery
+  scale variant 2111.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1016
+    apt_sim.variant: attack_scale_variant_2111
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1016/
+tags:
+- attack.t1016

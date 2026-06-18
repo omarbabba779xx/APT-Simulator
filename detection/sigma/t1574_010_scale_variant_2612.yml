@@ -1,0 +1,22 @@
+title: Services File Permissions Weakness Scale Variant 2612 Marker
+id: 7a564cb2-7fcb-54b1-b2a4-1b1cf2ff15f8
+status: experimental
+description: Detects simulator telemetry for Services File Permissions Weakness scale
+  variant 2612.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1574.010
+    apt_sim.variant: attack_scale_variant_2612
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1574/010/
+tags:
+- attack.t1574.010

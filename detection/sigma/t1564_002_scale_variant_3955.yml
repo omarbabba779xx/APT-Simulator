@@ -1,0 +1,21 @@
+title: Hidden Users Scale Variant 3955 Marker
+id: 4248c24a-d5a0-5491-b80e-2b349b8ed062
+status: experimental
+description: Detects simulator telemetry for Hidden Users scale variant 3955.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1564.002
+    apt_sim.variant: attack_scale_variant_3955
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1564/002/
+tags:
+- attack.t1564.002

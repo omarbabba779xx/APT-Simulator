@@ -1,0 +1,21 @@
+title: Cloud Groups Scale Variant 3615 Marker
+id: a1928fef-0ad7-5c9a-ab1d-d6dc99482aea
+status: experimental
+description: Detects simulator telemetry for Cloud Groups scale variant 3615.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1069.003
+    apt_sim.variant: attack_scale_variant_3615
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1069/003/
+tags:
+- attack.t1069.003

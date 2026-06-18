@@ -1,0 +1,21 @@
+title: SSH Hijacking Scale Variant 3951 Marker
+id: 38071eef-729c-5e95-b6a1-6a4493441dfd
+status: experimental
+description: Detects simulator telemetry for SSH Hijacking scale variant 3951.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1563.001
+    apt_sim.variant: attack_scale_variant_3951
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1563/001/
+tags:
+- attack.t1563.001

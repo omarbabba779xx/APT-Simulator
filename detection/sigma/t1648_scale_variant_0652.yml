@@ -1,0 +1,21 @@
+title: Serverless Execution Scale Variant 0652 Marker
+id: 88bfca71-8826-5ff5-9dcf-98073f9aa20d
+status: experimental
+description: Detects simulator telemetry for Serverless Execution scale variant 0652.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1648
+    apt_sim.variant: attack_scale_variant_0652
+    apt_sim.telemetry_source: azure_activity
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1648/
+tags:
+- attack.t1648

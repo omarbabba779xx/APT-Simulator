@@ -1,0 +1,21 @@
+title: Winlogon Helper DLL Scale Variant 0391 Marker
+id: 22420bdd-cb2c-50b0-b1df-aab658df18fb
+status: experimental
+description: Detects simulator telemetry for Winlogon Helper DLL scale variant 0391.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1547.004
+    apt_sim.variant: attack_scale_variant_0391
+    apt_sim.telemetry_source: cloudtrail
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1547/004/
+tags:
+- attack.t1547.004

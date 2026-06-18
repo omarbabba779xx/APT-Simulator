@@ -1,0 +1,22 @@
+title: Token Impersonation/Theft Scale Variant 0915 Marker
+id: e789bae7-1af2-54d4-957d-d80344144cee
+status: experimental
+description: Detects simulator telemetry for Token Impersonation/Theft scale variant
+  0915.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1134.001
+    apt_sim.variant: attack_scale_variant_0915
+    apt_sim.telemetry_source: entra_id
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1134/001/
+tags:
+- attack.t1134.001

@@ -1,0 +1,21 @@
+title: Timestomp Scale Variant 0836 Marker
+id: 1f3e92a4-aa00-517e-87e5-0bea45500d51
+status: experimental
+description: Detects simulator telemetry for Timestomp scale variant 0836.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1070.006
+    apt_sim.variant: attack_scale_variant_0836
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1070/006/
+tags:
+- attack.t1070.006

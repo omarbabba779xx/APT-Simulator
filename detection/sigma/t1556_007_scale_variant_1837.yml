@@ -1,0 +1,21 @@
+title: Hybrid Identity Scale Variant 1837 Marker
+id: 722d1fa5-4374-5c1e-b0de-918c0a4bf8fc
+status: experimental
+description: Detects simulator telemetry for Hybrid Identity scale variant 1837.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1556.007
+    apt_sim.variant: attack_scale_variant_1837
+    apt_sim.telemetry_source: m365_unified_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1556/007/
+tags:
+- attack.t1556.007

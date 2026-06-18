@@ -1,0 +1,21 @@
+title: Scanning IP Blocks Scale Variant 1993 Marker
+id: d27f69d6-d0af-523b-9520-55d4d71611e0
+status: experimental
+description: Detects simulator telemetry for Scanning IP Blocks scale variant 1993.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1595.001
+    apt_sim.variant: attack_scale_variant_1993
+    apt_sim.telemetry_source: gcp_audit
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1595/001/
+tags:
+- attack.t1595.001

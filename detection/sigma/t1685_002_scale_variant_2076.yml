@@ -1,0 +1,22 @@
+title: Disable or Modify Cloud Log Scale Variant 2076 Marker
+id: 984c84a8-d4b7-5632-a0c6-67313262d70b
+status: experimental
+description: Detects simulator telemetry for Disable or Modify Cloud Log scale variant
+  2076.
+logsource:
+  product: apt_simulator
+  category: attack_scale_variant
+detection:
+  selection:
+    event.dataset: apt_sim.attack_scale_variant
+    attack.technique.id: T1685.002
+    apt_sim.variant: attack_scale_variant_2076
+    apt_sim.telemetry_source: okta_system
+  condition: selection
+falsepositives:
+- authorized simulator replay
+level: low
+references:
+- https://attack.mitre.org/techniques/1685/002/
+tags:
+- attack.t1685.002
