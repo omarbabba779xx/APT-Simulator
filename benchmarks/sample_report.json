@@ -1,0 +1,18 @@
+{
+  "benchmark": "local_api_smoke",
+  "expected": {
+    "attack_tactics": "15/15",
+    "golden_event_rows": 2000,
+    "loaded_scenarios": 3522,
+    "ttps": 5064,
+    "validated_scenarios": 1000
+  },
+  "required_endpoints": [
+    "/healthz",
+    "/platform/readiness",
+    "/execution/v3/status",
+    "/imports/center",
+    "/evidence/summary",
+    "/reports/benchmark-pack.zip"
+  ]
+}

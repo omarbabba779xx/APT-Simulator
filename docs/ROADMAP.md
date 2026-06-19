@@ -50,6 +50,10 @@
 - [x] Dashboard History, Labs, and Access views.
 - [x] Public evidence and verification guide.
 - [x] Evidence Center with readiness gates and downloadable evidence ZIP bundles.
+- [x] Execution Engine v3 status with persistent queue, retry controls, cleanup closure, and audit integrity.
+- [x] Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
+- [x] Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, and benchmarks.
+- [x] Public benchmark pack with API smoke checklist, sample report, and downloadable API snapshots.
 
 ## Next Reference-Level Work
 

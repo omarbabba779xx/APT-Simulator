@@ -8,6 +8,9 @@ This document gives reviewers a fast way to verify the project without trusting 
 python -m pytest tests/test_conformance.py tests/test_scenario_maturity.py -q
 python -m orchestrator.scenario_maturity summary --limit-items 5
 python -m orchestrator.attack_sync status --path config/attack_enterprise_snapshot.json
+curl http://127.0.0.1:8000/platform/readiness
+curl http://127.0.0.1:8000/imports/center
+curl http://127.0.0.1:8000/execution/v3/status
 ```
 
 Expected core results:
@@ -34,6 +37,9 @@ Expected core results:
 6. Open History and download JSON, HTML, and ZIP artifacts.
 7. Open Labs and choose one of Windows AD, Linux Fleet, Cloud/Kubernetes, or SaaS/Identity.
 8. Open Evidence Center and download the global evidence ZIP or one scenario ZIP.
+9. Open Platform Readiness and confirm the 10-area scorecard.
+10. Open Import Center and review source lanes, local counts, and safety boundaries.
+11. Download `/reports/benchmark-pack.zip` and inspect `manifest.json`.
 
 ## Capability Matrix
 
@@ -43,8 +49,10 @@ Expected core results:
 | Scenario depth | 1,000 fixture-backed actor-chain DAGs with runbooks and success criteria |
 | SOC evidence | ECS fields, OCSF categories, SIEM fields, latency targets, 2,000 golden events |
 | Evidence exports | `/evidence/summary`, `/reports/evidence-pack.zip`, and per-scenario ZIP bundles |
+| Platform readiness | `/platform/readiness` 10-area scorecard and `/reports/benchmark-pack.zip` |
+| Import center | `/imports/center` for ATT&CK STIX, AEL, Atomic Red Team, cloud reference, and rule-corpus lanes |
 | Campaigns | 10/50/100 launch controls, scheduling, repeat, pause, resume, retry failed |
-| Execution state | Persistent run history, queue entries, step logs, cleanup status |
+| Execution state | `/execution/v3/status`, persistent run history, queue entries, step logs, cleanup status |
 | Reports | JSON, HTML, and ZIP artifact bundles |
 | Lab tracks | Windows AD, Linux Fleet, Cloud/Kubernetes, SaaS/Identity |
 | Safety | Dry-run and marker-only default for scale coverage |

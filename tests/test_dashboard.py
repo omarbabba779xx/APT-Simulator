@@ -30,6 +30,9 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "Scenario Builder" in r.text
     assert "Scenario Library" in r.text
     assert "Evidence Center" in r.text
+    assert "Platform Readiness" in r.text
+    assert "Execution Engine v3" in r.text
+    assert "Import Center" in r.text
     assert "TTP Catalog" in r.text
     assert "Project Boundaries" in r.text
     assert "Not an offensive framework" in r.text
@@ -130,6 +133,31 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     access = client.get("/access/rbac").json()
     assert access["roles"] == ["viewer", "operator", "admin"]
 
+    engine = client.get("/execution/v3/status").json()
+    assert engine["version"] == "v3"
+    assert engine["mode"] == "lab-safe"
+    assert engine["readiness_score"] >= 80
+    assert {item["name"] for item in engine["capabilities"]} >= {
+        "persistent_queue",
+        "multi_host_dispatch",
+        "retry_failed_steps",
+        "cleanup_tracking",
+        "tamper_evident_logs",
+    }
+
+    imports = client.get("/imports/center").json()
+    assert imports["importer_count"] == 5
+    assert imports["local_content"]["ael_scenarios"] == 11
+    assert imports["local_content"]["atomic_scenarios"] == 0
+    assert imports["local_content"]["cloud_pack_ttps"] > 0
+
+    readiness = client.get("/platform/readiness").json()
+    assert readiness["capability_count"] == 10
+    assert readiness["counts"]["ttps"] == 5064
+    assert readiness["counts"]["loaded_scenarios"] == 3522
+    assert readiness["counts"]["validated_scenarios"] == 1000
+    assert readiness["counts"]["benchmark_files"] >= 3
+
 
 def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> None:
     client = _client(tmp_path)
@@ -165,6 +193,18 @@ def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> No
         assert "evidence/scenario_evidence.yaml" in names
         assert "evidence/soc_golden_events.jsonl" in names
         assert "scenarios/validated/validated_apt29_identity_cloud_chain.yaml" in names
+
+    benchmark_pack = client.get("/reports/benchmark-pack.zip")
+    assert benchmark_pack.status_code == 200
+    assert benchmark_pack.headers["content-type"] == "application/zip"
+    with zipfile.ZipFile(io.BytesIO(benchmark_pack.content)) as archive:
+        names = set(archive.namelist())
+        manifest = json.loads(archive.read("manifest.json"))
+        assert manifest["counts"]["validated_scenarios"] == 1000
+        assert "api/platform_readiness.json" in names
+        assert "api/execution_engine_v3.json" in names
+        assert "api/import_center.json" in names
+        assert "benchmarks/README.md" in names
 
 
 def test_scenario_builder_preview(tmp_path) -> None:
@@ -259,6 +299,17 @@ def test_persistent_history_queue_and_run_artifact_bundle(tmp_path) -> None:
     cleanup = client.get(f"/runs/{run_id}/cleanup-plan").json()
     assert cleanup["run_id"] == run_id
     assert cleanup["pending_count"] == len(detail["steps"])
+
+    engine = client.get("/execution/v3/status").json()
+    assert engine["queue"]["total"] >= len(detail["steps"])
+
+    retry = client.post(f"/execution/v3/runs/{run_id}/retry-failed").json()
+    assert retry["run_id"] == run_id
+    assert retry["planner_steps_requeued"] == 0
+
+    cleanup_close = client.post(f"/execution/v3/runs/{run_id}/cleanup").json()
+    assert cleanup_close["run_id"] == run_id
+    assert cleanup_close["cleanup_items_closed"] >= 0
 
     bundle = client.get(f"/reports/runs/{run_id}.zip")
     assert bundle.status_code == 200

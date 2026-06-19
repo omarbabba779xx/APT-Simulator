@@ -18,6 +18,7 @@ from fastapi.responses import HTMLResponse, Response
 from ..core.auth import require_role
 from ..dsl.schema import Scenario
 from ..evidence_center import build_evidence_summary, validated_scenario_files
+from ..execution_engine_v3 import build_engine_status, cleanup_run, retry_failed_run
 from ..scenario_builder import (
     DIFFICULTY_STEPS,
     build_scenario,
@@ -688,6 +689,27 @@ def execution_queue(run_id: str | None = None, _claims=require_role("viewer")) -
         return {"total": 0, "items": []}
     items = [_queue_entry(item) for item in s.repo.queue_entries(run_id)]
     return {"total": len(items), "items": items}
+
+
+@router.get("/execution/v3/status")
+def execution_engine_v3_status(_claims=require_role("viewer")) -> dict[str, object]:
+    return build_engine_status(get_state())
+
+
+@router.post("/execution/v3/runs/{run_id}/retry-failed")
+def execution_engine_v3_retry_failed(run_id: str, _claims=require_role("operator")) -> dict[str, object]:
+    s = get_state()
+    if not s.planner.get_run(run_id) and not (s.repo and s.repo.get_run(run_id)):
+        raise HTTPException(404, "run not found")
+    return retry_failed_run(s, run_id)
+
+
+@router.post("/execution/v3/runs/{run_id}/cleanup")
+def execution_engine_v3_cleanup(run_id: str, _claims=require_role("operator")) -> dict[str, object]:
+    s = get_state()
+    if not s.planner.get_run(run_id) and not (s.repo and s.repo.get_run(run_id)):
+        raise HTTPException(404, "run not found")
+    return cleanup_run(s, run_id)
 
 
 @router.get("/execution/artifacts/{run_id}.zip")

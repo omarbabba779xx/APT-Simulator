@@ -280,6 +280,69 @@ class Repository:
             stmt = select(RunArtifact).where(RunArtifact.run_id == run_id).order_by(col(RunArtifact.id))
             return list(s.exec(stmt).all())
 
+    def retry_failed_steps(self, run_id: str) -> int:
+        retryable = {"failed", "skipped", "aborted"}
+        changed = 0
+        with Session(self.engine) as s:
+            run = s.get(Run, run_id)
+            if not run:
+                return 0
+            for row in s.exec(select(StepInstance).where(StepInstance.run_id == run_id)).all():
+                if row.status not in retryable:
+                    continue
+                row.status = "queued"
+                row.agent_id = None
+                row.started_at = None
+                row.finished_at = None
+                row.output = None
+                row.error = None
+                s.add(row)
+                changed += 1
+            for entry in s.exec(select(QueueEntry).where(QueueEntry.run_id == run_id)).all():
+                if entry.status not in retryable:
+                    continue
+                entry.status = "queued"
+                entry.assigned_agent = None
+                entry.cleanup_status = "pending"
+                entry.last_error = None
+                entry.next_attempt_at = None
+                entry.updated_at = _now()
+                s.add(entry)
+            if changed:
+                run.status = "running"
+                run.finished_at = None
+                s.add(run)
+                s.add(
+                    RunLog(
+                        run_id=run_id,
+                        event="run.retry_failed",
+                        message=f"requeued {changed} failed step(s)",
+                    )
+                )
+            s.commit()
+        return changed
+
+    def mark_cleanup_complete(self, run_id: str) -> int:
+        with Session(self.engine) as s:
+            entries = s.exec(select(QueueEntry).where(QueueEntry.run_id == run_id)).all()
+            changed = 0
+            for entry in entries:
+                if entry.cleanup_required and entry.cleanup_status != "complete":
+                    entry.cleanup_status = "complete"
+                    entry.updated_at = _now()
+                    s.add(entry)
+                    changed += 1
+            if entries:
+                s.add(
+                    RunLog(
+                        run_id=run_id,
+                        event="run.cleanup",
+                        message=f"marked {changed} cleanup item(s) complete",
+                    )
+                )
+            s.commit()
+        return changed
+
     def create_campaign(
         self,
         campaign_id: str,

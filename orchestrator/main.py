@@ -10,7 +10,7 @@ from contextlib import asynccontextmanager
 import typer
 import uvicorn
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .api import agents as agents_api
@@ -192,6 +192,31 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
             },
             "token_cli": "python -m orchestrator.auth_cli issue --role admin --subject analyst",
         }
+
+    @app.get("/imports/center")
+    def imports_center() -> dict[str, object]:
+        """Official importer readiness and local imported content status."""
+        from .import_center import build_import_center
+
+        return build_import_center(state.scenarios)
+
+    @app.get("/platform/readiness")
+    def platform_readiness() -> dict[str, object]:
+        """Project-level scorecard across execution, imports, evidence, detection, and reports."""
+        from .platform_readiness import build_platform_readiness
+
+        return build_platform_readiness(state)
+
+    @app.get("/reports/benchmark-pack.zip")
+    def benchmark_pack_zip() -> Response:
+        """Download reproducible public benchmark evidence snapshots."""
+        from .benchmark_pack import build_benchmark_zip
+
+        return Response(
+            build_benchmark_zip(state),
+            media_type="application/zip",
+            headers={"Content-Disposition": 'attachment; filename="apt-simulator-benchmark-pack.zip"'},
+        )
 
     @app.get("/runs/{run_id}/timeline")
     def run_timeline(run_id: str) -> dict[str, object]:

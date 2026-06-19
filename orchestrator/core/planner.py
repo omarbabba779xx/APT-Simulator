@@ -108,6 +108,29 @@ class Planner:
                     changed += 1
         return changed
 
+    def retry_failed_steps(self, run_id: str) -> int:
+        """Reset failed/skipped/aborted steps so a lab operator can retry a run."""
+        changed = 0
+        retryable = {STATUS_FAILED, STATUS_SKIPPED, STATUS_ABORTED}
+        with self._lock:
+            run = self._runs.get(run_id)
+            if not run:
+                return 0
+            for state in run.steps.values():
+                if state.status not in retryable:
+                    continue
+                state.status = STATUS_QUEUED
+                state.assigned_agent = None
+                state.output = ""
+                state.error = None
+                state.started_at = 0.0
+                state.finished_at = 0.0
+                changed += 1
+            if changed:
+                run.status = "running"
+                run.finished_at = 0.0
+        return changed
+
     def next_task_for_agent(self, agent_id: str, agent_platform: str) -> tuple[Run, StepState] | None:
         """Return the next ready step for this agent, or None."""
         platform = agent_platform.lower()

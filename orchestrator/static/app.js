@@ -19,6 +19,9 @@ const state = {
   exposure: null,
   maturity: null,
   evidenceSummary: null,
+  platformReadiness: null,
+  importCenter: null,
+  engineV3: null,
   space: null,
   library: { items: [], counts: {}, total: 0, filtered: 0 },
   campaigns: [],
@@ -129,6 +132,7 @@ async function refreshLive() {
     api("/campaigns").then((data) => { state.campaigns = data; }),
     api("/history/runs").then((data) => { state.history = data; }),
     api("/execution/queue").then((data) => { state.queue = data; }),
+    api("/execution/v3/status").then((data) => { state.engineV3 = data; }),
   ];
   await Promise.allSettled(tasks);
   renderHealth();
@@ -136,6 +140,7 @@ async function refreshLive() {
   renderRuns();
   renderCampaigns();
   renderHistory();
+  renderExecutionEngine();
   renderOverview();
 }
 
@@ -150,6 +155,8 @@ async function refreshStatic() {
     api("/exposure/graph").then((data) => { state.exposure = data; }),
     api("/scenario-maturity").then((data) => { state.maturity = data; }),
     api("/evidence/summary").then((data) => { state.evidenceSummary = data; }),
+    api("/platform/readiness").then((data) => { state.platformReadiness = data; }),
+    api("/imports/center").then((data) => { state.importCenter = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
     api("/scenario-library").then((data) => { state.library = data; }),
     api("/lab-profiles").then((data) => { state.labProfiles = data; }),
@@ -168,6 +175,9 @@ async function refreshStatic() {
   renderExposure();
   renderMaturity();
   renderEvidenceCenter();
+  renderPlatformReadiness();
+  renderImportCenter();
+  renderExecutionEngine();
   renderLabProfiles();
   renderAccess();
   renderVariantSpace();
@@ -218,6 +228,7 @@ function renderMetrics() {
     ["Variants", fmtInt(state.space?.total_variants), "Generable"],
     ["Scenarios", Object.keys(state.scenarios || {}).length, "Loaded"],
     ["Validated", maturity.validated_scenarios ?? 0, "Actor-chain"],
+    ["Readiness", `${state.platformReadiness?.overall_score ?? 0}%`, "Platform"],
     ["Runs", state.history?.total ?? runs.length, "Stored"],
     ["Agents", agents, "Registered"],
   ];
@@ -489,6 +500,151 @@ function renderEvidenceCenter() {
     .slice(0, 12);
   renderBars("evidence-lab-bars", labRows);
   renderBars("evidence-telemetry-bars", telemetryRows);
+}
+
+function scoreClass(score) {
+  const numeric = Number(score || 0);
+  if (numeric >= 95) return "pill ok";
+  if (numeric >= 70) return "pill warn";
+  return "pill bad";
+}
+
+function renderPlatformReadiness() {
+  const readiness = state.platformReadiness;
+  const score = byId("platform-score");
+  const summary = byId("platform-summary");
+  const tbody = byId("platform-table");
+  const count = byId("platform-count");
+  if (!score || !summary || !tbody || !count) return;
+  clear(summary);
+  clear(tbody);
+  if (!readiness) {
+    score.textContent = "0%";
+    summary.appendChild(node("p", { class: "empty" }, "No platform readiness data"));
+    return;
+  }
+  score.textContent = `${readiness.overall_score || 0}%`;
+  score.className = scoreClass(readiness.overall_score);
+  const rows = [
+    ["Status", readiness.status || "-"],
+    ["Capabilities", `${readiness.strong_count || 0}/${readiness.capability_count || 0} strong`],
+    ["TTPs", fmtInt(readiness.counts?.ttps)],
+    ["Scenarios", fmtInt(readiness.counts?.loaded_scenarios)],
+    ["Validated", fmtInt(readiness.counts?.validated_scenarios)],
+    ["Benchmark files", fmtInt(readiness.counts?.benchmark_files)],
+  ];
+  for (const [label, value] of rows) {
+    summary.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, label),
+      node("strong", {}, String(value)),
+    ]));
+  }
+  const capabilities = readiness.capabilities || [];
+  for (const item of capabilities) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", {}, item.area),
+      node("td", {}, node("span", { class: scoreClass(item.score) }, item.status)),
+      node("td", {}, `${item.score}%`),
+      node("td", { class: "muted" }, (item.evidence || []).join(" | ")),
+      node("td", { class: "muted" }, (item.gaps || []).join(" | ") || "-"),
+    ]));
+  }
+  if (!capabilities.length) tbody.appendChild(emptyRow(5, "No capability data"));
+  count.textContent = `${capabilities.length} areas`;
+}
+
+function renderExecutionEngine() {
+  const engine = state.engineV3;
+  const score = byId("engine-score");
+  const summary = byId("engine-summary");
+  const gates = byId("engine-gates");
+  const gateCount = byId("engine-gate-count");
+  if (!score || !summary || !gates || !gateCount) return;
+  clear(summary);
+  clear(gates);
+  if (!engine) {
+    score.textContent = "0%";
+    summary.appendChild(node("p", { class: "empty" }, "No engine status"));
+    return;
+  }
+  score.textContent = `${engine.readiness_score || 0}%`;
+  score.className = scoreClass(engine.readiness_score);
+  const rows = [
+    ["Mode", engine.mode || "-"],
+    ["Agents", fmtInt(engine.agents?.registered)],
+    ["Stored runs", fmtInt(engine.runs?.stored)],
+    ["Queue records", fmtInt(engine.queue?.total)],
+    ["Pending cleanup", fmtInt(engine.queue?.pending_cleanup)],
+    ["Audit chain", engine.integrity?.audit_hash_chain || "-"],
+  ];
+  for (const [label, value] of rows) {
+    summary.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, label),
+      node("strong", {}, String(value)),
+    ]));
+  }
+  const capabilities = engine.capabilities || [];
+  gateCount.textContent = `${capabilities.filter((item) => item.passed).length}/${capabilities.length} gates`;
+  gateCount.className = capabilities.every((item) => item.passed) ? "pill ok" : "pill warn";
+  for (const item of capabilities) {
+    gates.appendChild(node("div", { class: item.passed ? "gate-row passed" : "gate-row failed" }, [
+      node("span", { title: item.gap || "" }, item.name),
+      node("strong", {}, item.status),
+    ]));
+  }
+}
+
+function renderImportCenter() {
+  const data = state.importCenter;
+  const score = byId("import-score");
+  const summary = byId("import-summary");
+  const boundaries = byId("import-boundaries");
+  const tbody = byId("imports-table");
+  const count = byId("imports-count");
+  if (!score || !summary || !boundaries || !tbody || !count) return;
+  clear(summary);
+  clear(boundaries);
+  clear(tbody);
+  if (!data) {
+    score.textContent = "0%";
+    summary.appendChild(node("p", { class: "empty" }, "No import center data"));
+    return;
+  }
+  score.textContent = `${data.readiness_score || 0}%`;
+  score.className = scoreClass(data.readiness_score);
+  const rows = [
+    ["Importers", `${data.loaded_importers}/${data.importer_count} loaded`],
+    ["AEL scenarios", fmtInt(data.local_content?.ael_scenarios)],
+    ["ART scenarios", fmtInt(data.local_content?.atomic_scenarios)],
+    ["Cloud pack TTPs", fmtInt(data.local_content?.cloud_pack_ttps)],
+    ["ATT&CK drift", data.attack_drift?.status || "-"],
+  ];
+  for (const [label, value] of rows) {
+    summary.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, label),
+      node("strong", {}, String(value)),
+    ]));
+  }
+  for (const line of data.boundaries || []) {
+    boundaries.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, line),
+      node("strong", {}, "enforced"),
+    ]));
+  }
+  for (const importer of data.importers || []) {
+    tbody.appendChild(node("tr", {}, [
+      node("td", {}, [
+        node("strong", {}, importer.name),
+        node("div", {}, node("a", { href: importer.source_url, target: "_blank", rel: "noreferrer" }, importer.source_url)),
+      ]),
+      node("td", {}, node("span", { class: importer.loaded ? "pill ok" : "pill warn" }, importer.status)),
+      node("td", {}, fmtInt(importer.imported_items)),
+      node("td", { class: "mono" }, importer.mode),
+      node("td", { class: "mono muted" }, importer.local_command),
+    ]));
+  }
+  if (!(data.importers || []).length) tbody.appendChild(emptyRow(5, "No importers"));
+  count.textContent = `${data.importer_count || 0} importers`;
 }
 
 function renderCatalogFilters() {

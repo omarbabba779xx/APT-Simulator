@@ -13,6 +13,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 1,000 validated actor-chain scenarios |
 | Scenario maturity | 1,000 fixture-backed validated actor-chain scenarios with 2,000 SOC golden event rows |
 | Evidence exports | Global evidence ZIP and per-scenario evidence ZIP reports |
+| Execution Engine v3 | Lab-safe multi-host dispatch model, persistent queue, retry controls, cleanup tracking, and tamper-evident audit logs |
+| Official importers | ATT&CK STIX sync, ATT&CK Emulation Library importer, Atomic Red Team importer, cloud reference pack status, and rule-corpus comparison |
+| Product readiness | Platform scorecard and downloadable benchmark ZIP with API snapshots |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -22,6 +25,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 flowchart LR
     Dashboard["Browser dashboard"] --> Library["Scenario Library"]
     Dashboard --> Maturity["Scenario Maturity"]
+    Dashboard --> Evidence["Evidence Center"]
+    Dashboard --> Platform["Platform Readiness"]
+    Dashboard --> Imports["Import Center"]
     Dashboard --> Matrix["ATT&CK Matrix"]
     Dashboard --> Sync["ATT&CK Sync"]
     Dashboard --> Campaigns["Campaign Runner"]
@@ -30,6 +36,9 @@ flowchart LR
     Dashboard --> Reports["Run and campaign reports"]
     Library --> API["FastAPI orchestrator"]
     Maturity --> API
+    Evidence --> API
+    Platform --> API
+    Imports --> API
     Matrix --> API
     Campaigns --> API
     Reports --> API
@@ -65,12 +74,14 @@ The ATT&CK sync layer uses a bundled Enterprise STIX snapshot, detects missing, 
 flowchart TD
     Scenario["Scenario YAML or generated variant"] --> Loader["Scenario loader"]
     Loader --> Planner["DAG-aware planner"]
+    Planner --> Queue["SQLite execution queue"]
     Planner --> Signer["Signed task descriptor"]
     Signer --> Agent["Beacon agent or local runner"]
     Agent --> TTP["Registered TTP simulation"]
     TTP --> Telemetry["Synthetic telemetry and markers"]
     Telemetry --> Detection["Sigma, ECS, OCSF, query exports"]
     Planner --> Audit["Hash-chained audit log"]
+    Queue --> Cleanup["Cleanup tracking and retry controls"]
     Planner --> Reports["JSON and HTML reports"]
 ```
 
@@ -119,6 +130,10 @@ flowchart TD
 - Produces JSON and HTML reports for runs and campaigns.
 - Produces ZIP artifact bundles for persistent run history.
 - Produces global and per-scenario evidence ZIP bundles for SOC review.
+- Exposes Execution Engine v3 readiness for queue state, retry controls, cleanup tracking, and audit integrity.
+- Exposes an Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
+- Exposes a Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, and benchmarks.
+- Produces a benchmark ZIP with current API snapshots and verification files.
 - Tracks ATT&CK snapshot drift and detection-rule quality.
 - Builds a controlled exposure graph from loaded scenarios and catalog domains.
 - Scores scenario maturity using actor depth, DAG structure, tactic coverage, detection coverage, and evidence fixtures.
@@ -194,6 +209,8 @@ The dashboard includes:
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
 | Evidence Center | Review quality gates, evidence coverage, telemetry spread, and download evidence ZIP bundles. |
+| Platform Readiness | Review the 10-area scorecard, Execution Engine v3 readiness, and benchmark export. |
+| Import Center | Review official importer lanes, loaded content, source URLs, commands, and safety boundaries. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
 | TTP Catalog | Search and filter registered TTPs and safety tiers. |
@@ -233,7 +250,16 @@ curl -o scenario-evidence.zip http://127.0.0.1:8000/reports/scenarios/validated_
 curl -o evidence-pack.zip http://127.0.0.1:8000/reports/evidence-pack.zip
 curl http://127.0.0.1:8000/history/runs
 curl http://127.0.0.1:8000/execution/queue
+curl http://127.0.0.1:8000/execution/v3/status
 curl http://127.0.0.1:8000/lab-profiles
+```
+
+Platform readiness, import status, and benchmark bundle:
+
+```bash
+curl http://127.0.0.1:8000/platform/readiness
+curl http://127.0.0.1:8000/imports/center
+curl -o benchmark-pack.zip http://127.0.0.1:8000/reports/benchmark-pack.zip
 ```
 
 Variant-space count:
@@ -300,6 +326,8 @@ curl http://127.0.0.1:8000/reports/runs/<run_id>.json
 curl http://127.0.0.1:8000/reports/runs/<run_id>.html
 curl -o run-artifacts.zip http://127.0.0.1:8000/reports/runs/<run_id>.zip
 curl http://127.0.0.1:8000/runs/<run_id>/cleanup-plan
+curl -X POST http://127.0.0.1:8000/execution/v3/runs/<run_id>/retry-failed
+curl -X POST http://127.0.0.1:8000/execution/v3/runs/<run_id>/cleanup
 ```
 
 ## CLI Examples

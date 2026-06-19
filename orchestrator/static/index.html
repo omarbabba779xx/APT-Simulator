@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>APT Simulator Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=dashboard-v4" />
+  <link rel="stylesheet" href="style.css?v=dashboard-v5" />
 </head>
 <body>
   <header class="topbar">
@@ -20,6 +20,8 @@
       <button class="tab" data-view="library">Scenario Library</button>
       <button class="tab" data-view="maturity">Maturity</button>
       <button class="tab" data-view="evidence">Evidence</button>
+      <button class="tab" data-view="platform">Platform</button>
+      <button class="tab" data-view="imports">Imports</button>
       <button class="tab" data-view="matrix">Matrix</button>
       <button class="tab" data-view="sync">Sync</button>
       <button class="tab" data-view="catalog">Catalog</button>
@@ -213,6 +215,85 @@
           </div>
           <div id="evidence-telemetry-bars" class="bar-list"></div>
         </div>
+      </div>
+    </section>
+
+    <section id="view-platform" class="view">
+      <div class="split-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Platform Readiness</h2>
+            <span id="platform-score" class="pill neutral">0%</span>
+          </div>
+          <div class="evidence-actions">
+            <a class="link-button" href="/platform/readiness" target="_blank" rel="noreferrer">Readiness JSON</a>
+            <a class="link-button" href="/reports/benchmark-pack.zip" target="_blank" rel="noreferrer">Benchmark ZIP</a>
+          </div>
+          <div id="platform-summary" class="sync-summary"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Execution Engine v3</h2>
+            <span id="engine-score" class="pill neutral">0%</span>
+          </div>
+          <div id="engine-summary" class="sync-summary"></div>
+        </div>
+      </div>
+      <div class="split-grid evidence-grid">
+        <div class="table-shell">
+          <div class="table-title">
+            <h2>Capability Scorecard</h2>
+            <span id="platform-count" class="pill neutral">0 areas</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Area</th><th>Status</th><th>Score</th><th>Evidence</th><th>Gaps</th></tr>
+            </thead>
+            <tbody id="platform-table"></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Engine Gates</h2>
+            <span id="engine-gate-count" class="pill neutral">0 gates</span>
+          </div>
+          <div id="engine-gates" class="gate-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-imports" class="view">
+      <div class="split-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Import Center</h2>
+            <span id="import-score" class="pill neutral">0%</span>
+          </div>
+          <div class="evidence-actions">
+            <a class="link-button" href="/imports/center" target="_blank" rel="noreferrer">Imports JSON</a>
+            <a class="link-button" href="/attack/sync/status" target="_blank" rel="noreferrer">Drift JSON</a>
+          </div>
+          <div id="import-summary" class="sync-summary"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Import Boundaries</h2>
+            <span class="pill neutral">Safety</span>
+          </div>
+          <div id="import-boundaries" class="sync-summary"></div>
+        </div>
+      </div>
+      <div class="table-shell evidence-grid">
+        <div class="table-title">
+          <h2>Official Source Lanes</h2>
+          <span id="imports-count" class="pill neutral">0 importers</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Source</th><th>Status</th><th>Loaded Items</th><th>Mode</th><th>Command</th></tr>
+          </thead>
+          <tbody id="imports-table"></tbody>
+        </table>
       </div>
     </section>
 
@@ -586,6 +667,6 @@
     <div id="dialog-body"></div>
   </dialog>
 
-  <script src="app.js?v=dashboard-v4"></script>
+  <script src="app.js?v=dashboard-v5"></script>
 </body>
 </html>
