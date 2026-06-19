@@ -1,0 +1,134 @@
+name: validated_apt40_saas_token_education_realistic_0356
+description: Fixture-backed SaaS token abuse and external sharing path for APT40-style
+  style defensive validation in the education sector (latam, realistic).
+target_platforms:
+- any
+actor: APT40-style
+tags:
+- validated
+- actor_chain
+- realistic
+- education
+- latam
+- saas-identity
+- identity
+- saas
+- m365
+- github
+- collection
+steps:
+- id: s01_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+- id: s02_azure_signin
+  ttp: T1078.004:AZURE_PORTAL_RISKY_SIGNIN
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s01_password_spray
+- id: s03_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s02_azure_signin
+- id: s04_token_creation
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s03_app_role_grant
+- id: s05_group_enum
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s04_token_creation
+- id: s06_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s05_group_enum
+- id: s07_drive_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s06_repo_clone
+- id: s08_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s07_drive_download
+- id: s09_cleanup_marker
+  ttp: T1070.004
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt40
+    sector: education
+    region: latam
+    difficulty: realistic
+    variant_index: 356
+  depends_on:
+  - s08_external_share

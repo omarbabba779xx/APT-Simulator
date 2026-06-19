@@ -81,13 +81,14 @@ Query sketches are emitted for:
 apt-scenario-builder generate --actor cloud-intrusion --difficulty realistic --steps 12
 apt-campaign build-queue --actors apt29,fin7,cloud-intrusion --repeats 5
 apt-campaign materialize-variants --count 2500 --offset 0 --stride 6272006 --out-dir scenarios/generated
+python tools/generate_validated_pack.py --target 1000 --refresh-generated
 apt-campaign replay-events --events 10000
 apt-emulation-plan-import scan <path-to-emulation-library>
 apt-emulation-plan-import convert <path-to-emulation-library> --out-dir scenarios/ael
 ```
 
 Generated scenarios use DAG dependencies and dry-run parameters by default.
-The 50 validated actor-chain scenarios live under `scenarios/validated/` and
+The 1,000 validated actor-chain scenarios live under `scenarios/validated/` and
 have fixture-backed evidence contracts under `evidence/`, including ECS fields,
-OCSF categories, SIEM fields, latency targets, report expectations, and 100 SOC
+OCSF categories, SIEM fields, latency targets, report expectations, and 2,000 SOC
 golden events.

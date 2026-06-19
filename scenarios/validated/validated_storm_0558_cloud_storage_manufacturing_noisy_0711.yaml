@@ -1,0 +1,145 @@
+name: validated_storm_0558_cloud_storage_manufacturing_noisy_0711
+description: Fixture-backed cloud storage discovery and transfer path for Storm-0558-style
+  style defensive validation in the manufacturing sector (apac, noisy).
+target_platforms:
+- any
+actor: Storm-0558-style
+tags:
+- validated
+- actor_chain
+- noisy
+- manufacturing
+- apac
+- cloud-k8s
+- cloud
+- storage
+- exfiltration
+steps:
+- id: s01_cloud_login
+  ttp: T1078.004:AWS_CONSOLE_LOGIN_SUCCESS
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+- id: s02_service_discovery
+  ttp: T1526:AWS_SERVICE_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s01_cloud_login
+- id: s03_storage_discovery
+  ttp: T1619:CLOUD_STORAGE_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s02_service_discovery
+- id: s04_infra_discovery
+  ttp: T1580:CLOUD_INFRA_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s03_storage_discovery
+- id: s05_object_burst
+  ttp: T1530:AWS_S3_OBJECT_BURST
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s04_infra_discovery
+- id: s06_object_collection
+  ttp: T1530:AWS_S3_OBJECT_COLLECTION_ADV
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s05_object_burst
+- id: s07_account_transfer
+  ttp: T1537:CLOUD_ACCOUNT_DATA_TRANSFER
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s06_object_collection
+- id: s08_archive_marker
+  ttp: T1560
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s07_account_transfer
+- id: s09_exfil_marker
+  ttp: T1048
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s08_archive_marker
+- id: s10_cleanup_marker
+  ttp: T1070.004
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.storm-0558
+    sector: manufacturing
+    region: apac
+    difficulty: noisy
+    variant_index: 711
+  depends_on:
+  - s09_exfil_marker

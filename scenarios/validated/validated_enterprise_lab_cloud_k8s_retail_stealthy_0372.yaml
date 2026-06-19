@@ -1,0 +1,146 @@
+name: validated_enterprise_lab_cloud_k8s_retail_stealthy_0372
+description: Fixture-backed cloud to Kubernetes control path for Enterprise Lab style
+  defensive validation in the retail sector (emea, stealthy).
+target_platforms:
+- linux
+actor: Enterprise Lab
+tags:
+- validated
+- actor_chain
+- stealthy
+- retail
+- emea
+- cloud-k8s
+- cloud
+- kubernetes
+- container
+- linux
+steps:
+- id: s01_cloud_login
+  ttp: T1078.004:AWS_IAM_CONSOLE_RISK
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+- id: s02_service_discovery
+  ttp: T1526:AWS_SERVICE_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s01_cloud_login
+- id: s03_infra_discovery
+  ttp: T1580:CLOUD_INFRA_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s02_service_discovery
+- id: s04_metadata_token
+  ttp: T1552.005:INSTANCE_METADATA_TOKEN_READ
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s03_infra_discovery
+- id: s05_admin_command
+  ttp: T1651:CLOUD_ADMIN_COMMAND
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s04_metadata_token
+- id: s06_k8s_discovery
+  ttp: T1613:K8S_RESOURCE_DISCOVERY_ADV
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s05_admin_command
+- id: s07_k8s_exec
+  ttp: T1059.013:K8S_API_EXEC
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s06_k8s_discovery
+- id: s08_cluster_role_binding
+  ttp: T1098.006:K8S_CLUSTER_ROLE_BINDING
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s07_k8s_exec
+- id: s09_service_create
+  ttp: T1543.005:K8S_SERVICE_CREATED
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s08_cluster_role_binding
+- id: s10_host_escape_signal
+  ttp: T1611:K8S_HOST_ESCAPE_SIGNAL
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.enterprise-lab
+    sector: retail
+    region: emea
+    difficulty: stealthy
+    variant_index: 372
+  depends_on:
+  - s09_service_create

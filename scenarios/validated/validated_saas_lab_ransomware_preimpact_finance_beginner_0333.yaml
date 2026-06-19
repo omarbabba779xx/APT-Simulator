@@ -1,0 +1,172 @@
+name: validated_saas_lab_ransomware_preimpact_finance_beginner_0333
+description: Fixture-backed ransomware pre-impact chain for SaaS Lab style defensive
+  validation in the finance sector (apac, beginner).
+target_platforms:
+- windows
+actor: SaaS Lab
+tags:
+- validated
+- actor_chain
+- beginner
+- finance
+- apac
+- windows-ad
+- windows
+- ad
+- ransomware
+- impact
+steps:
+- id: s01_domain_logon
+  ttp: T1078.002:AD_DOMAIN_ACCOUNT_LOGIN
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+- id: s02_account_enum
+  ttp: T1087.002:AD_DOMAIN_ACCOUNT_ENUM
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s01_domain_logon
+- id: s03_group_enum
+  ttp: T1069.002:AD_DOMAIN_GROUP_ENUM
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s02_account_enum
+- id: s04_remote_systems
+  ttp: T1018:AD_REMOTE_SYSTEM_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s03_group_enum
+- id: s05_sam_marker
+  ttp: T1003.002:AD_SAM_ACCESS_MARKER
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s04_remote_systems
+- id: s06_ntds_marker
+  ttp: T1003.003:AD_NTDS_ACCESS_MARKER
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s05_sam_marker
+- id: s07_winrm_lateral
+  ttp: T1021.006:AD_WINRM_LATERAL_PATH
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s06_ntds_marker
+- id: s08_gpo_marker
+  ttp: T1484.001:AD_GROUP_POLICY_MODIFICATION
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s07_winrm_lateral
+- id: s09_service_marker
+  ttp: T1543.003:AD_WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s08_gpo_marker
+- id: s10_archive_marker
+  ttp: T1560
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s09_service_marker
+- id: s11_impact_marker
+  ttp: T1486
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s10_archive_marker
+- id: s12_account_removal_marker
+  ttp: T1531:AD_ACCOUNT_ACCESS_REMOVAL
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.saas-lab
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 333
+  depends_on:
+  - s11_impact_marker

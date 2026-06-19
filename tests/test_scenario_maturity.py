@@ -8,14 +8,14 @@ def test_scenario_maturity_counts_validated_fixture_backed_scenarios() -> None:
     scenarios = load_scenarios_from_dir("scenarios")
     report = build_scenario_maturity(scenarios, limit_items=None)
 
-    assert report["total_scenarios"] == 2572
-    assert report["validated_scenarios"] == 50
-    assert report["fixture_backed_scenarios"] == 50
+    assert report["total_scenarios"] == 3522
+    assert report["validated_scenarios"] == 1000
+    assert report["fixture_backed_scenarios"] == 1000
     assert report["counts_by_kind"]["generated variant"] == 2500
     assert report["counts_by_kind"]["emulation plan"] == 11
-    assert report["counts_by_kind"]["validated actor-chain"] == 50
-    assert report["evidence_quality"]["with_siem_fields"] == 50
-    assert report["evidence_quality"]["with_detection_latency"] == 50
+    assert report["counts_by_kind"]["validated actor-chain"] == 1000
+    assert report["evidence_quality"]["with_siem_fields"] == 1000
+    assert report["evidence_quality"]["with_detection_latency"] == 1000
 
 
 def test_scenario_evidence_returns_golden_events() -> None:

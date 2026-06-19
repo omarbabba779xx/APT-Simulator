@@ -1,0 +1,121 @@
+name: validated_kimsuky_m365_data_telecom_noisy_0580
+description: Fixture-backed M365 data discovery and exposure path for Kimsuky-style
+  style defensive validation in the telecom sector (apac, noisy).
+target_platforms:
+- any
+actor: Kimsuky-style
+tags:
+- validated
+- actor_chain
+- noisy
+- telecom
+- apac
+- saas-identity
+- identity
+- m365
+- saas
+- collection
+- exfiltration
+steps:
+- id: s01_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+- id: s02_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s01_password_spray
+- id: s03_group_enum
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s02_risky_signin
+- id: s04_token_creation
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s03_group_enum
+- id: s05_drive_download
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s04_token_creation
+- id: s06_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s05_drive_download
+- id: s07_exfil_marker
+  ttp: T1048
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s06_external_share
+- id: s08_cleanup_marker
+  ttp: T1070.004
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.kimsuky
+    sector: telecom
+    region: apac
+    difficulty: noisy
+    variant_index: 580
+  depends_on:
+  - s07_exfil_marker

@@ -1,0 +1,172 @@
+name: validated_wizard_spider_fincrime_collection_energy_stealthy_0429
+description: Fixture-backed financial intrusion collection path for Wizard Spider-style
+  style defensive validation in the energy sector (emea, stealthy).
+target_platforms:
+- windows
+actor: Wizard Spider-style
+tags:
+- validated
+- actor_chain
+- stealthy
+- energy
+- emea
+- windows-ad
+- windows
+- fincrime
+- collection
+- lateral
+steps:
+- id: s01_powershell_marker
+  ttp: T1059.001:WINDOWS_POWERSHELL_ENCODED
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+- id: s02_wmi_marker
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s01_powershell_marker
+- id: s03_scheduled_task
+  ttp: T1053.005
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s02_wmi_marker
+- id: s04_service_marker
+  ttp: T1543.003:WINDOWS_SERVICE_CREATE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s03_scheduled_task
+- id: s05_process_discovery
+  ttp: T1057
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s04_service_marker
+- id: s06_credential_marker
+  ttp: T1003
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s05_process_discovery
+- id: s07_bruteforce_marker
+  ttp: T1110
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s06_credential_marker
+- id: s08_smb_lateral
+  ttp: T1021.002
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s07_bruteforce_marker
+- id: s09_local_collection
+  ttp: T1005
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s08_smb_lateral
+- id: s10_archive_marker
+  ttp: T1560
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s09_local_collection
+- id: s11_tool_transfer
+  ttp: T1105
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s10_archive_marker
+- id: s12_exfil_marker
+  ttp: T1041
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: windows-ad
+    principal: lab.wizard-spider
+    sector: energy
+    region: emea
+    difficulty: stealthy
+    variant_index: 429
+  depends_on:
+  - s11_tool_transfer

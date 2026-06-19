@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -71,11 +72,18 @@ def load_golden_events(path: str | Path = DEFAULT_GOLDEN_EVENTS_PATH) -> dict[st
     return out
 
 
+@lru_cache(maxsize=None)
 def _registered_ttp(attack_id: str) -> Any | None:
     exact = registry.get(attack_id)
     if exact:
         return exact
     return registry.get(_base_attack_id(attack_id))
+
+
+@lru_cache(maxsize=None)
+def _has_sigma_rule(attack_id: str) -> bool:
+    ttp = _registered_ttp(attack_id)
+    return bool(ttp and ttp.sigma_rule() is not None)
 
 
 def _scenario_tactics(scenario: Scenario) -> list[str]:
@@ -95,7 +103,7 @@ def _detection_coverage(scenario: Scenario) -> tuple[int, int, int]:
         if not ttp:
             continue
         registered += 1
-        if ttp.sigma_rule() is not None:
+        if _has_sigma_rule(step.ttp):
             with_rules += 1
     missing = max(len(scenario.steps) - registered, 0)
     return registered, with_rules, missing

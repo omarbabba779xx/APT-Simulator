@@ -25,6 +25,7 @@ Thumbs.db
 desktop.ini
 
 # Project runtime
+.omx/
 data/
 logs/
 *.db

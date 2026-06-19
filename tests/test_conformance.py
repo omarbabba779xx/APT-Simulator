@@ -25,21 +25,23 @@ def test_exact_public_counts() -> None:
     cfg = load_config("config/default.yaml")
     scenarios = load_scenarios_from_dir(cfg.orchestrator.scenarios_dir)
     assert len(registry.all()) == 5064
-    assert len(scenarios) == 2572
+    assert len(scenarios) == 3522
     assert len(list((ROOT / "scenarios" / "generated").glob("*.yaml"))) == 2500
     assert len(list((ROOT / "scenarios" / "ael").glob("*.yaml"))) == 11
-    assert len(list((ROOT / "scenarios" / "validated").glob("*.yaml"))) == 50
+    assert len(list((ROOT / "scenarios" / "validated").glob("*.yaml"))) == 1000
+    assert sum(1 for _ in (ROOT / "evidence" / "soc_golden_events.jsonl").open(encoding="utf-8")) == 2000
 
 
 def test_readme_states_exact_counts() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for expected in [
         "5,064 TTPs",
-        "2,572 loaded scenarios",
+        "3,522 loaded scenarios",
         "11 classic YAML scenarios",
         "2,500 generated YAML scenarios",
         "11 emulation-plan YAML scenarios",
-        "50 validated actor-chain YAML scenarios",
+        "1,000 validated actor-chain YAML scenarios",
+        "2,000 SOC golden event rows",
         "15,680,015,680 generable scenario variants",
         "5,064 Sigma rules",
         "15/15 current ATT&CK Enterprise tactics covered",

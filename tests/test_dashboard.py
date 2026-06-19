@@ -48,9 +48,9 @@ def test_coverage_endpoint(tmp_path) -> None:
 def test_loaded_scenarios_include_generated_yaml_variants(tmp_path) -> None:
     client = _client(tmp_path)
     health = client.get("/healthz").json()
-    assert health["scenarios_loaded"] == 2572
+    assert health["scenarios_loaded"] == 3522
     scenarios = client.get("/scenarios").json()
-    assert len(scenarios) == 2572
+    assert len(scenarios) == 3522
     assert any(name.startswith("apt29_beginner_") for name in scenarios)
     assert "ael_apt29" in scenarios
     assert "validated_apt29_identity_cloud_chain" in scenarios
@@ -61,7 +61,7 @@ def test_scenario_library_filters(tmp_path) -> None:
     r = client.get("/scenario-library", params={"source": "generated variant", "platform": "windows"})
     assert r.status_code == 200
     body = r.json()
-    assert body["total"] == 2572
+    assert body["total"] == 3522
     assert body["filtered"] > 0
     first = body["items"][0]
     assert first["kind"] == "generated variant"
@@ -73,7 +73,7 @@ def test_scenario_library_filters(tmp_path) -> None:
     assert ael["items"][0]["kind"] == "emulation plan"
 
     validated = client.get("/scenario-library", params={"source": "validated actor-chain"}).json()
-    assert validated["filtered"] == 50
+    assert validated["filtered"] == 1000
     assert validated["items"][0]["kind"] == "validated actor-chain"
 
 
@@ -99,15 +99,15 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert set(workbench["targets"]) == {"splunk", "elastic", "sentinel", "chronicle"}
 
     graph = client.get("/exposure/graph").json()
-    assert graph["scenario_count"] == 2572
+    assert graph["scenario_count"] == 3522
     assert graph["domain_counts"]["cloud"] > 0
     assert graph["domain_counts"]["container"] > 0
 
     maturity = client.get("/scenario-maturity").json()
-    assert maturity["total_scenarios"] == 2572
-    assert maturity["validated_scenarios"] == 50
-    assert maturity["fixture_backed_scenarios"] == 50
-    assert maturity["evidence_quality"]["with_siem_fields"] == 50
+    assert maturity["total_scenarios"] == 3522
+    assert maturity["validated_scenarios"] == 1000
+    assert maturity["fixture_backed_scenarios"] == 1000
+    assert maturity["evidence_quality"]["with_siem_fields"] == 1000
 
     evidence = client.get("/scenario-evidence/validated_apt29_identity_cloud_chain").json()
     assert evidence["found"] is True

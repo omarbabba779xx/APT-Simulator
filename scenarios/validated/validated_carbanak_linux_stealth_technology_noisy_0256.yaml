@@ -1,0 +1,146 @@
+name: validated_carbanak_linux_stealth_technology_noisy_0256
+description: Fixture-backed Linux low-noise persistence and C2 path for Carbanak style
+  defensive validation in the technology sector (emea, noisy).
+target_platforms:
+- linux
+actor: Carbanak
+tags:
+- validated
+- actor_chain
+- noisy
+- technology
+- emea
+- linux-fleet
+- linux
+- stealth
+- persistence
+- c2
+steps:
+- id: s01_local_accounts
+  ttp: T1087.001:LINUX_LOCAL_ACCOUNT_DISCOVERY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+- id: s02_system_discovery
+  ttp: T1082
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s01_local_accounts
+- id: s03_process_discovery
+  ttp: T1057
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s02_system_discovery
+- id: s04_shell_history_marker
+  ttp: T1059.004:LINUX_SHELL_HISTORY_DISABLE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s03_process_discovery
+- id: s05_cron_marker
+  ttp: T1053.003:LINUX_CRON_MARKER
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s04_shell_history_marker
+- id: s06_tool_transfer
+  ttp: T1105:LINUX_CURL_TOOL_TRANSFER
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s05_cron_marker
+- id: s07_obfuscation_marker
+  ttp: T1027
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s06_tool_transfer
+- id: s08_web_c2_marker
+  ttp: T1071.001
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s07_obfuscation_marker
+- id: s09_archive_marker
+  ttp: T1560
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s08_web_c2_marker
+- id: s10_cleanup_marker
+  ttp: T1070.004:LINUX_LOG_CLEAR
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: linux-fleet
+    principal: lab.carbanak
+    sector: technology
+    region: emea
+    difficulty: noisy
+    variant_index: 256
+  depends_on:
+  - s09_archive_marker

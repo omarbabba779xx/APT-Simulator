@@ -9,9 +9,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Area | Current state |
 | --- | --- |
 | Coverage catalog | 5,064 TTPs mapped to ATT&CK Enterprise techniques and controlled variants |
-| Scenario library | 2,572 loaded YAML scenarios available to the API and dashboard |
-| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 50 validated actor-chain scenarios |
-| Scenario maturity | 50 fixture-backed validated actor-chain scenarios with SOC evidence contracts |
+| Scenario library | 3,522 loaded YAML scenarios available to the API and dashboard |
+| Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 1,000 validated actor-chain scenarios |
+| Scenario maturity | 1,000 fixture-backed validated actor-chain scenarios with 2,000 SOC golden event rows |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -37,11 +37,12 @@ flowchart LR
 ## Exact Current Counts
 
 - 5,064 TTPs
-- 2,572 loaded scenarios
+- 3,522 loaded scenarios
 - 11 classic YAML scenarios
 - 2,500 generated YAML scenarios
 - 11 emulation-plan YAML scenarios
-- 50 validated actor-chain YAML scenarios
+- 1,000 validated actor-chain YAML scenarios
+- 2,000 SOC golden event rows
 - 15,680,015,680 generable scenario variants
 - 5,064 Sigma rules
 - 15/15 current ATT&CK Enterprise tactics covered
@@ -51,9 +52,9 @@ flowchart LR
 - 36 Cloud/Kubernetes lab TTPs in the `cloud_k8s_lab` pack
 - 28 Active Directory/Windows enterprise lab TTPs in the `ad_enterprise_lab` pack
 
-The 2,572 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
+The 3,522 loaded scenarios are committed as complete YAML scenario definitions and are available through the orchestrator and dashboard. The larger deterministic variant space remains available for preview and controlled batch generation.
 
-The 50 validated actor-chain scenarios are full scenario DAGs with fixture-backed SOC evidence contracts under `evidence/`. They are not counted as generated variants and are exposed separately in the Scenario Library and Scenario Maturity views.
+The 1,000 validated actor-chain scenarios are full scenario DAGs with fixture-backed SOC evidence contracts under `evidence/`. They are not counted as generated variants and are exposed separately in the Scenario Library and Scenario Maturity views.
 
 The ATT&CK sync layer uses a bundled Enterprise STIX snapshot, detects missing, extra, deprecated, and revoked local technique IDs, and keeps the dashboard aligned to the current 15 tactic Enterprise model.
 
@@ -79,7 +80,7 @@ pie title Loaded scenario library
     "Classic YAML scenarios" : 11
     "Generated YAML scenarios" : 2500
     "Emulation-plan scenarios" : 11
-    "Validated actor-chain scenarios" : 12
+    "Validated actor-chain scenarios" : 1000
 ```
 
 ```mermaid
@@ -87,7 +88,7 @@ flowchart LR
     Actors["Actor profiles"] --> Variants["Deterministic variant builder"]
     Difficulty["Difficulty levels"] --> Variants
     Platforms["Windows, Linux, macOS, cloud, identity, SaaS"] --> Variants
-    AEL["Emulation-plan imports"] --> Loaded["2,572 loaded YAML scenarios"]
+    AEL["Emulation-plan imports"] --> Loaded["3,522 loaded YAML scenarios"]
     Validated["Fixture-backed actor-chain scenarios"] --> Loaded
     Variants --> Loaded
     Variants --> Space["15,680,015,680 generable variants"]
@@ -102,7 +103,7 @@ flowchart TD
     Sigma --> Workbench["Rule quality scoring"]
     Events --> Workbench
     Workbench --> Targets["Splunk, Elastic, Sentinel, Chronicle export readiness"]
-    Scenarios["2,572 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
+    Scenarios["3,522 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
     Scenarios --> Maturity["Scenario maturity and evidence scoring"]
     Evidence["Golden event contracts"] --> Maturity
 ```
@@ -124,7 +125,7 @@ flowchart TD
 
 - It is not an offensive framework.
 - It is not intended for systems without written authorization.
-- It stores the complete 2,572-scenario loaded library; larger variant batches are generated on demand.
+- It stores the complete 3,522-scenario loaded library; larger variant batches are generated on demand.
 - Fixture-backed scenarios include expected telemetry contracts; they are not claims of external SIEM certification.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
@@ -144,7 +145,7 @@ flowchart TD
 orchestrator/   FastAPI app, planner, dashboard API, reports, scenario loader
 agent/          Beacon agent and local runner
 ttps/           TTP registry, Python TTPs, catalog-backed TTP packs
-scenarios/      11 classic, 2,500 generated, 11 emulation-plan, and 50 validated YAML scenarios
+scenarios/      11 classic, 2,500 generated, 11 emulation-plan, and 1,000 validated YAML scenarios
 evidence/       Scenario evidence contracts and SOC golden event fixtures
 detection/      Sigma rules, coverage metadata, fixture/query export targets
 profiles/       Actor profile inputs
@@ -370,7 +371,13 @@ python -m orchestrator.exposure_graph graph --out exposure-graph.json
 python -m orchestrator.scenario_maturity summary
 ```
 
-The maturity report separates generated variants from validated actor-chain scenarios, tracks evidence-backed scenarios, and surfaces missing evidence for static or imported scenarios. The 50 validated scenarios include Sigma match references, ECS fields, OCSF categories, SIEM fields, detection latency targets, report expectations, and 100 golden SOC events.
+Regenerate the validated actor-chain scenario pack:
+
+```bash
+python tools/generate_validated_pack.py --target 1000 --refresh-generated
+```
+
+The maturity report separates generated variants from validated actor-chain scenarios, tracks evidence-backed scenarios, and surfaces missing evidence for static or imported scenarios. The 1,000 validated scenarios include Sigma match references, ECS fields, OCSF categories, SIEM fields, detection latency targets, report expectations, and 2,000 golden SOC events.
 
 ## Lab Profiles
 
@@ -416,8 +423,9 @@ node --check orchestrator/static/app.js
 Conformance tests verify:
 
 - TTP count is exactly 5,064.
-- Loaded scenario count is exactly 2,572.
-- Validated actor-chain scenario count is exactly 50.
+- Loaded scenario count is exactly 3,522.
+- Validated actor-chain scenario count is exactly 1,000.
+- SOC golden event row count is exactly 2,000.
 - README count statements match the current implementation.
 - ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
 - Public text files do not include forbidden public tooling markers.
@@ -429,10 +437,10 @@ The repository stores the complete loaded scenario library:
 - `scenarios/*.yaml` contains 11 classic scenario files.
 - `scenarios/generated/*.yaml` contains 2,500 generated scenario files.
 - `scenarios/ael/*.yaml` contains 11 emulation-plan scenario files.
-- `scenarios/validated/*.yaml` contains 50 fixture-backed validated actor-chain scenario files.
-- `evidence/soc_golden_events.jsonl` contains two golden event rows per validated scenario, 100 rows total.
+- `scenarios/validated/*.yaml` contains 1,000 fixture-backed validated actor-chain scenario files.
+- `evidence/soc_golden_events.jsonl` contains two golden event rows per validated scenario, 2,000 rows total.
 - Each generated file is a complete scenario DAG with actor, target platforms, tags, steps, TTP IDs, parameters, and dependencies.
-- The loader reads the full directory tree and loads all 2,572 scenarios directly.
+- The loader reads the full directory tree and loads all 3,522 scenarios directly.
 
 ## License
 

@@ -1,0 +1,134 @@
+name: validated_apt29_identity_saas_finance_beginner_0481
+description: Fixture-backed identity to SaaS collection for APT29 style defensive
+  validation in the finance sector (apac, beginner).
+target_platforms:
+- any
+actor: APT29
+tags:
+- validated
+- actor_chain
+- beginner
+- finance
+- apac
+- saas-identity
+- identity
+- saas
+- cloud
+- m365
+- okta
+steps:
+- id: s01_password_spray
+  ttp: T1110.003:M365_PASSWORD_SPRAY
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+- id: s02_mfa_policy_marker
+  ttp: T1556.009:OKTA_MFA_POLICY_WEAKEN
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s01_password_spray
+- id: s03_risky_signin
+  ttp: T1078.004:IDENTITY_RISKY_SIGNIN
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s02_mfa_policy_marker
+- id: s04_app_role_grant
+  ttp: T1098.003:ENTRA_APP_ROLE_GRANT
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s03_risky_signin
+- id: s05_token_creation
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s04_app_role_grant
+- id: s06_group_enumeration
+  ttp: T1087.004:M365_GROUP_ENUMERATION
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s05_token_creation
+- id: s07_drive_collection
+  ttp: T1530:GOOGLE_DRIVE_BULK_DOWNLOAD
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s06_group_enumeration
+- id: s08_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s07_drive_collection
+- id: s09_cleanup_marker
+  ttp: T1070.004
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: saas-identity
+    principal: lab.apt29
+    sector: finance
+    region: apac
+    difficulty: beginner
+    variant_index: 481
+  depends_on:
+  - s08_external_share

@@ -39,8 +39,8 @@
 
 ## Phase 5 - Evidence, Product Readiness, And Persistent Operations - Complete
 
-- [x] 50 fixture-backed validated actor-chain scenarios.
-- [x] 100 SOC golden event rows with ECS, OCSF, SIEM, latency, and cleanup fields.
+- [x] 1,000 fixture-backed validated actor-chain scenarios.
+- [x] 2,000 SOC golden event rows with ECS, OCSF, SIEM, latency, and cleanup fields.
 - [x] Scenario maturity scoring with evidence-quality counters.
 - [x] Persistent execution queue entries.
 - [x] Persistent run history, step logs, and artifact records.

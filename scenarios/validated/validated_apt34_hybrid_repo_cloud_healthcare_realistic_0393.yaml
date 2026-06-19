@@ -1,0 +1,174 @@
+name: validated_apt34_hybrid_repo_cloud_healthcare_realistic_0393
+description: Fixture-backed hybrid endpoint to source repository and cloud path for
+  APT34-style style defensive validation in the healthcare sector (latam, realistic).
+target_platforms:
+- windows
+- linux
+actor: APT34-style
+tags:
+- validated
+- actor_chain
+- realistic
+- healthcare
+- latam
+- cloud-k8s
+- hybrid
+- cloud
+- saas
+- kubernetes
+- repository
+steps:
+- id: s01_system_discovery
+  ttp: T1082
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+- id: s02_user_discovery
+  ttp: T1033
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s01_system_discovery
+- id: s03_wmi_marker
+  ttp: T1047:WINDOWS_WMI_PROCESS_CREATE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s02_user_discovery
+- id: s04_gcp_console
+  ttp: T1078.004:GCP_CONSOLE_SESSION
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s03_wmi_marker
+- id: s05_project_enum
+  ttp: T1580:GCP_PROJECT_ENUMERATION
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s04_gcp_console
+- id: s06_token_creation
+  ttp: T1098.005:SAAS_TOKEN_CREATED
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s05_project_enum
+- id: s07_repo_clone
+  ttp: T1213.003:GITHUB_PRIVATE_REPO_CLONE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s06_token_creation
+- id: s08_k8s_discovery
+  ttp: T1613:K8S_RESOURCE_DISCOVERY_ADV
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s07_repo_clone
+- id: s09_web_c2_marker
+  ttp: T1071.001
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s08_k8s_discovery
+- id: s10_external_share
+  ttp: T1567.002:SAAS_EXTERNAL_SHARE
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s09_web_c2_marker
+- id: s11_archive_marker
+  ttp: T1560
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s10_external_share
+- id: s12_cleanup_marker
+  ttp: T1070.004
+  params:
+    dry_run: true
+    safety_mode: marker_only
+    lab_profile: cloud-k8s
+    principal: lab.apt34
+    sector: healthcare
+    region: latam
+    difficulty: realistic
+    variant_index: 393
+  depends_on:
+  - s11_archive_marker
