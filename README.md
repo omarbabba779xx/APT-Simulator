@@ -12,6 +12,7 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Scenario library | 3,522 loaded YAML scenarios available to the API and dashboard |
 | Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 1,000 validated actor-chain scenarios |
 | Scenario maturity | 1,000 fixture-backed validated actor-chain scenarios with 2,000 SOC golden event rows |
+| Evidence exports | Global evidence ZIP and per-scenario evidence ZIP reports |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -117,6 +118,7 @@ flowchart TD
 - Builds scenario batches from deterministic variant space.
 - Produces JSON and HTML reports for runs and campaigns.
 - Produces ZIP artifact bundles for persistent run history.
+- Produces global and per-scenario evidence ZIP bundles for SOC review.
 - Tracks ATT&CK snapshot drift and detection-rule quality.
 - Builds a controlled exposure graph from loaded scenarios and catalog domains.
 - Scores scenario maturity using actor depth, DAG structure, tactic coverage, detection coverage, and evidence fixtures.
@@ -191,6 +193,7 @@ The dashboard includes:
 | Overview | Counts, coverage, detection score, and recent run state. |
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
+| Evidence Center | Review quality gates, evidence coverage, telemetry spread, and download evidence ZIP bundles. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
 | TTP Catalog | Search and filter registered TTPs and safety tiers. |
@@ -223,8 +226,11 @@ Scenario maturity and evidence:
 
 ```bash
 curl http://127.0.0.1:8000/scenario-maturity
+curl http://127.0.0.1:8000/evidence/summary
 curl http://127.0.0.1:8000/scenario-evidence/validated_apt29_identity_cloud_chain
 curl http://127.0.0.1:8000/reports/scenarios/validated_apt29_identity_cloud_chain.json
+curl -o scenario-evidence.zip http://127.0.0.1:8000/reports/scenarios/validated_apt29_identity_cloud_chain.zip
+curl -o evidence-pack.zip http://127.0.0.1:8000/reports/evidence-pack.zip
 curl http://127.0.0.1:8000/history/runs
 curl http://127.0.0.1:8000/execution/queue
 curl http://127.0.0.1:8000/lab-profiles

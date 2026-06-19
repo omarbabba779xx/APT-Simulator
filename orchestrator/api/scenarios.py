@@ -8,13 +8,16 @@ import time
 import uuid
 import zipfile
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, cast
 
+import yaml
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import HTMLResponse, Response
 
 from ..core.auth import require_role
 from ..dsl.schema import Scenario
+from ..evidence_center import build_evidence_summary, validated_scenario_files
 from ..scenario_builder import (
     DIFFICULTY_STEPS,
     build_scenario,
@@ -293,6 +296,61 @@ def scenario_report_json(scenario_name: str, _claims=require_role("viewer")) -> 
 @router.get("/reports/scenarios/{scenario_name}.html", response_class=HTMLResponse)
 def scenario_report_html(scenario_name: str, _claims=require_role("viewer")) -> HTMLResponse:
     return HTMLResponse(_report_html(scenario_report_json(scenario_name), f"Scenario {scenario_name}"))
+
+
+@router.get("/reports/scenarios/{scenario_name}.zip")
+def scenario_report_zip(scenario_name: str, _claims=require_role("viewer")) -> Response:
+    report = scenario_report_json(scenario_name)
+    evidence = cast(dict[str, Any], report["evidence"])
+    evidence_contract = cast(dict[str, Any], evidence.get("evidence", {}))
+    golden_events = cast(list[dict[str, Any]], evidence.get("golden_events", []))
+    bundle = io.BytesIO()
+    with zipfile.ZipFile(bundle, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("report.json", json.dumps(report, indent=2, sort_keys=True))
+        archive.writestr("report.html", _report_html(report, f"Scenario {scenario_name}"))
+        archive.writestr("scenario.yaml", yaml.safe_dump(report["scenario"], sort_keys=False))
+        archive.writestr("maturity.json", json.dumps(report["maturity"], indent=2, sort_keys=True))
+        archive.writestr("evidence.json", json.dumps(evidence, indent=2, sort_keys=True))
+        archive.writestr(
+            "golden_events.jsonl",
+            "".join(json.dumps(event, sort_keys=True) + "\n" for event in golden_events),
+        )
+        archive.writestr("runbook.md", _scenario_runbook_markdown(scenario_name, evidence_contract))
+    return Response(
+        bundle.getvalue(),
+        media_type="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="{scenario_name}-evidence.zip"'},
+    )
+
+
+@router.get("/evidence/summary")
+def evidence_summary(_claims=require_role("viewer")) -> dict[str, object]:
+    return build_evidence_summary(get_state().scenarios)
+
+
+@router.get("/reports/evidence-pack.zip")
+def evidence_pack_zip(_claims=require_role("viewer")) -> Response:
+    summary = evidence_summary()
+    bundle = io.BytesIO()
+    with zipfile.ZipFile(bundle, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("manifest.json", json.dumps(summary, indent=2, sort_keys=True))
+        for source, name in [
+            (Path("evidence/scenario_evidence.yaml"), "evidence/scenario_evidence.yaml"),
+            (Path("evidence/soc_golden_events.jsonl"), "evidence/soc_golden_events.jsonl"),
+            (Path("docs/PUBLIC_EVIDENCE.md"), "docs/PUBLIC_EVIDENCE.md"),
+        ]:
+            if source.exists():
+                archive.write(source, name)
+        index = []
+        for path in validated_scenario_files():
+            archive.write(path, f"scenarios/validated/{path.name}")
+            index.append(path.stem)
+        archive.writestr("validated_index.json", json.dumps(index, indent=2, sort_keys=True))
+    return Response(
+        bundle.getvalue(),
+        media_type="application/zip",
+        headers={"Content-Disposition": 'attachment; filename="apt-simulator-evidence-pack.zip"'},
+    )
 
 
 @router.get("/scenario-builder/preview")
@@ -840,6 +898,21 @@ def _report_html(data: dict[str, object], title: str) -> str:
         "th{width:220px;background:#f5f5f5;}</style></head><body>"
         f"<h1>{html.escape(title)}</h1><table>{''.join(rows)}</table></body></html>"
     )
+
+
+def _scenario_runbook_markdown(scenario_name: str, evidence: dict[str, Any]) -> str:
+    lines = [f"# {scenario_name}", "", "## Runbook"]
+    for item in evidence.get("runbook", []):
+        lines.append(f"- {item}")
+    lines.extend(["", "## Success Criteria"])
+    for item in evidence.get("success_criteria", []):
+        lines.append(f"- {item}")
+    lines.extend(["", "## Detection Fields"])
+    lines.append(f"- Sigma matches: {', '.join(evidence.get('sigma_matches', []))}")
+    lines.append(f"- ECS fields: {', '.join(evidence.get('ecs_fields', []))}")
+    lines.append(f"- OCSF categories: {', '.join(evidence.get('ocsf_categories', []))}")
+    lines.append(f"- SIEM fields: {', '.join(evidence.get('siem_fields', []))}")
+    return "\n".join(lines) + "\n"
 
 
 def _summarize(run) -> RunSummary:

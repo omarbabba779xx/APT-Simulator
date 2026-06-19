@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import io
+import json
+import zipfile
+
 from fastapi.testclient import TestClient
 
 from orchestrator.main import build_app
@@ -25,6 +29,7 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "APT Simulator" in r.text
     assert "Scenario Builder" in r.text
     assert "Scenario Library" in r.text
+    assert "Evidence Center" in r.text
     assert "TTP Catalog" in r.text
     assert "Project Boundaries" in r.text
     assert "Not an offensive framework" in r.text
@@ -113,11 +118,53 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert evidence["found"] is True
     assert len(evidence["golden_events"]) == 2
 
+    evidence_summary = client.get("/evidence/summary").json()
+    assert evidence_summary["counts"]["validated_scenarios"] == 1000
+    assert evidence_summary["counts"]["golden_event_rows"] == 2000
+    assert evidence_summary["readiness_score"] == 100
+    assert all(gate["passed"] for gate in evidence_summary["quality_gates"])
+
     labs = client.get("/lab-profiles").json()
     assert len(labs) == 4
 
     access = client.get("/access/rbac").json()
     assert access["roles"] == ["viewer", "operator", "admin"]
+
+
+def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> None:
+    client = _client(tmp_path)
+
+    scenario_bundle = client.get("/reports/scenarios/validated_apt29_identity_cloud_chain.zip")
+    assert scenario_bundle.status_code == 200
+    assert scenario_bundle.headers["content-type"] == "application/zip"
+    with zipfile.ZipFile(io.BytesIO(scenario_bundle.content)) as archive:
+        names = set(archive.namelist())
+        assert {
+            "report.json",
+            "report.html",
+            "scenario.yaml",
+            "maturity.json",
+            "evidence.json",
+            "golden_events.jsonl",
+            "runbook.md",
+        } <= names
+        evidence = json.loads(archive.read("evidence.json"))
+        assert evidence["found"] is True
+        assert len(archive.read("golden_events.jsonl").decode().splitlines()) == 2
+
+    evidence_pack = client.get("/reports/evidence-pack.zip")
+    assert evidence_pack.status_code == 200
+    assert evidence_pack.headers["content-type"] == "application/zip"
+    with zipfile.ZipFile(io.BytesIO(evidence_pack.content)) as archive:
+        names = set(archive.namelist())
+        manifest = json.loads(archive.read("manifest.json"))
+        index = json.loads(archive.read("validated_index.json"))
+        assert manifest["counts"]["validated_scenarios"] == 1000
+        assert manifest["counts"]["golden_event_rows"] == 2000
+        assert len(index) == 1000
+        assert "evidence/scenario_evidence.yaml" in names
+        assert "evidence/soc_golden_events.jsonl" in names
+        assert "scenarios/validated/validated_apt29_identity_cloud_chain.yaml" in names
 
 
 def test_scenario_builder_preview(tmp_path) -> None:

@@ -18,6 +18,7 @@ const state = {
   workbench: null,
   exposure: null,
   maturity: null,
+  evidenceSummary: null,
   space: null,
   library: { items: [], counts: {}, total: 0, filtered: 0 },
   campaigns: [],
@@ -148,6 +149,7 @@ async function refreshStatic() {
     api("/detections/workbench").then((data) => { state.workbench = data; }),
     api("/exposure/graph").then((data) => { state.exposure = data; }),
     api("/scenario-maturity").then((data) => { state.maturity = data; }),
+    api("/evidence/summary").then((data) => { state.evidenceSummary = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
     api("/scenario-library").then((data) => { state.library = data; }),
     api("/lab-profiles").then((data) => { state.labProfiles = data; }),
@@ -165,6 +167,7 @@ async function refreshStatic() {
   renderWorkbench();
   renderExposure();
   renderMaturity();
+  renderEvidenceCenter();
   renderLabProfiles();
   renderAccess();
   renderVariantSpace();
@@ -416,6 +419,12 @@ function renderMaturity() {
           rel: "noreferrer",
           class: "inline-report",
         }, "JSON"),
+        node("a", {
+          href: `/reports/scenarios/${item.name}.zip`,
+          target: "_blank",
+          rel: "noreferrer",
+          class: "inline-report",
+        }, "ZIP"),
       ]),
     ]));
   }
@@ -426,6 +435,60 @@ function renderMaturity() {
     .map(([label, count]) => ({ label, count }))
     .sort((a, b) => b.count - a.count);
   renderBars("maturity-bars", bars);
+}
+
+function renderEvidenceCenter() {
+  const summary = state.evidenceSummary;
+  const score = byId("evidence-score");
+  const summaryBox = byId("evidence-summary");
+  const gatesBox = byId("evidence-gates");
+  const gateCount = byId("evidence-gate-count");
+  if (!score || !summaryBox || !gatesBox || !gateCount) return;
+  clear(summaryBox);
+  clear(gatesBox);
+  if (!summary) {
+    score.textContent = "0%";
+    gateCount.textContent = "0 gates";
+    summaryBox.appendChild(node("p", { class: "empty" }, "No evidence summary"));
+    return;
+  }
+  score.textContent = `${summary.readiness_score || 0}%`;
+  score.className = (summary.readiness_score || 0) >= 100 ? "pill ok" : "pill warn";
+  const counts = summary.counts || {};
+  const rows = [
+    ["Loaded scenarios", fmtInt(counts.loaded_scenarios)],
+    ["Validated scenarios", fmtInt(counts.validated_scenarios)],
+    ["Evidence contracts", fmtInt(counts.evidence_contracts)],
+    ["Golden event rows", fmtInt(counts.golden_event_rows)],
+    ["Actors", fmtInt(counts.actors)],
+    ["Telemetry sources", fmtInt(counts.telemetry_sources)],
+  ];
+  for (const [label, value] of rows) {
+    summaryBox.appendChild(node("div", { class: "summary-row" }, [
+      node("span", {}, label),
+      node("strong", {}, value),
+    ]));
+  }
+
+  const gates = summary.quality_gates || [];
+  gateCount.textContent = `${gates.filter((gate) => gate.passed).length}/${gates.length} gates`;
+  gateCount.className = gates.every((gate) => gate.passed) ? "pill ok" : "pill warn";
+  for (const gate of gates) {
+    gatesBox.appendChild(node("div", { class: gate.passed ? "gate-row passed" : "gate-row failed" }, [
+      node("span", {}, gate.name),
+      node("strong", {}, `${fmtInt(gate.actual)} / ${fmtInt(gate.expected)}`),
+    ]));
+  }
+
+  const labRows = Object.entries(summary.lab_profiles || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+  const telemetryRows = Object.entries(summary.telemetry_sources || {})
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12);
+  renderBars("evidence-lab-bars", labRows);
+  renderBars("evidence-telemetry-bars", telemetryRows);
 }
 
 function renderCatalogFilters() {

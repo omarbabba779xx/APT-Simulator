@@ -49,6 +49,7 @@
 - [x] Lab profiles for Windows AD, Linux fleet, Cloud/Kubernetes, and SaaS/Identity testing.
 - [x] Dashboard History, Labs, and Access views.
 - [x] Public evidence and verification guide.
+- [x] Evidence Center with readiness gates and downloadable evidence ZIP bundles.
 
 ## Next Reference-Level Work
 

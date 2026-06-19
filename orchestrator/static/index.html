@@ -19,6 +19,7 @@
       <button class="tab is-active" data-view="overview">Overview</button>
       <button class="tab" data-view="library">Scenario Library</button>
       <button class="tab" data-view="maturity">Maturity</button>
+      <button class="tab" data-view="evidence">Evidence</button>
       <button class="tab" data-view="matrix">Matrix</button>
       <button class="tab" data-view="sync">Sync</button>
       <button class="tab" data-view="catalog">Catalog</button>
@@ -172,6 +173,45 @@
             <span id="maturity-score" class="pill neutral">0 avg</span>
           </div>
           <div id="maturity-bars" class="bar-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-evidence" class="view">
+      <div class="split-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Evidence Center</h2>
+            <span id="evidence-score" class="pill neutral">0%</span>
+          </div>
+          <div class="evidence-actions">
+            <a class="link-button" href="/reports/evidence-pack.zip" target="_blank" rel="noreferrer">Evidence ZIP</a>
+            <a class="link-button" href="/evidence/summary" target="_blank" rel="noreferrer">Summary JSON</a>
+          </div>
+          <div id="evidence-summary" class="sync-summary"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Quality Gates</h2>
+            <span id="evidence-gate-count" class="pill neutral">0 gates</span>
+          </div>
+          <div id="evidence-gates" class="gate-list"></div>
+        </div>
+      </div>
+      <div class="split-grid evidence-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Lab Profiles</h2>
+            <span class="pill neutral">Validated</span>
+          </div>
+          <div id="evidence-lab-bars" class="bar-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Telemetry Sources</h2>
+            <span class="pill neutral">SOC</span>
+          </div>
+          <div id="evidence-telemetry-bars" class="bar-list"></div>
         </div>
       </div>
     </section>

@@ -562,9 +562,46 @@ legend {
 
 .sync-summary,
 .drift-list,
-.exposure-graph {
+.exposure-graph,
+.gate-list {
   display: grid;
   gap: 8px;
+}
+
+.evidence-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.evidence-grid {
+  margin-top: 14px;
+}
+
+.gate-row {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfe;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gate-row span {
+  color: var(--muted);
+}
+
+.gate-row.passed {
+  border-color: #b7ebc8;
+  background: #f0fdf4;
+}
+
+.gate-row.failed {
+  border-color: #fed7aa;
+  background: #fff7ed;
 }
 
 .drift-group {

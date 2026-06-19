@@ -33,6 +33,7 @@ Expected core results:
 5. Start one validated scenario.
 6. Open History and download JSON, HTML, and ZIP artifacts.
 7. Open Labs and choose one of Windows AD, Linux Fleet, Cloud/Kubernetes, or SaaS/Identity.
+8. Open Evidence Center and download the global evidence ZIP or one scenario ZIP.
 
 ## Capability Matrix
 
@@ -41,6 +42,7 @@ Expected core results:
 | ATT&CK coverage | Bundled Enterprise snapshot, drift status, 15/15 tactics, 696 local base IDs |
 | Scenario depth | 1,000 fixture-backed actor-chain DAGs with runbooks and success criteria |
 | SOC evidence | ECS fields, OCSF categories, SIEM fields, latency targets, 2,000 golden events |
+| Evidence exports | `/evidence/summary`, `/reports/evidence-pack.zip`, and per-scenario ZIP bundles |
 | Campaigns | 10/50/100 launch controls, scheduling, repeat, pause, resume, retry failed |
 | Execution state | Persistent run history, queue entries, step logs, cleanup status |
 | Reports | JSON, HTML, and ZIP artifact bundles |
