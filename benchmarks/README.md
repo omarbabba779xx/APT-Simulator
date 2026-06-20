@@ -16,6 +16,10 @@ This folder contains reproducible local checks for the public project claims.
 | Load-test profiles | 5 |
 | SIEM connector targets | 4 |
 | SIEM validation targets | 4 |
+| Platform readiness areas | 25 |
+| Enterprise hardening areas | 8 |
+| Cloud sandbox profiles | 4 |
+| Secret backend lanes | 6 |
 
 ## API Evidence
 
@@ -41,6 +45,7 @@ Extra validation surfaces:
 - `/siem/connectors/status` and `/siem/connectors/sample` expose Splunk HEC, Elastic bulk, Sentinel Data Collector, and Chronicle UDM payload contracts.
 - `/lab-evidence/summary` exposes imported real-lab evidence records and their scenario/TTP coverage.
 - `siem_mock_smoke.md` documents local mock ingestion checks.
-- `/enterprise/readiness` exposes enterprise validation, access, secrets, audit, packaging, SIEM, and load readiness.
+- `/enterprise/readiness` exposes enterprise validation, hardening, access, secrets, audit, packaging, SIEM, and load readiness.
+- `/enterprise/hardening` exposes TTP quality, fleet, import fidelity, cloud sandbox, secret backends, performance, compliance, and public proof.
 - `enterprise_validation.md` documents the 11 enterprise validation tracks.
 - `load_campaign_plan.json` defines 10, 50, 100, 500, and 1,000 scenario load profiles.

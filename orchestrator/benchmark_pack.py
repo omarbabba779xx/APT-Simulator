@@ -18,6 +18,17 @@ from .enterprise import (
 )
 from .evidence_center import build_evidence_summary
 from .execution_engine_v3 import build_engine_status
+from .enterprise_hardening import (
+    cloud_sandbox_readiness_report,
+    compliance_readiness_report,
+    enterprise_hardening_report,
+    fleet_readiness_report,
+    importer_fidelity_report,
+    performance_plan,
+    public_proof_readiness_report,
+    secrets_backends_report,
+    ttp_quality_report,
+)
 from .import_center import build_import_center
 from .lab_evidence import lab_evidence_summary
 from .platform_readiness import build_platform_readiness
@@ -66,6 +77,17 @@ def build_benchmark_manifest(state: AppState) -> dict[str, Any]:
             "/enterprise/siem-validation",
             "/lab-evidence/summary",
             "/lab-evidence/template",
+            "/enterprise/hardening",
+            "/enterprise/quality/ttps",
+            "/enterprise/fleet/readiness",
+            "/enterprise/import-fidelity",
+            "/enterprise/cloud-sandbox/readiness",
+            "/enterprise/secrets/backends",
+            "/enterprise/performance/plan",
+            "POST /enterprise/performance/smoke",
+            "/enterprise/compliance/readiness",
+            "/enterprise/public-proof/readiness",
+            "/reports/backup-export.zip",
             "/reports/audit-export.zip",
             "/evidence/summary",
             "/detections/workbench",
@@ -132,6 +154,42 @@ def build_benchmark_zip(state: AppState) -> bytes:
             "api/enterprise_siem_validation.json",
             json.dumps(siem_validation_report(), indent=2, sort_keys=True),
         )
+        archive.writestr(
+            "api/enterprise_hardening.json",
+            json.dumps(enterprise_hardening_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_ttp_quality.json",
+            json.dumps(ttp_quality_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_fleet_readiness.json",
+            json.dumps(fleet_readiness_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_import_fidelity.json",
+            json.dumps(importer_fidelity_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_cloud_sandbox.json",
+            json.dumps(cloud_sandbox_readiness_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_secrets_backends.json",
+            json.dumps(secrets_backends_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_performance_plan.json",
+            json.dumps(performance_plan(), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_compliance.json",
+            json.dumps(compliance_readiness_report(state), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/enterprise_public_proof.json",
+            json.dumps(public_proof_readiness_report(state), indent=2, sort_keys=True),
+        )
         for path in BENCHMARK_FILES:
             if path.exists():
                 archive.write(path, str(path).replace("\\", "/"))
@@ -141,6 +199,8 @@ def build_benchmark_zip(state: AppState) -> bytes:
             archive.write("docs/PUBLIC_EVIDENCE.md", "project/docs/PUBLIC_EVIDENCE.md")
         if Path("docs/ENTERPRISE_VALIDATION.md").exists():
             archive.write("docs/ENTERPRISE_VALIDATION.md", "project/docs/ENTERPRISE_VALIDATION.md")
+        if Path("docs/ENTERPRISE_HARDENING.md").exists():
+            archive.write("docs/ENTERPRISE_HARDENING.md", "project/docs/ENTERPRISE_HARDENING.md")
         if Path("docs/PRODUCTION_DEPLOYMENT.md").exists():
             archive.write("docs/PRODUCTION_DEPLOYMENT.md", "project/docs/PRODUCTION_DEPLOYMENT.md")
     return bundle.getvalue()
@@ -160,6 +220,8 @@ def sample_benchmark_report() -> dict[str, Any]:
             "load_test_profiles": 5,
             "siem_validation_targets": 4,
             "siem_connector_targets": 4,
+            "platform_readiness_areas": 25,
+            "enterprise_hardening_areas": 8,
         },
         "required_endpoints": [
             "/healthz",
@@ -171,6 +233,11 @@ def sample_benchmark_report() -> dict[str, Any]:
             "POST /labs/multi-agent/smoke",
             "/enterprise/readiness",
             "/enterprise/load-test/plan",
+            "/enterprise/hardening",
+            "/enterprise/quality/ttps",
+            "/enterprise/fleet/readiness",
+            "/enterprise/cloud-sandbox/readiness",
+            "/enterprise/compliance/readiness",
             "/lab-evidence/summary",
             "/evidence/summary",
             "/reports/benchmark-pack.zip",

@@ -18,6 +18,13 @@ curl http://127.0.0.1:8000/enterprise/load-test/plan
 curl http://127.0.0.1:8000/enterprise/siem-validation
 curl http://127.0.0.1:8000/lab-evidence/summary
 curl http://127.0.0.1:8000/lab-evidence/template
+curl http://127.0.0.1:8000/enterprise/hardening
+curl http://127.0.0.1:8000/enterprise/quality/ttps
+curl http://127.0.0.1:8000/enterprise/fleet/readiness
+curl http://127.0.0.1:8000/enterprise/import-fidelity
+curl http://127.0.0.1:8000/enterprise/cloud-sandbox/readiness
+curl http://127.0.0.1:8000/enterprise/performance/plan
+curl http://127.0.0.1:8000/enterprise/compliance/readiness
 curl http://127.0.0.1:8000/evidence/summary
 curl http://127.0.0.1:8000/attack/sync/status
 curl http://127.0.0.1:8000/detections/workbench
@@ -38,6 +45,10 @@ Minimum expected API values:
 /platform/readiness.counts.agent_package_targets = 3
 /platform/readiness.counts.load_test_profiles = 5
 /platform/readiness.counts.siem_validation_targets = 4
+/platform/readiness.capability_count = 25
+/platform/readiness.counts.enterprise_hardening_areas = 8
+/platform/readiness.counts.cloud_sandbox_profiles = 4
+/platform/readiness.counts.secret_backend_lanes = 6
 /evidence/summary.counts.golden_event_rows = 2000
 /attack/sync/status.coverage_label = 15/15
 /labs/multi-agent/smoke.ok = true

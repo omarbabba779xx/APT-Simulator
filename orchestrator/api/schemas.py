@@ -10,6 +10,10 @@ class AgentRegister(BaseModel):
     hostname: str
     platform: str
     pid: int
+    agent_version: str = "unknown"
+    install_id: str = ""
+    capabilities: list[str] = Field(default_factory=list)
+    certificate_subject: str = ""
 
 
 class AgentRegistered(BaseModel):
@@ -21,6 +25,9 @@ class AgentRegistered(BaseModel):
 class BeaconRequest(BaseModel):
     agent_id: str
     platform: str
+    agent_version: str = "unknown"
+    capabilities: list[str] = Field(default_factory=list)
+    certificate_subject: str = ""
 
 
 class BeaconTask(BaseModel):

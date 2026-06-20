@@ -538,6 +538,10 @@ function renderPlatformReadiness() {
     ["Scenarios", fmtInt(readiness.counts?.loaded_scenarios)],
     ["Validated", fmtInt(readiness.counts?.validated_scenarios)],
     ["Enterprise tracks", fmtInt(readiness.counts?.enterprise_validation_tracks)],
+    ["Hardening areas", fmtInt(readiness.counts?.enterprise_hardening_areas)],
+    ["Cloud profiles", fmtInt(readiness.counts?.cloud_sandbox_profiles)],
+    ["Secret lanes", fmtInt(readiness.counts?.secret_backend_lanes)],
+    ["Lab evidence", fmtInt(readiness.counts?.real_lab_evidence_records)],
     ["Load profiles", fmtInt(readiness.counts?.load_test_profiles)],
     ["Benchmark files", fmtInt(readiness.counts?.benchmark_files)],
   ];

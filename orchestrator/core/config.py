@@ -16,6 +16,9 @@ class OrchestratorConfig(BaseModel):
     db_path: str = "data/apt_sim.db"
     killswitch_file: str = "data/STOP"
     lab_evidence_path: str = "data/lab_evidence.jsonl"
+    backup_dir: str = "data/backups"
+    retention_days: int = 90
+    cloud_sandbox_profiles_path: str = "config/cloud_sandbox_profiles.yaml"
 
 
 class AgentConfig(BaseModel):
@@ -35,6 +38,10 @@ class SecurityConfig(BaseModel):
     jwt_algorithm: str = "HS256"
     secrets_provider: str = "local_file"
     secrets_env_prefix: str = "APT_SIM_"
+    vault_addr_env: str = "VAULT_ADDR"
+    aws_secret_id_env: str = "APT_SIM_AWS_SECRET_ID"
+    azure_keyvault_url_env: str = "AZURE_KEYVAULT_URL"
+    gcp_secret_name_env: str = "APT_SIM_GCP_SECRET_NAME"
     sso_enabled: bool = False
     sso_provider: str = "oidc"
     oidc_issuer: str = ""
@@ -43,6 +50,9 @@ class SecurityConfig(BaseModel):
     oidc_jwks_path: str = ""
     rbac_role_claim: str = "role"
     rbac_role_map: dict[str, str] = Field(default_factory=dict)
+    agent_mtls_enabled: bool = False
+    agent_client_ca_path: str = ""
+    agent_heartbeat_stale_seconds: int = 300
 
 
 class LoggingConfig(BaseModel):

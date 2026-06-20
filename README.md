@@ -15,9 +15,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Evidence exports | Global evidence ZIP and per-scenario evidence ZIP reports |
 | Execution Engine v3 | Lab-safe multi-host dispatch model, local three-agent smoke, persistent queue, retry controls, cleanup tracking, and tamper-evident audit logs |
 | SIEM ingestion | Splunk HEC, Elastic bulk, Microsoft Sentinel Data Collector, and Google Chronicle UDM connectors with local/private safety gate and mock-smoke tests |
-| Enterprise readiness | 11 lab validation tracks, 3 agent package targets with service wrappers, OIDC/JWKS RBAC, redacted secrets inventory, audit export, real-lab evidence import, and long-campaign load plan |
+| Enterprise readiness | 11 lab validation tracks, 8 hardening areas, 3 agent package targets with service wrappers, OIDC/JWKS RBAC, redacted secrets inventory, audit/backup export, real-lab evidence import, and long-campaign load plan |
 | Official importers | ATT&CK STIX sync, ATT&CK Emulation Library importer, Atomic Red Team importer, cloud reference pack status, and rule-corpus comparison |
-| Product readiness | 17-area Platform Readiness scorecard and downloadable benchmark ZIP with API snapshots |
+| Product readiness | 25-area Platform Readiness scorecard and downloadable benchmark ZIP with API snapshots |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -64,6 +64,11 @@ flowchart LR
 - 5 load-test profiles up to 1,000 scenarios
 - 4 SIEM validation targets: Splunk, Elastic, Microsoft Sentinel, and Google Chronicle
 - 0 real-lab evidence records imported by default; `/lab-evidence/import` stores user-owned lab evidence in append-only JSONL
+- 8 enterprise hardening areas: TTP quality, agent fleet, importer fidelity, cloud sandbox, secret backends, performance, compliance, public proof
+- 4 cloud/Kubernetes sandbox profiles: AWS, Azure, GCP, Kubernetes
+- 6 secret backend lanes: environment, local file, Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager
+- 25 Platform Readiness areas
+- 90-day default retention policy
 - 15/15 current ATT&CK Enterprise tactics covered
 - 696 current ATT&CK Enterprise base technique/sub-technique IDs tracked locally
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
@@ -150,7 +155,9 @@ flowchart TD
 - Exports audit logs as a ZIP with raw JSONL plus hash-chain verification manifest.
 - Exposes long-campaign load-test profiles for 10, 50, 100, 500, and 1,000 scenario runs.
 - Exposes an Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
-- Exposes a Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, and benchmarks.
+- Exposes a Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, hardening, and benchmarks.
+- Exposes enterprise hardening reports for TTP quality, fleet operations, official-source import fidelity, cloud sandbox guardrails, secret backends, performance, compliance, and public proof.
+- Exports non-secret backup ZIP bundles for restore rehearsals.
 - Produces a benchmark ZIP with current API snapshots and verification files.
 - Tracks ATT&CK snapshot drift and detection-rule quality.
 - Builds a controlled exposure graph from loaded scenarios and catalog domains.
@@ -229,7 +236,7 @@ The dashboard includes:
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
 | Evidence Center | Review quality gates, evidence coverage, telemetry spread, and download evidence ZIP bundles. |
-| Platform Readiness | Review the 17-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, lab evidence import, enterprise validation, and benchmark export. |
+| Platform Readiness | Review the 25-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, lab evidence import, enterprise hardening, enterprise validation, and benchmark export. |
 | Import Center | Review official importer lanes, loaded content, source URLs, commands, and safety boundaries. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
@@ -322,7 +329,18 @@ curl http://127.0.0.1:8000/enterprise/agent-packaging
 curl http://127.0.0.1:8000/enterprise/load-test/plan
 curl http://127.0.0.1:8000/enterprise/siem-validation
 curl http://127.0.0.1:8000/lab-evidence/summary
+curl http://127.0.0.1:8000/enterprise/hardening
+curl http://127.0.0.1:8000/enterprise/quality/ttps
+curl http://127.0.0.1:8000/enterprise/fleet/readiness
+curl http://127.0.0.1:8000/enterprise/import-fidelity
+curl http://127.0.0.1:8000/enterprise/cloud-sandbox/readiness
+curl http://127.0.0.1:8000/enterprise/secrets/backends
+curl http://127.0.0.1:8000/enterprise/performance/plan
+curl -X POST "http://127.0.0.1:8000/enterprise/performance/smoke?scenario_count=25"
+curl http://127.0.0.1:8000/enterprise/compliance/readiness
+curl http://127.0.0.1:8000/enterprise/public-proof/readiness
 curl -o audit-export.zip http://127.0.0.1:8000/reports/audit-export.zip
+curl -o backup-export.zip http://127.0.0.1:8000/reports/backup-export.zip
 ```
 
 Variant-space count:
@@ -496,10 +514,12 @@ python -m agent.main run-local scenarios/basic_recon.yaml --dry-run
 The `/enterprise/readiness` endpoint combines the production-facing readiness surfaces:
 
 - 11 lab validation tracks: Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Microsoft Sentinel, and Google Chronicle.
+- 8 enterprise hardening areas: TTP quality, fleet operations, import fidelity, cloud sandbox, secret backends, performance, compliance, and public proof.
 - 3 agent packaging targets: Windows, Linux, and macOS, with service wrapper artifacts.
 - OIDC/JWKS RBAC with viewer, operator, and admin roles.
-- Redacted secrets inventory with `APT_SIM_JWT_SECRET` environment override support.
+- Redacted secrets inventory with 6 backend lanes: environment, local file, Vault, AWS Secrets Manager, Azure Key Vault, and GCP Secret Manager.
 - Audit export ZIP with hash-chain verification manifest.
+- Backup export ZIP with database, audit JSONL, config, manifest, and restore rehearsal checklist.
 - Real-lab evidence import summary and append-only JSONL registry.
 - 5 long-campaign load-test profiles: 10, 50, 100, 500, and 1,000 scenarios.
 
@@ -539,7 +559,8 @@ Conformance tests verify:
 - SOC golden event row count is exactly 2,000.
 - README count statements match the current implementation.
 - ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
-- Enterprise readiness reports exactly 11 validation tracks, 3 package targets, 5 load-test profiles, 4 SIEM validation targets, and real-lab evidence record counts.
+- Enterprise readiness reports exactly 11 validation tracks, 8 hardening areas, 3 package targets, 5 load-test profiles, 4 SIEM validation targets, and real-lab evidence record counts.
+- Platform readiness reports exactly 25 areas.
 - Public text files do not include forbidden public tooling markers.
 
 ## Loaded Scenario Model

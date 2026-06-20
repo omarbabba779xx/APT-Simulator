@@ -1,0 +1,45 @@
+profiles:
+  aws:
+    mode: marker-plus-sandbox-contract
+    required_guardrails:
+      - dedicated sandbox account
+      - SCP or IAM boundary blocks destructive APIs
+      - CloudTrail enabled before campaign
+      - cost budget alarm enabled
+    allowed_signal_families:
+      - cloudtrail-iam-read
+      - s3-read-marker
+      - ec2-metadata-marker
+  azure:
+    mode: marker-plus-sandbox-contract
+    required_guardrails:
+      - dedicated test subscription
+      - activity logs exported to SIEM
+      - budget alert enabled
+      - break-glass identity excluded from tests
+    allowed_signal_families:
+      - entra-signin-marker
+      - role-assignment-read-marker
+      - storage-read-marker
+  gcp:
+    mode: marker-plus-sandbox-contract
+    required_guardrails:
+      - dedicated project
+      - audit logs exported
+      - billing alert enabled
+      - service account keys rotated after tests
+    allowed_signal_families:
+      - iam-policy-read-marker
+      - storage-read-marker
+      - audit-log-marker
+  kubernetes:
+    mode: marker-plus-sandbox-contract
+    required_guardrails:
+      - disposable cluster or namespace
+      - audit policy enabled
+      - network policies applied
+      - service accounts scoped to lab namespace
+    allowed_signal_families:
+      - rbac-read-marker
+      - pod-discovery-marker
+      - audit-event-marker

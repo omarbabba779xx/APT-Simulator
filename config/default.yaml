@@ -6,6 +6,9 @@ orchestrator:
   db_path: data/apt_sim.db
   killswitch_file: data/STOP
   lab_evidence_path: data/lab_evidence.jsonl
+  backup_dir: data/backups
+  retention_days: 90
+  cloud_sandbox_profiles_path: config/cloud_sandbox_profiles.yaml
 
 agent:
   beacon_interval_seconds: 5
@@ -23,6 +26,10 @@ security:
   jwt_algorithm: HS256
   secrets_provider: local_file
   secrets_env_prefix: APT_SIM_
+  vault_addr_env: VAULT_ADDR
+  aws_secret_id_env: APT_SIM_AWS_SECRET_ID
+  azure_keyvault_url_env: AZURE_KEYVAULT_URL
+  gcp_secret_name_env: APT_SIM_GCP_SECRET_NAME
   sso_enabled: false
   sso_provider: oidc
   oidc_issuer: ""
@@ -31,6 +38,9 @@ security:
   oidc_jwks_path: ""
   rbac_role_claim: role
   rbac_role_map: {}
+  agent_mtls_enabled: false
+  agent_client_ca_path: ""
+  agent_heartbeat_stale_seconds: 300
 
 logging:
   level: INFO

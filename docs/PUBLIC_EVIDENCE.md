@@ -48,7 +48,7 @@ Expected core results:
 6. Open History and download JSON, HTML, and ZIP artifacts.
 7. Open Labs and choose one of Windows AD, Linux Fleet, Cloud/Kubernetes, or SaaS/Identity.
 8. Open Evidence Center and download the global evidence ZIP or one scenario ZIP.
-9. Open Platform Readiness and confirm the 17-area scorecard.
+9. Open Platform Readiness and confirm the 25-area scorecard.
 10. Open Import Center and review source lanes, local counts, and safety boundaries.
 11. Download `/reports/benchmark-pack.zip` and inspect `manifest.json`.
 12. Run `POST /labs/multi-agent/smoke` and confirm three distinct lab agents receive steps.
@@ -64,12 +64,13 @@ Expected core results:
 | Scenario depth | 1,000 fixture-backed actor-chain DAGs with runbooks and success criteria |
 | SOC evidence | ECS fields, OCSF categories, SIEM fields, latency targets, 2,000 golden events |
 | Evidence exports | `/evidence/summary`, `/reports/evidence-pack.zip`, and per-scenario ZIP bundles |
-| Platform readiness | `/platform/readiness` 17-area scorecard and `/reports/benchmark-pack.zip` |
+| Platform readiness | `/platform/readiness` 25-area scorecard and `/reports/benchmark-pack.zip` |
 | Import center | `/imports/center` for ATT&CK STIX, AEL, Atomic Red Team, cloud reference, and rule-corpus lanes |
 | Multi-agent lab | `/labs/multi-agent/smoke` registers three lab agents and records planner dispatch proof |
 | SIEM ingestion | `/siem/connectors/status`, `/siem/connectors/sample`, Splunk HEC, Elastic bulk, Sentinel Data Collector, Chronicle UDM, mock-smoke tests |
 | Real-lab evidence import | `/lab-evidence/summary`, `/lab-evidence/template`, append-only JSONL registry |
-| Enterprise readiness | `/enterprise/readiness`, `/enterprise/lab-validation`, `/enterprise/agent-packaging`, `/enterprise/load-test/plan` |
+| Enterprise readiness | `/enterprise/readiness`, `/enterprise/hardening`, `/enterprise/lab-validation`, `/enterprise/agent-packaging`, `/enterprise/load-test/plan` |
+| Compliance and backup | `/enterprise/compliance/readiness`, `/reports/backup-export.zip` |
 | Audit export | `/reports/audit-export.zip` with raw JSONL and chain-verification manifest |
 | Campaigns | 10/50/100 launch controls, scheduling, repeat, pause, resume, retry failed |
 | Execution state | `/execution/v3/status`, persistent run history, queue entries, step logs, cleanup status |

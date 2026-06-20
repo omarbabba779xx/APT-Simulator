@@ -60,6 +60,8 @@
 - [x] Windows, Linux, and macOS agent packaging matrix with production signing guidance.
 - [x] Enterprise access/RBAC report, OIDC/JWKS validation path, and redacted secrets inventory.
 - [x] Real-lab evidence import registry for user-owned SIEM exports, host logs, screenshots, and campaign reports.
+- [x] Enterprise hardening scorecard for TTP quality, fleet operations, import fidelity, cloud sandbox, secret backends, performance, compliance, and public proof.
+- [x] Non-secret backup ZIP export and restore rehearsal checklist.
 - [x] Hash-chain audit export ZIP with verification manifest.
 - [x] Long-campaign load-test plan for 10, 50, 100, 500, and 1,000 scenarios.
 - [x] Production deployment and enterprise validation documentation.

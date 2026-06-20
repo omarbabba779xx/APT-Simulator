@@ -54,6 +54,7 @@ Recommended checks:
 curl http://127.0.0.1:8000/exposure/graph
 curl http://127.0.0.1:8000/coverage/matrix
 curl http://127.0.0.1:8000/enterprise/lab-validation
+curl http://127.0.0.1:8000/enterprise/cloud-sandbox/readiness
 ```
 
 ## SaaS And Identity Lab

@@ -31,6 +31,10 @@ def register(req: AgentRegister, _claims=require_role("operator")) -> AgentRegis
         "hostname": req.hostname,
         "platform": req.platform,
         "pid": req.pid,
+        "agent_version": req.agent_version,
+        "install_id": req.install_id,
+        "capabilities": req.capabilities,
+        "certificate_subject": req.certificate_subject,
         "registered_at": datetime.now(timezone.utc).isoformat(),
         "last_seen": datetime.now(timezone.utc).isoformat(),
     }
@@ -55,6 +59,9 @@ def beacon(req: BeaconRequest, _claims=require_role("operator")) -> BeaconRespon
     if req.agent_id not in s.agents:
         raise HTTPException(404, "unknown agent")
     s.agents[req.agent_id]["last_seen"] = datetime.now(timezone.utc).isoformat()
+    s.agents[req.agent_id]["agent_version"] = req.agent_version
+    s.agents[req.agent_id]["capabilities"] = req.capabilities
+    s.agents[req.agent_id]["certificate_subject"] = req.certificate_subject
     if s.repo:
         s.repo.touch_agent(req.agent_id)
 

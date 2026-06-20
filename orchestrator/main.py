@@ -261,6 +261,79 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
         return siem_validation_report()
 
+    @app.get("/enterprise/hardening")
+    def enterprise_hardening(_claims=require_role("viewer")) -> dict[str, object]:
+        """Enterprise hardening scorecard for remaining production gaps."""
+        from .enterprise_hardening import enterprise_hardening_report
+
+        return enterprise_hardening_report(state)
+
+    @app.get("/enterprise/quality/ttps")
+    def enterprise_ttp_quality(_claims=require_role("viewer")) -> dict[str, object]:
+        """TTP quality lanes: lab-proven, fixture-backed, scenario-backed, and catalog-scale."""
+        from .enterprise_hardening import ttp_quality_report
+
+        return ttp_quality_report(state)
+
+    @app.get("/enterprise/fleet/readiness")
+    def enterprise_fleet_readiness(_claims=require_role("viewer")) -> dict[str, object]:
+        """Agent fleet readiness, heartbeat SLA, platform coverage, and mTLS contract."""
+        from .enterprise_hardening import fleet_readiness_report
+
+        return fleet_readiness_report(state)
+
+    @app.get("/enterprise/import-fidelity")
+    def enterprise_import_fidelity(_claims=require_role("viewer")) -> dict[str, object]:
+        """Official-source importer fidelity and ATT&CK drift controls."""
+        from .enterprise_hardening import importer_fidelity_report
+
+        return importer_fidelity_report(state)
+
+    @app.get("/enterprise/cloud-sandbox/readiness")
+    def enterprise_cloud_sandbox(_claims=require_role("viewer")) -> dict[str, object]:
+        """Cloud/Kubernetes sandbox profile guardrails for user-owned labs."""
+        from .enterprise_hardening import cloud_sandbox_readiness_report
+
+        return cloud_sandbox_readiness_report(state)
+
+    @app.get("/enterprise/secrets/backends")
+    def enterprise_secret_backends(_claims=require_role("admin")) -> dict[str, object]:
+        """Secret backend readiness across env, local file, Vault, AWS, Azure, and GCP."""
+        from .enterprise_hardening import secrets_backends_report
+
+        return secrets_backends_report(state)
+
+    @app.get("/enterprise/performance/plan")
+    def enterprise_performance_plan(_claims=require_role("viewer")) -> dict[str, object]:
+        """Large-campaign performance profiles and metrics to capture."""
+        from .enterprise_hardening import performance_plan
+
+        return performance_plan()
+
+    @app.post("/enterprise/performance/smoke")
+    def enterprise_performance_smoke(
+        scenario_count: int = Query(25, ge=1, le=1000),
+        _claims=require_role("operator"),
+    ) -> dict[str, object]:
+        """Run a non-executing performance smoke over loaded scenario metadata."""
+        from .enterprise_hardening import run_performance_smoke
+
+        return run_performance_smoke(state, scenario_count=scenario_count)
+
+    @app.get("/enterprise/compliance/readiness")
+    def enterprise_compliance(_claims=require_role("viewer")) -> dict[str, object]:
+        """Backup, retention, audit, migration, HA, and restore-drill readiness."""
+        from .enterprise_hardening import compliance_readiness_report
+
+        return compliance_readiness_report(state)
+
+    @app.get("/enterprise/public-proof/readiness")
+    def enterprise_public_proof(_claims=require_role("viewer")) -> dict[str, object]:
+        """Public proof pack readiness and API snapshot checklist."""
+        from .enterprise_hardening import public_proof_readiness_report
+
+        return public_proof_readiness_report(state)
+
     @app.get("/lab-evidence/summary")
     def lab_evidence_status(_claims=require_role("viewer")) -> dict[str, object]:
         """Real-lab evidence import summary for scenarios, TTPs, and SIEM traces."""
@@ -318,6 +391,19 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
             media_type="application/zip",
             headers={
                 "Content-Disposition": 'attachment; filename="apt-simulator-audit-export.zip"'
+            },
+        )
+
+    @app.get("/reports/backup-export.zip")
+    def backup_export_zip(_claims=require_role("admin")) -> Response:
+        """Download non-secret backup ZIP for restore rehearsal."""
+        from .backup import build_backup_zip
+
+        return Response(
+            build_backup_zip(state),
+            media_type="application/zip",
+            headers={
+                "Content-Disposition": 'attachment; filename="apt-simulator-backup-export.zip"'
             },
         )
 

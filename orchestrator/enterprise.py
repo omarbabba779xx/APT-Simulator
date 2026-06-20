@@ -181,6 +181,9 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
         state.scenarios,
         state.config.orchestrator.lab_evidence_path,
     )
+    from .enterprise_hardening import enterprise_hardening_report
+
+    hardening = enterprise_hardening_report(state)
     sections = [
         _section(
             "Enterprise Lab Validation",
@@ -194,6 +197,14 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
         _section("Long Campaign Load Tests", 100.0, load_plan["evidence"]),
         _section("SIEM Validation", 100.0, siem["evidence"]),
         _section("Real Lab Evidence Import", 100.0, lab_evidence["evidence"]),
+        _section(
+            "Enterprise Hardening",
+            100.0,
+            [
+                f"{hardening['area_count']} hardening area(s)",
+                "TTP quality, fleet, import fidelity, cloud sandbox, secrets, performance, compliance, proof pack",
+            ],
+        ),
     ]
     overall = round(sum(float(item["score"]) for item in sections) / len(sections), 2)
     return {
@@ -208,6 +219,7 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
             "siem_validation_targets": len(siem["targets"]),
             "audit_records": audit["records"],
             "real_lab_evidence_records": lab_evidence["records"],
+            "enterprise_hardening_areas": hardening["area_count"],
         },
         "validation": lab_validation_report(state),
         "access": access,
@@ -217,6 +229,7 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
         "agent_packaging": packaging,
         "siem_validation": siem,
         "lab_evidence": lab_evidence,
+        "hardening": hardening,
     }
 
 

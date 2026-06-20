@@ -191,7 +191,7 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert lab["status"] == "completed"
 
     readiness = client.get("/platform/readiness").json()
-    assert readiness["capability_count"] == 17
+    assert readiness["capability_count"] == 25
     assert readiness["counts"]["ttps"] == 5064
     assert readiness["counts"]["loaded_scenarios"] == 3522
     assert readiness["counts"]["validated_scenarios"] == 1000
@@ -201,6 +201,9 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert readiness["counts"]["load_test_profiles"] == 5
     assert readiness["counts"]["siem_validation_targets"] == 4
     assert readiness["counts"]["real_lab_evidence_records"] >= 0
+    assert readiness["counts"]["enterprise_hardening_areas"] == 8
+    assert readiness["counts"]["cloud_sandbox_profiles"] == 4
+    assert readiness["counts"]["secret_backend_lanes"] == 6
     assert readiness["counts"]["benchmark_files"] >= 6
 
 
@@ -251,6 +254,9 @@ def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> No
         assert "api/import_center.json" in names
         assert "api/lab_evidence_summary.json" in names
         assert "api/enterprise_readiness.json" in names
+        assert "api/enterprise_hardening.json" in names
+        assert "api/enterprise_ttp_quality.json" in names
+        assert "api/enterprise_compliance.json" in names
         assert "api/enterprise_load_test_plan.json" in names
         assert "benchmarks/README.md" in names
         assert "benchmarks/siem_mock_smoke.md" in names

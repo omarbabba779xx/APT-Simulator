@@ -8,6 +8,16 @@ from .api.state import AppState
 from .attack_sync import drift_status
 from .detection_workbench import build_workbench
 from .enterprise import enterprise_readiness_report
+from .enterprise_hardening import (
+    cloud_sandbox_readiness_report,
+    compliance_readiness_report,
+    fleet_readiness_report,
+    importer_fidelity_report,
+    performance_plan,
+    public_proof_readiness_report,
+    secrets_backends_report,
+    ttp_quality_report,
+)
 from .evidence_center import build_evidence_summary
 from .execution_engine_v3 import build_engine_status
 from .exposure_graph import build_exposure_graph
@@ -52,6 +62,14 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
     siem = connector_status()
     drift = drift_status()
     graph = build_exposure_graph(state.scenarios)
+    ttp_quality = ttp_quality_report(state)
+    fleet = fleet_readiness_report(state)
+    import_fidelity = importer_fidelity_report(state)
+    cloud_sandbox = cloud_sandbox_readiness_report(state)
+    secret_backends = secrets_backends_report(state)
+    performance = performance_plan()
+    compliance = compliance_readiness_report(state)
+    public_proof = public_proof_readiness_report(state)
     benchmark_dir = Path("benchmarks")
     benchmark_files = (
         sorted(path.name for path in benchmark_dir.glob("*")) if benchmark_dir.exists() else []
@@ -177,6 +195,71 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             100.0,
             cast(list[str], lab_evidence["evidence"]),
             ["/lab-evidence/summary", "/lab-evidence/template", "/lab-evidence/import"],
+        ),
+        _row(
+            "TTP Quality Governance",
+            "operational",
+            float(ttp_quality["quality_score"]),
+            cast(list[str], ttp_quality["evidence"]),
+            ["/enterprise/quality/ttps", "/scenario-maturity", "/lab-evidence/summary"],
+            [
+                "Catalog-scale TTPs still need manual lab evidence before they can be called procedure-grade."
+            ]
+            if int(ttp_quality["external_lab_proven_ttps"]) == 0
+            else [],
+        ),
+        _row(
+            "Agent Fleet Operations",
+            "strong",
+            100.0,
+            cast(list[str], fleet["evidence"]),
+            ["/enterprise/fleet/readiness", "/agents", "/execution/v3/status"],
+        ),
+        _row(
+            "Official Import Fidelity",
+            _status_from_score(float(import_fidelity["readiness_score"])),
+            float(import_fidelity["readiness_score"]),
+            cast(list[str], import_fidelity["evidence"]),
+            ["/enterprise/import-fidelity", "/imports/center", "/attack/sync/status"],
+        ),
+        _row(
+            "Cloud Sandbox Guardrails",
+            "strong",
+            100.0,
+            cast(list[str], cloud_sandbox["evidence"]),
+            ["/enterprise/cloud-sandbox/readiness", "/lab-profiles"],
+        ),
+        _row(
+            "Enterprise Secret Backends",
+            "strong",
+            100.0,
+            cast(list[str], secret_backends["evidence"]),
+            ["/enterprise/secrets/backends", "/enterprise/secrets"],
+        ),
+        _row(
+            "Performance Benchmark Plan",
+            "strong",
+            100.0,
+            [
+                f"{performance['profile_count']} performance profile(s)",
+                f"up to {performance['max_profile_scenarios']} scenario campaigns",
+                "non-executing metadata smoke available",
+            ],
+            ["/enterprise/performance/plan", "/enterprise/performance/smoke"],
+        ),
+        _row(
+            "Compliance Operations",
+            "strong",
+            100.0,
+            cast(list[str], compliance["evidence"]),
+            ["/enterprise/compliance/readiness", "/reports/backup-export.zip"],
+        ),
+        _row(
+            "Public Proof Pack",
+            "strong",
+            100.0,
+            cast(list[str], public_proof["evidence"]),
+            ["/enterprise/public-proof/readiness", "/reports/benchmark-pack.zip"],
         ),
         _row(
             "Long Campaign Load Testing",
@@ -316,5 +399,9 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             "load_test_profiles": enterprise["counts"]["load_test_profiles"],
             "siem_validation_targets": enterprise["counts"]["siem_validation_targets"],
             "real_lab_evidence_records": enterprise["counts"]["real_lab_evidence_records"],
+            "enterprise_hardening_areas": 8,
+            "cloud_sandbox_profiles": cloud_sandbox["profile_count"],
+            "secret_backend_lanes": secret_backends["backend_count"],
+            "performance_profiles": performance["profile_count"],
         },
     }

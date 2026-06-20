@@ -129,3 +129,15 @@ curl -o benchmark-pack.zip http://127.0.0.1:8000/reports/benchmark-pack.zip
 ```
 
 The benchmark bundle includes readiness snapshots, enterprise validation snapshots, public evidence docs, and load-test artifacts.
+
+## Enterprise Hardening
+
+The hardening scorecard exposes the controls that turn the project from a lab tool into a production-managed internal service:
+
+```bash
+curl http://127.0.0.1:8000/enterprise/hardening
+curl http://127.0.0.1:8000/enterprise/compliance/readiness
+curl -o backup-export.zip http://127.0.0.1:8000/reports/backup-export.zip
+```
+
+See `docs/ENTERPRISE_HARDENING.md` for the full checklist.
