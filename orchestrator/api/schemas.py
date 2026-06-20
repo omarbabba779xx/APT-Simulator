@@ -125,3 +125,13 @@ class CampaignSummary(BaseModel):
     scheduled_at: float | None = None
     repeat_interval_seconds: int | None = None
     repeat_remaining: int = 0
+
+
+class SIEMSendRequest(BaseModel):
+    url: str
+    token: str = ""
+    api_key: str = ""
+    index: str = "apt-simulator"
+    event_limit: int = Field(default=10, ge=1, le=500)
+    allow_external: bool = False
+    timeout_seconds: float = Field(default=10.0, ge=1.0, le=60.0)

@@ -11,6 +11,9 @@ python -m orchestrator.attack_sync status --path config/attack_enterprise_snapsh
 curl http://127.0.0.1:8000/platform/readiness
 curl http://127.0.0.1:8000/imports/center
 curl http://127.0.0.1:8000/execution/v3/status
+curl http://127.0.0.1:8000/siem/connectors/status
+curl http://127.0.0.1:8000/siem/connectors/sample?limit=2
+curl -X POST http://127.0.0.1:8000/labs/multi-agent/smoke
 ```
 
 Expected core results:
@@ -20,6 +23,7 @@ Expected core results:
 - 1,000 validated actor-chain YAML scenarios.
 - 2,000 SOC golden event rows.
 - 5,064 Sigma rules.
+- 2 SIEM connector targets.
 - 15/15 current ATT&CK Enterprise tactics covered.
 
 ## Reviewer Walkthrough
@@ -37,9 +41,11 @@ Expected core results:
 6. Open History and download JSON, HTML, and ZIP artifacts.
 7. Open Labs and choose one of Windows AD, Linux Fleet, Cloud/Kubernetes, or SaaS/Identity.
 8. Open Evidence Center and download the global evidence ZIP or one scenario ZIP.
-9. Open Platform Readiness and confirm the 10-area scorecard.
+9. Open Platform Readiness and confirm the 12-area scorecard.
 10. Open Import Center and review source lanes, local counts, and safety boundaries.
 11. Download `/reports/benchmark-pack.zip` and inspect `manifest.json`.
+12. Run `POST /labs/multi-agent/smoke` and confirm three distinct lab agents receive steps.
+13. Review `/siem/connectors/status` and `/siem/connectors/sample?limit=2`.
 
 ## Capability Matrix
 
@@ -49,8 +55,10 @@ Expected core results:
 | Scenario depth | 1,000 fixture-backed actor-chain DAGs with runbooks and success criteria |
 | SOC evidence | ECS fields, OCSF categories, SIEM fields, latency targets, 2,000 golden events |
 | Evidence exports | `/evidence/summary`, `/reports/evidence-pack.zip`, and per-scenario ZIP bundles |
-| Platform readiness | `/platform/readiness` 10-area scorecard and `/reports/benchmark-pack.zip` |
+| Platform readiness | `/platform/readiness` 12-area scorecard and `/reports/benchmark-pack.zip` |
 | Import center | `/imports/center` for ATT&CK STIX, AEL, Atomic Red Team, cloud reference, and rule-corpus lanes |
+| Multi-agent lab | `/labs/multi-agent/smoke` registers three lab agents and records planner dispatch proof |
+| SIEM ingestion | `/siem/connectors/status`, `/siem/connectors/sample`, Splunk HEC send, Elastic bulk send, mock-smoke tests |
 | Campaigns | 10/50/100 launch controls, scheduling, repeat, pause, resume, retry failed |
 | Execution state | `/execution/v3/status`, persistent run history, queue entries, step logs, cleanup status |
 | Reports | JSON, HTML, and ZIP artifact bundles |

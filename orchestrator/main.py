@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 
 import typer
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -19,9 +19,10 @@ from .api import profiles as profiles_api
 from .api import scenarios as scenarios_api
 from .api import ttps as ttps_api
 from .api import ws as ws_api
+from .api.schemas import SIEMSendRequest
 from .api.state import AppState, set_state
 from .core.audit import AuditLog
-from .core.auth import load_or_generate_secret
+from .core.auth import load_or_generate_secret, require_role
 from .core.bus import EventBus
 from .core.config import load_config
 from .core.killswitch import KillSwitch
@@ -217,6 +218,73 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
             media_type="application/zip",
             headers={"Content-Disposition": 'attachment; filename="apt-simulator-benchmark-pack.zip"'},
         )
+
+    @app.post("/labs/multi-agent/smoke")
+    def multi_agent_lab_smoke(_claims=require_role("operator")) -> dict[str, object]:
+        """Run a local three-agent dispatch smoke through planner and history store."""
+        from .multi_agent_lab import run_multi_agent_smoke
+
+        return run_multi_agent_smoke(state)
+
+    @app.get("/siem/connectors/status")
+    def siem_connectors_status(_claims=require_role("viewer")) -> dict[str, object]:
+        """SIEM connector target status and payload contracts."""
+        from .siem_connectors import connector_status
+
+        return connector_status()
+
+    @app.get("/siem/connectors/sample")
+    def siem_connectors_sample(
+        limit: int = Query(3, ge=1, le=20),
+        _claims=require_role("viewer"),
+    ) -> dict[str, object]:
+        """Preview Splunk HEC and Elastic bulk payloads from golden SOC events."""
+        from .siem_connectors import elastic_bulk_payload, sample_golden_events, splunk_hec_payload
+
+        events = sample_golden_events(limit=limit)
+        return {
+            "events": events,
+            "splunk_hec": splunk_hec_payload(events),
+            "elastic_bulk": elastic_bulk_payload(events),
+        }
+
+    @app.post("/siem/connectors/splunk/hec/send")
+    def siem_splunk_hec_send(req: SIEMSendRequest, _claims=require_role("operator")) -> dict[str, object]:
+        """Send golden SOC events to Splunk HEC or a local compatible mock endpoint."""
+        from .siem_connectors import sample_golden_events, send_splunk_hec
+
+        if not req.token:
+            raise HTTPException(400, "token is required")
+        try:
+            return send_splunk_hec(
+                req.url,
+                req.token,
+                sample_golden_events(limit=req.event_limit),
+                index=req.index,
+                allow_external=req.allow_external,
+                timeout_seconds=req.timeout_seconds,
+            )
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/siem/connectors/elastic/bulk/send")
+    def siem_elastic_bulk_send(req: SIEMSendRequest, _claims=require_role("operator")) -> dict[str, object]:
+        """Send golden SOC events to Elastic bulk API or a local compatible mock endpoint."""
+        from .siem_connectors import sample_golden_events, send_elastic_bulk
+
+        if not req.api_key:
+            raise HTTPException(400, "api_key is required")
+        try:
+            return send_elastic_bulk(
+                req.url,
+                req.api_key,
+                sample_golden_events(limit=req.event_limit),
+                index=req.index,
+                allow_external=req.allow_external,
+                timeout_seconds=req.timeout_seconds,
+            )
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     @app.get("/runs/{run_id}/timeline")
     def run_timeline(run_id: str) -> dict[str, object]:

@@ -4,6 +4,7 @@
     "attack_tactics": "15/15",
     "golden_event_rows": 2000,
     "loaded_scenarios": 3522,
+    "siem_targets": 2,
     "ttps": 5064,
     "validated_scenarios": 1000
   },
@@ -12,6 +13,9 @@
     "/platform/readiness",
     "/execution/v3/status",
     "/imports/center",
+    "/siem/connectors/status",
+    "/siem/connectors/sample",
+    "POST /labs/multi-agent/smoke",
     "/evidence/summary",
     "/reports/benchmark-pack.zip"
   ]

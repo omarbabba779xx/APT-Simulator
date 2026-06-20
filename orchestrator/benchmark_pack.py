@@ -17,6 +17,7 @@ from .platform_readiness import build_platform_readiness
 BENCHMARK_FILES = (
     Path("benchmarks/README.md"),
     Path("benchmarks/api_smoke.md"),
+    Path("benchmarks/siem_mock_smoke.md"),
     Path("benchmarks/sample_report.json"),
 )
 
@@ -40,6 +41,9 @@ def build_benchmark_manifest(state: AppState) -> dict[str, Any]:
             "/platform/readiness",
             "/execution/v3/status",
             "/imports/center",
+            "/siem/connectors/status",
+            "/siem/connectors/sample",
+            "POST /labs/multi-agent/smoke",
             "/evidence/summary",
             "/detections/workbench",
             "/attack/sync/status",
@@ -95,6 +99,9 @@ def sample_benchmark_report() -> dict[str, Any]:
             "/platform/readiness",
             "/execution/v3/status",
             "/imports/center",
+            "/siem/connectors/status",
+            "/siem/connectors/sample",
+            "POST /labs/multi-agent/smoke",
             "/evidence/summary",
             "/reports/benchmark-pack.zip",
         ],

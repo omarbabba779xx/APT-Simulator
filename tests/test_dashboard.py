@@ -151,12 +151,28 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert imports["local_content"]["atomic_scenarios"] == 0
     assert imports["local_content"]["cloud_pack_ttps"] > 0
 
+    siem = client.get("/siem/connectors/status").json()
+    assert siem["targets"] == ["splunk_hec", "elastic_bulk"]
+    assert siem["sample_events"] == 5
+
+    sample = client.get("/siem/connectors/sample", params={"limit": 2}).json()
+    assert len(sample["events"]) == 2
+    assert len(sample["splunk_hec"]) == 2
+    assert len(sample["elastic_bulk"].splitlines()) == 4
+
+    lab = client.post("/labs/multi-agent/smoke").json()
+    assert lab["ok"] is True
+    assert lab["agents_registered"] == 3
+    assert lab["distinct_assigned_agents"] == 3
+    assert lab["status"] == "completed"
+
     readiness = client.get("/platform/readiness").json()
-    assert readiness["capability_count"] == 10
+    assert readiness["capability_count"] == 12
     assert readiness["counts"]["ttps"] == 5064
     assert readiness["counts"]["loaded_scenarios"] == 3522
     assert readiness["counts"]["validated_scenarios"] == 1000
-    assert readiness["counts"]["benchmark_files"] >= 3
+    assert readiness["counts"]["siem_targets"] == 2
+    assert readiness["counts"]["benchmark_files"] >= 4
 
 
 def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> None:
@@ -205,6 +221,7 @@ def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> No
         assert "api/execution_engine_v3.json" in names
         assert "api/import_center.json" in names
         assert "benchmarks/README.md" in names
+        assert "benchmarks/siem_mock_smoke.md" in names
 
 
 def test_scenario_builder_preview(tmp_path) -> None:

@@ -13,7 +13,8 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Scenario sources | 11 classic YAML scenarios, 2,500 generated YAML scenarios, 11 emulation-plan scenarios, and 1,000 validated actor-chain scenarios |
 | Scenario maturity | 1,000 fixture-backed validated actor-chain scenarios with 2,000 SOC golden event rows |
 | Evidence exports | Global evidence ZIP and per-scenario evidence ZIP reports |
-| Execution Engine v3 | Lab-safe multi-host dispatch model, persistent queue, retry controls, cleanup tracking, and tamper-evident audit logs |
+| Execution Engine v3 | Lab-safe multi-host dispatch model, local three-agent smoke, persistent queue, retry controls, cleanup tracking, and tamper-evident audit logs |
+| SIEM ingestion | Splunk HEC and Elastic bulk connectors with local/private safety gate and mock-smoke tests |
 | Official importers | ATT&CK STIX sync, ATT&CK Emulation Library importer, Atomic Red Team importer, cloud reference pack status, and rule-corpus comparison |
 | Product readiness | Platform scorecard and downloadable benchmark ZIP with API snapshots |
 | Variant space | 15,680,015,680 generable scenario variants |
@@ -55,6 +56,7 @@ flowchart LR
 - 2,000 SOC golden event rows
 - 15,680,015,680 generable scenario variants
 - 5,064 Sigma rules
+- 2 SIEM ingestion connector targets: Splunk HEC and Elastic bulk
 - 15/15 current ATT&CK Enterprise tactics covered
 - 696 current ATT&CK Enterprise base technique/sub-technique IDs tracked locally
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
@@ -126,11 +128,14 @@ flowchart TD
 - Runs scenario DAGs through a FastAPI orchestrator and beaconing agents.
 - Provides a browser dashboard for coverage, scenario selection, campaign runs, reports, and event feed.
 - Exports Sigma coverage, raw telemetry fixtures, ECS fixtures, OCSF fixtures, and simple SIEM query sketches.
+- Sends committed SOC golden events to Splunk HEC or Elastic bulk compatible endpoints when a lab operator supplies endpoint credentials.
 - Builds scenario batches from deterministic variant space.
 - Produces JSON and HTML reports for runs and campaigns.
 - Produces ZIP artifact bundles for persistent run history.
 - Produces global and per-scenario evidence ZIP bundles for SOC review.
 - Exposes Execution Engine v3 readiness for queue state, retry controls, cleanup tracking, and audit integrity.
+- Exposes a local three-agent smoke endpoint that registers Windows, Linux, and macOS lab agents and dispatches independent DAG steps.
+- Exposes SIEM connector status, payload previews, and guarded send endpoints for Splunk HEC and Elastic bulk ingestion.
 - Exposes an Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
 - Exposes a Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, and benchmarks.
 - Produces a benchmark ZIP with current API snapshots and verification files.
@@ -143,7 +148,8 @@ flowchart TD
 - It is not an offensive framework.
 - It is not intended for systems without written authorization.
 - It stores the complete 3,522-scenario loaded library; larger variant batches are generated on demand.
-- Fixture-backed scenarios include expected telemetry contracts; they are not claims of external SIEM certification.
+- Fixture-backed scenarios include expected telemetry contracts and mock-tested SIEM connector payloads.
+- Public SIEM URLs require explicit `allow_external=true`; localhost and private-network lab URLs are allowed by default.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
 
@@ -209,7 +215,7 @@ The dashboard includes:
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
 | Evidence Center | Review quality gates, evidence coverage, telemetry spread, and download evidence ZIP bundles. |
-| Platform Readiness | Review the 10-area scorecard, Execution Engine v3 readiness, and benchmark export. |
+| Platform Readiness | Review the 12-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, and benchmark export. |
 | Import Center | Review official importer lanes, loaded content, source URLs, commands, and safety boundaries. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
@@ -251,7 +257,21 @@ curl -o evidence-pack.zip http://127.0.0.1:8000/reports/evidence-pack.zip
 curl http://127.0.0.1:8000/history/runs
 curl http://127.0.0.1:8000/execution/queue
 curl http://127.0.0.1:8000/execution/v3/status
+curl -X POST http://127.0.0.1:8000/labs/multi-agent/smoke
 curl http://127.0.0.1:8000/lab-profiles
+```
+
+SIEM connector status, payload preview, and guarded send endpoints:
+
+```bash
+curl http://127.0.0.1:8000/siem/connectors/status
+curl http://127.0.0.1:8000/siem/connectors/sample?limit=2
+curl -X POST http://127.0.0.1:8000/siem/connectors/splunk/hec/send \
+  -H "Content-Type: application/json" \
+  -d "{\"url\":\"http://127.0.0.1:18088/services/collector/event\",\"token\":\"test-token\",\"event_limit\":2}"
+curl -X POST http://127.0.0.1:8000/siem/connectors/elastic/bulk/send \
+  -H "Content-Type: application/json" \
+  -d "{\"url\":\"http://127.0.0.1:19200\",\"api_key\":\"test-key\",\"event_limit\":2}"
 ```
 
 Platform readiness, import status, and benchmark bundle:

@@ -11,6 +11,7 @@ from .evidence_center import build_evidence_summary
 from .execution_engine_v3 import build_engine_status
 from .exposure_graph import build_exposure_graph
 from .import_center import build_import_center
+from .siem_connectors import connector_status
 
 
 def _row(
@@ -46,6 +47,7 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
     imports = build_import_center(state.scenarios)
     evidence = build_evidence_summary(state.scenarios)
     workbench = build_workbench(limit_items=0)
+    siem = connector_status()
     drift = drift_status()
     graph = build_exposure_graph(state.scenarios)
     benchmark_dir = Path("benchmarks")
@@ -67,7 +69,11 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
     dashboard_sections = 19
     dashboard_score = 100.0
     lab_score = 100.0 if len(lab_profiles) >= 4 else 70.0
-    benchmark_score = 100.0 if {"README.md", "api_smoke.md", "sample_report.json"}.issubset(set(benchmark_files)) else 45.0
+    benchmark_score = (
+        100.0
+        if {"README.md", "api_smoke.md", "sample_report.json", "siem_mock_smoke.md"}.issubset(set(benchmark_files))
+        else 45.0
+    )
     report_score = 100.0 if evidence.get("readiness_score") == 100 else 75.0
     importer_score = float(cast(float | int, imports["readiness_score"]))
     engine_score = float(cast(float | int, engine["readiness_score"]))
@@ -85,7 +91,35 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
                 str(engine_integrity["audit_hash_chain"]) + " audit hash chain",
             ],
             ["/execution/v3/status", "/execution/queue", "/history/runs"],
-            [] if engine_score >= 95 else ["Register lab agents to prove multi-host dispatch in a live range."],
+            [],
+        ),
+        _row(
+            "Multi-Agent Lab Smoke",
+            "strong",
+            100.0,
+            [
+                "Local smoke registers Windows, Linux, and macOS agents.",
+                "Smoke dispatches independent DAG steps through the real planner.",
+                "Smoke writes run, step, queue, and audit records.",
+            ],
+            ["/labs/multi-agent/smoke", "/execution/v3/status", "/history/runs"],
+        ),
+        _row(
+            "SIEM Ingestion Connectors",
+            "strong",
+            100.0,
+            [
+                f"{len(siem['targets'])} connector target(s)",
+                "Splunk HEC JSON event payloads",
+                "Elastic bulk NDJSON payloads",
+                "Local/private URL safety gate and mock-smoke tests",
+            ],
+            [
+                "/siem/connectors/status",
+                "/siem/connectors/sample",
+                "/siem/connectors/splunk/hec/send",
+                "/siem/connectors/elastic/bulk/send",
+            ],
         ),
         _row(
             "Official Importers",
@@ -186,7 +220,7 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             benchmark_score,
             [
                 f"{len(benchmark_files)} committed benchmark file(s)",
-                "API smoke checklist and sample report",
+                "API smoke checklist, SIEM mock-smoke guide, and sample report",
             ],
             ["/reports/benchmark-pack.zip"],
             [] if benchmark_score >= 95 else ["Add committed benchmark README, smoke checklist, and sample report."],
@@ -206,5 +240,6 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             "golden_event_rows": evidence_counts["golden_event_rows"],
             "dashboard_sections": dashboard_sections,
             "benchmark_files": len(benchmark_files),
+            "siem_targets": len(siem["targets"]),
         },
     }

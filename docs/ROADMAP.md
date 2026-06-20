@@ -51,14 +51,16 @@
 - [x] Public evidence and verification guide.
 - [x] Evidence Center with readiness gates and downloadable evidence ZIP bundles.
 - [x] Execution Engine v3 status with persistent queue, retry controls, cleanup closure, and audit integrity.
+- [x] Local three-agent lab smoke for planner dispatch, queue, history, and audit proof.
 - [x] Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
-- [x] Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, and benchmarks.
-- [x] Public benchmark pack with API smoke checklist, sample report, and downloadable API snapshots.
+- [x] Splunk HEC and Elastic bulk SIEM connector senders with local/private safety gate and mock-smoke tests.
+- [x] Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, multi-agent smoke, SIEM, and benchmarks.
+- [x] Public benchmark pack with API smoke checklist, SIEM mock-smoke guide, sample report, and downloadable API snapshots.
 
 ## Next Reference-Level Work
 
-- [ ] Direct SIEM connectors for Splunk HEC and Elastic ingest pipeline push.
 - [ ] Portable agent builds for Windows, Linux, and macOS.
-- [ ] Stronger multi-host execution policies with host groups and explicit step placement.
+- [ ] Host-group placement policies, dedicated agent pools, and richer multi-host scheduling rules.
+- [ ] User-owned SIEM validation profiles for Splunk, Elastic, Sentinel, Chronicle, and OpenSearch deployments.
 - [ ] Rich downloadable evidence packs with screenshots or recorded dashboard walkthroughs.
 - [ ] More actor-chain scenarios validated in real lab environments.
