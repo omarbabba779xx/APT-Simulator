@@ -14,10 +14,10 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Scenario maturity | 1,000 fixture-backed validated actor-chain scenarios with 2,000 SOC golden event rows |
 | Evidence exports | Global evidence ZIP and per-scenario evidence ZIP reports |
 | Execution Engine v3 | Lab-safe multi-host dispatch model, local three-agent smoke, persistent queue, retry controls, cleanup tracking, and tamper-evident audit logs |
-| SIEM ingestion | Splunk HEC and Elastic bulk connectors with local/private safety gate and mock-smoke tests |
-| Enterprise readiness | 11 lab validation tracks, 3 agent package targets, SSO/RBAC contract, redacted secrets inventory, audit export, and long-campaign load plan |
+| SIEM ingestion | Splunk HEC, Elastic bulk, Microsoft Sentinel Data Collector, and Google Chronicle UDM connectors with local/private safety gate and mock-smoke tests |
+| Enterprise readiness | 11 lab validation tracks, 3 agent package targets with service wrappers, OIDC/JWKS RBAC, redacted secrets inventory, audit export, real-lab evidence import, and long-campaign load plan |
 | Official importers | ATT&CK STIX sync, ATT&CK Emulation Library importer, Atomic Red Team importer, cloud reference pack status, and rule-corpus comparison |
-| Product readiness | 16-area Platform Readiness scorecard and downloadable benchmark ZIP with API snapshots |
+| Product readiness | 17-area Platform Readiness scorecard and downloadable benchmark ZIP with API snapshots |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -58,11 +58,12 @@ flowchart LR
 - 2,000 SOC golden event rows
 - 15,680,015,680 generable scenario variants
 - 5,064 Sigma rules
-- 2 SIEM ingestion connector targets: Splunk HEC and Elastic bulk
+- 4 SIEM ingestion connector targets: Splunk HEC, Elastic bulk, Microsoft Sentinel Data Collector, and Google Chronicle UDM
 - 11 enterprise validation tracks
-- 3 agent package targets: Windows, Linux, and macOS
+- 3 agent package targets: Windows, Linux, and macOS, with Windows service, systemd, and launchd wrappers
 - 5 load-test profiles up to 1,000 scenarios
 - 4 SIEM validation targets: Splunk, Elastic, Microsoft Sentinel, and Google Chronicle
+- 0 real-lab evidence records imported by default; `/lab-evidence/import` stores user-owned lab evidence in append-only JSONL
 - 15/15 current ATT&CK Enterprise tactics covered
 - 696 current ATT&CK Enterprise base technique/sub-technique IDs tracked locally
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
@@ -122,7 +123,7 @@ flowchart TD
     Catalog --> Events["Synthetic telemetry fixtures"]
     Sigma --> Workbench["Rule quality scoring"]
     Events --> Workbench
-    Workbench --> Targets["Splunk, Elastic, Sentinel, Chronicle export readiness"]
+    Workbench --> Targets["Splunk, Elastic, Sentinel, Chronicle ingestion payloads"]
     Scenarios["3,522 loaded scenarios"] --> Exposure["Identity -> endpoint -> cloud -> SaaS/container graph"]
     Scenarios --> Maturity["Scenario maturity and evidence scoring"]
     Evidence["Golden event contracts"] --> Maturity
@@ -134,17 +135,18 @@ flowchart TD
 - Runs scenario DAGs through a FastAPI orchestrator and beaconing agents.
 - Provides a browser dashboard for coverage, scenario selection, campaign runs, reports, and event feed.
 - Exports Sigma coverage, raw telemetry fixtures, ECS fixtures, OCSF fixtures, and simple SIEM query sketches.
-- Sends committed SOC golden events to Splunk HEC or Elastic bulk compatible endpoints when a lab operator supplies endpoint credentials.
+- Sends committed SOC golden events to Splunk HEC, Elastic bulk, Microsoft Sentinel Data Collector, or Google Chronicle UDM compatible endpoints when a lab operator supplies endpoint credentials.
 - Builds scenario batches from deterministic variant space.
 - Produces JSON and HTML reports for runs and campaigns.
 - Produces ZIP artifact bundles for persistent run history.
 - Produces global and per-scenario evidence ZIP bundles for SOC review.
 - Exposes Execution Engine v3 readiness for queue state, retry controls, cleanup tracking, and audit integrity.
 - Exposes a local three-agent smoke endpoint that registers Windows, Linux, and macOS lab agents and dispatches independent DAG steps.
-- Exposes SIEM connector status, payload previews, and guarded send endpoints for Splunk HEC and Elastic bulk ingestion.
+- Exposes SIEM connector status, payload previews, and guarded send endpoints for Splunk HEC, Elastic bulk, Microsoft Sentinel Data Collector, and Google Chronicle UDM ingestion.
 - Exposes enterprise validation tracks for Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Microsoft Sentinel, and Google Chronicle.
-- Exposes agent packaging readiness for Windows, Linux, and macOS builds.
-- Exposes enterprise access, SSO configuration status, RBAC matrix, and redacted secrets inventory.
+- Exposes agent packaging readiness for Windows, Linux, and macOS builds, including service wrapper artifacts.
+- Exposes enterprise access, OIDC/JWKS validation status, RBAC matrix, and redacted secrets inventory.
+- Imports external lab evidence records for scenarios, TTPs, SIEM exports, screenshots, and host logs.
 - Exports audit logs as a ZIP with raw JSONL plus hash-chain verification manifest.
 - Exposes long-campaign load-test profiles for 10, 50, 100, 500, and 1,000 scenario runs.
 - Exposes an Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
@@ -160,6 +162,7 @@ flowchart TD
 - It is not intended for systems without written authorization.
 - It stores the complete 3,522-scenario loaded library; larger variant batches are generated on demand.
 - Fixture-backed scenarios include expected telemetry contracts and mock-tested SIEM connector payloads.
+- Real lab evidence is user-imported; no SIEM screenshots, host logs, or customer lab traces are bundled by default.
 - Public SIEM URLs require explicit `allow_external=true`; localhost and private-network lab URLs are allowed by default.
 - It does not contact cloud providers for the marker-only cloud simulations.
 - It does not replace a full red-team engagement.
@@ -226,7 +229,7 @@ The dashboard includes:
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
 | Evidence Center | Review quality gates, evidence coverage, telemetry spread, and download evidence ZIP bundles. |
-| Platform Readiness | Review the 16-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, enterprise validation, and benchmark export. |
+| Platform Readiness | Review the 17-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, lab evidence import, enterprise validation, and benchmark export. |
 | Import Center | Review official importer lanes, loaded content, source URLs, commands, and safety boundaries. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
@@ -235,7 +238,7 @@ The dashboard includes:
 | History | Read persistent run history, execution queue state, cleanup status, and ZIP artifacts. |
 | Labs | Select Windows AD, Linux fleet, Cloud/Kubernetes, or SaaS/Identity lab profiles. |
 | Access | Inspect RBAC roles and token issuance command. |
-| Detection Workbench | Score Sigma quality, field gaps, false-positive risk, and export readiness. |
+| Detection Workbench | Score Sigma quality, field gaps, false-positive risk, and SIEM target readiness. |
 | Exposure Graph | Browse controlled identity, endpoint, cloud, SaaS, and container paths. |
 | Reports | Open JSON and HTML reports for runs and campaigns. |
 | Event Feed | Watch recent orchestrator and simulation activity. |
@@ -283,6 +286,22 @@ curl -X POST http://127.0.0.1:8000/siem/connectors/splunk/hec/send \
 curl -X POST http://127.0.0.1:8000/siem/connectors/elastic/bulk/send \
   -H "Content-Type: application/json" \
   -d "{\"url\":\"http://127.0.0.1:19200\",\"api_key\":\"test-key\",\"event_limit\":2}"
+curl -X POST http://127.0.0.1:8000/siem/connectors/sentinel/data-collector/send \
+  -H "Content-Type: application/json" \
+  -d "{\"url\":\"http://127.0.0.1:18090/api/logs?api-version=2016-04-01\",\"workspace_id\":\"workspace-123\",\"shared_key\":\"<base64-shared-key>\",\"event_limit\":2}"
+curl -X POST http://127.0.0.1:8000/siem/connectors/chronicle/udm/send \
+  -H "Content-Type: application/json" \
+  -d "{\"url\":\"http://127.0.0.1:18091/v2/udmevents:batchCreate\",\"bearer_token\":\"test-token\",\"event_limit\":2}"
+```
+
+Real-lab evidence import:
+
+```bash
+curl http://127.0.0.1:8000/lab-evidence/summary
+curl http://127.0.0.1:8000/lab-evidence/template
+curl -X POST http://127.0.0.1:8000/lab-evidence/import \
+  -H "Content-Type: application/json" \
+  -d "{\"source\":\"splunk\",\"evidence_type\":\"siem_export\",\"scenario\":\"validated_apt29_identity_cloud_chain\",\"attack_ids\":[\"T1078\"],\"artifact_ref\":\"file:///lab/splunk-export.json\"}"
 ```
 
 Platform readiness, import status, and benchmark bundle:
@@ -302,6 +321,7 @@ curl http://127.0.0.1:8000/enterprise/lab-validation
 curl http://127.0.0.1:8000/enterprise/agent-packaging
 curl http://127.0.0.1:8000/enterprise/load-test/plan
 curl http://127.0.0.1:8000/enterprise/siem-validation
+curl http://127.0.0.1:8000/lab-evidence/summary
 curl -o audit-export.zip http://127.0.0.1:8000/reports/audit-export.zip
 ```
 
@@ -476,10 +496,11 @@ python -m agent.main run-local scenarios/basic_recon.yaml --dry-run
 The `/enterprise/readiness` endpoint combines the production-facing readiness surfaces:
 
 - 11 lab validation tracks: Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Microsoft Sentinel, and Google Chronicle.
-- 3 agent packaging targets: Windows, Linux, and macOS.
-- SSO/RBAC contract with viewer, operator, and admin roles.
+- 3 agent packaging targets: Windows, Linux, and macOS, with service wrapper artifacts.
+- OIDC/JWKS RBAC with viewer, operator, and admin roles.
 - Redacted secrets inventory with `APT_SIM_JWT_SECRET` environment override support.
 - Audit export ZIP with hash-chain verification manifest.
+- Real-lab evidence import summary and append-only JSONL registry.
 - 5 long-campaign load-test profiles: 10, 50, 100, 500, and 1,000 scenarios.
 
 Production deployment guidance is in `docs/PRODUCTION_DEPLOYMENT.md`. Lab validation guidance is in `docs/ENTERPRISE_VALIDATION.md`.
@@ -518,7 +539,7 @@ Conformance tests verify:
 - SOC golden event row count is exactly 2,000.
 - README count statements match the current implementation.
 - ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
-- Enterprise readiness reports exactly 11 validation tracks, 3 package targets, 5 load-test profiles, and 4 SIEM validation targets.
+- Enterprise readiness reports exactly 11 validation tracks, 3 package targets, 5 load-test profiles, 4 SIEM validation targets, and real-lab evidence record counts.
 - Public text files do not include forbidden public tooling markers.
 
 ## Loaded Scenario Model

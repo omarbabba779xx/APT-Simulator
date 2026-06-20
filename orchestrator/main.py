@@ -29,6 +29,7 @@ from .core.killswitch import KillSwitch
 from .core.planner import Planner
 from .core.signer import load_private
 from .dsl.loader import load_scenarios_from_dir
+from .lab_evidence import LabEvidenceRecord
 from .storage.db import Repository, init_engine
 from .telemetry.otel import maybe_install as maybe_install_otel
 
@@ -58,7 +59,7 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
     scenarios = load_scenarios_from_dir(cfg.orchestrator.scenarios_dir)
 
     jwt_secret: bytes | None = None
-    if cfg.security.require_auth:
+    if cfg.security.require_auth and not cfg.security.sso_enabled:
         jwt_secret = load_or_generate_secret(
             cfg.security.jwt_secret_path,
             env_var=f"{cfg.security.secrets_env_prefix}JWT_SECRET",
@@ -260,6 +261,40 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
         return siem_validation_report()
 
+    @app.get("/lab-evidence/summary")
+    def lab_evidence_status(_claims=require_role("viewer")) -> dict[str, object]:
+        """Real-lab evidence import summary for scenarios, TTPs, and SIEM traces."""
+        from .lab_evidence import lab_evidence_summary
+
+        return lab_evidence_summary(state.scenarios, cfg.orchestrator.lab_evidence_path)
+
+    @app.get("/lab-evidence/template")
+    def lab_evidence_import_template(_claims=require_role("viewer")) -> dict[str, object]:
+        """Example payload for importing external lab evidence."""
+        from .lab_evidence import evidence_template
+
+        return evidence_template()
+
+    @app.post("/lab-evidence/import")
+    def lab_evidence_import(
+        record: LabEvidenceRecord,
+        _claims=require_role("operator"),
+    ) -> dict[str, object]:
+        """Import one external lab evidence record into the append-only JSONL registry."""
+        from .lab_evidence import append_lab_evidence
+
+        imported = append_lab_evidence(record, cfg.orchestrator.lab_evidence_path)
+        state.audit.append(
+            "lab_evidence.import",
+            {
+                "id": imported.id,
+                "source": imported.source,
+                "scenario": imported.scenario,
+                "attack_ids": imported.attack_ids,
+            },
+        )
+        return imported.model_dump(mode="json")
+
     @app.get("/reports/benchmark-pack.zip")
     def benchmark_pack_zip() -> Response:
         """Download reproducible public benchmark evidence snapshots."""
@@ -305,14 +340,22 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         limit: int = Query(3, ge=1, le=20),
         _claims=require_role("viewer"),
     ) -> dict[str, object]:
-        """Preview Splunk HEC and Elastic bulk payloads from golden SOC events."""
-        from .siem_connectors import elastic_bulk_payload, sample_golden_events, splunk_hec_payload
+        """Preview SIEM payloads from golden SOC events."""
+        from .siem_connectors import (
+            chronicle_udm_payload,
+            elastic_bulk_payload,
+            sample_golden_events,
+            sentinel_data_collector_payload,
+            splunk_hec_payload,
+        )
 
         events = sample_golden_events(limit=limit)
         return {
             "events": events,
             "splunk_hec": splunk_hec_payload(events),
             "elastic_bulk": elastic_bulk_payload(events),
+            "sentinel_data_collector": sentinel_data_collector_payload(events),
+            "chronicle_udm": chronicle_udm_payload(events),
         }
 
     @app.post("/siem/connectors/splunk/hec/send")
@@ -353,6 +396,53 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
                 req.api_key,
                 sample_golden_events(limit=req.event_limit),
                 index=req.index,
+                allow_external=req.allow_external,
+                timeout_seconds=req.timeout_seconds,
+            )
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/siem/connectors/sentinel/data-collector/send")
+    def siem_sentinel_data_collector_send(
+        req: SIEMSendRequest,
+        _claims=require_role("operator"),
+    ) -> dict[str, object]:
+        """Send golden SOC events to Microsoft Sentinel or a local compatible mock."""
+        from .siem_connectors import sample_golden_events, send_sentinel_data_collector
+
+        if not req.workspace_id:
+            raise HTTPException(400, "workspace_id is required")
+        if not req.shared_key:
+            raise HTTPException(400, "shared_key is required")
+        try:
+            return send_sentinel_data_collector(
+                req.url,
+                req.workspace_id,
+                req.shared_key,
+                sample_golden_events(limit=req.event_limit),
+                log_type=req.log_type,
+                allow_external=req.allow_external,
+                timeout_seconds=req.timeout_seconds,
+            )
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.post("/siem/connectors/chronicle/udm/send")
+    def siem_chronicle_udm_send(
+        req: SIEMSendRequest,
+        _claims=require_role("operator"),
+    ) -> dict[str, object]:
+        """Send golden SOC events to Google Chronicle UDM or a local compatible mock."""
+        from .siem_connectors import sample_golden_events, send_chronicle_udm
+
+        token = req.bearer_token or req.token
+        if not token:
+            raise HTTPException(400, "bearer_token is required")
+        try:
+            return send_chronicle_udm(
+                req.url,
+                token,
+                sample_golden_events(limit=req.event_limit),
                 allow_external=req.allow_external,
                 timeout_seconds=req.timeout_seconds,
             )

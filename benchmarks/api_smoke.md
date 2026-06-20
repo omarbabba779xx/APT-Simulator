@@ -16,6 +16,8 @@ curl http://127.0.0.1:8000/enterprise/lab-validation
 curl http://127.0.0.1:8000/enterprise/agent-packaging
 curl http://127.0.0.1:8000/enterprise/load-test/plan
 curl http://127.0.0.1:8000/enterprise/siem-validation
+curl http://127.0.0.1:8000/lab-evidence/summary
+curl http://127.0.0.1:8000/lab-evidence/template
 curl http://127.0.0.1:8000/evidence/summary
 curl http://127.0.0.1:8000/attack/sync/status
 curl http://127.0.0.1:8000/detections/workbench
@@ -31,7 +33,7 @@ Minimum expected API values:
 /healthz.scenarios_loaded = 3522
 /platform/readiness.counts.ttps = 5064
 /platform/readiness.counts.validated_scenarios = 1000
-/platform/readiness.counts.siem_targets = 2
+/platform/readiness.counts.siem_targets = 4
 /platform/readiness.counts.enterprise_validation_tracks = 11
 /platform/readiness.counts.agent_package_targets = 3
 /platform/readiness.counts.load_test_profiles = 5
@@ -39,6 +41,6 @@ Minimum expected API values:
 /evidence/summary.counts.golden_event_rows = 2000
 /attack/sync/status.coverage_label = 15/15
 /labs/multi-agent/smoke.ok = true
-/siem/connectors/status.targets = ["splunk_hec", "elastic_bulk"]
+/siem/connectors/status.targets = ["splunk_hec", "elastic_bulk", "sentinel_data_collector", "chronicle_udm"]
 /enterprise/readiness.status = enterprise-lab-ready
 ```

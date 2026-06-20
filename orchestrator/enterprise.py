@@ -11,6 +11,7 @@ from typing import Any
 from .api.state import AppState
 from .core.audit import AuditLog
 from .core.config import AppConfig
+from .lab_evidence import lab_evidence_summary
 from .siem_connectors import SUPPORTED_TARGETS
 
 
@@ -100,16 +101,16 @@ ENTERPRISE_VALIDATION_TRACKS: tuple[dict[str, Any], ...] = (
         "id": "sentinel",
         "name": "Microsoft Sentinel Validation",
         "platform": "siem",
-        "scope": "KQL rule review, field mapping, and golden-event comparison workflow.",
-        "evidence": ["Sentinel export readiness", "Detection Workbench target tracking"],
+        "scope": "Data Collector ingestion, KQL rule review, and golden-event comparison workflow.",
+        "evidence": ["Sentinel Data Collector sender", "Mock-smoke tests", "KQL query sketches"],
         "runbook": "docs/ENTERPRISE_VALIDATION.md#siem-validation",
     },
     {
         "id": "chronicle",
         "name": "Google Chronicle Validation",
         "platform": "siem",
-        "scope": "YARA-L style rule review, field mapping, and golden-event comparison workflow.",
-        "evidence": ["Chronicle export readiness", "Detection Workbench target tracking"],
+        "scope": "UDM ingestion, YARA-L style rule review, and golden-event comparison workflow.",
+        "evidence": ["Chronicle UDM sender", "Mock-smoke tests", "YARA-L query sketches"],
         "runbook": "docs/ENTERPRISE_VALIDATION.md#siem-validation",
     },
 )
@@ -121,18 +122,21 @@ AGENT_PACKAGE_TARGETS: tuple[dict[str, str], ...] = (
         "artifact": "dist/apt-agent.exe",
         "build_command": ".\\packaging\\build_agent.ps1",
         "signing": "signtool sign with the enterprise code-signing certificate",
+        "service_install": "packaging/windows/install_agent_service.ps1",
     },
     {
         "platform": "linux",
         "artifact": "dist/apt-agent",
         "build_command": "./packaging/build_agent.sh",
         "signing": "sign or attest through the Linux package pipeline",
+        "service_install": "packaging/linux/apt-agent.service",
     },
     {
         "platform": "macos",
         "artifact": "dist/apt-agent",
         "build_command": "./packaging/build_agent.sh",
         "signing": "codesign and notarize before fleet deployment",
+        "service_install": "packaging/macos/com.apt-simulator.agent.plist",
     },
 )
 
@@ -173,6 +177,10 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
     load_plan = load_test_plan()
     packaging = agent_packaging_report()
     siem = siem_validation_report()
+    lab_evidence = lab_evidence_summary(
+        state.scenarios,
+        state.config.orchestrator.lab_evidence_path,
+    )
     sections = [
         _section(
             "Enterprise Lab Validation",
@@ -185,6 +193,7 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
         _section("Audit Export", 100.0, audit["evidence"]),
         _section("Long Campaign Load Tests", 100.0, load_plan["evidence"]),
         _section("SIEM Validation", 100.0, siem["evidence"]),
+        _section("Real Lab Evidence Import", 100.0, lab_evidence["evidence"]),
     ]
     overall = round(sum(float(item["score"]) for item in sections) / len(sections), 2)
     return {
@@ -198,6 +207,7 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
             "load_test_profiles": len(LOAD_TEST_PROFILES),
             "siem_validation_targets": len(siem["targets"]),
             "audit_records": audit["records"],
+            "real_lab_evidence_records": lab_evidence["records"],
         },
         "validation": lab_validation_report(state),
         "access": access,
@@ -206,6 +216,7 @@ def enterprise_readiness_report(state: AppState) -> dict[str, Any]:
         "load_test_plan": load_plan,
         "agent_packaging": packaging,
         "siem_validation": siem,
+        "lab_evidence": lab_evidence,
     }
 
 
@@ -249,6 +260,9 @@ def agent_packaging_report() -> dict[str, Any]:
             "packaging/agent.spec",
             "packaging/build_agent.ps1",
             "packaging/build_agent.sh",
+            "packaging/windows/install_agent_service.ps1",
+            "packaging/linux/apt-agent.service",
+            "packaging/macos/com.apt-simulator.agent.plist",
             "packaging/release_matrix.json",
             "packaging/README.md",
         ],
@@ -256,6 +270,9 @@ def agent_packaging_report() -> dict[str, Any]:
             "PyInstaller spec committed",
             "Windows build script committed",
             "Linux/macOS build script committed",
+            "Windows service installer committed",
+            "systemd unit committed",
+            "launchd plist committed",
             "Production signing steps documented",
         ],
     }
@@ -266,7 +283,7 @@ def access_readiness_report(config: AppConfig) -> dict[str, Any]:
         config.security.sso_enabled
         and config.security.oidc_issuer
         and config.security.oidc_audience
-        and config.security.oidc_jwks_url
+        and (config.security.oidc_jwks_url or config.security.oidc_jwks_path)
     )
     return {
         "status": "rbac_ready",
@@ -290,12 +307,13 @@ def access_readiness_report(config: AppConfig) -> dict[str, Any]:
             "oidc_issuer_configured": bool(config.security.oidc_issuer),
             "oidc_audience_configured": bool(config.security.oidc_audience),
             "oidc_jwks_url_configured": bool(config.security.oidc_jwks_url),
+            "oidc_jwks_path_configured": bool(config.security.oidc_jwks_path),
             "configuration_complete": sso_configured,
         },
         "evidence": [
             "JWT RBAC dependency enforced when auth is enabled",
             "Viewer/operator/admin role matrix exposed",
-            "OIDC configuration contract present for enterprise SSO integration",
+            "OIDC/JWKS validation path implemented for enterprise SSO integration",
         ],
     }
 
@@ -380,15 +398,15 @@ def siem_validation_report() -> dict[str, Any]:
         },
         {
             "name": "sentinel",
-            "mode": "query_validation",
-            "connector": "kql_export",
-            "implemented": True,
+            "mode": "ingest",
+            "connector": "sentinel_data_collector",
+            "implemented": "sentinel_data_collector" in SUPPORTED_TARGETS,
         },
         {
             "name": "chronicle",
-            "mode": "query_validation",
-            "connector": "query_export",
-            "implemented": True,
+            "mode": "ingest",
+            "connector": "chronicle_udm",
+            "implemented": "chronicle_udm" in SUPPORTED_TARGETS,
         },
     ]
     return {
@@ -398,7 +416,8 @@ def siem_validation_report() -> dict[str, Any]:
         "evidence": [
             "Splunk HEC sender",
             "Elastic bulk sender",
-            "Sentinel and Chronicle detection workbench targets",
+            "Sentinel Data Collector sender",
+            "Chronicle UDM sender",
             "Golden SOC event comparison workflow",
         ],
     }

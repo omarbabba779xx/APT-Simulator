@@ -1,16 +1,22 @@
 from __future__ import annotations
 
 
+import json
+
 import jwt
 import pytest
+from cryptography.hazmat.primitives.asymmetric import rsa
+from jwt.algorithms import RSAAlgorithm
 
 from orchestrator.core.auth import (
     ROLES,
     decode_token,
+    decode_oidc_token,
     has_role,
     issue_token,
     load_or_generate_secret,
 )
+from orchestrator.core.config import SecurityConfig
 
 
 def test_role_ordering() -> None:
@@ -57,6 +63,39 @@ def test_secret_env_override(monkeypatch, tmp_path) -> None:
     monkeypatch.setenv("APT_SIM_TEST_SECRET", "from-env")
     assert load_or_generate_secret(tmp_path / "s.bin", env_var="APT_SIM_TEST_SECRET") == b"from-env"
     assert not (tmp_path / "s.bin").exists()
+
+
+def test_oidc_jwks_role_mapping(tmp_path) -> None:
+    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    public_jwk = json.loads(RSAAlgorithm.to_jwk(key.public_key()))
+    public_jwk["kid"] = "test-key"
+    jwks_path = tmp_path / "jwks.json"
+    jwks_path.write_text(json.dumps({"keys": [public_jwk]}), encoding="utf-8")
+
+    token = jwt.encode(
+        {
+            "sub": "analyst@example.com",
+            "iss": "https://idp.example.test/",
+            "aud": "apt-simulator",
+            "groups": ["soc-operators"],
+        },
+        key,
+        algorithm="RS256",
+        headers={"kid": "test-key"},
+    )
+    claims = decode_oidc_token(
+        token,
+        SecurityConfig(
+            sso_enabled=True,
+            oidc_issuer="https://idp.example.test/",
+            oidc_audience="apt-simulator",
+            oidc_jwks_path=str(jwks_path),
+            rbac_role_claim="groups",
+            rbac_role_map={"soc-operators": "operator"},
+        ),
+    )
+    assert claims["sub"] == "analyst@example.com"
+    assert claims["role"] == "operator"
 
 
 def test_roles_constant() -> None:

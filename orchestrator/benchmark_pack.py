@@ -19,6 +19,7 @@ from .enterprise import (
 from .evidence_center import build_evidence_summary
 from .execution_engine_v3 import build_engine_status
 from .import_center import build_import_center
+from .lab_evidence import lab_evidence_summary
 from .platform_readiness import build_platform_readiness
 
 
@@ -63,6 +64,8 @@ def build_benchmark_manifest(state: AppState) -> dict[str, Any]:
             "/enterprise/agent-packaging",
             "/enterprise/load-test/plan",
             "/enterprise/siem-validation",
+            "/lab-evidence/summary",
+            "/lab-evidence/template",
             "/reports/audit-export.zip",
             "/evidence/summary",
             "/detections/workbench",
@@ -93,6 +96,17 @@ def build_benchmark_zip(state: AppState) -> bytes:
         archive.writestr(
             "api/evidence_summary.json",
             json.dumps(build_evidence_summary(state.scenarios), indent=2, sort_keys=True),
+        )
+        archive.writestr(
+            "api/lab_evidence_summary.json",
+            json.dumps(
+                lab_evidence_summary(
+                    state.scenarios,
+                    state.config.orchestrator.lab_evidence_path,
+                ),
+                indent=2,
+                sort_keys=True,
+            ),
         )
         archive.writestr(
             "api/enterprise_readiness.json",
@@ -145,6 +159,7 @@ def sample_benchmark_report() -> dict[str, Any]:
             "agent_package_targets": 3,
             "load_test_profiles": 5,
             "siem_validation_targets": 4,
+            "siem_connector_targets": 4,
         },
         "required_endpoints": [
             "/healthz",
@@ -156,6 +171,7 @@ def sample_benchmark_report() -> dict[str, Any]:
             "POST /labs/multi-agent/smoke",
             "/enterprise/readiness",
             "/enterprise/load-test/plan",
+            "/lab-evidence/summary",
             "/evidence/summary",
             "/reports/benchmark-pack.zip",
         ],

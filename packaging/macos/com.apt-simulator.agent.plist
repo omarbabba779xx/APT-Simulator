@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.apt-simulator.agent</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/apt-simulator/apt-agent</string>
+    <string>beacon</string>
+    <string>--config</string>
+    <string>/usr/local/etc/apt-simulator/config.yaml</string>
+  </array>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/usr/local/var/log/apt-simulator/agent.log</string>
+  <key>StandardErrorPath</key>
+  <string>/usr/local/var/log/apt-simulator/agent.err</string>
+</dict>
+</plist>

@@ -31,7 +31,7 @@ Use the environment override for production secret injection:
 export APT_SIM_JWT_SECRET="<secret-from-vault>"
 ```
 
-The `/enterprise/access` endpoint exposes the viewer/operator/admin matrix and the OIDC SSO configuration contract. Set the OIDC fields when integrating with an enterprise identity provider:
+The `/enterprise/access` endpoint exposes the viewer/operator/admin matrix and the OIDC/JWKS validation status. Set the OIDC fields when integrating with an enterprise identity provider:
 
 ```yaml
 security:
@@ -41,7 +41,12 @@ security:
   oidc_audience: apt-simulator
   oidc_jwks_url: https://idp.example.com/.well-known/jwks.json
   rbac_role_claim: role
+  rbac_role_map:
+    soc-operators: operator
+    soc-admins: admin
 ```
+
+For offline validation or CI, use `oidc_jwks_path` with a local JWKS file instead of `oidc_jwks_url`.
 
 ## Secrets Management
 
@@ -64,7 +69,7 @@ Build agents from the repository root:
 ./packaging/build_agent.sh
 ```
 
-The `/enterprise/agent-packaging` endpoint lists the Windows, Linux, and macOS build matrix. Production builds should be signed or attested before fleet deployment.
+The `/enterprise/agent-packaging` endpoint lists the Windows, Linux, and macOS build matrix, including the Windows service installer, Linux systemd unit, and macOS launchd plist. Production builds should be signed or attested before fleet deployment.
 
 ## Audit Export
 
@@ -84,7 +89,7 @@ The ZIP contains:
 
 ## SIEM Validation
 
-Splunk HEC and Elastic bulk ingestion are implemented as guarded send endpoints. Microsoft Sentinel and Google Chronicle are supported through query validation and field-mapping workflows in the Detection Workbench.
+Splunk HEC, Elastic bulk, Microsoft Sentinel Data Collector, and Google Chronicle UDM ingestion are implemented as guarded send endpoints. They use committed SOC golden events and enforce localhost/private-network safety by default.
 
 Use:
 
@@ -92,6 +97,17 @@ Use:
 curl http://127.0.0.1:8000/enterprise/siem-validation
 curl http://127.0.0.1:8000/siem/connectors/status
 ```
+
+## Real-Lab Evidence Registry
+
+External SIEM exports, screenshots, host logs, and campaign reports can be registered through:
+
+```bash
+curl http://127.0.0.1:8000/lab-evidence/template
+curl http://127.0.0.1:8000/lab-evidence/summary
+```
+
+The registry stores references and SHA-256 values. It does not bundle customer lab artifacts by default.
 
 ## Load Testing
 

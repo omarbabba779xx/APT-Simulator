@@ -15,11 +15,16 @@ from __future__ import annotations
 import secrets
 import time
 import os
+import json
 from pathlib import Path
 from typing import Any
 
 import jwt
 from fastapi import Depends, HTTPException, Request
+from jwt import PyJWKClient
+from jwt.algorithms import RSAAlgorithm
+
+from .config import SecurityConfig
 
 
 ROLES = ("viewer", "operator", "admin")
@@ -69,6 +74,54 @@ def decode_token(token: str, secret: bytes, algorithm: str = "HS256") -> dict[st
     return jwt.decode(token, secret, algorithms=[algorithm], issuer="apt-simulator")
 
 
+def decode_oidc_token(token: str, config: SecurityConfig) -> dict[str, Any]:
+    if not config.oidc_issuer or not config.oidc_audience:
+        raise jwt.InvalidTokenError("OIDC issuer and audience must be configured")
+    key = _oidc_signing_key(token, config)
+    claims = jwt.decode(
+        token,
+        key=key,
+        algorithms=["RS256"],
+        audience=config.oidc_audience,
+        issuer=config.oidc_issuer,
+    )
+    role = _map_role_claim(claims, config)
+    claims["role"] = role
+    return claims
+
+
+def _oidc_signing_key(token: str, config: SecurityConfig) -> Any:
+    if config.oidc_jwks_path:
+        return _oidc_signing_key_from_file(token, Path(config.oidc_jwks_path))
+    if config.oidc_jwks_url:
+        return PyJWKClient(config.oidc_jwks_url).get_signing_key_from_jwt(token).key
+    raise jwt.InvalidTokenError("OIDC JWKS URL or local JWKS path must be configured")
+
+
+def _oidc_signing_key_from_file(token: str, path: Path) -> Any:
+    if not path.exists():
+        raise jwt.InvalidTokenError(f"OIDC JWKS file does not exist: {path}")
+    header = jwt.get_unverified_header(token)
+    kid = header.get("kid")
+    jwks = json.loads(path.read_text(encoding="utf-8"))
+    for key_data in jwks.get("keys", []):
+        if key_data.get("kid") == kid:
+            return RSAAlgorithm.from_jwk(json.dumps(key_data))
+    raise jwt.InvalidTokenError(f"OIDC signing key not found for kid: {kid}")
+
+
+def _map_role_claim(claims: dict[str, Any], config: SecurityConfig) -> str:
+    value = claims.get(config.rbac_role_claim)
+    values = value if isinstance(value, list) else [value]
+    for item in values:
+        if not item:
+            continue
+        role = config.rbac_role_map.get(str(item), str(item))
+        if role in ROLES:
+            return role
+    raise jwt.InvalidTokenError(f"no valid RBAC role in claim '{config.rbac_role_claim}'")
+
+
 def _extract_token(request: Request) -> str | None:
     header = request.headers.get("authorization") or request.headers.get("Authorization")
     if not header or not header.lower().startswith("bearer "):
@@ -91,14 +144,22 @@ def require_role(min_role: str):
         token = _extract_token(request)
         if not token:
             raise HTTPException(401, "missing bearer token")
-        if s.jwt_secret is None:
+        if s.config.security.sso_enabled:
+            try:
+                claims = decode_oidc_token(token, s.config.security)
+            except jwt.ExpiredSignatureError:
+                raise HTTPException(401, "token expired")
+            except jwt.InvalidTokenError as exc:
+                raise HTTPException(401, f"invalid token: {exc}")
+        elif s.jwt_secret is None:
             raise HTTPException(500, "auth misconfigured: no secret loaded")
-        try:
-            claims = decode_token(token, s.jwt_secret, algorithm=s.config.security.jwt_algorithm)
-        except jwt.ExpiredSignatureError:
-            raise HTTPException(401, "token expired")
-        except jwt.InvalidTokenError as exc:
-            raise HTTPException(401, f"invalid token: {exc}")
+        else:
+            try:
+                claims = decode_token(token, s.jwt_secret, algorithm=s.config.security.jwt_algorithm)
+            except jwt.ExpiredSignatureError:
+                raise HTTPException(401, "token expired")
+            except jwt.InvalidTokenError as exc:
+                raise HTTPException(401, f"invalid token: {exc}")
         actual = claims.get("role", "")
         if not has_role(actual, min_role):
             raise HTTPException(

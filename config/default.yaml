@@ -5,6 +5,7 @@ orchestrator:
   scenarios_dir: scenarios
   db_path: data/apt_sim.db
   killswitch_file: data/STOP
+  lab_evidence_path: data/lab_evidence.jsonl
 
 agent:
   beacon_interval_seconds: 5
@@ -27,7 +28,9 @@ security:
   oidc_issuer: ""
   oidc_audience: ""
   oidc_jwks_url: ""
+  oidc_jwks_path: ""
   rbac_role_claim: role
+  rbac_role_map: {}
 
 logging:
   level: INFO

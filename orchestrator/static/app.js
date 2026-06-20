@@ -19,6 +19,7 @@ const state = {
   exposure: null,
   maturity: null,
   evidenceSummary: null,
+  labEvidence: null,
   platformReadiness: null,
   importCenter: null,
   engineV3: null,
@@ -155,6 +156,7 @@ async function refreshStatic() {
     api("/exposure/graph").then((data) => { state.exposure = data; }),
     api("/scenario-maturity").then((data) => { state.maturity = data; }),
     api("/evidence/summary").then((data) => { state.evidenceSummary = data; }),
+    api("/lab-evidence/summary").then((data) => { state.labEvidence = data; }),
     api("/platform/readiness").then((data) => { state.platformReadiness = data; }),
     api("/imports/center").then((data) => { state.importCenter = data; }),
     api("/scenario-builder/space").then((data) => { state.space = data; }),
@@ -450,6 +452,7 @@ function renderMaturity() {
 
 function renderEvidenceCenter() {
   const summary = state.evidenceSummary;
+  const labEvidence = state.labEvidence || {};
   const score = byId("evidence-score");
   const summaryBox = byId("evidence-summary");
   const gatesBox = byId("evidence-gates");
@@ -473,6 +476,9 @@ function renderEvidenceCenter() {
     ["Golden event rows", fmtInt(counts.golden_event_rows)],
     ["Actors", fmtInt(counts.actors)],
     ["Telemetry sources", fmtInt(counts.telemetry_sources)],
+    ["Imported lab evidence", fmtInt(labEvidence.records)],
+    ["Lab-evidence scenarios", fmtInt(labEvidence.scenarios_with_real_lab_evidence)],
+    ["Lab-evidence TTPs", fmtInt(labEvidence.ttps_with_real_lab_evidence)],
   ];
   for (const [label, value] of rows) {
     summaryBox.appendChild(node("div", { class: "summary-row" }, [

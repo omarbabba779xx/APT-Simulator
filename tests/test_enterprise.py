@@ -26,6 +26,7 @@ def test_enterprise_reports_have_exact_counts() -> None:
     assert readiness["counts"]["agent_package_targets"] == 3
     assert readiness["counts"]["load_test_profiles"] == 5
     assert readiness["counts"]["siem_validation_targets"] == 4
+    assert readiness["counts"]["real_lab_evidence_records"] >= 0
     assert readiness["validation"]["track_count"] == 11
 
     access = client.get("/enterprise/access").json()
@@ -35,6 +36,7 @@ def test_enterprise_reports_have_exact_counts() -> None:
     packaging = client.get("/enterprise/agent-packaging").json()
     assert packaging["target_count"] == 3
     assert {item["platform"] for item in packaging["targets"]} == {"windows", "linux", "macos"}
+    assert "packaging/linux/apt-agent.service" in packaging["files"]
 
     load_plan = client.get("/enterprise/load-test/plan").json()
     assert load_plan["max_documented_campaign_size"] == 1000
@@ -64,6 +66,7 @@ def test_enterprise_helpers_are_redacted_and_consistent() -> None:
     report = enterprise_readiness_report(get_state())
     secrets = secrets_status(get_state().config)
     assert report["counts"]["validation_tracks"] == 11
+    assert report["counts"]["real_lab_evidence_records"] >= 0
     assert all(item["material"] == "redacted" for item in secrets["files"])
     assert all(item["material"] == "redacted" for item in secrets["env_overrides"])
 

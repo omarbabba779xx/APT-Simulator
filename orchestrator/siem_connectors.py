@@ -5,6 +5,9 @@ import json
 import socket
 import urllib.parse
 import urllib.request
+import base64
+import hashlib
+import hmac
 from datetime import datetime, timezone
 from ipaddress import ip_address
 from typing import Any
@@ -12,7 +15,12 @@ from typing import Any
 from .scenario_maturity import load_golden_events
 
 
-SUPPORTED_TARGETS = ("splunk_hec", "elastic_bulk")
+SUPPORTED_TARGETS = (
+    "splunk_hec",
+    "elastic_bulk",
+    "sentinel_data_collector",
+    "chronicle_udm",
+)
 
 
 def sample_golden_events(limit: int = 10) -> list[dict[str, Any]]:
@@ -54,6 +62,48 @@ def elastic_bulk_payload(events: list[dict[str, Any]], *, index: str = "apt-simu
         lines.append(json.dumps(action, sort_keys=True, separators=(",", ":")))
         lines.append(json.dumps(event, sort_keys=True, separators=(",", ":")))
     return "\n".join(lines) + ("\n" if lines else "")
+
+
+def sentinel_data_collector_payload(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {
+            "TimeGenerated": event.get("@timestamp"),
+            "Scenario": event.get("scenario"),
+            "AttackId": event.get("threat.technique.id"),
+            "Host": event.get("host.name"),
+            "Source": event.get("event.provider", "apt-simulator"),
+            "RawEvent": event,
+        }
+        for event in events
+    ]
+
+
+def chronicle_udm_payload(events: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "events": [
+            {
+                "metadata": {
+                    "product_name": "APT Simulator",
+                    "vendor_name": "APT Simulator",
+                    "event_type": "GENERIC_EVENT",
+                    "collected_timestamp": event.get("@timestamp"),
+                },
+                "principal": {
+                    "hostname": event.get("host.name", "apt-simulator-lab"),
+                },
+                "security_result": {
+                    "rule_name": event.get("rule.name", event.get("scenario", "scenario")),
+                    "severity": "INFORMATIONAL",
+                },
+                "extensions": {
+                    "attack_id": event.get("threat.technique.id"),
+                    "scenario": event.get("scenario"),
+                    "raw_event": event,
+                },
+            }
+            for event in events
+        ]
+    }
 
 
 def send_splunk_hec(
@@ -106,6 +156,67 @@ def send_elastic_bulk(
     return _send(request, timeout_seconds=timeout_seconds, events_sent=len(events))
 
 
+def send_sentinel_data_collector(
+    url: str,
+    workspace_id: str,
+    shared_key: str,
+    events: list[dict[str, Any]],
+    *,
+    log_type: str = "AptSimulator_CL",
+    allow_external: bool = False,
+    timeout_seconds: float = 10.0,
+) -> dict[str, Any]:
+    target = (
+        url
+        or f"https://{workspace_id}.ods.opinsights.azure.com/api/logs?api-version=2016-04-01"
+    )
+    _require_lab_url(target, allow_external=allow_external)
+    payload = json.dumps(
+        sentinel_data_collector_payload(events),
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    date = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    request = urllib.request.Request(
+        target,
+        data=payload,
+        headers={
+            "Authorization": _sentinel_signature(workspace_id, shared_key, date, len(payload)),
+            "Content-Type": "application/json",
+            "Log-Type": log_type,
+            "x-ms-date": date,
+        },
+        method="POST",
+    )
+    return _send(request, timeout_seconds=timeout_seconds, events_sent=len(events))
+
+
+def send_chronicle_udm(
+    url: str,
+    bearer_token: str,
+    events: list[dict[str, Any]],
+    *,
+    allow_external: bool = False,
+    timeout_seconds: float = 10.0,
+) -> dict[str, Any]:
+    _require_lab_url(url, allow_external=allow_external)
+    payload = json.dumps(
+        chronicle_udm_payload(events),
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    request = urllib.request.Request(
+        url,
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {bearer_token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    return _send(request, timeout_seconds=timeout_seconds, events_sent=len(events))
+
+
 def connector_status() -> dict[str, Any]:
     sample = sample_golden_events(limit=5)
     return {
@@ -123,6 +234,18 @@ def connector_status() -> dict[str, Any]:
             "content_type": "application/x-ndjson",
             "auth_header": "Authorization: ApiKey <key>",
             "bulk_lines": len(elastic_bulk_payload(sample).splitlines()),
+        },
+        "sentinel_data_collector": {
+            "method": "POST",
+            "content_type": "application/json",
+            "auth_header": "Authorization: SharedKey <workspace>:<signature>",
+            "payload_records": len(sentinel_data_collector_payload(sample)),
+        },
+        "chronicle_udm": {
+            "method": "POST",
+            "content_type": "application/json",
+            "auth_header": "Authorization: Bearer <token>",
+            "payload_records": len(chronicle_udm_payload(sample)["events"]),
         },
     }
 
@@ -154,6 +277,20 @@ def _require_lab_url(url: str, *, allow_external: bool) -> None:
     if any(address.is_private or address.is_loopback for address in addresses):
         return
     raise ValueError("SIEM URL is not local/private; set allow_external=true explicitly")
+
+
+def _sentinel_signature(
+    workspace_id: str,
+    shared_key: str,
+    date: str,
+    content_length: int,
+) -> str:
+    x_headers = f"x-ms-date:{date}"
+    string_to_hash = f"POST\n{content_length}\napplication/json\n{x_headers}\n/api/logs"
+    decoded_key = base64.b64decode(shared_key)
+    digest = hmac.new(decoded_key, string_to_hash.encode("utf-8"), hashlib.sha256).digest()
+    encoded_hash = base64.b64encode(digest).decode("utf-8")
+    return f"SharedKey {workspace_id}:{encoded_hash}"
 
 
 def _event_epoch_hint(event: dict[str, Any]) -> float | None:

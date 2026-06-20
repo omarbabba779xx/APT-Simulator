@@ -53,12 +53,13 @@
 - [x] Execution Engine v3 status with persistent queue, retry controls, cleanup closure, and audit integrity.
 - [x] Local three-agent lab smoke for planner dispatch, queue, history, and audit proof.
 - [x] Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
-- [x] Splunk HEC and Elastic bulk SIEM connector senders with local/private safety gate and mock-smoke tests.
+- [x] Splunk HEC, Elastic bulk, Sentinel Data Collector, and Chronicle UDM SIEM connector senders with local/private safety gate and mock-smoke tests.
 - [x] Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, multi-agent smoke, SIEM, and benchmarks.
 - [x] Public benchmark pack with API smoke checklist, SIEM mock-smoke guide, sample report, and downloadable API snapshots.
 - [x] Enterprise validation tracks for Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Sentinel, and Chronicle.
 - [x] Windows, Linux, and macOS agent packaging matrix with production signing guidance.
-- [x] Enterprise access/RBAC report, OIDC SSO configuration contract, and redacted secrets inventory.
+- [x] Enterprise access/RBAC report, OIDC/JWKS validation path, and redacted secrets inventory.
+- [x] Real-lab evidence import registry for user-owned SIEM exports, host logs, screenshots, and campaign reports.
 - [x] Hash-chain audit export ZIP with verification manifest.
 - [x] Long-campaign load-test plan for 10, 50, 100, 500, and 1,000 scenarios.
 - [x] Production deployment and enterprise validation documentation.

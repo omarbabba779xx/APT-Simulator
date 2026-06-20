@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from typing import Any
@@ -49,6 +50,7 @@ def test_multi_agent_smoke_and_siem_send_endpoints() -> None:
     assert lab_body["distinct_assigned_agents"] == 3
 
     server, base_url = _mock_server()
+    shared_key = base64.b64encode(b"sentinel-shared-key-32-bytes").decode("ascii")
     try:
         splunk = client.post(
             "/siem/connectors/splunk/hec/send",
@@ -66,6 +68,23 @@ def test_multi_agent_smoke_and_siem_send_endpoints() -> None:
                 "event_limit": 2,
             },
         )
+        sentinel = client.post(
+            "/siem/connectors/sentinel/data-collector/send",
+            json={
+                "url": f"{base_url}/api/logs?api-version=2016-04-01",
+                "workspace_id": "workspace-123",
+                "shared_key": shared_key,
+                "event_limit": 2,
+            },
+        )
+        chronicle = client.post(
+            "/siem/connectors/chronicle/udm/send",
+            json={
+                "url": f"{base_url}/v2/udmevents:batchCreate",
+                "bearer_token": "chronicle-token",
+                "event_limit": 2,
+            },
+        )
     finally:
         server.shutdown()
 
@@ -73,6 +92,12 @@ def test_multi_agent_smoke_and_siem_send_endpoints() -> None:
     assert splunk.json()["events_sent"] == 2
     assert elastic.status_code == 200
     assert elastic.json()["events_sent"] == 2
+    assert sentinel.status_code == 200
+    assert sentinel.json()["events_sent"] == 2
+    assert chronicle.status_code == 200
+    assert chronicle.json()["events_sent"] == 2
     assert _MockSIEM.requests[0]["authorization"] == "Splunk splunk-token"
     assert _MockSIEM.requests[1]["path"] == "/_bulk"
     assert _MockSIEM.requests[1]["authorization"] == "ApiKey elastic-key"
+    assert _MockSIEM.requests[2]["authorization"].startswith("SharedKey workspace-123:")
+    assert _MockSIEM.requests[3]["authorization"] == "Bearer chronicle-token"

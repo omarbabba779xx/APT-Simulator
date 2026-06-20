@@ -7,7 +7,7 @@
     "golden_event_rows": 2000,
     "loaded_scenarios": 3522,
     "load_test_profiles": 5,
-    "siem_targets": 2,
+    "siem_targets": 4,
     "siem_validation_targets": 4,
     "ttps": 5064,
     "validated_scenarios": 1000
@@ -26,6 +26,7 @@
     "/enterprise/agent-packaging",
     "/enterprise/load-test/plan",
     "/enterprise/siem-validation",
+    "/lab-evidence/summary",
     "/evidence/summary",
     "/reports/audit-export.zip",
     "/reports/benchmark-pack.zip"

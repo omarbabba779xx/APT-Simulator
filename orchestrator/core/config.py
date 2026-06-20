@@ -15,6 +15,7 @@ class OrchestratorConfig(BaseModel):
     scenarios_dir: str = "scenarios"
     db_path: str = "data/apt_sim.db"
     killswitch_file: str = "data/STOP"
+    lab_evidence_path: str = "data/lab_evidence.jsonl"
 
 
 class AgentConfig(BaseModel):
@@ -39,7 +40,9 @@ class SecurityConfig(BaseModel):
     oidc_issuer: str = ""
     oidc_audience: str = ""
     oidc_jwks_url: str = ""
+    oidc_jwks_path: str = ""
     rbac_role_claim: str = "role"
+    rbac_role_map: dict[str, str] = Field(default_factory=dict)
 
 
 class LoggingConfig(BaseModel):

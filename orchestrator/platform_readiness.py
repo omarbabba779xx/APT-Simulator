@@ -66,6 +66,7 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
     lab_profiles = cast(dict[str, int], evidence.get("lab_profiles", {}))
     graph_nodes = cast(list[dict[str, Any]], graph["nodes"])
     graph_edges = cast(list[dict[str, Any]], graph["edges"])
+    lab_evidence = cast(dict[str, Any], enterprise["lab_evidence"])
     gates_passed = sum(1 for gate in quality_gates if gate["passed"])
     workbench_score = float(workbench.get("average_quality_score", 0))
     drift_score = 100.0 if drift.get("status") == "synced" else 65.0
@@ -123,6 +124,8 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
                 f"{len(siem['targets'])} connector target(s)",
                 "Splunk HEC JSON event payloads",
                 "Elastic bulk NDJSON payloads",
+                "Sentinel Data Collector JSON payloads",
+                "Chronicle UDM JSON payloads",
                 "Local/private URL safety gate and mock-smoke tests",
             ],
             [
@@ -130,6 +133,8 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
                 "/siem/connectors/sample",
                 "/siem/connectors/splunk/hec/send",
                 "/siem/connectors/elastic/bulk/send",
+                "/siem/connectors/sentinel/data-collector/send",
+                "/siem/connectors/chronicle/udm/send",
             ],
         ),
         _row(
@@ -150,6 +155,7 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             [
                 f"{enterprise['counts']['agent_package_targets']} package target(s)",
                 "Windows, Linux, and macOS build commands documented",
+                "Windows service, systemd, and launchd wrappers documented",
                 "Production signing and attestation steps documented",
             ],
             ["/enterprise/agent-packaging"],
@@ -160,10 +166,17 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             95.0,
             [
                 "Viewer/operator/admin RBAC matrix",
-                "OIDC SSO configuration contract",
+                "OIDC/JWKS token validation path",
                 "Redacted secret inventory and JWT environment override",
             ],
             ["/enterprise/access", "/enterprise/secrets"],
+        ),
+        _row(
+            "Real Lab Evidence Import",
+            "strong",
+            100.0,
+            cast(list[str], lab_evidence["evidence"]),
+            ["/lab-evidence/summary", "/lab-evidence/template", "/lab-evidence/import"],
         ),
         _row(
             "Long Campaign Load Testing",
@@ -302,5 +315,6 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             "agent_package_targets": enterprise["counts"]["agent_package_targets"],
             "load_test_profiles": enterprise["counts"]["load_test_profiles"],
             "siem_validation_targets": enterprise["counts"]["siem_validation_targets"],
+            "real_lab_evidence_records": enterprise["counts"]["real_lab_evidence_records"],
         },
     }

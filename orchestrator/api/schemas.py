@@ -131,6 +131,10 @@ class SIEMSendRequest(BaseModel):
     url: str
     token: str = ""
     api_key: str = ""
+    workspace_id: str = ""
+    shared_key: str = ""
+    log_type: str = "AptSimulator_CL"
+    bearer_token: str = ""
     index: str = "apt-simulator"
     event_limit: int = Field(default=10, ge=1, le=500)
     allow_external: bool = False

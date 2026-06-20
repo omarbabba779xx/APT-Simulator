@@ -1,0 +1,21 @@
+[Unit]
+Description=APT Simulator lab beacon agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=apt-simulator
+Group=apt-simulator
+WorkingDirectory=/opt/apt-simulator
+ExecStart=/opt/apt-simulator/apt-agent beacon --config /etc/apt-simulator/config.yaml
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/apt-simulator /var/log/apt-simulator
+
+[Install]
+WantedBy=multi-user.target

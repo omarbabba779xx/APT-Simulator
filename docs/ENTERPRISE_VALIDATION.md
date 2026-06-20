@@ -17,8 +17,8 @@ APT Simulator exposes 11 enterprise validation tracks through `/enterprise/lab-v
 | SaaS And Identity Lab | MFA policy, risky sign-in, token, sharing, and SaaS collection marker telemetry. |
 | Splunk Validation | HEC ingestion using committed SOC golden events and Sigma/SPL validation. |
 | Elastic Validation | Bulk API ingestion using committed SOC golden events and Sigma/Elastic validation. |
-| Microsoft Sentinel Validation | KQL rule review, field mapping, and golden-event comparison workflow. |
-| Google Chronicle Validation | Query export review, field mapping, and golden-event comparison workflow. |
+| Microsoft Sentinel Validation | Data Collector ingestion, KQL rule review, and golden-event comparison workflow. |
+| Google Chronicle Validation | UDM ingestion, YARA-L style rule review, and golden-event comparison workflow. |
 
 ## Windows AD Lab
 
@@ -69,7 +69,7 @@ curl http://127.0.0.1:8000/scenario-evidence/validated_apt29_identity_cloud_chai
 
 ## SIEM Validation
 
-Splunk and Elastic have guarded send endpoints. Microsoft Sentinel and Google Chronicle are tracked through detection workbench export readiness and field-mapping checks.
+Splunk, Elastic, Microsoft Sentinel, and Google Chronicle have guarded send endpoints. All four endpoints use committed SOC golden events, allow localhost/private-network lab targets by default, and require explicit `allow_external=true` for public URLs.
 
 ```bash
 curl http://127.0.0.1:8000/siem/connectors/status
@@ -79,6 +79,18 @@ curl http://127.0.0.1:8000/enterprise/siem-validation
 
 Use localhost or private-network mock endpoints for repeatable CI smoke tests. For public endpoints, set `allow_external=true` only after confirming the lab scope and credentials.
 
+## Real-Lab Evidence Import
+
+Use the lab evidence registry to attach externally captured proof from user-owned labs. Evidence records are stored as append-only JSONL and reference external artifacts by URI/path plus SHA-256.
+
+```bash
+curl http://127.0.0.1:8000/lab-evidence/template
+curl http://127.0.0.1:8000/lab-evidence/summary
+curl -X POST http://127.0.0.1:8000/lab-evidence/import \
+  -H "Content-Type: application/json" \
+  -d "{\"source\":\"splunk\",\"evidence_type\":\"siem_export\",\"scenario\":\"validated_apt29_identity_cloud_chain\",\"attack_ids\":[\"T1078\"],\"artifact_ref\":\"file:///lab/splunk-export.json\"}"
+```
+
 ## Evidence To Capture
 
 - `/enterprise/readiness`
@@ -86,5 +98,6 @@ Use localhost or private-network mock endpoints for repeatable CI smoke tests. F
 - `/reports/benchmark-pack.zip`
 - `/reports/evidence-pack.zip`
 - `/reports/audit-export.zip`
+- `/lab-evidence/summary`
 - SIEM screenshots or query exports from the user-owned lab
 - Campaign report JSON/HTML artifacts

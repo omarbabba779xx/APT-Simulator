@@ -4,18 +4,21 @@
       "platform": "windows",
       "artifact": "dist/apt-agent.exe",
       "build_command": ".\\packaging\\build_agent.ps1",
+      "service_install": "packaging/windows/install_agent_service.ps1",
       "production_signing": "signtool sign with the enterprise code-signing certificate"
     },
     {
       "platform": "linux",
       "artifact": "dist/apt-agent",
       "build_command": "./packaging/build_agent.sh",
+      "service_install": "packaging/linux/apt-agent.service",
       "production_signing": "sign or attest through the Linux package pipeline"
     },
     {
       "platform": "macos",
       "artifact": "dist/apt-agent",
       "build_command": "./packaging/build_agent.sh",
+      "service_install": "packaging/macos/com.apt-simulator.agent.plist",
       "production_signing": "codesign and notarize before fleet deployment"
     }
   ]
