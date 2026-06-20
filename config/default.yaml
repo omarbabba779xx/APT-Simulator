@@ -17,6 +17,17 @@ security:
   signing_key_path: keys/ed25519_private.pem
   signing_pub_path: keys/ed25519_public.pem
   enforce_lab_whitelist: true
+  require_auth: false
+  jwt_secret_path: keys/jwt_secret.bin
+  jwt_algorithm: HS256
+  secrets_provider: local_file
+  secrets_env_prefix: APT_SIM_
+  sso_enabled: false
+  sso_provider: oidc
+  oidc_issuer: ""
+  oidc_audience: ""
+  oidc_jwks_url: ""
+  rbac_role_claim: role
 
 logging:
   level: INFO

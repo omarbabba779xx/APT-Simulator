@@ -29,3 +29,4 @@ Output: `dist/apt-agent`
 - Plugin auto-registration works in the frozen binary because `collect_submodules("ttps")` materializes every TTP module.
 - Dev builds are NOT code-signed. Sign with `signtool` (Windows) or `codesign` (macOS) for production deployment.
 - Strip + UPX are disabled by default. Enable in `agent.spec` if size matters more than build determinism.
+- The `/enterprise/agent-packaging` endpoint exposes the Windows, Linux, and macOS packaging matrix used by the benchmark pack.

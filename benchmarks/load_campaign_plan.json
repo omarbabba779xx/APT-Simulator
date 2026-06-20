@@ -1,0 +1,39 @@
+{
+  "name": "enterprise_long_campaign_load_plan",
+  "profiles": [
+    {
+      "name": "api_smoke",
+      "scenario_count": 10,
+      "mode": "API smoke"
+    },
+    {
+      "name": "campaign_50",
+      "scenario_count": 50,
+      "mode": "queued campaign"
+    },
+    {
+      "name": "campaign_100",
+      "scenario_count": 100,
+      "mode": "queued campaign"
+    },
+    {
+      "name": "campaign_500",
+      "scenario_count": 500,
+      "mode": "batch preview plus queued slices"
+    },
+    {
+      "name": "campaign_1000",
+      "scenario_count": 1000,
+      "mode": "long campaign"
+    }
+  ],
+  "required_checks": [
+    "/enterprise/load-test/plan",
+    "/scenario-builder/batch-preview?count=100",
+    "POST /campaigns/run count=50",
+    "POST /campaigns/run count=100",
+    "/execution/queue",
+    "/history/runs",
+    "/reports/benchmark-pack.zip"
+  ]
+}

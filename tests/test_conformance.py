@@ -10,7 +10,15 @@ from ttps.base import registry
 
 ROOT = Path(__file__).resolve().parents[1]
 TEXT_SUFFIXES = {".md", ".py", ".js", ".css", ".html", ".yaml", ".yml", ".toml", ".txt"}
-SKIP_PARTS = {".git", ".mypy_cache", ".pytest_cache", ".ruff_cache", ".tmp", "__pycache__"}
+SKIP_PARTS = {
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tmp",
+    ".venv",
+    "__pycache__",
+}
 FORBIDDEN_MARKERS = [
     "co" + "dex",
     "open" + "ai",
@@ -44,6 +52,10 @@ def test_readme_states_exact_counts() -> None:
         "2,000 SOC golden event rows",
         "15,680,015,680 generable scenario variants",
         "5,064 Sigma rules",
+        "11 enterprise validation tracks",
+        "3 agent package targets",
+        "5 load-test profiles",
+        "4 SIEM validation targets",
         "15/15 current ATT&CK Enterprise tactics covered",
         "696 current ATT&CK Enterprise base technique/sub-technique IDs",
         "100 ATT&CK-mapped marker-only variants",

@@ -32,6 +32,14 @@ class SecurityConfig(BaseModel):
     require_auth: bool = False
     jwt_secret_path: str = "keys/jwt_secret.bin"
     jwt_algorithm: str = "HS256"
+    secrets_provider: str = "local_file"
+    secrets_env_prefix: str = "APT_SIM_"
+    sso_enabled: bool = False
+    sso_provider: str = "oidc"
+    oidc_issuer: str = ""
+    oidc_audience: str = ""
+    oidc_jwks_url: str = ""
+    rbac_role_claim: str = "role"
 
 
 class LoggingConfig(BaseModel):

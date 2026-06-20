@@ -531,6 +531,8 @@ function renderPlatformReadiness() {
     ["TTPs", fmtInt(readiness.counts?.ttps)],
     ["Scenarios", fmtInt(readiness.counts?.loaded_scenarios)],
     ["Validated", fmtInt(readiness.counts?.validated_scenarios)],
+    ["Enterprise tracks", fmtInt(readiness.counts?.enterprise_validation_tracks)],
+    ["Load profiles", fmtInt(readiness.counts?.load_test_profiles)],
     ["Benchmark files", fmtInt(readiness.counts?.benchmark_files)],
   ];
   for (const [label, value] of rows) {

@@ -31,6 +31,8 @@ def test_dashboard_index_served(tmp_path) -> None:
     assert "Scenario Library" in r.text
     assert "Evidence Center" in r.text
     assert "Platform Readiness" in r.text
+    assert "Enterprise JSON" in r.text
+    assert "Audit ZIP" in r.text
     assert "Execution Engine v3" in r.text
     assert "Import Center" in r.text
     assert "TTP Catalog" in r.text
@@ -66,7 +68,10 @@ def test_loaded_scenarios_include_generated_yaml_variants(tmp_path) -> None:
 
 def test_scenario_library_filters(tmp_path) -> None:
     client = _client(tmp_path)
-    r = client.get("/scenario-library", params={"source": "generated variant", "platform": "windows"})
+    r = client.get(
+        "/scenario-library",
+        params={"source": "generated variant", "platform": "windows"},
+    )
     assert r.status_code == 200
     body = r.json()
     assert body["total"] == 3522
@@ -92,7 +97,19 @@ def test_ttps_listing(tmp_path) -> None:
     ttps = r.json()
     assert len(ttps) == 5064
     ids = {t["attack_id"] for t in ttps}
-    assert {"T1033", "T1083", "T1059", "T1547.001", "T1057", "T1071.001", "T1003", "T1027", "T1112", "T1070.004", "T1580"} <= ids
+    assert {
+        "T1033",
+        "T1083",
+        "T1059",
+        "T1547.001",
+        "T1057",
+        "T1071.001",
+        "T1003",
+        "T1027",
+        "T1112",
+        "T1070.004",
+        "T1580",
+    } <= ids
 
 
 def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
@@ -167,12 +184,16 @@ def test_dashboard_new_analysis_endpoints(tmp_path) -> None:
     assert lab["status"] == "completed"
 
     readiness = client.get("/platform/readiness").json()
-    assert readiness["capability_count"] == 12
+    assert readiness["capability_count"] == 16
     assert readiness["counts"]["ttps"] == 5064
     assert readiness["counts"]["loaded_scenarios"] == 3522
     assert readiness["counts"]["validated_scenarios"] == 1000
     assert readiness["counts"]["siem_targets"] == 2
-    assert readiness["counts"]["benchmark_files"] >= 4
+    assert readiness["counts"]["enterprise_validation_tracks"] == 11
+    assert readiness["counts"]["agent_package_targets"] == 3
+    assert readiness["counts"]["load_test_profiles"] == 5
+    assert readiness["counts"]["siem_validation_targets"] == 4
+    assert readiness["counts"]["benchmark_files"] >= 6
 
 
 def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> None:
@@ -220,8 +241,12 @@ def test_evidence_pack_exports_global_and_per_scenario_artifacts(tmp_path) -> No
         assert "api/platform_readiness.json" in names
         assert "api/execution_engine_v3.json" in names
         assert "api/import_center.json" in names
+        assert "api/enterprise_readiness.json" in names
+        assert "api/enterprise_load_test_plan.json" in names
         assert "benchmarks/README.md" in names
         assert "benchmarks/siem_mock_smoke.md" in names
+        assert "benchmarks/enterprise_validation.md" in names
+        assert "benchmarks/load_campaign_plan.json" in names
 
 
 def test_scenario_builder_preview(tmp_path) -> None:

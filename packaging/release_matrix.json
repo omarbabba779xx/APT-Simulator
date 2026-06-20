@@ -1,0 +1,22 @@
+{
+  "agent_targets": [
+    {
+      "platform": "windows",
+      "artifact": "dist/apt-agent.exe",
+      "build_command": ".\\packaging\\build_agent.ps1",
+      "production_signing": "signtool sign with the enterprise code-signing certificate"
+    },
+    {
+      "platform": "linux",
+      "artifact": "dist/apt-agent",
+      "build_command": "./packaging/build_agent.sh",
+      "production_signing": "sign or attest through the Linux package pipeline"
+    },
+    {
+      "platform": "macos",
+      "artifact": "dist/apt-agent",
+      "build_command": "./packaging/build_agent.sh",
+      "production_signing": "codesign and notarize before fleet deployment"
+    }
+  ]
+}

@@ -59,7 +59,10 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
     jwt_secret: bytes | None = None
     if cfg.security.require_auth:
-        jwt_secret = load_or_generate_secret(cfg.security.jwt_secret_path)
+        jwt_secret = load_or_generate_secret(
+            cfg.security.jwt_secret_path,
+            env_var=f"{cfg.security.secrets_env_prefix}JWT_SECRET",
+        )
 
     state = AppState(
         config=cfg,
@@ -154,7 +157,7 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
     @app.get("/exposure/graph")
     def exposure_graph() -> dict[str, object]:
-        """Controlled exposure graph across identity, endpoint, cloud, SaaS, and container domains."""
+        """Controlled exposure graph across identity, endpoint, cloud, SaaS, and containers."""
         from .exposure_graph import build_exposure_graph
 
         return build_exposure_graph(state.scenarios)
@@ -208,6 +211,55 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
 
         return build_platform_readiness(state)
 
+    @app.get("/enterprise/readiness")
+    def enterprise_readiness(_claims=require_role("viewer")) -> dict[str, object]:
+        """Enterprise validation, access, secrets, audit, packaging, SIEM, and load readiness."""
+        from .enterprise import enterprise_readiness_report
+
+        return enterprise_readiness_report(state)
+
+    @app.get("/enterprise/access")
+    def enterprise_access(_claims=require_role("viewer")) -> dict[str, object]:
+        """Enterprise access model, RBAC matrix, and SSO configuration status."""
+        from .enterprise import access_readiness_report
+
+        return access_readiness_report(state.config)
+
+    @app.get("/enterprise/secrets")
+    def enterprise_secrets(_claims=require_role("admin")) -> dict[str, object]:
+        """Redacted secret inventory and configured secret sources."""
+        from .enterprise import secrets_status
+
+        return secrets_status(state.config)
+
+    @app.get("/enterprise/lab-validation")
+    def enterprise_lab_validation(_claims=require_role("viewer")) -> dict[str, object]:
+        """Enterprise lab validation tracks for endpoint, cloud, identity, and SIEM labs."""
+        from .enterprise import lab_validation_report
+
+        return lab_validation_report(state)
+
+    @app.get("/enterprise/agent-packaging")
+    def enterprise_agent_packaging(_claims=require_role("viewer")) -> dict[str, object]:
+        """Agent packaging matrix for Windows, Linux, and macOS."""
+        from .enterprise import agent_packaging_report
+
+        return agent_packaging_report()
+
+    @app.get("/enterprise/load-test/plan")
+    def enterprise_load_test_plan(_claims=require_role("viewer")) -> dict[str, object]:
+        """Long campaign load-test profiles and verification checks."""
+        from .enterprise import load_test_plan
+
+        return load_test_plan()
+
+    @app.get("/enterprise/siem-validation")
+    def enterprise_siem_validation(_claims=require_role("viewer")) -> dict[str, object]:
+        """SIEM validation targets for ingest and query validation workflows."""
+        from .enterprise import siem_validation_report
+
+        return siem_validation_report()
+
     @app.get("/reports/benchmark-pack.zip")
     def benchmark_pack_zip() -> Response:
         """Download reproducible public benchmark evidence snapshots."""
@@ -216,7 +268,22 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         return Response(
             build_benchmark_zip(state),
             media_type="application/zip",
-            headers={"Content-Disposition": 'attachment; filename="apt-simulator-benchmark-pack.zip"'},
+            headers={
+                "Content-Disposition": 'attachment; filename="apt-simulator-benchmark-pack.zip"'
+            },
+        )
+
+    @app.get("/reports/audit-export.zip")
+    def audit_export_zip(_claims=require_role("admin")) -> Response:
+        """Download raw audit JSONL plus a hash-chain verification manifest."""
+        from .enterprise import build_audit_export_zip
+
+        return Response(
+            build_audit_export_zip(Path(cfg.orchestrator.audit_dir) / "audit.jsonl"),
+            media_type="application/zip",
+            headers={
+                "Content-Disposition": 'attachment; filename="apt-simulator-audit-export.zip"'
+            },
         )
 
     @app.post("/labs/multi-agent/smoke")
@@ -249,7 +316,10 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
         }
 
     @app.post("/siem/connectors/splunk/hec/send")
-    def siem_splunk_hec_send(req: SIEMSendRequest, _claims=require_role("operator")) -> dict[str, object]:
+    def siem_splunk_hec_send(
+        req: SIEMSendRequest,
+        _claims=require_role("operator"),
+    ) -> dict[str, object]:
         """Send golden SOC events to Splunk HEC or a local compatible mock endpoint."""
         from .siem_connectors import sample_golden_events, send_splunk_hec
 
@@ -268,7 +338,10 @@ def build_app(config_path: str = "config/default.yaml") -> FastAPI:
             raise HTTPException(400, str(exc)) from exc
 
     @app.post("/siem/connectors/elastic/bulk/send")
-    def siem_elastic_bulk_send(req: SIEMSendRequest, _claims=require_role("operator")) -> dict[str, object]:
+    def siem_elastic_bulk_send(
+        req: SIEMSendRequest,
+        _claims=require_role("operator"),
+    ) -> dict[str, object]:
         """Send golden SOC events to Elastic bulk API or a local compatible mock endpoint."""
         from .siem_connectors import sample_golden_events, send_elastic_bulk
 

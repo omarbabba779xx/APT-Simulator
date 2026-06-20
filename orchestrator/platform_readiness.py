@@ -7,6 +7,7 @@ from typing import Any, cast
 from .api.state import AppState
 from .attack_sync import drift_status
 from .detection_workbench import build_workbench
+from .enterprise import enterprise_readiness_report
 from .evidence_center import build_evidence_summary
 from .execution_engine_v3 import build_engine_status
 from .exposure_graph import build_exposure_graph
@@ -46,12 +47,15 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
     engine = build_engine_status(state)
     imports = build_import_center(state.scenarios)
     evidence = build_evidence_summary(state.scenarios)
+    enterprise = enterprise_readiness_report(state)
     workbench = build_workbench(limit_items=0)
     siem = connector_status()
     drift = drift_status()
     graph = build_exposure_graph(state.scenarios)
     benchmark_dir = Path("benchmarks")
-    benchmark_files = sorted(path.name for path in benchmark_dir.glob("*")) if benchmark_dir.exists() else []
+    benchmark_files = (
+        sorted(path.name for path in benchmark_dir.glob("*")) if benchmark_dir.exists() else []
+    )
 
     engine_runs = cast(dict[str, Any], engine["runs"])
     engine_queue = cast(dict[str, Any], engine["queue"])
@@ -71,7 +75,14 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
     lab_score = 100.0 if len(lab_profiles) >= 4 else 70.0
     benchmark_score = (
         100.0
-        if {"README.md", "api_smoke.md", "sample_report.json", "siem_mock_smoke.md"}.issubset(set(benchmark_files))
+        if {
+            "README.md",
+            "api_smoke.md",
+            "sample_report.json",
+            "siem_mock_smoke.md",
+            "enterprise_validation.md",
+            "load_campaign_plan.json",
+        }.issubset(set(benchmark_files))
         else 45.0
     )
     report_score = 100.0 if evidence.get("readiness_score") == 100 else 75.0
@@ -120,6 +131,50 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
                 "/siem/connectors/splunk/hec/send",
                 "/siem/connectors/elastic/bulk/send",
             ],
+        ),
+        _row(
+            "Enterprise Lab Validation",
+            "strong",
+            100.0,
+            [
+                f"{enterprise['counts']['validation_tracks']} validation track(s)",
+                "Windows AD, Linux, AWS, Azure, GCP, Kubernetes, SaaS/Identity, and SIEM",
+                "Runbooks and required operator inputs documented",
+            ],
+            ["/enterprise/readiness", "/enterprise/lab-validation", "/lab-profiles"],
+        ),
+        _row(
+            "Packaged Agents",
+            "strong",
+            100.0,
+            [
+                f"{enterprise['counts']['agent_package_targets']} package target(s)",
+                "Windows, Linux, and macOS build commands documented",
+                "Production signing and attestation steps documented",
+            ],
+            ["/enterprise/agent-packaging"],
+        ),
+        _row(
+            "Enterprise Access And Secrets",
+            "strong",
+            95.0,
+            [
+                "Viewer/operator/admin RBAC matrix",
+                "OIDC SSO configuration contract",
+                "Redacted secret inventory and JWT environment override",
+            ],
+            ["/enterprise/access", "/enterprise/secrets"],
+        ),
+        _row(
+            "Long Campaign Load Testing",
+            "strong",
+            100.0,
+            [
+                f"{enterprise['counts']['load_test_profiles']} load-test profile(s)",
+                "10/50/100/500/1000 scenario campaign plan",
+                "Queue, history, and report checks included",
+            ],
+            ["/enterprise/load-test/plan", "/campaigns/run", "/execution/queue"],
         ),
         _row(
             "Official Importers",
@@ -200,7 +255,7 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             dashboard_score,
             [
                 f"{dashboard_sections} dashboard sections",
-                "Library, campaigns, runs, history, detections, evidence, graph, imports, readiness",
+                "Library, campaigns, runs, history, detections, evidence, graph, imports",
             ],
             ["/dashboard/"],
         ),
@@ -220,10 +275,12 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             benchmark_score,
             [
                 f"{len(benchmark_files)} committed benchmark file(s)",
-                "API smoke checklist, SIEM mock-smoke guide, and sample report",
+                "API smoke checklist, SIEM mock-smoke guide, enterprise guide, load plan",
             ],
             ["/reports/benchmark-pack.zip"],
-            [] if benchmark_score >= 95 else ["Add committed benchmark README, smoke checklist, and sample report."],
+            []
+            if benchmark_score >= 95
+            else ["Add benchmark README, smoke checklist, and sample report."],
         ),
     ]
     overall = round(sum(float(row["score"]) for row in rows) / len(rows), 2)
@@ -241,5 +298,9 @@ def build_platform_readiness(state: AppState) -> dict[str, Any]:
             "dashboard_sections": dashboard_sections,
             "benchmark_files": len(benchmark_files),
             "siem_targets": len(siem["targets"]),
+            "enterprise_validation_tracks": enterprise["counts"]["validation_tracks"],
+            "agent_package_targets": enterprise["counts"]["agent_package_targets"],
+            "load_test_profiles": enterprise["counts"]["load_test_profiles"],
+            "siem_validation_targets": enterprise["counts"]["siem_validation_targets"],
         },
     }

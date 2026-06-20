@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import secrets
 import time
+import os
 from pathlib import Path
 from typing import Any
 
@@ -29,7 +30,11 @@ def has_role(actual: str, required: str) -> bool:
     return _RANK.get(actual, -1) >= _RANK.get(required, 99)
 
 
-def load_or_generate_secret(path: str | Path) -> bytes:
+def load_or_generate_secret(path: str | Path, env_var: str | None = None) -> bytes:
+    if env_var:
+        value = os.environ.get(env_var)
+        if value:
+            return value.encode("utf-8")
     p = Path(path)
     if p.exists():
         return p.read_bytes()

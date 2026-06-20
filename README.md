@@ -15,8 +15,9 @@ It does not run destructive malware. The catalog-scale coverage added in this re
 | Evidence exports | Global evidence ZIP and per-scenario evidence ZIP reports |
 | Execution Engine v3 | Lab-safe multi-host dispatch model, local three-agent smoke, persistent queue, retry controls, cleanup tracking, and tamper-evident audit logs |
 | SIEM ingestion | Splunk HEC and Elastic bulk connectors with local/private safety gate and mock-smoke tests |
+| Enterprise readiness | 11 lab validation tracks, 3 agent package targets, SSO/RBAC contract, redacted secrets inventory, audit export, and long-campaign load plan |
 | Official importers | ATT&CK STIX sync, ATT&CK Emulation Library importer, Atomic Red Team importer, cloud reference pack status, and rule-corpus comparison |
-| Product readiness | Platform scorecard and downloadable benchmark ZIP with API snapshots |
+| Product readiness | 16-area Platform Readiness scorecard and downloadable benchmark ZIP with API snapshots |
 | Variant space | 15,680,015,680 generable scenario variants |
 | Detection content | 5,064 Sigma rules with coverage metadata and quality scoring |
 | ATT&CK scope | 15/15 current ATT&CK Enterprise tactics covered, with snapshot drift checks |
@@ -34,6 +35,7 @@ flowchart LR
     Dashboard --> Campaigns["Campaign Runner"]
     Dashboard --> Workbench["Detection Workbench"]
     Dashboard --> Exposure["Exposure Graph"]
+    Dashboard --> Enterprise["Enterprise Readiness"]
     Dashboard --> Reports["Run and campaign reports"]
     Library --> API["FastAPI orchestrator"]
     Maturity --> API
@@ -57,6 +59,10 @@ flowchart LR
 - 15,680,015,680 generable scenario variants
 - 5,064 Sigma rules
 - 2 SIEM ingestion connector targets: Splunk HEC and Elastic bulk
+- 11 enterprise validation tracks
+- 3 agent package targets: Windows, Linux, and macOS
+- 5 load-test profiles up to 1,000 scenarios
+- 4 SIEM validation targets: Splunk, Elastic, Microsoft Sentinel, and Google Chronicle
 - 15/15 current ATT&CK Enterprise tactics covered
 - 696 current ATT&CK Enterprise base technique/sub-technique IDs tracked locally
 - 100 ATT&CK-mapped marker-only variants in the `attack_variants` pack
@@ -136,6 +142,11 @@ flowchart TD
 - Exposes Execution Engine v3 readiness for queue state, retry controls, cleanup tracking, and audit integrity.
 - Exposes a local three-agent smoke endpoint that registers Windows, Linux, and macOS lab agents and dispatches independent DAG steps.
 - Exposes SIEM connector status, payload previews, and guarded send endpoints for Splunk HEC and Elastic bulk ingestion.
+- Exposes enterprise validation tracks for Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Microsoft Sentinel, and Google Chronicle.
+- Exposes agent packaging readiness for Windows, Linux, and macOS builds.
+- Exposes enterprise access, SSO configuration status, RBAC matrix, and redacted secrets inventory.
+- Exports audit logs as a ZIP with raw JSONL plus hash-chain verification manifest.
+- Exposes long-campaign load-test profiles for 10, 50, 100, 500, and 1,000 scenario runs.
 - Exposes an Import Center for ATT&CK STIX, ATT&CK Emulation Library, Atomic Red Team, cloud reference packs, and rule-corpus comparison.
 - Exposes a Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, and benchmarks.
 - Produces a benchmark ZIP with current API snapshots and verification files.
@@ -215,7 +226,7 @@ The dashboard includes:
 | Scenario Library | Filter by actor, difficulty, platform, source, and scenario kind. |
 | Scenario Maturity | Review actor-chain depth, evidence status, detection coverage, and SOC usability score. |
 | Evidence Center | Review quality gates, evidence coverage, telemetry spread, and download evidence ZIP bundles. |
-| Platform Readiness | Review the 12-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, and benchmark export. |
+| Platform Readiness | Review the 16-area scorecard, Execution Engine v3 readiness, multi-agent lab smoke, SIEM connectors, enterprise validation, and benchmark export. |
 | Import Center | Review official importer lanes, loaded content, source URLs, commands, and safety boundaries. |
 | ATT&CK Matrix | Browse tactic coverage and technique gaps. |
 | ATT&CK Sync | Check snapshot version, missing IDs, extra IDs, deprecated IDs, and revoked IDs. |
@@ -280,6 +291,18 @@ Platform readiness, import status, and benchmark bundle:
 curl http://127.0.0.1:8000/platform/readiness
 curl http://127.0.0.1:8000/imports/center
 curl -o benchmark-pack.zip http://127.0.0.1:8000/reports/benchmark-pack.zip
+```
+
+Enterprise validation, access, packaging, load-test, SIEM validation, and audit export:
+
+```bash
+curl http://127.0.0.1:8000/enterprise/readiness
+curl http://127.0.0.1:8000/enterprise/access
+curl http://127.0.0.1:8000/enterprise/lab-validation
+curl http://127.0.0.1:8000/enterprise/agent-packaging
+curl http://127.0.0.1:8000/enterprise/load-test/plan
+curl http://127.0.0.1:8000/enterprise/siem-validation
+curl -o audit-export.zip http://127.0.0.1:8000/reports/audit-export.zip
 ```
 
 Variant-space count:
@@ -448,6 +471,19 @@ Run a local dry-run style scenario without the orchestrator:
 python -m agent.main run-local scenarios/basic_recon.yaml --dry-run
 ```
 
+## Enterprise Readiness
+
+The `/enterprise/readiness` endpoint combines the production-facing readiness surfaces:
+
+- 11 lab validation tracks: Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Microsoft Sentinel, and Google Chronicle.
+- 3 agent packaging targets: Windows, Linux, and macOS.
+- SSO/RBAC contract with viewer, operator, and admin roles.
+- Redacted secrets inventory with `APT_SIM_JWT_SECRET` environment override support.
+- Audit export ZIP with hash-chain verification manifest.
+- 5 long-campaign load-test profiles: 10, 50, 100, 500, and 1,000 scenarios.
+
+Production deployment guidance is in `docs/PRODUCTION_DEPLOYMENT.md`. Lab validation guidance is in `docs/ENTERPRISE_VALIDATION.md`.
+
 ## Testing
 
 Run the full test suite:
@@ -482,6 +518,7 @@ Conformance tests verify:
 - SOC golden event row count is exactly 2,000.
 - README count statements match the current implementation.
 - ATT&CK tactic coverage is exactly 15/15 and drift status is synced.
+- Enterprise readiness reports exactly 11 validation tracks, 3 package targets, 5 load-test profiles, and 4 SIEM validation targets.
 - Public text files do not include forbidden public tooling markers.
 
 ## Loaded Scenario Model

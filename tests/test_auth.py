@@ -53,5 +53,11 @@ def test_secret_persisted(tmp_path) -> None:
     assert len(s1) >= 32
 
 
+def test_secret_env_override(monkeypatch, tmp_path) -> None:
+    monkeypatch.setenv("APT_SIM_TEST_SECRET", "from-env")
+    assert load_or_generate_secret(tmp_path / "s.bin", env_var="APT_SIM_TEST_SECRET") == b"from-env"
+    assert not (tmp_path / "s.bin").exists()
+
+
 def test_roles_constant() -> None:
     assert ROLES == ("viewer", "operator", "admin")

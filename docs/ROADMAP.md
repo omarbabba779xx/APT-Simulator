@@ -56,11 +56,16 @@
 - [x] Splunk HEC and Elastic bulk SIEM connector senders with local/private safety gate and mock-smoke tests.
 - [x] Platform Readiness scorecard across execution, imports, evidence, detection, drift, graph, reports, labs, multi-agent smoke, SIEM, and benchmarks.
 - [x] Public benchmark pack with API smoke checklist, SIEM mock-smoke guide, sample report, and downloadable API snapshots.
+- [x] Enterprise validation tracks for Windows AD, Linux fleet, AWS, Azure, GCP, Kubernetes, SaaS/Identity, Splunk, Elastic, Sentinel, and Chronicle.
+- [x] Windows, Linux, and macOS agent packaging matrix with production signing guidance.
+- [x] Enterprise access/RBAC report, OIDC SSO configuration contract, and redacted secrets inventory.
+- [x] Hash-chain audit export ZIP with verification manifest.
+- [x] Long-campaign load-test plan for 10, 50, 100, 500, and 1,000 scenarios.
+- [x] Production deployment and enterprise validation documentation.
 
 ## Next Reference-Level Work
 
-- [ ] Portable agent builds for Windows, Linux, and macOS.
 - [ ] Host-group placement policies, dedicated agent pools, and richer multi-host scheduling rules.
-- [ ] User-owned SIEM validation profiles for Splunk, Elastic, Sentinel, Chronicle, and OpenSearch deployments.
+- [ ] OpenSearch validation target alongside Splunk, Elastic, Sentinel, and Chronicle.
 - [ ] Rich downloadable evidence packs with screenshots or recorded dashboard walkthroughs.
-- [ ] More actor-chain scenarios validated in real lab environments.
+- [ ] Additional actor-chain scenarios with exported lab screenshots and SIEM query captures.

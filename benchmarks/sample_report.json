@@ -2,9 +2,13 @@
   "benchmark": "local_api_smoke",
   "expected": {
     "attack_tactics": "15/15",
+    "agent_package_targets": 3,
+    "enterprise_validation_tracks": 11,
     "golden_event_rows": 2000,
     "loaded_scenarios": 3522,
+    "load_test_profiles": 5,
     "siem_targets": 2,
+    "siem_validation_targets": 4,
     "ttps": 5064,
     "validated_scenarios": 1000
   },
@@ -16,7 +20,14 @@
     "/siem/connectors/status",
     "/siem/connectors/sample",
     "POST /labs/multi-agent/smoke",
+    "/enterprise/readiness",
+    "/enterprise/access",
+    "/enterprise/lab-validation",
+    "/enterprise/agent-packaging",
+    "/enterprise/load-test/plan",
+    "/enterprise/siem-validation",
     "/evidence/summary",
+    "/reports/audit-export.zip",
     "/reports/benchmark-pack.zip"
   ]
 }
